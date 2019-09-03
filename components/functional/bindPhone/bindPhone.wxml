@@ -1,0 +1,10 @@
+<view class="bindPhone" wx:if="{{!hide}}">
+	<form bindsubmit="formSubmit" report-submit='{{true}}'>
+	  <view class="inner">
+	    <i class="colse iconfont icon-close" bindtap="close" wx:if="{{hasClose}}"></i>
+	    <view class="tip">登录或注册</view>
+	    <button class="wxBtn" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" form-type="submit"><i class="wxIcon iconfont icon-weixin"></i>微信账号快速登录</button>
+	    <button class="plogin" bindtap="phoneLogin" form-type="submit">手机号注册/登录</button>
+	  </view>
+	</form>
+</view>

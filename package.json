@@ -1,0 +1,17 @@
+{
+  "name": "lieduoduo",
+  "version": "1.0.0",
+  "description": "备足说明：此项目采用小程序原生开发，开启eslint规则，项目结构分明，采用分包机制，需注意页面存放位置",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@sit.git.ziwork.com:lieduoduo-front_end/lieduoduo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {}
+}

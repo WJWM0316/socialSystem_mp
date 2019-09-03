@@ -1,0 +1,117 @@
+.myAccount {
+  background: #fff;
+}
+
+.head {
+	padding: 25rpx 30rpx 22rpx;
+	position: relative;
+}
+.head .account {
+	position: absolute;
+	top: 44rpx;
+	left: 67rpx;
+}
+.head .account .txt {
+	font-size:26rpx;
+	color:#fff;
+	line-height:36rpx;
+	margin-left: 4rpx;
+}
+.head .account .money {
+	font-size:80rpx;
+	font-weight:700;
+	color:#fff;
+	line-height:80rpx;
+	margin-top: 4rpx;
+  text-shadow: 1rpx 1rpx #FFDC29;
+}
+.head .more {
+	width:172rpx;
+	height:54rpx;
+	background:#FFDC29;
+	border-radius:30rpx;
+	font-size:26rpx;
+	color:#652791;
+	line-height:54rpx;
+	text-align: center;
+	position: absolute;
+	bottom: 44rpx;
+	left: 71rpx;
+}
+.head .imgBox {
+	position: relative;
+  z-index: 5;
+}
+.head .imgBox .bg {
+	width: 100%;
+	display: block;
+	border-radius:16rpx;
+}
+.head .imgBox::after {
+	content: '';
+	width:610rpx;
+	height:26rpx;
+	background:rgba(213,213,213,1);
+	border-radius:13rpx;
+	filter:blur(7rpx);
+	position: absolute;
+	bottom: -18rpx;
+	left: 50%;
+	margin-left: -305rpx;
+	z-index: -1;
+}
+.list {
+	padding-left: 40rpx;
+}
+.list .list-item {
+	padding: 40rpx 40rpx 40rpx 0;
+	border-bottom: 1rpx solid #E8E9EB;
+}
+
+.list .list-item .top {
+	overflow: hidden;
+}
+.list .list-item .top .title {
+	width:514rpx;
+	height:36rpx;
+	font-size:28rpx;
+	color:#282828;
+	line-height:38rpx;
+	font-weight:700;
+	float: left;
+}
+.list .list-item .top .price {
+	font-size:38rpx;
+	font-weight:700;
+	color:#282828;
+	float: right;
+	line-height:38rpx;
+}
+.list .list-item .top .price .priceTxt.returnCash {
+	color: #BCBCBC;
+}
+.list .list-item .top .price .priceTxt.reset {
+	color: #FF7F4D;
+}
+.list .list-item .top .price .priceTxt.gray {
+	color: #BCBCBC;
+}
+.list .list-item .bottom {
+	margin-top: 12rpx;
+	overflow: hidden;
+}
+
+.list .list-item .bottom .date {
+	font-size:24rpx;
+	font-weight:300;
+	color:#5D565D;
+	line-height:32rpx;
+	float: left;
+}
+
+.list .list-item .bottom .desc {
+	font-size:24rpx;
+	color:#FF7F4D;
+	line-height:32rpx;
+	float: right;
+}

@@ -1,0 +1,6 @@
+ {
+  "component": true,
+  "usingComponents": {
+  	"bindPhone": "../../../components/functional/bindPhone/bindPhone"
+  }
+}

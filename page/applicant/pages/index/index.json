@@ -1,0 +1,14 @@
+{
+	"enablePullDownRefresh": true,
+	"backgroundTextStyle": "light",
+  "usingComponents": {
+    "jobList": "../../../../components/business/jobList/jobList",
+    "followWechat": "../../../../components/business/followWechat/followWechat",
+    "tabBar": "../../../../components/business/tabBar/tabBar",
+    "myPicker": "../../../../components/functional/myPicker/myPicker",
+    "auth": "../../../../components/functional/auth/auth",
+    "navbar": "../../../../components/business/navbar/navbar",
+    "adPop": "../../../../components/business/adPop/adPop",
+    "bindPhone": "../../../../components/functional/bindPhone/bindPhone"
+  }
+}

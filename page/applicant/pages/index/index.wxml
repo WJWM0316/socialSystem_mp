@@ -1,0 +1,71 @@
+<view class="applicant-job">
+	<navbar title="店长多多" background="#652791" color="#fff" wx:if="{{tabFixed}}"></navbar>
+	<view hidden="{{!hasReFresh}}">
+    <refreshStatus></refreshStatus>
+  </view>
+  <view class="head" style="{{tabFixed ? 'margin-top:' + -navH + 'px' : ''}}">
+    <view class="bannerBox" wx:if="{{bannerList.length > 0}}">
+      <swiper
+        class="swiper"
+        autoplay
+        circular
+        bindchange="autoplay"
+        style="height: {{bannerH}}px"
+        >
+        <swiper-item wx:for="{{bannerList}}" wx:key="{{index}}" bindtap="jumpBanner" data-url="{{item.targetUrl || item.otherUrl}}">
+          <image class="banner" wx:if="{{isBangs}}" src="{{item.bigImgUrl}}" mode="widthFix"></image>
+          <image class="banner" wx:else src="{{item.smallImgUrl}}" mode="widthFix"></image>
+        </swiper-item>
+      </swiper>
+      <view class="swiper-dots" wx:if="{{bannerList.length > 1}}">
+        <view wx:for="{{bannerList}}" wx:key="{{index}}" class="swiper-dots-item {{bannerIndex === index ? 'active' : ''}}"></view>
+      </view>
+    </view>
+    <block  wx:else>
+      <image class="banner" wx:if="{{!isBangs}}" src="{{cdnImagePath}}bg_homepageh.png?a=3" mode="widthFix"></image>
+      <image class="banner" wx:else src="{{cdnImagePath}}bg_homepageh_3.png" mode="widthFix"></image>
+    </block>
+    <view class='more'>
+      <view class="moreActive" bindtap='toMore'>
+        <view class="left">
+          <view class="title">发现更多面试官</view>
+          <view class="info">Ta们都在积极抢人，欢迎围观</view>
+        </view>
+        <view class="right">
+          <image class="avatar" lazy-load wx:for="{{moreRecruiter}}" wx:key="{{index}}" src="{{item.smallUrl}}" wx:if="{{index <= 2}}"></image>
+          <image class="avatar" wx:if="{{moreRecruiter.length > 3}}" src="{{cdnImagePath}}more.png"></image>
+        </view>
+      </view>    
+    </view>
+    <view class="select-box {{tabFixed ? 'fixed' : ''}}" style="{{tabFixed ? 'top:' + navH + 'px' : ''}}">
+      <view class="select-tab">
+        <view class="item {{tabType === item.type ? 'cur' : ''}} {{item.active ? 'actived' : ''}}"  bindtap="choseTab" data-type="{{item.type}}" wx:for="{{tabList}}" wx:key="{{index}}"><text class="txt">{{item.name}}</text><i class="icon iconfont icon-zhishibiao"></i></view>
+      </view>
+      <view class="select-pop" hidden="{{tabType === 'closeTab'}}">
+        <view class="select-bg" catchtouchmove bindtap="choseTab" data-type="closeTab" style="height: calc(100vh - {{navH + 49}}px)"></view>
+        <view class="select-area city" hidden="{{tabType !== 'city'}}">
+          <text class="select-area-item {{cityIndex === index ? 'cur' : ''}}" bindtap="toggle" data-index="{{index}}" data-name="{{item.name}}" data-id="{{item.areaId}}" wx:for="{{cityList}}" wx:key="{{index}}">{{item.name}}</text>
+        </view>
+        <view class="select-area" hidden="{{tabType !== 'positionType'}}">
+          <text class="select-area-item {{typeIndex === index ? 'cur' : ''}}" bindtap="toggle" data-index="{{index}}" data-name="{{item.name}}" data-id="{{item.labelId}}" wx:for="{{positionTypeList}}" wx:key="{{index}}">{{item.name}}</text>
+        </view>
+        <view class="select-area salary" hidden="{{tabType !== 'salary'}}">
+          <text class="select-area-item {{emolumentIndex === index ? 'cur' : ''}}" bindtap="toggle" data-index="{{index}}" data-name="{{item.text}}" data-id="{{item.id}}" wx:for="{{emolumentList}}" wx:key="{{index}}">{{item.text}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="addIntention" bindtap="addIntention" wx:if="{{!hasExpect && (cityIndex || typeIndex || emolumentIndex)}}">
+    <text>把你的筛选条件添加到求职意向</text>
+    <button class="addBtn">立即添加<i class="icon iconfont icon-disejiantou-you"></i></button>
+  </view>
+  <view class="list-box">
+    <jobList listType="{{!isJobhunter ? 'index' : ''}}" personality="jobItem" list="{{positionList.list}}" list-type="interview" current-tab="all"></jobList>
+    <bottomStatus status="{{onBottomStatus}}" listData="{{positionList.list}}"></bottomStatus>
+  </view>
+  <tabBar id="bottomRedDotBar"></tabBar>
+  <auth wx:if="{{requireOAuth}}" bindauthSuccess="authSuccess"></auth>
+  <bindPhone hide="{{hideLoginBox}}" hasClose="{{false}}"></bindPhone>
+  <adPop></adPop>
+  <followWechat userInfo="{{userInfo}}"></followWechat>
+</view>

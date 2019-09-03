@@ -1,0 +1,24 @@
+<view class="search-company-page">
+	<navbar title="填写公司名称" background="#FFFFFF" color="#22292C"></navbar>
+	<view class="submit">
+		<view class="input-li clear-bottom">
+			<input placeholder="请输入公司名称" placeholder-class="holderStyle" bindinput="bindInput" value="{{formData.company_name}}" />
+		</view>
+		<view class="ul" wx:if="{{nameList.length > 0}}">
+			<view
+			class="li"
+			bindtap="selectCompany"
+			data-name="{{item.companyName}}"
+			data-id="{{item.id}}"
+			wx:for="{{ nameList }}"
+			wx:for-item="item"
+			wx:key="{{index}}">
+				<rich-text nodes="{{item.html}}"></rich-text>
+				<i class="icon iconfont icon-jiantou"></i>
+			</view>
+		</view>
+		<view class="bottomBox">
+			<view bindtap="submit" class="button-submit {{canClick ? 'button-enable' : ''}}">确定</view>
+		</view>
+	</view>
+</view>

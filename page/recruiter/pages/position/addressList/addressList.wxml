@@ -1,0 +1,24 @@
+<view class="addressList">
+  <navbar title="{{options.type === 'position' ? '选择地址' : '公司地址'}}" background="#FFFFFF" color="#22292C"></navbar>
+
+  <view hidden="{{!hasReFresh}}">
+    <refreshStatus></refreshStatus>
+  </view>
+
+  <view class="ul">
+    <view class="li" wx:for="{{addressList.list}}" wx:key="{{index}}" bindtap="onClick" data-id="{{index}}">
+      <view class="left" wx:if="{{options.selected == 1}}">
+        <view class="radio {{item.active ? 'radio-checked' : ''}}">
+          <i class="icon iconfont icon-wancheng" wx:if="{{item.active}}"></i>
+        </view>
+      </view>
+      <view class="center">{{item.title || item.address}}</view>
+      <view class="right" catchtap="edit" data-id="{{item.id}}">
+        <view class="edit"><i class="icon iconfont icon-bianji"></i></view>
+      </view>
+    </view>
+  </view>
+  <view class="footer">
+    <button class="button-submit clear-style" bindtap="add">新增地址</button>
+  </view>
+</view>

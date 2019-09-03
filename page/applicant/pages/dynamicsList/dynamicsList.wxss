@@ -1,0 +1,23 @@
+.list {
+	margin-top: 30rpx;
+}
+.jump {
+  width: 430rpx;
+  height: 98rpx;
+  background:rgba(255,220,41,1);
+  box-shadow:0rpx 4rpx 20rpx 0rpx rgba(232,201,40,0.47);
+  border-radius:49rpx;
+  margin: 44rpx auto 0;
+  font-size:30rpx;
+  font-weight:400;
+  color:rgba(40,40,40,1);
+  line-height: 98rpx;
+}
+
+.nodata {
+  background:rgba(255,255,255,1);
+  box-shadow:0rpx 8rpx 20rpx 0rpx rgba(34,56,101,0.08);
+  border-radius:10rpx;
+  margin:0 30rpx;
+  overflow: hidden;
+}

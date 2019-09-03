@@ -1,0 +1,7 @@
+<view class="rule-box">
+  <view class="mask" catchtouchmove="stopPageScroll"  bindtap="close" hidden="{{!openPop}}"></view>
+  <view class="content {{openPop ? 'show' : ''}}">
+    <view class="header" catchtouchmove="">{{title}}<i class="icon iconfont icon-close" bindtap="close"></i></view>
+    <slot></slot>
+  </view>
+</view>

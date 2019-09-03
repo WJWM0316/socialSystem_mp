@@ -1,0 +1,25 @@
+<!-- 排行榜第三名后的tab组件 -->
+<view class="ranking" bindtap="toRecruitment">
+  <view class="serialNum">{{item.currentRank}}</view>
+  <!-- 左边模块 -->
+  <view class='left'>
+    <view class='top'>
+      <text class="name">{{item.name}}</text>
+      <text class="title">{{item.position}}</text>
+    </view>
+    <view class='bottom'>
+      <i class="icon iconfont icon-gongsi"></i>
+      <text class="company">{{item.companyShortname}}</text>
+      <view class='influence'>
+        <i class="icon iconfont icon-yingxiangli"></i>
+        <text class='txt'>本周人气</text>
+        <text class='value'>{{item.weekOfPopularity > 200 ? '200+' : item.weekOfPopularity}}</text>
+      </view>
+    </view>
+  </view>
+  <!-- 头像 -->
+  <view class='headImgBox'>
+    <image class='headImg' lazy-load src="{{item.avatar.smallUrl}}"></image>
+    <image src="{{cdnImagePath}}sign1.png" mode="aspectFill" class="sign" wx:if="{{item.certification}}"></image>
+  </view>
+</view>

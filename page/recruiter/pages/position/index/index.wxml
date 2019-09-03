@@ -1,0 +1,75 @@
+f<!-- 加载过滤器 -->
+<wxs src="../../../../../utils/filters.wxs" module="filters" />
+<view class="positionList">
+<navbar title="职位管理"></navbar>
+<view style="height: 49rpx"></view>
+<view class="office-status-bar" style="top:{{navH}}px">
+  <view class="item {{positionStatus === '1' ? 'active' : ''}}" bindtap="onClickTab" data-status="1">招聘中({{onLinePositionNum}})</view>
+  <view class="item {{positionStatus === '2' ? 'active' : ''}} {{redDotInfos.positionOfflineBar ? 'red-dot' : ''}}" bindtap="onClickTab" data-status="2">下线职位</view>
+  <view class="publish" data-action="add" bindtap="routeJump"><i class="icon iconfont icon-bianji"></i> 发布职位</view>
+</view>
+
+<view hidden="{{!hasReFresh}}">
+	<refreshStatus></refreshStatus>
+</view>
+<form bindsubmit="formSubmit" report-submit='{{true}}'>
+<!--招聘中职位-->
+<view class="office-manager-list {{onLinePosition.list.length ? '' : 'nodata'}}" hidden="{{positionStatus === '2'}}">
+	<view class="li"
+		wx:for="{{onLinePosition.list}}"
+		wx:for-item="item"
+		wx:key="{{item.id}}"
+		>
+		<button 
+			form-type="submit" 
+			class="formIdBtn clear-style"
+			data-action="detail"
+			data-position-id="{{item.id}}"
+			data-company-id="{{item.companyId}}"
+			bindtap="routeJump">
+			<view class="header">
+				<view class="office-name">{{item.positionName}}</view>
+				<view class="office-sarary">{{item.emolumentMin * 1000}}~{{item.emolumentMax * 1000}}<text class="moneyTxt">元/月</text></view>
+			</view>
+			<view class="tags-box">
+				<view class="item" wx:if="{{item.city}}">{{item.city}}{{item.district}}</view>
+				<view class="item">{{item.workExperienceName}}</view>
+				<view class="item">{{item.educationName}}</view>
+			</view>
+			<!-- <view class="item-status"></view> -->
+		</button>
+	</view>
+	<bottomStatus status="{{onBottomStatus}}" listData="{{onLinePosition.list}}" desc="没有更多内容了~" marginTop="{{0}}"></bottomStatus>
+</view>
+<!--下线-->
+<view class="office-manager-list {{offLinePosition.list.length ? '' : 'nodata'}}"  hidden="{{positionStatus === '1'}}">
+	<view class="li"
+		wx:for="{{offLinePosition.list}}"
+		wx:for-item="item"
+		wx:key="{{item.id}}"
+		>
+		<button 
+			form-type="submit" 
+			class="formIdBtn clear-style"
+			data-action="fail"
+			data-position-id="{{item.id}}"
+			data-company-id="{{item.companyId}}"
+			bindtap="routeJump">
+			<view class="reddot" wx:if="{{item.isOnline === 2 && item.status === 4 && !item.isRead}}"></view>
+			<view class="header">
+				<view class="office-name">{{item.positionName}}</view>
+				<view class="office-sarary">{{item.emolumentMin * 1000}}~{{item.emolumentMax * 1000}}<text class="moneyTxt">元/月</text></view>
+			</view>
+			<view class="tags-box">
+				<view class="item" wx:if="{{item.city}}">{{item.city}}{{item.district}}</view>
+				<view class="item">{{item.workExperienceName}}</view>
+				<view class="item">{{item.educationName}}</view>
+			</view>
+			<view class="item-status {{item.status === 4 ? 'fail' : ''}} {{item.status === 2 || item.status === 3 ? 'under-review' : ''}} {{item.status === 0 ? 'close' : ''}}">{{filters.positionFilter(item.status)}}</view>
+		</button>
+	</view>
+	<bottomStatus status="{{offBottomStatus}}" listData="{{offLinePosition.list}}" desc="没有更多内容了~" marginTop="{{0}}"></bottomStatus>
+</view>
+</form>
+<tab-bar tabType="1" id="bottomRedDotBar" bindresultevent="getResult"></tab-bar>
+</view>

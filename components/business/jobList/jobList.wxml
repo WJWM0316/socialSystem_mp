@@ -1,0 +1,38 @@
+<!--工作机会列表-->
+<view class="ul my-class">
+    <form bindsubmit="formSubmit" report-submit='{{true}}'>  
+      <button wx:for="{{ list }}" wx:key="{{item.id}}" data-item="{{item}}" bindtap="routeJump" form-type="submit" class="formIdBtn" wx:if="{{item.vkey}}"> 
+        <view class="li personality {{showBoxShadow ? 'box-shadow' : ''}} {{listType === 'index' ? 'index' : ''}}">
+          <!-- 职位名称 -->
+          <view class="name">
+            <view class="title">{{item.positionName}}</view>
+            <view class="salary">{{item.emolumentMin * 1000}}~{{item.emolumentMax * 1000}}<text class="moneyTxt">元/月</text></view>
+          </view>
+          
+          <!-- 标签 -->
+          <view class="labelList">
+            <view class="label" wx:if="{{item.city || item.district}}">{{item.city}}{{item.district}}</view>
+            <view class="label">{{item.workExperienceName}}</view>
+            <view class="label">{{item.educationName}}</view>
+          </view>
+
+          <!-- hr信息 -->
+          <view class="hr">
+            <view class="conLeft">
+              <view class="hrImg">
+                <image mode="aspectFill" src="{{item.recruiterInfo.avatar.smallUrl}}" lazy-load></image>
+              </view>
+              <view class="hrName">{{item.recruiterInfo.name}} <block wx:if="{{item.recruiterInfo.position}}">· {{item.recruiterInfo.position}}</block></view>
+            </view>
+            <image wx:if="{{hasLogo}}" class="conRight logo" mode="aspectFit" src="{{item.companyInfo.logoInfo.smallUrl}}" lazy-load></image>
+          </view>
+        </view>
+
+        <view class="li craete {{showBoxShadow ? 'box-shadow' : ''}}" wx:if="{{listType === 'index' && list.length > 6 && index === 5}}" catchtap="toCreate">
+          <view class="title">名企高薪等你来撩</view>
+          <view class="desc">花几分钟写一份简历，获得更多优质机会</view>
+          <view class="btn">立即创建简历<i class="icon iconfont icon-disejiantou-you"></i></view>
+        </view>
+    </button>  
+    </form>
+</view>

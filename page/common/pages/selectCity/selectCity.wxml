@@ -1,0 +1,69 @@
+<view>
+	<navbar title="选择城市" background="#fff" color="#22292C"></navbar>
+	<!-- <view style="height: 120rpx;"></view>
+	<view class="search-box" style="top: {{statusBarHeight}}px">
+		<view class="mask"></view>
+		<input placeholder="搜索" bindinput="bindInput" />
+		<i class="icon iconfont icon-sousuo icon-search"></i>
+	</view> -->
+	<view class="hotArea">
+		<text class="hotArea-item {{item.active ? 'cur' : ''}}" wx:for="{{hotArea}}" wx:key="{{index}}" bindtap="tapHot" data-item="{{item}}">{{item.name}}</text>
+	</view>
+	<view class="category-list" >
+		<block wx:if="{{!searing}}">
+			<view
+				class="li link"
+				wx:for="{{cityList}}"
+				wx:for-item="item"
+				data-order="first"
+				wx:key="{{item.areaId}}"
+				data-index="{{index}}"
+				bindtap="onClick1">
+				<view class="text {{item.active ? 'active' : ''}}">{{item.title}}</view>
+				<i class="icon iconfont icon-xiangyou"></i>
+			</view>
+		</block>
+		<block wx:else>
+			<view
+			wx:for="{{cityList}}"
+			wx:for-item="item"
+			wx:key="{{item.id}}"
+			bindtap="onClick"
+			data-name="{{item.name}}"
+			data-label-id="{{item.areaId}}"
+			data-topid="{{item.topPid}}"
+			class="search-item" >
+				<view class="first"><rich-text nodes="{{item.html}}"></rich-text></view>
+				<view class="second"><rich-text nodes="{{item.seriesName}}"></rich-text></view>
+				<i class="icon iconfont icon-jiantou"></i>
+			</view>
+		</block>
+	</view>
+	<view class="mask-board {{showMask ? 'mask-board-show' : ''}}" style="top: {{statusBarHeight}}px">
+		<view class="left" bindtap="closeMask"></view>
+		<view class="box">
+			<view class="column second">
+				<view
+					wx:for="{{cityList[index1].children}}"
+					class="item {{second.active ? 'active' : ''}}"
+					wx:key="{{index}}"
+					wx:for-item="second"
+					data-index="{{index}}"
+					bindtap="onClick2"
+					data-order="second">{{second.title}}</view>
+			</view>
+			<!-- <view class="column third" wx:if="{{cityList[index1].children.length}}">
+				<view 
+				wx:for="{{cityList[index1].children[index2].children}}" 
+				class="item {{third.active ? 'active' : ''}}"
+			  wx:key="{{index}}"
+			  data-index="{{index}}"
+			  bindtap="onClick3"
+			  wx:for-item="third">
+					{{third.name}}
+					<i class="icon iconfont icon-wancheng" wx:if="{{third.active}}"></i>
+				</view>
+			</view> -->
+		</view>
+	</view>
+</view>

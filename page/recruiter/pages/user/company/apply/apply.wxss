@@ -1,0 +1,149 @@
+.button-submit {
+	margin: 0 100rpx;
+	height:88rpx;
+	background:#F5F4F7;
+	border-radius:48rpx;
+	font-size:32rpx;
+	font-weight:400;
+	color:#CDCBCF;
+	text-align: center;
+	line-height: 88rpx;
+}
+
+.button-enable {
+	background:rgba(101,39,145,1);
+	box-shadow:0rpx 20rpx 18rpx 0rpx rgba(101,39,145,0.2);
+	color:rgba(255,255,255,1);
+}
+
+.banner {
+	background: rgba(0,0,0,0.1);
+	position:fixed;
+	top: 0;
+	left: 0;
+}
+
+.banner image {
+	width: 100vw;
+	height: 410rpx;
+	display: block;
+}
+
+.input-li {
+	height:122rpx;
+	line-height: 122rpx;
+	padding: 0 40rpx;
+	position: relative;
+	background: white;
+}
+
+.input-li:after {
+	content: '';
+	display: block;
+	position: absolute;
+	left: 40rpx;
+	right: 20px;
+	bottom: 0;
+	height: 1px;
+	background: #E8E9EB;
+}
+
+.clear-bottom:after {
+	display: none;
+}
+
+.input-li .key {
+	font-size:28rpx;
+	font-weight:400;
+	color:#353943;
+	width: 180rpx;
+	float: left;
+}
+
+.input-li .value {
+	height: 100%;
+	font-size:28rpx;
+	color:rgba(98,98,98,1);
+	text-align: right;
+	width: calc(100% - 180rpx);
+	position: relative;
+	float: left;
+}
+
+.input-li input, .input-li .text {
+	width: 100%;
+	overflow: hidden;
+	display: inline-block;
+	height: 122rpx;
+	line-height: 122rpx;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	color: #282828;
+}
+
+.input-li .text.default {
+	color: #BCBCBC;
+}
+
+.ul {
+	display: table;
+	margin: 50rpx auto;
+}
+
+.ul .li {
+	font-size:28rpx;
+	font-weight:500;
+	color:rgba(188,188,188,1);
+	display: inline-block;
+	margin-right: 25rpx;
+	line-height: 1;
+}
+
+.ul .column-line {
+	border-right: 1px solid #DCDCDC;
+	padding-right: 25rpx;
+}
+.enter {
+	width: calc(100vw);
+	margin-top: 33rpx;
+	text-align: center;
+	font-size:28rpx;
+	color:#BCBCBC;
+	line-height:28rpx;
+	font-weight: 300;
+}
+
+.enter .left01{
+	margin-right: 15rpx;
+}
+
+.enter .right01{
+	margin-left: 15rpx;
+}
+
+.footer {
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 50rpx;
+	background: #FBFBFF;
+}
+
+.tips {
+	font-size:26rpx;
+	font-weight:400;
+	color:rgba(146,146,146,1);
+	line-height:26rpx;
+	margin: 30rpx 45rpx;
+}
+
+.tips .span {
+	color: #929292;
+	display: inline;
+}
+
+.tips .strong {
+	color: #652791;
+	display: inline;
+}

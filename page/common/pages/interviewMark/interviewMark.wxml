@@ -1,0 +1,45 @@
+<view class="interviewMark">
+	<navbar title="{{options.type === 'pending' ? options.adviser ? '标记不感兴趣' : '标记不合适' : '不合适原因'}}" background="#FFFFFF" color="#22292C"></navbar>
+	<block wx:if="{{options.type === 'pending'}}">
+		<view class="h2">请选择不合适的原因（多选）</view>
+		<view class="ul">
+			<view class="li {{item.active ? 'active' : ''}}"
+				wx:for="{{list}}"
+				wx:item="item"
+				wx:key="{{item}}"
+				data-index="{{index}}"
+				bindtap="check">{{item.title}}</view>
+		</view>
+		<view class="h3">补充说明（选填）</view>
+		<view class="edit-box">
+			<view class="edit">
+				<textarea
+					bindinput="bindInput"
+					class="textarea"
+					placeholder-style="color:#BCBCBC"
+					placeholder="告诉我们更多关于候选人的评价，以便我们改进服务（补充说明不会被候选人看到）"
+					maxlength="50000"
+					value="{{extra}}" />
+				<view class="sum">
+					<text class="{{ (extra.length && extra.length <= 300) ? 'active' : extra.length > 300 ? 'warning' : '' }}"> {{ extra.length }}</text>/300
+				</view>
+			</view>
+		</view>
+		<view class="btn-area">
+	    <view bindtap="submit" class="button-submit">确定</view>
+	  </view>
+	</block>
+	<block wx:else>
+		<view class="h2">不合适的原因：</view>
+		<view class="ul">
+			<view class="li disabled"
+				wx:for="{{list}}"
+				wx:item="item"
+				wx:key="{{item}}">{{item}}</view>
+		</view>
+		<block wx:if="{{extra}}">
+			<view class="h3">补充说明：</view>
+			<view class="tips"><text>{{extra}}</text></view>
+		</block>
+	</block>
+</view>

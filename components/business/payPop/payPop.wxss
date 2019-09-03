@@ -1,0 +1,67 @@
+@import '../../../iconfont.wxss'
+
+.actionSheet .tip {
+  font-size:26rpx;
+  font-weight:300;
+  color:#282828;
+  line-height:26rpx;
+  text-align: center;
+}
+.actionSheet .tip .txt {
+  color: #652791;
+}
+.actionSheet .tipTitle {
+  font-size:32rpx;
+  color:#5D565D;
+  line-height:32rpx;
+  margin-top: 44rpx;
+  text-align: center;
+}
+.actionSheet .num {
+  font-size:100rpx;
+  font-weight:700;
+  color:#282828;
+  line-height:100rpx;
+  text-align: center;
+  margin: 12rpx 0 46rpx;
+}
+.actionSheet .otherMsg {
+  font-size:26rpx;
+  font-weight:300;
+  color:#929292;
+  line-height:26rpx;
+  text-align: center;
+}
+.actionSheet .otherMsg.not {
+  color: #FF7F4D;
+}
+.actionSheet .otherMsg .more {
+  margin-left: 12rpx;
+  color: #652791;
+  font-weight: normal;
+}
+.actionSheet .msg {
+  width: 590rpx;
+  font-size:24rpx;
+  font-weight:300;
+  color:#BCBCBC;
+  line-height:36rpx;
+  margin: 62rpx auto 44rpx;
+}
+.actionSheet .msg .txt {
+  color: #8452A7;
+  text-decoration: underline;
+}
+.actionSheet .sureBtn {
+  width:610rpx;
+  height:88rpx;
+  background:#652791;
+  border-radius:44rpx;
+  font-size:32rpx;
+  color:#fff;
+  line-height:88rpx;
+  margin: 0 auto 52rpx;
+}
+.actionSheet .sureBtn.not {
+  background: #FF7F4D;
+}

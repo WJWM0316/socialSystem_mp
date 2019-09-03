@@ -1,0 +1,40 @@
+<!--page/common/pages/bindPhone/bindPhone.wxml-->
+<navbar title="登录" background="transparent" color="#fff"></navbar>
+<form bindsubmit="formSubmit" report-submit='{{true}}'>
+  <view class="bindPhone">
+    <view class="head">
+      <image class="img" mode="widthFix" src="{{cdnImagePath}}authBg.png"></image>
+      <view class="msg">
+        <view class="title">欢迎来到店长多多</view>
+        <view class="txt">店铺招人神器</view>
+      </view>
+    </view>
+    <view class="form">
+      <view class="phone">
+        <input class="phoneInput" type="number" value="{{phone}}" placeholder="请输入手机号码" placeholder-style="color: #A59CB6" bindconfirm="getPhone" bindinput="getPhone" maxlength="11"></input>
+      </view>
+      <view class="code">
+        <view class="inputBox">
+          <input class="codeInput" type="number" value="{{code}}" placeholder="请输入短信验证码" bindinput="getCode" placeholder-style="color: #A59CB6"></input>
+        </view>
+        <button bindtap="sendCode" class="clear-style sendBtn" hidden="{{second < 60}}" form-type="submit">获取验证码</button>
+        <view class="sendBtn wait" hidden="{{second === 60}}">{{second}}s</view>
+      </view>
+      <view class="code imgCode" wx:if="{{imgUrl}}">
+        <view class="inputBox">
+          <input class="codeInput" placeholder="请输入图片验证码" bindinput="getImgCode" placeholder-style="color: #A59CB6"></input>
+        </view>
+        <image class="codePic" src="{{imgUrl}}" bindtap="changeNewCaptcha" mode="widthFix"></image>
+      </view>
+    </view>
+    <button class="bindBtn {{!canClick ? 'noClick' : ''}}" catchtap="bindPhone" form-type="submit">登录</button>
+    <view class="wxBtn">
+      <button class="wxLogin" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" form-type="submit">
+        <view class="btnInner">
+          <view class="icon"><i class="iconfont icon-weixin"></i></view>微信快捷登录<i class="icon1 iconfont icon-xiangyou"></i>
+        </view>
+      </button>
+    </view>
+    <view class="userAgreement" bindtap="toJump">登录店长多多代表你已同意<text class="btn">《店长多多用户协议》</text></view>
+  </view>
+</form>

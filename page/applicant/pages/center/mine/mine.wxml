@@ -1,0 +1,110 @@
+<view class='mine'>
+  <navbar title="我的" background="{{navbarBg}}" color="#fff"></navbar>
+  <view hidden="{{!hasReFresh}}">
+    <refreshStatus></refreshStatus>
+  </view>
+  <image class="bgImg" mode="aspectFill" src="{{cdnImagePath}}mine_job_hunter.png"></image>
+  <view style="height: 24rpx"></view>
+  <form bindsubmit="formSubmit" report-submit='{{true}}'>
+    <view class="floating-box" bindtap='toEdit'>
+  		<view class="header">
+        <view class="content" wx:if='{{myInfo.uid}}'>
+          <view class="realname">{{myInfo.name}}</view>
+          <view class="degree-name" wx:if="{{myInfo.lastCompanyName || myInfo.lastCompany}}">
+            <block wx:if="{{myInfo.lastCompanyName || myInfo.lastCompany}}">{{myInfo.lastCompanyName || myInfo.lastCompany}}</block>
+            <block wx:if="{{(myInfo.lastCompanyName || myInfo.lastCompany) && myInfo.lastPosition}}}"> | </block>
+            <block wx:if="{{myInfo.lastPosition}}">{{myInfo.lastPosition}}</block>
+          </view>
+        </view> 
+        <view class="content" wx:if='{{!myInfo.uid && hasLogin}}'>
+  				<view class="realname">简历未完善</view>
+  				<text class="degree-name directions">你与offer之间还差一份简历\n快去完善吧~</text>
+  			</view>
+        <view class="content" wx:if='{{!hasLogin}}'>
+          <view class="realname">未登录</view>
+          <text class="degree-name directions">登录可后使用完整功能\n快去登录吧~</text>
+        </view>
+  			<image class="img-box" src="{{myInfo.avatar.smallUrl}}"></image>
+  		</view>
+      <button class="createBtn clear-style" form-type="submit" catchtap="jump" data-type="toCreate" wx:if="{{!isMicroCard && !isJobhunter}}">创建简历</button>
+      <view class="experience" wx:if='{{myInfo.uid}}'>
+        <view class="item" wx:if="{{myInfo.workAgeDesc}}"><i class="icon iconfont icon-zhiwei"></i>{{myInfo.workAgeDesc}}</view>
+        <view class="item" wx:if="{{myInfo.age}}"><i class="icon iconfont icon-nianling"></i>{{myInfo.age ? myInfo.age + '岁 ' : ''}}</view>
+        <view class="item" wx:if="{{myInfo.degreeDesc}}"><i class="icon iconfont icon-xueli"></i>{{myInfo.degreeDesc}}</view>
+      </view>
+      <button class="share-resume" form-type="submit" wx:if='{{!hasLogin}}' catchtap='login'>立即登录 <i class="icon iconfont icon-xiangyou"></i></button>
+  		<block wx:if="{{isJobhunter}}">
+        <button form-type="submit" class="share-resume clear-style" catchtap='toEdit'>在线简历 ({{myInfo.resumeCompletePercentageDesc}})</button>
+        <button class="save-resume-pic clear-style" form-type="submit" catchtap="share">转发我的简历</button>
+      </block>
+  	</view>
+    <!-- bottom -->
+    <view class="entry-list">
+  		<view class="li" bindtap="jump" data-type="interest">
+  			<view>
+          <i class="icon iconfont icon-ganxingqu"></i>
+          <view class="text">我关注的</view>
+        </view>
+  			<view class='arrow-box'>
+          <i class="icon iconfont icon-xiangyou"></i>
+        </view>
+  		</view>
+      <view class="li" bindtap="jump" data-type="interested_in_me">
+        <view>
+          <i class="icon iconfont icon-ganxingqu"></i>
+          <view class="text">对我感兴趣</view>
+        </view>
+        <view class='arrow-box'>
+          <i class="icon iconfont icon-xiangyou"></i>
+        </view>
+      </view>
+<!--   		<view class="li" bindtap="online">
+  			<view>
+          <i class="icon iconfont icon-kefu"></i>
+          <view class="text">联系客服</view>
+        </view>
+  			<view class='arrow-box'>
+          <i class="icon iconfont icon-xiangyou"></i>
+        </view>
+  		</view> -->
+  		<view class="li" bindtap="call">
+  			<view>
+          <i class="icon iconfont icon-dianhua"></i>
+          <view class="text">客服电话</view>
+        </view>
+        <view class='arrow-box'>
+          <view class="text2">{{telePhone}}</view>
+          <i class="icon iconfont icon-xiangyou"></i>
+        </view>
+  		</view>
+
+  		<view class="li" bindtap="jump" data-type="settings">
+  			<view>
+          <i class="icon iconfont icon-shezhi"></i>
+  			  <view class="text">设置</view>
+        </view>
+  			<view class='arrow-box'>
+          <i class="icon iconfont icon-xiangyou"></i>
+        </view>
+  		</view>
+  	</view>
+    <view class="toggleIdentity" bindtap="toggleIdentity">
+      <view class="key">
+        <i class="icon iconfont icon-qiehuanshenfen"></i>
+        <view class="text">{{isRecruiter ? '切换到我的招聘主页' : '我也要招人'}}</view>
+      </view>
+      <view class='arrow-box'>
+        <i class="icon iconfont icon-xiangyou"></i>
+      </view>
+    </view>
+	<!-- <view class="copy-right">
+		<view class="li">使用帮助</view>
+		<view class="li">用户协议</view>
+		<view class="li">意见反馈</view>
+	</view> -->
+  </form>
+</view>
+<tabBar id="bottomRedDotBar"></tabBar>
+<shareBtn id="share" posterType="applicant" shareBtn="{{false}}"></shareBtn>
+<block wx:if="{{myInfo.vkey && myInfo.vkey}}"><canvasCard cardData="{{myInfo}}" type="resume" bindgetCreatedImg="getCreatedImg"></canvasCard></block>
+<bindPhone hide="{{hideBind}}"></bindPhone>

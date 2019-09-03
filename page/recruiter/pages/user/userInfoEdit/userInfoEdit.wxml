@@ -1,0 +1,68 @@
+<view class="userInfoEdit">
+  <navBar title="基本资料" background="#fff" color="#22292C"></navBar>
+  <view class="title">头像</view>
+  <view class="item picBox">
+  	<view class="picList">
+  		<view class="pic" wx:for="{{picList}}" wx:key="{{index}}">
+	  		<image src="{{item.smallUrl}}" mode="aspectFill"></image>
+        <view class="removeFile" bindtap="removeFile" data-id="{{item.id}}" data-index="{{index}}">
+          <i class="removeBtn iconfont icon-close"></i>
+        </view>
+	  	</view>
+	  	<view class="pic" wx:if="{{picList.length < 6}}">
+        <avatarCut class="avatarCut" src="{{info.avatar.smallUrl}}" needBg="{{true}}">
+          <view class="addPic">+</view>
+        </avatarCut>
+	  	</view>
+  	</view>
+  </view>
+  <view class="title">基本信息</view>
+  <view class="item">
+    <view class="txt">姓名</view>
+    <view class="edit">
+      <input type="text" value="{{userName}}" data-type="name" bindblur="getInputValue" placeholder="请输入姓名" placeholder-style="color: #B2B6C2" disabled />
+    </view>
+  </view>
+  <view class="item">
+    <view class="txt">性别</view>
+    <view class="edit">
+      <radio-group class="radio-group" bindchange="radioChange" >
+        <label class="radio">
+          <radio value="1" color="#652791" checked="{{gender === 1}}"/>
+          男
+        </label>
+        <label class="radio">
+          <radio value="2" color="#652791" checked="{{gender === 2}}"/>
+          女
+        </label>
+      </radio-group>
+    </view>
+  </view>
+  <view class="item">
+    <view class="txt">担任职务</view>
+    <view class="edit">
+      <input type="text" value="{{position}}" data-type="position" bindblur="getInputValue" placeholder="请填写担任职务" placeholder-style="color: #B2B6C2"/>
+    </view>
+  </view>
+  <!-- <view class="item">
+    <view class="txt">公司邮箱</view>
+    <view class="edit">
+      <input type="text" value="{{email}}" data-type="email" bindblur="getInputValue" placeholder="请填写公司邮箱" placeholder-style="color: #B2B6C2"/>
+    </view>
+  </view> -->
+  <view class="title">联系方式</view>
+  <view class="item">
+    <view class="txt noRed">微信</view>
+    <view class="edit">
+      <input type="text" value="{{wechat}}" data-type="wechat" bindblur="getInputValue" placeholder="请填写微信号" placeholder-style="color: #B2B6C2"/>
+    </view>
+  </view>
+  <view class="title">个性签名</view>
+  <view class="signBox">
+    <textarea class="sign" value="{{signature}}" auto-height maxlength='30' placeholder="用一句话介绍你自己吧~" bindinput="singInput" placeholder-style="color: #B2B6C2; font-weight: 300"></textarea>
+    <view class="number">{{signature.length || 0}}/30</view>
+  </view>
+  <cover-view class="botBtn">
+    <button class="save" bindtap="saveInfo">保存资料</button>
+  </cover-view>
+</view>

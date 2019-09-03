@@ -1,0 +1,36 @@
+<view class="indexEdit">
+	<navbar title="我的公司" background="#fff" color="#22292C"></navbar>
+	<view class="head">
+		<roleInfoCard class="roleInfoCard" roleType="company" isMain="{{true}}" cardData="{{info}}"></roleInfoCard>
+		<view class="msg">
+			<view class="item">
+				<view class="txt">所属行业</view>
+				<view class="value">{{info.industry}}</view>
+			</view>
+			<view class="item">
+				<view class="txt">公司规模</view>
+				<view class="value">{{info.employeesInfo}}</view>
+			</view>
+			<view class="item" wx:if="{{info.website}}">
+				<view class="txt">公司官网</view>
+				<view class="value">{{info.website}}</view>
+			</view>
+		</view>
+	</view>
+	<!-- <view class="peoples" bindtap="jumpPage" data-type="peoples">
+		<view class="txt">公司面试官</view>
+		<view class="boxs">
+			<image class="people" wx:for="{{info.recruiterList}}" src="{{item.avatar.smallUrl}}" wx:key="{{index}}" wx:if="{{index < 4}}"></image>
+			<image class="people" wx:if="{{info.recruiterList.length > 3}}" src="{{cdnImagePath}}more.png"></image>
+		</view>
+		<i class="icon iconfont icon-xiangyou"></i>
+	</view> -->
+	<view class="mainPage" bindtap="jumpPage" data-type="main">
+		<view class="txt">公司主页</view>
+		<i class="icon iconfont icon-xiangyou"></i>
+	</view>
+	<view class="team" bindtap="jumpPage" data-type="bright">
+		<view class="txt">公司福利</view>
+		<i class="icon iconfont icon-xiangyou"></i>
+	</view>
+</view>

@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+  	"navbar": "../../../../../components/business/navbar/navbar",
+  	"roleInfoCard": "../../../../../components/business/roleInfoCard/roleInfoCard"
+  }
+}

@@ -1,0 +1,118 @@
+<view>
+	<navbar title="全部面试({{interviewList.total}})" background="#FFFFFF" color="#22292C" showBackBtn="{{true}}"></navbar>
+	<view class="history">
+		
+		<view class="fixed-box">
+			<view class="mask" wx:if="{{timeModel.show || positionModel.show}}" bindtap="closeModal"></view>
+			<view class="down-show" style="top: {{navH}}px">
+				<view
+					class="key {{timeSelected ? 'down-show-active' : ''}}"
+					bindtap="onTapTime"
+					data-type="timeModel">面试时间 <i class="icon iconfont icon-zhishibiao {{timeModel.show ? 'rotate180' : ''}}"></i></view>
+				<view
+					class="key {{positionSelected ? 'down-show-active' : ''}}"
+					bindtap="onTapPosition"
+					data-type="positionModel">职位类型 <i class="icon iconfont icon-zhishibiao {{positionModel.show ? 'rotate180' : ''}}"></i></view>
+			</view>
+			<view class="child-box" wx:if="{{timeModel.show || positionModel.show}}" style="top: {{navH}}px">
+				<view class="time" wx:if="{{timeModel.show}}">
+					<view class="h2">选择日期范围</view>
+					<view class="box4">
+						<view
+							class="item {{item.active ? 'active' : ''}}"
+							wx:for="{{dateList}}"
+							wx:key="{{item.id}}"
+							data-id="{{item.id}}"
+							bindtap="changeSearch">{{item.text}}</view>
+					</view>
+					<view class="h3">自定义时间范围<view class="p1">(最长可查询30天的面试记录)</view></view>
+					<view class="select-range">
+						<view class="start {{startTime.date ? 'active' : ''}}">
+							{{startTime.date ? startTime.date : '请选择时间'}} <i class="icon iconfont icon-zhishibiao"></i>
+							<picker
+						    mode="date"
+						    value="{{startTime.date}}"
+						    class="picker"
+						    bindchange="bindStartDateChange">
+						    <view class="picker">
+						      当前选择: {{startTime.date}}
+						    </view>
+						  </picker>
+						</view>
+						<view class="separator">到</view>
+						<view class="end {{endTime.date ? 'active' : ''}}">
+							{{endTime.date ? endTime.date : '请选择时间'}} <i class="icon iconfont icon-zhishibiao"></i>
+							<picker
+						    mode="date"
+						    value="{{endTime.date}}"
+						    class="picker"
+						    bindchange="bindEndDateChange">
+						    <view class="picker">
+						      当前选择: {{endTime.date}}
+						    </view>
+						  </picker>
+						</view>
+					</view>
+				</view>
+				<view class="position" wx:if="{{positionModel.show}}">
+					<view class="ul10">
+						<view
+							class="item10 {{item.active ? 'active' : ''}}"
+							wx:for-item="item"
+							wx:for="{{typeList}}"
+							data-id="{{item.id}}"
+							bindtap="selectType"
+							wx:key="{{index}}">{{item.name}}</view>
+					</view>
+					<view class="button-box">
+						<view class="button-reset" bindtap="resetSelectType">重置</view>
+						<view class="button-sure" bindtap="confirmChoose">确定</view>
+					</view>
+				</view>
+			</view>
+		</view>
+		<view hidden="{{!hasReFresh}}">
+			<refreshStatus></refreshStatus>
+		</view>
+		<view class="ul" wx:if="{{interviewList.list.length}}">
+			<form bindsubmit="formSubmit" report-submit='{{true}}'> 
+				<button
+					form-type="submit" 
+					class="formIdBtn"
+					data-positionId="{{item.positionId}}"
+					bindtap="routeJump"
+					wx:for="{{interviewList.list}}"
+					wx:for-item="item"
+					data-item-id="{{item.interviewId}}"
+					data-recruiterUid="{{item.recruiterUid}}"
+					data-status="{{item.status}}"
+					wx:key="{{index}}">
+					<view class="li">
+						<view class="row-one">
+							<view class="img-box"><image src="{{item.avatar.smallUrl}}"></image></view>
+							<view class="content">
+								<view class="row10">
+									<view class="user-name">{{item.jobhunterRealname}}</view>
+									<view class="time {{item.status > 50 ? '' : 'color'}}">{{item.arrangementInfo.appointment}}</view>
+								</view>
+								<view class="infos1">
+									{{item.workExperienceDesc}} · {{item.educationDesc}}
+									<block wx:if="{{item.emolumentMax}}"> · {{item.emolument}}</block>
+								</view>
+								<view class="infos2">
+									<block wx:if="{{item.lastCompanyName}}">{{item.lastCompanyName}}</block>
+									<block wx:if="{{item.lastCompanyName && item.lastPosition}}"> | </block>
+									<block wx:if="{{item.lastPosition}}">{{item.lastPosition}}</block>
+								</view>
+							</view>
+						</view>
+						<view class="row-two">
+							<i class="icon iconfont icon-mianshizhiwei"></i>面试职位：<text>{{item.positionId ? item.positionName : '未选择面试职位'}}</text>
+						</view>
+					</view>
+				</button>
+			</form>
+		</view>
+		<bottomStatus status="{{onBottomStatus}}" listData="{{interviewList.list}}" desc="暂时没有发现面试记录~"></bottomStatus>
+	</view>
+</view>

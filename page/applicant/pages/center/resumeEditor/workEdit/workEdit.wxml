@@ -1,0 +1,65 @@
+<!--简历工作编辑页-->
+<navbar title="工作经历" background="#FFFFFF" color="#22292C"></navbar>
+<view class="warp">
+  <view class="commont">
+    <view class="title"><text>*</text>公司名称</view>
+    <view class="result"><input type="text" maxlength="50" bindblur="inpCompany" placeholder="请输入公司名称" value="{{company}}"></input></view>
+  </view>
+  <view class="commont" data-type="3" bindtap="choose">
+    <view class="title"><text>*</text>职位类别</view>
+    <view class="result">{{jobCategories.typeName || jobCategories || '选择职位类别'}}<i class="icon iconfont icon-xiangyou"></i></view>
+  </view>
+  <view class="commont">
+    <view class="title"><text>*</text>职位名称</view>
+    <view class="result"><input type="text" bindblur="inpPosition" placeholder="请输入职位名称" value="{{positionName}}"></input></view>
+  </view>
+  <view class="commont salary">
+    <view class="title"><text>*</text>开始时间</view>
+    <myPicker class="myPicker" setResult="{{info.startTimeDesc}}" pickerType="startTime" placeholderStyle="color: #BCBCBC" data-time="start" bindresultevent="getresult"></myPicker>
+  </view>
+  <view class="commont salary">
+    <view class="title"><text>*</text>结束时间</view>
+    <myPicker class="myPicker" setResult="{{info.endTimeDesc}}" pickerType="endTime" placeholderStyle="color: #BCBCBC" data-time="end" bindresultevent="getresult"></myPicker>
+  </view>
+ <!--  <view class="commont" data-type="4" bindtap="choose">
+    <view class="title"><text>*</text>技能标签</view>
+    <view class="result">
+      <text wx:for="{{skill}}" wx:if="{{skill.length > 0}}" class="labelTxt" wx:key="{{index}}">{{item.labelName || item.name}}<text wx:if="{{index !== skill.length-1}}">、</text></text>
+      <text wx:if="{{skill.length === 0}}" class="placeholder">选择技能标签</text><i class="icon iconfont icon-xiangyou"></i>
+    </view>
+  </view> -->
+  <!--工作内容-->
+  <view class="title"><text>*</text>工作内容</view>
+  <view class="textArea">
+    <textarea placeholder="填写你工作内容" placeholder-class="placeholder" maxlength="1000" bindinput="WriteContent" value="{{duty}}"></textarea>
+    <view class="bottom">
+      <view class="example" bindtap="showPopups"><!-- <i class="icon iconfont icon-chakan"></i>看看别人怎么写 --></view>
+      <view class="num">{{duty.length}}/1000</view>
+    </view>
+  </view>
+  <view class="popups" wx:if="{{showCase}}">
+    <view class="top">
+      <view class="nameBox">
+        <image class="avatar"></image>
+        <text class="name">市场运营经理</text>
+      </view>
+      <view class="change" bindtap="nextExample">
+        <i class="icon iconfont icon-huanyihuan"></i>
+        <text>换一个</text>
+      </view>
+    </view>
+    <view class="content">
+      <view class="corner"><image src="{{cdnImagePath}}corner.png"></image></view>
+      本人有6年工作经验，意向电商或高并发，责任心非常强，耐力持久，热爱技术，皮实，性格内敛，灵活，执着。热衷于研究技术，崇尚科技改变世界！
+    </view>
+  </view>
+</view>
+<view style="height: 168rpx;"></view>
+<view class="saveBox">
+  <view class="save" bindtap="save" wx:if="{{isAdd}}">保存</view>
+  <block wx:else>
+    <view class="delete save" bindtap="del">删除</view>
+    <view class="saveAgain save" bindtap="save">保存</view>
+  </block>
+</view>
+

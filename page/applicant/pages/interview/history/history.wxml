@@ -1,0 +1,111 @@
+<view>
+	<navbar title="全部面试({{interviewList.total}})" background="#FFFFFF" color="#22292C"></navbar>
+	<view class="history">
+		<view class="fixed-box">
+			<view class="mask" wx:if="{{timeModel.show || positionModel.show}}" bindtap="closeModal"></view>
+			<view class="down-show" style="top: {{navH}}px">
+				<view
+					class="key {{timeSelected ? 'down-show-active' : ''}}"
+					bindtap="onTapTime"
+					data-type="timeModel">面试时间 <i class="icon iconfont icon-zhishibiao {{timeModel.show ? 'rotate180' : ''}}"></i></view>
+			</view>
+			<view class="child-box" wx:if="{{timeModel.show || positionModel.show}}" style="top: {{navH}}px">
+				<view class="time" wx:if="{{timeModel.show}}">
+					<view class="h2">选择日期范围</view>
+					<view class="box4">
+						<view
+							class="item {{item.active ? 'active' : ''}}"
+							wx:for="{{dateList}}"
+							wx:key="{{item.id}}"
+							data-id="{{item.id}}"
+							bindtap="changeSearch">{{item.text}}</view>
+					</view>
+					<view class="h3">自定义时间范围<view class="p1">（最长可查询30天的面试记录）</view></view>
+					<view class="select-range">
+						<view class="start {{startTime.date ? 'active' : ''}}">
+							{{startTime.date ? startTime.date : '请选择时间'}} <i class="icon iconfont icon-zhishibiao"></i>
+							<picker
+						    mode="date"
+						    value="{{startTime.date}}"
+						    class="picker"
+						    bindchange="bindStartDateChange">
+						    <view class="picker">
+						      当前选择: {{startTime.date}}
+						    </view>
+						  </picker>
+						</view>
+						<view class="separator">到</view>
+						<view class="end {{endTime.date ? 'active' : ''}}">
+							{{endTime.date ? endTime.date : '请选择时间'}} <i class="icon iconfont icon-zhishibiao"></i>
+							<picker
+						    mode="date"
+						    value="{{endTime.date}}"
+						    class="picker"
+						    bindchange="bindEndDateChange">
+						    <view class="picker">
+						      当前选择: {{endTime.date}}
+						    </view>
+						  </picker>
+						</view>
+					</view>
+				</view>
+				<view class="position" wx:if="{{positionModel.show}}">
+					<view class="ul10">
+						<view
+							class="item10"
+							wx:for-item="item"
+							wx:for="{{[1,2,3,4,5,6,7,8]}}"
+							wx:key="{{index}}">全部</view>
+					</view>
+					<view class="button-box">
+						<view class="button-reset">重置</view>
+						<view class="button-sure">确定</view>
+					</view>
+				</view>
+			</view>
+		</view>
+
+		<view class="ul" wx:if="{{interviewList.list.length}}">
+			<view hidden="{{!hasReFresh}}">
+				<refreshStatus></refreshStatus>
+			</view>
+			<form bindsubmit="formSubmit" report-submit='{{true}}'> 
+				<button
+					form-type="submit" 
+					class="formIdBtn"
+					data-positionId="{{item.positionId}}"
+					bindtap="routeJump"
+					wx:for="{{interviewList.list}}"
+					wx:for-item="item"
+					data-item-id="{{item.interviewId}}"
+					data-recruiterUid="{{item.recruiterUid}}"
+					data-status="{{item.status}}"
+					wx:key="{{index}}">
+					<view class="li">
+						<view class="row-one">
+							<view class="img-box"><image src="{{item.avatar.smallUrl}}"></image></view>
+							<view class="content">
+								<view class="header">
+									<view class="infos1">
+										<view class="name">{{item.recruiterRealname}}</view>
+										<view class="degree" wx:if="{{item.recruiterPositionName}}">{{item.recruiterPositionName}}</view>
+									</view>
+									<view class="time {{item.status > 50 ? '' : 'color'}}">{{item.arrangementInfo.appointment}}</view>
+								</view>
+								<view class="infos2">{{item.companyShortname}}</view>
+							</view>
+						</view>
+						<view class="row-two">
+							<i class="icon iconfont icon-mianshizhiwei"></i>面试职位：{{item.positionId ? item.positionName : '未选择面试职位'}}
+						</view>
+						<view class="row-three" wx:if="{{item.address}}">
+							<i class="icon iconfont icon-mianshidizhi"></i>{{item.address}}{{item.doorplate}}
+						</view>
+					</view>
+				</button>
+			</form>
+		</view>
+    <bottomStatus  marginTop="{{260}}" status="{{onBottomStatus}}" listData="{{interviewList.list}}" desc="{{hasLogin ? (isJobhunter ? '没有面试记录~' : '你与offer之间就差一份简历~') : '大量名企高薪职位等你开撩'}}">
+		</bottomStatus>
+	</view>
+</view>

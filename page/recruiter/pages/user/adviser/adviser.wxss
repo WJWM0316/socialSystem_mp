@@ -1,0 +1,243 @@
+
+.head {
+	width: 100%;
+	position: relative;
+}
+.head .bg {
+	width: 100%;
+	display: block;
+}
+
+.tab {
+	width: 100%;
+	height: 98rpx;
+	line-height: 98rpx;
+	padding: 0 60rpx;
+	box-sizing: border-box;
+	overflow: hidden;
+	background: #fff;
+  box-shadow:0rpx 11rpx 30rpx 0rpx rgba(142,194,216,0.08);
+}
+.tab.tabFloat {
+	position: fixed;
+	left: 0;
+	z-index: 1;
+} 
+.tab-item {
+	font-size:32rpx;
+	color:#5D565D;
+	float: left;
+	margin-right: 82rpx;
+}
+.tab-item:last-child {
+	margin-right: 0;
+}
+.tab-item .txt {
+	position: relative;
+	line-height: 98rpx;
+	display: block;
+}
+.tab-item.cur .txt {
+	color: #282828;
+	font-weight: 700;
+}
+
+.tab-item.cur .txt::after {
+	content: '';
+	width:32rpx;
+	height:8rpx;
+	background:#FFDC29;
+	border-radius:4rpx;
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	margin-left: -16rpx;
+}
+
+.tab-item.red .txt::before {
+	content: '';
+	width: 14rpx;
+	height: 14rpx;
+	border-radius: 50%;
+	background: #FF2E3E;
+	position: absolute;
+	top: 27rpx;
+	right: -22rpx;
+}
+.tip {
+	padding: 0 50rpx;
+	height:88rpx;
+	line-height: 88rpx;
+	background:#FBFBFF;
+	box-shadow:0rpx 0rpx 20rpx 0rpx rgba(50,14,59,0.08);
+	border-radius:0rpx 0rpx 16rpx 16rpx;
+	font-size:26rpx;
+	font-weight:300;
+	color:#282828;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.tip .go {
+  line-height: 88rpx;
+  color: #652791;
+  font-weight: 700;
+}
+.tip .go .icon {
+  font-weight: 300;
+  font-size: 20rpx;
+}
+.list {
+	padding: 0 30rpx;
+}
+.list-item {
+	margin-top: 20rpx;
+	box-shadow:0rpx 0rpx 30rpx 0rpx rgba(22,39,77,0.07);
+	border-radius:16rpx;
+	background: #fff;
+	width: 100%;
+	padding: 0 40rpx;
+	box-sizing: border-box;
+	position: relative;
+}
+.list-item.red::after {
+	content: '';
+	width: 14rpx;
+	height: 14rpx;
+	border-radius: 50%;
+	background: #FF2E3E;
+	position: absolute;
+	top: 30rpx;
+	right: 30rpx;
+}
+.list-item .msg {
+	padding: 30rpx 0 23rpx 140rpx;
+	position: relative;
+	box-sizing: border-box;
+	border-bottom: 1rpx solid #E8E9EB;
+}
+
+.list-item .msg .head {
+	width:121rpx;
+	height:121rpx;
+	background:rgba(255,255,255,0.5);
+	overflow: hidden;
+	border-radius:61rpx;
+	position: absolute;
+	top: 30rpx;
+	left: 0;
+}
+.list-item .msg .head .img {
+	width: 100%;
+	height: 100%;
+	display: block;
+}
+
+.list-item .msg .detail {
+	width: 100%;
+	height: 121rpx;
+	display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+}
+
+.detail .top {
+	font-size:26rpx;
+	font-weight:300;
+	color:#929292;
+	line-height:36rpx;
+  height: 36rpx;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+.detail .top.noFlex {
+  display: block;
+}
+.detail .top .name {
+	font-size:32rpx;
+	font-weight:700;
+	color:#282828;
+	line-height:32rpx;
+	margin-right: 30rpx;
+  display: inline-block;
+}
+
+.detail .top .name.filter {
+  width: 72rpx;
+  overflow-x: hidden;
+}
+.invisible {
+	width:96rpx;
+	height:58rpx;
+}
+
+.detail .bot {
+	font-size:28rpx;
+	font-weight:300;
+	color:#626262;
+	line-height:28rpx;
+	margin-top: 10rpx;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+
+
+.list-item .desc {
+	font-size:24rpx;
+	font-weight:300;
+	color:#666666;
+	line-height:88rpx;
+}
+
+.list-item .desc .icon {
+	height: 40rpx;
+  background: #FFDC29;
+  font-size:20rpx;
+  font-weight:700;
+  color:rgba(40,40,40,1);
+  padding-left: 12rpx;
+  line-height: 40rpx;
+  display: inline-block;
+  margin-right: 30rpx;
+  position: relative;
+  padding-right: 5rpx;
+}
+.list-item .desc .icon:before {
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 50%;
+  right: -40rpx;
+  transform: translateY(-50%);
+  border-width: 21.5rpx;
+  border-style: solid;
+  border-color: transparent transparent transparent #FFDC29;
+  display: block;
+  content: '';
+}
+.positionName {
+	color: #8452A7;
+}
+
+.know{
+	height:33rpx;
+	font-size:24rpx;
+	font-weight:400;
+	color:rgba(255,255,255,1);
+	line-height:33rpx;
+	position: absolute;
+	bottom: 44rpx;
+	left: 80rpx;
+}
+
+.know .icon{
+	font-size:24rpx;
+	color: #FFDC29;
+	margin-left: 8rpx;
+}

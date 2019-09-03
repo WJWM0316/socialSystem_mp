@@ -1,0 +1,3 @@
+<view class="refresh">
+	<image class="load" src="{{cdnImagePath}}load.png"></image>
+</view>

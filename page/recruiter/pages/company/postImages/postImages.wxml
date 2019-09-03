@@ -1,0 +1,22 @@
+<view class="company-images">
+	<navbar title="编辑公司图片" background="#fff" color="#22292C"></navbar>
+	<view class="ul">
+    <image
+    	class="commont img"
+    	wx:for="{{imgList}}"
+    	wx:key="{{item}}"
+      mode = "aspectFill"
+      wx:if = "{{index <= 20}}"
+    	src="{{item.smallUrl}}">
+    		<view class="close" data-index="{{index}}" bindtap="delete">
+    			<i class="icon iconfont icon-close"></i>
+    		</view>
+    </image>
+    <unloadFile class="commont addImg" bindresultEvent="upload" unloadType="img" wx:if="{{imgList.length < 20}}">
+      <view class="add"><i class="icon iconfont icon-jiahao"></i></view>
+    </unloadFile> 
+  </view>
+  <view class="footer">
+    <view class="button-save" bindtap="submit">保存</view>
+  </view>
+</view>

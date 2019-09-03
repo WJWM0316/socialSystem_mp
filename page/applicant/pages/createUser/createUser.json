@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+  	"navbar": "../../../../components/business/navbar/navbar",
+  	"avatarCut": "../../../../components/functional/avatarCut/avatarCut",
+  	"myPicker": "../../../../components/functional/myPicker/myPicker",
+  	"customPicker": "../../../../components/business/customPicker/customPicker",
+  	"guidePop": "../../../../components/layout/guidePop/guidePop"
+  }
+}

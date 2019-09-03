@@ -1,0 +1,15 @@
+<actionSheet class="actionSheet rule-box" openPop="{{openPayPop}}" title="确认邀约" bindclose="close">
+  <view class="tip">此候选人来自<text class="txt">顾问精选</text>推荐，开撩邀约需消耗</view>
+  <view class="tipTitle">多多币</view>
+  <view class="num">{{chargeData.charge}}</view>
+  <view class="otherMsg" wx:if="{{chargeData.isEnough}}">账户剩余 {{chargeData.remain}} 多多币<text class="more" bindtap="callPhone">获取更多</text></view>
+  <view class="otherMsg not" wx:else>账户剩余 {{chargeData.remain}} 多多币，余币不足</view>
+  <view class="msg">
+    <text>* 邀约后，平台顾问将1V1跟进候选人处理&面试情况 
+    * 候选人在48小时内未接受邀请，或未按约定时间到场面试时，多多币将原路退回到你的账户
+    * 更多细则，欢迎联系客服 </text>
+    <text class="txt" bindtap="callPhone">{{telePhone}}</text>
+  </view>
+  <button class="sureBtn" bindtap="submit" wx:if="{{chargeData.isEnough}}">确认邀约</button>
+  <button class="sureBtn not" bindtap="callPhone" wx:else>余币不足，邀约请联系我们</button>
+</actionSheet>

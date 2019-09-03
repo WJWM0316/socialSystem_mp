@@ -1,0 +1,8 @@
+{
+	"enablePullDownRefresh": true,
+	"backgroundTextStyle": "light",
+  "usingComponents": {
+    "bindPhone": "../../../../components/functional/bindPhone/bindPhone",
+    "navbar": "../../../../../components/business/navbar/navbar"
+  }
+}

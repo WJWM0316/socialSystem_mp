@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "myPicker": "../../../../components/functional/myPicker/myPicker",
+    "navbar": "../../../../../components/business/navbar/navbar"
+  }
+}

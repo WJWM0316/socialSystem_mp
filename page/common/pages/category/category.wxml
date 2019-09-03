@@ -1,0 +1,57 @@
+<view>
+	<navbar title="选择职位类别" color="#22292C" background="#ffffff"></navbar>
+	<view style="height: 120rpx;"></view>
+	<view class="search-box" style="top: {{statusBarHeight}}px">
+		<view class="mask"></view>
+		<input placeholder="搜索" bindinput="bindInput" />
+		<i class="icon iconfont icon-sousuo icon-search"></i>
+	</view>
+	<view class="hotArea" wx:if="{{hotArea.length > 0}}">
+		<text class="hotArea-item {{item.active ? 'cur' : ''}}" wx:for="{{hotArea}}" wx:key="{{index}}" bindtap="tapHot" data-item="{{item}}">{{item.name}}</text>
+	</view>
+	<view class="category-list" >
+		<block wx:if="{{!searing}}">
+			<view
+				class="li link"
+				wx:for="{{positionTypeList}}"
+				wx:for-item="item"
+				data-order="first"
+				wx:key="{{item.id}}"
+				data-index="{{index}}"
+				bindtap="onClick1">
+				<view class="text {{item.active ? 'active' : ''}}">{{item.name}}</view>
+				<i class="icon iconfont icon-xiangyou"></i>
+			</view>
+		</block>
+		<block wx:else>
+			<view
+			wx:for="{{positionTypeList}}"
+			wx:for-item="item"
+			wx:key="{{item.id}}"
+			bindtap="onClick"
+			data-name="{{item.name}}"
+			data-label-id="{{item.labelId}}"
+			data-topid="{{item.topPid}}"
+			class="search-item" >
+				<view class="first"><rich-text nodes="{{item.html}}"></rich-text></view>
+				<view class="second"><rich-text nodes="{{item.seriesName}}"></rich-text></view>
+				<i class="icon iconfont icon-jiantou"></i>
+			</view>
+		</block>
+	</view>
+	<view class="mask-board {{showMask ? 'mask-board-show' : ''}}" style="top: {{statusBarHeight}}px">
+		<view class="left" bindtap="closeMask"></view>
+		<view class="box">
+			<view class="column second">
+				<view
+					wx:for="{{positionTypeList[index1].children}}"
+					class="item {{second.active ? 'active' : ''}}"
+					wx:key="{{index}}"
+					wx:for-item="second"
+					data-index="{{index}}"
+					bindtap="onClick2"
+					data-order="second">{{second.name}}</view>
+			</view>
+		</view>
+	</view>
+</view>

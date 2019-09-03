@@ -1,0 +1,19 @@
+@import '../../../iconfont.wxss'
+.change-identity {
+	display: table;
+	margin: 50rpx auto;
+}
+
+.change-identity .item {
+	font-size:28rpx;
+	font-weight:500;
+	color:rgba(188,188,188,1);
+	display: inline-block;
+	margin-right: 25rpx;
+	line-height: 1;
+}
+
+.change-identity .column-line {
+	border-right: 1px solid #DCDCDC;
+	padding-right: 25rpx;
+}

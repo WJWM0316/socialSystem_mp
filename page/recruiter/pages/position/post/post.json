@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "navbar": "../../../../../components/business/navbar/navbar",
+    "myPicker": "../../../../../components/functional/myPicker/myPicker",
+    "scanCodeTips": "../../../../../components/layout/scanCodeTips/scanCodeTips"
+  }
+}

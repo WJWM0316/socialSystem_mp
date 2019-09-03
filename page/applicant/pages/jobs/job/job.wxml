@@ -1,0 +1,36 @@
+<view class="applicant-job">
+	<navbar title="店长多多" background="#652791" color="#fff"></navbar>
+
+	<view hidden="{{!hasReFresh}}">
+    <refreshStatus></refreshStatus>
+  </view>
+  
+  <!--<view class="header">
+    <view class="left">
+      <view class="chooseArea">选择地区<i class="icon iconfont icon-zhishibiao"></i></view>
+      <view class="chooseArea">职位类型<i class="icon iconfont icon-zhishibiao"></i></view>
+    </view>
+    <view class="interested"><i class="icon iconfont icon-ganxingqu"></i>感兴趣</view>
+  </view>-->
+
+  <view class="select-box" style="top: {{navH}}px">
+    <view class="item">
+      <picker range="{{cityList}}" range-key="name" bindchange="bindChange" data-type="city" value="{{cityIndex}}">
+        <view class="picker">{{cityList[cityIndex].name}}</view>
+        <i class="icon iconfont icon-zhishibiao"></i>
+      </picker>
+    </view>
+    <view class="item">
+      <picker range="{{positionTypeList}}" range-key="name" bindchange="bindChange" data-type="type" value="{{typeIndex}}">
+        <view class="picker">{{positionTypeList[typeIndex].name}}</view>
+        <i class="icon iconfont icon-zhishibiao"></i>
+      </picker>
+    </view>
+  </view>
+
+  <view class="list-box" style="padding-top: 112rpx">
+    <jobList personality="jobItem" list="{{positionList.list}}" list-type="interview" current-tab="all"></jobList>
+    <bottomStatus status="{{onBottomStatus}}" listData="{{positionList.list}}"></bottomStatus>
+  </view>
+  <tabBar></tabBar>
+</view>

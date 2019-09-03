@@ -1,0 +1,6 @@
+<view class="not-found">
+  <navbar title="{{title}}" background="#fff" color="#22292C" showHome="{{showHomeBtn}}" customBack bindbackEvent="backEvent"></navbar>
+  <image class="emptyState" src="{{cdnImagePath}}emptyState.png"></image>
+  <view class="oops">{{msg}}</view>
+  <view class="return" bindtap="jump" wx:if="{{noReturn}}">返回</view>
+</view>

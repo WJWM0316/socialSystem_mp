@@ -1,0 +1,29 @@
+<view class="tabsPage">
+  <navbar title="公司福利"></navbar>
+  <block>
+    <view class="content">
+      <view class="head">已选择标签<text class="number"><text class="num">{{choseList.length}}</text>/8</text></view>
+      <view class="tabs">
+        <text class="tab checked" wx:for="{{choseList}}" wx:key="{{index}}" bindtap="choseTab" data-tabData="{{item}}">{{item.title}}</text>
+      </view>
+      <view class="head"></view>
+      <view class="tabs">
+        <text class="tab {{item.select ? 'checked' : ''}}" wx:for="{{teamList}}" wx:key="{{index}}" bindtap="choseTab" data-tabData="{{item}}">{{item.title}}</text>
+      </view>
+      <view class="msg">找不到想要的标签？</view>
+      <view class="addLabel" bindtap="openPop">添加自定义标签</view>
+      <bitton class="save" bindtap="saveLabel">保存</bitton>
+    </view>
+  </block>
+  <view class="customPop" hidden="{{hidePop}}">
+    <view class="inner">
+      <view class="title">添加自定义标签</view>
+      <i bindtap="closePop" class="colseBtn iconfont icon-close"></i>
+      <view class="inputBox">
+        <input class="customLabel" maxlength="6" type="text" value="{{customLabel}}" placeholder="有趣的标签更吸引关注哦~" bindinput="getCustomLabel"/>
+        <text class="num">{{(6 - customLabel.length) || 6}}</text>
+      </view>
+      <button class="addBtn" bindtap="addLabel">添加标签</button>
+    </view>
+  </view>
+</view> 

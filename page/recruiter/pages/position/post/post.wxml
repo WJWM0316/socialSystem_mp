@@ -1,0 +1,95 @@
+<view class="position-post">
+	<navbar title="{{pageTitle}}" background="#FFFFFF" color="#22292C" customBack bindbackEvent="backEvent"></navbar>
+<!-- 	<view class="warning" bindtap="showTips"><i class="icon iconfont icon-PC"></i>前往PC端发布新职位<i class="icon iconfont icon-xiangyou"></i></view>
+ -->	<view class="tips">* 职位名称、职位类别、工作地点发布后将不可修改</view>
+	<view class="entry-list">
+
+		<view class="li link" bindtap="routeJump" data-route="search" wx:if="{{!query.positionId}}">
+			<view class="key"><text>*</text>职位名称</view>
+			<i class="icon iconfont icon-xiangyou"></i>
+			<view class="text2 {{position_name ? '' : 'color-default'}}">{{position_name || '请填写'}}</view>
+		</view>
+		<view class="li link" wx:else>
+			<view class="key"><text>*</text>职位名称</view>
+			<view class="text2 {{position_name ? '' : 'color-default'}}">{{position_name || '请填写'}}</view>
+		</view>
+
+		<view class="li link" bindtap="getCategory" wx:if="{{!query.positionId}}">
+			<view class="key"><text>*</text>职位类别</view>
+			<i class="icon iconfont icon-xiangyou"></i>
+			<view class="text2 {{typeName ? '' : 'color-default'}}">{{typeName || '请选择'}}</view>
+		</view>
+		<view class="li link" wx:else>
+			<view class="key"><text>*</text>职位类别</view>
+			<view class="text2 {{typeName ? '' : 'color-default'}}">{{typeName || '请选择'}}</view>
+		</view>
+
+		<view class="li link marginB24" bindtap="getPositionAddress">
+			<view class="key"><text>*</text>工作地点</view>
+			<i class="icon iconfont icon-xiangyou"></i>
+			<view class="text2 {{address ? '' : 'color-default'}}">{{address || '请选择'}}</view>
+		</view>
+<!-- 		<view class="li link" bindtap="routeJump" data-route="skills">
+			<view class="key"><text>*</text>技能要求</view>
+			<i class="icon iconfont icon-xiangyou"></i>
+			<view class="text2 {{skills.length ? '' : 'color-default'}}" wx:if="{{!skills.length}}">请选择</view>
+			<view class="text2" wx:else>
+				<text wx:for="{{skills}}" wx:for-item="item" wx:key="index">{{item.name}}{{index < skills.length - 1 ? '、' : ''}}</text>
+			</view>
+		</view> -->
+		<view class="li dropdown marginB24">
+			<view class="key"><text>*</text>薪资范围</view>
+			<i class="icon iconfont icon-xiangyou"></i>
+			<view class="text2 {{emolument_range !== '请选择薪资范围' ? '' : 'color-default'}}">{{emolument_range}}</view>
+			<view class="picker-box">
+				<myPicker needWatch setResult="{{ emolument_range }}" pickerType="salaryRangeB" bindresultevent="getSalary"></myPicker>
+			</view>
+		</view>
+		<view class="li dropdown">
+			<view class="key"><text>*</text>经验要求</view>
+			<i class="icon iconfont icon-xiangyou"></i>
+			<view class="text2 {{work_experience_name !== '请选择经验要求' ? '' : 'color-default'}}">{{work_experience_name}}</view>
+			<view class="picker-box">
+				<myPicker setResult="{{ work_experience_name }}" pickerType="experience" bindresultevent="getExperience" rangeKey="text"></myPicker>
+			</view>
+		</view>
+		<view class="li dropdown marginB24">
+			<view class="key"><text>*</text>最低学历</view>
+			<i class="icon iconfont icon-xiangyou"></i>
+			<view class="text2 {{educationName !== '请选择学历' ? '' : 'color-default'}}">{{educationName}}</view>
+			<view class="picker-box">
+				<myPicker setResult="{{ educationName }}" pickerType="education" bindresultevent="getEducation" rangeKey="text"></myPicker>
+			</view>
+		</view>
+		<view class="li link clear-bottom" bindtap="routeJump" data-route="description">
+			<view class="key"><text>*</text>职位描述</view>
+			<i class="icon iconfont icon-xiangyou"></i>
+			<view class="text2 {{describe ? '' : 'color-default'}}">{{describe || '请填写'}}</view>
+		</view>
+<!-- 		<view class="publish-tips">
+			<view>发布职位即代表同意<text>《店长多多职位信息发布规则》</text></view>
+			<view>如违反规则，可能导致你的账号被锁定</view>
+		</view> -->
+	</view>
+	<view class="btn-area">
+    <view class="button-submit {{canClick ? 'button-enable' : ''}}" bindtap="submit">发布</view>
+  </view>
+<!--   <view class="over-layout" wx:if="{{showScanBox}}">
+  	<view class="box">
+  		<i class="icon iconfont icon-close close-button" bindtap="showTips"></i>
+  		<view class="h1">登录PC端发布职位</view>
+  		<view class="dl">
+				<view class="dt">
+					<view class="label">第1步</view>
+					<view class="value">电脑浏览器打开网址“<text bindtap="copy">www.lieduoduo.com</text>”</view>
+				</view>
+				<view class="dt">
+					<view class="label">第2步</view>
+					<view class="value">扫描页面中二维码即可登录网页端进行操作</view>
+				</view>
+			</view>
+			<view class="scan-button" bindtap="scanCode">立即扫码</view>
+  	</view>
+  </view> -->
+</view>
+<scanCodeTips showScanBox="{{showScanBox}}"></scanCodeTips>

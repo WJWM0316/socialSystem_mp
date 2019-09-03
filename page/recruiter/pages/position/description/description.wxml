@@ -1,0 +1,32 @@
+<view class="position-description">
+	<navbar title="职位描述" background="#FFFFFF" color="#22292C"></navbar>
+	<!-- <view class="tips">* 职位名称、职位类别、工作地点发布后将不可修改</view> -->
+	<view bindsubmit="submit">
+		<view class="edit-box">
+			<textarea
+				bindinput="bindInput"
+				placeholder="填写详细，清晰的职位描述，有助于精准的展示招聘需求，例如： \n 1、工作内容…  \n 2、任职要求… \n 3、特别要求…"
+				maxlength="5000"
+				value="{{describe}}" />
+			<view class="controls">
+				<view class="similarity" bindtap="view"><i class="icon iconfont icon-chakan"></i>看看别人怎么写</view>
+				<view class="sum"><text class="{{describe.length > 5000 ? 'red' : ''}}">{{ describe.length }}</text>/5000</view>
+			</view>
+		</view>
+		<block wx:if="{{show}}">
+			<view class="example">
+				<view class="infos">
+					<image class="img-box" src="{{randomCopy.icon}}" mode="aspectFill"></image>
+					<view class="degress">{{randomCopy.name}}</view>
+				</view>
+				<view class="change" bindtap="next"><i class="icon iconfont icon-huanyihuan"></i>换一个</view>
+			</view>
+			<view class="floating-box">
+				<text bindtap="copyText">{{randomCopy.txt}}</text>
+			</view>
+		</block>
+		<view class="btn-area">
+	    <view bindtap="submit" class="button-submit {{canClick ? 'button-enable' : ''}}">保存</view>
+	  </view>
+	</view>
+</view>

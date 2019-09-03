@@ -1,0 +1,22 @@
+<wxs src="../../../../utils/filters.wxs" module="filters" />
+<view class="bindPhone">
+  <navbar title="绑定手机号" background="#fff" color="#22292C"></navbar>
+  <view class="head">
+  	<view class="mobiletips">当前绑定手机号</view>
+  	<view class="myMoBile">{{filters.mobileFormat(mobile, 'hide')}}</view>
+  </view>
+  <view class="form">
+    <view class="phone">
+      <input type="tel" value="{{phone}}" placeholder="请输入手机号码" bindconfirm="getPhone" bindblur="getPhone"></input>
+    </view>
+    <view class="code">
+      <input type="text" value="{{code}}" placeholder="请输入短信验证码" bindblur="getCode"></input>
+      <view bindtap="sendCode" class="sendBtn" hidden="{{second < 60}}">获取验证码</view>
+      <view class="sendBtn wait" hidden="{{second === 60}}">等待{{second}}s</view>
+    </view>
+  </view>
+  <view class="footer">
+	  <view class="tip" wx:if="{{choseType === 'APPLICANT'}}">修改成功后，手机号将同步到你的在线简历</view>
+	  <button class="bindBtn" bindtap="bindPhone">确认修改手机号</button>
+  </view>
+</view>

@@ -1,0 +1,37 @@
+{
+  "desc": "关于本文件的更多信息，请参考文档 https://developers.weixin.qq.com/miniprogram/dev/framework/sitemap.html",
+  "rules": [
+  	{
+		  "action": "allow",
+		  "page": "page/applicant/pages/index/index"
+		},
+		{
+		  "action": "allow",
+		  "page": "page/recruiter/pages/index/index"
+		},
+		{
+		  "action": "allow",
+		  "page": "page/common/pages/positionDetail/positionDetail"
+		},
+		{
+		  "action": "allow",
+		  "page": "page/common/pages/recruiterDetail/recruiterDetail"
+		},
+		{
+		  "action": "allow",
+		  "page": "page/common/pages/resumeDetail/resumeDetail"
+		},
+		{
+		  "action": "allow",
+		  "page": "page/common/pages/homepage/homepage"
+		},
+		{
+		  "action": "allow",
+		  "page": "page/common/pages/rank/rank"
+		},
+		{
+      "action": "disallow",
+      "page": "*"
+    }
+	]
+}

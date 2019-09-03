@@ -1,0 +1,93 @@
+.ul {
+  margin: 0 30rpx;
+}
+
+.ul .li {
+  overflow: hidden;
+  padding: 35rpx 40rpx;
+  background: white;
+  position: relative;
+  margin-top: 20rpx;
+	background:rgba(255,255,255,1);
+	box-shadow:0rpx 4rpx 20rpx 0rpx rgba(101,39,145,0.1);
+	border-radius:10rpx;
+}
+
+.ul .li .img-box {
+  width:120rpx;
+  height:120rpx;
+  box-shadow:0rpx 2rpx 12rpx 0rpx rgba(0,0,0,0.12);
+  border-radius: 50%;
+  margin-right: 30rpx;
+  position: relative;
+  display: inline-block;
+}
+
+.ul .li .img-box image{
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.ul .img-box .certification-icon {
+  position: absolute;
+  bottom: 10rpx;
+  right: 4rpx;
+  width: 36rpx;
+  height: 36rpx;
+  background-color: #FF7F4C;
+  line-height: 36rpx;
+  text-align: center;
+  border-radius: 50%;n
+  border: 2rpx solid #FFFFFF;
+  font-size: 22rpx;
+  color: #fff;
+  font-weight: 700;
+}
+
+.ul .li .content {
+  width: calc(100% - 150rpx);
+  display: inline-block;
+  position: relative;
+}
+
+.ul .li .row-one {
+  overflow: hidden;
+  line-height: 1;
+}
+
+.ul .li .username {
+  font-size:36rpx;
+  font-weight:500;
+  color:rgba(40,40,40,1);
+  float: left;
+}
+
+.ul .li .recruitment-number {
+  float: right;
+  font-size:24rpx;
+  font-weight:400;
+  color:rgba(101,39,145,1);
+}
+
+.ul .li .row-two {
+  font-size:24rpx;
+  font-weight:300;
+  color:rgba(40,40,40,1);
+  margin-top: 10rpx;
+  overflow: hidden;
+}
+
+.ul .li .row-three {
+  background:rgba(248,248,248,1);
+  display: inline-block;
+  font-size:24rpx;
+  font-weight:300;
+  color:rgba(98,98,98,1);
+  padding: 10rpx 18rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 90%;
+  margin-top: 12rpx;
+}

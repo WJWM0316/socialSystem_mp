@@ -1,0 +1,26 @@
+<!--完善简历第二步，工作内容编辑-->
+<navbar title="填写工作内容" background="#FFFFFF" color="#22292C"></navbar>
+<view class="textArea">
+  <textarea placeholder="填写你工作内容" value="{{content}}" placeholder-class="placeholder" maxlength="1000" bindinput="WriteContent"></textarea>
+  <view class="bottom">
+    <view class="example" bindtap="showPopups"><!-- <i class="icon iconfont icon-chakan"></i>看看别人怎么写 --></view>
+    <view class="num">{{nowInputNum}}/1000</view>
+  </view>
+</view>
+<view class="popups">
+  <view class="top">
+    <view class="nameBox">
+      <image class="avatar" src="{{randomCopy.icon}}" mode="aspectFill"></image>
+      <text class="name">{{randomCopy.name}}</text>
+    </view>
+    <view class="change" bindtap="next">
+      <i class="icon iconfont icon-huanyihuan"></i>
+      <text>换一个</text>
+    </view>
+  </view>
+  <view class="content">
+    <view class="corner"><image src="{{cdnImagePath}}corner.png"></image></view>
+    <text bindtap="copyText">{{randomCopy.txt}}</text>
+  </view>
+</view>
+<view class="sendBtn" bindtap="send">确定</view>

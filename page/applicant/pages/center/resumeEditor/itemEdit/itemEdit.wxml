@@ -1,0 +1,42 @@
+<!--简历项目编辑页-->
+<navbar title="项目经历" background="#FFFFFF" color="#22292C"></navbar>
+<view class="warp">
+  <view class="commont">
+    <view class="title"><text>*</text>项目名称</view>
+    <view class="result"><input type="text" bindblur="itemName" placeholder="请输入项目名称" value="{{itemName}}"></input></view>
+  </view>
+  <view class="commont">
+    <view class="title"><text>*</text>担任角色</view>
+    <view class="result"><input type="text" bindblur="role" placeholder="请输入担任角色" value="{{role}}"></input></view>
+  </view>
+  <view class="commont salary">
+    <view class="title"><text>*</text>开始时间</view>
+    <myPicker class="myPicker" setResult="{{info.startTimeDesc}}" pickerType="startTime" data-time="start" bindresultevent="getresult"></myPicker>
+  </view>
+  <view class="commont salary">
+    <view class="title"><text>*</text>结束时间</view>
+    <myPicker class="myPicker" setResult="{{info.endTimeDesc}}" pickerType="endTime" data-time="end" bindresultevent="getresult"></myPicker>
+  </view>
+  <!--项目描述-->
+  <view class="title"><text>*</text>项目描述</view>
+  <view class="textArea">
+    <textarea placeholder="填写项目描述" placeholder-class="placeholder" maxlength="1000" bindinput="writeContent" value="{{description}}"></textarea>
+    <view class="bottom">
+      <view class="example" bindtap="showPopups"><!-- <i class="icon iconfont icon-chakan"></i>看看别人怎么写 --></view>
+      <view class="num">{{description.length}}/1000</view>
+    </view>
+  </view>
+  <!--项目链接-->
+  <view class="title">项目链接</view>
+  <view class="textArea">
+    <textarea placeholder="填写项目链接" placeholder-class="placeholder" bindinput="itemLink" value="{{itemLink}}"></textarea>
+  </view>
+</view>
+<view style="height: 168rpx;"></view>
+<view class="saveBox">
+  <view class="save" bindtap="save" wx:if="{{isAdd}}">保存</view>
+  <block wx:else>
+    <view class="delete save" bindtap="del">删除</view>
+    <view class="saveAgain save" bindtap="save">保存</view>
+  </block>
+</view>

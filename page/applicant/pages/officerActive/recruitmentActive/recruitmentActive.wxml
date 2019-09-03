@@ -1,0 +1,27 @@
+<view class="recruitmentActive">
+  <navbar title="面试官动态" color="#000000" background="#FFFFFF"></navbar>
+
+  <view hidden="{{!hasReFresh}}">
+    <refreshStatus></refreshStatus>
+  </view>
+
+  <view class="tabBar" style="top: {{navH}}px">
+    <text bindtap="onTabClick" data-active="watchedList" class="{{active === 'watchedList' ? 'active' : ''}}">看过我的</text>
+    <text bindtap="onTabClick" data-active="interestList" class="{{active === 'interestList' ? 'active' : ''}}">对我感兴趣</text>
+  </view>
+
+  <view hidden="{{active === 'interestList'}}" class="list-box">
+  	<officerTab iconfont1="more" personality="list" list="{{watchedList.list}}" showFooter="{{false}}" dotType="circle"></officerTab>
+    <bottomStatus status="{{onBottomStatus}}" listData="{{watchedList.list}}" desc="还没有面试官看过我～">
+      <button class="jump clear-style" bindtap="jump">发现更多面试官</button>
+    </bottomStatus>
+  </view>
+
+  <view hidden="{{active === 'watchedList'}}" class="list-box">
+  	<officerTab iconfont1="more" personality="list" list="{{interestList.list}}" showFooter="{{false}}" dotType="circle"></officerTab>
+    <bottomStatus status="{{onBottomStatus}}" listData="{{interestList.list}}" desc="还没有面试官对我感兴趣～">
+      <button class="jump clear-style" bindtap="jump">发现更多面试官</button>
+    </bottomStatus>
+  </view>
+  
+</view>

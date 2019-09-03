@@ -1,0 +1,68 @@
+<view class="company-email">
+	<navbar title="验证邮箱" background="#FFFFFF" color="#22292C"></navbar>
+	<view class="form" wx:if="{{step === 1}}">
+		<view class="h1">公司邮箱验证</view>
+		<view class="p">公司邮箱，用于验证面试官个人与公司所属关系的真实性</view>
+	  <view class="input-li clear-bottom">
+	  	<block wx:if="{{options.from === 'company'}}">
+	  		<input class="value" placeholder="输入公司邮箱" bindinput="bindInput" value="{{email}}" adjust-position="{{true}}" />
+	  	</block>
+	  	<block wx:else>
+	  		<input class="prefix" placeholder="输入公司邮箱前缀" bindinput="bindInput" value="{{email}}" />
+	  		<view class="suffix">{{options.suffix}}</view>
+	  	</block>
+	  </view>
+	  <view class="example">示例：Hr@tiger.com</view>
+	</view>
+	<view class="form" wx:else>
+
+		<view class="h1">请输入邮箱验证码</view>
+		<view class="p" wx:if="{{options.from === 'company'}}">我们向 <text>{{email}}</text> 发送了{{codeLength}}位数的验证码，请查收并填入下方</view>
+		<view class="p" wx:else>我们向 <text>{{email}}{{options.suffix}}</text> 发送了{{codeLength}}位数的验证码，请查收并填入下方</view>
+
+		<view class="codeError" wx:if="{{error}}">验证码输入错误请重新发送</view>
+
+	  <view class="write-box">
+	  	<sixInputBox bindresultEvent="getResult" classErrorName="{{classErrorName}}" isFocus="{{isFocus}}"></sixInputBox>
+	  </view>
+
+	  <view class="example1">
+	  	<text bindtap="reEmail" wx:if="{{canResend}}">重新发送</text>
+	  	<text bindtap="reEmail" wx:if="{{!canResend}}" class="gray">{{time}}s 后可重新发送</text>
+	  	<view class="question" bindtap="tapShow"> <i class="icon iconfont icon-zhushi"></i> 遇到问题</view>
+	  </view>
+	</view>
+
+	<view class="btn-area" wx:if="{{step === 1}}">
+    <button class="button-submit {{isEmail ? 'button-enable' : ''}}" bindtap="sendEmail">发送验证码</button>
+    <view class="tips">
+			<view class="span">了解更多认证须知，欢迎联系我们</view>
+			<view class="strong" bindtap="callPhone">{{telePhone}}</view>
+		</view>
+  </view>
+  
+  <view class="btn-area" wx:else>
+  	<view class="p4" bindtap="changeIndentifyMethods">
+			<text>选择其他认证方式</text>
+			<i class="icon iconfont icon-xiangyou"></i>
+		</view>
+    <view class="tips">
+			<view class="span">了解更多认证须知，欢迎联系我们</view>
+			<view class="strong" bindtap="callPhone">{{telePhone}}</view>
+		</view>
+  </view>
+</view>
+
+<view class="over-layout" wx:if="{{showTips}}">
+	<view class="box">
+		<view class="h9">验证码遇到问题</view>
+		<view class="p2">可能存在收不到验证码的原因:</view>
+		<view class="p3">1、检查是否填错邮箱； </view>
+		<view class="p3">2、检查邮箱是否服务到期；</view>
+		<view class="p3"> 3、检查公司邮箱是否已经满了； </view>
+		<view class="p3">4、检查是否落到了垃圾邮件，然后把发信箱账号设为白名单； </view>
+		<view class="p3">5、检查品牌企业邮箱的DNS解析错误或未进行DNS解析； </view>
+		<view class="p3">6、检查设备网络或软件是否故障；</view>
+		<view class="scan-button" bindtap="tapShow">知道了</view>
+	</view>
+</view>

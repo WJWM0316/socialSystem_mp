@@ -1,0 +1,32 @@
+<view class="applicant-job">
+	<navbar title="店长多多" background="#652791" color="#fff"></navbar>
+
+	<view hidden="{{!hasReFresh}}">
+    <refreshStatus></refreshStatus>
+  </view>
+  
+
+  <view class="select-box" style="top: {{navH}}px;">
+    <view class="select-tab">
+      <view class="item1 item {{tabType === item.type ? 'cur' : ''}} {{item.active ? 'actived' : ''}}" bindtap="choseTab" data-type="{{item.type}}" wx:for="{{tabList}}" wx:key="{{index}}"><text class="txt">{{item.name}}</text><i class="icon iconfont icon-zhishibiao"></i></view>
+    </view>
+    <view hidden="{{tabType === 'closeTab'}}">
+      <view class="select-bg" bindtap="choseTab" data-type="closeTab" style="height: calc(100vh - {{navH + 49}}px)"></view>
+      <view class="select-area city" hidden="{{tabType !== 'city'}}">
+        <text class="select-area-item {{cityIndex === index ? 'cur' : ''}}" bindtap="toggle" data-index="{{index}}" data-name="{{item.name}}" data-id="{{item.areaId}}" wx:for="{{cityList}}" wx:key="{{index}}">{{item.name}}</text>
+      </view>
+      <view class="select-area" hidden="{{tabType !== 'positionType'}}">
+        <text class="select-area-item {{typeIndex === index ? 'cur' : ''}}" bindtap="toggle" data-index="{{index}}" data-name="{{item.name}}" data-id="{{item.labelId}}" wx:for="{{positionTypeList}}" wx:key="{{index}}">{{item.name}}</text>
+      </view>
+      <view class="select-area salary" hidden="{{tabType !== 'salary'}}">
+        <text class="select-area-item {{emolumentIndex === index ? 'cur' : ''}}" bindtap="toggle" data-index="{{index}}" data-name="{{item.text}}" data-id="{{item.id}}" wx:for="{{emolumentList}}" wx:key="{{index}}">{{item.text}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="list-box" style="padding-top: 118rpx">
+    <jobList personality="jobItem" list="{{positionList.list}}" list-type="interview" current-tab="all"></jobList>
+    <bottomStatus status="{{onBottomStatus}}" listData="{{positionList.list}}"></bottomStatus>
+  </view>
+  <tabBar></tabBar>
+  <auth wx:if="{{requireOAuth}}" bindauthSuccess="authSuccess"></auth>
+</view>

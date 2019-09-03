@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+  	"scanCodeTips": "../../../components/layout/scanCodeTips/scanCodeTips"
+  }
+}

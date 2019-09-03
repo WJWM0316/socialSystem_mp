@@ -1,0 +1,47 @@
+<!--components/layout/myPicker/myPicker.wxml-->
+<view class="my-class" style="height: 100%">
+  <picker
+    class="picker"
+    value="{{result}}"
+    mode="{{mode}}"
+    range="{{list}}"
+    range-key="{{rangeKey}}"
+    bindchange="change"
+    bindcolumnchange="changeColumn"
+    style="{{styleObj}}"
+    wx-if="{{list && list.length > 0}}"
+  >
+    <slot wx:if="{{needSlot}}"></slot>
+    <block wx:else>
+      <block wx:if="{{result}}">
+        <block wx:if="{{pickerType === 'dateTime'}}">
+          <text>{{list[0][result[0]]}}-{{list[1][result[1]]}}-{{list[2][result[2]]}} {{list[3][result[3]]}}:{{list[4][result[4]]}}</text>
+        </block>
+        <block wx:else>
+          <block wx:if="{{mode === 'multiSelector'}}">
+            <block wx:if="{{pickerType === 'region'}}">
+              <text class="showTxt">{{list[1][result[1]].title}}</text>
+            </block>
+            <block wx:else>
+              <text wx:if="{{list[1][result[1]] !== firstOption}}">{{list[0][result[0]]}}</text>
+              <block>
+                <text wx:if="{{pickerType === 'salaryRangeC' || pickerType === 'salaryRangeB'}}">~</text>
+                <text wx:if="{{list[0][result[0]] !== firstOption && pickerType !== 'salaryRangeC'}}">-</text>
+              </block>
+              <text wx:if="{{list[0][result[0]] !== firstOption}}">{{list[1][result[1]]}}</text>
+              <text wx:if="{{list[0][result[0]] === firstOption && list[1][result[1]] === firstOption}}">{{list[0][result[0]]}}</text>
+            </block>
+          </block>
+
+          <block wx:if="{{mode === 'selector'}}">
+            <text wx:if="{{rangeKey}}" class="showTxt">{{list[result][rangeKey]}}<i class="iconfont icon-sanjiaoshaixuan triangle" wx:if="{{pickerType === 'occupation' && isTriangle}}"></i></text>
+            <text wx:else class="showTxt">{{list[result]}}</text>
+          </block>
+        </block>
+      </block>
+      <block wx:else> 
+        <view class="placeholder">{{placeholder}}<i class="iconfont icon-zhishibiao triangle1" wx:if="{{isTriangle}}"></i></view>
+      </block>
+    </block>
+  </picker>
+</view>

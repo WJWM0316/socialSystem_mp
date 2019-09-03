@@ -1,0 +1,42 @@
+<!--简历项目编辑页-->
+<navbar title="教育经历" background="#FFFFFF" color="#22292C"></navbar>
+<view class="warp">
+  <view class="commont">
+    <view class="title"><text>*</text>学校</view>
+    <view class="result"><input type="text" bindblur="schoolName" placeholder="请填写学校名称" value="{{schoolName}}"></input></view>
+  </view>
+  <view class="commont salary">
+    <view class="title"><text>*</text>学历</view>
+    <myPicker class="myPicker" setResult="{{info.degreeDesc}}" pickerType="education" placeholderStyle="color: #BCBCBC" rangeKey="text" data-time="education" bindresultevent="getresult"></myPicker>
+  </view>
+  <view class="commont">
+    <view class="title"><text>*</text>专业</view>
+    <view class="result"><input type="text" bindblur="subject" placeholder="请填写专业名称" value="{{subject}}"></input></view>
+  </view>
+  <view class="commont salary">
+    <view class="title"><text>*</text>开始时间</view>
+    <myPicker class="myPicker" setResult="{{info.startTimeDesc}}" pickerType="startTime" placeholderStyle="color: #BCBCBC" data-time="start" bindresultevent="getresult"></myPicker>
+  </view>
+  <view class="commont salary">
+    <view class="title"><text>*</text>结束时间</view>
+    <myPicker class="myPicker" setResult="{{info.endTimeDesc}}" pickerType="endTime" placeholderStyle="color: #BCBCBC" data-time="end" bindresultevent="getresult"></myPicker>
+  </view>
+  <!--项目描述-->
+  <view class="title">在校经历</view>
+  <view class="textArea">
+    <textarea placeholder="填写在校经历" placeholder="请填写在校经历" placeholder-class="placeholder" maxlength="1000" bindinput="WriteContent" value="{{description}}"></textarea>
+    <view class="bottom">
+      <view class="example" bindtap="showPopups"><!-- <i class="icon iconfont icon-chakan"></i>看看别人怎么写 --></view>
+      <view class="num">{{description.length}}/1000</view>
+    </view>
+  </view>
+
+</view>
+<view style="height: 168rpx;"></view>
+<view class="saveBox">
+  <view class="save" bindtap="save" wx:if="{{isAdd}}">保存</view>
+  <block wx:else>
+    <view class="delete save" bindtap="del">删除</view>
+    <view class="saveAgain save" bindtap="save">保存</view>
+  </block>
+</view>

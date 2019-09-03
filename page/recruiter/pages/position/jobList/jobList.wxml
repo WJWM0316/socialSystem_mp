@@ -1,0 +1,137 @@
+<view class="job-list">
+  <navbar title="选择职位" background="#FFFFFF" color="#22292C"></navbar>
+
+  <view class="position-tab" wx:if="{{identity === 'RECRUITER' && options.type === 'recruiter_chat'}}">
+    <view class="name">可选择以下职位</view>
+    <view class="public" bindtap="publicPosition"><i class="icon iconfont icon-bianji"></i>发布职位</view>
+  </view>
+
+<!--   <view hidden="{{!hasReFresh}}">
+    <refreshStatus></refreshStatus>
+  </view> -->
+
+  <block wx:if="{{identity === 'RECRUITER' && options.type === 'confirm_chat'}}">
+    <view class="h1">以下是候选人多条申请记录，请选择处理</view>
+    <view class="p">确认选择后，候选人其他申请记录将自动合并处理，不需要再单独处理；面试最终确认前，你可以随时与候选人沟通更改面试职位</view>
+  </block>
+  
+  <block wx:if="{{identity === 'RECRUITER' && options.type === 'reject_chat'}}">
+    <view class="h1">以下是候选人多条申请记录，请选择处理</view>
+    <view class="p">该候选人有多个未处理申请，您可以从中选择1个进行约面，或选择全部都处理为不合适</view>
+  </block>
+
+  <!-- 招聘官点击不合适 start-->
+  <view class="radio-group">
+    
+    <!-- 求职端开撩 start -->
+    <block wx:if="{{identity === 'APPLICANT' && options.type === 'job_hunting_chat'}}">
+      <view class="h1">选择约面职位</view>
+      <view class="p" wx:if="{{options.showNotPositionApply === '1'}}">请从面试官的招聘职位中选择1个，发起面试申请。你也可以不选择职位，直接申请面试</view>
+
+      <view class="li clear-bottom" wx:if="{{options.showNotPositionApply === '1' && identity === 'APPLICANT'}}">
+        <view class="content unsuitable">暂不选择职位</view>
+        <view class="radio-box" bindtap="onClick" data-name="{{item.positionName}}" data-id="{{'person'}}">
+          <view class="myRadio {{item.active ? 'active' : ''}}">
+            <i class="icon iconfont icon-wancheng" wx:if="{{item.active}}"></i>
+          </view>
+        </view>
+      </view>
+      <view class="example" wx:if="{{options.showNotPositionApply === '1'}}">TA的在线职位</view>
+    </block>
+    <!-- 求职端开撩 end -->
+
+    <view class="li" wx:for="{{onLinePositionList.list}}" wx:key="{{index}}">
+      <block wx:if="{{item.positionId || item.id}}">
+        <view class="content">
+          <view class="title">
+            <view class="txt1">{{item.positionName}}</view>
+            <view class="txt2">{{item.emolumentMin}}~{{item.emolumentMax}}k</view>
+          </view>
+          <view class="labels">
+            <text class="txt">{{item.city}}{{item.district}}</text>
+            <text class="txt">{{item.workExperienceName}}</text>
+            <text class="txt">{{item.educationName}}</text>
+          </view>
+        </view>
+        <view class="status-box">
+          <block wx:if="{{ (item.positionStatus === 4 && (options.type === 'confirm_chat' || options.type === 'reject_chat')) || (nowTab === 'offline' && item.status === 4)}}">
+            职位审核未通过
+          </block>
+          <block wx:if="{{ (item.positionStatus === 0 && (options.type === 'confirm_chat' || options.type === 'reject_chat')) || (nowTab === 'offline' && item.status === 0)}}">
+            职位已关闭
+          </block>
+          <block wx:if="{{ (item.positionStatus === 3 && (options.type === 'confirm_chat' || options.type === 'reject_chat')) || (nowTab === 'offline' && item.status === 3)}}">
+            职位审核中
+          </block>
+        </view>
+        
+        <!-- 招聘端确认约面或者决拒绝约面 start -->
+        <view
+          class="radio-box"
+          bindtap="onClick"
+          data-name="{{item.positionName}}"
+          data-index="{{index}}"
+          data-status="{{item.positionStatus}}"
+          data-position-id="{{item.positionId}}"
+          data-id="{{item.id || item.interviewId}}"
+          wx:if="{{(item.positionStatus === 4 || item.positionStatus === 4 || item.positionStatus === 0 || item.positionStatus === 3) && (options.type === 'confirm_chat' || options.type === 'reject_chat')}}">
+          <view class="myRadio {{item.active ? 'active' : ''}}">
+            <i class="icon iconfont icon-wancheng" wx:if="{{item.active}}"></i>
+          </view>
+        </view>
+        <!-- 招聘端确认约面或者决拒绝约面 start -->
+
+        <view
+          class="radio-box"
+          bindtap="onClick"
+          data-name="{{item.positionName}}"
+          data-index="{{index}}"
+          data-status="{{item.status}}"
+          data-id="{{item.id || item.interviewId}}"
+          wx:else>
+          <view class="myRadio {{item.active ? 'active' : ''}}">
+            <i class="icon iconfont icon-wancheng" wx:if="{{item.active}}"></i>
+          </view>
+        </view>
+
+      </block>
+      <block wx:else>
+        <view class="content chat-me">直接与我约面</view>
+        <view
+          class="radio-box"
+          bindtap="onClick"
+          data-index="{{index}}"
+          data-status="{{item.status}}"
+          data-name="{{item.positionName}}"
+          data-id="{{item.interviewId}}"
+          >
+          <view class="myRadio {{item.active ? 'active' : ''}}"><i class="icon iconfont icon-wancheng" wx:if="{{item.active}}"></i>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <view class="li2" wx:if="{{identity === 'RECRUITER' && options.type === 'reject_chat'}}">
+    <view class="content">
+      <view class="unsuitable">都不合适</view>
+      <view class="unsuitable-tips">选择此项，以上申请记录将全部合并处理为不合适</view>
+    </view>
+    <view
+      class="radio-box"
+      bindtap="onClick"
+      data-name="{{item.positionName}}"
+      data-id="{{'unsuitable'}}"
+      >
+      <view class="myRadio {{unsuitableChecked ? 'active' : ''}}">
+        <i class="icon iconfont icon-wancheng" wx:if="{{unsuitableChecked}}"></i>
+      </view>
+    </view>
+  </view>
+
+  <bottomStatus status="{{onLinePositionList}}" listData="{{onLinePositionList.list}}" desc="没有更多内容了~"></bottomStatus>
+
+  <view
+    class="footer"
+    wx:if="{{options.type === 'confirm_chat' || options.type === 'reject_chat' || options.type === 'recruiter_chat'}}"><view bindtap="submit" class="button-submit {{buttonClick ? 'button-enable' : ''}}">确定</view></view>
+</view>

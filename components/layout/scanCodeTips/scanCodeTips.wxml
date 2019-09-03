@@ -1,0 +1,21 @@
+<view class="over-layout" wx:if="{{showScanBox}}">
+	<view class="box">
+		<i class="icon iconfont icon-close close-button" bindtap="showTips"></i>
+		<view class="h1">网页登录</view>
+		<view class="dl">
+			<view class="dt">
+				<view class="label">第1步</view>
+				<view class="value">电脑浏览器打开网址“<text bindtap="copy" class="text">sao.lieduoduo.com</text>”</view>
+			</view>
+			<view class="input-box">
+				<view class="input">sao.lieduoduo.com</view>
+				<i class="icon iconfont icon-sousuo"></i>
+			</view>
+			<view class="dt">
+				<view class="label">第2步</view>
+				<view class="value">点击下方立即扫码按钮，扫描屏幕二维码登录</view>
+			</view>
+		</view>
+		<view class="scan-button" bindtap="scanCode">立即扫码</view>
+	</view>
+</view>

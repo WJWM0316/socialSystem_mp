@@ -1,0 +1,198 @@
+/**
+ * 时间戳转化格式
+ */
+var dateFormat = function(timestamp, format) {
+  var date = getDate(timestamp * 1000)
+  var year = date.getFullYear()
+  var month = date.getMonth() + 1
+  var day = date.getDate()
+  if (month < 10) month = '0' + month
+  if (day < 10) day = '0' + day
+  var hour = function() {
+    if(date.getHours() < 10) {
+      return '0' + date.getHours()
+    }
+    return date.getHours()
+  }
+
+  var minute = function() {
+    if(date.getMinutes() < 10) {
+      return '0' + date.getMinutes()
+    }
+    return date.getMinutes()
+  }
+
+  var second = function() {
+    if(date.getSeconds() < 10) {
+      return '0' + date.getSeconds()
+    }
+    return date.getSeconds()
+  }
+  switch(format) {
+    case 'YYYY-MM-DD':
+    return year + '-' + month + '-' + day
+    case 'YYYY-MM-DD hh:mm':
+    return year + '-' + month + '-' + day + ' ' + hour() + ':' + minute()
+    case 'MM-DD':
+    return month + '-' + day
+    case 'YYYY.MM':
+    return year + '.' + month
+    case 'YM':
+    return year+'年'+month+'月'
+  }
+}
+
+/**
+ * 时间戳转化活跃时间
+ */
+var activeTime = function(timestamp) {
+  var releaseTime = timestamp
+  var now = getDate()
+  var timeStr = '刚刚'
+  if (releaseTime) {
+    releaseTime = getDate(releaseTime * 1000)
+    var differ = parseInt((now.getTime() - releaseTime.getTime()) / 1000)
+    var timeCompany = {
+      m: 60,
+      h: 60 * 60,
+      d: 60 * 60 * 24
+    }
+    // 是否跨年 and 超过两天
+    var nowDate = {
+      y: now.getFullYear(),
+      m: now.getMonth(),
+      d: now.getDate()
+    }
+    var releaseTimeDate = {
+      y: releaseTime.getFullYear(),
+      m: releaseTime.getMonth(),
+      d: releaseTime.getDate()
+    }
+    // 是否当天
+    if (nowDate.y === releaseTimeDate.y && nowDate.m === releaseTimeDate.m && nowDate.d === releaseTimeDate.d) {
+      if (differ < timeCompany.m) { // 一分钟以内
+        timeStr = '刚刚'
+      } else if (differ < timeCompany.h) { // 一小时以内
+        timeStr = parseInt(differ / timeCompany.m) + '分钟前'
+      } else {
+        timeStr = parseInt(differ / timeCompany.h) + '小时前'
+      }
+    } else {
+      differ = parseInt((getDate(nowDate.y, nowDate.m, nowDate.d).getTime() - releaseTime.getTime()) / 1000)
+      if (differ < timeCompany.d) { // 昨天
+        timeStr = '昨天'
+      } else if (differ < timeCompany.d * 2) {
+        timeStr = '前天'
+      } else {
+        if (now.getFullYear() > releaseTime.getFullYear()) { // 超过两天且跨年
+          timeStr = dateFormat(releaseTime, 'YY-MM-DD')
+        } else {
+          timeStr = dateFormat(releaseTime, 'YY-MM-DD HH:mm')
+        }
+      }
+    }
+  }
+  return timeStr
+}
+
+
+var positionFilter = function(num) {
+  var status = null
+  switch(num) {
+    case 0:
+      status = '已关闭'
+      break
+    case 1:
+      status = '已关闭'
+      break
+    case 2:
+      // 先发后审
+      status = '审核中'
+      break
+    case 3:
+      // 审核不通过，再次编辑提审状态
+      status = '审核中'
+      break
+    case 4:
+      status = '审核失败'
+      break
+    default:
+      break
+  }
+  return status
+}
+
+// 手机格式转化
+var mobileFormat = function(mobile, type) {
+  var mobile = mobile
+  if (type === 'blank') {
+    mobile = mobile.slice(0, 3) + ' ' + mobile.slice(3, 7) + ' ' + mobile.slice(7, 11)
+  } else {
+    mobile = mobile.slice(0, 3) + '*****' + mobile.slice(8, 11)
+  }
+  return mobile
+}
+
+// 文件后缀
+var fileFormat = function(url) {
+  var defaultSrc = null
+  var ext = url.split('.')[url.split('.').length - 1]
+  switch(ext) {
+    case 'xls':
+      defaultSrc = 'https://lieduoduo-uploads-test.oss-cn-shenzhen.aliyuncs.com/front-assets/images/icon_document_excel@3x.png'
+      break
+    case 'xlsx':
+      defaultSrc = 'https://lieduoduo-uploads-test.oss-cn-shenzhen.aliyuncs.com/front-assets/images/icon_document_excel@3x.png'
+      break
+    case 'ppt':
+      defaultSrc = 'https://lieduoduo-uploads-test.oss-cn-shenzhen.aliyuncs.com/front-assets/images/icon_document_ppt@3x.png'
+      break
+    case 'pptx':
+      defaultSrc = 'https://lieduoduo-uploads-test.oss-cn-shenzhen.aliyuncs.com/front-assets/images/icon_document_ppt@3x.png'
+      break
+    case 'pdf':
+      defaultSrc = 'https://lieduoduo-uploads-test.oss-cn-shenzhen.aliyuncs.com/front-assets/images/icon_document_ppt@3x.png'
+      break
+    case 'doc':
+      defaultSrc = 'https://lieduoduo-uploads-test.oss-cn-shenzhen.aliyuncs.com/front-assets/images/icon_document_word@3x.png'
+      break
+    case 'docx':
+      defaultSrc = 'https://lieduoduo-uploads-test.oss-cn-shenzhen.aliyuncs.com/front-assets/images/icon_document_word@3x.png'
+      break
+    case 'png':
+      defaultSrc = 'https://lieduoduo-uploads-test.oss-cn-shenzhen.aliyuncs.com/front-assets/images/icon_document_png@3x.png'
+      break
+    case 'jpg':
+      defaultSrc = 'https://lieduoduo-uploads-test.oss-cn-shenzhen.aliyuncs.com/front-assets/images/icon_document_jpg@3x.png'
+      break
+    case 'jpeg':
+      defaultSrc = 'https://lieduoduo-uploads-test.oss-cn-shenzhen.aliyuncs.com/front-assets/images/icon_document_jpg@3x.png'
+      break
+    case 'txt':
+      defaultSrc = 'https://lieduoduo-uploads-test.oss-cn-shenzhen.aliyuncs.com/front-assets/images/icon_document_txt@3x.png'
+      break
+    default:
+      defaultSrc = 'https://lieduoduo-uploads-test.oss-cn-shenzhen.aliyuncs.com/front-assets/images/default_ext.png'
+      break
+  }
+  return defaultSrc
+}
+
+// 加密身份证
+var encryptId = function(str, frontLen, endLen) {
+  var len = str.length - frontLen - endLen;
+  var xing = '';
+  for (var i = 0; i < len; i++) {
+    xing += '*';
+  }
+  return str.substring(0, frontLen) + xing + str.substring(str.length - endLen);
+}
+
+module.exports = {
+  dateFormat: dateFormat,
+  activeTime: activeTime,
+  mobileFormat: mobileFormat,
+  positionFilter: positionFilter,
+  fileFormat: fileFormat,
+  encryptId: encryptId
+}

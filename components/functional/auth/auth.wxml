@@ -1,0 +1,9 @@
+<!--components/business/auth/auth.wxml-->
+<view class="auth">
+  <form bindsubmit="formSubmit" report-submit='{{true}}'>
+	  <button open-type="getUserInfo" form-type="submit" bindgetuserinfo="onGotUserInfo" lang="zh_CN">
+	  	<image src="{{cdnImagePath}}auto1.png" class="pic"  mode="widthFix" hidden="{{confirmPop}}"></image>
+	  	<image src="{{cdnImagePath}}auto2.png" class="pic"  mode="widthFix" hidden="{{!confirmPop}}"></image>
+	  </button>
+  </form>
+</view>

@@ -1,0 +1,32 @@
+<!--完善简历第一步-->
+<navbar title=" " background="transparent" color="#fff"></navbar>
+
+<view class="header" style="margin-top: -{{navHeight}}px">
+  <image class="headerBg" src="{{cdnImagePath}}pic_bg_new@3x.png"></image>
+  <text class="title">说说你的教育经历</text>
+  <text class="subtitle">真实可靠的职场形象总能碰到机遇</text>
+</view>
+<view>
+  <form bindsubmit="formSubmit" bindreset="formReset">
+    <view class="school commont">
+      <input name="school" placeholder-class="holderStyle" maxlength="50" placeholder="填写学校名" />
+    </view>
+    <view class="major commont">
+      <input name="major" placeholder-class="holderStyle" placeholder="填写专业名称" />
+    </view>
+    <view class="degree">
+      <myPicker class="myPicker" data-type="education" isTriangle="{{true}}" placeholderStyle="color: #BCBCBC" pickerType="education" bindresultevent="getresult" rangeKey="text"></myPicker>
+    </view>
+    <view class="timeBox">
+      <view class="startTime">
+        <myPicker class="myPicker" data-type="starTime" pickerType="startTime" isTriangle="{{true}}" bindresultevent="getresult"></myPicker>
+      </view> ~ 
+      <view class="endTime">
+        <myPicker class="myPicker" pickerType="endTime" isTriangle="{{true}}" bindresultevent="getresult"></myPicker>
+      </view>
+    </view>
+    <view class="btn-area">
+      <button formType="submit"><i class="icon iconfont icon-wancheng"></i></button>
+    </view>
+  </form>
+</view>

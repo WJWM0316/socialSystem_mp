@@ -1,0 +1,14 @@
+{
+	"enablePullDownRefresh": true,
+	"backgroundTextStyle": "light",
+  "usingComponents": {
+  	"shrinkText": "../../../../components/functional/shrinkText/shrinkText",
+    "navbar": "../../../../components/business/navbar/navbar",
+    "roleInfoCard": "../../../../components/business/roleInfoCard/roleInfoCard",
+    "shareBtn": "../../../../components/layout/shareBtn/shareBtn",
+    "interviewBar": "../../../../components/business/interviewBar/interviewBar",
+    "company": "../../../../components/business/roleInfoCard/roleInfoCard",
+    "canvasCard": "../../../../components/business/canvasCard/canvasCard",
+    "notFound": "../../../../components/layout/notFound/notFound"
+  }
+}

@@ -1,0 +1,38 @@
+<view class="wrap">
+	<view class="openBtnBox">
+		<view class="openBtn openBtnBg"></view>
+		<view class="openBtn" bindtap="oper" data-type='open'>
+			<i class="icon iconfont icon-bianji1"></i>
+			推荐转发语
+		</view>
+	</view>
+	
+
+	<view class="sharePop" wx:if="{{!guidePop && openTro}}" bindtap="oper" data-type='closeTro'>
+		<view class="shareBg"></view>
+		<view class="clickPop"></view>
+	</view>
+	<view class="mainPop" wx:if="{{opened}}">
+		<view class="mainPopBg" bindtap="oper" data-type='close'></view>
+		<view class="contentBox" animation="{{animationData}}">
+			<view class="content contentBg"></view>
+			<view class="content">
+				<view class="closeBtn" bindtap="oper" data-type='close'><i class="icon iconfont icon-cha-cu"></i></view>
+				<view class="typeBox">
+					<text class='type {{choseIndex === index ? "cur" : ""}}' bindtap="toggle" data-type="type" wx:for="{{list}}" wx:key="{{index}}" data-index="{{index}}">{{item.name}}</text>
+				</view>
+				<view class="word">
+					<textarea class="textarea" value="{{list[choseIndex].value[txtIndex]}}" bindinput="getValue" bindconfirm="copy" cursor-spacing="{{150}}" show-confirm-bar></textarea>
+				</view>
+				<text class="tip">*复制后，可到聊天输入框或朋友圈编辑器粘贴使用</text>
+				<view class="operBox">
+					<view class="toggle">
+						<i class="icon iconfont icon-qianyige {{txtIndex === 0 ? 'disabled' : ''}}" bindtap="toggle" data-type="prev"></i>
+						<i class="icon iconfont icon-houyige {{txtIndex === list[choseIndex].value.length - 1 ? 'disabled' : ''}}" bindtap="toggle" data-type="next"></i>
+					</view>
+					<view class="copyBtn" bindtap="copy">复制文字</view>
+				</view>
+			</view>
+		</view>
+	</view>
+</view>

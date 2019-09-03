@@ -1,0 +1,131 @@
+@import '../../../iconfont.wxss'
+.followWechat {
+	width: 100%;
+	height: 100rpx;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position: fixed;
+	left: 0;
+	bottom: 98rpx;
+	font-size:26rpx;
+	font-weight:300;
+	color:#282828;
+	background:#FBFBFF;
+	line-height: 100rpx;
+	padding: 0 36rpx 0 40rpx;
+	box-sizing: border-box;
+  border-bottom: 1rpx solid #CCD7DD;
+}
+.followWechat.iphoneX {
+	bottom: 166rpx;
+}
+.followWechat .left {
+	display: flex;
+	align-items: center;
+}
+.followWechat .icon {
+	width:72rpx;
+	height:69rpx;
+	margin-right: 14rpx;
+}
+.followWechat .btn {
+	width:148rpx;
+	height:60rpx;
+	background:#FFDC29;
+	border-radius:39rpx;
+	font-size:26rpx;
+	font-weight:400;
+	color:#282828;
+	line-height:60rpx;
+	text-align: center;
+	padding: 0;
+	margin: 0;
+}
+.followWechat .btn::after {
+	display: none;
+}
+.extraBlock {
+	height: 100rpx;
+}
+.followWechatPop .followPop, .followWechatPop .authPop {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background:rgba(0,0,0,0.5);
+	z-index: 10000;
+}
+.followWechatPop .inner {
+	background: #fff;
+	width:570rpx;
+	height:746rpx;
+	border-radius:12rpx;
+	position: relative;
+}
+.followWechatPop .authPop .inner {
+	width:570rpx;
+	height:468rpx;
+}
+.followWechatPop .title {
+	font-size:36rpx;
+	color:#354048;
+	line-height:44rpx;
+	font-weight: 700;
+	text-align: center;
+	margin: 50rpx 0 36rpx;
+}
+.followWechatPop .authPop .title {
+	margin: 70rpx 0 24rpx;
+}
+.followWechatPop .txt {
+	font-size:30rpx;
+	color:#5C565D;
+	line-height:44rpx;
+	padding: 40rpx 50rpx 0;
+}
+.followWechatPop .authPop .txt {
+	padding: 0 50rpx 50rpx;
+}
+.followWechatPop .followPop .swiper {
+	width: 490rpx;
+	height: 380rpx;
+	margin: 0 auto;
+}
+.followWechatPop .followPop .swiper .img {
+	width: 490rpx;
+	height: 380rpx;
+	display: block;
+}
+.followWechatPop .close {
+	font-size: 40rpx;
+	line-height: 40rpx;
+	padding: 30rpx;
+	position: absolute;
+	top: 0;
+	right: 0;
+	color: #CDCBCF;
+}
+.followWechatPop .btn {
+	width:400rpx;
+	height:88rpx;
+	background:rgba(255,220,41,1);
+	border-radius:44rpx;
+	font-size:32rpx;
+	color:rgba(40,40,40,1);
+	line-height:88rpx;
+	text-align: center;
+	margin: 0 auto;
+}
+.followWechatPop .desc {
+	font-size:24rpx;
+	font-weight:300;
+	color:rgba(146,146,146,1);
+	line-height:24rpx;
+	margin-top: 30rpx;
+	text-align: center;
+}

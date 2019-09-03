@@ -1,0 +1,40 @@
+<!--简历意向编辑页-->
+<navbar title="求职意向" background="#FFFFFF" color="#22292C"></navbar>
+<view class="warp">
+  <view class="commont">
+    <view class="title"><text class="star">*</text>期望城市</view>
+    <myPicker class="myPicker" setResult="{{info.province}} {{info.city}}" pickerType="region" rangeKey="title" bindresultevent="getresult" data-type="region"></myPicker>
+  </view>
+  <view class="commont" data-type="1" bindtap="choose">
+    <view class="title"><text class="star">*</text>期望职位</view>
+    <view class="result">
+      <text wx:if="{{info.position}}">{{info.position}}</text>
+      <text class="holderStyle" wx:else>请选择</text>
+      <i class="icon iconfont icon-xiangyou"></i>
+    </view>
+  </view>
+  <view class="commont salary">
+    <view class="title"><text class="star">*</text>期望薪资</view>
+    <myPicker class="myPicker" setResult="{{info.salaryFloor * 1000}}~{{info.salaryCeil * 1000}}元/月" pickerType="salaryRangeC" bindresultevent="getresult" data-type="salaryRangeC"></myPicker>
+  </view>
+  <view class="commont" data-type="2" bindtap="choose">
+    <view class="title"><text class="star">*</text>期望领域</view>
+    <view class="result">
+      <text class="resultBox">
+        <block wx:if="{{info.fields && info.fields.length > 0}}" >
+          <text class="label" wx:for="{{info.fields}}" wx:key="{{index}}">{{item.field || item.name}}</text>
+        </block>
+        <text class="holderStyle" wx:else>请选择</text>
+      </text>
+      <i class="icon iconfont icon-xiangyou"></i>
+    </view>
+  </view>
+</view>
+<view style="height: 168rpx;"></view>
+<view class="saveBox">
+  <view class="save" bindtap="save" wx:if="{{isAdd}}">保存</view>
+  <block wx:else>
+    <view class="delete save" bindtap="del">删除</view>
+    <view class="saveAgain save" bindtap="save">保存</view>
+  </block>
+</view>

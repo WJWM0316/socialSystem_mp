@@ -1,0 +1,11 @@
+<view class="content">
+  <!-- 输入框（表格） -->
+  <view class="pay_number" catchtap="set_focus">
+    <view class="password_dot {{value_length - item === -1 ? 'active' : ''}}  {{classErrorName}}" wx:for="{{value_num}}" wx:key="{{index}}">
+      <view wx:if="{{value_length == item-1}}" class="cursor"></view>
+      <view wx:if="{{value_length >= item}}">{{val_arr[index]}}</view>
+    </view>
+  </view>
+  <!-- 输入框（隐藏） -->
+  <input value="{{input_value}}" focus="{{isFocus}}" maxlength="6" type="number" class='input_container' placeholder="" bindinput="get_value" bindfocus="get_focus" adjust-position="{{true}}" />
+</view>

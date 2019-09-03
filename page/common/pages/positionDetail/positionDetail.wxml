@@ -1,0 +1,150 @@
+<form bindsubmit="formSubmit" report-submit='{{true}}'>
+	<view class="job-detail">
+		<navbar title="{{detail.positionName}}" background="#FFFFFF" color="#22292C" showHome="{{true}}"></navbar>
+		<view hidden="{{!hasReFresh}}">
+	    <refreshStatus></refreshStatus>
+	  </view>
+		<view class="page-top">
+			<image class="bgImg" src="{{cdnPath}}job-detail.png" mode="aspectFill"></image>
+			<shareBtn posterType="position" id="shareBtn" posterData="{{detail}}" wx:if="{{detail.isOnline === 1 && (detail.status === 1 || detail.status === 2)}}"></shareBtn>
+			<view class="company-infos">
+				<view class="header">
+					<view class="text">
+						<view class="position-name">{{detail.positionName}}</view>
+						<view class="position-salary">{{detail.emolumentMin * 1000}}~{{detail.emolumentMax * 1000}}<text class="moneyTxt">元/月</text></view>
+					</view>
+					<view class="img-box" data-type="about" bindtap="todoAction">
+						<image mode="aspectFit" src="{{detail.companyInfo.logoInfo.smallUrl}}"></image>
+					</view>
+				</view>
+				<view class="infos">
+					<view wx:if="{{detail.city}}"><i class="icon iconfont icon-dizhi"></i>{{detail.city}}{{detail.district}}</view>
+					<view><i class="icon iconfont icon-zhiwei"></i>{{detail.workExperienceName}}</view>
+					<view><i class="icon iconfont icon-xueli"></i>{{detail.educationName}}</view>
+				</view>
+				<view class="welfare-ul" wx:if="{{detail.lightspotInfo.length}}">
+					<view class="li" wx:for="{{detail.lightspotInfo}}" wx:key="{{index}}" wx:for-item="item">{{item}}</view>
+				</view>
+			</view>
+		</view>
+		
+		<!-- 审核不通过 start-->
+		<block wx:if="{{!isOwner && detail.isOnline === 2 && (detail.status === 4 || detail.status === 3)}}">
+			<view class="notfound">
+				<image class="pic" src="{{cdnPath}}emptyState.png"></image>
+				<view class="h10">职位已关闭</view>
+				<view class="h11">该职位信息异常，已停止招聘</view>
+			</view>
+		</block>
+		<!-- 审核不通过 end-->
+		<!-- 招聘罐主动关闭 start-->
+		<block wx:elif="{{!isOwner && detail.isOnline === 2 && (detail.status === 0 || detail.status === 1)}}">
+			<view class="notfound">
+				<image class="pic" src="{{cdnPath}}emptyState.png"></image>
+				<view class="h10">职位已关闭</view>
+				<view class="h11">该职位已停止招聘</view>
+			</view>
+		</block>
+		<!-- 招聘罐主动关闭 end-->
+		<!-- 正常职位 start-->
+		<block wx:else>
+			<view class="job-describe">
+				<view class="title">
+					<view class="icon"> <view class="fan"></view> </view> 职位描述
+				</view>
+				<!-- <view class="tags-ul">
+					<view
+					class="li"
+					wx:for="{{detail.skillsLabel}}"
+					wx:for-item="item"
+					wx:key="{{item.id}}"># {{item.name}}</view>
+				</view> -->
+				<text class="rich-text">{{ detail.describe }}</text>
+			</view>
+			<view class="about-company">
+				<view class="title">
+					<view class="icon"> <view class="fan"></view> </view> 关于我们
+				</view>
+				<button class="clear-style tab-company-homepage" form-type="submit" data-type="about" bindtap="todoAction">
+					<view class="left">
+						<view class="img-box"><image mode="aspectFill" src="{{detail.companyInfo.logoInfo.smallUrl}}" mode="aspectFit"></image></view>
+					</view>
+					<view class="content">
+						<view class="company-name">{{detail.companyInfo.companyShortname}}</view>
+						<view class="infos">{{detail.companyInfo.industry}} · {{detail.companyInfo.employeesInfo}}</view>
+					</view>
+					<view class="right">
+						<i class="icon iconfont icon-xiangyou"></i>
+					</view>
+				</button>
+				<view class="tab-company-address" data-type="map" bindtap="todoAction" wx:if="{{detail.recruiterInfo.mobile}}">
+					<view class="address_left">
+						<view class="leftBox">
+			        <i class="imgIcon iconfont icon-dizhi-mian"></i>
+							<view class="adress_txt">{{detail.address}}{{detail.doorplate}}</view>
+						</view>
+						<text class="btn">详情</text>
+	        </view>
+				</view>
+				<view class="tab-company-address phone" data-type="phone" bindtap="todoAction">
+					<view class="address_left">
+						<view class="leftBox">
+							<i class="imgIcon iconfont icon-shoujihaoma"></i><text class="adress_txt">{{detail.recruiterInfo.mobile}}</text>
+						</view>
+						<text class="btn" bindtap="call">拨打电话</text>
+	        </view>
+				</view>
+				<view class="tab-company-address wechat" data-type="wechat" bindtap="todoAction" wx:if="{{detail.recruiterInfo.wechat}}">
+					<view class="address_left">
+						<view class="leftBox">
+							<i class="imgIcon iconfont icon-weixin"></i><text class="adress_txt">{{detail.recruiterInfo.wechat}}</text>
+						</view>
+						<text class="btn" bindtap="wechat">复制微信号</text>
+	        </view>
+				</view>
+				<view class="detail" wx:if="{{companyInfos.intro}}">
+					<text class="rich-text">{{companyInfos.intro}}</text>
+				</view>
+			</view>
+			
+		</block>
+		<!-- 正常职位 end-->
+
+		<view class="make-homepage" wx:if="{{ !isRecruiter }}">
+			<view bindtap="todoAction" data-type="make">我也要招人<i class="icon iconfont icon-disejiantou-you"></i></view>
+		</view>
+
+		<button
+			wx:if="{{!isOwner && (detail.isOnline === 1 && (detail.status === 1 || detail.status === 2))}}"
+			class="clear-style collect"
+			data-type="{{detail.isCollect ? 'uncollect' : 'collect'}}"
+			form-type="submit"
+			bindtap="todoAction">
+				<i class="icon iconfont icon-ganxingqu" wx:if="{{!detail.isCollect}}"></i>
+				<i class="icon iconfont icon-biaojiweiganxingqu" wx:else></i>
+		</button>
+		
+		<block wx:if="{{isRecruiter && isOwner}}">
+			<view class="switch-tips" bindtap="todoAction" data-type="close" wx:if="{{detail.isOnline === 1}}">
+				<view class="h1">关闭职位</view>
+				<view class="h2">关闭职位后将不再产生招聘效果</view>
+				<i class="icon iconfont icon-disejiantou-you"></i>
+			</view>
+			<view class="footer">
+				<view class="edit" bindtap="todoAction" data-type="edit">编辑职位</view>
+				<view class="share" bindtap="todoAction" data-type="open" wx:if="{{detail.status !== 3 && detail.status !== 4 && detail.isOnline === 2}}">开放职位</view>
+				<view class="share" bindtap="todoAction" data-type="share" wx:if="{{detail.isOnline === 1}}">转发我的职位</view>
+			</view>
+		</block>
+
+		<block wx:if="{{detail.id}}"><canvasCard cardData="{{detail}}" type="position" bindgetCreatedImg="getCreatedImg"></canvasCard></block>
+		<interviewBar
+			id="interviewBar"
+			infos="{{ detail }}"
+			bindresultevent="bindStatusChange"
+			type="position"
+			options="{{query}}"
+			wx:if="{{detail.vkey && !isOwner}}"></interviewBar>
+		<auth wx:if="{{requireOAuth}}" bindauthSuccess="authSuccess"></auth>
+	</view>
+</form>

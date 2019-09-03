@@ -1,0 +1,219 @@
+@import '../../../iconfont.wxss'
+.calendar {
+  position: relative;
+}
+.open {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) rotate(90deg);
+  bottom: -10rpx;
+  padding: 10rpx;
+  display: block;
+  font-size: 32rpx;
+  color: #652791;
+}
+.open.up {
+  bottom: -5rpx;
+  transform: translateX(-50%) rotate(270deg);
+}
+.calendar .wrap {
+  width: 100%;
+  height: 190rpx;
+  padding: 34rpx 0 0rpx;
+  box-sizing: border-box;
+  white-space: nowrap;
+  background: #fff;
+}
+.calendar .item {
+  width: 14.285%;
+  display: inline-block;
+}
+.calendar .item.head {
+  width: 132rpx;
+  vertical-align: top;
+}
+.calendar .item .have {
+  position: relative;
+}
+.calendar .item .overdue::after {
+  content: '';
+  width: 12rpx;
+  height: 12rpx;
+  bottom: 0rpx;
+  left: 50%;
+  margin-left: -6rpx;
+  border-radius: 50%;
+  background: #BCBCBC;
+  position: absolute;
+}
+.calendar .item .noOverdue::after {
+  content: '';
+  width: 12rpx;
+  height: 12rpx;
+  bottom: 0rpx;
+  left: 50%;
+  margin-left: -6rpx;
+  border-radius: 50%;
+  background: #FF7F4C;
+  position: absolute;
+}
+
+.calendar .day, .week, .month {
+  display: block;
+  text-align: center;
+}
+
+.calendar .week {
+  height: 22rpx;
+  font-size: 22rpx;
+  line-height: 22rpx;
+  color: #282828;
+}
+.calendar .day {
+  width: 68rpx;
+  height: 68rpx;
+  line-height: 68rpx;
+  text-align: center;
+  font-size: 32rpx;
+  color: #282828;
+  margin: 25rpx auto 0;
+}
+.calendar .day.curDay {
+  border-radius: 50%;
+  background: #EFE9F4;
+}
+.calendar .day.choseDate {
+  border-radius: 50%;
+  background: #652791;
+  color: #fff;
+}
+.calendar .month {
+  height: 90rpx;
+  line-height: 90rpx;
+  background:#EFE9F4;
+}
+
+
+.newCalendar {
+  background: #fff;
+  padding-bottom: 34rpx;
+  position: relative;
+}
+.calendar-head {
+  width: 100%;
+  height: 86rpx;
+  line-height: 86rpx;
+  padding: 0 210rpx;
+  box-sizing: border-box;
+  color: #652791;
+  font-size: 32rpx;
+  font-weight: 700;
+}
+.calendar-head .inner {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.calendar-head .inner .prev {
+  transform: rotate(180deg);
+  font-weight: 500;
+}
+.calendar-head .inner .next {
+  font-weight: 500;
+}
+.calendar-week {
+  display: flex;
+}
+.calendar-week .week {
+  text-align: center;
+  width: 14.285%;
+  height: 42rpx;
+  line-height: 42rpx;
+  color: #282828;
+  font-weight: 500;
+  font-size: 22rpx;
+}
+.calendar-body {
+  display: flex;
+  flex-wrap: wrap;
+}
+.calendar-body .day {
+  width: 14.285%;
+  text-align: center;
+  height: 82rpx;
+  line-height: 82rpx;
+  font-size:32rpx;
+  font-weight:500;
+  color: #282828;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar-body .day .inner {
+  width: 68rpx;
+  height: 68rpx;
+  line-height: 68rpx;
+  text-align: center;
+  display: block;
+  position: relative;
+}
+.calendar-body .day .inner.curDay {
+  border-radius: 50%;
+  background: #EFE9F4;
+}
+.calendar-body .day .inner.choseDate {
+  border-radius: 50%;
+  background: #652791;
+  color: #fff;
+  box-shadow:0rpx 10rpx 18rpx 0rpx rgba(101,39,145,0.3);
+}
+
+.calendar-body .day .inner.overdue::after {
+  content: '';
+  width: 12rpx;
+  height: 12rpx;
+  bottom: 0rpx;
+  left: 50%;
+  margin-left: -6rpx;
+  border-radius: 50%;
+  background: #BCBCBC;
+  position: absolute;
+}
+.calendar-body .day .inner.noOverdue::after {
+  content: '';
+  width: 12rpx;
+  height: 12rpx;
+  bottom: 0rpx;
+  left: 50%;
+  margin-left: -6rpx;
+  border-radius: 50%;
+  background: #FF7F4C;
+  position: absolute;
+}
+.backToday {
+  width:220rpx;
+  height:88rpx;
+  background:rgba(255,255,255,1);
+  box-shadow:0rpx 10rpx 38rpx 0rpx rgba(40,40,40,0.2);
+  border-radius:44rpx;
+  position: fixed;
+  left: 50%;
+  margin-left: -110rpx;
+  bottom: 48rpx;
+  font-size:28rpx;
+  font-weight: 600;
+  color: #652791;
+  line-height:88rpx;
+  text-align: center;
+}
+.backToday.noIphoneX {
+  bottom: 147rpx;
+}
+.backToday.iphoneX {
+  bottom: 215rpx;
+}
+.icon {
+  margin-left: 7rpx;
+}

@@ -1,0 +1,34 @@
+<view class="calendar" wx:if="{{calendarType === 'roll'}}">
+  <scroll-view class="wrap" scroll-x style="width: 100%" scroll-left="{{scrollLeft}}px" bindscrolltolower="nextMonth" bindscrolltoupper="prevMonth" upper-threshold="500" lower-threshold="200">
+    <view wx:for="{{list}}" wx:key="{{index}}" class="item {{item.month && !item.day ? 'head' : ''}}">
+      <view wx:if="{{item.day}}" bindtap="toggle" data-year="{{item.year}}" data-month="{{item.month}}" data-days="{{item.days}}" class="have {{item.haveView && item.haveViewed ? 'overdue' : ''}} {{item.haveView && !item.haveViewed && item.date !== curDate ? 'noOverdue' : ''}}">
+        <view class="week">{{item.week}}</view>
+        <view class="day {{item.date === curDate && item.date !== choseDate ? 'curDay' : ''}} {{item.date === choseDate ? 'choseDate' : ''}}">{{item.day}}</view>
+      </view>
+      <block wx:else>
+        <view class="month">{{item.month}}月</view>
+      </block>
+    </view>
+  </scroll-view>
+  <text wx:if="{{switchable}}" class="open icon iconfont icon-xiangyou" bindtap="changeType"></text>
+  <view class="backToday {{iphoneX ? 'iphoneX':''}} {{!iphoneX ? 'noIphoneX':''}}" bindtap="backToday" hidden="{{!choseOtherDate}}">回到今天<i class="icon iconfont icon-huidaojintian"></i></view>
+</view>
+
+<view class="newCalendar" wx:if="{{calendarType === 'normal'}}">
+  <view class="calendar-head">
+    <view class="inner">
+      <text class="icon iconfont icon-xiangyou prev" bindtap="prevMonth"></text>
+      <text class="date">{{headYear}}年{{headMonth}}月</text>
+      <text class="icon iconfont icon-xiangyou next" bindtap="nextMonth"></text>
+    </view> 
+  </view>
+  <view class="calendar-week">
+    <view class="week" wx:for="{{weeks_ch}}" wx:key="{{index}}">{{item}}</view>
+  </view>
+  <view class="calendar-body">
+    <view class="day" wx:for="{{calendarBody}}" wx:key="{{index}}">
+      <text class="inner {{item.date === curDate && item.date !== choseDate ? 'curDay' : ''}} {{item.date === choseDate ? 'choseDate' : ''}} {{item.date !== choseDate && item.haveView && item.haveViewed ? 'overdue' : ''}} {{item.date !== choseDate && item.haveView && !item.haveViewed ? 'noOverdue' : ''}}" bindtap="toggle" data-year="{{item.year}}" data-ceshi="{{item.haveView}}" data-ce="{{item.haveViewed}}" data-month="{{item.month}}" data-days="{{item.days}}">{{item.day}}</text>
+    </view>
+  </view>
+  <text wx:if="{{switchable}}" class="open icon iconfont icon-xiangyou up" bindtap="changeType"></text>
+</view>

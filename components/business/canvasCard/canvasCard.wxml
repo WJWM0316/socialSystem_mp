@@ -1,0 +1,3 @@
+<view class="canvasCard">
+	<canvas canvas-id="cardCanvas" class="canvas" id="cardCanvas" style="width: 420px; height: 336px;"></canvas>
+</view>

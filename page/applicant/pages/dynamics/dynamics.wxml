@@ -1,0 +1,45 @@
+<view>
+  <navbar title="动态"  background="#652791" color="#fff" isFixed="{{isFixed}}"></navbar>
+  <view hidden="{{!hasReFresh}}">
+    <refreshStatus></refreshStatus>
+  </view>
+  <view class="tabBoxBg"></view>
+  <view class="tabBox">
+    <view class="tab-item" bindtap="jumpMy" data-type="myBrowse">
+      <view class="inner">
+        <image class="icon" mode="aspectFit" src="{{cdnImagePath}}dynamics1.png"></image>我看过的
+      </view>
+    </view>
+    <view class="tab-item" bindtap="jumpMy" data-type="myCollect">
+      <view class="inner">
+        <image class="icon" mode="aspectFit" src="{{cdnImagePath}}dynamics2.png"></image>我感兴趣
+      </view>
+    </view>
+  </view>
+  <view class="default {{fixedDom ? 'fixed' : ''}}" style="top: {{navH}}px">
+    <view class="ul-tab-bar">
+      <view class="li {{pageList === 'myBrowse' ? 'active' : ''}}" bindtap="onTabClick" data-key="myBrowse">
+        <view class="{{redDot.redDotJobHunterViewList ? 'reddot' : ''}}">看过我</view>
+      </view>
+      <view class="li {{pageList === 'myCollect' ? 'active' : ''}}" bindtap="onTabClick" data-key="myCollect">
+        <view class="{{redDot.redDotJobHunterCollectList ? 'reddot' : ''}}">对我感兴趣</view>
+      </view>
+    </view>
+  </view>
+  <form bindsubmit="formSubmit" report-submit='{{true}}'>
+    <view class="{{myBrowse.list.length ? '' : 'nodata'}}" style="min-height: calc(100vh - {{(!isIphoneX ? 49 : 83) + navH + 150}}px)" hidden="{{pageList === 'myCollect'}}">
+      <officerTab wx:if="{{myBrowse.list.length > 0}}" list="{{myBrowse.list}}" page="dynamics" reddotType="red_dot_job_hunter_view_item"></officerTab>
+      <bottomStatus status="{{myBrowse.onBottomStatus}}" listData="{{myBrowse.list}}" desc="{{isJobhunter ? '还没有面试官看过你哟~' : '你与offer之间就差一份简历~'}}" marginTop="{{30}}">
+        <button class="jump clear-style" form-type="submit" bindtap="jump" data-type="{{isJobhunter ? 'positionList' : 'create'}}">{{isJobhunter ? '发现更多职业机会' : '立即创建简历'}}</button>
+      </bottomStatus>
+    </view>  
+    <view class="{{myCollect.list.length ? '' : 'nodata'}}" style="min-height: calc(100vh - {{(!isIphoneX ? 49 : 83) + navH + 150}}px)" hidden="{{pageList === 'myBrowse'}}">
+      <officerTab wx:if="{{myCollect.list.length > 0}}" list="{{myCollect.list}}" page="dynamics" reddotType="red_dot_job_hunter_collect_item"></officerTab>
+      <bottomStatus status="{{myCollect.onBottomStatus}}" listData="{{myCollect.list}}" desc="{{isJobhunter ? '还没有面试官对我感兴趣~' : '你与offer之间就差一份简历~'}}" marginTop="{{30}}">
+        <button class="jump clear-style" form-type="submit" bindtap="jump" data-type="{{isJobhunter ? 'rank' : 'create'}}">{{isJobhunter ? '发现更多面试官' : '立即创建简历'}}</button>
+      </bottomStatus>
+    </view>
+  </form>
+  <bindPhone wx:if="{{needLogin}}"></bindPhone>
+  <tabBar id="bottomRedDotBar" bindresultevent="getResult"></tabBar>
+</view>

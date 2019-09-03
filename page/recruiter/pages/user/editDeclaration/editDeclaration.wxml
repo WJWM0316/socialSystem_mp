@@ -1,0 +1,18 @@
+<viwe class="editBrief">
+	 <navBar title="编辑招聘宣言" background="#fff" color="#22292C" customBack bindbackEvent="backEvent"></navBar>
+	 <view class="textBox">
+	 	<view class="title">{{info.topicTitle}}</view>
+	 	<textarea class="textarea" value="{{content}}" maxlength="1000" bindinput="changeVal" placeholder="为招聘宣言添加你的真知灼见吧~"></textarea>
+	 	<view class="tip">
+	 		<view></view>
+	 		<view class="number">{{content.length}}/1000</view>
+	 	</view>
+	 </view>
+	 <view class="btnBox" wx:if="{{options.topicId}}">
+	 		<button class="btn" bindtap="saveInfo">发布</button>
+	 </view>
+	 <view class="btnBox remove" wx:else>
+	 		<button class="removeBtn" bindtap="remove">删除</button>
+	 		<button class="btn" bindtap="saveInfo">发布</button>
+	 </view>
+</viwe>

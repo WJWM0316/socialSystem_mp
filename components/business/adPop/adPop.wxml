@@ -1,0 +1,7 @@
+<view class="adPop" wx:if="{{showPop}}">
+	<view class="adPopBg" bindtap="close"></view>
+	<view class="adContent">
+		<image class="img" mode="widthFix" src="{{adData.imgInfo.url}}" bindtap="jump"></image>
+		<i class="close iconfont icon-cha-cu" bindtap="close"></i>
+	</view>
+</view>

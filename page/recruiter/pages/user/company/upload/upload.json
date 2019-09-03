@@ -1,0 +1,6 @@
+{
+	"usingComponents": {
+    "navbar": "../../../../../components/business/navbar/navbar",
+    "unloadFile": "../../../../../components/functional/unloadFile/unloadFile"
+  }
+}

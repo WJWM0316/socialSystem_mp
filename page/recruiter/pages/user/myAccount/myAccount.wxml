@@ -1,0 +1,30 @@
+<wxs src="../../../../../utils/filters.wxs" module="filters" />
+<navbar background="#ffffff" title="我的账户" color="#22292C"></navbar>
+<view hidden="{{!hasReFresh}}">
+  <refreshStatus></refreshStatus>
+</view>
+<view class="myAccount" style="min-height: calc(100vh - {{navHeight}}px)">
+	<view class="head">
+		<view class="imgBox">
+			<image class="bg" mode="widthFix" src="{{cdnPath}}myAccount.png"></image>
+			<view class="account">
+				<view class="txt">我的多多币</view>
+				<view class="money">{{myAccount.wallet.remain}}</view>
+			</view>
+			<view class="more" bindtap="getMore">获取更多</view>
+		</view>
+	</view>
+	<view class="list">
+		<view class="list-item" wx:for="{{ordersData.list}}" wx:key="{{index}}">
+			<view class="top">
+				<view class="title">{{item.label}}</view>
+				<view class="price"><text class="priceTxt {{item.status === 3 ? 'returnCash' : ''}} {{item.type === -1 ? 'reset' : ''}}">{{item.type === 1 ? '-' : '+'}}{{item.money}}</text></view>
+			</view>
+			<view class="bottom">
+				<view class="date">{{filters.dateFormat(item.updateTime, 'YYYY-MM-DD hh:mm')}}</view>
+				<view class="desc">{{item.statusText}}</view>
+			</view>
+		</view>
+	</view>
+	<bottomStatus status="{{ordersData.onBottomStatus}}" listData="{{ordersData.list}}" desc="暂无明细记录哦~"></bottomStatus>
+</view>

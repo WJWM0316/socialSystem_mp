@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "avatarCut": "../../../../../components/functional/avatarCut/avatarCut",
+    "navBar": "../../../../../components/business/navbar/navbar",
+    "myPicker": "../../../../../components/functional/myPicker/myPicker"
+  }
+}

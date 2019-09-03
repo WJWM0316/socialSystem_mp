@@ -1,0 +1,72 @@
+<view class="interest">
+	<navbar title="我的权益" background="#fff" color="#22292C"></navbar>
+	<view class="expired-tips" wx:if="{{infos.limitDay <= 5}}">
+		尊贵的用户：您的{{infos.rtVersionName}}权益即将于{{infos.expiredDesc}}到期，
+		<block wx:if="{{infos.rtVersionId === 1}}">限时升级专业版，请尽快联系我们~</block>
+		<block wx:else>请尽快续费，联系我们吧~</block>
+	</view>
+	<view style="height:24rpx;background: #FBFBFF;" wx:if="{{infos.limitDay > 5}}"></view>
+	<view hidden="{{!hasReFresh}}">
+    <refreshStatus></refreshStatus>
+  </view>
+	<view class="box">
+		<view class="card">
+			<image class="bg" mode="aspectFill" src="{{cdnImagePath}}interest_02.png" wx:if="{{infos.rtVersionId === 1}}"></image>
+			<image class="bg" mode="aspectFill" src="{{cdnImagePath}}interest_01.jpg" wx:else></image>
+			<view class="overlay">
+				<view class="header">
+					<view class="img-box">
+						<image class="bg" mode="aspectFill" src="{{recruiterInfo.avatar.smallUrl}}"></image>
+					</view>
+					<view class="content">
+						<view class="name {{infos.rtVersionId === 1 && infos.limitDay <= 5 ? 'default' : infos.rtVersionId === 1 && infos.limitDay > 5 ? 'black' : 'vip'}}">{{infos.rtVersionName}}</view>
+						<view class="time {infos.rtVersionId === 1 ? 'default' : 'vip'}}">有效期{{!infos.expired ? ' 无限' : '至 ' + infos.expiredDesc}}</view>
+					</view>
+				</view>
+				<view class="footer">
+					<view class="button" bindtap="alert1" wx:if="{{infos.rtVersionId === 1}}">升级专业版</view>
+					<view class="button" bindtap="alert2" wx:if="{{infos.rtVersionId === 2}}">立即续费</view>
+				</view>
+			</view>
+			<view class="filter"></view>
+		</view>
+		<view class="ul">
+			<view class="li">
+				<view class="key1">面试官人数上限</view>
+				<view class="key2">
+					<block wx:if="{{infos.cRecruiterNum !== -1}}"><text>{{infos.cRecruiterNum}}</text>人</block>
+					<block wx:else><text class="chine">不限</text></block>
+				</view>
+				<view class="key3">已加入公司面试官{{infos.cRecruiterNumUsed}}人</view>
+			</view>
+			<view class="li">
+				<view class="key1">在线职位数上限</view>
+				<view class="key2">
+					<block wx:if="{{infos.rOnlinePosition !== -1}}"><text>{{infos.rOnlinePosition}}</text>个</block>
+					<block wx:else><text class="chine">不限</text></block>
+				</view>
+				<view class="key3">在线职位{{infos.rOnlinePositionUsed}}个</view>
+			</view>
+			<view class="li">
+				<view class="key1">每日面试邀约数上限</view>
+				<view class="key2">
+					<block wx:if="{{infos.rDayInviteInterview !== -1}}"><text>{{infos.rDayInviteInterview}}</text>人</block>
+					<block wx:else><text class="chine">不限</text></block>
+				</view>
+				<view class="key3">已邀约{{infos.rDayInviteInterviewUsed}}人</view>
+			</view>
+			<view class="li">
+				<view class="key1">每日查看简历上限</view>
+				<view class="key2">
+					<block wx:if="{{infos.rDayBrowseResume !== -1}}"><text>{{infos.rDayBrowseResume}}</text>份</block>
+					<block wx:else><text class="chine">不限</text></block>
+				</view>
+				<view class="key3">已查看简历{{infos.rDayBrowseResumeUsed}}份 </view>
+			</view>
+		</view>
+		<view class="contact">
+			<view class="tips">了解更多招聘权益，欢迎联系我们</view>
+			<view class="phone" bindtap="call"><i class="icon iconfont icon-dianhua1"></i>400-065-5788</view>
+		</view>
+	</view>
+</view>

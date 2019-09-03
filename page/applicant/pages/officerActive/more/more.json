@@ -1,0 +1,9 @@
+{
+	"enablePullDownRefresh": true,
+	"backgroundTextStyle": "light",
+  "component": true,
+  "usingComponents": {
+    "navbar": "../../../../components/business/navbar/navbar",
+    "rankingTab": "../../../../components/business/rankingTab/rankingTab"
+  }
+}

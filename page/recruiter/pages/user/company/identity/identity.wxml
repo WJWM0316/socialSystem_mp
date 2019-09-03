@@ -1,0 +1,87 @@
+<view class="company-identity">
+	<navbar title="填写身份信息" background="#FFFFFF" color="#22292C"></navbar>
+
+	<view class="warning">
+		根据人力资源相关法律规定，用人单位开展招聘业务，需提供相关公司认证资质资料，请确保提交真实有效信息。
+	</view>
+
+	<view>
+		
+		<block wx:if="{{!applyJoin}}">
+		  <view class="upload-li margintop24">
+		  	<view class="text">
+		  		<view class="h1">上传身份证正面</view>
+		  		<view class="p">正面身份证人像面信息均在照片内清晰可识别身份信息</view>
+		  	</view>
+		  	<view class="upload-box">
+			    <unloadFile bindresultEvent="upload_front"  bindbeforeUpload="beforeUpload" bindfailUpload="failUpload" unloadType="img" data-type="passport_front" cardInfo="{{cardInfo_front}}">
+			    	<image src="{{cdnImagePath}}pic_identitycard_01.png" mode="scaleToFill" class="default-image"></image>
+			    	<image src="{{formData.passport_front.url}}" wx:if="{{formData.passport_front.url}}" mode="scaleToFill" class="upload-image"></image>
+					  <view class="upload-button">{{formData.passport_front.url ? '重新上传' : '点击上传'}}</view>
+					</unloadFile>
+					<view class="mask" wx:if="{{formData.passport_front.loading}}">上传识别中..</view>
+				</view>
+		  </view>
+
+			<block wx:if="{{formData.passport_front.hasUpload}}">
+				<view class="input-li">
+			    <view class="key">真实姓名</view>
+			    <input class="value" placeholder-style="color:#BCBCBC" placeholder="申请人的真实姓名" bindinput="bindInput" data-field="real_name" value="{{formData.real_name}}" />
+			  </view>
+
+			  <view class="input-li clear-bottom">
+			    <view class="key">身份证号</view>
+			    <input class="value" placeholder-style="color:#BCBCBC" placeholder="请填写18位身份证号码" bindinput="bindInput" data-field="identity_num" value="{{formData.identity_num}}" maxlength="18"/>
+			  </view>
+			</block>
+
+<!-- 		  <view class="upload-li">
+		  	<view class="text">
+		  		<view class="h1">上传身份证反面</view>
+		  		<view class="p">反面身份证，国徽信息均在照片内清晰可识别身份信息</view>
+		  	</view>
+		  	<view class="upload-box">
+			    <unloadFile bindresultEvent="upload_back" unloadType="img" data-type="passport_reverse" cardInfo="{{cardInfo_back}}" bindbeforeUpload="beforeUpload" bindfailUpload="failUpload">
+			    	<image src="{{cdnImagePath}}pic_identitycard_02.png" mode="scaleToFill" class="default-image"></image>
+			    	<image src="{{formData.passport_reverse.url}}" wx:if="{{formData.passport_reverse.url}}" mode="scaleToFill" class="upload-image"></image>
+					  <view class="upload-button">{{formData.passport_reverse.url ? '重新上传' : '点击上传'}}</view>
+					</unloadFile>
+					<view class="mask" wx:if="{{formData.passport_reverse.loading}}">上传识别中..</view>
+				</view>
+		  </view>
+
+		  <block wx:if="{{formData.passport_reverse.hasUpload}}">
+				<view class="input-li clear-bottom">
+			    <view class="key">有效期</view>
+			    <view class="time-zone">
+				    <view class="start-time">
+				    	<picker class="value" mode = 'date' bindchange="getStartDate" value="{{formData.validity_start}}">{{!formData.validity_start  ? '请选择' : formData.validity_start}}</picker>
+				    	<i class="icon iconfont icon-zhishibiao"></i>
+				    </view>
+				     至 
+				    <view class="end-time">
+				    	<picker class="value" mode = 'date' bindchange="getEndDate" value="{{formData.validity_end}}">{{!formData.validity_end  ? '请选择' : formData.validity_end}}</picker>
+				    	<i class="icon iconfont icon-zhishibiao"></i>
+				    </view>
+				  </view>
+			  </view>
+			</block> -->
+			
+		</block>
+		<block wx:else>
+			<view class="input-li">
+		    <view class="key">真实姓名</view>
+		    <input class="value" placeholder-style="color:#BCBCBC" placeholder="申请人的真实姓名" bindinput="bindInput" data-field="real_name" value="{{formData.real_name}}" />
+		  </view>
+
+		  <view class="input-li clear-bottom">
+		    <view class="key">身份证号</view>
+		    <input class="value" placeholder-style="color:#BCBCBC" placeholder="请填写18位身份证号码" bindinput="bindInput" data-field="identity_num" value="{{formData.identity_num}}" maxlength="18"/>
+		  </view>
+		</block>
+	  <view class="btn-area">
+	    <view bindtap="submit" class="button-submit {{canClick ? 'button-enable' : ''}}">提交审核</view>
+	  </view>
+	</view>
+
+</view>

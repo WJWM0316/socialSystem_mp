@@ -1,0 +1,148 @@
+<view class="center">
+<navbar background="{{navbarBg}}" title="我的" color="#fff"></navbar>
+<view class="top-banner {{isIphoneX ? 'isIphoneX' : ''}}">
+	<image class="bgImg" mode="aspectFill" src="{{cdnPath}}recruiter_mine_new_bg.png"></image>
+</view>
+<view hidden="{{!hasReFresh}}">
+  <refreshStatus></refreshStatus>
+</view>
+  
+<view class="page-mine">
+	<form bindsubmit="formSubmit" report-submit='{{true}}'>
+		<view class="floating-box" bindtap="jumpUpdateInfos">
+			<view class="header">
+				<view class="content">
+					<view class="realname">{{recruiterInfo.name}}</view>
+					<view class="degree-name">{{recruiterInfo.companyShortname}} | {{recruiterInfo.position}}</view>
+					<view class="perfects">完善度{{recruiterInfo.percent}}%</view>
+				</view>
+				<view class="img-box">
+					<image class="img-box" src="{{recruiterInfo.avatar.smallUrl}}" catchtap="preview"></image>
+					<image src="{{cdnPath}}sign1.png" mode="aspectFill" class="sign" wx:if="{{recruiterInfo.identityAuth}}"></image>
+				</view>
+			</view>
+			<button form-type="submit" class="share-homepage clear-style">分享我的主页</button>
+			<button form-type="submit" class="share-homepage-pic clear-style" catchtap="routeJump" data-route="poster">生成朋友圈分享图</button>
+		</view>
+		<!-- <view class="entry-list show-off-block" bindtap="toRank">
+			<view class="content">
+				<view class="first">
+					<text class="strong">{{recruiterInfo.ranking > 200 ? '200+' : recruiterInfo.ranking}}</text> 排名
+				</view>
+				<view class="second">
+					<text>本周人气 {{recruiterInfo.weekOfPopularity}}</text><text class="influence">影响力 {{recruiterInfo.influence}}</text>
+				</view>
+			</view>
+			<i class="icon iconfont icon-xiangyou"></i>
+			<view class="text2 color-default">查看排行榜</view>
+		</view> -->
+	</form>
+	<view class="entry-list">
+
+<!-- 		<view class="li">
+			<i class="icon iconfont icon-zhiyejihui label-icon"></i>
+			<view class="text">我感兴趣的</view>
+			<i class="icon iconfont icon-xiangyou"></i>
+		</view> -->
+
+		<!-- <view class="li toolbox">
+			<view class="tool-item {{pageInfos.arNewResumeRedDot ? 'red' : ''}}"  bindtap="routeJump" data-route="adviser">
+				<image class="icon" src="{{cdnPath}}icon_my_resume.png"></image>
+				<view class="title">顾问精选</view>
+				<view class="txt" wx:if="{{!pageInfos.haveAdvisorService}}">立即开通</view>
+				<view class="txt" wx:if="{{pageInfos.arNotHandleNum > 0}}"><text class="num">{{pageInfos.arNotHandleNum}}<block wx:if="{{pageInfos.arNotHandleNum > 99}}">+</block></text>份未处理</view>
+			</view>
+			<view class="tool-item"  bindtap="routeJump" data-route="myAccount">
+				<image class="icon" src="{{cdnPath}}icon_my_account.png"></image>
+				<view class="title">我的账号</view>
+				<view class="txt"><text class="num">{{pageInfos.remain}}</text>多多币</view>
+			</view>
+			<view class="tool-item" bindtap="routeJump" data-route="interest">
+				<image class="icon" src="{{cdnPath}}icon_my_rights.png"></image>
+				<view class="title">我的权益</view>
+				<view class="txt">{{pageInfos.rtVersionName}}</view>
+			</view>
+			<view class="tool-item"  bindtap="routeJump" data-route="company">
+				<image class="icon" src="{{cdnPath}}icon_my_company.png"></image>
+				<view class="title">我的公司</view>
+			</view>
+		</view> -->
+
+		<view class="li" bindtap="routeJump" data-route="company">
+			<i class="icon iconfont icon-gongsi1 label-icon"></i>
+			<view class="text">我的公司</view>
+			<i class="icon iconfont icon-xiangyou"></i>
+		</view>
+		
+		<view class="li" bindtap="routeJump" data-route="team">
+			<i class="icon iconfont icon-zhaopintuandui label-icon"></i>
+			<view class="text {{redDotInfos.applyAuditBar ? 'reddot' : ''}}">招聘团队</view>
+			<view class="boxs">
+				<image
+					class="people"
+					wx:for="{{pageInfos.recruiters}}"
+					src="{{item.avatar.smallUrl}}"
+					wx:key="{{index}}"
+					wx:if="{{index < 4}}"></image>
+				<image
+					class="people"
+					wx:if="{{info.recruiterList.length > 3}}"
+					src="{{cdnImagePath}}more.png"></image>
+			</view>
+			<i class="icon iconfont icon-xiangyou"></i>
+		</view>
+
+		<view class="li" bindtap="routeJump" data-route="interest">
+			<i class="icon iconfont icon-wodequanyi label-icon"></i>
+			<i class="icon iconfont icon-xiangyou"></i>
+			<view class="text">我的权益</view>
+			<view class="text2 color-default">{{pageInfos.rtVersionName}}</view>
+		</view>
+
+		<view class="li" bindtap="routeJump" data-route="identity">
+			<i class="icon iconfont icon-renzheng label-icon"></i>
+			<i class="icon iconfont icon-xiangyou" wx:if="{{!pageInfos.identityAuth}}"></i>
+			<view class="text">认证</view>
+			<view class="text2 color-gray rz" wx:if="{{pageInfos.identityAuth}}">已认证</view>
+			<view class="text2 color-pedding" wx:if="{{!pageInfos.identityAuth && (pageInfos.identityStatus !== 0 && pageInfos.identityStatus !== 1 && pageInfos.identityStatus !== 2)}}">未认证</view>
+			<view class="text2 color-pedding" wx:if="{{!pageInfos.identityAuth && pageInfos.identityStatus === 0}}">认证审核中</view>
+			<view class="text2 color-fail" wx:if="{{!pageInfos.identityAuth && pageInfos.identityStatus === 2}}">认证审核失败</view>
+		</view>
+
+		<!-- <view class="li">
+			<i class="icon iconfont icon-kefu label-icon"></i>
+			<view class="text">在线咨询</view>
+			<i class="icon iconfont icon-xiangyou"></i>
+		</view> -->
+
+		<view class="li" bindtap="callPhone">
+			<i class="icon iconfont icon-dianhua label-icon"></i>
+			<i class="icon iconfont icon-xiangyou"></i>
+			<view class="text">客服电话</view>
+			<view class="text2 color-default">{{telePhone}}</view>
+		</view>
+
+		<view class="li" bindtap="routeJump" data-route="settings">
+			<i class="icon iconfont icon-shezhi label-icon"></i>
+			<view class="text">设置</view>
+			<i class="icon iconfont icon-xiangyou"></i>
+		</view>		
+	</view>
+
+	<view class="toggleIdentity" bindtap="toggleIdentity">
+		<i class="icon iconfont icon-qiehuanshenfen label-icon"></i>
+		<view class="text">切换身份</view>
+		<view class="text2 color-default">当前为面试官</view>
+		<i class="icon iconfont icon-xiangyou"></i>
+	</view>
+		
+	<!-- <view class="copy-right">
+		<view class="li">使用帮助</view>
+		<view class="li">用户协议</view>
+		<view class="li">意见反馈</view>
+	</view> -->
+</view>
+<block wx:if="{{recruiterInfo.uid}}"><canvasCard cardData="{{recruiterInfo}}" type="recruiter" bindgetCreatedImg="getCreatedImg"></canvasCard>
+</block>
+<tab-bar tabType="1" id="bottomRedDotBar" bindresultevent="getResult"></tab-bar>
+</view>

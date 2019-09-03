@@ -1,0 +1,5 @@
+<view class="change-identity">
+	<view class="item column-line" bindtap="hunterJob">前往求职端</view>
+	<view class="item" bindtap="changeMobile">联系客服</view>
+	<bindPhone wx:if="{{showBindMobile}}"></bindPhone>
+</view>

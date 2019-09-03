@@ -1,0 +1,15 @@
+<view class="moreActive" bindtap='toMore'>
+  <view class="left" wx:if="{{type == 1}}">
+    <view class="title">发现更多面试官</view>
+    <view class="info">Ta们都在积极抢人，欢迎围观</view>
+  </view>
+  <view class="left" wx:if="{{type == 2}}">
+    <view class="title">面试官动态</view>
+    <view class="dot" wx:if="{{redDotActiveList}}"></view>
+    <view class="info">看过我、对我感兴趣的面试官</view>
+  </view>
+  <view class="right">
+    <image class="avatar" lazy-load wx:for="{{avatarList}}" wx:key="{{index}}" src="{{item.smallUrl}}" wx:if="{{index <= 2}}"></image>
+    <image class="avatar" wx:if="{{avatarList.length > 3}}" src="{{cdnImagePath}}more.png"></image>
+  </view>
+</view>    

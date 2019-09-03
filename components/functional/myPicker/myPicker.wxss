@@ -1,0 +1,33 @@
+@import '../../../iconfont.wxss'
+.my-class {
+	width: 100%;
+  height: 100%;
+}
+.picker {
+  width: 100%;
+  height: 100%;
+  color:#282828;
+  white-space: nowrap;
+}
+.triangle {
+	font-size: 13rpx;
+	color: #652791;
+	margin-left: 11rpx;
+	vertical-align:middle;
+}
+.triangle1 {
+	font-size: 32rpx;
+	color: #BCBCBC;
+	margin-left: 8rpx;
+}
+.placeholder {
+	color: #BCBCBC;
+	font-weight: 300;
+}
+.picker .showTxt {
+	width: 100%;
+	display: inline-block;
+	overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}

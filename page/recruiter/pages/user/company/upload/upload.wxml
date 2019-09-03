@@ -1,0 +1,41 @@
+<view class="company-upload">
+	<navbar title="完善公司信息" background="#FFFFFF" color="#22292C" customBack bindbackEvent="backEvent"></navbar>
+	<view class="warning">根据人力资源相关法律规定，用人单位开展招聘业务，需提供相关公司认证资质资料，请确保提交真实有效信息。</view>
+	<view>
+
+	  <view class="upload-li">
+	  	<view class="h1">上传营业执照</view>
+	  	<view class="p">确保公司全称与提交认证/审核公司一致；如为复印件、黑白扫描件，需要加公司公章；不支持屏幕截图或翻拍图片；不能有与招聘无关的标注或水印；不支持电子版营业执照，保证图片信息清晰完整；</view>
+	  	<view class="upload-box">
+		    <unloadFile bindresultEvent="upload" unloadType="img" data-type="business_license">
+		    	<!-- <view class="icon-box">+</view> -->
+		    	<image src="{{cdnImagePath}}businesslicense01.png" mode="aspectFill" class="icon-box1"></image>
+				  <!-- <view class="upload-tips">上传营业执照</view> -->
+				  <image src="{{formData.business_license.smallUrl}}" mode="aspectFill" class="image"></image>
+				  <view class="mask" wx:if="{{formData.business_license.smallUrl}}"></view>
+				  <view class="replace-image" wx:if="{{formData.business_license.smallUrl}}"><i class="icon iconfont icon-zhongxinshangchuan"></i>重新上传</view>
+				</unloadFile>
+			</view>
+	  </view>
+
+	  <view class="upload-li">
+	  	<view class="h1">上传工牌/名片/在职证明（三选一）</view>
+	  	<view class="p">确保提交的认证与审核公司一致；如为复印件、黑白扫描件，需要加公司公章；不支持屏幕截图或翻拍图片；图片不能涂改、添加标注或水印；保证图片信息清晰完整；</view>
+	  	<view class="upload-box">
+		    <unloadFile bindresultEvent="upload" unloadType="img" data-type="on_job">
+				  <!-- <view class="icon-box">+</view> -->
+				  <image src="{{cdnImagePath}}identitycard01.png" mode="aspectFill" class="icon-box2"></image>
+				  <!-- <view class="upload-tips">上传图片</view> -->
+				  <image src="{{formData.on_job.smallUrl}}" mode="aspectFill" class="image"></image>
+				  <view class="mask" wx:if="{{formData.on_job.smallUrl}}"></view>
+				  <view class="replace-image" wx:if="{{formData.on_job.smallUrl}}"><i class="icon iconfont icon-zhongxinshangchuan"></i>重新上传</view>
+				</unloadFile>
+			</view>
+	  </view>
+
+	  <view class="btn-area">
+	    <view bindtap="submit" class="button-submit {{canClick ? 'button-enable' : ''}}">下一步</view>
+	  </view>
+
+	</view>
+</view>

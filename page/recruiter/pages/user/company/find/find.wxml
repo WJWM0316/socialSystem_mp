@@ -1,0 +1,78 @@
+<view class="search-company-page">
+	<navbar title="输入公司全称" background="#FFFFFF" color="#22292C"></navbar>
+	<view class="page-header">
+		<view class="h1">我们需要确认您的公司信息</view>
+		<view class="h2">如果公司已经注册，可直接查找公司信息</view>
+		<view class="p">1、请输入营业执照上的的公司全称</view>
+		<view class="p">2、请注意区分总公司和分公司</view>
+		<view class="p">  3、公司名称将用于后续公司认证使用，请确保准确性</view>
+	</view>
+	<view class="submit">
+		<view class="input-li clear-bottom">
+			<input placeholder="请输入您公司营业执照上的公司全称" bindinput="bindInput" value="{{formData.company_name}}" />
+		</view>
+		<view class="example">示例：广州老虎信息科技有限公司</view>
+		<view class="ul" wx:if="{{nameList.length > 0}}">
+			<view
+			class="li"
+			bindtap="selectCompany"
+			data-name="{{item.companyName}}"
+			data-id="{{item.id}}"
+			wx:for="{{ nameList }}"
+			wx:for-item="item"
+			wx:key="{{index}}">
+				<rich-text nodes="{{item.html}}"></rich-text>
+				<i class="icon iconfont icon-jiantou"></i>
+			</view>
+		</view>
+		<view class="bottomBox">
+			<view bindtap="submit" class="button-submit {{canClick ? 'button-enable' : ''}}">下一步</view>
+		</view>
+		
+	</view>
+	<view class="certification-layout {{showMaskBox ? 'certification-layout-show' : ''}}">
+		<view class="mask {{showMaskBox ? 'certification-layout-show' : ''}}"></view>
+		<view class="box {{showMaskBox ? 'box-show' : ''}}">
+			<i class="icon iconfont icon-close"  bindtap="close"></i>
+			<block wx:if="{{type === 'create'}}">
+				<view class="h1">了解创建公司审核流程</view>
+				<view class="ul">
+					<view class="item">
+						<view class="img-box"><view class="circle">1</view></view>
+						<view class="text">
+							<view class="h2">验证公司信息</view>
+							<view class="p">通过录入公司信息与营业执照，工牌名片/在职证明等，验证公司信息；</view>
+						</view>
+					</view>
+					<view class="item">
+						<view class="img-box"><view class="circle">2</view></view>
+						<view class="text">
+							<view class="h2">验证个人身份信息</view>
+							<view class="p">通过录入身份证信息，验证您的本人身份；</view>
+						</view>
+					</view>
+				</view>
+			</block>
+			<block wx:else>
+				<view class="h1">了解面试官身份审核流程</view>
+				<view class="ul">
+					<view class="item">
+						<view class="img-box"><view class="circle">1</view></view>
+						<view class="text">
+							<view class="h2">验证个人身份信息</view>
+							<view class="p">通过录入身份证信息，验证您的本人身份；</view>
+						</view>
+					</view>
+					<view class="item">
+						<view class="img-box"><view class="circle">2</view></view>
+						<view class="text">
+							<view class="h2">验证您与所申请公司的关系 </view>
+							<view class="p">通过提交个人信息与身份信息，公司管理员将验证您所属关系</view>
+						</view>
+					</view>
+				</view>
+			</block>
+			<button class="button-know" bindtap="closeMask">开始审核</button>
+		</view>
+	</view>
+</view>

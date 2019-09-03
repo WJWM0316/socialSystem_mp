@@ -1,0 +1,114 @@
+@import '../../../iconfont.wxss'
+
+.ranking{
+  margin: 0 30rpx 20rpx 56rpx;
+  height: 180rpx;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30rpx 0 54rpx;
+  box-sizing: border-box;
+  background-color: #fff;
+  border-radius: 16rpx;
+  box-shadow:0px 8px 20px 0px rgba(34,56,101,0.08);
+  position: relative;
+}
+.serialNum{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: -28rpx;
+  width: 46rpx;
+  height: 46rpx;
+  border: 4rpx solid #FFFFFF;
+  background-color: #8452A7;
+  text-align: center;
+  line-height: 46rpx;
+  border-radius: 50%;
+  color: #FFFFFF;
+  font-size: 26rpx;
+  box-shadow:0px 8px 20px 0px rgba(34,56,101,0.08);
+}
+.headImgBox{
+  position: relative;
+}
+.headImgBox .sign{
+  position: absolute;
+  bottom: 4rpx;
+  right: 4rpx;
+  width: 36rpx;
+  height: 36rpx;
+}
+.headImgBox .headImg{
+  width: 120rpx;
+  height: 120rpx;
+  background-color: #ccc;
+  border-radius: 50%;
+  box-shadow:0px 2px 12px 0px rgba(0,0,0,0.12);
+  object-fit: cover;
+  vertical-align: middle;
+}
+.ranking .left .top{
+  flex-wrap: nowrap;
+  align-items: center;
+  width: 430rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ranking .left .top .name{
+  color: #282828;
+  font-size: 36rpx;
+  margin-right: 41rpx;
+  font-weight: 500;
+  position: relative;
+}
+.ranking .left .top .name::after{
+  display: block;
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -21rpx;
+  transform: translateY(-50%);
+  width: 1rpx;
+  height: 23rpx;
+  background-color: #979797;
+}
+.ranking .left .top .title{
+  font-size: 28rpx;
+  color: #282828;
+  font-weight: 300;
+}
+.ranking .left .bottom{
+  margin-top: 18rpx;
+  display: flex;
+  align-items: center;
+}
+.ranking .left .bottom .company{
+  max-width: 196rpx;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 24rpx;
+  font-weight: 300;
+  margin-right: 40rpx;
+  color: #929292;
+}
+.ranking .left .bottom .influence{
+  display: flex;
+  flex-wrap: nowrap;
+  font-size: 24rpx;
+  font-weight: 300;
+  color: #929292;
+}
+.ranking .left .bottom .value{
+  margin-left: 10rpx;
+  color: #652791;
+}
+
+.ranking .left .icon{
+  margin-right: 10rpx;
+  color: #BACED8;
+  font-size: 26rpx;
+}

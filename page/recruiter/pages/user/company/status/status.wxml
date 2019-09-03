@@ -1,0 +1,297 @@
+<!-- 加载过滤器 -->
+<wxs src="../../../../../../utils/filters.wxs" module="filters" />
+
+<navbar title="{{pageTitle}}" background="#FFFFFF" color="#22292C" showHome="{{showHome}}"></navbar>
+
+<view class="company-identity-status">
+	
+	<view hidden="{{!hasReFresh}}">
+	  <refreshStatus></refreshStatus>
+	</view>
+
+	<!-- 创建公司 start -->
+	<view class="header" wx:if="{{options.from === 'company'}}">
+
+		<image
+			src="{{cdnImagePath}}pic_await001.png"
+			mode="scaleToFill"
+			class="default-status"
+			wx:if="{{companyInfos.status === 0}}"></image>
+		
+		<image
+			src="{{cdnImagePath}}pic_defeated001.png"
+			mode="scaleToFill"
+			class="default-status"
+			wx:if="{{companyInfos.status === 2}}"></image>
+		
+		<image
+		src="{{cdnImagePath}}pic_succeed001.png" 
+		mode="scaleToFill" 
+		class="default-status"
+		wx:if="{{companyInfos.status === 1}}"></image>
+
+		<block wx:if="{{companyInfos.status === 0}}">
+			<view class="h1">公司认证审核中</view>
+			<view class="p">该申请将在1个工作日内审核，通过后即可开始招聘</view>
+		</block>
+
+		<block wx:elif="{{companyInfos.status === 2}}">
+			<view class="h3">公司认证审核未通过</view>
+			<view class="p2">请重新提交资料，完成公司创建</view>
+			<view class="h2">公司认证审核未通过的原因如下</view>
+			<view class="reation" wx:if="{{companyInfos.reviewNote}}">
+				<text wx:if="{{companyInfos.reviewNote}}">{{companyInfos.reviewNote}}</text>
+				<!-- <text wx:if="{{identityInfos.reviewNote}}">{{identityInfos.reviewNote}}</text> -->
+				<view bindtap="todoAction" data-action="modifyCompany" class="p5">重新提交认证信息>></view>
+			</view>
+		</block>
+
+		<block wx:else>
+			<view class="h1">公司认证审核已通过</view>
+			<view class="p3">{{companyInfos.companyName}}</view>
+			<view class="line-box"> <view class="line-left"></view> 获得权益 <view class="line-right"></view> </view>
+			<view class="button-box">
+				<view class="button">
+					<image src="{{cdnImagePath}}equities_01.png" mode="scaleToFill" class="button-image"></image>
+					<text bindtap="todoAction" data-action="position">免费发布职位</text>
+				</view>
+				<view class="button">
+					<image src="{{cdnImagePath}}equities_02.png" mode="scaleToFill" class="button-image"></image>
+					<text>免费查看简历</text>
+				</view>
+			</view>
+		</block>
+
+	</view>
+	<!-- 创建公司 end -->
+	
+	<!-- 身份认证 start -->
+	<view class="header" wx:if="{{options.from === 'identity'}}">
+		<image
+			src="{{cdnImagePath}}pic_await001.png"
+			mode="scaleToFill"
+			class="default-status"
+			wx:if="{{identityInfos.status === 0}}"></image>
+		<image
+			src="{{cdnImagePath}}pic_defeated001.png"
+			mode="scaleToFill"
+			class="default-status"
+			wx:if="{{identityInfos.status === 2}}"></image>
+		
+		<image
+		src="{{cdnImagePath}}pic_succeed001.png" 
+		mode="scaleToFill" 
+		class="default-status"
+		wx:if="{{identityInfos.status === 1}}"></image>
+
+		<block wx:if="{{identityInfos.status === 0}}">
+			<view class="h1">实名认证审核中</view>
+			<view class="p">该申请将在1个工作日内审核，通过后即可开始招聘</view>
+		</block>
+
+		<block wx:elif="{{identityInfos.status === 2}}">
+			<view class="h3">实名认证审核未通过</view>
+			<view class="p2">请重新提交资料，完成个人信息认证</view>
+			<view class="h2">实名认证审核未通过的原因如下</view>
+			<view class="reation">
+				<text>{{identityInfos.reviewNote}}</text>
+				<view bindtap="todoAction" data-action="identity" wx:if="{{!identityInfos.id || identityInfos.status === 2}}" class="p5">重新提交认证信息>></view>
+			</view>
+		</block>
+
+		<block wx:else>
+			<view class="h3">实名认证审核已通过</view>
+			<view class="p10">恭喜，你的资料已认证成功!</view>
+		</block>
+	</view>
+	<!-- 身份认证 end -->
+
+	<!-- 申请加入 start -->
+	<view class="header" wx:if="{{options.from === 'join'}}">
+		<image
+			src="{{cdnImagePath}}pic_await001.png"
+			mode="scaleToFill"
+			class="default-status"
+			wx:if="{{companyInfos.status === 0}}"></image>
+		<image
+			src="{{cdnImagePath}}pic_defeated001.png"
+			mode="scaleToFill"
+			class="default-status"
+			wx:if="{{companyInfos.status === 2}}"></image>
+		
+		<image
+		src="{{cdnImagePath}}pic_succeed001.png" 
+		mode="scaleToFill" 
+		class="default-status"
+		wx:if="{{companyInfos.status === 1}}"></image>
+
+		<block wx:if="{{companyInfos.status === 0}}">
+			<view class="h1">加入公司申请审核中</view>
+			<view class="p">该申请将通知公司管理员审核，审核通过后即可开始招聘</view>
+		</block>
+
+		<block wx:elif="{{companyInfos.status === 2}}">
+			<view class="h3">加入公司申请审核失败</view>
+			<view class="p10">您提交的申请审核未通过，具体原因请咨询管理员</view>
+		</block>
+
+		<block wx:else>
+			<view class="h1">加入公司申请已通过</view>
+			<view class="p3">{{companyInfos.companyName}}</view>
+			<view class="line-box"> <view class="line-left"></view> 获得权益 <view class="line-right"></view> </view>
+			<view class="button-box">
+				<view class="button">
+					<image src="{{cdnImagePath}}equities_01.png" mode="scaleToFill" class="button-image"></image>
+					<text bindtap="todoAction" data-action="position">免费发布职位</text>
+				</view>
+				<view class="button">
+					<image src="{{cdnImagePath}}equities_02.png" mode="scaleToFill" class="button-image"></image>
+					<text>免费查看简历</text>
+				</view>
+			</view>
+		</block>
+	</view>
+	<!-- 申请加入 end -->
+
+	<view class="section" wx:if="{{options.from === 'company' && companyInfos.status !== 1}}">
+		<view class="title">
+			<view class="label">您的公司信息</view>
+			<view class="jump" bindtap="todoAction" data-action="modifyCompany">申请信息有误？去更改</view>
+		</view>
+		<view class="ul">
+			<view class="li">
+				<view class="key">公司全称</view>
+				<view class="value">{{companyInfos.companyName}}</view>
+			</view>
+			<view class="li">
+				<view class="key">公司简称</view>
+				<view class="value">{{companyInfos.companyShortname}}</view>
+			</view>
+			<view class="li">
+				<view class="key">所属行业</view>
+				<view class="value">{{companyInfos.industry}}</view>
+			</view>
+			<view class="li">
+				<view class="key">人员规模</view>
+				<view class="value">{{companyInfos.employeesInfo}}</view>
+			</view>
+			<!-- 
+				验证方式：
+				0： 旧流程
+				1： 邮箱验证
+				2： 营业执照加相关证明 
+			-->
+			<view class="li" wx:if="{{companyInfos.verificationMethod}}">
+				<view class="key">认证方式</view>
+				<view class="value">{{companyInfos.verificationMethod === 1 ? '邮箱验证' : '营业执照加相关证明'}}</view>
+			</view>
+		</view>
+	</view>
+
+	<view class="section" wx:if="{{options.from === 'identity' && identityInfos.status !== 1}}">
+		<view class="title">
+			<view class="label">认证信息</view>
+			<view class="jump" bindtap="todoAction" data-action="identity">申请信息有误？去更改</view>
+		</view>
+		<view class="ul">
+			<view class="li">
+				<view class="key">姓名</view>
+				<view class="value">{{identityInfos.realName}}</view>
+			</view>
+			<view class="li">
+				<view class="key">身份证号</view>
+				<view class="value">{{filters.encryptId(identityInfos.identityNum, 1, 1)}}</view>
+			</view>
+			<view class="li" wx:if="{{!applyJoin}}">
+				<view class="key">证件照片</view>
+				<view class="value">{{identityInfos.identityNum ? '已上传' : '未上传'}}</view>
+			</view>
+		</view>
+	</view>
+
+	<view class="section" wx:if="{{options.from === 'join' && companyInfos.status !== 1}}">
+		<view class="title">
+			<view class="label">您的申请</view>
+			<view class="jump" bindtap="todoAction" data-action="applyModify">申请信息有误？去更改</view>
+		</view>
+		<view class="ul">
+			<view class="li">
+				<view class="key">公司全称</view>
+				<view class="value">{{companyInfos.companyName}}</view>
+			</view>
+			<view class="li">
+				<view class="key">姓名</view>
+				<view class="value">{{companyInfos.realName}}</view>
+			</view>
+			<view class="li">
+				<view class="key">担任职务</view>
+				<view class="value">{{companyInfos.userPosition}}</view>
+			</view>
+			<view class="li">
+				<view class="key">接收简历邮箱</view>
+				<view class="value">{{companyInfos.userEmail}}</view>
+			</view>
+			<view class="li item">
+				<view class="img-box">
+					<image src="{{companyInfos.adminInfo.avatar.smallUrl}}" mode="scaleToFill" ></image>
+				</view>
+				<view class="infos">
+					<text class="realname">{{companyInfos.adminInfo.name}} </text>
+					<text class="degress"> {{companyInfos.adminInfo.position}}</text>
+				</view>
+				<view class="button-box" data-action="notice" bindtap="todoAction" wx:if="{{companyInfos.status === 0}}">
+					<i class="icon iconfont icon-tongzhi notice"></i>通知管理员
+				</view>
+			</view>
+		</view>
+	</view>
+
+	<view class="div" wx:if="{{options.from !== 'identity' && companyInfos.status !== 1}}">
+		<view class="box" bindtap="todoAction" data-action="identity">
+			<view class="p1">认证个人身份</view>
+			<view class="p2">提前认证身份，公司过审后即可马上发布职位</view>
+			<view class="has active" wx:if="{{!identityInfos.haveIdentity}}">去认证</view>
+			<block wx:if="{{identityInfos.haveIdentity}}">
+				<view class="has" wx:if="{{identityInfos.status === 1}}">已认证</view>
+				<view class="has" wx:if="{{identityInfos.status === 0}}">审核中</view>
+				<view class="has red" wx:if="{{identityInfos.status === 2}}">未通过</view>
+			</block>
+			<!-- 
+				1.还没有填写身份信息 
+				2.个人身份认证失败 
+			-->
+			<i class="icon iconfont icon-xiangyou" wx:if="{{!identityInfos.haveIdentity || identityInfos.status === 2 || identityInfos.status === 0}}"></i>
+		</view>
+	</view>
+	<view class="tip2" wx:if="{{options.from === 'identity' && (identityInfos.status !== 1 || !identityInfos.haveIdentity)}}">
+		<view class="span">了解更多认证须知，欢迎联系我们</view>
+		<view class="strong" bindtap="callPhone">{{telePhone}}</view>
+	</view>
+
+	<view class="quickly-entry" wx:if="{{options.from !== 'identity' && companyInfos.status !== 1}}">
+		<view class="content">
+			<view class="h6">快速通道权益</view>
+			<view class="h7">助您创建公司更快捷，欢迎体验~</view>
+		</view>
+		<view class="button" data-action="call" bindtap="todoAction">联系体验</view>
+		<image class="bgImg" src="{{cdnImagePath}}verify_bg.png" mode="aspectFill"></image>
+	</view>
+
+	<view
+		class="go identity222"
+		bindtap="toggle"
+		wx:if="{{companyInfos.status !== 1 && (options.from === 'company' || options.from === 'join')}}">
+		<text>前往求职端</text>
+	</view>
+	
+	<view
+		class="go {{ identityInfos.status === 0 ? 'identity111' : ''}}"
+		bindtap="toggle"
+		wx:if="{{identityInfos.status !== 1 && options.from === 'identity'}}">
+		<text>前往求职端</text>
+	</view>
+
+	<view class="button4" wx:if="{{options.from !== 'identity' && companyInfos.status === 1}}" bindtap="todoAction" data-action="recruitment">开始招聘</view>
+	<view class="button4" wx:if="{{options.from === 'identity' && identityInfos.status === 1}}" bindtap="todoAction" data-action="recruitment">确定</view>
+</view>
+

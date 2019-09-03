@@ -1,0 +1,31 @@
+<view class="recruiterList">
+	<navbar title="公司面试官" background="#fff" color="#22292C"></navbar>
+	
+	 <view class="todo-tab" bindtap="routeJump" wx:if="{{isCompanyAdmin}}">
+  	<i class="icon iconfont icon-tongzhi icon1"></i>
+  	面试官加入申请
+  	<view class="red-dot" wx:if="{{redDotInfos.applyAuditBar}}"></view>
+  	<i class="icon iconfont icon-xiangyou icon2"></i>
+  </view>
+	
+	<view hidden="{{!hasReFresh}}">
+    <refreshStatus></refreshStatus>
+  </view>
+
+	<view class="ul">
+		<view class="li" wx:for="{{recruitersList.list}}" wx:key="{{index}}" wx-for-item="{{item}}" data-uid="{{item.uid}}"  bindtap="jump">
+			<view class="img-box">
+		    <image class="img" mode="aspectFill" src="{{item.avatar.smallUrl}}"></image>
+		    <image src="{{cdnImagePath}}sign1.png" mode="aspectFill" class="vip" wx:if="{{item.identityAuth}}"></image>
+	    </view>
+	    <view class="recruiterMsg">
+	      <view class="name">{{item.name}}</view>
+	      <view class="detail">{{item.position}}</view>
+	    </view>
+	  </view>
+	</view>
+	<bottomStatus status="{{onBottomStatus}}" listData="{{recruitersList.list}}"></bottomStatus>
+	<!-- <view class="footer">
+		<view bindtap="authTransfer"><i class="backLast iconfont icon-bianji1"></i> 申请转移管理权限</view>
+	</view> -->
+</view>

@@ -1,0 +1,41 @@
+<wxs src="../../../../../utils/filters.wxs" module="filter" />
+<view class="attachment">
+	<navbar title="附件简历" background="#FFFFFF" color="#22292C"></navbar>
+	<view class="bg" style="top: {{navH}}px"></view>
+	<view hidden="{{!hasReFresh}}">
+	  <refreshStatus></refreshStatus>
+	</view>
+	<view class="infos">
+		<image class="img" mode="aspectFill" src="{{cdnPath}}scan_code_default.png" wx:if="{{!attachResume.vkey}}"></image>
+		<image class="img" mode="aspectFill" src="{{cdnPath}}scan_code_complate.png" wx:else></image>
+		<view class="tips {{!attachResume.vkey ? 'none' : 'has'}}">{{!attachResume.vkey ? '暂未上传附件简历' : '附件简历已上传'}}</view>
+	</view>
+	<view>{{text}}</view>
+	<view class="ul" wx:if="{{!attachResume.vkey}}">
+		<view class="li">
+			<view class="label">第1步</view>
+			<view class="value">电脑浏览器打开网址“sao.lieduoduo.com”</view>
+		</view>
+		<view class="li">
+			<view class="label">第2步</view>
+			<view class="value">点击下方按钮扫码登录，登录后，根据引导操作，完成上传</view>
+		</view>
+	</view>
+	<view class="attach-box" wx:else>
+		<view class="item" bindtap="preview" data-file="{{attachResume}}">
+			<view class="img-box">
+				<image class="img" mode="aspectFill" src="{{filter.fileFormat(attachResume.url)}}"></image>
+			</view>
+			<view class="content">
+				<view class="filename">{{attachResume.attachName}}</view>
+				<view class="date">{{attachResume.createdAt}}</view>
+			</view>
+			<i class="icon iconfont icon-xiangyou"></i>
+		</view>
+	</view>
+	<view class="footer">
+		<view class="p" wx:if="{{!attachResume.vkey}}">附件简历上传后，面试官在确认预约面试后可查看</view>
+		<view class="p" wx:else>打开网址“sao.lieduoduo.com”扫码上传附件简历</view>
+		<view class="button" bindtap="scanCode">扫码上传</view>
+	</view>
+</view>

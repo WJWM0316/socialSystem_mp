@@ -1,0 +1,49 @@
+/* 支付密码框 */
+
+.pay_number {
+  margin: 0 16rpx;
+  display: flex;
+  flex-direction: row;
+  height: 100rpx;
+}
+
+/* 单个格式样式 */
+
+.password_dot {
+  flex: 1;
+  border-bottom: 1px solid #cfd4d3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 24rpx;
+  font-size: 88rpx;
+  line-height: 1;
+  padding-bottom: 16rpx;
+}
+
+.active{
+  border-color:#652791;
+}
+
+.error{
+  border-color:#ED5C5C;
+}
+
+/* 输入框 */
+
+.input_container {
+  height: 100%;
+  width: 200%;
+  min-height: 0;
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  transform: translateX(-100%);
+}
+
+.content {
+  height: 100rpx;
+  overflow: hidden;
+  position: relative;
+}

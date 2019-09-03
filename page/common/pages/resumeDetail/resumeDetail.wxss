@@ -1,0 +1,747 @@
+.resumeDetail{
+  /*background: #F5F4F7;*/
+  width: 100%;
+  padding: 25rpx 30rpx;
+  box-sizing: border-box;
+  position: relative;
+  min-height: 85vh;
+}
+.share{
+  width: 76rpx;
+  height: 68rpx;
+  position: absolute;
+  top: 30rpx;
+  right: 0;
+  border-radius: 36rpx 0 0 36rpx;
+  background-color: #FFFFFF;
+  box-shadow:0rpx 4rpx 14rpx 0rpx rgba(101,39,145,0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.avatarBox{
+  min-width: 120rpx;
+  width: 120rpx;
+  height: 120rpx;
+  margin-right: 40rpx;
+  position: relative;
+}
+.adviser .avatarBox {
+  margin-right: 18rpx;
+}
+.avatarBox .gender{
+  position: absolute;
+  bottom: 4rpx;
+  right: 4rpx;
+  width: 32rpx;
+  height: 32rpx;
+}
+.avatarBox .gender .sexIcon{
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.girl{
+  background-color: #FE6795;
+}
+.man{
+  background-color: #2878FF;
+}
+.gender i .icon-xingbiebiaoqian-nan{
+  background-color: #2878FF;
+}
+.avatar{
+  min-width: 120rpx;
+  border-radius: 50%;
+  width: 120rpx;
+  height: 120rpx;
+  background-color: #ccc;
+  box-shadow:0rpx 2rpx 12rpx 0rpx rgba(0,0,0,0.12);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.avatar .img {
+  width: 120rpx;
+  height: 120rpx;
+}
+
+.previewFile {
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 26rpx 40rpx 23rpx;
+  box-shadow:0rpx 4rpx 20rpx 0rpx rgba(101,39,145,0.1);
+  border-radius:10rpx;
+  margin-bottom: 20rpx;
+}
+.fileName {
+  font-size:26rpx;
+  font-weight:400;
+  color:rgba(40,40,40,1);
+  line-height:37rpx;
+}
+.fileIcon {
+  width: 67rpx;
+  height: 51rpx;
+  margin-right: 20rpx;
+  vertical-align:middle;
+}
+.previewBtn {
+  font-size:26rpx;
+  font-weight:400;
+  color:rgba(101,39,145,1);
+  line-height:37rpx;
+}
+.btnIcon {
+  font-size: 26rpx;
+  color: #652791;
+  margin-left: 10rpx;
+}
+.personalInfo .top{
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+/*.personalInfo .info{
+  font-size: 26rpx;
+  font-weight: 300;
+  color: #282828;
+  height: 120rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+}
+.personalInfo .info .name{
+  font-size: 46rpx;
+  font-weight: 500;
+  line-height: 46rpx;
+  margin-bottom: 10rpx;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+}*/
+
+.personalInfo .info{
+  font-size: 26rpx;
+  font-weight: 300;
+  color: #282828;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.personalInfo .info .name{
+  font-size: 46rpx;
+  font-weight: 500;
+  line-height: 46rpx;
+  height: 46rpx;
+  margin-bottom: 10rpx;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+}
+
+.personalInfo .info .name .filter {
+  width: 108rpx;
+  display: inline-block;
+  overflow-x: hidden;
+}
+.invisible {
+  width: 172rpx;
+  height: 72rpx;
+  display: block;
+}
+.adviser .companyName {
+  padding-left: 22rpx;
+  margin-top: 6rpx;
+}
+.experience{
+  font-size: 24rpx;
+  font-weight: 300;
+  color: #282828;
+  margin: 37rpx 0 0 0;
+  
+}
+.experience view{
+  white-space: nowrap;
+  margin-right: 32rpx;
+  display: inline-block;
+  margin-bottom: 20rpx;
+}
+.experience i {
+  color: #CDCBCF;
+  font-size: 28rpx;
+  margin-right: 12rpx;
+}
+.experience .status{
+  height: 38rpx;
+  line-height: 38rpx;
+  color: #652791;
+  background-color: #EFE9F4;
+  padding: 0 18rpx !important;
+  margin-right: 0
+}
+.fgLine{
+  margin-top: 22rpx;
+  display: block;
+  width: 100%;
+  height: 10rpx;
+}
+.personalTip{
+  box-sizing: border-box;
+  margin-top: 36rpx;
+  width: 100%;
+}
+.personalTip .text{
+  font-size: 28rpx;
+  line-height: 1.5;
+  font-weight: 300;
+  color: #282828;
+}
+.personalTip .tipBox{
+  margin-top: 30rpx;
+  width: 100%;
+  font-size: 26rpx;
+  font-weight: 400;
+  color: #652791;
+}
+.personalTip .tipBox .tip{
+  display: inline-block;
+  border: 1rpx solid #CEC5DF;
+  border-radius: 30rpx;
+  padding: 0 30rpx;
+  margin-right: 16rpx;
+  margin-top: 16rpx;
+  height: 48rpx;
+  line-height: 48rpx;
+  box-sizing:border-box;
+}
+.personalTip .text{
+}
+/*意向*/
+.intent .officeTab{
+  margin-top: 40rpx;
+  color: #282828;
+  font-size: 32rpx;
+  font-weight: 500;
+  padding-bottom: 50rpx;
+  border-bottom: 1rpx dashed #CED7DC;
+}
+.intent .officeTab:last-child{
+  border-bottom: none;
+  padding-bottom: 0rpx;
+}
+.intent .officeTab .officeDetail{
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.intent .officeTab .officeDetail .name{
+  width: 300rpx;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.intent .officeTab .salary{
+  color: #FF7F4C;
+}
+.intent .officeTab .officeInfo{
+  font-size: 28rpx;
+  font-weight: 300;
+  margin-top: 5rpx;
+}
+/*工作经历*/
+.workExp{}
+.workExp .moreExp{
+  font-size: 26rpx;
+  color: #652791;
+  font-weight: 300;
+  margin-top: 50rpx;
+}
+/*更多*/
+.more .moreTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.more .expContent{
+  color: #282828 !important;
+}
+
+.more .imgBox{
+  margin-top: 20rpx;
+}
+.more .imgBox::after{
+  content: '';
+  display: block;
+  height: 0;
+  clear: both;
+}
+.more .imgBox image{
+  float: left;
+  width: 146rpx;
+  height: 146rpx;
+  background-color: #ccc;
+  margin-right: 8rpx;
+  margin-bottom: 8rpx;
+  border-radius: 2rpx;
+}
+.imgBox image:nth-of-type(4n){
+  margin-right: 0;
+}
+/*开撩约面*/
+.bottomBox{
+  position: relative;
+  background-color: #F5F4F7;
+}
+.collect{
+  display: block;
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  bottom: 162rpx;
+  right: 20rpx;
+  background-color: #FFFFFF;
+  color: #8452A7;
+  box-shadow:0px 4px 14px 0px rgba(101,39,145,0.18);
+}
+.communicate{
+  height: 138rpx;
+  padding: 20rpx;
+  width: 100%;
+  border-radius: 28rpx 28rpx 0 0;
+  background-color: #FFFFFF;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  box-sizing: border-box;
+}
+.communicate .hrAvatar{
+  width: 100rpx;
+  height: 100rpx;
+  flex-shrink: 0;
+  background-color: #ccc;
+  margin-right: 12rpx;
+  border-radius: 50%;
+}
+.communicate text{
+  font-size: 22rpx;
+  color: #282828;
+  font-weight: 300;
+}
+.communicate .name{
+  font-size: 32rpx;
+  font-weight: 500;
+  display: block;
+}
+.communicate .btn{
+  float: right;
+  width: 250rpx;
+  height: 80rpx;
+  background-color: #652791;
+  color: #FFFFFF;
+  font-size: 28rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 40rpx;
+  margin-left: 34rpx;
+}
+
+/*公共样式*/
+.commentBox{
+  padding: 40rpx 40rpx 50rpx;
+  width: 100%;
+  background-color: #FFFFFF;
+  box-sizing: border-box;
+  border-radius: 10rpx;
+  box-shadow:0px 4px 20px 0px rgba(101,39,145,0.1);
+  margin-bottom: 20rpx;
+}
+.commentBox .officeTab:last-of-type,
+.commentBox .listCareers .expTab:last-of-type{
+  padding-bottom: 0;
+  border-bottom: none;
+}
+.commentBox .add{
+  display: block;
+  width: 610rpx;
+  height: 80rpx;
+  border: 1rpx solid #652791;
+  border-radius: 42rpx;
+  color: #652791;
+  font-size: 28rpx;
+  font-weight: 400;
+  text-align: center;
+  line-height: 80rpx;
+  margin-top: 60rpx;
+}
+.commontIcon{
+  margin-right: 16rpx;
+  display: inline-block;
+  width: 24rpx;
+  height: 28rpx;
+  position: relative;
+}
+.commontIcon .box{
+  display: block;
+  width: 24rpx;
+  height: 28rpx;
+  border: 2rpx solid #652791;
+  box-sizing: border-box;
+  position: absolute;
+  top: 4rpx;
+  left: 4rpx;
+}
+.commontIcon .box::after{
+  content: '';
+  display: block;
+  width: 24rpx;
+  height: 28rpx;
+  position: absolute;
+  top: -6rpx;
+  left: -5rpx;
+}
+.commontIcon::before{
+  content: '';
+  display: block;
+  width: 24rpx;
+  height: 28rpx;
+  background-color: #EFE9F4;
+  position: absolute;
+  top: -2rpx;
+  left: -1rpx;
+  z-index: 0;
+}
+.intentTitle{
+  font-size: 28rpx;
+  color: #626262;
+  font-weight: 500;
+}
+
+.expTab{
+  color: #282828;
+  padding: 40rpx 0 50rpx;
+  border-bottom: 1px dashed #CED7DC;
+}
+.expTab:last-child {
+  border: none;
+  padding-bottom: 0;
+}
+.expTab .expTitle{
+  display: flex;
+  justify-content: space-between;
+}
+.expTab .expName{
+  display: inline-block;
+  min-width: 349rpx;
+  font-size: 32rpx;
+  font-weight: 500;
+  line-height: 40rpx;
+}
+.expName.ellipsis {
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.expTab .expTime{
+  margin-left: 0;
+  flex-shrink: 0;
+  font-size: 24rpx;
+  font-weight: 300;
+  color: #626262;
+  line-height: 40rpx;
+}
+.expTab .expInfo{
+  font-size: 28rpx;
+  font-weight: 400;
+  padding: 24rpx 0 0;
+  line-height:28rpx;
+}
+.expTab .expContent{
+  line-height: 48rpx;
+  font-size: 28rpx;
+  font-weight: 300;
+  color: #626262;
+  margin-top: 16rpx;
+  display: block;
+}
+.expTab .expTip{
+  margin-top: 34rpx;
+}
+.expTab .expTip text{
+  margin-right: 12rpx;
+  color: #652791;
+  font-size: 24rpx;
+  font-weight: 300;
+  display: inline-block;
+  background-color: #EFE9F4;
+  padding: 0 20rpx;
+  height: 46rpx;
+  line-height: 46rpx;
+}
+.expTab .link{
+  line-height: 48rpx;
+  word-break: break-all;
+  margin-top: 20rpx;
+  font-size: 28rpx;
+  font-weight: 300;
+  color: #626262;
+}
+.expTab .link text{
+  color: #652791;
+}
+.edit{
+  color: #652791;
+}
+.addpadding{
+  padding-bottom: 138rpx;
+  background: #F5F4F7;
+}
+.openbtn {
+  font-size: 26rpx;
+  font-weight: 400;
+  color: #652791;
+  line-height: 26rpx;
+  margin-top: 46rpx;
+  height: 26rpx;
+  display: flex;
+  align-items: center;
+}
+.openbtn .icon {
+  width: 30rpx;
+  height: 30rpx;
+  line-height: 30rpx;
+  font-size: 30rpx;
+  color: #652791;
+  font-weight: 300;
+  margin-left: 10rpx;
+}
+.openbtn .icon.shrink {
+  transform: rotate(180deg);
+}
+.editBot {
+  width:100%;
+  height:135rpx;
+  background:rgba(255,255,255,0.98);
+  box-shadow:0rpx -6rpx 20rpx 0rpx rgba(34,56,101,0.08);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding: 24rpx 100rpx;
+  box-sizing: border-box;
+}
+.editBot .editBotBtn {
+  width: 100%;
+  height: 88rpx;
+  background: #652791;
+  border-radius: 44rpx;
+  font-size:32rpx;
+  color:#fff;
+  line-height:88rpx;
+}
+.modeShrinkText {
+  color: #282828 !important;
+}
+
+.resume-from {
+  height:68rpx;
+  background:rgba(255,255,255,1);
+  border-radius:0rpx 0rpx 28rpx 28rpx;
+  font-size:28rpx;
+  color:rgba(92,86,93,1);
+  line-height:68rpx;
+  text-align: center;
+  position: relative;
+}
+
+.resume-from:before {
+  height: 93rpx;
+  background: #F5F4F7;
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: -1;
+}
+
+.resume-from .text4{
+  display: inline-block;
+  position: relative;
+  z-index: 5;
+}
+
+.resume-from .icon-left{
+  width: 20rpx;
+  height: 12rpx;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: -30rpx;
+}
+
+.resume-from .icon-right{
+  width: 20rpx;
+  height: 12rpx;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: -30rpx;
+}
+
+.resume-from .icon1 .img01 {
+  width: 20rpx;
+  height: 15rpx;
+}
+
+
+.resume-from .position {
+  display: inline;
+  position: relative;
+  color: #652791;
+}
+
+.resume-from .position .text10{
+  position: relative;
+  z-index: 1
+}
+
+.resume-from .position:after {
+  height:6rpx;
+  background:#FFDC29;
+  border-radius:2rpx;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 4rpx;
+  content: '';
+  display: block;
+  z-index: 0;
+}
+
+.invisibleWrap {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.invisibleWrap .photo {
+  width:180rpx;
+  height:180rpx;
+  background:rgba(255,255,255,0.5);
+  border:2rpx solid rgba(232,233,235,1);
+  filter:blur(6rpx);
+  border-radius: 50%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.invisibleWrap .photo .img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.invisibleWrap .desc {
+  text-align: center;
+  font-size:28rpx;
+  font-weight:300;
+  color:#282828;
+  line-height:40rpx;
+  margin-top: 40rpx;
+}
+.invisibleWrap .rule {
+  font-size:24rpx;
+  color:#652791;
+  line-height:33rpx;
+  text-align: center;
+  padding-top: 30rpx;
+}
+.invisibleWrap .backHomeBtn {
+  width:348rpx;
+  height:88rpx;
+  background:rgba(101,38,145,1);
+  border-radius:44rpx;
+  margin: 94rpx auto 0;
+  font-size:32rpx;
+  color:#fff;
+  line-height:88rpx;
+}
+
+.actionSheet .content {
+  width:630rpx;
+  font-size:28rpx;
+  font-weight:300;
+  color:#282828;
+  line-height:46rpx;
+  text-indent: 2em;
+  margin: 24rpx auto 70rpx;
+}
+.actionSheet .desc {
+  font-size:24rpx;
+  color:#929292;
+  line-height:24rpx;
+  text-align: center;
+}
+.actionSheet .callPhone {
+  width:376rpx;
+  height:88rpx;
+  background:#EFE9F4;
+  border-radius:44rpx;
+  margin: 30rpx auto 60rpx;
+  font-size:32rpx;
+  color:#652791;
+  line-height: 88rpx;
+}
+
+.contact .title {
+  margin-bottom: 20rpx;
+}
+.contact .phone, .contact .wechat {
+  padding: 26rpx 0;
+}
+.contact .wechat {
+  padding-bottom: 0;
+}
+.contact .phone {
+  border-bottom: 1rpx solid #E8E9EB;
+}
+.contact .phone.noWechat {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.contact {
+  font-size:30rpx;
+  color:rgba(40,40,40,1);
+  line-height:48rpx;
+  padding-bottom: 36rpx;
+}
+
+.contact .imgIcon {
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+  color: #FFFFFF;
+  font-size: 20rpx;
+  text-align: center;
+  line-height: 48rpx;
+  display: inline-block;
+  background:rgba(101,39,145,0.3);
+}
+.contact .btn {
+  float: right;
+  font-size:26rpx;
+  color:rgba(101,39,145,1);
+  line-height:48rpx;
+}

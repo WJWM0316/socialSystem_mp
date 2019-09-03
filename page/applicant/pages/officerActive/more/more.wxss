@@ -1,0 +1,212 @@
+.more{
+  width: 100%;
+  min-height: 100vh;
+  background: #EFE9F4;
+}
+.more .scrollView{
+  height: 82vh;/*82vh*/
+}
+.more .bigTab{
+  height: 75.5vh;
+}
+.more .scrollView::-webkit-scrollbar{
+  width: 0;
+  display: none;
+}
+.fixed-box {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+}
+.more .tabBar{
+  background-color: #FFFFFF;
+  width: 100%;
+  height: 98rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:0px 11px 30px 0px rgba(153,193,214,0.08);
+  position: relative;
+}
+.more .tabBar text{
+  height: 100%;
+  line-height: 98rpx;
+  margin-right: 86rpx;
+  font-size: 32rpx;
+  color: #626262;
+  font-weight: 400;
+  position: relative;
+}
+.more .tabBar .active{
+  color: #353943;
+  font-weight: 700;
+}
+.more .tabBar .active::after{
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 4rpx;
+  width: 32rpx;
+  height: 8rpx;
+  background-color: #FFDC29;
+}
+.more .tabBar text:nth-of-type(3){
+  margin-right: 0;
+}
+
+.more .childTabBar{
+  box-sizing: border-box;
+  width: 100%;
+  height: 88rpx;
+  background-color: #FFFFFF;
+  box-shadow:0px 11rpx 30rpx 0rpx rgba(153,193,214,0.08);
+  white-space: nowrap;
+  padding: 17rpx 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+.more .childTabBar::-webkit-scrollbar{
+  width: 0;
+  display: none;
+}
+.more .childTabBar::after{
+  content: '.';
+  display: block;
+  opacity: 0;
+}
+.more .childTabBar view {
+  box-sizing: border-box;
+  padding: 0 30rpx;
+  height: 54rpx;
+  text-align: center;
+  background-color: #FFFFFF;
+  line-height: 88rpx;
+  margin-left: 10rpx;
+  font-size: 26rpx;
+  color: #282828;
+  line-height: 54rpx;
+  border-radius: 27rpx;
+  display: inline-block;
+  padding-right: 35rpx;
+}
+.more .childTabBar text:nth-of-type(1){
+  margin-left: 0;
+}
+.more .childTabBar .nowChildActive{
+  color: #652791;
+  background-color: #EFE9F4;
+}
+.more .childTabBar .firstChildActive{
+  margin-left: 40rpx !important;
+}
+.more .childTabBar .lastChildActive{
+  margin-right: 40rpx;
+}
+.more .childTabBar::after{
+  content: '.';
+  display: block;
+  opacity: 0;
+}
+
+.more .topicBox{
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 61rpx;
+  background: url('https://lieduoduo-uploads-test.oss-cn-shenzhen.aliyuncs.com/front-assets/images/topicBg.png') no-repeat;
+  background-color: #EFE9F4;
+  background-size: 100% 100%;
+  padding: 50rpx 0 60rpx 0;
+}
+/* 前3名样式 */
+.topicList{
+  width: 250rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.headIMg{
+  position: relative;
+}
+.headIMg .icon{
+  position: absolute;
+  bottom: 24rpx;
+  right: 0rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  width: 48rpx;
+  height: 48rpx;
+}
+.headIMg .icon image{
+  width: 100%;
+  height: 100%;
+}
+.headIMg image{
+  width: 130rpx;
+  height: 130rpx;
+  border-radius: 50%;
+  background-color: #ccc;
+  margin-bottom: 24rpx;
+  box-shadow:0px 2px 12px 0px rgba(0,0,0,0.12);
+  /*border:2rpx solid rgba(232,233,235,1);*/
+}
+.first .icon{
+  width: 60rpx;
+  height: 60rpx;
+}
+.first image{
+  width: 160rpx;
+  height: 160rpx;
+  margin-bottom: 19rpx;
+}
+.name{
+  width: 100%;
+  height: 36rpx;
+  display: inline-block;
+  line-height: 36rpx;
+  font-size: 36rpx;
+  color: #282828;
+  font-weight: 500;
+  text-align: center;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.title{
+  width: 100%;
+  font-size: 24rpx;
+  font-weight: 300;
+  color: #282828;
+  margin-top: 10rpx;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: center;
+}
+.influence{
+  padding: 0 24rpx;
+  height: 52rpx;
+  border-radius: 26rpx;
+  background-color: #652791;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 23rpx;
+}
+.influence text{
+  color: #fff;
+  font-size: 22rpx;
+  font-weight: 300;
+}
+.influence .num{
+  color: #FFDC29;
+  font-weight: 500;
+  font-size: 26rpx;
+  margin-left: 10rpx;
+}

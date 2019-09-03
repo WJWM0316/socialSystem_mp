@@ -1,0 +1,60 @@
+<view class="createUser">
+	<navbar title="" mustBack="{{mustBack}}"  background="#4F286E" color="#fff" customBack bindbackEvent="backEvent"></navbar>
+	<form bindsubmit="formSubmit" report-submit='{{true}}'>
+		<view class="wrap" style="padding-top:{{nav}}px;">
+			<view class="inner" style="padding-top:{{!isBangs ? 15 : 71}}rpx">
+				<view hidden="{{step !== 0}}" class="entry start {{active === 0 ? 'active' : ''}}" >
+					<view class="animation title"><image class="pic" src="{{cdnImagePath}}pic_weclomefont_.png" mode="widthFix"></image></view>
+					<view class="animation icon"><image class="pic" src="{{cdnImagePath}}pic_ai.png"  mode="widthFix"></image></view>
+				</view>
+				<block>
+					<view hidden="{{step !== 1}}" class="first micro {{active === 1 ? 'active' : ''}}" >
+							<view class="animation title"><text>宇航员，请验证身份，进入求职飞船吧</text></view>
+							<view class="animation form">
+								<view class="avatarBox">
+						      <avatarCut class="avatar" avatar="avatar" src="{{avatar.url}}" icon="{{true}}"></avatarCut>
+						    </view>
+						    <view class="name">
+						    	<input class="userName" name="name" placeholder-class="holderStyle" bindinput="getValue" data-type="name" maxlength="20" placeholder="输入真实姓名"  value="{{name}}"/>
+						    	<view class="sexBox">
+						    		<view class="sex-item {{gender === 1 ? 'active' : ''}}" bindtap="chooseGender" data-gender="{{1}}"><i class="icon"></i>男</view>
+						    		<view class="sex-item {{gender === 2 ? 'active' : ''}}" bindtap="chooseGender" data-gender="{{2}}"><i class="icon"></i>女</view>
+						    	</view>
+						    </view>
+						    <view class="name {{city || birthDesc || startWorkYearDesc ? 'selected' : ''}}">
+						    	<view class="myPicker" bindtap="openPicker" data-index="{{0}}"><view class="title">工作城市</view><view hidden="{{!city && !birthDesc && !startWorkYearDesc}}" class="value {{!city ? 'placeholder' : ''}}">{{city || '请选择'}}</view></view>
+						    	<view class="myPicker" bindtap="openPicker" data-index="{{1}}"><view class="title">出生年月</view><view hidden="{{!city && !birthDesc && !startWorkYearDesc}}" class="value {{!birthDesc ? 'placeholder' : ''}}">{{birthDesc || '请选择'}}</view></view>
+						    	<view class="myPicker" bindtap="openPicker" data-index="{{2}}"><view class="title">工作时间</view><view hidden="{{!city && !birthDesc && !startWorkYearDesc}}" class="value {{!startWorkYearDesc ? 'placeholder' : ''}}">{{startWorkYearDesc || '请选择'}}</view></view>
+						    </view>
+						    <view class="box">
+							    <input bindtap="jump" data-type="positionType" data-id="{{positionTypeId}}" disabled name="positionType" placeholder-class="holderStyle" placeholder="{{startWorkYear === 0 ? '做过的工作（选填）' : '做过的工作'}}" value="{{positionTypeName}}"/>
+							  </view>
+							  <view class="box">
+									<myPicker class="myPicker" placeholderTxt="最高学历" setResult="{{degree}}" data-type="education" placeholder-class="holderStyle" pickerType="education" bindresultevent="getresult" rangeKey="text" styleObj="color: #EFE9F4;font-weight: 300"></myPicker>
+								</view>
+							  <block wx:if="{{!userInfo}}">
+							  	<button class="animation btn" form-type="submit" open-type="getUserInfo" bindgetuserinfo="onGotUserInfo" lang="zh_CN">
+										<view class="btn-area">完成</view>
+								    <view class="btn-area-bg"></view>
+									</button>
+							  </block>
+							  <block wx:else>
+							  	<button class="animation btn" form-type="submit" bindtap="createMicro" id="microBtn">
+							  		<view class="btn-area">完成</view>
+								    <view class="btn-area-bg"></view>
+							  	</button>
+							  </block>
+							  <view></view>
+							  <view class="botBox">
+							  	<view class="toggleIdentity" bindtap="toggleIdentity">切换为招聘官</view>
+							  	<view class="toggleAccount" bindtap="jump" data-type="changeAccount">切换账号</view>
+							  </view>
+							</view>
+					</view>
+				</block>
+			</view>
+		</view>
+	</form>
+	<customPicker pickerType="{{pickerType}}" openPicker="{{openPicker}}" activeIndex="{{activeIndex}}" bindpickerResult="pickerResult"></customPicker>
+	<guidePop showPop="{{showPop}}"></guidePop>
+</view>

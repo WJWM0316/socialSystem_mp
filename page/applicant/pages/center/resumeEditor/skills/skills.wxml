@@ -1,0 +1,30 @@
+<view class="position-skills">
+	<navbar title="选择期望领域" background="#FFFFFF" color="#22292C"></navbar>
+	<view class="header">
+		<text class="title">已选择标签</text>
+		<text class="{{ skills.length ? 'strong' : ''}}">{{skills.length}}</text>/{{limitNum}}
+	</view>
+	<view class="checked-item-ul" wx:if="{{skills.length}}">
+		<view
+			class="li"
+			wx:for="{{skills}}"
+			wx:for-item="item"
+			wx:key="{{item.id}}"
+			data-item="{{item}}"
+			bindtap="onClick"> {{item.name || item.field}}</view>
+	</view>
+	<view class="unchecked-item-ul">
+		<view
+			class="li {{item.active ? 'active' : ''}}"
+			wx:for="{{professionalSkills}}"
+			wx:for-item="item"
+			wx:key="{{item.id}}"
+			data-item="{{item}}"
+			bindtap="onClick"> {{item.name}} </view>
+	</view>
+	<view class="footer">
+    <button class="button-submit {{canClick ? 'button-enable' : ''}}" bindtap="submit">
+      <text>保存</text>
+    </button>
+  </view>
+</view>

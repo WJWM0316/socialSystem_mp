@@ -1,0 +1,15 @@
+@import '../../../iconfont.wxss'
+.refresh {
+	padding: 36rpx 0;
+}
+.load {
+	width: 66rpx;
+	height: 66rpx;
+	display: block;
+	margin: 0 auto;
+	animation: loading 1s linear infinite;
+}
+@keyframes loading {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

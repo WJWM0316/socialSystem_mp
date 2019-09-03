@@ -1,0 +1,82 @@
+@import '../../../iconfont.wxss'
+
+.choose {
+  width: 100%;
+  min-height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  background: #fff;
+  padding: 0 50rpx;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+.title {
+	margin: 48rpx auto 0;
+}
+.title .icon {
+	width: 140rpx;
+	height: 140rpx;
+	display: block;
+	margin: 0 auto;
+}
+.title .desc {
+	text-align: center;
+	font-size: 28rpx;
+	font-weight: 400;
+	color: #929292;
+	line-height: 42rpx;
+	margin-top: 12rpx;
+}
+.role1, .role2 {
+	padding: 30rpx 48rpx 30rpx 79rpx;
+	font-size: 0;
+	line-height: 50rpx;
+}
+.role1 .icon, .role2 .icon {
+	margin-left: 16rpx;
+	font-size: 34rpx;
+}
+.role2 {
+	margin-top: 32rpx;
+	color: #fff;
+	background: #652791;
+}
+.role1 {
+	margin-top: 112rpx;
+	color: #652791;
+	background: #FFDC29;
+}
+.role1 .img, .role2 .img {
+	width: 200rpx;
+	height: 200rpx;
+	display: block;
+	float: right;
+	border: 1px solid #FAD728;
+	border-radius: 50%;
+}
+.role1 .img{
+	border: 8rpx solid #FAD728;
+}
+.role2 .img {
+	border: 8rpx solid #5A2382;
+}
+.role1 .desc, .role2 .desc  {
+	float: left;
+	line-height: 218rpx;
+	font-size: 36rpx;
+	font-weight: 500;
+}
+.hasAd .role1 {
+	margin-top: 44rpx;
+}
+.hasAd .role2 {
+	margin-top: 32rpx;
+}
+.ad {
+	width: 650rpx;
+	height: 200rpx;
+	border-radius: 10rpx;
+	margin-top: 118rpx;
+}

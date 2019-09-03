@@ -1,0 +1,83 @@
+<view class="like">
+	<navbar title="足迹" showBackBtn="{{true}}"></navbar>
+	<view class="office-status-bar" style="top: {{navH}}px">
+		<view class="item {{tab === 'companyList' ? 'active' : ''}}" bindtap="onClickTab" data-tab="companyList">公司</view>
+  	<view class="item {{tab === 'recruiterList' ? 'active' : ''}}" bindtap="onClickTab" data-tab="recruiterList">面试官</view>
+	</view>
+	<view class="block"></view>
+	<view hidden="{{!hasReFresh}}">
+		<refreshStatus></refreshStatus>
+	</view>
+
+	<view class="jobList" hidden="{{tab === 'recruiterList'}}">
+		<form bindsubmit="formSubmit" report-submit='{{true}}'  wx:if="{{companyList.list.length > 0}}" > 
+			<button
+				form-type="submit" 
+				class="formIdBtn"
+				data-id="{{item.companyId}}"
+				bindtap="routeJump"
+				wx:for="{{companyList.list}}"
+				wx:for-item="item"
+				wx:if="{{item.vkey}}"
+				wx:key="{{index}}">
+				<view class="item3">
+					<view class="img-box">
+						<image class="avatar" src="{{item.logoInfo.smallUrl}}" mode="aspectFilt"></image>
+					</view>
+					<view class="content">
+						<view class="row-one">
+							{{item.companyShortname}}
+							<view class="position" wx:if="{{item.positionNum}}">
+		          	<text class="num">{{item.positionNum}} 个在招职位</text>
+		          </view>
+						</view>
+						<view class="row-two">
+							<view class="company">
+								{{item.industry}} · {{item.employeesInfo}}
+							</view>
+						</view>
+					</view>
+				</view>
+			</button>
+		</form>
+		<bottomStatus status="{{companyList.onBottomStatus}}" desc="{{isJobhunter ? '你还没有看过的公司哟~' : '你与offer之间就差一份简历~'}}" listData="{{companyList.list}}"></bottomStatus>
+	</view>
+
+	<view class="ul" hidden="{{tab === 'companyList'}}">
+		<form bindsubmit="formSubmit" report-submit='{{true}}'  wx:if="{{recruiterList.list.length > 0}}" > 
+			<button
+				form-type="submit" 
+				class="formIdBtn"
+				data-uid="{{item.uid}}"
+				bindtap="routeJump"
+				wx:for="{{recruiterList.list}}"
+				wx:for-item="item"
+				wx:if="{{item.vkey}}"
+				wx:key="{{index}}">
+				<view class="item3">
+					<view class="img-box">
+						<image class="avatar" src="{{item.avatar.smallUrl}}" mode="aspectFill"></image>
+						<image src="{{cdnImagePath}}sign1.png" mode="aspectFill" class="sign" wx:if="{{item.identityAuth}}"></image>
+					</view>
+					<view class="content">
+						<view class="row-one">
+							<view class="name">{{item.name}}</view>
+							<view class="mix">{{item.position}}</view>
+						</view>
+						<view class="row-two">
+							<view class="company">
+								<i class="icon iconfont icon-gongsi"></i>{{item.companyShortname}}
+							</view>
+		          <view class="position" wx:if="{{item.positionNum}}">
+		          	<i class="icon iconfont icon-zhiwei"></i>
+		          	<text class="num">{{item.positionNum}}</text>个职位
+		          </view>
+						</view>
+					</view>
+				</view>
+			</button>
+		</form>
+		<bottomStatus status="{{recruiterList.onBottomStatus}}" listData="{{recruiterList.list}}" desc="{{isJobhunter ? '你还没有看过的面试官哟~' : '你与offer之间就差一份简历~'}}"></bottomStatus>
+	</view>
+	<tabBar></tabBar>
+</view>

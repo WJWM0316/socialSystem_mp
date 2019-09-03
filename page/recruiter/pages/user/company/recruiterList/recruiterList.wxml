@@ -1,0 +1,19 @@
+<view class="recruiter-list">
+	<navbar title="全部面试官" background="#FFFFFF" color="#22292C"></navbar>
+	<view class="ul">
+		<view class="li" wx:for="{{ recruitersList.list }}" wx:key="{{index}}" wx:for-item="recruiter" bindtap="bindMain" data-uid="{{recruiter.uid}}">
+			<view class="img-box">
+				<image src="{{recruiter.avatar.smallUrl}}"></image>
+				<i class="certification-icon">V</i>
+			</view>
+			<view class="content">
+				<view class="row-one">
+					<view class="username">{{recruiter.name}}</view>
+					<view class="recruitment-number" wx:if="{{recruiter.positionNum}}">{{recruiter.positionNum}} 个在招职位</view>
+				</view>
+				<view class="row-two">{{recruiter.position}}</view>
+				<view class="row-three">{{recruiter.randomTxt}}</view>
+			</view>
+		</view>
+	</view>
+</view>

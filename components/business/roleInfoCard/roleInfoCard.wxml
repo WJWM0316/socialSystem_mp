@@ -1,0 +1,68 @@
+<view class="my-class roleInfoCard">
+  <view class="company {{isMain ? 'edit' : ''}} {{roleType === 'detailCompany' ? 'detail' : ''}}" wx:if="{{roleType === 'company' || roleType === 'detailCompany'}}" bindtap="jumpCompany">
+    <image lazy-load class="img" src="{{cardData.avatar.smallUrl || cardData.logoInfo.smallUrl || cardData.logo.smallUrl}}" mode="aspectFit"></image>
+    <view class="companyMsg" wx:if="{{!isMain}}">
+      <view class="name">{{cardData.name}}</view>
+      <view class="detail">{{cardData.industry}} · {{cardData.employeesDesc}}</view>
+    </view>
+    <view class="companyMsg" wx:else>
+      <view class="name">{{cardData.companyShortname}}</view>
+      <view class="detail">{{cardData.companyName}}</view>
+    </view>
+    <i bindtap="jumpEditBase" class="editIcon iconfont icon-bianji1" wx:if="{{isMain && isCompanyAdmin}}"></i>
+    <i class="icon iconfont icon-xiangyou" wx:if="{{!isMain}}"></i>
+  </view>
+
+  <block  wx:if="{{roleType === 'applicant'}}">
+    <view class="applicant" bindtap="jumpApplicant">
+      <image lazy-load class="img" src="{{cardData.avatar.smallUrl}}" mode="aspectFill"></image>
+      <view class="applicantMsg">
+        <view class="name {{glass ? 'hasFilter' : ''}}">
+          <text wx:if="{{!glass}}" class="nameTxt">{{cardData.jobhunterRealname || cardData.realname}}</text>
+          <image wx:else src="{{cdnImagePath}}invisible1.png" class="filter"></image>
+          <text class="msg"><text wx:if="{{cardData.workAgeDesc}}">{{cardData.workAgeDesc}}</text><text wx:if="{{cardData.degreeDesc}}"> · {{cardData.degreeDesc}}</text><text wx:if="{{cardData.salaryFloor}}"> · {{cardData.salaryFloor}}-{{cardData.salaryCeil}}k</text></text></view>
+        <view class="detail">
+          <block wx:if="{{cardData.lastCompanyName}}">{{cardData.lastCompanyName}}</block>
+          <block wx:if="{{cardData.lastCompanyName && cardData.lastPosition}}"> | </block>
+          <block wx:if="{{cardData.lastPosition}}">{{cardData.lastPosition}}</block>
+        </view>
+      </view>
+    </view>
+    <view class="contact">
+      <view class="mobile" bindtap="makePhoneCall" wx:if="{{(cardData.mobile || cardData.jobhunterMobile) && cardData.lastInterviewStatus !== 52}}">手机：<text class="txt">{{cardData.mobile || cardData.jobhunterMobile}}</text></view>
+      <view class="wechat" bindtap="setClipboardData" wx:if="{{(cardData.wechat || cardData.jobhunterWechat) && cardData.lastInterviewStatus !== 52}}">微信：<text class="txt">{{cardData.wechat || cardData.jobhunterWechat}}</text></view>
+      <view class="waiting" wx:if="{{!cardData.mobile && cardData.lastInterviewStatus !== 52}}">候选人接受邀请后，可查看联系方式</view>
+    </view>
+  </block>
+  
+  <block wx:if="{{roleType === 'recruiter'}}">
+    <view class="recruiter {{isMain? 'recruiterMain':''}}" bindtap="jumpRecruiter">
+      <image lazy-load class="img" src="{{cardData.avatar.smallUrl}}" mode="aspectFill"></image>
+      <view class="vip">V</view>
+      <view class="recruiterMsg">
+        <view class="name">{{cardData.name || cardData.recruiterRealname || cardData.realname}}<text class="msg" wx:if="{{!isMain}}"> · {{cardData.position || cardData.positionName}}</text></view>
+        <view class="detail" wx:if="{{cardData.companyShortname}}">{{cardData.companyShortname}}<text wx:if="{{isMain}}"> | {{cardData.position}}</text></view>
+      </view>
+      <i class="editBtn iconfont icon-bianji1" wx:if="{{isMain}}" bindtap="jumpEdit"></i>
+      <view class="status" wx:if="{{!isMain}}">邀你面试</view>
+      <view></view>
+    </view>
+    <view class="contact" wx:if="{{cardData.lastInterviewStatus === 41}}">
+      <view class="mobile" bindtap="makePhoneCall" wx:if="{{cardData.mobile || cardData.jobhunterMobile}}">手机：<text class="txt">{{cardData.mobile || cardData.jobhunterMobile}}</text></view>
+    </view>
+  </block>
+  <image lazy-load wx:if="{{roleType === 'recruiter' && isMain}}" class="line" src="{{cdnImagePath}}line.png"></image>
+  <view wx:if="{{roleType === 'recruiter' && isMain}}" class="lineTip">
+    <text wx:if="{{cardData.signature}}">{{cardData.signature}}</text>
+    <text wx:else class="noSign">你还未填写个性签名，说说你的想法吧~</text>
+  </view>
+  
+  <view class="recruiter {{roleType === 'recruiterList'? 'recruiterList':''}}" wx:if="{{roleType === 'recruiterList'}}" bindtap="jumpRecruiter">
+    <image lazy-load class="img" src="{{cardData.avatar.smallUrl}}" mode="aspectFill"></image>
+    <view class="vip">V</view>
+    <view class="recruiterMsg">
+      <view class="name">{{cardData.name}}</view>
+      <view class="detail">{{cardData.position}}</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,42 @@
+<view class="baseEdit">
+	<navbar title="编辑基本信息" background="#fff" color="#22292C"></navbar>
+	<view class="head">
+		<view class="msg">
+			<view class="item companyLogo">
+				<view class="txt red">公司Logo</view>
+				<view class="value">
+					<unloadFile bindresultEvent="getResult" unloadType="avatar" data-type="avatar">
+						<image class="logo" src="{{info.logoInfo.smallUrl}}" mode="aspectFit"></image>
+					</unloadFile>     
+				</view>
+				<i class="icon iconfont icon-xiangyou"></i>
+			</view>
+			<view class="item disabled" bindtap="disabled">
+				<view class="txt">公司全称</view>
+				<view class="value">{{info.companyName}}</view>
+			</view>
+			<view class="item disabled" bindtap="disabled">
+				<view class="txt">公司简称</view>
+				<view class="value">{{info.companyShortname}}</view>
+			</view>
+			<view class="item disabled" bindtap="disabled">
+				<view class="txt">所属行业</view>
+				<view class="value">{{info.industry}}</view>
+			</view>
+			<view class="item">
+				<view class="txt red">公司规模</view>
+				<view class="value">
+					<myPicker pickerType="staffMembers" setResult="{{info.employeesInfo}}" rangeKey="text" bindresultevent="getResult" data-type="staffMembers"></myPicker>
+				</view>
+				<i class="icon iconfont icon-xiangyou"></i>
+			</view>
+			<view class="item website disabled">
+				<view class="txt">公司官网</view>
+				<view class="value"><input type="text" bindblur="changeVal" value="{{info.website}}" data-type="website" placeholder-class="holderStyle" placeholder="请输入公司官网"/></view>
+			</view>
+		</view>
+	</view>
+	<view class="btn" bindtap="saveInfo">
+		<button class="saveBtn">保存</button>
+	</view>
+</view>

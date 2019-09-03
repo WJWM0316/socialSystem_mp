@@ -1,0 +1,150 @@
+.company-upload{
+  padding-bottom: 148rpx;
+}
+
+.company-upload .warning {
+	background:rgba(255,252,240,1);
+	font-size:26rpx;
+	font-weight:300;
+	color:#FF7F4D;
+	padding: 22rpx 40rpx;
+	line-height: 36rpx;
+}
+
+.company-upload .upload-li {
+	padding: 56rpx 40rpx 0 40rpx;
+	background: white;
+	margin-bottom: 24rpx;
+	overflow: hidden;
+}
+
+.company-upload .upload-li .h1{
+	font-size:36rpx;
+	font-weight:bold;
+	color:rgba(40,40,40,1);
+	line-height: 1;
+	margin-bottom: 15rpx;
+}
+
+.company-upload .upload-li .p{
+	font-size:26rpx;
+	font-weight:400;
+	color:#626262;
+	line-height: 40rpx;
+}
+
+.company-upload .upload-box {
+	height:380rpx;
+	background:#FAFCFF;
+	border-radius:10rpx;
+	border:2rpx dotted #CED7DC;
+	margin: 32rpx auto;
+	font-size:28rpx;
+	font-weight:400;
+	color:rgba(188,188,188,1);
+	text-align: center;
+	position: relative;
+	overflow: hidden;
+}
+
+.company-upload .upload-box .mask {
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0,0,0,.3);
+	z-index: 2;
+}
+
+.company-upload .image {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.company-upload .replace-image {
+	position: absolute;
+	right: 30rpx;
+	bottom: 24rpx;
+	font-size:28rpx;
+	font-weight:400;
+	color:rgba(255,255,255,1);
+	z-index: 3;
+}
+
+.company-upload .icon-box1 {
+	width:244rpx;
+	height: 154rpx;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.company-upload .icon-box2 {
+	width:244rpx;
+	height: 164rpx;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.button-submit {
+  background:#F5F4F7;
+  border-radius:48rpx;
+  border: 1px solid #F5F4F7;
+  font-size:32rpx;
+  font-weight:400;
+  color:#CDCBCF;
+  text-align: center;
+  line-height: 88rpx;
+  height:88rpx;
+  margin: 30rpx 100rpx;
+}
+
+/*.button-submit {
+	background:#F5F4F7;
+	border-radius:48rpx;
+	border: 1px solid #F5F4F7;
+	font-size:32rpx;
+	font-weight:400;
+	color:#CDCBCF;
+	text-align: center;
+	line-height: 88rpx;
+	height:88rpx;
+	margin: 224rpx 100rpx;
+}*/
+
+.button-enable {
+	background:rgba(101,39,145,1);
+	border-radius:48rpx;
+	color:rgba(255,255,255,1);
+}
+
+.company-upload .icon-zhongxinshangchuan {
+	font-size: 30rpx;
+	margin-right: 10rpx;
+}
+
+.company-upload .icon-tixing {
+	font-size: 30rpx;
+	margin-right: 10rpx;
+}
+
+.btn-area{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 148rpx;
+  background-color: #fff;
+  z-index: 10;
+}
+
+.upload-tips{
+	color: #BCBCBC
+}

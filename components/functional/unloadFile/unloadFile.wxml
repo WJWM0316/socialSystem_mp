@@ -1,0 +1,6 @@
+<!--components/functional/unloadFile/unloadFile.wxml-->
+
+<view class="unloadWrap" bindtap="unloadFile">
+  <!-- <image src="{{url}}"></image> -->
+  <slot></slot> 
+</view>

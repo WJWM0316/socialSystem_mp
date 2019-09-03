@@ -1,0 +1,57 @@
+<view class="like">
+	<navbar title="我关注的" background="#FFFFFF" color="#22292C" showBackBtn="{{true}}"></navbar>
+	<view class="office-status-bar" style="top: {{navH}}px">
+		<view class="item {{tab === 'positionList' ? 'active' : ''}}" bindtap="onClickTab" data-tab="positionList">机会</view>
+  	<view class="item {{tab === 'recruiterList' ? 'active' : ''}}" bindtap="onClickTab" data-tab="recruiterList">面试官</view>
+	</view>
+	<view class="block"></view>
+	<view hidden="{{!hasReFresh}}">
+		<refreshStatus></refreshStatus>
+	</view>
+
+	<view class="jobList" hidden="{{tab === 'recruiterList'}}">
+		<jobList personality="jobItem" wx:if="{{positionList.list.length > 0}}" list="{{positionList.list}}" list-type="interview" current-tab="all"></jobList>
+		<bottomStatus status="{{positionList.onBottomStatus}}" desc="{{isJobhunter ? '空空如也，赶快去发现更多职业机会吧～' : '你与offer之间就差一份简历~'}}" listData="{{positionList.list}}">
+<!-- 			<button class="jump clear-style" bindtap="jump" data-type="{{isJobhunter ? 'positionList' : 'create'}}">{{isJobhunter ? '发现更多职业机会' : '立即创建简历'}}</button>
+ -->		</bottomStatus>
+	</view>
+
+	<view class="ul" hidden="{{tab === 'positionList'}}">
+		<form bindsubmit="formSubmit" report-submit='{{true}}'  wx:if="{{recruiterList.list.length > 0}}" > 
+			<button
+				form-type="submit" 
+				class="formIdBtn"
+				data-uid="{{item.uid}}"
+				bindtap="routeJump"
+				wx:for="{{recruiterList.list}}"
+				wx:for-item="item"
+				wx:if="{{item.vkey}}"
+				wx:key="{{index}}">
+				<view class="item3">
+					<view class="img-box">
+						<image class="avatar" src="{{item.avatar.smallUrl}}" mode="aspectFill"></image>
+						<image src="{{cdnImagePath}}sign1.png" mode="aspectFill" class="sign" wx:if="{{item.identityAuth}}"></image>
+					</view>
+					<view class="content">
+						<view class="row-one">
+							<view class="name">{{item.name}}</view>
+							<view class="mix">{{item.position}}</view>
+						</view>
+						<view class="row-two">
+							<view class="company">
+								<i class="icon iconfont icon-gongsi"></i>{{item.companyShortname}}
+							</view>
+		          <view class="position" wx:if="{{item.positionNum}}">
+		          	<i class="icon iconfont icon-zhiwei"></i>
+		          	<text class="num">{{item.positionNum}}</text>个职位
+		          </view>
+						</view>
+					</view>
+				</view>
+			</button>
+		</form>
+		<bottomStatus status="{{recruiterList.onBottomStatus}}" listData="{{recruiterList.list}}" desc="{{isJobhunter ? '你还没有感兴趣的面试官哟~' : '你与offer之间就差一份简历~'}}">
+<!-- 			<button class="jump" bindtap="jump" data-type="{{isJobhunter ? 'rank' : 'create'}}">{{isJobhunter ? '发现更多职业机会' : '立即创建简历'}}</button>
+ -->		</bottomStatus>
+	</view>
+</view>

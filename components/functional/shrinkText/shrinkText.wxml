@@ -1,0 +1,3 @@
+<view wx:if="{{textData && (!isShrink || !line)}}" class="my-class msg"><text>{{textData}}</text></view>
+<view wx:if="{{textData && isShrink && line}}" class="my-class msg shrink" style="-webkit-line-clamp:{{line}};height:{{48*line}}rpx"><text>{{textData}}</text></view>
+<view class="openbtn" wx:if="{{needShrink && line}}" bindtap="toggle">{{btnTxt}}<i class="icon iconfont icon-zhishibiao {{!isShrink ? 'shrink':''}}"></i></view>

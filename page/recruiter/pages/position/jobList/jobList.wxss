@@ -1,0 +1,262 @@
+
+.job-list .li {
+  padding: 35rpx 0 35rpx 40rpx;
+  position: relative;
+  box-sizing: border-box;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 148rpx;
+}
+
+.job-list .li2 {
+  padding: 35rpx 0 35rpx 40rpx;
+  position: relative;
+  box-sizing: border-box;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 148rpx;
+  margin-top: 24rpx;
+}
+
+.job-list .content {
+  flex: 1;
+  font-size:28rpx;
+  font-weight:bold;
+  color: #282828;
+}
+
+.job-list .radio-box {
+  width: 102rpx;
+  position: relative;
+  text-align: center;
+  height: 100%;
+}
+
+.job-list .li:after {
+  content: '';
+  display: block;
+  height: 1px;
+  left: 40rpx;
+  right: 0;
+  background: #E8E9EB;
+  position: absolute;
+  bottom: 0;
+}
+
+.job-list .li:last-child:after, .job-list .clear-bottom:after {
+  display: none;
+}
+
+.job-list .title {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #626262;
+  line-height: 32rpx;
+}
+
+.job-list .title .txt1 {
+  max-width: 320rpx;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+  font-size:28rpx;
+  font-weight:500;
+  color:rgba(40,40,40,1);
+  margin-right: 16rpx;
+  display: inline-block;
+}
+
+.job-list .title .txt2 {
+  max-width: 410rpx;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+  font-size:28rpx;
+  font-weight:500;
+  color:rgba(40,40,40,1);
+  margin-right: 16rpx;
+  display: inline-block;
+}
+
+.job-list .labels {
+  margin-top: 15rpx;
+  font-size: 0;
+}
+
+.job-list .labels .txt {
+  height: 34rpx;
+  line-height: 34rpx;
+  padding: 0 12rpx;
+  font-size: 24rpx;
+  font-weight: 400;
+  color: #929292;
+  margin-right: 16rpx;
+  background: #F8F8F8;
+  border-radius: 4rpx;
+}
+
+.job-list .edit-button {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 40rpx;
+  text-align: center;
+  height:86rpx;
+  line-height: 86rpx;
+  background:rgba(255,255,255,1);
+  box-shadow:0rpx 10rpx 38rpx 0rpx rgba(188,188,188,0.4);
+  border-radius:100rpx;
+  width: 238rpx;
+  font-size:28rpx;
+  font-weight:600;
+  color:rgba(101,39,145,1);
+}
+
+.job-list .h1 {
+  font-size:32rpx;
+  font-weight:bold;
+  color:rgba(40,40,40,1);
+  background: white;
+  line-height: 1;
+  padding: 56rpx 40rpx 16rpx 40rpx;
+}
+
+.job-list .p {
+  font-size:26rpx;
+  font-weight:400;
+  color:rgba(98,98,98,1);
+  line-height: 1.8;
+  background: white;
+  padding: 0rpx 40rpx 30rpx 40rpx;
+  margin-bottom: 24rpx;
+}
+
+.job-list .status-box {
+  font-size:24rpx;
+  font-weight:400;
+  color:rgba(146,146,146,1);
+  position: relative;
+}
+
+.job-list .apply {
+  font-size:24rpx;
+  font-weight:400;
+  color:rgba(146,146,146,1);
+  position: relative;
+}
+
+.job-list .chat-me {
+  font-size:28rpx;
+  font-weight:500;
+  color:rgba(40,40,40,1);
+}
+
+.job-list .unsuitable {
+  color:#652791;
+}
+
+.job-list .unsuitable-tips {
+  font-size: 26rpx;
+  margin-top: 16rpx;
+  line-height: 1;
+}
+
+.job-list .example {
+  font-size:26rpx;
+  font-weight:400;
+  color:rgba(92,86,93,1);
+  line-height: 90rpx;
+  padding: 0 40rpx;
+}
+
+.job-list .radio-group {
+  margin-top: 24rpx;
+}
+
+.myRadio {
+  width:36rpx;
+  height:36rpx;
+  position: relative;
+  display: inline-block;
+  border-radius: 50%;
+  border: 1px solid #BCBCBC;
+  line-height: 36rpx;
+  text-align: center;
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.myRadio.active {
+  background: #652791;
+  color: white;
+  border: unset;
+}
+
+.myRadio.active .icon{
+  font-size: 24rpx;
+  display:inline-block;
+  transform:translateY(-4rpx);
+}
+
+.button-submit {
+  height:88rpx;
+  background:#F5F4F7;
+  border-radius:48rpx;
+  font-size:32rpx;
+  font-weight:400;
+  color:#CDCBCF;
+  text-align: center;
+  line-height: 88rpx;
+}
+
+.button-enable {
+  background:rgba(101,39,145,1);
+  box-shadow:0rpx 20rpx 18rpx 0rpx rgba(101,39,145,0.2);
+  color:rgba(255,255,255,1);
+}
+.footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: white;
+  padding: 30rpx 100rpx;
+}
+
+.job-list {
+  padding-bottom:172rpx;
+}
+
+.position-tab {
+  height:98rpx;
+  line-height:98rpx;
+  background: white;
+  padding: 0 40rpx;
+}
+
+.position-tab .name{
+  float: left;
+  font-size:30rpx;
+  font-weight:400;
+  color:rgba(92,86,93,1);
+}
+
+.position-tab .icon{
+  color: #652791;
+  font-size: 28rpx;
+  margin-right: 10rpx;
+}
+
+.position-tab .public{
+  font-size:28rpx;
+  font-weight:500;
+  color:#652791;
+  float: right;
+}

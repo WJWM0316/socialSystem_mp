@@ -1,0 +1,128 @@
+@import '../../../iconfont.wxss'
+
+.ul{
+   padding: 0 30rpx;
+   overflow: hidden;
+}
+
+.officerTab {
+  box-sizing: border-box;
+  padding: 0 30rpx;
+  width: 100%;
+  height: 180rpx;
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius:10rpx;
+  box-shadow:0rpx 0rpx 30rpx 0rpx rgba(22,39,77,0.1);
+}
+
+.officerTab2 {
+  padding: 30rpx 40rpx 30rpx 186rpx;
+  width: 100%;
+  height: 180rpx;
+  background: white;
+  border-radius:10rpx;
+  box-shadow:0rpx 0rpx 30rpx 0rpx rgba(22,39,77,0.1);
+  margin-bottom: 20rpx;
+  position: relative;
+  box-sizing: border-box;
+}
+.info {
+  height: 120rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.headerImg{
+  width: 116rpx;
+  height: 116rpx;
+  flex-shrink: 0;
+  box-shadow:0rpx 2rpx 12rpx 0rpx rgba(0,0,0,0.12);
+  border:2rpx solid rgba(232,233,235,1);
+  border-radius: 50%;
+  position: absolute;
+  top: 30rpx;
+  left: 40rpx;
+}
+
+.headerImg .avatar{
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.headerImg .certification-icon {
+  position: absolute;
+  bottom: 4rpx;
+  right: 4rpx;
+  width: 36rpx;
+  height: 36rpx;
+}
+
+.info .top{
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.info .top .name{
+  margin-right: 21rpx;
+  font-size: 36rpx;
+  font-weight: 500;
+  color: #282828;
+}
+
+.info .top .title{
+  font-size: 28rpx;
+  font-weight: 300;
+  color: #282828;
+  border-left: 1px solid #979797;
+  padding-left: 17rpx;
+}
+
+.info .bottom{
+  display: flex;
+  align-items: center;
+  margin-top: 20rpx;
+}
+
+.info .bottom i{
+  margin-right: 10rpx;
+  font-size: 26rpx;
+  color: #CDCBCF;
+}
+
+.info .bottom .company{
+  margin-right: 42rpx;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+
+.info .bottom .company,
+.info .bottom .position
+{
+  max-width: 240rpx;
+  font-size: 24rpx;
+  font-weight: 300;
+  color: #929292;
+}
+
+.info .bottom .position .num{
+  color: #8452A7;
+}
+
+.reddot {
+  width:14rpx;
+  height:14rpx;
+  background:#FF4949;
+  position: absolute;
+  top: 14rpx;
+  right: 14rpx;
+  border-radius: 50%;
+  content: '';
+  display: block;
+}

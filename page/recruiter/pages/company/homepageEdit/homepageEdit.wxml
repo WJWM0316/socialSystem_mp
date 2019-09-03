@@ -1,0 +1,97 @@
+<view class="homepage">
+	<navbar title="编辑公司主页" background="#FFFFFF" color="#22292C"></navbar>
+
+	<view class="base-info">
+		<view class="head">
+			<view class="img-box">
+				<image class="bgImg" src="{{companyInfos.logoInfo.smallUrl}}" mode="aspectFit"></image>
+			</view>
+			<view class="content">
+				<view class="h1">{{companyInfos.companyShortname}}</view>
+				<view class="h2">{{companyInfos.companyName}}</view>
+			</view>
+			<view class="edit-box" data-route="base" bindtap="routeJump"><i class="icon iconfont icon-bianji1"></i></view>
+		</view>
+		<view class="ul">
+			<view class="li">
+				<view class="key">所属行业</view>
+				<view class="value">{{companyInfos.industry}}</view>
+			</view>
+			<view class="li">
+				<view class="key">公司规模</view>
+				<view class="value">{{companyInfos.employeesInfo}}</view>
+			</view>
+			<view class="li" wx:if="{{companyInfos.website}}">
+				<view class="key">公司官网</view>
+				<view class="value">{{companyInfos.website}}</view>
+			</view>
+		</view>
+	</view>
+
+	<view class="introduction">
+		<view class="title">
+			<view class="self-icon"> <view class="fan"></view> </view> 公司介绍
+			<view class="icon-button" data-route="introduction" bindtap="routeJump" wx:if="{{companyInfos.intro}}"><i class="icon iconfont icon-bianji1"></i></view>
+		</view>
+		<view class="company-detail" wx:if="{{companyInfos.intro}}">
+			<text class="p">{{companyInfos.intro}}</text>
+		</view>
+		<view class="button-placehoder" data-route="introduction" bindtap="routeJump" wx:else>添加公司介绍</view>
+	</view>
+	
+	<view class="company-images">
+		<view class="title">
+			<view class="self-icon"> <view class="fan"></view> </view> 公司图片
+			<view class="icon-button" data-route="image" bindtap="routeJump" wx:if="{{companyInfos.albumInfo.length}}"><i class="icon iconfont icon-bianji1"></i></view>
+		</view>
+		<view class="ul" wx:if="{{companyInfos.albumInfo.length}}">
+			<view class="li" wx:for="{{companyInfos.albumInfo}}" wx:key="{{index}}" wx:for-item="item">
+				<image src="{{item.smallUrl}}" mode="aspectFit"></image>
+			</view>
+		</view>
+		<view class="placeholder-image" data-route="image" bindtap="routeJump" wx:else><i class="icon iconfont icon-jiahao"></i></view>
+	</view>
+
+	<view class="production-box">
+		<view class="title">
+			<view class="self-icon"> <view class="fan"></view> </view> 产品介绍 
+			<view class="icon-button" data-route="product-edit" bindtap="routeJump" wx:if="{{companyInfos.product.length}}"><i class="icon iconfont icon-bianji1"></i></view>
+		</view>
+		<view class="ul" wx:if="{{companyInfos.product.length}}">
+			<view class="li" wx:for="{{companyInfos.product}}" wx:key="{{index}}" wx:for-item="item">
+				<view class="img-box">
+					<image src="{{item.logoInfo.smallUrl}}" mode="aspectFit"></image>
+				</view>
+				<view class="content">
+					<view class="row-one">
+						<view class="username">{{item.productName}}</view>
+						<view class="recruitment-number">{{item.slogan}}</view>
+					</view>
+					<view class="row-two"># {{item.lightspot}}</view>
+				</view>
+			</view>
+		</view>
+		<view class="button-placehoder" data-route="product" bindtap="routeJump" wx:else>添加产品介绍</view>
+	</view>
+	
+	<view class="company-address">
+		<view class="title">
+			<view class="self-icon"> <view class="fan"></view> </view> 公司地址
+			<view class="icon-button" data-route="address-post" bindtap="routeJump" wx:if="{{companyInfos.address.length}}"><i class="icon iconfont icon-bianji1"></i></view>
+		</view>
+		<block  wx:if="{{companyInfos.address.length}}">
+			<view
+				class="link-box"
+				wx:for="{{companyInfos.address}}"
+				wx:for-item="item"
+				data-route="editCompanyAddress"
+				bindtap="routeJump"
+				data-id="{{item.id}}"
+				wx:key="{{item.id}}">
+				<view class="link"><i class="icon iconfont icon-dizhi"></i>{{item.address}}</view>
+				<view class="button"><i class="icon iconfont icon-xiangyou"></i></view>
+			</view>
+		</block>
+		<view class="button-placehoder" data-route="address-post" bindtap="routeJump" wx:else>添加公司地址</view>
+	</view>
+</view>

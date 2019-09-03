@@ -1,0 +1,153 @@
+@import '../../../iconfont.wxss'
+.shareBtn {
+  width: 70rpx;
+  height:152rpx;
+  background:#fff;
+  border-radius:30rpx 0rpx 0rpx 30rpx;
+  border:4rpx solid rgba(40,40,40,1);
+  position:fixed;
+  top: 12.6%;
+  right: 5rpx;
+  z-index: 9;
+  padding: 24rpx 16rpx 20rpx 20rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #652791;
+  box-sizing: border-box;
+  line-height:30rpx;
+  font-weight: 500;
+}
+.shareBtn .shareIcon  {
+  margin-bottom: 8rpx;
+  margin-left: -2rpx;
+  display: block;
+}
+.shareBtnBg  {
+  top: 13.1%;
+  right: 0;
+  background: #FFDC29;
+  border-right: 0;
+}
+.shareBtn::after {
+  display: block;
+}
+.shareIcon {
+  width: 100%;
+  height: 100%;
+}
+.shareBox {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  left: 0;
+  bottom: 0;
+  z-index: 11;
+  background: rgba(0,0,0,0.5);
+  overflow: hidden;
+}
+.shareBg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+}
+.posChoseBox {
+  width: 100%;
+  position: absolute;
+  left: 0%;
+  bottom: -600px;
+  z-index: 12;
+}
+.choseBox {
+  width:690rpx;
+  background:rgba(255,255,255,1);
+  border-radius:24rpx 0rpx 24rpx 24rpx;
+  border:2px solid rgba(0,0,0,1);
+  box-sizing: border-box;
+  padding: 12rpx 60rpx;
+  position: relative;
+  top: 0;
+  left: 50%;
+  margin-left: -345rpx;
+}
+.choseBoxBg {
+  width:690rpx;
+  height: 100%;
+  background: #FFDC29;
+  position: absolute;
+  left: 50%;
+  margin-left: -345rpx;
+  top: 12rpx;
+}
+.choseBox .btnCon {
+  padding: 52rpx 0;
+  text-align: left;
+  border-bottom:2rpx solid rgba(232,233,235,1);
+  background: #fff url('https://lieduoduo-uploads-test.oss-cn-shenzhen.aliyuncs.com/front-assets/images/btn_share_wechat.png') no-repeat right center;
+  background-size: 76rpx 76rpx;
+}
+.choseBox .btn2 {
+  background-image: url('https://lieduoduo-uploads-test.oss-cn-shenzhen.aliyuncs.com/front-assets/images/btn_share_img.png');
+}
+.choseBox .btnCon.btn3 {
+  border-bottom: 0;
+  background-image: url('https://lieduoduo-uploads-test.oss-cn-shenzhen.aliyuncs.com/front-assets/images/btn_share_pic.png');
+}
+.choseBox .btnCon .title {
+  line-height: 40rpx;
+  font-size:34rpx;
+  font-weight:500;
+  color:rgba(40,40,40,1);
+}
+.choseBox .btnCon .title .icon {
+  padding: 5rpx 15rpx;
+  font-size:22rpx;
+  font-weight:500;
+  color:rgba(255,126,74,1);
+  line-height:30rpx;
+  border-radius:20rpx 20rpx 20rpx 20rpx;
+  border:1rpx solid rgba(255,126,74,1);
+  vertical-align:4rpx;
+  margin-left: 20rpx;
+  box-sizing: border-box;
+  display: inline-block;
+}
+.choseBox .btnCon .desc {
+  font-size:24rpx;
+  font-weight:300;
+  color:rgba(40,40,40,1);
+  line-height:24rpx;
+  margin-top: 12rpx;
+}
+.choseBox button {
+  border-radius: 0;
+  background: none;
+  padding: 0;
+}
+button.close {
+  width:44px;
+  height:34px;
+  background:rgba(255,220,41,1);
+  border-radius:100rpx 100rpx 0rpx 0rpx;
+  border:2px solid rgba(0,0,0,1);
+  position: absolute;
+  right: -2px;
+  top: -34px;
+  background: #FFDC29;
+  overflow: hidden;
+  text-align: center;
+  z-index: 11;
+  box-sizing: border-box;
+  padding: 0;
+}
+button.close .icon {
+  font-size: 24rpx;
+  line-height: 24rpx;
+  color: #282828;
+  display: block;
+  margin: 12px 0;
+}
+
+.choseBox .button5 .btnCon{
+  border-bottom: unset;
+}

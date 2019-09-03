@@ -1,0 +1,68 @@
+@import '../../../iconfont.wxss'
+
+.moreActive{
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40rpx;
+  box-sizing: border-box;
+  border-bottom: 1rpx solid #E8E9EB;
+  height: 144rpx;
+}
+
+.left{
+  position: relative;
+}
+.left::before{
+  display: block;
+  content: '';
+  width: 2rpx;
+  height: 68rpx;
+  position: absolute;
+  top: 50%;
+  left: -40rpx;
+  transform: translateY(-50%);
+  background-color: #8452A7;
+}
+.left .dot{
+  width: 14rpx;
+  height: 14rpx;
+  display: inline-block;
+  background-color: #FF7F4C;
+  border-radius: 50%;
+  margin-left: 12rpx;
+}
+
+.left .title{
+  margin-bottom: 14rpx;
+  font-size: 32rpx;
+  color:#282828;
+  font-weight: 500;
+  line-height: 32rpx;
+}
+
+.left .info{
+  font-size: 24rpx;
+  color: #929292;
+  font-weight: 300;
+  line-height: 24rpx;
+}
+
+.right{
+  overflow: hidden;
+}
+
+.right .avatar{
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  margin-left: -10rpx;
+  border: 1rpx solid #E8E9EB;
+}
+.right .avatar:first-child{
+  margin-left: 0;
+}
+.right .avatar:last-child{
+}

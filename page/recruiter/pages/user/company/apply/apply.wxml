@@ -1,0 +1,43 @@
+<view class="company-apply-page">
+	<navbar title="填写个人信息" background="rgba(0,0,0,0)" showBack="{{false}}"></navbar>
+	<view class="banner">
+		<image class="bgImg" src="{{cdnImagePath}}bg_login@2x.png" mode="aspectFill"></image>
+	</view>
+	<view class="form" style="margin-top: {{height - navH}}px">
+
+	  <view class="input-li">
+	    <view class="key">真实姓名</view>
+	    <view class="value">
+	    	<input placeholder-style="color:#BCBCBC" placeholder="请输入真实姓名" bindinput="bindInput" data-field="real_name" value="{{formData.real_name}}" maxlength="20"/>
+	    </view>
+	  </view>
+		
+		<view class="input-li" bindtap="getCompanyName">
+	    <view class="key">公司全称</view>
+	    <view class="value">
+	    	<view class="text {{formData.company_name ? 'active' : 'default'}}">{{formData.company_name ? formData.company_name : '请输入公司全称'}}</view>
+	    </view>
+	  </view>
+
+	  <view class="input-li clear-bottom">
+	    <view class="key">我的职务</view>
+	    <view class="value">
+	    	<input placeholder-style="color:#BCBCBC" placeholder="比如：天河店店长" bindinput="bindInput" data-field="user_position" value="{{formData.user_position}}" maxlength="50" />
+	    </view>
+	  </view>
+
+	  <view class="tips">
+	  	<view class="span">如需咨询服务，请拨打</view>
+	  	<view class="strong" bindtap="callPhone"> {{telePhone}}</view>
+	  </view>
+	</view>
+
+	<view class="footer">
+    <view bindtap="submit" class="button-submit button-enable">下一步</view>
+    <view class="enter">
+			<text class="toggle left01" bindtap="toggle">前往求职端</text>|<text class="changePhone right01" bindtap="changePhone">换个账号</text>
+  	</view>
+  </view>
+
+	<!-- <changeIdentity></changeIdentity> -->
+</view>

@@ -1,0 +1,81 @@
+.warp{
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 40rpx;
+}
+.commont{
+  box-sizing: border-box;
+  width: 100%;
+  height: 122rpx;
+  font-size: 28rpx;
+  color: #353943;
+  border-bottom: 1rpx solid #E8E9EB;
+  position: relative;
+  overflow: hidden;
+  padding-left: 150rpx;
+  text-align: right;
+  line-height:122rpx;
+}
+
+.commont text.label {
+  color: #282828;
+  line-height: 122rpx;
+  margin-right: 10rpx;
+}
+.commont text.star {
+  color: #FF3636;
+  margin-top: 5rpx;
+  margin-right: 10rpx;
+}
+.title {
+  width: 150rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: left;
+}
+.result {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%;
+}
+.result .resultBox {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+.saveBox {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 29rpx 85rpx;
+  display: flex;
+  justify-content: space-between;
+  background: #fff;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+.save {
+  width: 100%;
+  height: 90rpx;
+  line-height: 90rpx;
+  font-weight:400;
+  color:#fff;
+  display: block;
+  background: #652791;
+  text-align: center;
+  border-radius: 48rpx;
+  font-size: 32rpx;
+}
+.saveAgain {
+  box-sizing: border-box;
+  width: 308rpx;
+  display: block;
+}
+.delete{
+  width: 248rpx;
+  background-color: #BCBCBC;
+}

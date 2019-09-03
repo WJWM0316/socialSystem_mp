@@ -1,0 +1,62 @@
+<view class="verify">
+	<navbar title="审核管理" background="#fff" color="#22292C"></navbar>
+	<view hidden="{{!hasReFresh}}">
+    <refreshStatus></refreshStatus>
+  </view>
+	<view style="height: 98rpx"></view>
+	<view class="office-status-bar" style="top:{{navH}}px">
+	  <view class="item {{tab === 'list0' ? 'active' : ''}}" bindtap="onClickTab" data-tab="list0">
+	  	<view class="{{redDotInfos.applyAuditBar ? 'reddot' : ''}}">待审核</view>
+	  </view>
+	  <view class="item {{tab === 'list2' ? 'active' : ''}}" bindtap="onClickTab" data-tab="list2"><view>审核未通过</view></view>
+	  <view class="item {{tab === 'list1' ? 'active' : ''}}" bindtap="onClickTab" data-tab="list1"><view>已通过</view></view>
+	</view>
+	
+	<!-- 未审核 start-->
+	<view hidden="{{tab === 'list1' || tab === 'list2'}}">
+		<view class="ul">
+			<view class="li" wx:for="{{list0.list}}" wx:key="{{index}}" wx:for-item="item" bindtap="routeJump" data-index="{{index}}">
+				<view class="name">{{item.realName}}</view>
+				<view class="time">申请时间: {{item.createdAt}}</view>
+				<i class="icon iconfont icon-xiangyou"></i>
+				<view class="reddot" wx:if="{{!item.isRead}}"></view>
+			</view>
+		</view>
+		<bottomStatus status="{{onBottomStatus}}" listData="{{list0.list}}" desc="暂无面试官加入组织， 邀请同事加入，一起开启社交招聘~">
+			<!-- <button class="jump" bindtap="jump">邀请面试官加入</button> -->
+		</bottomStatus>
+	</view>
+	<!-- 未审核 end-->
+	
+	<!-- 已通过 start-->
+	<view hidden="{{tab === 'list0' || tab === 'list2'}}">
+		<view class="ul">
+			<view class="li" wx:for="{{list1.list}}" wx:key="{{index}}" wx:for-item="item" bindtap="routeJump" data-index="{{index}}">
+				<view class="name">{{item.realName}}</view>
+				<view class="time">审核时间: {{item.updatedAt}}</view>
+				<i class="icon iconfont icon-xiangyou"></i>
+				<!-- <view class="reddot"></view> -->
+			</view>
+		</view>
+		<bottomStatus status="{{onBottomStatus}}" listData="{{list1.list}}" desc="暂无面试官加入组织， 邀请同事加入，一起开启社交招聘~">
+			<!-- <button class="jump" bindtap="jump">邀请面试官加入</button> -->
+		</bottomStatus>
+	</view>
+	<!-- 已通过 end-->
+
+	<!-- 未通过 start-->
+	<view hidden="{{tab === 'list0' || tab === 'list1'}}">
+		<view class="ul">
+			<view class="li" wx:for="{{list2.list}}" wx:key="{{index}}" wx:for-item="item" bindtap="routeJump" data-index="{{index}}">
+				<view class="name">{{item.realName}}</view>
+				<view class="time">审核时间: {{item.updatedAt}}</view>
+				<i class="icon iconfont icon-xiangyou"></i>
+				<!-- <view class="reddot"></view> -->
+			</view>
+		</view>
+		<bottomStatus status="{{onBottomStatus}}" listData="{{list2.list}}" desc="暂无面试官加入组织，邀请同事加入，一起开启社交招聘~">
+			<!-- <button class="jump" bindtap="jump">邀请面试官加入</button> -->
+		</bottomStatus>
+	</view>
+	<!-- 未通过 end-->
+</view>

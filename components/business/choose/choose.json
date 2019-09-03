@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "auth": "../../../../components/functional/auth/auth",
+    "bindPhone": "../../../../components/functional/bindPhone/bindPhone",
+    "navbar": "../../../../components/business/navbar/navbar"
+  }
+}

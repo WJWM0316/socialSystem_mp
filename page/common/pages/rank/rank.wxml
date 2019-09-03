@@ -1,0 +1,128 @@
+<view class="more">
+  <navbar title="本周面试官榜单" color="#282828" background="#FFFFFF" showHome="{{true}}"></navbar>
+  
+  <view class="fixed-box" style="top: {{navH}}px">
+    <view class="tabBar">
+      <text bindtap="onTabClick" data-tab="rankAll" class="{{tab === 'rankAll' ? 'active' : ''}}">总榜单</text>
+      <text bindtap="onTabClick" data-tab="rankCity" class="{{tab === 'rankCity' ? 'active' : ''}}">城市榜单</text>
+      <text bindtap="onTabClick" data-tab="rankCate" class="{{tab === 'rankCate' ? 'active' : ''}}">职位榜单</text>
+    </view>
+    <view class="childTabBar" hidden="{{tab === 'rankAll'}}">
+      <view
+        wx:for="{{tab === 'rankCity' ? cityLabel : jobLabel}}"
+        bindtap="toggle"
+        wx:key="{{index}}"
+        data-nowIndex="{{index}}"
+        data-name="{{item.name}}"
+        data-id="{{item.areaId || item.labelId}}"
+        class="{{index === nowIndex ? 'nowChildActive' : ''}} {{index === 0 && nowIndex === 0? 'firstChildActive' : ''}} {{index === childTabList.length - 1 && nowIndex === childTabList.length - 1? 'lastChildActive' : ''}}">
+          {{item.name}}
+      </view>
+    </view>
+    <view hidden="{{!hasReFresh}}">
+      <refreshStatus></refreshStatus>
+    </view>
+  </view>
+  
+  
+  <view class="listWrap" style="margin-top: {{fixedHeight}}px">
+    <view class="rule"  bindtap="toggleShowRules">
+     <text>排名实时更新，每周一重置排名，<text class="ruleBtn">查看上榜规则</text></text>
+    </view>
+    <!-- 前3名 -->
+    <view class="topicBox">
+       <!-- <view class="rules" wx:if="{{identity === 'RECRUITER'}}">规则</view> -->
+      <view>
+        <view wx:if="{{commonList.list[1]}}" class="topicList" bindtap="toRecruitment" data-uid="{{commonList.list[1].uid}}">
+          <view class="headIMg">
+            <image src="{{commonList.list[1].avatar.smallUrl}}"></image>
+            <view class='icon'>
+              <image src="{{cdnImagePath}}icon_no2.png" />
+            </view>
+          </view>
+          <text class="name">{{commonList.list[1].name}}</text>
+          <text class="title">{{commonList.list[1].position}}</text>
+          <view class="influence">
+            <text>本周人气</text>
+            <text class="num">{{commonList.list[1].weekOfPopularity}}</text>
+          </view>
+        </view>
+      </view>
+      <view>
+        <view wx:if="{{commonList.list[0]}}" class="topicList" bindtap="toRecruitment" data-uid="{{commonList.list[0].uid}}">
+          <view class="headIMg first">
+            <image src="{{commonList.list[0].avatar.smallUrl}}"></image>
+            <view class='icon'>
+              <image src="{{cdnImagePath}}icon_no1.png" />
+            </view>
+          </view>
+          <text class="name">{{commonList.list[0].name}}</text>
+          <text class="title">{{commonList.list[0].position}}</text>
+          <view class="influence">
+            <text>本周人气</text>
+            <text class="num">{{commonList.list[0].weekOfPopularity}}</text>
+          </view>
+        </view>
+      </view>
+      <view>
+        <view wx:if="{{commonList.list[2]}}" class="topicList" bindtap="toRecruitment" data-uid="{{commonList.list[2].uid}}">
+          <view class="headIMg">
+            <image src="{{commonList.list[2].avatar.smallUrl}}"></image>
+            <view class='icon'>
+              <image src="{{cdnImagePath}}icon_no3.png" />
+            </view>
+          </view>
+          <text class="name">{{commonList.list[2].name}}</text>
+          <text class="title">{{commonList.list[2].position}}</text>
+          <view class="influence">
+            <text>本周人气</text>
+            <text class="num">{{commonList.list[2].weekOfPopularity}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- 第三名之后的数据 -->
+    <rankingTab wx:for="{{commonList.list}}" wx:key="{{index}}" item="{{item}}" index="{{index}}" wx:if="{{index >= 3}}"></rankingTab>
+    <bottomStatus status="{{onBottomStatus}}" listData="{{commonList.list}}"></bottomStatus>
+  </view>
+  
+  <view class="foot-bar" wx:if="{{identity === 'RECRUITER'}}" bindtap="viewYourself">
+    <view class="img-box"><image mode="aspectFill" src="{{detail.avatar.smallUrl}}" class="image"></image></view>
+    <view class="content">
+      <view class="row-one">我的排名：<text class="{{commonList.rankDetail.currentRank ? 'strong' : ''}}">{{commonList.rankDetail.currentRank > 200 ? '200+' : commonList.rankDetail.currentRank > 0 ? commonList.rankDetail.currentRank : '暂未上榜'}}</text></view>
+      <view class="row-two">
+        <view class="item10">影响力 <view class="strong">{{commonList.rankDetail.influence}}</view></view>
+        <view class="item10">本周人气 <view class="strong">{{commonList.rankDetail.weekOfPopularity}}</view></view>
+      </view>
+    </view>
+  </view>
+
+  <view class="rule-box">
+    <view class="mask" catchtouchmove="stopPageScroll"  bindtap="toggleShowRules" hidden="{{!showRules}}"></view>
+    <view class="content {{showRules ? 'show' : ''}}">
+      <view class="header" catchtouchmove="stopPageScroll">排行榜说明<i class="icon iconfont icon-close" bindtap="toggleShowRules"></i></view>
+      <view class="ul" wx:if="{{showRules}}">
+        <view class="li">
+          <view class="key"><text class="text">本周人气</text></view>
+          <view class="value">人气值由招聘官的主页和职位被候选人浏览、开撩约面、标记感兴趣等数据综合计算得出，数据每周一重置，代表了招聘官整体的人气热度。本周人气值越大，排名越靠前。</view>
+        </view>
+        <view class="li">
+          <view class="key"><text class="text">影响力</text></view>
+          <view class="value">用户可以在招聘官的主页中，对自己认可的招聘官打Call。每位用户可以为1位招聘官打Call1次。每获得1次打Call，招聘官影响力+1。影响力代表的是招聘官整体的被认可度。</view>
+        </view>
+        <view class="li">
+          <view class="key"><text class="text">总榜</text></view>
+          <view class="value">每周人气值前200名，可以进入总榜，优先面向全站候选人曝光。榜单中的招聘官按当周人气值由高至低排列。</view>
+        </view>
+        <view class="li">
+          <view class="key"><text class="text">城市榜</text></view>
+          <view class="value">在北京、广州、深圳、上海、杭州、成都六大热门城市有在招职位，且每周人气值前200名的招聘官，可进入城市榜单。榜单中的招聘官按当周人气值由高至低排列。</view>
+        </view>
+        <view class="li">
+          <view class="key"><text class="text">职位榜</text></view>
+          <view class="value">在对应职位类别有在招职位，且每周人气值前200名的招聘官，可以进入职位榜单。榜单中的招聘官按当周人气值由高至低排列。</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,62 @@
+<view class="identityMethods">
+	<navbar title="认证方式" background="#fff" color="#22292C"></navbar>
+	<view class="header">
+		<view class="h1">选择认证方式</view>
+		<view class="h2">请从以下方式中选择一个，完成公司认证</view>
+	</view>
+
+	<view class="ul">
+
+		<!-- <view class="li" data-route="email" bindtap="routeJump">
+			<view class="icon-box"><i class="icon iconfont icon-youxiangrenzheng"></i></view>
+			<view class="content">
+				<view class="h3">公司邮箱认证</view>
+				<view class="h4">适合有统一公司邮箱的面试官使用</view>
+			</view>
+			<view class="arrow-box">
+				<text>去认证</text>
+				<i class="icon iconfont icon-xiangyou"></i>
+			</view>
+		</view> -->
+		
+		<view class="li" data-route="notice" bindtap="routeJump" wx:if="{{options.from === 'join'}}">
+			<view class="icon-box"><i class="icon iconfont icon-guanliyuanrenzheng"></i></view>
+			<view class="content">
+				<view class="h3">管理员认证</view>
+				<view class="h4">通过申请加入，联系管理员进行认证</view>
+			</view>
+			<view class="arrow-box">
+				<text>去认证</text>
+				<i class="icon iconfont icon-xiangyou"></i>
+			</view>
+		</view>
+
+		<view class="li" data-route="license" bindtap="routeJump" wx:else>
+			<view class="icon-box"><i class="icon iconfont icon-tijiaoshenqing"></i></view>
+			<view class="content">
+				<view class="h3">营业执照加相关证明认证</view>
+				<view class="h4">上传工商营业执照、</view>
+				<view class="h5">工牌/名片/在职业证明（三选一）</view>
+			</view>
+			<view class="arrow-box">
+				<text>去认证</text>
+				<i class="icon iconfont icon-xiangyou"></i>
+			</view>
+		</view>
+
+	</view>
+
+	<view class="quickly-entry" wx:if="{{options.from !== 'join'}}">
+		<view>
+			<view class="h6">快速通道权益</view>
+			<view class="h7">助您创建公司更快捷，欢迎体验~</view>
+		</view>
+		<view class="button" data-route="call" bindtap="routeJump">联系体验</view>
+		<image class="bgImg" src="{{cdnImagePath}}verify_bg.png" mode="aspectFill"></image>
+	</view>
+
+	<view class="tips">
+		<view class="span">了解更多认证须知，欢迎联系我们</view>
+		<view class="strong" bindtap="callPhone">{{telePhone}}</view>
+	</view>
+</view>

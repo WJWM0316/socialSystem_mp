@@ -1,0 +1,10 @@
+<view class="guidePop" wx:if="{{showPop}}">
+  <view class="inner">
+    <i class="close iconfont icon-close" bindtap="close"></i>
+    <image class="pic" src="{{cdnImagePath}}createRemue.png" alt=""></image>
+    <text class="desc">只差一点点
+    就可以去心仪的公司面试啦！</text>
+    <button class="btn continue" bindtap="close">继续创建</button>
+    <button class="btn giveUp" bindtap="back">放弃这个机会，后面再说</button>
+  </view>
+</view>

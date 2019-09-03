@@ -1,0 +1,13 @@
+<view>
+  <navbar title="{{options.type === 'myBrowse' ? '我看过的' : '我感兴趣'}}" background="#FFFFFF" color="#22292C"></navbar>
+  <view hidden="{{!hasReFresh}}">
+    <refreshStatus></refreshStatus>
+  </view>
+  <view class="list {{list.length ? '' : 'nodata'}}">
+    <officerTab list="{{list}}" showSlideView="{{false}}" buttonType="delete" bindrefreshevent="refreshEvent"></officerTab>
+  </view> 
+  <bottomStatus status="{{onBottomStatus}}" listData="{{list}}" desc="{{isJobhunter ? '你还没有看过的职位和面试官哟～' : '你与offer之间就差一份简历~'}}">
+    <button class="jump clear-style" bindtap="jump" data-type="{{isJobhunter ? 'index' : 'create'}}" wx:if="{{options.type === 'myBrowse'}}">{{isJobhunter ? '发现更多职业机会' : '立即创建简历'}}</button>
+    <button class="jump clear-style" bindtap="jump" wx:else>发现更多面试官</button>
+  </bottomStatus>
+</view>

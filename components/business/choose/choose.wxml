@@ -1,0 +1,20 @@
+<!--components/business/choose/choose.wxml-->
+<view class="choose" wx:if="{{!isChose}}">
+	<navbar title="选择身份" background="#FFFFFF" color="#22292C"></navbar>
+	<view class="title">
+		<image src="{{cdnImagePath}}choseIcon1.png" class="icon"></image>
+		<view class="desc">店铺招人神器</view>
+	</view>
+  <form bindsubmit="formSubmit" report-submit='{{true}}'>
+    <button class="role1" form-type="submit" bindtap='jump' data-identity="APPLICANT" open-type="getUserInfo" bindgetuserinfo="onGotUserInfo" lang="zh_CN">
+    	<view class="desc">我是求职者<icon class="icon iconfont icon-disejiantou-you"></icon></view>
+    	<image class="img" src="{{cdnImagePath}}choseIcon2.png"></image>
+    </button>
+    <button class="role2" form-type="submit" bindtap='jump' data-identity="RECRUITER" open-type="getUserInfo" bindgetuserinfo="onGotUserInfo" lang="zh_CN">
+    	<view class="desc">我是面试官<icon class="icon iconfont icon-disejiantou-you"></icon></view>
+    	<image class="img" src="{{cdnImagePath}}choseIcon3.png"></image>
+    </button>
+  </form>
+  <!-- <image class="ad" src="{{cdnImagePath}}ad.png"></image> -->
+  <!-- <bindPhone></bindPhone> -->
+</view>

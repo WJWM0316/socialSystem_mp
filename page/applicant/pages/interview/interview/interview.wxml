@@ -1,0 +1,204 @@
+<view class="applicant-interview">
+	<navbar title="面试"  background="#652791" color="#fff"></navbar>
+	
+	<view class="fixed-dom" style="top: {{navH}}px">
+
+		<!-- 一级导航栏 start -->
+		<view class="fixed-bar">
+			<view
+				class="li {{tab.active ? 'active' : ''}} {{tab.showRedDot ? 'red-dot' : ''}}"
+				bindtap="chooseParentTab"
+				data-mark="{{tab.id}}"
+				wx:for="{{tabLists}}"
+				wx:for-item="tab"
+				data-index="{{index}}"
+				wx:key="{{tab.id}}">
+					<view class="span">{{tab.text}}</view>
+			</view>
+		</view>
+		<!-- 一级导航栏 end -->
+
+		<!-- 申请记录 start -->
+		<view class="tab-tab-list" hidden="{{tabIndex !== 1}}">
+			<view class="ul">
+				<view
+				 	wx:for="{{receiveScreen}}" 
+				 	wx:key="{{index}}"
+					class="item {{item.active ? 'active' : ''}} {{item.showRedDot ? 'red-dot' : ''}}"
+					bindtap="chooseItem"
+					data-index="{{index}}">
+						<view class="span">{{item.key}}</view>
+				</view>
+			</view>
+		</view>
+		<!-- 申请记录 end -->
+
+		<!-- 收到邀请 start -->
+		<view class="tab-tab-list" hidden="{{tabIndex !== 0}}">
+			<view class="ul">
+				<view
+				 	wx:for="{{applyScreen}}" 
+				 	wx:key="{{index}}"
+					class="item {{item.active ? 'active' : ''}} {{item.showRedDot ? 'red-dot' : ''}}"
+					bindtap="chooseItem"
+					data-index="{{index}}">
+						<view class="span">{{item.key}}</view>
+				</view>
+			</view>
+		</view>
+		<!-- 收到邀请 end -->
+		
+		<!-- 面试日程 start-->
+<!-- 		<myCalendar wx:if="{{tabIndex === 2}}" id="myCalendar" calendarType="roll" setDateList="{{dateList}}" switchable bindresultEvent="getResult"></myCalendar> -->
+		<!-- 面试日程 end-->
+		<view class="interview-page-title" wx:if="{{tabIndex === 2}}">
+			<view class="total">最近面试（{{interviewData.total}}）</view>
+			<view class="history" bindtap="jumpInterviewPage"><i class="icon iconfont icon-lishijilu"></i> 全部面试</view>
+		</view>
+		<view class="scroll-box"  wx:if="{{dateList.length && tabIndex === 2}}">
+			<view
+				wx:for="{{dateList}}"
+				wx:key="{{index}}"
+				class="item {{item.active ? 'active' : ''}} {{item.number ? 'red' : ''}}"
+				wx:for-item="item"
+				data-time="{{item.time}}"
+				data-index="{{index}}"
+				bindtap="getResult">{{item.date}}</view>
+		</view>
+	</view>
+
+  <!--申请记录-->
+	<view hidden="{{tabIndex !== 0}}" class="list-box type1" style="padding-top: 186rpx">
+		<view hidden="{{!hasReFresh}}">
+			<refreshStatus></refreshStatus>
+		</view>
+		<form bindsubmit="formSubmit" report-submit='{{true}}'> 
+			<button
+				form-type="submit" 
+				class="formIdBtn"
+				data-positionId="{{item.positionId}}"
+				bindtap="routeJump"
+				wx:for="{{applyData.list}}"
+				wx:for-item="item"
+				data-item-id="{{item.interviewId}}"
+				data-recruiterUid="{{item.recruiterUid}}"
+				data-status="{{item.status}}"
+				wx:key="{{index}}">
+				<view class="item2">
+					<view class="row-one">
+						<view class="img-box"><image src="{{item.avatar.smallUrl}}"></image></view>
+						<view class="content">
+							<view class="header">
+								<view class="name">{{item.recruiterRealname}}</view>
+								<view class="zhiwei">{{item.recruiterPositionName}}</view>
+							</view>
+							<view class="degress">{{item.companyShortname}}</view>
+						</view>
+					</view>
+					<view class="reddot" wx:if="{{item.redDot}}"></view>
+					<view class="row-two">
+						<view class="infos">
+							<view class="day">{{item.createdAt}}</view>
+							<view class="action">申请约面</view>
+							<view class="position">{{item.positionName}}</view>
+						</view>
+						<view class="status">{{item.statusDesc}}</view>
+					</view>
+				</view>
+			</button>
+		</form>
+		<bottomStatus status="{{applyBottomStatus}}" listData="{{applyData.list}}" desc="{{hasLogin ? (isJobhunter ? '你还没有面试申请记录哟~' : '你与offer之间就差一份简历~') : '大量名企高薪职位等你开撩'}}">
+		</bottomStatus>
+	</view>
+
+	<!--收到邀请-->
+	<view hidden="{{tabIndex !== 1}}" class="list-box type2" style="padding-top: 186rpx">
+		<view hidden="{{!hasReFresh}}">
+			<refreshStatus></refreshStatus>
+		</view>
+		<form bindsubmit="formSubmit" report-submit='{{true}}'> 
+			<button
+				form-type="submit" 
+				class="formIdBtn"
+				data-positionId="{{item.positionId}}"
+				bindtap="routeJump"
+				wx:for="{{receiveData.list}}"
+				wx:for-item="item"
+				data-item-id="{{item.interviewId}}"
+				data-recruiterUid="{{item.recruiterUid}}"
+				data-status="{{item.status}}"
+				wx:key="{{index}}">
+				<view class="item2">
+					<view class="row-one">
+						<view class="img-box"><image src="{{item.avatar.smallUrl}}"></image></view>
+						<view class="content">
+							<view class="header">
+								<view class="name">{{item.recruiterRealname}}</view>
+								<view class="zhiwei">{{item.recruiterPositionName}}</view>
+							</view>
+							<view class="degress">{{item.companyShortname}}</view>
+						</view>
+					</view>
+					<view class="reddot" wx:if="{{item.redDot}}"></view>
+					<view class="row-two">
+						<view class="infos">
+							<view class="day">{{item.createdAt}}</view>
+							<view class="action">邀请约面</view>
+							<view class="position">{{item.positionName}}</view>
+						</view>
+						<view class="status {{item.status === 41 ? 'dark' : ''}}">{{item.statusDesc}}</view>
+					</view>
+				</view>
+			</button>
+		</form>
+		<bottomStatus status="{{receiveBottomStatus}}" listData="{{receiveData.list}}" desc="{{hasLogin ? (isJobhunter ? '你还没有面试邀请记录哟~' : '你与offer之间就差一份简历~') : '大量名企高薪职位等你开撩'}}">
+		</bottomStatus>
+	</view>
+
+	<!--面试日程-->
+	<view hidden="{{tabIndex !== 2}}" class="list-box list-box2 {{dateList.length ? 'height10' : ''}}">
+		<view hidden="{{!hasReFresh}}">
+			<refreshStatus></refreshStatus>
+		</view>
+		<form bindsubmit="formSubmit" report-submit='{{true}}'> 
+			<button
+				form-type="submit" 
+				class="formIdBtn"
+				data-positionId="{{item.positionId}}"
+				bindtap="routeJump"
+				wx:for="{{interviewData.list}}"
+				wx:for-item="item"
+				data-item-id="{{item.interviewId}}"
+				data-recruiterUid="{{item.recruiterUid}}"
+				data-status="{{item.status}}"
+				wx:key="{{index}}">
+				<view class="item3">
+					<button form-type="submit" bindtap="routeJump" class="formIdBtn">
+						<view class="row-one">
+							<view class="img-box"><image src="{{item.avatar.smallUrl}}"></image></view>
+							<view class="content">
+								<view class="header">
+									<view class="name">{{item.recruiterRealname}}</view>
+									<view class="zhiwei">{{item.recruiterPositionName}}</view>
+								</view>
+								<view class="degress">{{item.companyShortname}}</view>
+							</view>
+							<view class="time {{item.status < 50 ? 'active' : ''}} {{item.redDot ? 'redDot' : ''}}" wx:if="{{item.createdAtTime}}">
+								<i class="icon iconfont icon-lishijilu"></i>{{item.createdAtTime}}
+							</view>
+						</view>
+						<view class="row-two">
+							<i class="icon iconfont icon-mianshizhiwei"></i>
+							面试职位：{{item.positionId ? item.positionName : '未选择面试职位'}}
+						</view>
+						<view class="row-three" wx:if="{{item.address}}">
+							<i class="icon iconfont icon-mianshidizhi"></i>{{item.address}}{{item.doorplate}}</view>
+					</button>
+				</view>
+			</button>
+		</form>
+		<bottomStatus status="{{interviewBottomStatus}}" listData="{{interviewData.list}}" desc="{{hasLogin ? (isJobhunter ? '你还没有面试记录哟~' : '你与offer之间就差一份简历~') : '大量名企高薪职位等你开撩'}}">
+		</bottomStatus>
+	</view>
+	<tabBar id="bottomRedDotBar"></tabBar>
+</view>

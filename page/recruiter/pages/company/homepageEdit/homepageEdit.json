@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+  	"jobList": "../../../../../components/business/jobList/jobList",
+  	"shareBtn": "../../../../../components/layout/shareBtn/shareBtn",
+  	"jobList": "../../../../../components/business/jobList/jobList",
+  	"navbar": "../../../../../components/business/navbar/navbar"
+  }
+}

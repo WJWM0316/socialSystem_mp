@@ -1,0 +1,9 @@
+{
+	"enablePullDownRefresh": true,
+	"backgroundTextStyle": "light",
+  "usingComponents": {
+    "navbar": "../../../../components/business/navbar/navbar",
+    "tabBar": "../../../../components/business/tabBar/tabBar",
+    "jobList": "../../../../components/business/jobList/jobList"
+  }
+}

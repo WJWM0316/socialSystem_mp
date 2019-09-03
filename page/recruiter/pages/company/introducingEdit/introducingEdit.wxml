@@ -1,0 +1,16 @@
+<view class="company-introdution">
+	<navbar title="编辑公司介绍" background="#fff" color="#22292C"></navbar>
+	<view class="edit-box">
+			<textarea
+				bindinput="bindInput"
+				placeholder="描述您公司的背景和业务"
+				maxlength="5000"
+				value="{{intro}}" />
+			<view class="controls">
+				<view class="sum">{{ intro.length }}/5000</view>
+			</view>
+		</view>
+	<view class="footer">
+    <view class="button-save" bindtap="submit">保存</view>
+  </view>
+</view>

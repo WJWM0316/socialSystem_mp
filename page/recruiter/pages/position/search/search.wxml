@@ -1,0 +1,24 @@
+<view class="position-name-search">
+	<navbar title="填写职位名称" background="#FFFFFF" color="#22292C" showBackBtn="{{true}}"></navbar>
+	<view class="tips">* 不能填写QQ、微信、电话等联系方式，以及特殊符号</view>
+	<view bindsubmit="submit">
+		<view class="input-li">
+			<input placeholder="请输入职位名称" auto-focus bindinput="bindInput" value="{{keyword}}" maxlength="50" placeholder-style="color:#BCBCBC"/>
+		</view>
+		<view class="name-lists">
+			<view
+				class="item"
+				wx:for="{{nameLists}}"
+				wx:for-item="item"
+				wx:key="{{item.id}}"
+				bindtap="onClick"
+				data-name="{{item.name}}">
+					<rich-text nodes="{{item.html}}"></rich-text>
+					<i class="icon iconfont icon-jiantou"></i>
+				</view>
+		</view>
+		<view class="btn-area">
+	    <view bindtap="submit" class="button-submit {{canClick ? 'button-enable' : ''}}">保存</view>
+	  </view>
+	</view>
+</view>

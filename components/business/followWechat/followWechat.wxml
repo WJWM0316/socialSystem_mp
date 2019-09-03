@@ -1,0 +1,43 @@
+<block  wx:if="{{!userInfo.officialId}}">
+	<view class="followWechat {{isIphoneX ? 'iphoneX' : ''}}"  bindtap="show">
+		<view class="left">
+			<image class="icon" src="{{cdnImagePath}}followWechat.png"></image>
+			<text class="txt">关注公众号，不错过任何面试动态</text>
+		</view>
+		<button class="btn">去关注</button>
+	</view>
+	<view class="extraBlock"></view>
+	<view class="followWechatPop">
+		<view class="followPop" wx:if="{{showPop}}">
+			<view class="inner">
+				<view class="title">关注店长多多公众号</view>
+				<i class="close icon iconfont icon-close"  bindtap="close" data-type="showPop"></i>
+				<swiper class="swiper"
+					indicator-dots
+					indicator-color = 'rgba(0, 0, 0, .1)'
+					indicator-active-color = '#FFDC29'
+					autoplay
+					circular
+					interval = "{{3000}}"
+				>
+					<swiper-item class="swiper-item"><image lazy-load class="img" src="{{cdnImagePath}}follow1.png"></image></swiper-item>
+					<swiper-item class="swiper-item"><image lazy-load class="img" src="{{cdnImagePath}}follow2.png"></image></swiper-item>
+					<swiper-item class="swiper-item"><image lazy-load class="img" src="{{cdnImagePath}}follow3.png"></image></swiper-item>
+					<swiper-item class="swiper-item"><image lazy-load class="img" src="{{cdnImagePath}}follow4.png"></image></swiper-item>
+				</swiper>
+				<view class="txt">关注步骤：点击右上角【···】选择【关于店长多多】，进入【相关公众号】点击【关注公众号】</view>
+			</view>
+		</view>
+		<view class="authPop" wx:if="{{authPop}}">
+			<view class="inner">
+				<view class="title">关注店长多多公众号</view>
+				<i class="close icon iconfont icon-close"  bindtap="close" data-type="authPop"></i>
+				<view class="txt">因小程序限制，关注公众号前需关联身份，便于获得相关面试通知</view>
+				<button  class="btn" open-type="getUserInfo" form-type="submit" bindgetuserinfo="onGotUserInfo" lang="zh_CN">
+			  	关联身份
+			  </button>
+				<view class="desc">已关注？点上方按钮关联公众号身份</view>
+			</view>
+		</view>
+	</view>
+</block>

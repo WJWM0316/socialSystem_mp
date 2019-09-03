@@ -1,0 +1,37 @@
+<view class="verify">
+	<navbar title="{{infos.status === 0 ? '待审核' : '审核结果'}}" background="#fff" color="#22292C"></navbar>
+	<view hidden="{{!hasReFresh}}">
+    <refreshStatus></refreshStatus>
+  </view>
+	<view class="header" wx:if="{{infos.status}}">
+		<image src="{{cdnImagePath}}pic_await.png" mode="scaleToFill" class="default-status"></image>
+		<view class="status-txt">审核处理成功</view>
+		<view class="time">审核时间：{{infos.updatedAt}}</view>
+	</view>
+	<view class="box">
+		<view class="title">申请信息</view>
+		<view class="ul">
+			<view class="li">
+				<view class="key">申请人</view>
+				<view class="value">{{infos.realName}}</view>
+			</view>
+			<view class="li">
+				<view class="key">担任职务</view>
+				<view class="value">{{infos.userPosition}}</view>
+			</view>
+			<view class="li footer" wx:if="{{!infos.status}}">
+				<view class="key">申请时间</view>
+				<view class="value">{{infos.createdAt}}</view>
+			</view>
+			<view class="li footer" wx:if="{{infos.status === 1 || infos.status === 2}}">
+				<view class="key">审核状态</view>
+				<view class="value">{{infos.status === 1 ? '已通过' : '不予通过'}}</view>
+			</view>
+		</view>
+	</view>
+	<view class="button-box" wx:if="{{!infos.status}}">
+		<view class="button button1" bindtap="failApplyjoin">不予通过</view>
+		<view class="button button2" bindtap="passApplyjoin">审核通过</view>
+	</view>
+	<view class="return" wx:if="{{infos.status}}" bindtap="goHome">返回首页</view>
+</view>

@@ -1,0 +1,76 @@
+<view class="userInfoEdit">
+  <navBar title="编辑个人信息" background="#FFFFFF" color="#22292C"></navBar>
+  <view class="title">基本信息</view>
+  <view class="item avatar">
+    <view class="txt">头像</view>
+    <view class="edit">
+      <avatarCut class="avatarCut" src="{{info.avatar.smallUrl}}"></avatarCut>
+    </view>
+  </view>
+  <view class="item">
+    <view class="txt">姓名</view>
+    <view class="edit">
+      <input type="text" value="{{info.name}}" data-type="name" bindblur="getInputValue" placeholder="请输入姓名" placeholder-style="color: #B2B6C2"/>
+    </view>
+  </view>
+  <view class="item">
+    <view class="txt">性别</view>
+    <view class="edit">
+      <radio-group class="radio-group" bindchange="radioChange">
+        <label class="radio">
+          <radio value="1" color="#652791" checked="{{info.gender === 1}}"/>
+          男
+        </label>
+        <label class="radio">
+          <radio value="2" color="#652791" checked="{{info.gender === 2}}"/>
+          女
+        </label>
+      </radio-group>
+    </view>
+  </view>
+  <view class="item">
+    <view class="txt">出生年月</view>
+    <view class="edit">
+      <myPicker pickerType="birthday" placeholderStyle="color: #B2B6C2" data-type="birthday" bindresultevent="getResult" setResult="{{info.birthDesc}}"></myPicker>
+    </view>
+  </view>
+  <view class="item">
+    <view class="txt">参加工作时间</view>
+    <view class="edit">
+      <myPicker pickerType="workTime" placeholderStyle="color: #B2B6C2" data-type="workTime" bindresultevent="getResult" setResult="{{info.startWorkYearDesc}}"></myPicker>
+    </view>
+  </view>
+  <view class="item">
+    <view class="txt">求职状态</view>
+    <view class="edit">
+      <myPicker pickerType="jobStatus" placeholderStyle="color: #B2B6C2" rangeKey="text" data-type="jobStatus" bindresultevent="getResult" setResult="{{info.jobStatusDesc}}"></myPicker>
+    </view>
+  </view>
+  <view class="item">
+    <view class="txt">手机号码</view>
+    <view class="edit" bindtap="jump">
+      <input type="tel" disabled value="{{info.mobile}}" data-type="mobile" bindblur="getInputValue" placeholder="请输入手机号码" placeholder-style="color: #B2B6C2"/>
+    </view>
+  </view>
+  <view class="item">
+    <view class="txt noRed">微信号</view>
+    <view class="edit">
+      <input type="text" value="{{info.wechat}}" data-type="wechat" bindblur="getInputValue" placeholder="请输入微信号" placeholder-style="color: #B2B6C2"/>
+    </view>
+  </view>
+  <view class="title">个性标签</view>
+  <view class="labelSection">
+    <view class="labelBox">
+      <view class="tab" wx:for="{{info.personalizedLabels}}" wx:key="{{index}}">{{item.labelName || item.name}}</view>
+    </view>
+    <view class="editLabel" bindtap="jumpLabel">编辑标签</view>
+  </view>
+  <view class="title">自我描述</view>
+  <view class="signBox">
+    <textarea class="sign" value="{{info.signature}}" auto-height maxlength='150' placeholder="用一句话介绍你自己吧~" bindinput="singInput" placeholder-style="color: #B2B6C2; font-weight: 300"></textarea>
+    <view class="number">{{info.signature.length}}/150</view>
+  </view>
+  <cover-view class="botBtn">
+    <button class="save" bindtap="saveInfo">保存资料</button>
+  </cover-view>
+</view>

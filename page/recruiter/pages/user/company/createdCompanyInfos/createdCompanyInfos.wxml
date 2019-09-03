@@ -1,0 +1,41 @@
+<view class="createdCompanyInfos">
+	<navbar title="公司认证" background="#fff" color="#22292C" customBack bindbackEvent="backEvent"></navbar>
+	<view hidden="{{!hasReFresh}}">
+	  <refreshStatus></refreshStatus>
+	</view>
+	<view class="header">
+		<view class="icon-box">
+			<i class="icon iconfont icon-tijiaoshenqing"></i>
+		</view>
+		<view class="content">
+			<view class="h1">创建公司申请已提交</view>
+			<view class="h2">我们将在1个工作日内，协助你开通招聘服务</view>
+		</view>
+	</view>
+
+	<view class="div">
+		<view class="p">根据人力资源相关法规要求，我们将联系你完成以下认证：</view>
+		<view class="ul">
+			<view class="li">
+				<view class="icon-box"><i class="icon iconfont icon-tijiaoshenqing"></i></view>
+				<view class="content">公司资质认证；</view>
+			</view>
+			<view class="li">
+				<view class="icon-box"><i class="icon iconfont icon-shenfenrenzheng"></i></view>
+				<view class="content">身份信息认证；</view>
+			</view>
+		</view>
+	</view>
+
+	<view class="footer">
+		<view class="p2" bindtap="changeIndentifyMethods">
+			<text>等不及了，在线自助完成认证 </text>
+			<i class="icon iconfont icon-zizhurenzheng"></i>
+		</view>
+		<view class="enter">
+			<view class="toggle text2" bindtap="toggle">前往求职端</view>
+  		 |
+  		<view class="changePhone text2" bindtap="changePhone">换个账号</view>
+  	</view>
+	</view>
+</view>

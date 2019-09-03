@@ -1,0 +1,12 @@
+<view class="settings">
+	<navbar title="账号设置" background="#fff" color="#22292C"></navbar>
+	<view class="changePhone" bindtap="changeMobile">
+		<text class="txt mobile">绑定手机号</text>
+		<i class="icon iconfont icon-xiangyou"></i>
+	</view>
+<!-- 	<view class="toggle" bindtap="toggleIdentity">
+		<text class="txt">切换为“{{identity}}”身份</text>
+		<i class="icon iconfont icon-xiangyou"></i>
+	</view> -->
+	<view class="upLogin" bindtap="upLogin">退出登录</view>
+</view>

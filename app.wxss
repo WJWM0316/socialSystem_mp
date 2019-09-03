@@ -1,0 +1,61 @@
+/**app.wxss**/
+@import 'iconfont.wxss'
+.container {
+} 
+.holderStyle{
+  color: #BCBCBC;
+	font-weight: 300;
+}
+.clear-style {
+	background: none;
+	border: 0;
+	padding: 0;
+}
+.clear-style::after{
+	display: none;
+	border: none;
+}
+page {
+	background:#FBFBFF;
+}
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+  display: none;
+}
+text {
+	word-break:break-all;
+}
+view {
+	-webkit-overflow-scrolling: touch;
+}
+button::after{
+	border: none;
+}
+.hasFilter {
+  height: 58rpx !important;
+  line-break: 58rpx !important;
+  display: flex !important;
+  align-items: center !important;
+}
+.filter {
+  width: 96rpx;
+  height: 58rpx;
+  margin-right: 16rpx;
+}
+.filter2 {
+  width: 172rpx;
+  height: 72rpx;
+  margin-left: -20rpx;
+  margin-bottom: 6rpx;
+}
+.moneyTxt {
+  font-size:26rpx;
+  margin-left: 6rpx;
+}
+/*
+@font-face {
+  font-family: designFont;
+  src: url('./vendor/lib/DINAlternateBold.ttf');
+}*/

@@ -1,0 +1,26 @@
+<view class="ul">
+  <view 
+  class="officerTab2" 
+  bindtap="routeJump" 
+  data-companyId="{{item.id}}" 
+  data-uid="{{item.uid}}" 
+  wx:for="{{ list }}" 
+  wx:key="{{index}}"
+  wx:if="{{!showSlideView}}">
+    <view class="reddot" wx:if="{{item.redDot}}"></view>
+    <view class="headerImg">
+      <image src="{{item.avatar.smallUrl}}" class="avatar" lazy-load></image>
+      <image src="{{cdnImagePath}}sign1.png" mode="aspectFill" class="certification-icon"></image>
+    </view>
+    <view class="info">
+      <view class="top">
+        <text class="name">{{item.name}}</text>
+        <text class="title">{{item.position}}</text>
+      </view>
+      <view class="bottom">
+        <view class="company" wx:if="{{item.companyName}}"><i class="icon iconfont icon-gongsi"></i>{{item.companyName}}</view>
+        <view class="position" wx:if="{{item.positionNum > 0}}"><i class="icon iconfont icon-zhiwei"></i><text class="num">{{item.positionNum}}</text>个职位</view>
+      </view>
+    </view>
+  </view>
+</view>

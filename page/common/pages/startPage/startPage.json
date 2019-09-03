@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+  	"choose": "../../../../components/business/choose/choose"
+  }
+}

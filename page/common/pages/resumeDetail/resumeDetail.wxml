@@ -1,0 +1,194 @@
+<!--求职者个人简历页-->
+<!-- 加载过滤器 -->
+<wxs src="../../../../utils/filters.wxs" module="filters" />
+
+<view wx:if="{{!info.isBlockResume}}">
+  <navbar title="{{isOwner ? '简历完善度' + info.resumeCompletePercentageDesc : '简历详情'}}" background="#FFFFFF" color="#22292C" showHome="{{true}}"></navbar>
+  <block wx:if="{{!invisible}}">
+    <view class="resume-from" wx:if="{{info.sourceDesc}}">
+      <view class="text4">
+        <image class="icon1 icon-left img01" src="{{cdnImagePath}}sanjiaoxing001.png"></image>
+        此候选人来自：<view class="position"><text class="text10">{{info.sourceDesc}}</text></view>
+        <image class="icon1 icon-right img01" src="{{cdnImagePath}}sanjiaoxing001.png"></image>
+      </view>
+    </view>
+    <form bindsubmit="formSubmit" report-submit='{{true}}'>
+      <view hidden="{{!hasReFresh}}">
+        <refreshStatus></refreshStatus>
+      </view>
+      <view class="resumeDetail {{isOwner? '' : 'addpadding'}}" wx:if="{{info}}">
+        <shareBtn wx:if="{{!isOwner}}" posterType="{{options.preview ? 'applicant' : ''}}"></shareBtn>
+        <button form-type="submit" class="clear-style previewFile" wx:if="{{info.resumeAttach && !isOwner}}" bindtap="previewFile" data-file="{{info.resumeAttach}}">
+          <view class="fileName"><image class="fileIcon" src="{{cdnImagePath}}jianliIcon.png"></image><text>该候选人已上传附件简历</text></view>
+          <view class="previewBtn"><text>在线查看</text><i class="btnIcon iconfont icon-disejiantou-you"></i></view>
+        </button>
+      <!-- 基本信息 -->
+        <view class="personalInfo commentBox">
+          <view class="top">
+            <button class="clear-style avatarBox" form-type="submit" bindtap="readAvatar">
+              <view class="avatar">
+                <image src="{{info.avatar.smallUrl}}" class="img"></image>
+              </view>
+              <view class="gender">
+                <image class="sexIcon" src="{{cdnImagePath}}nan.png" wx:if="{{info.gender === 1}}"></image>
+                <image class="sexIcon" src="{{cdnImagePath}}nv.png" wx:else></image>
+              </view>
+            </button>
+            <view class="info">
+              <view class="name" wx:if="{{!info.advisor.glass}}">
+                  <text>{{info.name}}</text>
+                  <i class="icon iconfont icon-bianji1 edit" data-editName="info" data-id="{{item.id}}" bindtap="edit" wx:if="{{isOwner}}"></i>
+              </view>
+              <image wx:else src="{{cdnImagePath}}invisible2.png" class="filter2"></image>
+              <view class="companyName" wx:if="{{info.lastCompanyName || info.lastPosition}}">
+                <text>{{info.lastCompanyName}}</text><block wx:if="{{info.lastCompanyName && info.lastPosition}}"> | </block><text>{{info.lastPosition}}</text>
+              </view>
+            </view>
+          </view>
+          <view class="experience">
+            <view class="time" wx:if="{{info.workAgeDesc}}"><i class="icon iconfont icon-zhiwei"></i>{{info.workAgeDesc}}</view>
+            <view class="age" wx:if="{{info.age}}"><i class="icon iconfont icon-nianling"></i>{{info.age}}岁</view>
+            <view class="education" wx:if="{{info.degreeDesc}}"> <i class="icon iconfont icon-xueli"></i>{{info.degreeDesc}}</view>
+            <view class="status" wx:if="{{info.jobStatus}}">{{info.jobStatusDesc}}</view>
+          </view>
+          <block wx:if="{{info.signature}}">
+            <image class="fgLine" src="{{cdnImagePath}}line.png"></image>
+            <view class="personalTip">
+              <view class="text">{{info.signature || '你还未填写个性签名，说说你的想法吧~'}}</view>
+              <view class="tipBox" wx:if="{{info.personalizedLabels.length > 0}}">
+                <text class="tip" wx:for="{{info.personalizedLabels}}" wx:key="{{index}}">{{item.labelName || item.name}}</text>
+              </view>
+            </view>
+          </block>
+        </view>
+        <view class="contact commentBox" wx:if="{{(!isOwner) || (isOwner && showEdit)}}">
+          <view class="intentTitle"><view class="commontIcon"><view class="box"></view></view> 联系方式</view>
+          <view class="phone {{!info.wechat ? 'noWechat' : ''}}"><i class="imgIcon iconfont icon-shoujihaoma"></i><text class="data">{{info.mobile}}</text><text class="btn" bindtap="call">拨打电话</text></view>
+          <view class="wechat" wx:if="{{info.wechat}}"><i class="imgIcon iconfont icon-weixin"></i><text class="data">{{info.wechat}}</text><text class="btn" bindtap="wechat">复制微信号</text></view>
+        </view>
+        <!-- 意向 -->
+        <view class="intent commentBox" wx:if="{{(!isOwner && info.expects.length > 0) || isOwner}}">
+          <view class="intentTitle"><view class="commontIcon"><view class="box"></view></view> 求职意向</view>
+          <!-- 意向列表 -->
+          <view class="officeTab" wx:for="{{info.expects}}" wx:if="{{index < 3}}" wx:key="{{index}}">
+            <view>
+              <view class="officeDetail">
+                <text class="name">{{item.position}} | {{item.city}}</text>
+                <text class="salary">{{item.salaryFloor * 1000}}~{{item.salaryCeil * 1000}}<text class="moneyTxt">元/月</text></text>
+                <i class="icon iconfont icon-bianji1 edit" data-editName="intent" data-id="{{item.id}}" bindtap="edit" wx:if="{{isOwner}}"></i></view>
+            </view>
+            <view class="officeInfo">
+              <block wx:for="{{item.fields}}" wx:for-item="officeInfo" wx:for-number="{{item.fields.length}}" wx:key="{{index}}">
+                <text>{{officeInfo.field || officeInfo.name}} <block wx:if="{{item.fields.length - 1 !== index}}" > · </block></text>
+              </block>
+            </view>
+          </view>
+          <text class="add" data-editName="intent" bindtap="edit" wx:if="{{isOwner && info.expects.length < 3}}" data-id="">添加求职意向</text>
+        </view>
+        <!-- 工作经历 -->
+        <view class="workExp commentBox" wx:if="{{(!isOwner && info.careers.length > 0) || isOwner}}">
+          <view class="intentTitle"><view class="commontIcon"><view class="box"></view></view> 工作经历</view>
+          <view class="listCareers">
+            <view class="expTab" wx:for="{{info.careers}}" wx:key="{{index}}" wx:if="{{isOwner || (!isOwner && index < showLimit)}}">
+              <view class="expTitle">
+                <text wx:if="{{item.company}}" class="expName {{isOwner ? 'ellipsis':''}}">{{item.company}}</text>
+                <block wx:if="{{item.startTime}}">
+                  <text class="expTime" wx:if="{{item.endTime}}">{{filters.dateFormat(item.startTime, 'YYYY.MM')}}-{{filters.dateFormat(item.endTime, 'YYYY.MM')}}</text>
+                  <text class="expTime" wx:else>{{filters.dateFormat(item.startTime, 'YYYY.MM')}}-至今</text>
+                </block>
+                <i class="icon iconfont icon-bianji1 edit" data-editName="work" data-id="{{item.id}}" bindtap="edit" wx:if="{{isOwner}}"></i>
+              </view>
+              <view class="expInfo" wx:if="{{item.position}}">{{item.position}}</view>
+              <!-- 工作内容 -->
+              <shrinkText class="expContent" wx:if="{{item.duty}}" textData="{{item.duty}}" line="{{isOwner ? 1 : 0}}"></shrinkText>
+              <!-- 工作标签 -->
+              <view class='expTip' wx:if="{{item.technicalLabels.length > 0}}">
+                <text wx:for="{{item.technicalLabels}}" wx:key="{{index}}"># {{item.labelName}}</text>
+              </view>
+            </view>
+          </view>
+          <view class="openbtn" bindtap="openMoreCareer" wx:if="{{!isOwner && info.careers.length > 3 && showLimit === 3}}">展开全部{{info.careers.length}}个工作经历<i class="icon iconfont icon-zhishibiao {{showLimit === 100 ? 'shrink':''}}"></i></view>
+          <view class="openbtn" bindtap="openMoreCareer" wx:if="{{!isOwner && info.careers.length > 3 && showLimit === 100}}">折叠收起<i class="icon iconfont icon-zhishibiao {{showLimit === 100 ? 'shrink':''}}"></i></view>
+          <text class="add" data-editName="work" bindtap="edit" wx:if="{{isOwner && info.careers.length < 10}}" data-id="">添加工作经历</text>
+        </view>
+        <!-- 教育经历 -->
+        <view class="projectExp commentBox" wx:if="{{(!isOwner && info.educations.length > 0) || isOwner}}">
+          <view class="intentTitle"><view class="commontIcon"><view class="box"></view></view> 教育经历</view>
+          <view class="listCareers">
+            <view class="expTab" wx:for="{{info.educations}}" wx:key="{{index}}">
+              <view class="expTitle">
+                <text class="expName {{isOwner ? 'ellipsis':''}}">{{item.school}}</text>
+                <block wx:if="{{item.startTime}}">
+                  <text class="expTime" wx:if="{{item.endTime}}">{{filters.dateFormat(item.startTime, 'YYYY.MM')}}-{{filters.dateFormat(item.endTime, 'YYYY.MM')}}</text>
+                  <text class="expTime" wx:else>{{filters.dateFormat(item.startTime, 'YYYY.MM')}}-至今</text>
+                </block>
+                <i class="icon iconfont icon-bianji1 edit" data-editName="education" data-id="{{item.id}}" bindtap="edit" wx:if="{{isOwner}}"></i>
+              </view>
+              <view class="expInfo">{{item.degreeDesc}}<block wx:if="{{item.major}}"> · {{item.major}}</block></view>
+              <!-- 教育经历 -->
+              <shrinkText class="expContent" wx:if="{{item.experience}}" textData="{{item.experience}}" line="{{isOwner ? 1 : 0}}"></shrinkText>
+            </view>
+          </view>
+          <text class="add" data-editName="education" bindtap="edit" wx:if="{{isOwner && info.educations.length < 10}}" data-id="">添加教育经历</text>
+        </view>
+        <!-- 更多 -->
+        <view class="more commentBox" wx:if="{{(!isOwner && info.moreIntroduce.introduce || info.moreIntroduce.imgs.length > 0) || isOwner}}">
+          <view class="intentTitle moreTitle">
+            <view><view class="commontIcon"><view class="box"></view></view> 更多介绍 </view>
+            <i class="icon iconfont icon-bianji1 edit" data-editName="more" data-id="{{item.id}}" bindtap="edit" wx:if="{{(info.moreIntroduce.introduce || info.moreIntroduce.imgs.length > 0) && isOwner}}"></i>
+          </view>
+          <view class="expTab" hidden="{{!info.moreIntroduce.introduce && info.moreIntroduce.imgs.length === 0}}">
+            <!-- 工作内容 -->
+            <shrinkText my-class="modeShrinkText" textData="{{info.moreIntroduce.introduce}}" wx:if="{{info.moreIntroduce.introduce}}" line="{{isOwner ? 1 : 0}}"></shrinkText>
+            <view class="imgBox" wx:if="{{info.moreIntroduce.imgs.length > 0}}">
+              <image wx:for="{{info.moreIntroduce.imgs}}" wx:key="{{index}}" mode="aspectFill" src="{{item.smallUrl}}" bindtap="preview" data-current="{{item.url}}"></image>
+            </view>
+          </view>
+          <text class="add" data-editName="more" bindtap="edit" wx:if="{{!info.moreIntroduce.introduce && info.moreIntroduce.imgs.length === 0 && isOwner}}" data-id="0">完善更多介绍</text>
+        </view>
+      </view>
+      <block>
+        <button form-type="submit" wx:if="{{!options.preview && !isOwner}}" hidden="{{options.adviser && info.sourceType !== 500 || info.advisor.glass}}" class="clear-style collect" bindtap="collect">
+          <i class="icon iconfont icon-ganxingqu" wx:if="{{!info.interested}}"></i>
+          <i class="icon iconfont icon-biaojiweiganxingqu" wx:else></i>
+        </button>
+        <!-- 底部开撩 -->
+        <view class="bottomBox" hidden="{{options.adviser && info.sourceType !== 500}}">
+          <view wx:if="{{!options.preview}}">
+            <interviewBar
+              id="interviewBar"
+              infos="{{info}}"
+              type="resume"
+              bindresultevent="init"
+              wx:if="{{info.vkey && !isOwner}}"></interviewBar>
+          </view>
+          <view wx:if="{{options.preview && !isOwner}}" class="editBot">
+            <button form-type="submit" class="editBotBtn" bindtap="editSelf">编辑简历</button>
+          </view>
+        </view>
+      </block>
+      <block wx:if="{{info.vkey}}"><canvasCard cardData="{{info}}" type="resume" bindgetCreatedImg="getCreatedImg"></canvasCard></block>
+    </form>
+  </block>
+  <block wx:else>
+    <view class="invisibleWrap" style="margin-top: -{{navH}}px">
+      <view class="wrap">
+        <view class="photo filter">
+          <image class="img" src="https://attach.lieduoduo.ziwork.com/default/man.png!130xauto"></image>
+        </view>
+        <view class="desc">
+          <view>该简历为顾问精选简历</view>
+          <view>暂无查看权限</view>
+        </view>
+        <view class="rule" bindtap="toggleExplainPop">什么是精选简历？</view>
+        <button class="backHomeBtn" bindtap="backHome">返回首页</button>
+      </view>
+    </view>
+    <actionSheet class="actionSheet" openPop="{{hasExplainPop}}" title="精选简历" bindclose="toggleExplainPop">
+      <view class="content">精选简历，是猎Plus约面服务会员享有的特权。由平台专属顾问在365天的服务周期内，持续为招聘官量身甄选优质简历，提供打包推荐、跟进邀约面试等服务。</view>
+      <view class="desc">了解更多细则，欢迎联系我们</view>
+      <button class="callPhone" bindtap="callPhone">{{telePhone}}</button>
+    </actionSheet>
+  </block>
+</view>
+<notFound msg="{{'oops！找不到这份简历了~'}}" title="{{'简历详情'}}" wx:if="{{info.isBlockResume}}"></notFound>

@@ -1,0 +1,46 @@
+.chooseTopic {
+	background: #FAFCFF;
+	min-height: 100vh;
+}
+.list {
+	margin-top: 24rpx;
+	background: #fff;
+	padding: 0 40rpx;
+}
+.list .item {
+	padding: 44rpx 0;
+	border-bottom: 1rpx solid #E8E9EB;
+	font-size: 28rpx;
+	font-weight: bold;
+	position: relative;
+}
+.list .item .topic {
+	width: 546rpx;
+}
+.list .item .topic .title {
+	color: #282828;
+	font-weight:bold;
+	line-height:40rpx;
+}
+.list .item .topic .msg {
+	color: #626262;
+	font-weight:400;
+	line-height:38rpx;
+	font-size: 26rpx;
+	margin-top: 8rpx;
+}
+.list .item .addBtn {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	right: 0;
+	font-size:28rpx;
+	font-weight:bold;
+	color:rgba(101,39,145,1);
+	line-height:40rpx;
+}
+.add {
+	font-size: 34rpx;
+}
+
+

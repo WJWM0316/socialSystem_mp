@@ -1,0 +1,21 @@
+<view class="productList">
+	<navbar title="产品介绍" background="#fff" color="#22292C"></navbar>
+	<view class="ul">
+		<view class="li" wx:for="{{productList}}" wx:key="{{index}}" wx:for-item="item">
+			<view class="logo-box">
+				<image src="{{item.logo.smallUrl}}" mode="aspectFill"></image>
+			</view>
+			<view class="content">
+				<view class="first">
+					<view class="strong">{{item.productName}}</view>
+					<view class="tips">{{item.slogan}}</view>
+				</view>
+				<view class="second">{{item.lightspot}}</view>
+			</view>
+			<view class="edit-box" bindtap="edit" data-id="{{item.id}}"><i class="icon iconfont icon-bianji"></i></view>
+		</view>
+	</view>
+	<view class="footer">
+    <button class="button-save" bindtap="add">新增</button>
+  </view>
+</view>

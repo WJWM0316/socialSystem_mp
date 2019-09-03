@@ -1,0 +1,12 @@
+{
+	"enablePullDownRefresh": true,
+	"backgroundTextStyle": "light",
+  "usingComponents": {
+  	"navbar": "../../../../components/business/navbar/navbar",
+    "tabBar": "../../../../components/business/tabBar/tabBar",
+    "choose": "../../../../components/business/choose/choose",
+    "auth": "../../../../components/functional/auth/auth",
+    "bindPhone": "../../../../components/functional/bindPhone/bindPhone",
+    "officerTab": "../../../../components/business/officerTab/officerTab"
+  }
+}

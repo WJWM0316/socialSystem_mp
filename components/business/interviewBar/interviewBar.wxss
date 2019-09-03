@@ -1,0 +1,322 @@
+@import '../../../iconfont.wxss'
+.interview-bar {
+  height:138rpx;
+  background:rgba(255,255,255,1);
+  box-shadow:0rpx -6rpx 20rpx 0rpx rgba(34,56,101,0.08);
+  background: white;
+  width: 100%;
+  position:fixed;
+  z-index: 10;
+  left: 0;
+  bottom: 0;
+  box-sizing: border-box;
+  padding: 20rpx;
+  display: flex;
+  border-radius:28rpx 28rpx 0rpx 0rpx;
+}
+.interview-bar .clear-style {
+  padding: 0;
+  background: none;
+  border: none;
+}
+.interview-bar .clear-style::after {
+  display: none;
+}
+.interview-bar .img-box{
+  width:100rpx;
+	height:100rpx;
+	border:3rpx solid rgba(255,255,255,1);
+	background: rgba(0,0,0,.01);
+	border-radius: 50%;
+	margin-right: 12rpx;
+	overflow: hidden;
+}
+
+.interview-bar .img-box .img {
+	width: 100%;
+	height: 100%;
+}
+
+.interview-bar .img-box .tips-img {
+	width: 623rpx;
+	height: 135rpx;
+	position: absolute;
+	top: -90rpx;
+	left: 0;
+	z-index: 10;
+}
+
+.interview-bar .button-box{
+	height:80rpx;
+	border-radius:40rpx;
+	margin: 10rpx 0;
+	text-align: center;
+	font-size:28rpx;
+	font-weight:500;
+	flex: 1;
+	margin-left: 30rpx;
+	overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.interview-bar .button-box view {
+	flex: 1;
+}
+
+.interview-bar .accept {
+	background: #652791;
+	color: white;
+}
+
+.interview-bar .reject {
+	background: #EFE9F4;
+	color: #652791;
+}
+
+.interview-bar .accept, .interview-bar .reject {
+  height: 80rpx;
+  line-height: 80rpx;
+}
+
+.interview-bar .freeze {
+	background: #F5F4F7;
+	font-size:28rpx;
+	color:rgba(146,146,146,1);
+}
+.interview-bar .button-box-color1 {
+	background:rgba(101,39,145,1);
+	color:rgba(255,255,255,1);
+}
+
+.interview-bar .button-box-color2 {
+	background: #EFE9F4;
+	color: #652791;
+}
+
+.interview-bar .button-box-color3 {
+	background: #652791;
+	color: #fff;
+}
+
+.interview-bar .button-box-color4 {
+	color: #fff;
+	background:rgba(205,203,207,1);
+}
+
+.interview-bar .content {
+  position: relative;
+}
+
+.interview-bar .first {
+  line-height: 1;
+  margin-top: 20rpx;
+}
+
+.interview-bar .second {
+  line-height: 1;
+	font-size:22rpx;
+	font-weight:300;
+	color:rgba(40,40,40,1);
+	width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	max-width: 330rpx;
+	margin-top: 10rpx;
+}
+
+.interview-bar .name {
+	font-size:32rpx;
+	font-weight:500;
+	color:rgba(40,40,40,1);
+	display: inline-block;
+	line-height: 1;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	max-width: 160rpx;
+}
+
+.interview-bar .hunter-infos {
+	font-size:22rpx;
+	font-weight:500;
+	color:#929292;
+	display: inline-block;
+}
+
+.interview-bar .strong {
+	color:#8452A7;
+	display: inline-block;
+	margin-left: 10rpx;
+}
+
+.interview-bar .edit-button {
+  margin-right: 20rpx;
+  height:80rpx;
+	border-radius:40rpx;
+	text-align: center;
+	line-height: 80rpx;
+	font-size:28rpx;
+	font-weight:500;
+	color:#652791;
+	width:246rpx;
+	background:rgba(239,233,244,1);
+	border-radius:44rpx;
+	margin: 10rpx 30rpx 10rpx 60rpx;
+}
+
+.interview-bar .switch-button {
+  flex: 1;
+	height:80rpx;
+	background:rgba(101,39,145,1);
+	border-radius:40rpx;
+	margin: 10rpx 60rpx 10rpx 0rpx;
+	text-align: center;
+	line-height: 80rpx;
+	font-size:28rpx;
+	font-weight:500;
+	color:rgba(255,255,255,1);
+	width:354rpx;
+	background:rgba(101,39,145,1);
+	box-shadow:0rpx 4rpx 12rpx 0rpx rgba(101,39,145,0.38);
+	border-radius:44rpx;
+}
+
+.overlay {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	top: 0;
+	background: rgba(0,0,0,.6);
+	z-index: 10000000;
+}
+
+.overlay .box {
+	background: white;
+	padding: 56rpx 50rpx 0 50rpx;
+	border-radius: 18rpx;
+	position: absolute;
+	top: 50%;
+	box-sizing: border-box;
+	transform: translateY(-50%);
+	left: 50rpx;
+	right: 50rpx;
+	height: 712rpx;
+	text-align: center;
+	transition: all ease .2s;
+}
+
+.overlay .button {
+	height:88rpx;
+	background:rgba(101,39,145,1);
+	box-shadow:0rpx 20rpx 18rpx 0rpx rgba(101,39,145,0.2);
+	border-radius:49rpx;
+	font-size:32rpx;
+	font-weight:400;
+	color:rgba(255,255,255,1);
+	text-align: center;
+	line-height: 88rpx;
+	position: absolute;
+	left: 50rpx;
+	right: 50rpx;
+	bottom: 56rpx;
+}
+
+.overlay .p1 {
+	font-size:32rpx;
+	font-weight:400;
+	color:rgba(40,40,40,1);
+	line-height:48rpx;
+	text-align: center;
+}
+
+.overlay .p2 {
+	font-size:32rpx;
+	font-weight:400;
+	color:rgba(40,40,40,1);
+	line-height:48rpx;
+	text-align: center;
+}
+
+.overlay .icon-close {
+	position: absolute;
+	top: 31rpx;
+	right: 31rpx;
+	color: #CDCBCF;
+}
+
+.overlay image {
+	width: 440rpx;
+	height: 290rpx;
+	margin: 38rpx auto 32rpx auto;
+}
+.btnBox {
+	width: 650rpx;
+	line-height: 80rpx;
+	overflow: hidden;
+	font-size:28rpx;
+	font-weight:700;
+	color:#fff;
+	text-align: center;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 0 auto;
+}
+.btnBox .uninterested {
+	width:286rpx;
+	height:80rpx;
+	background:#EFE9F4;
+	color: #652791;
+	border-radius: 40rpx 0 0 40rpx;
+}
+.btnBox .invitation {
+	width:364rpx;
+	height:80rpx;
+	background:#652791;
+	border-radius: 0 40rpx 40rpx 0rpx;
+}
+.btnBox .viewInvitations {
+	width:100%;
+	height:80rpx;
+	background:#652791;
+	color: #ffffff;
+	border-radius: 40rpx;
+}
+.btnBox .default {
+	width:100%;
+	height:80rpx;
+	background:#F5F4F7;
+	color: #929292;
+	border-radius: 40rpx;
+}
+.min-row{
+	height: 100rpx;
+	line-height: 100rpx;
+	font-size:28rpx;
+	color:#282828;
+	flex: 1;
+}
+
+.min-row .active{
+	color:rgba(101,39,145,1);
+}
+
+.min-row .btn_01{
+	float: left;
+	padding-left: 50rpx;
+}
+
+.min-row .btn_02{
+	float: right;
+	padding-right: 50rpx;
+}
+
+.btnBox .min-row .btn_01 {
+  padding-left: 0;
+}
+.btnBox .min-row .btn_02 {
+  padding-right: 0;
+}

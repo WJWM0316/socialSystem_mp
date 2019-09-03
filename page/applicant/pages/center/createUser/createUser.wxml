@@ -1,0 +1,29 @@
+<!--完善简历第一步-->
+<navbar title=" " background="transparent" color="#fff" customBack bindbackEvent="backEvent"></navbar>
+<view class="warp" style="margin-top: -{{navHeight}}px">
+  <view class="header">
+    <image class="headerBg" src="{{cdnImagePath}}pic_bg_new@3x.png"></image>
+    <text class="title">开启有趣的求职之旅</text>
+    <text class="subtitle">真实可靠的职场形象总能碰到机遇</text>
+    <view class="avatarBox">
+      <view class="photoIcon"><i class="icon iconfont icon-xiangji"></i></view>
+      <avatarCut class="avatar" avatar="avatar" src="{{avatar.smallUrl}}"></avatarCut>
+    </view>
+  </view>
+  <block>
+    <view class="gender" bindtap="chooseGender">
+      <view class="{{gender === '1'? 'active' : ''}}" data-gender="1">男</view>
+      <view class="{{gender === '2'? 'active' : ''}}" data-gender="2">女</view>
+    </view>
+    <view class="name">
+      <input name="name" placeholder-class="holderStyle" bindinput="getValue" data-type="name" maxlength="20" placeholder="请输入姓名"  value="{{name}}"/>
+    </view>
+    <view class="time">
+      <myPicker class="myPicker" setResult="{{workTimeDesr}}" isTriangle="{{true}}" pickerType="workTime" bindresultevent="getresult"></myPicker>
+    </view>
+    <view class="btn-area">
+      <button bindtap="submit"><i class="icon iconfont icon-xiayibu"></i></button>
+    </view>
+  </block>
+</view>
+<guidePop showPop="{{showPop}}"></guidePop>

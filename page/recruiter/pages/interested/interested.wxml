@@ -1,0 +1,46 @@
+<view>
+	<navbar title="我感兴趣的"  background="white" color="#22292C" showHome="{{true}}"></navbar>
+
+	<view hidden="{{!hasReFresh}}">
+		<refreshStatus></refreshStatus>
+	</view>
+
+	<view class="list-box {{!collectUsers.list.length ? 'nodata' : ''}}" style="top: {{navH}}px">
+		<form bindsubmit="formSubmit" report-submit='{{true}}'> 
+			<button
+				form-type="submit"
+				bindtap="viewResumeDetail"
+				class="formIdBtn"
+				wx:for="{{collectUsers.list}}"
+				wx:for-item="item"
+				data-jobhunterUid="{{item.uid}}"
+				wx:key="{{index}}">
+				<view class="item2">
+					<view class="row-one">
+						<view class="img-box"><image src="{{item.avatar.smallUrl}}" lazy-load></image></view>
+						<view class="content">
+							<view class="header">
+								<view class="name">{{item.name}}</view>
+								<view class="zhiwei">
+									<block>{{item.workAgeDesc}}</block>
+									<block wx:if="{{item.degreeDesc}}"> · {{item.degreeDesc}}</block>
+									<block wx:if="{{item.salary}}"> · {{item.salary}}</block>
+								</view>
+							</view>
+							<view class="degress" wx:if="{{item.lastCompanyName || item.lastPosition}}">
+								<block wx:if="{{item.lastCompanyName}}">{{item.lastCompanyName}}</block>
+								<block wx:if="{{item.lastCompanyName && item.lastPosition}}"> | </block>
+								<block wx:if="{{item.lastPosition}}">{{item.lastPosition}}</block>
+							</view>
+						</view>
+					</view>
+					<!-- <view class="reddot"></view> -->
+				</view>
+			</button>
+		</form>
+		<bottomStatus status="{{onBottomStatus}}" listData="{{collectUsers.list}}" desc=" 立即分享，一大波候选人等着开撩你！" marginTop="{{140}}">
+			<button class="jump share-position" bindtap="dotoAction" data-action="position">分享职位</button>
+			<button class="jump share-homepage" bindtap="dotoAction" data-action="recruiter">分享我的主页</button>
+		</bottomStatus>
+	</view>
+</view>

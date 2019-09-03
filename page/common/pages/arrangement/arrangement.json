@@ -1,0 +1,10 @@
+{
+	"enablePullDownRefresh": true,
+	"backgroundTextStyle": "light",
+  "usingComponents": {
+  	"canvasCard": "../../../../../components/business/canvasCard/canvasCard",
+    "navbar": "../../../../../components/business/navbar/navbar",
+    "roleInfoCard": "../../../../components/business/roleInfoCard/roleInfoCard",
+    "myPicker": "../../../../../components/functional/myPicker/myPicker"
+  }
+}

@@ -1,0 +1,29 @@
+.not-found {
+  text-align: center;
+}
+
+.not-found .emptyState {
+  width: 340rpx;
+  height: 240rpx;
+  margin-top: 120rpx;
+}
+
+.not-found .oops {
+  font-size:26rpx;
+  color:rgba(92,86,93,1);
+  line-height:26rpx;
+  margin: 20rpx auto 40rpx auto;
+}
+
+.not-found .return {
+  width:430rpx;
+  height:98rpx;
+  background:rgba(255,220,41,1);
+  box-shadow:0rpx 4rpx 20rpx 0rpx rgba(232,201,40,0.47);
+  border-radius:49rpx;
+  text-align: center;
+  line-height: 98rpx;
+  font-size:30rpx;
+  color:rgba(40,40,40,1);
+  display: inline-block;
+}

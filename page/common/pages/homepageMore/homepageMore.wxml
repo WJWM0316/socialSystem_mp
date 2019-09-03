@@ -1,0 +1,70 @@
+		
+<navbar title="{{companyInfos.companyShortname}}" background="#fff" color="#22292C" showHome="{{true}}"></navbar>
+
+<view class="production-box" wx:if="{{companyInfos.product.length}}">
+	<view class="title">
+		<view class="icon"> <view class="fan"></view> </view> 产品介绍
+	</view>
+	<view class="ul">
+		<button form-type="submit" class="clear-style li" wx:for="{{companyInfos.product}}" wx:key="{{index}}" wx:for-item="item">
+			<view class="base">
+				<view class="img-box">
+					<image mode="aspectFit" src="{{item.logoInfo.smallUrl}}" />
+				</view>
+				<view class="content">
+					<view class="row-one">
+						<view class="username">{{item.productName}}</view>
+						<view class="recruitment-number">{{item.slogan}}</view>
+					</view>
+				</view>
+			</view>
+			<view class="row-two"># {{item.lightspot}}</view>
+		</button>
+	</view>
+</view>
+
+<view class="company-address" wx:if="{{companyInfos.address.length > 0}}">
+	<view class="title">
+		<view class="icon"> <view class="fan"></view> </view> 公司地址
+	</view>
+	<view
+		class="map"
+		bindtap="viewMap"
+		data-longitude="{{map.longitude}}"
+		data-latitude="{{ map.latitude }}"
+		data-address="{{map.address}}"
+		data-doorplate="{{map.doorplate}}">
+		<map
+			wx:if="{{tab !== 'recruitment'}}"
+		  longitude="{{ map.longitude }}"
+		  latitude="{{ map.latitude }}"
+		  scale="16"
+		  enable-scroll="{{false}}"
+		  markers="{{map.markers}}"
+		  show-location></map>
+	</view>
+	<view
+		class="li"
+		wx:for="{{companyInfos.address}}"
+		wx:key="{{index}}"
+		wx:for-item="item"
+		data-longitude="{{item.lng}}"
+		data-latitude="{{item.lat}}"
+		data-address="{{item.address}}"
+		data-doorplate="{{item.doorplate}}"
+		bindtap="viewMap">
+			<i class="icon iconfont icon-dizhi"></i>
+			<view class="text">{{item.address}}</view>
+			<i class="icon iconfont icon-xiangyou"></i>
+	</view>
+</view>
+
+<view class="company-website" wx:if="{{companyInfos.website}}">
+	<view class="title">
+		<view class="icon"> <view class="fan"></view> </view> 公司官网
+	</view>
+	<view class="link-box">
+		<view class="link">{{companyInfos.website}}</view>
+		<view class="button" bindtap="copyLink">复制</view>
+	</view>
+</view>

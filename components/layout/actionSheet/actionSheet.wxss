@@ -1,0 +1,56 @@
+@import '../../../iconfont.wxss'
+
+.rule-box .content{
+  width:100vw;
+  height:auto;
+  background:rgba(255,255,255,1);
+  border-radius:28rpx 28rpx 0rpx 0rpx;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+  z-index: 10001;
+  transform: translateY(100%);
+  transition: all ease .2s;
+  opacity: .5;
+}
+
+.rule-box .mask {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background:rgba(0,0,0,.5);
+  z-index: 9;
+}
+.rule-box .show{
+  transform: translateY(0%);
+  opacity: 1
+}
+
+.rule-box .header{
+  height:108rpx;
+  background:rgba(255,255,255,1);
+  font-size:36rpx;
+  font-weight:700;
+  color:rgba(53,64,72,1);
+  line-height: 108rpx;
+  text-align: center;
+  position: relative;
+  margin-bottom: 30rpx;
+  padding: 0 60rpx;
+}
+
+.rule-box .header .icon-close{
+  font-size: 30rpx;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10rpx;
+  padding: 0 25rpx;
+  color: #929292;
+}
+

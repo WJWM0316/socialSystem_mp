@@ -40,7 +40,333 @@ Page({
     interval: 1000,
     duration: 1000,
     query: {},
-    companyInfos: {},
+    companyInfos: {
+      "id": 1346,
+      "vkey": "omv1b4ir",
+      "companyShortname": "星光璀璨（中国）",
+      "companyName": "星光璀璨（中国）影视文化传媒有限公司",
+      "logo": 26977,
+      "financing": "8",
+      "industryId": 150000,
+      "industry": "媒体",
+      "employees": "6",
+      "businessLicense": 0,
+      "onJob": 0,
+      "email": "Jiqiangliao@thetiger.com.cn",
+      "emailStatus": 1,
+      "website": "https://baidu.com",
+      "status": 1,
+      "oneSentenceIntro": "勿因未候日光暖，擅自轻言世间寒。",
+      "intro": "星光璀璨（中国）于2016年3月开始运作，先后成立了北京、武汉、成都、山西、郑州等十大工作室，共2000余直播间，同时有10家子公司，100家战略合作线下主播工作室。独家代理签约主播营销权益，共同培养新晋主播，策划全新主播栏目。拥有线上、线下管理人员500多人。专业经纪人、管理团队多方面培训助攻网红之路。稳居陌陌直播平台第一梯队公会，同时巩固各直播平台（花椒、繁星、YY、火山、抖音等）最大的公会地位。",
+      "createdUid": 567,
+      "isPerfect": 1,
+      "wherefrom": "1",
+      "customerLevel": 10,
+      "advisorGroupId": 1,
+      "advisorUid": 21,
+      "adminUid": 29,
+      "groupId": 4,
+      "creator": 0,
+      "updater": 0,
+      "createdAt": "2019-07-03 17:33:49",
+      "updatedAt": "2019-08-19 18:17:31",
+      "deletedAt": null,
+      "album": [
+        {
+          "id": 238,
+          "companyId": 1346,
+          "fileId": 26993,
+          "createdAt": "2019-07-03 18:29:48"
+        },
+        {
+          "id": 239,
+          "companyId": 1346,
+          "fileId": 26994,
+          "createdAt": "2019-07-03 18:29:50"
+        },
+        {
+          "id": 240,
+          "companyId": 1346,
+          "fileId": 26995,
+          "createdAt": "2019-07-03 18:29:52"
+        },
+        {
+          "id": 241,
+          "companyId": 1346,
+          "fileId": 26996,
+          "createdAt": "2019-07-03 18:29:54"
+        },
+        {
+          "id": 242,
+          "companyId": 1346,
+          "fileId": 26997,
+          "createdAt": "2019-07-03 18:29:56"
+        },
+        {
+          "id": 243,
+          "companyId": 1346,
+          "fileId": 26998,
+          "createdAt": "2019-07-03 18:29:58"
+        },
+        {
+          "id": 244,
+          "companyId": 1346,
+          "fileId": 26999,
+          "createdAt": "2019-07-03 18:30:00"
+        }
+      ],
+      "address": [
+        {
+          "id": 1004,
+          "companyId": 1346,
+          "areaId": 110105,
+          "doorplate": "10楼1010室",
+          "address": "北京市朝阳区东四环 阳光上东10号楼",
+          "lng": "116.483711",
+          "lat": "39.965542",
+          "headOffice": null,
+          "createdAt": "2019-07-12 10:32:34",
+          "province": "北京市",
+          "city": "北京市",
+          "district": "朝阳区"
+        },
+        {
+          "id": 1015,
+          "companyId": 1346,
+          "areaId": 440105,
+          "doorplate": "",
+          "address": "广东省广州市海珠区逸景路462号 珠江国际酒店",
+          "lng": "113.302628",
+          "lat": "23.08285",
+          "headOffice": null,
+          "createdAt": "2019-08-28 14:24:53",
+          "province": "广东省",
+          "city": "广州市",
+          "district": "海珠区"
+        }
+      ],
+      "product": [
+        {
+          "id": 462,
+          "companyId": 1346,
+          "productName": "明日头条",
+          "logo": 27000,
+          "slogan": "一款基于机器学习的个性化资讯推荐引擎～",
+          "lightspot": "核心产品明日头条现已成为一个通过人工智能技术，给用户推荐信息的内容平台。",
+          "siteUrl": "www.mrtt.com",
+          "createdAt": "2019-07-03 18:37:52",
+          "logoInfo": {
+            "id": 27000,
+            "vkey": "zf4btu9l",
+            "attachType": "img",
+            "attachTypeDesc": "图片",
+            "url": "https://attach.lieduoduo.ziwork.com/img/2019/0703/18/5d1c84f841c27.jpg",
+            "fileName": "tmp_53e4a855ff01809ba770a153736588d1.jpg",
+            "size": 28923,
+            "sizeM": "28.2KB",
+            "createdAt": "2019-07-03 18:35:36",
+            "extension": "jpg",
+            "width": 399,
+            "height": 368,
+            "middleUrl": "https://attach.lieduoduo.ziwork.com/img/2019/0703/18/5d1c84f841c27.jpg!330xauto",
+            "smallUrl": "https://attach.lieduoduo.ziwork.com/img/2019/0703/18/5d1c84f841c27.jpg!130xauto"
+          }
+        },
+        {
+          "id": 463,
+          "companyId": 1346,
+          "productName": "抖乐",
+          "logo": 27001,
+          "slogan": "一个帮助大众用户表达自我，记录美好生活的短视频平台～",
+          "lightspot": "应用人工智能技术为用户创造丰富多样的玩法！",
+          "siteUrl": "www.douyue.com",
+          "createdAt": "2019-07-03 18:41:58",
+          "logoInfo": {
+            "id": 27001,
+            "vkey": "u0waqwzx",
+            "attachType": "img",
+            "attachTypeDesc": "图片",
+            "url": "https://attach.lieduoduo.ziwork.com/img/2019/0703/18/5d1c85e2cbbcf.jpg",
+            "fileName": "tmp_3261888b4c986d3e0b286379f8a0d937.jpg",
+            "size": 24468,
+            "sizeM": "23.9KB",
+            "createdAt": "2019-07-03 18:39:31",
+            "extension": "jpg",
+            "width": 402,
+            "height": 401,
+            "middleUrl": "https://attach.lieduoduo.ziwork.com/img/2019/0703/18/5d1c85e2cbbcf.jpg!330xauto",
+            "smallUrl": "https://attach.lieduoduo.ziwork.com/img/2019/0703/18/5d1c85e2cbbcf.jpg!130xauto"
+          }
+        },
+        {
+          "id": 464,
+          "companyId": 1346,
+          "productName": "南瓜视频",
+          "logo": 27002,
+          "slogan": "国内最大的「个性化推荐视频平台」～",
+          "lightspot": "通过人工智能帮助每个人发现感兴趣的视频！",
+          "siteUrl": "www.nangua.com",
+          "createdAt": "2019-07-03 18:44:33",
+          "logoInfo": {
+            "id": 27002,
+            "vkey": "liqubztm",
+            "attachType": "img",
+            "attachTypeDesc": "图片",
+            "url": "https://attach.lieduoduo.ziwork.com/img/2019/0703/18/5d1c86b8e1588.jpg",
+            "fileName": "tmp_622cac290f937b6b4086ed6f1ea9212b.jpg",
+            "size": 36768,
+            "sizeM": "35.9KB",
+            "createdAt": "2019-07-03 18:43:05",
+            "extension": "jpg",
+            "width": 404,
+            "height": 338,
+            "middleUrl": "https://attach.lieduoduo.ziwork.com/img/2019/0703/18/5d1c86b8e1588.jpg!330xauto",
+            "smallUrl": "https://attach.lieduoduo.ziwork.com/img/2019/0703/18/5d1c86b8e1588.jpg!130xauto"
+          }
+        }
+      ],
+      "integrityRate": "91%",
+      "logoInfo": {
+        "id": 26977,
+        "vkey": "6uimgr9w",
+        "attachType": "img",
+        "attachTypeDesc": "图片",
+        "url": "https://attach.lieduoduo.ziwork.com/img/2019/0703/17/5d1c75cb69a2c.jpg",
+        "fileName": "tmp_069a600145ff7aae3da7c0b76966f1e6.jpg",
+        "size": 12175,
+        "sizeM": "11.9KB",
+        "createdAt": "2019-07-03 17:30:52",
+        "extension": "jpg",
+        "width": 300,
+        "height": 300,
+        "middleUrl": "https://attach.lieduoduo.ziwork.com/img/2019/0703/17/5d1c75cb69a2c.jpg!330xauto",
+        "smallUrl": "https://attach.lieduoduo.ziwork.com/img/2019/0703/17/5d1c75cb69a2c.jpg!130xauto"
+      },
+      "albumInfo": [
+        {
+          "id": 26993,
+          "vkey": "dyx2rxow",
+          "attachType": "img",
+          "attachTypeDesc": "图片",
+          "url": "https://attach.lieduoduo.ziwork.com/img/2019/0703/18/5d1c83938d588.jpg",
+          "fileName": "tmp_bab3769beca9303ef936fb4a057abf84.jpg",
+          "size": 288465,
+          "sizeM": "281.7KB",
+          "createdAt": "2019-07-03 18:29:40",
+          "extension": "jpg",
+          "width": 1440,
+          "height": 1080,
+          "middleUrl": "https://attach.lieduoduo.ziwork.com/img/2019/0703/18/5d1c83938d588.jpg!330xauto",
+          "smallUrl": "https://attach.lieduoduo.ziwork.com/img/2019/0703/18/5d1c83938d588.jpg!130xauto"
+        },
+        {
+          "id": 26994,
+          "vkey": "1tgicn6p",
+          "attachType": "img",
+          "attachTypeDesc": "图片",
+          "url": "https://attach.lieduoduo.ziwork.com/img/2019/0703/18/5d1c8393e6c35.jpg",
+          "fileName": "tmp_a47ae67a768040ca4577de39412742ef.jpg",
+          "size": 184804,
+          "sizeM": "180.5KB",
+          "createdAt": "2019-07-03 18:29:40",
+          "extension": "jpg",
+          "width": 1440,
+          "height": 1080,
+          "middleUrl": "https://attach.lieduoduo.ziwork.com/img/2019/0703/18/5d1c8393e6c35.jpg!330xauto",
+          "smallUrl": "https://attach.lieduoduo.ziwork.com/img/2019/0703/18/5d1c8393e6c35.jpg!130xauto"
+        },
+        {
+          "id": 26995,
+          "vkey": "bcpvpnnj",
+          "attachType": "img",
+          "attachTypeDesc": "图片",
+          "url": "https://attach.lieduoduo.ziwork.com/img/2019/0703/18/5d1c839413c22.jpg",
+          "fileName": "tmp_6c8105338b39f882604ade4851df967c.jpg",
+          "size": 251550,
+          "sizeM": "245.7KB",
+          "createdAt": "2019-07-03 18:29:40",
+          "extension": "jpg",
+          "width": 1440,
+          "height": 1080,
+          "middleUrl": "https://attach.lieduoduo.ziwork.com/img/2019/0703/18/5d1c839413c22.jpg!330xauto",
+          "smallUrl": "https://attach.lieduoduo.ziwork.com/img/2019/0703/18/5d1c839413c22.jpg!130xauto"
+        },
+        {
+          "id": 26996,
+          "vkey": "kjta2vbn",
+          "attachType": "img",
+          "attachTypeDesc": "图片",
+          "url": "https://attach.lieduoduo.ziwork.com/img/2019/0703/18/5d1c8394d1000.jpg",
+          "fileName": "tmp_75b5c6e9790fccf34df6a6829006918f.jpg",
+          "size": 388684,
+          "sizeM": "379.6KB",
+          "createdAt": "2019-07-03 18:29:41",
+          "extension": "jpg",
+          "width": 1440,
+          "height": 1080,
+          "middleUrl": "https://attach.lieduoduo.ziwork.com/img/2019/0703/18/5d1c8394d1000.jpg!330xauto",
+          "smallUrl": "https://attach.lieduoduo.ziwork.com/img/2019/0703/18/5d1c8394d1000.jpg!130xauto"
+        },
+        {
+          "id": 26997,
+          "vkey": "zwrc7qyz",
+          "attachType": "img",
+          "attachTypeDesc": "图片",
+          "url": "https://attach.lieduoduo.ziwork.com/img/2019/0703/18/5d1c839517b86.jpg",
+          "fileName": "tmp_2d20150881defdc6cb353349516c4b80.jpg",
+          "size": 344741,
+          "sizeM": "336.7KB",
+          "createdAt": "2019-07-03 18:29:42",
+          "extension": "jpg",
+          "width": 1440,
+          "height": 1080,
+          "middleUrl": "https://attach.lieduoduo.ziwork.com/img/2019/0703/18/5d1c839517b86.jpg!330xauto",
+          "smallUrl": "https://attach.lieduoduo.ziwork.com/img/2019/0703/18/5d1c839517b86.jpg!130xauto"
+        },
+        {
+          "id": 26998,
+          "vkey": "xizyb9pr",
+          "attachType": "img",
+          "attachTypeDesc": "图片",
+          "url": "https://attach.lieduoduo.ziwork.com/img/2019/0703/18/5d1c83951bc77.jpg",
+          "fileName": "tmp_6ea2d2fb9f19d497e940e5e877e0b88a.jpg",
+          "size": 390516,
+          "sizeM": "381.4KB",
+          "createdAt": "2019-07-03 18:29:43",
+          "extension": "jpg",
+          "width": 1440,
+          "height": 1080,
+          "middleUrl": "https://attach.lieduoduo.ziwork.com/img/2019/0703/18/5d1c83951bc77.jpg!330xauto",
+          "smallUrl": "https://attach.lieduoduo.ziwork.com/img/2019/0703/18/5d1c83951bc77.jpg!130xauto"
+        },
+        {
+          "id": 26999,
+          "vkey": "8farf1pc",
+          "attachType": "img",
+          "attachTypeDesc": "图片",
+          "url": "https://attach.lieduoduo.ziwork.com/img/2019/0703/18/5d1c83950d7b0.jpg",
+          "fileName": "tmp_8584a47b3686a78eda9db28e2f218c8f.jpg",
+          "size": 412533,
+          "sizeM": "402.9KB",
+          "createdAt": "2019-07-03 18:29:43",
+          "extension": "jpg",
+          "width": 1440,
+          "height": 1080,
+          "middleUrl": "https://attach.lieduoduo.ziwork.com/img/2019/0703/18/5d1c83950d7b0.jpg!330xauto",
+          "smallUrl": "https://attach.lieduoduo.ziwork.com/img/2019/0703/18/5d1c83950d7b0.jpg!130xauto"
+        }
+      ],
+      "financingInfo": "不需要融资",
+      "employeesInfo": "10000人以上",
+      "positionNum": 20,
+      "businessLicenseInfo": [],
+      "onJobInfo": [],
+      "adminName": "商务C",
+      "advisorName": "廖继强",
+      "statusDesc": "上线",
+      "customerLevelDesc": "0类",
+      "sCode": "mv186qvv"
+    },
     recruitersList: [],
     cdnImagePath: app.globalData.cdnImagePath,
     positionTypeList: [],
@@ -85,17 +411,17 @@ Page({
       }
     }
   },
-  onShow() {
-    if (app.loginInit) {
-      this.initPage()
-      this.init().then(() => this.getOnlinePositionType())
-    } else {
-      app.loginInit = () => {
-        this.initPage()
-        this.init().then(() => this.getOnlinePositionType())
-      }
-    }
-  },
+  // onShow() {
+  //   if (app.loginInit) {
+  //     this.initPage()
+  //     this.init().then(() => this.getOnlinePositionType())
+  //   } else {
+  //     app.loginInit = () => {
+  //       this.initPage()
+  //       this.init().then(() => this.getOnlinePositionType())
+  //     }
+  //   }
+  // },
   initPage () {
     let jumpCreate = () => {
       if (!app.globalData.isJobhunter && wx.getStorageSync('choseType') !== 'RECRUITER') {
@@ -442,18 +768,6 @@ Page({
       } else {
         if (this.data.showNav) this.setData({showNav: false})
       }
-    }
-  },
-  /**
-   * @Author   小书包
-   * @DateTime 2019-01-21
-   * @detail   触底加载数据
-   * @return   {[type]}   [description]
-   */
-  onReachBottom() {
-    const positionList = this.data.positionList
-    if (!positionList.isLastPage) {
-      this.getPositionList(false).then(() => this.setData({onBottomStatus: 1}))
     }
   },
   getCreatedImg(e) {

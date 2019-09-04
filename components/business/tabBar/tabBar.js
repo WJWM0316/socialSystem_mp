@@ -30,6 +30,14 @@ Component({
         path: `${RECRUITER}index/index`
       },
       {
+        title: '动态',
+        flag: 'dynamics',
+        iconPath: `${cdnImagePath}tab_dynamics.png`,
+        selectedIconPath: `${cdnImagePath}tab_dynamics_active.png`,
+        active: false,
+        path: `${RECRUITER}dynamics/dynamics`
+      },
+      {
         title: '面试',
         flag: 'interview',
         iconPath: `${cdnImagePath}tab_interview_nor@3x.png`,
@@ -56,7 +64,7 @@ Component({
     ],
     applicantList: [
       {
-        title: '公司',
+        title: '主页',
         flag: 'chance',
         iconPath: `${cdnImagePath}tab_company@3x.png`,
         selectedIconPath: `${cdnImagePath}tab_company_pre@3x.png`,

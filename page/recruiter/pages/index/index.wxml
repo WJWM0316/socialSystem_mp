@@ -1,249 +1,98 @@
+<view class="page_index">
 
-	<navbar title="{{background !== 'transparent' ? '店长多多' : ''}}"  background="{{background}}" color="#fff" isFixed="{{isFixed}}"></navbar>
+	<navbar
+		title="{{background !== 'transparent' ? '猎多多' : ''}}" 
+		background="{{background}}"
+		color="#fff"
+		isFixed="{{isFixed}}">
+	</navbar>
 
-	<view hidden="{{!hasReFresh}}">
-		<refreshStatus></refreshStatus>
-	</view>
-	
-	<view class="index-bannar">
-		<image src="{{cdnImagePath}}recruiter_mine_new_bg.png"></image>
-	</view>
-	
-	<view class="welcome">
-		<view class="admin">{{welcomeWord}}，{{detail.realname}}</view>
-		<view class="capsule" bindtap="routeJump" data-route="recruiter">
-			<view class="img-box"><image mode="aspectFill" src="{{detail.avatar.smallUrl}}" class="image"></image></view>
-			<i class="icon iconfont icon-youyi"></i>
+	<view class="index_header">
+		<view hidden="{{!hasReFresh}}">
+			<refreshStatus></refreshStatus>
 		</view>
-	</view>
-
-	<view class="floating-box">
-		<view class="row-one">
-			<view class="flex">
-				<view class="item" bindtap="routeJump" data-route="interested">
-					<view class="number">{{indexShowCount.recruiterInterestedToJ}}</view>
-					<view class="text">我感兴趣的<i class="icon iconfont icon-disejiantou-you"></i></view>
+		
+		<view class="index-bannar">
+			<image src="{{cdnImagePath}}recruiter_mine_new_bg.png"></image>
+		</view>
+		
+		<view class="welcome">
+			<view class="admin">{{welcomeWord}}，{{detail.realname}}</view>
+			<view class="capsule" bindtap="routeJump" data-route="recruiter">
+				<view class="img-box">
+					<image mode="aspectFill" src="{{detail.avatar.smallUrl}}" class="image"></image>
 				</view>
-				<view class="item" bindtap="routeJump" data-route="interview">
-					<view class="number">{{indexShowCount.recentInterview}}</view>
-					<view class="text">最近面试<i class="icon iconfont icon-disejiantou-you"></i></view>
-				</view>
-				<view class="item" bindtap="routeJump" data-route="position">
-					<view class="number">{{indexShowCount.onlinePosition}}</view>
-					<view class="text">在招职位<i class="icon iconfont icon-disejiantou-you"></i></view>
-				</view>
-			</view>
-			
-			<view class="btnBox">
-				<view class="btn1" bindtap="routeJump" data-route="companyPoster"><i class="icon iconfont icon-fanhuishouye"></i>转发公司主页</view>
-				<view class="btn2" bindtap="routeJump" data-route="position"><i class="icon iconfont icon-zhiwei"></i>转发我的职位</view>
+				<i class="icon iconfont icon-youyi"></i>
 			</view>
 		</view>
-	</view>
-	
-	<view class="shoper-banner" wx:if="{{banner.length}}">
-		<swiper
-      class="swiper"
-      autoplay
-      circular
-      bindchange="autoplay">
-      <swiper-item
-				bindtap="toJump" 
-				data-url="{{item.otherUrl}}" 
-				wx:for="{{banner}}"
-				wx:key="{{index}}"
-				class="swiper-item"
-				wx:for-item="item">
-        <image src="{{item.bigImgUrl}}" class="images"></image>
-      </swiper-item>
-    </swiper>
-	</view>
 
-	<view>
-		<view class="default {{fixedDom ? 'fixed' : ''}}" style="top: {{navH}}px">
-			<view class="ul-tab-bar">
-				<view
-					class="li {{pageList === 'collectMySelf' ? 'active' : ''}}"
-					bindtap="ontabClick"
-					data-key="collectMySelf">
-					发现<view></view>
-					<view class="line"></view>
-				</view>
-				<view
-					class="li {{pageList === 'browseMySelf' ? 'active' : ''}}"
-					bindtap="ontabClick"
-					data-key="browseMySelf">
-					看过我的
-					<text class="total" wx:if="{{indexShowCount.viewCount}}">{{indexShowCount.viewCount}}</text>
-					<view class="line"></view>
-				</view>
-				<image src="{{cdnImagePath}}line00002.png" class="image" hidden="{{pageList === 'browseMySelf'}}"></image>
-				<image src="{{cdnImagePath}}line00001.png" class="image" hidden="{{pageList === 'collectMySelf'}}"></image>
+		<view class="floating-box">
+			<view class="item left001" bindtap="routeJump" data-route="interested">
+				<view class="number">{{indexShowCount.recruiterInterestedToJ}}</view>
+				<view class="text">看过我的<i class="icon iconfont icon-disejiantou-you"></i></view>
+			</view>
+			<view class="item center001" bindtap="routeJump" data-route="interview">
+				<view class="number">{{indexShowCount.recentInterview}}</view>
+				<view class="text">最近面试<i class="icon iconfont icon-disejiantou-you"></i></view>
+			</view>
+			<view class="item right001" bindtap="routeJump" data-route="position">
+				<view class="number">{{indexShowCount.onlinePosition}}</view>
+				<view class="text">未处理申请<i class="icon iconfont icon-disejiantou-you"></i></view>
 			</view>
 		</view>
-		<!-- <view class="list-box adviser"  hidden="{{pageList === 'browseMySelf'}}">
-			<view class="formIdBtn" wx:if="{{indexShowCount.advisor}}" bindtap="routeJump" data-route="adviser">
-				<view class="item2">
-					<view class="row-one">
-						<view class="img-box"><image src="{{cdnImagePath}}icon_gwhead.png" lazy-load></image></view>
-						<view class="content">
-							<view class="header">
-								<view class="name">顾问精选简历</view>
-							</view>
-							<view class="degress">
-								<block wx:if="{{indexShowCount.advisor.total}}">
-									<block wx:if="{{indexShowCount.advisor.notHandleNum > 0}}">
-										<text class="num">{{indexShowCount.advisor.notHandleNum}}</text> 位候选人未处理
-									</block>
-									<block wx:else>
-										<text>累计收到 {{indexShowCount.advisor.total}} 位候选人</text>
-									</block>
-								</block>
-								<block wx:else>
-									<text>有合适简历将立即给您推荐</text>
-								</block>
-							</view>
+		
+		
+		<view class="todos_bar_notopen" bindtap="routeJump" data-route="dynamics">
+			<view class="left">
+				<view class="todo_title">候选人动态<view class="number" wx:if="{{indexShowCount.dynamicTotal}}">{{indexShowCount.dynamicTotal}}</view></view>
+				<view class="todo_tips">对我感兴趣/看过我的</view>
+			</view>
+			<view class="right">
+				<view class="imglist">
+					<image class="imgitem" lazy-load wx:for="{{indexShowCount.candidateDynamic}}" wx:key="{{index}}" src="{{item.smallUrl}}" wx:if="{{index <= 2}}"></image>
+					<image class="imgitem" src="{{cdnImagePath}}more.png" wx:if="{{indexShowCount.candidateDynamic.length > 3}}"></image>
+				</view>
+			</view>
+		</view>
+		<view class="todo_ul">
+			<view class="li" wx:for="{{[1,2,3]}}" wx:key="{{index}}">
+				<view class="img-box">
+					<image src="{{cdnImagePath}}sign1.png" mode="aspectFill" class="vip"></image>
+				</view>
+				<view class="content">
+					<view class="row1">
+						<view class="left">
+							<view class="name">张杰</view>
+							<view class="infos1">老虎科技 | 产品经理</view>
 						</view>
+						<view class="time">刚刚</view>
+					</view>
+					<view class="row2">
+						他 <i class="icon iconfont icon-biaojiweiganxingqu"></i> 你的 产品总监
 					</view>
 				</view>
 			</view>
-		</view> -->
-		<view class="list-box {{indexShowCount.advisor ? 'normal' : ''}}  {{collectMySelf.list.length === 0 ? '' : 'nodata'}}" hidden="{{pageList === 'browseMySelf'}}">
-			<form bindsubmit="formSubmit" report-submit='{{true}}'>
-				<button
-					form-type="submit"
-					bindtap="viewResumeDetail"
-					class="formIdBtn"
-					wx:for="{{collectMySelf.list}}"
-					wx:for-item="item"
-					data-jobhunterUid="{{item.uid}}"
-					data-type="{{item.myType}}"
-					wx:key="{{index}}">
-					<view class="item2">
-						<!-- 无发布职位和分享按钮 start -->
-						<block wx:if="{{!item.myType}}">
-							<view class="row-one">
-								<view class="img-box"><image src="{{item.avatar.smallUrl}}" lazy-load></image></view>
-								<view class="content">
-									<view class="header">
-										<view class="name">{{item.name}}</view>
-										<view class="zhiwei">
-											<block>{{item.workAgeDesc}}</block>
-											<block wx:if="{{item.degreeDesc}}"> · {{item.degreeDesc}}</block>
-											<block wx:if="{{item.salaryCeil}}"> · {{item.salaryFloor}}-{{item.salaryCeil}}k</block>
-										</view>
-									</view>
-									<view class="degress" wx:if="{{item.lastCompanyName || item.lastPosition}}">
-										<block wx:if="{{item.lastCompanyName}}">{{item.lastCompanyName}}</block>
-										<block wx:if="{{item.lastCompanyName && item.lastPosition}}"> | </block>
-										<block wx:if="{{item.lastPosition}}">{{item.lastPosition}}</block>
-									</view>
-								</view>
-							</view>
-							<!-- <view class="reddot"></view> -->
-							<view class="row-two">
-								<!-- 正常列表数据 start -->
-								<block wx:if="{{!item.isRecommend}}">
-									<view class="day">{{item.viewAt}}</view>
-									<view class="action">
-										{{item.gender === 2 ? '她' : '他'}}
-										<i class="icon iconfont icon-biaojiweiganxingqu"></i>
-										你的
-									</view>
-									<view class="position">
-										<block wx:if="{{item.positionName}}">{{item.positionName}}</block>
-										<block wx:if="{{!item.positionName}}">个人主页</block>
-									</view>
-								</block>
-								<!-- 正常列表数据 end -->
+		</view>
+		<view class="shoper-banner" wx:if="{{banner.length}}">
+			<swiper
+	      class="swiper"
+	      autoplay
+	      circular
+	      bindchange="autoplay">
+	      <swiper-item
+					bindtap="toJump" 
+					data-url="{{item.otherUrl}}" 
+					wx:for="{{banner}}"
+					wx:key="{{index}}"
+					class="swiper-item"
+					wx:for-item="item">
+	        <image src="{{item.bigImgUrl}}" class="images"></image>
+	      </swiper-item>
+	    </swiper>
+		</view>
 
-								<!-- 系统或者官方推荐 start -->
-								<block wx:else>
-									<view class="featured-icon">热门</view>
-									<view class="text">
-										根据你的
-										<view class="position limit-wid">{{item.positionName}}</view>
-										为你推荐
-									</view>
-								</block>
-								<!-- 系统或者官方推荐 end -->
-							</view>
-						</block>
-						<!-- 无发布职位和分享按钮 end -->
-						<block wx:else>
-							<view class="public">
-								<view class="row1">Get更多优质简历</view>
-								<block wx:if="{{item.myType === 1}}">
-									<view class="row2">根据职位为你匹配优质候选人</view>
-									<view class="row3">发布/开放职位<i class="icon iconfont icon-disejiantou-you"></i></view>
-								</block>
-								<block wx:if="{{item.myType === 2}}">
-									<view class="row2">努力就有回报，主动出击去转发吧~</view>
-									<view class="row3">去转发主页<i class="icon iconfont icon-disejiantou-you"></i></view>
-								</block>
-								<image src="{{cdnImagePath}}image0001.png" class="image"></image>
-							</view>
-						</block>
-					</view>
-				</button>
-				<view class="item2">
-					<bottomStatus status="{{onBottomStatus}}" listData="{{collectMySelf.list}}"  desc="点击上方按钮分享，\r\n 一大波候选人等着开撩你！" paddingTop="{{collectMySelf.list.length === 0 ? '55' : ''}}" marginTop="{{0}}">
-						<button class="jump share-position" bindtap="routeJump" data-route="position" wx:if="{{!detail.positionNum && !collectMySelf.list.length}}">发布/开放职位</button>
-					</bottomStatus>
-				</view>
-			</form>
-		</view>
-		<view class="list-box {{browseMySelf.list.length === 0 ? '' : 'nodata'}}" hidden="{{pageList === 'collectMySelf'}}">
-			<form bindsubmit="formSubmit" report-submit='{{true}}'> 
-				<button
-					form-type="submit"
-					bindtap="viewResumeDetail"
-					class="formIdBtn"
-					wx:for="{{browseMySelf.list}}"
-					wx:for-item="item"
-					data-jobhunterUid="{{item.uid}}"
-					data-type="clearRedDot"
-					wx:key="{{index}}">
-					<view class="item2">
-						<view class="row-one">
-							<view class="img-box"><image src="{{item.avatar.smallUrl}}" lazy-load></image></view>
-							<view class="content">
-								<view class="header">
-									<view class="name">{{item.name}}</view>
-									<view class="zhiwei">
-										<block>{{item.workAgeDesc}}</block>
-										<block wx:if="{{item.degreeDesc}}"> · {{item.degreeDesc}}</block>
-										<block wx:if="{{item.salary}}"> · {{item.salary}}</block>
-									</view>
-								</view>
-								<view class="degress" wx:if="{{item.lastCompanyName || item.lastPosition}}">
-									<block wx:if="{{item.lastCompanyName}}">{{item.lastCompanyName}}</block>
-									<block wx:if="{{item.lastCompanyName && item.lastPosition}}"> | </block>
-									<block wx:if="{{item.lastPosition}}">{{item.lastPosition}}</block>
-								</view>
-							</view>
-						</view>
-						<view class="row-two">
-							<view class="day">{{item.viewAt}}</view>
-							<view class="action">
-								查看了你的{{item.positionName ? '职位' : ''}}
-							</view>
-							<view class="position">
-								<block wx:if="{{item.positionName}}">{{item.positionName}}</block>
-								<block wx:if="{{!item.positionName}}">个人主页</block>
-							</view>
-						</view>
-					</view>
-				</button>
-				<view class="item2">
-					<bottomStatus status="{{onBottomStatus}}" listData="{{browseMySelf.list}}" desc="还没有候选人看过你哟～ \r\n试试分享你的职位，让更多人来围观吧~" paddingTop="{{browseMySelf.list.length === 0 ? '55' : ''}}" marginTop="{{0}}"></bottomStatus>
-				</view>
-			</form>
-		</view>
 	</view>
 
   <tabBar tabType="1" id="bottomRedDotBar"></tabBar>
-  <choose wx:if="{{!choseType}}"></choose>
-  <followWechat userInfo="{{userInfo}}"></followWechat>
-	<shareBtn posterType="company" id="shareBtn" shareBtn="{{false}}"></shareBtn>
-	<block wx:if="{{companyInfos.id}}"><canvasCard cardData="{{companyInfos}}" type="company" bindgetCreatedImg="getCreatedImg"></canvasCard></block>
+  <followWechat wx:if="{{userInfo}}"></followWechat>
+</view>

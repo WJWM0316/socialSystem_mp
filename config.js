@@ -12,9 +12,9 @@ export let PUBAPIHOST = ''
 export let WEBVIEW = ''
 if (environment === 0) {
 	// 测试服接口
-	APPLICANTHOST = 'https://qiuzhi-api.ent.lieduoduo.ziwork.com'
-	RECRUITERHOST = 'https://zhaopin-api.ent.lieduoduo.ziwork.com'
-	PUBAPIHOST = 'https://pub-api.ent.lieduoduo.ziwork.com'
+	APPLICANTHOST = 'https://qiuzhi-api.lieduoduo.ziwork.com'
+	RECRUITERHOST = 'https://zhaopin-api.lieduoduo.ziwork.com'
+	PUBAPIHOST = 'https://pub-api.lieduoduo.ziwork.com'
 	WEBVIEW = `https://h5.lieduoduo.ziwork.com/`
 } else {
 	// 正式服环境

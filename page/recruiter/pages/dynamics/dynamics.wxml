@@ -1,0 +1,117 @@
+<view>
+	<navbar title="候选人动态" background="#FFFFFF" color="#22292C"></navbar>
+	<view class="place"></view>
+	<view class="office-status-bar" style="top: {{navH}}px">
+		<view class="item {{tab === 'interestList' ? 'active' : ''}}" bindtap="onClickTab" data-tab="interestList">
+			对我感兴趣
+			<view class="redot" wx:if="{{indexShowCount.interestedNum}}">{{indexShowCount.interestedNum}}</view>
+		</view>
+  	<view class="item {{tab === 'viewList' ? 'active' : ''}}" bindtap="onClickTab" data-tab="viewList">
+  		看过我的
+  		<view class="redot" wx:if="{{indexShowCount.viewNum}}">{{indexShowCount.viewNum}}</view>
+  	</view>
+	</view>
+	<view class="block"></view>
+	<view hidden="{{!hasReFresh}}">
+		<refreshStatus></refreshStatus>
+	</view>
+
+	<view class="list-box viewList" hidden="{{tab === 'viewList'}}">
+		<form bindsubmit="formSubmit" report-submit='{{true}}'>
+			<button
+				form-type="submit"
+				bindtap="viewResumeDetail"
+				class="formIdBtn"
+				wx:for="{{viewList.list}}"
+				wx:for-item="item"
+				data-jobhunterUid="{{item.uid}}"
+				data-type="red_dot_recruiter_view_item"
+				wx:key="{{index}}">
+				<view class="item2">
+					<view class="row-one">
+						<view class="img-box"><image src="{{item.avatar.smallUrl}}" lazy-load></image></view>
+						<view class="content">
+							<view class="header">
+								<text wx:if="{{!item.glass}}" class="name">{{item.name}}</text>
+								<image wx:else class="filter" src="{{cdnImagePath}}invisible1.png" mode="aspectFit"></image>
+								<view class="zhiwei">
+									<block>{{item.workAgeDesc}}</block>
+									<block wx:if="{{item.degreeDesc}}"> · {{item.degreeDesc}}</block>
+									<block wx:if="{{item.salaryCeil}}"> · {{item.salaryFloor}}-{{item.salaryCeil}}k</block>
+								</view>
+							</view>
+							<view class="degress" wx:if="{{item.lastCompanyName || item.lastPosition}}">
+								<block wx:if="{{item.lastCompanyName}}">{{item.lastCompanyName}}</block>
+								<block wx:if="{{item.lastPosition}}"> | {{item.lastPosition}}</block>
+							</view>
+						</view>
+					</view>
+					<view class="row-two">
+						<view class="day">{{item.viewAt}}</view>
+						<view class="action">
+							{{item.gender === 2 ? '她' : '他'}}
+							<i class="icon iconfont icon-biaojiweiganxingqu"></i>
+							你的
+						</view>
+						<view class="position">
+							<block wx:if="{{item.positionName}}">{{item.positionName}}</block>
+							<block wx:if="{{!item.positionName}}">个人主页</block>
+						</view>
+					</view>
+				</view>
+			</button>
+		</form>
+		<bottomStatus status="{{ onBottomStatus }}" listData="{{viewList.list}}" desc="还没有候选人对你感兴趣哟～ 主动发现获取更多候选人吧" marginTop="{{40}}">
+			<button class="jump" bindtap="routeJump">发现更多候选人</button>
+		</bottomStatus>
+	</view>
+
+	<view class="list-box interestList" hidden="{{tab === 'interestList'}}">
+		<form bindsubmit="formSubmit" report-submit='{{true}}'> 
+			<button
+				form-type="submit"
+				bindtap="viewResumeDetail"
+				class="formIdBtn"
+				wx:for="{{interestList.list}}"
+				wx:for-item="item"
+				data-jobhunterUid="{{item.uid}}"
+				data-type="red_dot_recruiter_collect_item"
+				wx:key="{{index}}">
+				<view class="item2">
+					<view class="row-one">
+						<view class="img-box"><image src="{{item.avatar.smallUrl}}" lazy-load></image></view>
+						<view class="content">
+							<view class="header">
+								<text wx:if="{{!item.glass}}" class="name">{{item.name}}</text>
+								<image wx:else class="filter" src="{{cdnImagePath}}invisible1.png" mode="aspectFit"></image>
+								<view class="zhiwei">
+									<block>{{item.workAgeDesc}}</block>
+									<block wx:if="{{item.degreeDesc}}"> · {{item.degreeDesc}}</block>
+									<block wx:if="{{item.salary}}"> · {{item.salary}}</block>
+								</view>
+							</view>
+							<view class="degress" wx:if="{{item.lastCompanyName || item.lastPosition}}">
+								<block wx:if="{{item.lastCompanyName}}">{{item.lastCompanyName}}</block>
+								<block wx:if="{{item.lastPosition}}"> | {{item.lastPosition}}</block>
+							</view>
+						</view>
+					</view>
+					<view class="row-two">
+						<view class="day">{{item.viewAt}}</view>
+						<view class="action">
+							查看了你的{{item.positionName ? '职位' : ''}}
+						</view>
+						<view class="position">
+							<block wx:if="{{item.positionName}}">{{item.positionName}}</block>
+							<block wx:if="{{!item.positionName}}">个人主页</block>
+						</view>
+					</view>
+				</view>
+			</button>
+		</form>
+		<bottomStatus status="{{onBottomStatus}}" listData="{{interestList.list}}" desc="还没有候选人看过你哟～ 主动发现获取更多候选人吧" marginTop="{{40}}">
+			<button class="jump" bindtap="routeJump">发现更多候选人</button>
+		</bottomStatus>
+	</view>
+
+</view>

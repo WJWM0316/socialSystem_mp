@@ -70,6 +70,7 @@
       "root": "page/recruiter/",
       "pages": [
         "pages/index/index",
+        "pages/dynamics/dynamics",
         "pages/interview/index/index",
         "pages/interview/history/history",
         "pages/position/index/index",

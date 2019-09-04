@@ -75,44 +75,44 @@ Page({
     bannerIndex: 0,
     companyInfos: {}
   },
-  onLoad() {
-    let choseType = wx.getStorageSync('choseType') || ''
-    this.setData({ choseType})
-    let that = this
-    if (choseType === 'APPLICANT') {
-      let that = this
-      app.wxConfirm({
-        title: '提示',
-        content: '检测到你是求职者，是否切换求职者',
-        confirmBack() {
-          wx.reLaunch({url: `${COMMON}homepage/homepage`})
-        },
-        cancelBack() {
-          wx.setStorageSync('choseType', 'RECRUITER')
-          app.getAllInfo().then(res => {
-            that.init()
-          })
-        }
-      })
-    }
-  },
-  onShow() {
-    if (app.loginInit) {
-      if (!app.globalData.hasLogin) {
-        wx.navigateTo({url: `${COMMON}bindPhone/bindPhone`})
-        return
-      }
-      this.init()
-    } else {
-      app.loginInit = () => {
-        if (!app.globalData.hasLogin) {
-          wx.navigateTo({url: `${COMMON}bindPhone/bindPhone`})
-          return
-        }
-        this.init()
-      }
-    }
-  },
+  // onLoad() {
+  //   let choseType = wx.getStorageSync('choseType') || ''
+  //   this.setData({ choseType})
+  //   let that = this
+  //   if (choseType === 'APPLICANT') {
+  //     let that = this
+  //     app.wxConfirm({
+  //       title: '提示',
+  //       content: '检测到你是求职者，是否切换求职者',
+  //       confirmBack() {
+  //         wx.reLaunch({url: `${COMMON}homepage/homepage`})
+  //       },
+  //       cancelBack() {
+  //         wx.setStorageSync('choseType', 'RECRUITER')
+  //         app.getAllInfo().then(res => {
+  //           that.init()
+  //         })
+  //       }
+  //     })
+  //   }
+  // },
+  // onShow() {
+  //   if (app.loginInit) {
+  //     if (!app.globalData.hasLogin) {
+  //       wx.navigateTo({url: `${COMMON}bindPhone/bindPhone`})
+  //       return
+  //     }
+  //     this.init()
+  //   } else {
+  //     app.loginInit = () => {
+  //       if (!app.globalData.hasLogin) {
+  //         wx.navigateTo({url: `${COMMON}bindPhone/bindPhone`})
+  //         return
+  //       }
+  //       this.init()
+  //     }
+  //   }
+  // },
   init () {
     if (wx.getStorageSync('choseType') === 'APPLICANT') return
     let collectMySelf = this.data.collectMySelf

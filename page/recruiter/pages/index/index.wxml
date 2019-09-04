@@ -41,7 +41,6 @@
 			</view>
 		</view>
 		
-		
 		<view class="todos_bar_notopen" bindtap="routeJump" data-route="dynamics">
 			<view class="left">
 				<view class="todo_title">候选人动态<view class="number" wx:if="{{indexShowCount.dynamicTotal}}">{{indexShowCount.dynamicTotal}}</view></view>
@@ -54,10 +53,11 @@
 				</view>
 			</view>
 		</view>
+
 		<view class="todo_ul">
 			<view class="li" wx:for="{{[1,2,3]}}" wx:key="{{index}}">
 				<view class="img-box">
-					<image src="{{cdnImagePath}}sign1.png" mode="aspectFill" class="vip"></image>
+					<!-- <image src="{{cdnImagePath}}sign1.png" mode="aspectFill" class="vip"></image> -->
 				</view>
 				<view class="content">
 					<view class="row1">
@@ -65,14 +65,20 @@
 							<view class="name">张杰</view>
 							<view class="infos1">老虎科技 | 产品经理</view>
 						</view>
-						<view class="time">刚刚</view>
 					</view>
 					<view class="row2">
-						他 <i class="icon iconfont icon-biaojiweiganxingqu"></i> 你的 产品总监
+						<view class="limit">
+							他
+							<i class="icon iconfont icon-biaojiweiganxingqu"></i>
+							你的
+							<view class="strong">产品总监</view>
+						</view>
+						<view class="time">刚刚</view>
 					</view>
 				</view>
 			</view>
 		</view>
+
 		<view class="shoper-banner" wx:if="{{banner.length}}">
 			<swiper
 	      class="swiper"
@@ -90,7 +96,14 @@
 	      </swiper-item>
 	    </swiper>
 		</view>
-
+		
+		<view class="sale-tools">
+			<view class="title">营销工具</view>
+			<view class="p2">帮助招聘官快速完成招聘任务</view>
+			<view class="tab-ul">
+				<view class="tab"></view>
+			</view>
+		</view>
 	</view>
 
   <tabBar tabType="1" id="bottomRedDotBar"></tabBar>

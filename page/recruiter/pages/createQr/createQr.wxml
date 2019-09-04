@@ -1,0 +1,16 @@
+<view class="create-qr">
+
+	<navbar
+		title="小程序码生成"
+		background="#FFFFFF"
+		color="#22292C">
+	</navbar>
+	
+	<!-- <image src="{{imgUrl}}" mode="aspectFit" class="image"></image> -->
+	<canvas canvas-id="cardCanvas" class="canvas" id="cardCanvas" style="width: 258px; height: 258px;"></canvas>
+	
+	<view class="footer">
+    <view bindtap="submit" class="button-submit button-enable">保存图片</view>
+  </view>
+
+</view>

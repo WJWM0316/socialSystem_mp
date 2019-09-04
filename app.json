@@ -111,7 +111,11 @@
         "pages/company/interest/interest",
         "pages/user/company/createdCompanyInfos/createdCompanyInfos",
         "pages/user/company/identityMethods/identityMethods",
-        "pages/interested/interested"
+        "pages/interested/interested",
+        "pages/mechanism/index/index",
+        "pages/mechanism/list/list",
+        "pages/mechanism/post/post",
+        "pages/echart/echart"
       ]
     }
   ],

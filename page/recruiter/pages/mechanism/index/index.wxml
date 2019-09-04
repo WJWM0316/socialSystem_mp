@@ -1,0 +1,35 @@
+<view class="mechanism-index">
+	<navbar title="我的机构" background="#fff" color="#22292C"></navbar>
+	
+	<view class="search-box" style="top:{{navH}}px">
+		<input
+			placeholder-style="color:#929292; font-size: 28rpx;"
+			placeholder="请输入机构名称"
+			bindinput="bindInput"
+			value="{{keyword}}"
+			type="search"
+			class="search" />
+	</view>
+
+	<view class="search-ul">
+		<view hidden="{{!hasReFresh}}">
+			<refreshStatus></refreshStatus>
+		</view>
+		<view class="item2">
+			<view class="row-one">
+				<view class="img-box">
+					<!-- <image src="{{item.avatar.smallUrl}}"></image> -->
+				</view>
+				<view class="content">
+					<view class="name">点都德</view>
+					<view class="address">广州天河区天河路212街光大银行对面10…</view>
+				</view>
+			</view>
+		</view>
+	</view>
+
+	<view class="footer">
+    <view bindtap="submit" class="button-submit button-enable">添加机构</view>
+  </view>
+
+</view>

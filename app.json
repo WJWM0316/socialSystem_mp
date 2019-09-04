@@ -25,7 +25,8 @@
     "page/common/pages/chooseJob/chooseJob",
     "page/common/pages/webView/webView",
     "page/common/pages/interviewMark/interviewMark",
-    "page/common/pages/homepageMore/homepageMore"
+    "page/common/pages/homepageMore/homepageMore",
+    "components/business/chooseEnter"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -111,7 +112,10 @@
         "pages/company/interest/interest",
         "pages/user/company/createdCompanyInfos/createdCompanyInfos",
         "pages/user/company/identityMethods/identityMethods",
-        "pages/interested/interested"
+        "pages/interested/interested",
+        "pages/organization/list/list",
+        "pages/organization/choose/choose",
+        "pages/marketingData/index/index"
       ]
     }
   ],

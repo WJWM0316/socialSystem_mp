@@ -1,0 +1,31 @@
+.chooseEnter {
+	padding: 24rpx 60rpx 32rpx;
+	background: #fff;
+	height:88rpx;
+	box-shadow:0rpx 11rpx 30rpx 0rpx rgba(153,193,214,0.08);
+	border-radius:0rpx 0rpx 32rpx 32rpx;
+	box-sizing: border-box;
+	position: relative;
+}
+.chooseEnter:after {
+	font-family: 'iconfont';
+	font-size: 26rpx;
+	position: absolute;
+	content: '\e601';
+	top: 50%;
+	right: 60rpx;
+	color: #652791;
+	transform: translate3d(0, -50%, 0);
+}
+.chooseEnter .icon {
+	font-size: 32rpx;
+	color: #8452A7;
+}
+.chooseEnter .name {
+	width: 400rpx;
+	font-size:30rpx;
+	font-weight:700;
+	color:#282828;
+	line-height:30rpx;
+	margin-left: 20rpx;
+}

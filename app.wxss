@@ -33,6 +33,11 @@ view {
 button::after{
 	border: none;
 }
+.ellipsis {
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
 .hasFilter {
   height: 58rpx !important;
   line-break: 58rpx !important;

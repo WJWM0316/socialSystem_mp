@@ -113,6 +113,9 @@ Page({
       case 'myAccount':
         wx.navigateTo({url: `${RECRUITER}user/myAccount/myAccount`})
         break
+      case 'organization':
+        wx.navigateTo({url: `${RECRUITER}organization/organizationList/organizationList`})
+        break
       default:
         break
     }

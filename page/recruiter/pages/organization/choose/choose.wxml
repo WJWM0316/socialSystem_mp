@@ -1,0 +1,15 @@
+
+<navbar title="选择机构"></navbar>
+<view class="search" style="top: {{navH}}px">
+	<input class="searchBar iconfont " type="text" placeholder="{{placeholder}}" placeholder-class="holderStyle" placeholder-style="font-family: 'iconfont'; font-weight: 300"/>
+</view>
+<view class="organizationList">
+	<view class="list">
+		<view class="list-item" wx:for="n in 6">
+			<view class="name ellipsis">asdasdasdasdaas阿萨德阿萨德吖</view>
+			<view class="radio {{item.active ? 'radio-checked' : ''}}">
+        <i class="icon iconfont icon-wancheng" wx:if="{{item.active}}"></i>
+      </view>
+		</view>
+	</view>
+</view>

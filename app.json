@@ -119,7 +119,8 @@
         "pages/mechanism/index/index",
         "pages/mechanism/list/list",
         "pages/mechanism/post/post",
-        "pages/echart/echart"
+        "pages/echart/echart",
+        "pages/createQr/createQr"
       ]
     }
   ],

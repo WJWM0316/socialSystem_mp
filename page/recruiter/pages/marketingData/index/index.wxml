@@ -1,3 +1,6 @@
 
 <navbar title="招聘营销数据"></navbar>
 <chooseOrgEnter></chooseOrgEnter>
+<view class="typeBar">
+	<view class="type"></view>
+</view>

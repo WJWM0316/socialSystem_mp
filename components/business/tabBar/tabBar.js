@@ -30,12 +30,12 @@ Component({
         path: `${RECRUITER}index/index`
       },
       {
-        title: '动态',
-        flag: 'dynamics',
+        title: '候选人',
+        flag: 'candidate',
         iconPath: `${cdnImagePath}tab_dynamics.png`,
         selectedIconPath: `${cdnImagePath}tab_dynamics_active.png`,
         active: false,
-        path: `${RECRUITER}dynamics/dynamics`
+        path: `${RECRUITER}candidate/candidate`
       },
       {
         title: '面试',

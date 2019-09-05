@@ -303,9 +303,9 @@ export const getInterviewRedDotBarApi = (data) => {
 // 清除红点
 export const clearTabInterviewRedDotApi = (data) => {
   return request({
-    url: `/interview/deleteTabRedDot`,
-    method: 'put',
-    data,
+    url: `/interview/deleteTabRedDot/${data.type}`,
+    method: 'delete',
+    // data,
     hasLoading: false
   })
 }
@@ -313,9 +313,9 @@ export const clearTabInterviewRedDotApi = (data) => {
 // 清除日程红点
 export const clearDayInterviewRedDotApi = (data) => {
   return request({
-    url: `/interview/deleteScheduleTabRedDot`,
-    method: 'put',
-    data,
+    url: `/interview/deleteScheduleTabRedDot/${data.type}`,
+    method: 'delete',
+    // data,
     hasLoading: false
   })
 }

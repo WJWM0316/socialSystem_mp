@@ -1,0 +1,219 @@
+<view class="recruiter-interview">
+	<navbar title="候选人"></navbar>
+
+	<view class="fixed-dom" style="top: {{navH}}px">
+
+		<!-- 顶部tab栏 start-->
+		<view class="fixed-bar">
+			<view
+				class="li {{tab.active ? 'active' : ''}} {{tab.showRedDot ? 'red-dot' : ''}}"
+				bindtap="chooseParentTab"
+				data-mark="{{tab.id}}"
+				wx:for="{{tabLists}}"
+				wx:for-item="tab"
+				data-index="{{index}}"
+				wx:key="{{tab.id}}">
+					<view class="span">{{tab.text}}</view>
+			</view>
+		</view>
+		<!-- 顶部tab栏 end-->
+
+		<!-- 收到意向 start-->
+		<view class="select-box" hidden="{{tabIndex !== 0}}">
+			<view class="item">
+				<picker range="{{receiveScreen}}" range-key="key" bindchange="bindChange" data-type="receiveStatus" value="{{receiveIndex}}">
+			    <view class="picker">{{receiveScreen[receiveIndex].key}}</view>
+			    <i class="icon iconfont icon-zhishibiao"></i>
+			  </picker>
+			</view>
+			<view class="item">
+				<picker range="{{positionList}}" range-key="positionName" bindchange="bindChange" data-type="position" value="{{positionIndex}}">
+			    <view class="picker">{{positionList[positionIndex].positionName}}</view>
+			    <i class="icon iconfont icon-zhishibiao"></i>
+			  </picker>
+			</view>
+		</view>
+		<!-- 收到意向 end-->
+		
+		<!-- 我的邀请 start-->
+		<view class="select-box" hidden="{{tabIndex !== 1}}">
+			<view class="item">
+				<picker range="{{applyScreen}}" range-key="key" bindchange="bindChange" data-type="applyStatus" value="{{applyIndex}}">
+			    <view class="picker">{{applyScreen[applyIndex].key}}</view>
+			    <i class="icon iconfont icon-zhishibiao"></i>
+			  </picker>
+			</view>
+			<view class="item">
+				<picker range="{{positionList}}" range-key="positionName" bindchange="bindChange" data-type="position" value="{{positionIndex}}">
+			    <view class="picker">{{positionList[positionIndex].positionName}}</view>
+			    <i class="icon iconfont icon-zhishibiao"></i>
+			  </picker>
+			</view>
+		</view>
+		<!-- 收到意向 end-->
+
+		<view class="interview-page-title" wx:if="{{tabIndex === 2}}">
+			<view class="total">面试安排（{{interviewData.total}}）</view>
+			<view class="history" bindtap="jumpInterviewPage"><i class="icon iconfont icon-lishijilu"></i> 全部面试</view>
+		</view>
+		<view class="scroll-box" wx:if="{{dateList.length && tabIndex === 2}}">
+			<view
+				wx:for="{{dateList}}"
+				wx:key="{{index}}"
+				class="item {{item.active ? 'active' : ''}} {{item.number ? 'red' : ''}}"
+				wx:for-item="item"
+				data-time="{{item.time}}"
+				data-index="{{index}}"
+				bindtap="getResult">{{item.date}}</view>
+		</view>
+		<!-- 面试日程 end-->
+	</view>
+
+	<!--收到意向-->
+	<view hidden="{{tabIndex !== 0}}" class="list-box" style="padding-top: 210rpx">
+		<view hidden="{{!hasReFresh}}">
+			<refreshStatus></refreshStatus>
+		</view>
+		<form bindsubmit="formSubmit" report-submit='{{true}}'> 
+			<button
+				form-type="submit"
+				bindtap="routeJump"
+				class="formIdBtn"
+				wx:for="{{receiveData.list}}"
+				wx:for-item="item"
+				data-item-id="{{item.interviewId}}"
+				data-status="{{item.status}}"
+				data-jobhunterUid="{{item.jobhunterUid}}"
+				wx:key="{{index}}">
+				<view class="item2">
+					<view class="row-one">
+						<view class="img-box"><image src="{{item.avatar.smallUrl}}"></image></view>
+						<view class="content">
+							<view class="header">
+								<view class="name">{{item.jobhunterRealname}}</view>
+								<view class="mix">
+									<block wx:if="{{item.workExperienceDesc}}">{{item.workExperienceDesc}}</block>
+									<block wx:if="{{item.educationDesc}}"> · {{item.educationDesc}}</block>
+									<block wx:if="{{item.emolumentMin}}"> · {{item.emolument}}</block>
+								</view>
+							</view>
+							<view class="degress">
+								<block wx:if="{{item.lastCompanyName}}">{{item.lastCompanyName}}</block>
+								<block wx:if="{{item.lastCompanyName && item.lastPosition}}"> | </block>
+								<block wx:if="{{item.lastPosition}}">{{item.lastPosition}}</block>
+							</view>
+						</view>
+					</view>
+					<view class="reddot" wx:if="{{item.redDot}}"></view>
+					<view class="row-two">
+						<view class="infos">
+							<view class="day">{{item.createdAt}}</view>
+							<view class="action">申请约面</view>
+							<view class="position" wx:if="{{item.positionId}}">{{item.positionName}}</view>
+						</view>
+						<view class="status {{item.status == 32 || item.status == 21 || item.status == 31 ? 'dark' : ''}}">{{item.statusDesc}}</view>
+					</view>
+				</view>
+			</button>
+		</form>
+		<bottomStatus status="{{receiveBottomStatus}}" listData="{{receiveData.list}}"></bottomStatus>
+	</view>
+	
+	<!--我的邀请-->
+	<view hidden="{{tabIndex !== 1}}" class="list-box" style="padding-top: 210rpx">
+		<view hidden="{{!hasReFresh}}">
+			<refreshStatus></refreshStatus>
+		</view>
+		<form bindsubmit="formSubmit" report-submit='{{true}}'> 
+			<button
+				form-type="submit"
+				bindtap="routeJump"
+				class="formIdBtn"
+				wx:for="{{applyData.list}}"
+				wx:for-item="item"
+				data-item-id="{{item.interviewId}}"
+				data-status="{{item.status}}"
+				data-jobhunterUid="{{item.jobhunterUid}}"
+				wx:key="{{index}}">
+				<view class="item2">
+					<view class="row-one">
+						<view class="img-box"><image src="{{item.avatar.smallUrl}}"></image></view>
+						<view class="content">
+							<view class="header {{item.glass ? 'hasFilter' : ''}}">
+								<view wx:if="{{!item.glass}}" class="name">{{item.jobhunterRealname}}</view>
+								<image wx:else class="filter" src="{{cdnPath}}invisible1.png" mode="aspectFit"></image>
+								<view class="mix">
+									<block wx:if="{{item.workExperienceDesc}}">{{item.workExperienceDesc}}</block>
+									<block wx:if="{{item.educationDesc}}"> · {{item.educationDesc}}</block>
+									<block wx:if="{{item.emolumentMin}}"> · {{item.emolument}}</block>
+								</view>
+							</view>
+							<view class="degress">
+								<block wx:if="{{item.lastCompanyName}}">{{item.lastCompanyName}}</block>
+								<block wx:if="{{item.lastCompanyName && item.lastPosition}}"> | </block>
+								<block wx:if="{{item.lastPosition}}">{{item.lastPosition}}</block>
+							</view>
+						</view>
+					</view>
+					<view class="reddot" wx:if="{{item.redDot}}"></view>
+					<view class="row-two">
+						<view class="infos">
+							<view class="day">{{item.createdAt}}</view>
+							<view class="action">邀请面试 </view>
+							<view class="position" wx:if="{{item.positionId}}"> {{item.positionName}}</view>
+						</view>
+						<view class="status {{item.status == 32 || item.status == 21 || item.status == 31 ? 'dark' : ''}}">{{item.statusDesc}}</view>
+					</view>
+				</view>
+			</button>
+		</form>
+		<bottomStatus status="{{applyBottomStatus}}" listData="{{applyData.list}}"></bottomStatus>
+	</view>
+
+	<!--面试日程-->
+	<view hidden="{{tabIndex !== 2}}" class="list-box list-box2 {{dateList.length ? 'height10' : ''}}">
+		<view hidden="{{!hasReFresh}}">
+			<refreshStatus></refreshStatus>
+		</view>
+		<form bindsubmit="formSubmit" report-submit='{{true}}'> 
+			<button
+				form-type="submit"
+				bindtap="routeJump"
+				class="formIdBtn"
+				wx:for="{{interviewData.list}}"
+				wx:for-item="item"
+				data-item-id="{{item.interviewId}}"
+				data-status="{{item.status}}"
+				data-jobhunterUid="{{item.jobhunterUid}}"
+				wx:key="{{index}}">
+				<view class="item3">
+					<view class="row-one">
+						<view class="img-box"><image src="{{item.avatar.smallUrl}}"></image></view>
+						<view class="content">
+							<view class="name">{{item.jobhunterRealname}}</view>
+							<view class="mix">
+								<block wx:if="{{item.workExperienceDesc}}">{{item.workExperienceDesc}}</block>
+								<block wx:if="{{item.educationDesc}}"> · {{item.educationDesc}}</block>
+								<block wx:if="{{item.emolumentMin}}"> · {{item.emolument}}</block>
+							</view>
+							<view class="degress">
+								<block wx:if="{{item.lastCompanyName}}">{{item.lastCompanyName}}</block>
+								<block wx:if="{{item.lastCompanyName && item.lastPosition}}"> | </block>
+								<block wx:if="{{item.lastPosition}}">{{item.lastPosition}}</block>
+							</view>
+						</view>
+						<view class="time {{item.status < 50 ? 'active' : ''}} {{item.redDot ? 'redDot' : ''}}" wx:if="{{item.createdAtTime}}">
+							<i class="icon iconfont icon-lishijilu"></i>{{item.createdAtTime}}
+						</view>
+					</view>
+					<view class="row-two">
+						<i class="icon iconfont icon-mianshizhiwei"></i>
+						面试职位：<text>{{item.positionId ? item.positionName : '未选择面试职位'}}</text>
+					</view>
+				</view>
+			</button>
+		</form>
+		<bottomStatus status="{{interviewBottomStatus}}" listData="{{interviewData.list}}"></bottomStatus>
+	</view>
+  <tab-bar tabType="1" id="bottomRedDotBar"></tab-bar>
+</view>

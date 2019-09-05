@@ -116,7 +116,8 @@
         "pages/mechanism/list/list",
         "pages/mechanism/post/post",
         "pages/echart/echart",
-        "pages/createQr/createQr"
+        "pages/createQr/createQr",
+        "pages/candidate/candidate"
       ]
     }
   ],

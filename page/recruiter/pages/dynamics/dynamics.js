@@ -45,6 +45,7 @@ Page({
   },
   onLoad(options) {
     wx.setStorageSync('choseType', 'RECRUITER')
+    if(Reflect.has(options, 'tab')) this.setData({tab: options.tab})
   },
   onShow() {
     this.getIndexShowCount()

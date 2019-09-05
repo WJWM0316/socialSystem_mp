@@ -7,101 +7,170 @@
 		isFixed="{{isFixed}}">
 	</navbar>
 
-	<view class="index_header">
-		<view hidden="{{!hasReFresh}}">
-			<refreshStatus></refreshStatus>
-		</view>
-		
-		<view class="index-bannar">
-			<image src="{{cdnImagePath}}recruiter_mine_new_bg.png"></image>
-		</view>
-		
-		<view class="welcome">
-			<view class="admin">{{welcomeWord}}，{{detail.realname}}</view>
-			<view class="capsule" bindtap="routeJump" data-route="recruiter">
-				<view class="img-box">
-					<image mode="aspectFill" src="{{detail.avatar.smallUrl}}" class="image"></image>
-				</view>
-				<i class="icon iconfont icon-youyi"></i>
+	<view hidden="{{!hasReFresh}}">
+		<refreshStatus></refreshStatus>
+	</view>
+	
+	<view class="index-bannar">
+		<image src="{{cdnImagePath}}recruiter_mine_new_bg.png"></image>
+	</view>
+	
+	<view class="welcome">
+		<view class="admin">{{welcomeWord}}，{{detail.realname}}</view>
+		<view class="capsule" bindtap="routeJump" data-route="recruiter">
+			<view class="img-box">
+				<image mode="aspectFill" src="{{detail.avatar.smallUrl}}" class="image"></image>
 			</view>
+			<i class="icon iconfont icon-youyi"></i>
 		</view>
+	</view>
 
-		<view class="floating-box">
-			<view class="item left001" bindtap="routeJump" data-route="interested">
-				<view class="number">{{indexShowCount.recruiterInterestedToJ}}</view>
-				<view class="text">看过我的<i class="icon iconfont icon-disejiantou-you"></i></view>
-			</view>
-			<view class="item center001" bindtap="routeJump" data-route="interview">
-				<view class="number">{{indexShowCount.recentInterview}}</view>
-				<view class="text">最近面试<i class="icon iconfont icon-disejiantou-you"></i></view>
-			</view>
-			<view class="item right001" bindtap="routeJump" data-route="position">
-				<view class="number">{{indexShowCount.onlinePosition}}</view>
-				<view class="text">未处理申请<i class="icon iconfont icon-disejiantou-you"></i></view>
-			</view>
+	<view class="floating-box">
+		<view class="item left001" bindtap="routeJump" data-route="interested">
+			<view class="number">{{indexShowCount.recruiterInterestedToJ}}</view>
+			<view class="text">看过我的<i class="icon iconfont icon-disejiantou-you"></i></view>
 		</view>
-		
-		<view class="todos_bar_notopen" bindtap="routeJump" data-route="dynamics">
-			<view class="left">
-				<view class="todo_title">候选人动态<view class="number" wx:if="{{indexShowCount.dynamicTotal}}">{{indexShowCount.dynamicTotal}}</view></view>
-				<view class="todo_tips">对我感兴趣/看过我的</view>
-			</view>
-			<view class="right">
-				<view class="imglist">
-					<image class="imgitem" lazy-load wx:for="{{indexShowCount.candidateDynamic}}" wx:key="{{index}}" src="{{item.smallUrl}}" wx:if="{{index <= 2}}"></image>
-					<image class="imgitem" src="{{cdnImagePath}}more.png" wx:if="{{indexShowCount.candidateDynamic.length > 3}}"></image>
-				</view>
-			</view>
+		<view class="item center001" bindtap="routeJump" data-route="interview">
+			<view class="number">{{indexShowCount.recentInterview}}</view>
+			<view class="text">最近面试<i class="icon iconfont icon-disejiantou-you"></i></view>
 		</view>
+		<view class="item right001" bindtap="routeJump" data-route="receiveData">
+			<view class="number">{{indexShowCount.onlinePosition}}</view>
+			<view class="text">未处理申请<i class="icon iconfont icon-disejiantou-you"></i></view>
+		</view>
+	</view>
+	
+	<view class="todos_bar_notopen" bindtap="routeJump" data-route="dynamics">
+		<view class="todo_title">候选人动态</view>
+		<view class="todo_tips">对我感兴趣/看过我的</view>
+		<view class="right">
+			<view wx:if="{{indexShowCount.dynamicTotal}}" class="has">
+				<view class="number" wx:if="{{indexShowCount.dynamicTotal}}">{{indexShowCount.dynamicTotal}}</view>个新增动态
+			</view>
+			<view class="none" wx:else>
+				暂无动态
+			</view>
+			<i class="icon iconfont icon-xiangyou"></i>
+		</view>
+	</view>
 
-		<view class="todo_ul">
-			<view class="li" wx:for="{{[1,2,3]}}" wx:key="{{index}}">
-				<view class="img-box">
-					<!-- <image src="{{cdnImagePath}}sign1.png" mode="aspectFill" class="vip"></image> -->
-				</view>
-				<view class="content">
-					<view class="row1">
-						<view class="left">
-							<view class="name">张杰</view>
-							<view class="infos1">老虎科技 | 产品经理</view>
-						</view>
-					</view>
-					<view class="row2">
-						<view class="limit">
-							他
-							<i class="icon iconfont icon-biaojiweiganxingqu"></i>
-							你的
-							<view class="strong">产品总监</view>
-						</view>
-						<view class="time">刚刚</view>
+	<view class="todo_ul">
+		<view class="li" wx:for="{{[1,2,3]}}" wx:key="{{index}}">
+			<view class="img-box">
+				<!-- <image src="{{cdnImagePath}}sign1.png" mode="aspectFill" class="vip"></image> -->
+			</view>
+			<view class="content">
+				<view class="row1">
+					<view class="left">
+						<view class="name">张杰</view>
+						<view class="infos1">产品经理 | 老虎科技</view>
 					</view>
 				</view>
+				<view class="row2">
+					<view class="limit">
+						他
+						<i class="icon iconfont icon-biaojiweiganxingqu"></i>
+						你的
+						<view class="strong">产品总监</view>
+					</view>
+					<view class="time">刚刚</view>
+				</view>
+			</view>
+		</view>
+	</view>
+
+	<view class="shoper-banner" wx:if="{{banner.length}}">
+		<swiper
+      class="swiper"
+      autoplay
+      circular
+      bindchange="autoplay">
+      <swiper-item
+				bindtap="toJump" 
+				data-url="{{item.otherUrl}}" 
+				wx:for="{{banner}}"
+				wx:key="{{index}}"
+				class="swiper-item"
+				wx:for-item="item">
+        <image src="{{item.bigImgUrl}}" class="images"></image>
+      </swiper-item>
+    </swiper>
+	</view>
+	
+	<view class="sale-tools">
+		<view class="title">营销工具</view>
+		<view class="p2">帮助招聘官快速完成招聘任务</view>
+		<view class="tab-ul">
+			<view class="tab1 left top split-line">
+				<view class="icon"></view>
+				<view class="p">转发机构主页</view>
+			</view>
+			<view class="tab1  right top">
+				<view class="icon"></view>
+				<view class="p">转发我的职位</view>
+			</view>
+			<view class="tab1 left bottom split-line" bindtap="routeJump" data-route="publicPosition">
+				<view class="icon"></view>
+				<view class="p">发布职位</view>
+			</view>
+			<view class="tab1 right bottom" bindtap="routeJump" data-route="receiveData">
+				<view class="icon"></view>
+				<view class="p">面试管理</view>
+			</view>
+		</view>
+	</view>
+
+	<view class="make-box">
+		<view class="title"><view class="icon"></view>生成招聘海报</view>
+		<view class="ul split-line">
+			<view class="li left">
+				<view class="img-box"></view>
+				<view class="p">机构</view>
+			</view>
+			<view class="li center">
+				<view class="img-box"></view>
+				<view class="p">职位</view>
+			</view>
+			<view class="li right">
+				<view class="img-box"></view>
+				<view class="p">招聘官</view>
 			</view>
 		</view>
 
-		<view class="shoper-banner" wx:if="{{banner.length}}">
-			<swiper
-	      class="swiper"
-	      autoplay
-	      circular
-	      bindchange="autoplay">
-	      <swiper-item
-					bindtap="toJump" 
-					data-url="{{item.otherUrl}}" 
-					wx:for="{{banner}}"
-					wx:key="{{index}}"
-					class="swiper-item"
-					wx:for-item="item">
-	        <image src="{{item.bigImgUrl}}" class="images"></image>
-	      </swiper-item>
-	    </swiper>
+		<view class="title"><view class="icon"></view>生成小程序码</view>
+		<view class="ul">
+			<view class="li left" bindtap="routeJump" data-route="qr-mechanism">
+				<view class="img-box"></view>
+				<view class="p">机构</view>
+			</view>
+			<view class="li center" bindtap="routeJump" data-route="qr-position">
+				<view class="img-box"></view>
+				<view class="p">职位</view>
+			</view>
+			<view class="li right" bindtap="routeJump" data-route="qr-recruiter">
+				<view class="img-box"></view>
+				<view class="p">招聘官</view>
+			</view>
 		</view>
-		
-		<view class="sale-tools">
-			<view class="title">营销工具</view>
-			<view class="p2">帮助招聘官快速完成招聘任务</view>
-			<view class="tab-ul">
-				<view class="tab"></view>
+	</view>
+	
+	<view class="data-box">
+		<view class="title">
+			<view class="myicon"></view>社交招聘数据
+			<view class="action">查看更多<i class="icon iconfont icon-xiangyou"></i></view>
+		</view>
+		<view class="tab-box">
+			<view class="tab2 left active-tab2">
+				<view class="number">520</view>
+				<view class="p">职位浏览次数</view>
+			</view>
+			<view class="tab2 center">
+				<view class="number">520</view>
+				<view class="p">招聘官浏览次数</view>
+			</view>
+			<view class="tab2 right">
+				<view class="number">520</view>
+				<view class="p">机构浏览次数</view>
 			</view>
 		</view>
 	</view>

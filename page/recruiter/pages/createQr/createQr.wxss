@@ -26,7 +26,6 @@
 	padding: 30rpx 100rpx;
 }
 
-.image{
-	width: 238px;
-	height: 258px;
+.canvas-box .canvas{
+	margin: 100rpx auto;
 }

@@ -318,19 +318,6 @@ Page({
       this.setData({hasReFresh: false})
     })
   },
-  /**
-   * @Author   小书包
-   * @DateTime 2019-01-21
-   * @detail   触底加载数据
-   * @return   {[type]}   [description]
-   */
-  onReachBottom() {
-    let key = this.data.pageList
-    if (!this.data[key].isLastPage) {
-      this.setData({onBottomStatus: 1})
-      this.getLists(false)
-    }
-  },
   onShareAppMessage(options) {
     let that = this
 　　return app.wxShare({
@@ -393,7 +380,7 @@ Page({
     let route = e.currentTarget.dataset.route
     switch(route) {
       case 'interested':
-        wx.navigateTo({url: `${RECRUITER}interested/interested`})
+        wx.navigateTo({url: `${RECRUITER}dynamics/dynamics?tab=viewList`})
         break
       case 'interview':
         wx.reLaunch({url: `${RECRUITER}interview/index/index?tabIndex=2`})
@@ -413,7 +400,25 @@ Page({
       case 'companyPoster':
         this.share()
         wx.setStorageSync('companyPosterdata', app.globalData.recruiterDetails.companyInfo)
-        break    
+        break
+      case 'receiveData':
+        wx.reLaunch({url: `${RECRUITER}interview/index/index`})
+        break
+      case 'dynamics':
+        wx.reLaunch({url: `${RECRUITER}dynamics/dynamics`})
+        break
+      case 'publicPosition':
+        wx.reLaunch({url: `${RECRUITER}position/post/post`})
+        break
+      case 'qr-mechanism':
+        wx.reLaunch({url: `${RECRUITER}createQr/createQr?type=qr-mechanism`})
+        break
+      case 'qr-position':
+        wx.reLaunch({url: `${RECRUITER}createQr/createQr?type=qr-position`})
+        break
+      case 'qr-recruiter':
+        wx.reLaunch({url: `${RECRUITER}createQr/createQr?type=qr-recruiter`})
+        break
       default:
         break
     }
@@ -445,5 +450,8 @@ Page({
   toJump(e) {
     let url = '/'+e.currentTarget.dataset.url
     wx.navigateTo({ url })
+  },
+  todoAction(e) {
+    let params = e.currentTarget.dataset
   }
 })

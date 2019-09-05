@@ -116,6 +116,10 @@
         "pages/organization/list/list",
         "pages/organization/choose/choose",
         "pages/marketingData/index/index"
+        "pages/mechanism/index/index",
+        "pages/mechanism/list/list",
+        "pages/mechanism/post/post",
+        "pages/echart/echart"
       ]
     }
   ],

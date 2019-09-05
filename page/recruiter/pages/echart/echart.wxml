@@ -1,0 +1,58 @@
+<view class="echart">
+
+	<navbar
+		title="招聘营销数据"
+		background="#FFFFFF"
+		color="#22292C">
+	</navbar>
+	
+	<view class="floating-bar" style="top: {{navH}}px">
+		<view class="label">
+			<i class="icon iconfont icon-biaojiweiganxingqu"></i>
+			点都德-天河电
+		</view>
+		<i class="icon iconfont icon-disejiantou-you"></i>
+	</view>
+
+	<view class="placeholder"> </view>
+
+	<view class="scroll-tab">
+		<view class="li active">全部</view>
+		<view class="li">海报扫码</view>
+		<view class="li">小程序码扫码</view>
+		<view class="li">长图扫码</view>
+		<view class="li">分享</view>
+		<view class="li">长按</view>
+		<view class="li">其他</view>
+	</view>
+	
+	<view class="content">
+
+		<view class="tab-bar">
+			<view class="li active">职位详情页</view>
+			<view class="li">招聘官主页</view>
+			<view class="li">机构主页</view>
+		</view>
+		
+		<view class="data">
+			<view class="item">
+				<view class="number">520</view>
+				<view class="text">访问总人数</view>
+			</view>
+			<view class="item">
+				<view class="number">520</view>
+				<view class="text">访问总次数</view>
+			</view>
+		</view>
+
+		<vieW class="echart-box">
+			<view class="title">近期趋势</view>
+			<view class="btn-box">
+				<view class="btn1">近7天</view>
+				<view class="btn2">近30天</view>
+			</view>
+			<ec-canvas class="ec-canvas" id="mychart-dom-line" canvas-id="mychart-line" ec="{{ ec }}"></ec-canvas>
+		</vieW>
+	</view>
+
+</view>

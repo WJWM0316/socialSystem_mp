@@ -57,6 +57,7 @@
 	<view class="todo_ul">
 		<view class="li" wx:for="{{[1,2,3]}}" wx:key="{{index}}">
 			<view class="img-box">
+				<!-- <image src="{{cdnImagePath}}sign1.png" mode="aspectFill" class="avatar"></image> -->
 				<!-- <image src="{{cdnImagePath}}sign1.png" mode="aspectFill" class="vip"></image> -->
 			</view>
 			<view class="content">
@@ -86,7 +87,7 @@
       circular
       bindchange="autoplay">
       <swiper-item
-				bindtap="toJump" 
+				bindtap="bannerJump" 
 				data-url="{{item.otherUrl}}" 
 				wx:for="{{banner}}"
 				wx:key="{{index}}"
@@ -160,17 +161,15 @@
 			<view class="action">查看更多<i class="icon iconfont icon-xiangyou"></i></view>
 		</view>
 		<view class="tab-box">
-			<view class="tab2 left active-tab2">
-				<view class="number">520</view>
-				<view class="p">职位浏览次数</view>
-			</view>
-			<view class="tab2 center">
-				<view class="number">520</view>
-				<view class="p">招聘官浏览次数</view>
-			</view>
-			<view class="tab2 right">
-				<view class="number">520</view>
-				<view class="p">机构浏览次数</view>
+			<view
+				class="tab2 {{item.active ? 'active-tab2' : ''}}"
+				wx:for="{{dataBox.tabLists}}"
+				wx:for-item="item"
+				bindtap="onClickDataTab"
+				data-index="{{index}}"
+				wx:key="{{index}}">
+				<view class="number">{{item.number}}</view>
+				<view class="p">{{item.text}}</view>
 			</view>
 		</view>
 	</view>

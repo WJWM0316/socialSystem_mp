@@ -73,7 +73,26 @@ Page({
     },
     banner: {},
     bannerIndex: 0,
-    companyInfos: {}
+    companyInfos: {},
+    dataBox: {
+      tabLists: [
+        {
+          number: '520',
+          text: '职位浏览次数',
+          active: true
+        },
+        {
+          number: '666',
+          text: '招聘官浏览次数',
+          active: false
+        },
+        {
+          number: '6.6k',
+          text: '机构浏览次数',
+          active: false
+        }
+      ]
+    }
   },
   // onLoad() {
   //   let choseType = wx.getStorageSync('choseType') || ''
@@ -408,16 +427,16 @@ Page({
         wx.reLaunch({url: `${RECRUITER}dynamics/dynamics`})
         break
       case 'publicPosition':
-        wx.reLaunch({url: `${RECRUITER}position/post/post`})
+        wx.navigateTo({url: `${RECRUITER}position/post/post`})
         break
       case 'qr-mechanism':
-        wx.reLaunch({url: `${RECRUITER}createQr/createQr?type=qr-mechanism`})
+        wx.navigateTo({url: `${RECRUITER}createQr/createQr?type=qr-mechanism`})
         break
       case 'qr-position':
-        wx.reLaunch({url: `${RECRUITER}createQr/createQr?type=qr-position`})
+        wx.navigateTo({url: `${RECRUITER}createQr/createQr?type=qr-position`})
         break
       case 'qr-recruiter':
-        wx.reLaunch({url: `${RECRUITER}createQr/createQr?type=qr-recruiter`})
+        wx.navigateTo({url: `${RECRUITER}createQr/createQr?type=qr-recruiter`})
         break
       default:
         break
@@ -444,14 +463,32 @@ Page({
       this.setData({welcomeWord: '晚上好'})
     }
   },
+  /**
+   * @Author   小书包
+   * @DateTime 2019-09-05
+   * @detail   benner轮播
+   */
   autoplay (e) {
     this.setData({bannerIndex: e.detail.current})
   },
-  toJump(e) {
+  /**
+   * @Author   小书包
+   * @DateTime 2019-09-05
+   * @detail   banner跳转
+   */
+  bannerJump(e) {
     let url = '/'+e.currentTarget.dataset.url
     wx.navigateTo({ url })
   },
-  todoAction(e) {
+  /**
+   * @Author   小书包
+   * @DateTime 2019-09-05
+   * @detail   数据看板tab
+   */
+  onClickDataTab(e) {
+    let dataBox = this.data.dataBox
     let params = e.currentTarget.dataset
+    dataBox.tabLists.map((field, index) => field.active = index === params.index ? true : false)
+    this.setData({dataBox})
   }
 })

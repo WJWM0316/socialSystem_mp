@@ -16,6 +16,10 @@ if (environment === 0) {
 	RECRUITERHOST = 'https://zhaopin-api.lieduoduo.ziwork.com'
 	PUBAPIHOST = 'https://pub-api.lieduoduo.ziwork.com'
 	WEBVIEW = `https://h5.lieduoduo.ziwork.com/`
+	// APPLICANTHOST = 'https://qiuzhi-api.dd.lieduoduo.com/'
+	// RECRUITERHOST = 'https://zhaopin-api.dd.lieduoduo.com/'
+	// PUBAPIHOST = 'https://pub-api.dd.lieduoduo.ziwork.com'
+	// WEBVIEW = `https://h5.lieduoduo.ziwork.com/`
 } else {
 	// 正式服环境
 	APPLICANTHOST = 'https://qiuzhi-api.ent.lieduoduo.com'

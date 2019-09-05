@@ -100,7 +100,7 @@ export const request = ({name = '', method = 'post', url, host, data = {}, needK
     delete addHttpHead['Authorization']
   }
   // 测试token
-  addHttpHead['Authorization'] = 'd291e8d300f87e337cf74b7a19d55c26'
+  addHttpHead['Authorization'] = 'e9beb6007329b7e7233c76f6433d4e5f'
   if (wx.getStorageSync('sessionToken')) {
     if (url === '/bind/register' || url === '/bind/quick_login') {
       addHttpHead['Authorization-Wechat'] = wx.getStorageSync('sessionToken')

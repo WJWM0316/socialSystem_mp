@@ -317,6 +317,12 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  overflow: hidden;
+}
+
+.todo_ul .avatar{
+  width: 100%;
+  height: 100%;
 }
 
 .todo_ul .vip {
@@ -403,6 +409,7 @@
   color: rgba(98,98,98,1);
   line-height: 24rpx;
   padding-top: 18rpx;
+  overflow: hidden;
 }
 
 .todo_ul .strong {
@@ -454,7 +461,7 @@
   border-radius:16rpx;
   margin: 30rpx 30rpx 0 30rpx;
   overflow: hidden;
-  padding: 40rpx;
+  padding: 42rpx 40rpx 40rpx;
 }
 
 .sale-tools .tab1{
@@ -616,6 +623,8 @@
   color:rgba(40,40,40,1);
   line-height:30rpx;
   position: relative;
+  padding-left: 10rpx;
+  padding-top: 30rpx;
 }
 
 .data-box .myicon {
@@ -679,12 +688,13 @@
   display: inline-block;
   padding-bottom: 48rpx;
   position: relative;
+  vertical-align: top;
 }
 
 .data-box .tab2::before {
   content: '';
   display: block;
-  height: 8rpx;
+  height: 7rpx;
   background:rgba(101,39,145,1);
   position: absolute;
   left: 50%;
@@ -702,15 +712,19 @@
   position: absolute;
   left: 50%;
   transform: translateY(-50%);
-  border-width: 8rpx;
+  border-width: 7rpx;
   border-style: solid;
   border-color: transparent transparent #652791 transparent;
   display: block;
   content: '';
   transform: translateX(-50%);
-  bottom: 8rpx;
+  bottom: 7rpx;
   transition: all ease .4s;
   opacity: 0;
+}
+
+.data-box .active-tab2 {
+  pointer-events: none;
 }
 
 .data-box .active-tab2::after {
@@ -721,11 +735,11 @@
   opacity: 1;
 }
 
-.data-box .left {
+.data-box .tab2:first-child {
   float: left;
 }
 
-.data-box .right {
+.data-box .tab2:last-child {
   float: right;
 }
 

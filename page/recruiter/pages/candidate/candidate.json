@@ -1,0 +1,9 @@
+{
+	"enablePullDownRefresh": true,
+	"backgroundTextStyle": "light",
+  "usingComponents": {
+    "tab-bar": "../../../../components/business/tabBar/tabBar",
+    "navbar": "../../../../components/business/navbar/navbar",
+    "myCalendar": "../../../../components/functional/myCalendar/myCalendar"
+  }
+}

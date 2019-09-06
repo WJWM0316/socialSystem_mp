@@ -16,6 +16,7 @@ Page({
     onLinePositionNum: 0,
     onBottomStatus: 0,
     offBottomStatus: 0,
+    isSuper: 1,
     onLinePosition: {
       list: [],
       pageNum: 1,
@@ -202,6 +203,9 @@ Page({
         break
       case 'detail':
         wx.navigateTo({url: `${COMMON}positionDetail/positionDetail?positionId=${params.positionId}`})
+        break
+      case 'mechanism':
+        wx.navigateTo({url: `${RECRUITER}mechanism/list/list`})
         break
       case 'fail':
         wx.navigateTo({url: `${COMMON}positionDetail/positionDetail?positionId=${params.positionId}&type=clear_red_dot`})

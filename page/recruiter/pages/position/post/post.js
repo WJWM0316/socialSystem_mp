@@ -21,24 +21,26 @@ let app = getApp()
 
 Page({
   data: {
-    position_name: '',
-    lng: '',
-    lat: '',
-    area_id: '',
-    address: '',
-    doorplate: '',
-    address_id: '',
-    type: '',
-    typeName: '',
-    labels: [],
-    emolument_min: '',
-    emolument_max: '',
-    emolument_range: '请选择薪资范围',
-    work_experience: '',
-    work_experience_name: '请选择经验要求',
-    education: '25',
-    educationName: '本科',
-    describe: '',
+    formData: {
+      position_name: '',
+      lng: '',
+      lat: '',
+      area_id: '',
+      address: '',
+      doorplate: '',
+      address_id: '',
+      type: '',
+      typeName: '',
+      labels: [],
+      emolument_min: '',
+      emolument_max: '',
+      emolument_range: '请选择薪资范围',
+      work_experience: '',
+      work_experience_name: '请选择经验要求',
+      education: '25',
+      educationName: '本科',
+      describe: ''
+    },
     query: {},
     pageTitle: '',
     canClick: false,
@@ -85,6 +87,7 @@ Page({
    */
   getUpdateInfos() {
     let options = this.data.query
+    let formData = this.data.formData
     let storage = Object.assign(wx.getStorageSync('createPosition'))
     if(
       storage.position_name
@@ -101,10 +104,24 @@ Page({
       || storage.lng
       || storage.address_id
       || storage.parentType
-      ) {
-      Object.keys(storage).map(field => this.setData({[field]: storage[field]}))
+    ) {
+      formData.position_name = storage.position_name
+      formData.area_id = storage.area_id
+      formData.type = storage.type
+      formData.typeName = storage.typeName
+      formData.emolument_min = storage.emolument_min
+      formData.emolument_max = storage.emolument_max
+      formData.doorplate = storage.doorplate
+      formData.address = storage.address
+      formData.describe = storage.describe
+      formData.work_experience = storage.work_experience
+      formData.lat = storage.lat
+      formData.lng = storage.lng
+      formData.address_id = storage.address_id
+      formData.parentType = storage.parentType
+      this.setData({ formData })
       this.bindButtonStatus()
-      return;
+      return
     }
     if(!Reflect.has(options, 'positionId')) return
     getPositionApi({id: options.positionId}).then(res => {
@@ -128,7 +145,7 @@ Page({
       formData.lat = storage.lat || infos.lat
       formData.address_id = storage.address_id || infos.addressId
       formData.parentType = storage.parentType || infos.topPid
-      Object.keys(formData).map(field => this.setData({[field]: formData[field]}))
+      this.setData({ formData })
       this.bindButtonStatus()
     })
   },
@@ -148,7 +165,7 @@ Page({
       app.wxToast({title: '请先选择职业类型别'})
     } else {
       wx.navigateTo({ url })
-      wx.setStorageSync('createPosition', this.data)
+      wx.setStorageSync('createPosition', this.data.formData)
     }
   },
   /**
@@ -163,7 +180,7 @@ Page({
       : `${RECRUITER}position/addressList/addressList?type=position&selected=1`
       
     wx.navigateTo({ url })
-    wx.setStorageSync('createPosition', this.data)
+    wx.setStorageSync('createPosition', this.data.formData)
   },
   /**
    * @Author   小书包
@@ -177,7 +194,7 @@ Page({
       : `${COMMON}category/category`
       
     wx.navigateTo({ url })
-    wx.setStorageSync('createPosition', this.data)
+    wx.setStorageSync('createPosition', this.data.formData)
   },
   /**
    * @Author   小书包
@@ -186,11 +203,11 @@ Page({
    * @return   {[type]}     [description]
    */
   getSalary(e) {
-    this.setData({
-      emolument_min: parseInt(e.detail.propsResult[0]),
-      emolument_max: parseInt(e.detail.propsResult[1]),
-      emolument_range: e.detail.propsDesc
-    })
+    let formData = this.data.formData
+    formData['emolument_min'] = parseInt(e.detail.propsResult[0])
+    formData['emolument_max'] = parseInt(e.detail.propsResult[1])
+    formData['emolument_range'] = e.detail.propsDesc
+    this.setData({ formData })
   },
   /**
    * @Author   小书包
@@ -199,7 +216,10 @@ Page({
    * @return   {[type]}     [description]
    */
   getExperience(e) {
-    this.setData({work_experience: e.detail.propsResult, work_experience_name: e.detail.propsDesc})
+    let formData = this.data.formData
+    formData['work_experience'] = e.detail.propsResult
+    formData['work_experience_name'] = e.detail.propsDesc
+    this.setData({ formData })
   },
   /**
    * @Author   小书包
@@ -208,7 +228,10 @@ Page({
    * @return   {[type]}     [description]
    */
   getEducation(e) {
-    this.setData({education: e.detail.propsResult, educationName: e.detail.propsDesc})
+    let formData = this.data.formData
+    formData['education'] = e.detail.propsResult
+    formData['educationName'] = e.detail.propsDesc
+    this.setData({ formData })
   },
   submit() {
     let formData = {}
@@ -230,7 +253,7 @@ Page({
       'lat',
       'address_id',
     ]
-    params.map(field => formData[field] = this.data[field])
+    params.map(field => formData[field] = this.data.formData[field])
     formData.labels = JSON.stringify(labels)
     if(this.data.query.positionId) formData.id = this.data.query.positionId
     if(this.data.address_id) {
@@ -246,38 +269,66 @@ Page({
 
     // 验证职位名称是否已经完善
     let positionName = new Promise((resolve, reject) => {
-      !this.data.position_name ? reject('请填写职位名称') : resolve()
+      if(!this.data.position_name) {
+        reject('请填写职位名称')
+      } else {
+        resolve()
+      }
     })
 
     // 验证职位类型是否已经选择
     let positionType = new Promise((resolve, reject) => {
-      !this.data.type ? reject('请选择职位类别') : resolve()
+      if(!this.data.type) {
+        reject('请选择职位类别')
+      } else {
+        resolve()
+      }
     })
 
 
     // 验证地址是否已经选择
     let positionAddress = new Promise((resolve, reject) => {
-      !this.data.address_id ? reject('请选择地址') : resolve()
+      if(!this.data.address_id) {
+        reject('请选择地址')
+      } else {
+        resolve()
+      }
     })
 
     // 验证薪资是否已经选择
     let positionEmolument = new Promise((resolve, reject) => {
-      !this.data.emolument_min ? reject('请选择薪资范围') : resolve()
+      if(!this.data.emolument_min) {
+        reject('请选择薪资范围')
+      } else {
+        resolve()
+      }
     })
 
     // 验证经验是否已经选择
     let positionExperience = new Promise((resolve, reject) => {
-      !this.data.work_experience ? reject('请选择经验要求') : resolve()
+      if(!this.data.work_experience) {
+        reject('请选择经验要求')
+      } else {
+        resolve()
+      }
     })
 
     // 验证学历是否已经选择
     let positionEducation = new Promise((resolve, reject) => {
-      !this.data.education ? reject('请选择学历要求') : resolve()
+      if(!this.data.education) {
+        reject('请选择学历要求')
+      } else {
+        resolve()
+      }
     })
 
     // 验证职位描述是否已经完善
     let positionDescribe = new Promise((resolve, reject) => {
-      !this.data.describe ? reject('请填写职位描述') : resolve()
+      if(!this.data.describe) {
+        reject('请填写职位描述')
+      } else {
+        resolve()
+      }
     })
 
     Promise.all([
@@ -341,7 +392,7 @@ Page({
    * @return   {[type]}   [description]
    */
   bindButtonStatus() {
-    let infos = this.data
+    let infos = this.data.formData
     let canClick = infos.position_name
       && infos.type
       && infos.address_id

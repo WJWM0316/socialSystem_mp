@@ -84,6 +84,7 @@ Page({
     const storage = wx.getStorageSync('createPosition') || {}
     addressList.list.map((field, index) => {
       if(params.id === index) {
+        console.log(field)
         field.active = true
         storage.address_id = field.id
         storage.address = field.address

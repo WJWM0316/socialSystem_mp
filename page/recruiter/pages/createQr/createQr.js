@@ -35,6 +35,10 @@ Page({
     })
   	this.draw()
   },
+  backEvent() {
+    wx.removeStorageSync('avatar')
+    wx.navigateBack({delta: 1})
+  },
   draw() {
     return new Promise((resolve, reject) => {
       let _this = this
@@ -43,8 +47,8 @@ Page({
       let avatarWidth = 100
       let bgUrl = '../../../../images/201909011831.jpg'
       let avatarUrl = '../../../../images/201909042919.jpg'
-      // let avatar = wx.getStorageSync('avatar')
-      // avatarUrl = avatar.middleUrl
+      let avatar = wx.getStorageSync('avatar')
+      avatarUrl = avatar.url
       // 最外层的一个圆
       ctx.beginPath()  
       ctx.fillStyle = '#DFD5EB'   
@@ -53,9 +57,9 @@ Page({
       ctx.fill()
       ctx.clip()
 
+      ctx.fillStyle = '#fff'
       // 次外层的圆
       ctx.beginPath()  
-      ctx.fillStyle = '#fff'   
       ctx.arc(canvasWidth/2, canvasWidth/2, canvasWidth/2 - 1, 0,Math.PI * 2, false)
       ctx.closePath()
       ctx.fill()
@@ -63,7 +67,6 @@ Page({
 
       // canvas的实际背景
       ctx.beginPath()  
-      ctx.fillStyle = '#fff'   
       ctx.arc(canvasWidth/2, canvasWidth/2, canvasWidth/2 - 9, 0,Math.PI * 2, false)
       ctx.closePath()
       ctx.fill()
@@ -74,9 +77,13 @@ Page({
 
       // 头像或者logo的白色背景
       ctx.beginPath()  
-      ctx.fillStyle = '#fff'   
-      ctx.lineWidth = 5
       ctx.arc(canvasWidth/2, canvasWidth/2, 60, 0,Math.PI * 2, false)
+      ctx.closePath()
+      ctx.fill()
+      ctx.clip()
+
+      ctx.beginPath()  
+      ctx.arc(canvasWidth/2, canvasWidth/2, 60 - 5, 0,Math.PI * 2, false)
       ctx.closePath()
       ctx.fill()
       ctx.clip()

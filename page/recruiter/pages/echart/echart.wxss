@@ -8,6 +8,7 @@
 	right: 0;
 	padding: 0 60rpx;
 	box-sizing: border-box;
+	line-height: 88rpx;
 }
 
 .floating-bar .icon-disejiantou-you{
@@ -16,6 +17,11 @@
 	transform: translateY(-50%);
 	right: 60rpx;
 	color: #652791;
+}
+
+.floating-bar .icon-gongsi{
+  padding-right: 20rpx;
+  color: #8452A7;
 }
 
 .floating-bar .label{

@@ -5,11 +5,6 @@ import {
 } from '../../../../../api/pages/position.js'
 
 import {
-  scanQrcodeApi,
-  scanLoginApi
-} from '../../../../../api/pages/common.js'
-
-import {
   applyInterviewApi
 } from '../../../../../api/pages/interview.js'
 
@@ -42,6 +37,7 @@ Page({
       describe: '',
       company_id: ''
     },
+    isCompanyTopAdmin: 0,
     query: {},
     pageTitle: '',
     canClick: false,
@@ -49,6 +45,8 @@ Page({
     options: {}
   },
   onLoad(options) {
+    let isCompanyTopAdmin = this.data.isCompanyTopAdmin
+    isCompanyTopAdmin = app.globalData.recruiterDetails.isCompanyTopAdmin
     this.setData({pageTitle: options.positionId ? '编辑职位' : '发布职位', query: options})
   },
   onShow() {
@@ -113,17 +111,18 @@ Page({
       formData.typeName = storage.typeName
       formData.emolument_min = storage.emolument_min
       formData.emolument_max = storage.emolument_max
+      formData.emolument_range =  storage.emolument_range
       formData.doorplate = storage.doorplate
       formData.address = storage.address
       formData.describe = storage.describe
       formData.work_experience = storage.work_experience
+      formData.work_experience_name = storage.work_experience_name
       formData.lat = storage.lat
       formData.lng = storage.lng
       formData.address_id = storage.address_id
       formData.parentType = storage.parentType
       formData.company_id = storage.company_id
-      this.setData({ formData })
-      this.bindButtonStatus()
+      this.setData({ formData }, () => this.bindButtonStatus())
       return
     }
     if(!Reflect.has(options, 'positionId')) return
@@ -148,9 +147,23 @@ Page({
       formData.lat = storage.lat || infos.lat
       formData.address_id = storage.address_id || infos.addressId
       formData.parentType = storage.parentType || infos.topPid
-      this.setData({ formData })
-      this.bindButtonStatus()
+      this.setData({ formData }, () => this.bindButtonStatus())
     })
+  },
+  /**
+   * @Author   小书包
+   * @DateTime 2019-09-06
+   * @detail   获取机构信息
+   * @return   {[type]}     [description]
+   */
+  getMechanism(e) {
+    let companyId = app.globalData.recruiterDetails.companyInfo.id
+    let url = this.data.query.positionId
+      ? `${RECRUITER}mechanism/list/list?positionId=${this.data.query.positionId}&companyId=${companyId}`
+      : `${RECRUITER}mechanism/list/list?companyId=${companyId}`
+
+    wx.navigateTo({ url })
+    wx.setStorageSync('createPosition', this.data.formData)
   },
   /**
    * @Author   小书包
@@ -257,10 +270,13 @@ Page({
       'address_id',
       'company_id'
     ]
+
     params.map(field => formData[field] = this.data.formData[field])
     formData.labels = JSON.stringify(labels)
+
+    console.log(this.data.formData, formData)
     if(this.data.query.positionId) formData.id = this.data.query.positionId
-    if(this.data.address_id) {
+    if(this.data.formData.address_id) {
       delete formData.lng
       delete formData.lng
       delete formData.lat
@@ -273,7 +289,7 @@ Page({
 
     // 验证是否已经选择机构id
     let companyId = new Promise((resolve, reject) => {
-      if(!formData.company_id) {
+      if(!this.data.formData.company_id) {
         reject('请选择机构id')
       } else {
         resolve()
@@ -282,7 +298,7 @@ Page({
 
     // 验证职位名称是否已经完善
     let positionName = new Promise((resolve, reject) => {
-      if(!formData.position_name) {
+      if(!this.data.formData.position_name) {
         reject('请填写职位名称')
       } else {
         resolve()
@@ -291,7 +307,7 @@ Page({
 
     // 验证职位类型是否已经选择
     let positionType = new Promise((resolve, reject) => {
-      if(!formData.type) {
+      if(!this.data.formData.type) {
         reject('请选择职位类别')
       } else {
         resolve()
@@ -301,7 +317,7 @@ Page({
 
     // 验证地址是否已经选择
     let positionAddress = new Promise((resolve, reject) => {
-      if(!formData.address_id) {
+      if(!this.data.formData.address_id) {
         reject('请选择地址')
       } else {
         resolve()
@@ -310,7 +326,7 @@ Page({
 
     // 验证薪资是否已经选择
     let positionEmolument = new Promise((resolve, reject) => {
-      if(!formData.emolument_min) {
+      if(!this.data.formData.emolument_min) {
         reject('请选择薪资范围')
       } else {
         resolve()
@@ -319,7 +335,7 @@ Page({
 
     // 验证经验是否已经选择
     let positionExperience = new Promise((resolve, reject) => {
-      if(!formData.work_experience) {
+      if(!this.data.formData.work_experience) {
         reject('请选择经验要求')
       } else {
         resolve()
@@ -328,7 +344,7 @@ Page({
 
     // 验证学历是否已经选择
     let positionEducation = new Promise((resolve, reject) => {
-      if(!formData.education) {
+      if(!this.data.formData.education) {
         reject('请选择学历要求')
       } else {
         resolve()
@@ -337,15 +353,14 @@ Page({
 
     // 验证职位描述是否已经完善
     let positionDescribe = new Promise((resolve, reject) => {
-      if(!formData.describe) {
+      if(!this.data.formData.describe) {
         reject('请填写职位描述')
       } else {
         resolve()
       }
     })
 
-    Promise.all([
-      companyId,
+    let checkLists = [
       positionName, 
       positionType, 
       positionAddress,
@@ -353,10 +368,13 @@ Page({
       positionExperience,
       positionEducation,
       positionDescribe
-    ]).then(res => {
-      this[action](formData)
-    })
-    .catch(err => app.wxToast({title: err}))
+    ]
+
+    if(this.data.isCompanyTopAdmin) {
+      checkLists = [companyId].concat(checkLists)
+    }
+    console.log(checkLists)
+    Promise.all(checkLists).then(res => this[action](formData)).catch(err => app.wxToast({title: err}))
   },
   /**
    * @Author   小书包

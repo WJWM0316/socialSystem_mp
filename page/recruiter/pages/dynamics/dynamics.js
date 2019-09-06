@@ -25,46 +25,8 @@ Page({
     options: {},
     isJobhunter: app.globalData.isJobhunter,
     interestList: {
-      list: [
-        {
-          "interviewId": 740,
-          "jobhunterUid": 3403,
-          "recruiterUid": 662,
-          "jobhunterRealname": "零零一一",
-          "avatar": {
-            "id": 27248,
-            "url": "https://attach.lieduoduo.ziwork.com/avatar/2019/0708/17/5d231013b9a96.png",
-            "attachType": "avatar",
-            "attachTypeDesc": "头像",
-            "width": 600,
-            "height": 600,
-            "middleUrl": "https://attach.lieduoduo.ziwork.com/avatar/2019/0708/17/5d231013b9a96.png!330xauto",
-            "smallUrl": "https://attach.lieduoduo.ziwork.com/avatar/2019/0708/17/5d231013b9a96.png!130xauto"
-          },
-          "redDot": 0,
-          "status": 55,
-          "statusDesc": "对方暂不考虑",
-          "interviewType": 1,
-          "positionId": 6765,
-          "positionName": "前端开发",
-          "emolumentMin": 12,
-          "emolumentMax": 13,
-          "emolument": "12K-13K",
-          "education": 25,
-          "educationDesc": "本科",
-          "workExperience": 0,
-          "workExperienceDesc": "1年以内",
-          "companyId": 432,
-          "companyName": "那些花儿（中国）有限责任公司",
-          "lastCompanyName": "广州百度有限公司",
-          "lastPosition": "php",
-          "createdAt": "07-25 16:48",
-          "createdAtTime": 1564044499,
-          "glass": 0,
-          "name": '廖继强'
-        }
-      ],
-      pageNum: 2,
+      list: [],
+      pageNum: 1,
       isLastPage: false,
       isRequire: false,
       onBottomStatus: 0
@@ -81,12 +43,11 @@ Page({
       viewNum: 0
     }
   },
-  // onLoad(options) {
-  //   wx.setStorageSync('choseType', 'RECRUITER')
-  //   if(Reflect.has(options, 'tab')) this.setData({tab: options.tab})
-  // },
+  onLoad(options) {
+    wx.setStorageSync('choseType', 'RECRUITER')
+    if(Reflect.has(options, 'tab')) this.setData({tab: options.tab})
+  },
   onShow() {
-    console.log(this.data);return
     this.getIndexShowCount()
     this.getLists()
   },
@@ -97,17 +58,15 @@ Page({
    * @return   {[type]}              [description]
    */
   onPullDownRefresh(hasLoading = true) {
-    const key = this.data.tab
-    const value = {list: [], pageNum: 1, isLastPage: false, isRequire: false, onBottomStatus: 0}
+    let key = this.data.tab
+    let value = {list: [], pageNum: 1, isLastPage: false, isRequire: false, onBottomStatus: 0}
+    let callback = () => {
+      this.setData({hasReFresh: false})
+      wx.stopPullDownRefresh()
+    }
     this.setData({[key]: value, hasReFresh: true})
     this.getIndexShowCount()
-    this.getLists().then(res => {
-      this.setData({hasReFresh: false})
-      wx.stopPullDownRefresh()
-    }).catch(e => {
-      this.setData({hasReFresh: false})
-      wx.stopPullDownRefresh()
-    })
+    this.getLists().then(res => callback()).catch(e => callback())
   },
   /**
    * 页面上拉触底事件的处理函数
@@ -115,7 +74,7 @@ Page({
   onReachBottom() {
     let key = this.data.tab
     this.setData({onBottomStatus: 1})
-    if (!this.data[key].isLastPage) this.getLists()
+    if(!this.data[key].isLastPage) this.getLists()
   },
   /**
    * @Author   小书包
@@ -124,7 +83,7 @@ Page({
    */
   viewResumeDetail(e) {
     let params = e.currentTarget.dataset
-    clearReddotApi({jobHunterUid: params.jobhunteruid, reddotType: params.type}).then(() => {
+    return clearReddotApi({jobHunterUid: params.jobhunteruid, reddotType: params.type}).then(() => {
       wx.navigateTo({url: `${COMMON}resumeDetail/resumeDetail?uid=${params.jobhunteruid}`})
     })
   },
@@ -162,11 +121,8 @@ Page({
    * @return   {[type]}   [description]
    */
   getLists() {
-    if(this.data.tab === 'interestList') {
-      return this.getViewList()
-    } else {
-      return this.getInterestList()
-    }
+    let funcApi = this.data.tab === 'interestList' ? 'getViewList' : 'getInterestList'
+    return this[funcApi]()
   },
   /**
    * @Author   小书包
@@ -212,11 +168,13 @@ Page({
   formSubmit(e) {
     app.postFormId(e.detail.formId)
   },
+  /**
+   * @Author   小书包
+   * @DateTime 2019-09-06
+   * @detail   获取红点
+   * @return   {[type]}   [description]
+   */
   getIndexShowCount() {
-    return new Promise((resolve, reject) => {
-      getIndexShowCountApi({hasLoading: false}).then(res => {
-        this.setData({indexShowCount: res.data}, () => resolve(res))
-      })
-    })
+    return getIndexShowCountApi({hasLoading: false}).then(res => this.setData({indexShowCount: res.data}))
   }
 })

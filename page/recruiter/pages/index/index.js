@@ -1,37 +1,26 @@
 import {
-  getMyBrowseUsersListApi,
-  getMyBrowsePositionApi,
-  getBrowseMySelfApi,
-  getCollectMySelfApi,
-  getMyCollectUsersApi
-} from '../../../../api/pages/browse.js'
-
-import {
-  getBrowseMySelfListsApi,
   getIndexShowCountApi
 } from '../../../../api/pages/recruiter.js'
 
 import {
-  clearReddotApi
-} from '../../../../api/pages/common.js'
-
-import {RECRUITER, COMMON, APPLICANT, WEBVIEW, VERSION} from '../../../../config.js'
-
-import {getSelectorQuery}  from '../../../../utils/util.js'
-
-import { getPositionListNumApi } from '../../../../api/pages/position.js'
+  RECRUITER, 
+  COMMON, 
+  APPLICANT, 
+  WEBVIEW,
+  VERSION
+} from '../../../../config.js'
 
 import {
   getAdBannerApi
 } from '../../../../api/pages/common'
 
 let app = getApp()
+
 let fixedDomPosition = 0,
     positionCard = null
 
 Page({
   data: {
-    pageList: 'collectMySelf',
     cdnImagePath: app.globalData.cdnImagePath,
     navH: app.globalData.navHeight,
     choseType: '',
@@ -40,13 +29,13 @@ Page({
     hasReFresh: false,
     onBottomStatus: 0,
     isFixed: true,
-    fixedDom: false,
     detail: {},
     welcomeWord: '',
     indexShowCount: {
       jobHunterInterestedToR: 0,
       recentInterview: 0,
       onlinePosition: 0,
+      waitingProcessInterview: 0,
       moreRecruiter: [],
       rankDetail: {
         currentRank: 0,
@@ -76,7 +65,8 @@ Page({
           active: false
         }
       ]
-    }
+    },
+    viewList: []
   },
   // onLoad() {
   //   let choseType = wx.getStorageSync('choseType') || ''
@@ -121,8 +111,6 @@ Page({
     let collectMySelf = this.data.collectMySelf
     let browseMySelf = this.data.browseMySelf
     let userInfo = app.globalData.userInfo
-    let pageList = this.data.pageList
-    let value = this.data[pageList]
     if(app.pageInit) {
       userInfo = app.globalData.userInfo
       let companyInfos = app.globalData.recruiterDetails.companyInfo
@@ -191,11 +179,6 @@ Page({
     } else {
       if (this.data.background !== 'transparent') this.setData({isFixed: false, background: 'transparent'})
     }
-    if(e.scrollTop > fixedDomPosition) {
-      if(!this.data.fixedDom) this.setData({fixedDom: true})
-    } else {
-      if(this.data.fixedDom) this.setData({fixedDom: false})
-    }
   },
   formSubmit(e) {
     app.postFormId(e.detail.formId)
@@ -229,7 +212,7 @@ Page({
         wx.reLaunch({url: `${RECRUITER}interview/index/index`})
         break
       case 'dynamics':
-        wx.reLaunch({url: `${RECRUITER}dynamics/dynamics`})
+        wx.navigateTo({url: `${RECRUITER}dynamics/dynamics`})
         break
       case 'publicPosition':
         wx.navigateTo({url: `${RECRUITER}position/post/post`})
@@ -242,6 +225,9 @@ Page({
         break
       case 'qr-recruiter':
         wx.navigateTo({url: `${RECRUITER}createQr/createQr?type=qr-recruiter`})
+        break
+      case 'echart':
+        wx.navigateTo({url: `${RECRUITER}echart/echart`})
         break
       default:
         break

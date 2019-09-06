@@ -3,6 +3,8 @@
 	<navbar
 		title="{{title}}"
 		background="#FFFFFF"
+		customBack
+		bindbackEvent="backEvent"
 		color="#22292C">
 	</navbar>
 

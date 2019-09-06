@@ -44,6 +44,7 @@
 
 .item5 .li .office-sarary {
   display: inline-block;
+  vertical-align: middle;
 }
 
 .item5 .li .tags-box {

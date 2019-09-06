@@ -25,8 +25,46 @@ Page({
     options: {},
     isJobhunter: app.globalData.isJobhunter,
     interestList: {
-      list: [],
-      pageNum: 1,
+      list: [
+        {
+          "interviewId": 740,
+          "jobhunterUid": 3403,
+          "recruiterUid": 662,
+          "jobhunterRealname": "零零一一",
+          "avatar": {
+            "id": 27248,
+            "url": "https://attach.lieduoduo.ziwork.com/avatar/2019/0708/17/5d231013b9a96.png",
+            "attachType": "avatar",
+            "attachTypeDesc": "头像",
+            "width": 600,
+            "height": 600,
+            "middleUrl": "https://attach.lieduoduo.ziwork.com/avatar/2019/0708/17/5d231013b9a96.png!330xauto",
+            "smallUrl": "https://attach.lieduoduo.ziwork.com/avatar/2019/0708/17/5d231013b9a96.png!130xauto"
+          },
+          "redDot": 0,
+          "status": 55,
+          "statusDesc": "对方暂不考虑",
+          "interviewType": 1,
+          "positionId": 6765,
+          "positionName": "前端开发",
+          "emolumentMin": 12,
+          "emolumentMax": 13,
+          "emolument": "12K-13K",
+          "education": 25,
+          "educationDesc": "本科",
+          "workExperience": 0,
+          "workExperienceDesc": "1年以内",
+          "companyId": 432,
+          "companyName": "那些花儿（中国）有限责任公司",
+          "lastCompanyName": "广州百度有限公司",
+          "lastPosition": "php",
+          "createdAt": "07-25 16:48",
+          "createdAtTime": 1564044499,
+          "glass": 0,
+          "name": '廖继强'
+        }
+      ],
+      pageNum: 2,
       isLastPage: false,
       isRequire: false,
       onBottomStatus: 0
@@ -43,11 +81,12 @@ Page({
       viewNum: 0
     }
   },
-  onLoad(options) {
-    wx.setStorageSync('choseType', 'RECRUITER')
-    if(Reflect.has(options, 'tab')) this.setData({tab: options.tab})
-  },
+  // onLoad(options) {
+  //   wx.setStorageSync('choseType', 'RECRUITER')
+  //   if(Reflect.has(options, 'tab')) this.setData({tab: options.tab})
+  // },
   onShow() {
+    console.log(this.data);return
     this.getIndexShowCount()
     this.getLists()
   },

@@ -35,7 +35,7 @@
 			<view class="text">最近面试<i class="icon iconfont icon-disejiantou-you"></i></view>
 		</view>
 		<view class="item right001" bindtap="routeJump" data-route="receiveData">
-			<view class="number">{{indexShowCount.onlinePosition}}</view>
+			<view class="number">{{indexShowCount.waitingProcessInterview}}</view>
 			<view class="text">未处理申请<i class="icon iconfont icon-disejiantou-you"></i></view>
 		</view>
 	</view>

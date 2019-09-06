@@ -1,7 +1,9 @@
 <view>
+
 	<navbar title="候选人动态" background="#FFFFFF" color="#22292C"></navbar>
-	<view class="place"></view>
-	<view class="office-status-bar" style="top: {{navH}}px">
+
+	<view class="placeholder"></view>
+	<view class="fixed-dom" style="top: {{navH}}px">
 		<view class="item {{tab === 'interestList' ? 'active' : ''}}" bindtap="onClickTab" data-tab="interestList">
 			对我感兴趣
 			<view class="redot" wx:if="{{indexShowCount.interestedNum}}">{{indexShowCount.interestedNum}}</view>
@@ -11,12 +13,12 @@
   		<view class="redot" wx:if="{{indexShowCount.viewNum}}">{{indexShowCount.viewNum}}</view>
   	</view>
 	</view>
-	<view class="block"></view>
+
 	<view hidden="{{!hasReFresh}}">
 		<refreshStatus></refreshStatus>
 	</view>
 
-	<view class="list-box viewList" hidden="{{tab === 'viewList'}}">
+	<view class="list-box viewList" wx:if="{{tab === 'viewList'}}">
 		<form bindsubmit="formSubmit" report-submit='{{true}}'>
 			<button
 				form-type="submit"
@@ -66,7 +68,7 @@
 		</bottomStatus>
 	</view>
 
-	<view class="list-box interestList" hidden="{{tab === 'interestList'}}">
+	<view class="list-box interestList" wx:if="{{tab === 'interestList'}}">
 		<form bindsubmit="formSubmit" report-submit='{{true}}'> 
 			<button
 				form-type="submit"
@@ -96,6 +98,7 @@
 							</view>
 						</view>
 					</view>
+					<view class="row-three">候选人来自<view class="strong">小程序码扫码</view></view>
 					<view class="row-two">
 						<view class="day">{{item.viewAt}}</view>
 						<view class="action">

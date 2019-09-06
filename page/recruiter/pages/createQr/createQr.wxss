@@ -1,17 +1,38 @@
 .button-submit {
 	height:88rpx;
-	background:#F5F4F7;
-	border-radius:48rpx;
-	font-size:32rpx;
-	color:#CDCBCF;
-	text-align: center;
 	line-height: 88rpx;
+	position: relative;
+	margin: 0;
+	padding: 0;
+	background: transparent;
+	overflow: unset;
 }
 
-.button-enable {
-	background:rgba(101,39,145,1);
-	box-shadow:0rpx 20rpx 18rpx 0rpx rgba(101,39,145,0.2);
+.button-submit .cover{
+	background:rgba(255,220,41,1);
+	border-radius:44rpx;
+	font-size:30rpx;
+	color:#CDCBCF;
+	text-align: center;
 	color:rgba(255,255,255,1);
+	font-size:30rpx;
+	color:rgba(40,40,40,1);
+	position: relative;
+	z-index: 2
+}
+
+.button-submit::before{
+	content: '';
+	display: block;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: -8rpx;
+	background: #652791;
+	border-radius: 44rpx;
+	z-index: 1
 }
 
 .footer {
@@ -19,13 +40,69 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background: #FBFBFF;
-	background:rgba(255,255,255,1);
-	box-shadow:0rpx -1rpx 0rpx 0rpx rgba(206,215,220,1);
+	background:rgba(255,255,255,.8);
 	opacity:0.96;
 	padding: 30rpx 100rpx;
 }
 
+.canvas-box {
+	margin-top: 224rpx;
+}
+
 .canvas-box .canvas{
-	margin: 100rpx auto;
+	margin: 0 auto;
+}
+
+.seleted-bar {
+  height: 88rpx;
+  line-height: 88rpx;
+  background: #FFFFFF;
+  font-weight: 700;
+  font-size:30rpx;
+  color:rgba(40,40,40,1);
+  box-shadow:0rpx 11rpx 30rpx 0rpx rgba(153,193,214,0.08);
+  border-radius:0rpx 0rpx 32rpx 32rpx;
+  margin-bottom: 36rpx;
+  padding: 0 60rpx;
+}
+
+.seleted-bar .icon-disejiantou-you{
+  float: right;
+  padding-right: 0;
+  color: #652791;
+}
+
+.seleted-bar .icon-gongsi{
+  padding-right: 20rpx;
+  color: #8452A7;
+}
+
+.tips{
+	height:33rpx;
+	font-size:24rpx;
+	color:rgba(146,146,146,1);
+	line-height:33rpx;
+	text-align: center;
+	margin-top: 60rpx;
+}
+
+.tips .strong{
+	color: #652791;
+	display: inline;
+	position: relative;
+}
+
+.avatarCut{
+	opacity: 0;
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 2;
+	top: 0;
+}
+
+.tips .icon{
+	position: relative;
+	top: 4rpx
 }

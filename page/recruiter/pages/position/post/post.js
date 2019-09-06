@@ -39,7 +39,8 @@ Page({
       work_experience_name: '请选择经验要求',
       education: '25',
       educationName: '本科',
-      describe: ''
+      describe: '',
+      company_id: ''
     },
     query: {},
     pageTitle: '',
@@ -104,6 +105,7 @@ Page({
       || storage.lng
       || storage.address_id
       || storage.parentType
+      || storage.company_id
     ) {
       formData.position_name = storage.position_name
       formData.area_id = storage.area_id
@@ -119,6 +121,7 @@ Page({
       formData.lng = storage.lng
       formData.address_id = storage.address_id
       formData.parentType = storage.parentType
+      formData.company_id = storage.company_id
       this.setData({ formData })
       this.bindButtonStatus()
       return
@@ -252,6 +255,7 @@ Page({
       'lng',
       'lat',
       'address_id',
+      'company_id'
     ]
     params.map(field => formData[field] = this.data.formData[field])
     formData.labels = JSON.stringify(labels)
@@ -267,9 +271,18 @@ Page({
       delete formData.address_id
     }
 
+    // 验证是否已经选择机构id
+    let companyId = new Promise((resolve, reject) => {
+      if(!formData.company_id) {
+        reject('请选择机构id')
+      } else {
+        resolve()
+      }
+    })
+
     // 验证职位名称是否已经完善
     let positionName = new Promise((resolve, reject) => {
-      if(!this.data.position_name) {
+      if(!formData.position_name) {
         reject('请填写职位名称')
       } else {
         resolve()
@@ -278,7 +291,7 @@ Page({
 
     // 验证职位类型是否已经选择
     let positionType = new Promise((resolve, reject) => {
-      if(!this.data.type) {
+      if(!formData.type) {
         reject('请选择职位类别')
       } else {
         resolve()
@@ -288,7 +301,7 @@ Page({
 
     // 验证地址是否已经选择
     let positionAddress = new Promise((resolve, reject) => {
-      if(!this.data.address_id) {
+      if(!formData.address_id) {
         reject('请选择地址')
       } else {
         resolve()
@@ -297,7 +310,7 @@ Page({
 
     // 验证薪资是否已经选择
     let positionEmolument = new Promise((resolve, reject) => {
-      if(!this.data.emolument_min) {
+      if(!formData.emolument_min) {
         reject('请选择薪资范围')
       } else {
         resolve()
@@ -306,7 +319,7 @@ Page({
 
     // 验证经验是否已经选择
     let positionExperience = new Promise((resolve, reject) => {
-      if(!this.data.work_experience) {
+      if(!formData.work_experience) {
         reject('请选择经验要求')
       } else {
         resolve()
@@ -315,7 +328,7 @@ Page({
 
     // 验证学历是否已经选择
     let positionEducation = new Promise((resolve, reject) => {
-      if(!this.data.education) {
+      if(!formData.education) {
         reject('请选择学历要求')
       } else {
         resolve()
@@ -324,7 +337,7 @@ Page({
 
     // 验证职位描述是否已经完善
     let positionDescribe = new Promise((resolve, reject) => {
-      if(!this.data.describe) {
+      if(!formData.describe) {
         reject('请填写职位描述')
       } else {
         resolve()
@@ -332,6 +345,7 @@ Page({
     })
 
     Promise.all([
+      companyId,
       positionName, 
       positionType, 
       positionAddress,

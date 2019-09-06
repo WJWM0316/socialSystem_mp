@@ -3,6 +3,7 @@ import {sendCodeApi, checkSessionKeyApi, changeNewCaptchaApi} from "../../../../
 import {quickLoginApi} from '../../../../api/pages/auth.js'
 
 let mobileNumber = 0
+let password = 0
 let second = 60
 let app = getApp()
 let timer = null
@@ -18,6 +19,7 @@ Page({
   data: {
     phone: '',
     code: '',
+    password: '',
     imgUrl: '',
     cdnImagePath: app.globalData.cdnImagePath,
     second: 60,
@@ -32,8 +34,6 @@ Page({
     captchaValue = ''
     backType = 'backPrev'
     if (options.backType) backType = options.backType
-    // let session_token = wx.getStorageSync('sessionToken')
-    // checkSessionKeyApi({session_token})
   },
   toJump () {
     wx.navigateTo({
@@ -47,7 +47,17 @@ Page({
       this.setData({
         phone: e.detail.value
       })
-      this.setData({canClick: this.data.code && this.data.phone ? true : false})
+      this.setData({canClick: this.data.password && this.data.phone ? true : false})
+    }, 100)
+  },
+  getNumber (e) {
+    password = e.detail.value
+    clearTimeout(timer)
+    timer = setTimeout(() => {
+      this.setData({
+        password: e.detail.value
+      })
+      this.setData({canClick: this.data.password && this.data.phone ? true : false})
     }, 100)
   },
   getCode(e) {
@@ -102,7 +112,8 @@ Page({
   bindPhone() {
     if (!this.data.canClick) return
     let data = {
-      mobile: this.data.phone,
+      email: this.data.phone,
+      password: this.data.password,
       code: this.data.code,
       captchaKey,
       captchaValue

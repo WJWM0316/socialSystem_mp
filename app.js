@@ -1,5 +1,5 @@
 //app.js
-import {loginApi, checkSessionKeyApi, bindPhoneApi, uploginApi} from 'api/pages/auth.js'
+import {loginApi, checkSessionKeyApi, bindPhoneApi, uploginApi, authLoginApi} from 'api/pages/auth.js'
 import {formIdApi, shareStatistics, readyStatistics, getVersionListApi} from 'api/pages/common.js'
 import {getPersonalResumeApi} from 'api/pages/center.js'
 import {getRecruiterDetailApi} from 'api/pages/recruiter.js'
@@ -87,6 +87,7 @@ App({
         that.loginInit()
       }
       that.loginInit = function () {}
+      that.getRoleInfo()
       resolve('sss')
       // wx.login({
       //   success: function (res0) {
@@ -380,7 +381,8 @@ App({
   phoneLogin(data, operType) {
     let _this = this
     return new Promise((resolve, reject) => {
-      bindPhoneApi(data).then(res => {
+
+      authLoginApi(data).then(res => {
         if (res.data.token) wx.setStorageSync('token', res.data.token)
         if (res.data.sessionToken) wx.setStorageSync('sessionToken', res.data.sessionToken)
         this.globalData.hasLogin = 1

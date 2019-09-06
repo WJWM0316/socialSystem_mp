@@ -3,11 +3,10 @@
 	"backgroundTextStyle": "light",
   "usingComponents": {
   	"canvasCard": "../../../../../components/business/canvasCard/canvasCard",
-  	"tabBar": "../../../../components/business/tabBar/tabBar",
-  	"shareBtn": "../../../../components/layout/shareBtn/shareBtn",
-    "canvasCard": "../../../../components/business/canvasCard/canvasCard",
-  	"auth": "../../../../components/functional/auth/auth",
-    "bindPhone": "../../../../components/functional/bindPhone/bindPhone",
+    "tabBar": "../../../../../components/business/tabBar/tabBar",
+  	"shareBtn": "../../../../../components/layout/shareBtn/shareBtn",
+  	"auth": "../../../../../components/functional/auth/auth",
+    "bindPhone": "../../../../../components/functional/bindPhone/bindPhone",
     "navbar": "../../../../../components/business/navbar/navbar"  
   }
 }

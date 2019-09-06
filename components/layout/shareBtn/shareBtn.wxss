@@ -6,7 +6,7 @@
   border-radius:30rpx 0rpx 0rpx 30rpx;
   border:4rpx solid rgba(40,40,40,1);
   position:fixed;
-  top: 12.6%;
+  top: 23%;
   right: 5rpx;
   z-index: 9;
   padding: 24rpx 16rpx 20rpx 20rpx;
@@ -17,13 +17,31 @@
   line-height:30rpx;
   font-weight: 500;
 }
+.shareBtn1, .shareBtnBg1 {
+  width: 72rpx;
+  height: 68rpx;
+  border-radius: 34rpx 0 0 34rpx;
+  box-sizing: border-box;
+  padding: 20rpx 10rpx 10rpx 18rpx;
+  right: 0;
+  position: absolute;
+  border: none;
+  z-index: 2;
+}
+.shareBtnBg1 {
+  background: #FFDC29;
+  z-index: 1;
+}
+.shareBtn1 .shareIcon {
+  display: block;
+}
 .shareBtn .shareIcon  {
   margin-bottom: 8rpx;
   margin-left: -2rpx;
   display: block;
 }
 .shareBtnBg  {
-  top: 13.1%;
+  top: 23.7%;
   right: 0;
   background: #FFDC29;
   border-right: 0;

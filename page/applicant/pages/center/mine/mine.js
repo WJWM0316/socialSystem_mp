@@ -10,7 +10,7 @@ Page({
    */
   data: {
     myInfo: {},
-    hasLogin: 1,
+    hasLogin: 0,
     hideBind: true,
     hasReFresh: false,
     isMicroCard: false,
@@ -45,12 +45,14 @@ Page({
     }
     if(app.pageInit) {
       init()
-    } app.pageInit = () => {
-      init()
+    } else {
+      app.pageInit = () => {
+        init()
+      }
     }
   },
   getMyInfo () {
-    let hasLogin = app.globalData.hasLogin,
+    let hasLogin = wx.getStorageSync('token'), // app.globalData.hasLogin,
         isJobhunter = app.globalData.isJobhunter,
         isRecruiter = app.globalData.isRecruiter,
         showScanIcon = hasLogin && isJobhunter ? true : false

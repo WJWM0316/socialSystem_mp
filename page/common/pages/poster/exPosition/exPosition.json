@@ -1,6 +1,0 @@
-{
-  "usingComponents": {
-  	"navbar": "../../../../components/business/navbar/navbar",
-  	"shareWord": "../../../../components/layout/shareWord/shareWord"
-  }
-}

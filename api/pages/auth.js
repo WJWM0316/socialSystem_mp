@@ -1,5 +1,14 @@
 import { request } from '../require.js'
 
+
+
+export const authLoginApi = (data, hasLoading) => {
+  return request({
+    url: '/auth/login',
+    data,
+    hasLoading: false
+  })
+}
 export const getSessionKeyApi = (data, hasLoading) => {
   return request({
     url: '/wechat/oauth/mini',

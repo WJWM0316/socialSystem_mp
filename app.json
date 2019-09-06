@@ -12,10 +12,7 @@
     "page/common/pages/arrangement/arrangement",
     "page/common/pages/rank/rank",
     "page/common/pages/careerChance/careerChance",
-    "page/common/pages/poster/position/position",
-    "page/common/pages/poster/resume/resume",
-    "page/common/pages/poster/recruiter/recruiter",
-    "page/common/pages/poster/exPosition/exPosition",
+    "page/common/pages/poster/createPost/createPost",
     "page/common/pages/poster/company/company",
     "page/common/pages/poster/saveImg/saveImg",
     "page/common/pages/category/category",
@@ -25,8 +22,7 @@
     "page/common/pages/chooseJob/chooseJob",
     "page/common/pages/webView/webView",
     "page/common/pages/interviewMark/interviewMark",
-    "page/common/pages/homepageMore/homepageMore",
-    "components/business/chooseEnter"
+    "page/common/pages/homepageMore/homepageMore"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -115,7 +111,7 @@
         "pages/interested/interested",
         "pages/organization/list/list",
         "pages/organization/choose/choose",
-        "pages/marketingData/index/index"
+        "pages/marketingData/index/index",
         "pages/mechanism/index/index",
         "pages/mechanism/list/list",
         "pages/mechanism/post/post",

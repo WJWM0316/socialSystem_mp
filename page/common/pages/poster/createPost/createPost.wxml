@@ -1,9 +1,8 @@
 <view class="poster">
-	<navbar title="分享职位" background="#fff" color="#22292C"></navbar>
-	<canvas canvas-id="canvas" id="canvas" class="canvas" style="width: 750px; height: 2600px;" hidden="{{imgUrl}}"></canvas>
-	<view class="imgBox" wx:if="{{imgUrl}}">
-		<shareWord bindhidePop="hidePop"></shareWord>
-		<image class='showImg {{!guidePop ? "filter" : ""}}' src="{{imgUrl}}" style="width: 100%;" mode="widthFix"></image>
+	<navbar title="{{title}}" background="#fff" color="#22292C"></navbar>
+	<view class="imgBox">
+		<shareWord bindhidePop="hidePop" wx:if="{{imgUrl}}"></shareWord>
+		<image class='showImg' src="{{imgUrl}}" style="width: 100%;" mode="widthFix"></image>
 	</view>
 	<view style="height: 90rpx;"></view>
 	<view class="save" hidden="{{!imgUrl}}">

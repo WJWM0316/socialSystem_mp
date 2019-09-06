@@ -1,4 +1,4 @@
-import {APPLICANTHOST, RECRUITERHOST, PUBAPIHOST, COMMON, RECRUITER, APPLICANT, VERSION} from '../config.js'
+import {APPLICANTHOST, RECRUITERHOST, PUBAPIHOST, COMMON, RECRUITER, APPLICANT, VERSION, NODEHOST} from '../config.js'
 const app = getApp()
 let loadNum = 0
 let BASEHOST = ''
@@ -43,15 +43,16 @@ export const request = ({name = '', method = 'post', url, host, data = {}, needK
     case 'PUBAPIHOST':
       BASEHOST = PUBAPIHOST
       break
+    case 'NODEHOST':
+      BASEHOST = NODEHOST
+      break
     default:
-      if (wx.getStorageSync('choseType') === "RECRUITER") {
-        BASEHOST = RECRUITERHOST
-      } else {
-        BASEHOST = APPLICANTHOST
-      }
+      BASEHOST = wx.getStorageSync('choseType') !== "RECRUITER" ? APPLICANTHOST : RECRUITERHOST 
   }
   // 版本号
   addHttpHead['Wechat-Version'] = VERSION
+
+  addHttpHead['Mp-App-Id'] = 'wx225f017495e6e195'
 
   // 如果连接带参数scode, 则存到头部
   if (data.sCode && !data.isReload) {
@@ -100,7 +101,6 @@ export const request = ({name = '', method = 'post', url, host, data = {}, needK
     delete addHttpHead['Authorization']
   }
   // 测试token
-  addHttpHead['Authorization'] = '29d7dc88812da7c83a89f90f6d3f67a9'
   if (wx.getStorageSync('sessionToken')) {
     if (url === '/bind/register' || url === '/bind/quick_login') {
       addHttpHead['Authorization-Wechat'] = wx.getStorageSync('sessionToken')

@@ -6,20 +6,22 @@
 // 0 是测试环境  1 是正式环境
 export const environment = 0
 export const VERSION = 104
-export let APPLICANTHOST = ''
-export let RECRUITERHOST = ''
-export let PUBAPIHOST = ''
-export let WEBVIEW = ''
+export let APPLICANTHOST = '',
+					 RECRUITERHOST = '',
+					 PUBAPIHOST = '',
+					 WEBVIEW = '',
+					 NODEHOST = ''
 if (environment === 0) {
 	// 测试服接口
-	APPLICANTHOST = 'https://qiuzhi-api.lieduoduo.ziwork.com'
-	RECRUITERHOST = 'https://zhaopin-api.lieduoduo.ziwork.com'
-	PUBAPIHOST = 'https://pub-api.lieduoduo.ziwork.com'
-	WEBVIEW = `https://h5.lieduoduo.ziwork.com/`
-	// APPLICANTHOST = 'https://qiuzhi-api.dd.lieduoduo.com/'
-	// RECRUITERHOST = 'https://zhaopin-api.dd.lieduoduo.com/'
-	// PUBAPIHOST = 'https://pub-api.dd.lieduoduo.ziwork.com'
+	// APPLICANTHOST = 'https://qiuzhi-api.lieduoduo.ziwork.com'
+	// RECRUITERHOST = 'https://zhaopin-api.lieduoduo.ziwork.com'
+	// PUBAPIHOST = 'https://pub-api.lieduoduo.ziwork.com'
 	// WEBVIEW = `https://h5.lieduoduo.ziwork.com/`
+	APPLICANTHOST = 'https://qiuzhi-api.dd.lieduoduo.com'
+	RECRUITERHOST = 'https://zhaopin-api.dd.lieduoduo.com'
+	PUBAPIHOST = 'https://pub-api.dd.lieduoduo.ziwork.com'
+	NODEHOST = 'https://node.lieduoduo.ziwork.com/frontEnd'
+	WEBVIEW = `https://h5.lieduoduo.ziwork.com/`
 } else {
 	// 正式服环境
 	APPLICANTHOST = 'https://qiuzhi-api.ent.lieduoduo.com'

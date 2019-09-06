@@ -26,7 +26,7 @@
         </view>
   			<image class="img-box" src="{{myInfo.avatar.smallUrl}}"></image>
   		</view>
-      <button class="createBtn clear-style" form-type="submit" catchtap="jump" data-type="toCreate" wx:if="{{!isMicroCard && !isJobhunter}}">创建简历</button>
+      <button class="createBtn clear-style" form-type="submit" catchtap="jump" data-type="toCreate" wx:if="{{hasLogin && !isMicroCard && !isJobhunter}}">创建简历</button>
       <view class="experience" wx:if='{{myInfo.uid}}'>
         <view class="item" wx:if="{{myInfo.workAgeDesc}}"><i class="icon iconfont icon-zhiwei"></i>{{myInfo.workAgeDesc}}</view>
         <view class="item" wx:if="{{myInfo.age}}"><i class="icon iconfont icon-nianling"></i>{{myInfo.age ? myInfo.age + '岁 ' : ''}}</view>
@@ -105,6 +105,6 @@
   </form>
 </view>
 <tabBar id="bottomRedDotBar"></tabBar>
-<shareBtn id="share" posterType="applicant" shareBtn="{{false}}"></shareBtn>
+<shareBtn id="share" posterType="applicant" shareBtn="{{false}}" params="{{myInfo.uid}}"></shareBtn>
 <block wx:if="{{myInfo.vkey && myInfo.vkey}}"><canvasCard cardData="{{myInfo}}" type="resume" bindgetCreatedImg="getCreatedImg"></canvasCard></block>
 <bindPhone hide="{{hideBind}}"></bindPhone>

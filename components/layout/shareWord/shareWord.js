@@ -6,15 +6,15 @@ const animation = wx.createAnimation({
 let copyContent = ''
 Component({
   /**
-  * 组件的属性列表
-  */
+   * 组件的属性列表
+   */
   properties: {
 
   },
 
   /**
-  * 组件的初始数据
-  */
+   * 组件的初始数据
+   */
   data: {
     opened: false,
     openTro: true,
@@ -33,14 +33,14 @@ Component({
         name: '普通版',
         value: [
 `#招人啦~！#
-【${info.positionName}】【${info.emolumentMin * 1000}~${info.emolumentMax * 1000}元/月】，base【${info.city}】，经验在【${info.workExperienceName}】的牛人欢迎来开撩哦~~
+【${info.positionName}】【${info.emolumentMin}K~${info.emolumentMax}K】，base【${info.city}】，经验在【${info.workExperienceName}】的牛人欢迎来开撩哦~~
 ↓↓↓打开下方海报，长按识别二维码即可直接约面试↓↓↓
 （不看机会的也可以帮忙转发一下哦，谢谢~）`,
 `#招牛人，招高手#
 做【${info.typeName}】相关职位的高手看过来~（欢迎大家自荐推荐）
 点开下面海报直接扫码来撩~`,
 `#招聘啦！招聘啦！#
-热招岗位：${info.positionName}，${info.emolumentMin * 1000}~${info.emolumentMax * 1000}元/月！
+热招岗位：${info.positionName}，${info.emolumentMin}K~${info.emolumentMax}K！
 详情可识别下方海报二维码查看，可以直接在小程序里联系招聘官哦~`
         ]
       },
@@ -71,14 +71,14 @@ Component({
         value: [
 `#找工作的小伙伴们要注意！前方高能！#
 公司里C字头大大们发话了，急需牛人若干，一起搞点大的
-咱${info.companyInfo.companyShortname}，规模${info.companyInfo.employeesInfo}，欢迎【${info.topType}】类牛人跟咱直接约面，品茶言欢~
+咱${info.companyInfo.companyShortname}目前${info.companyInfo.financingInfo}，规模${info.companyInfo.employeesInfo}，欢迎【${info.topType}】类牛人跟咱直接约面，品茶言欢~
 点开下方海报长按识别，交个朋友呗~
 （不看机会的也可以帮忙转发一下哦，谢谢~）`,
 `#与其说是招聘贴，不如说是交友帖#
 有种默契，叫志同道合；
 有种感情，叫革命友谊；
 有种效率，叫协作精神；
-在创业团队里待过的人，都懂得手足的可贵。发展路上的${info.companyInfo.companyShortname}，立志善待每一位正在或即将一起努力的手足，【${info.positionName}】【${info.emolumentMin * 1000}~${info.emolumentMax * 1000}元/月】，福利不封顶，希望能遇到那个同路的你！
+在创业团队里待过的人，都懂得手足的可贵。发展路上的${info.companyInfo.companyShortname}，立志善待每一位正在或即将一起努力的手足，【${info.positionName}】【${info.emolumentMin}K~${info.emolumentMax}K】，福利不封顶，希望能遇到那个同路的你！
 点击下方海报，长按识别二维码，跟咱走~
 （不看机会的也可以帮忙转发一下哦，谢谢~）`
         ]
@@ -91,7 +91,7 @@ Component({
 我们要的，是忠贞不二，肝胆相照的那个你
 我们要的，是心中有梦，热泪常盈的那个你
 而我们有的，是合理的待遇，发展的平台，和守望相助的同事
-【${info.positionName}】【${info.emolumentMin * 1000}~${info.emolumentMax * 1000}元/月】，点开下方海报扫码，我们等你
+【${info.positionName}】【${info.emolumentMin}K~${info.emolumentMax}K】，点开下方海报扫码，我们等你
 （不看机会的也可以帮忙转发一下哦，谢谢~）`,
 `#想对候选人说的话#
 也许，你早已成长为一位成熟可靠的职场人
@@ -109,7 +109,7 @@ Component({
         name: '逗比风',
         value: [
 `#咱${info.companyInfo.companyShortname}要招牛人啦~~#
-【${info.positionName}】【${info.emolumentMin * 1000}~${info.emolumentMax * 1000}元/月】，
+【${info.positionName}】【${info.emolumentMin}K~${info.emolumentMax}K】，
 岗位福利好，公司待遇佳，领导靠谱人人夸！
 要想开撩约面试，扫描海报二维码，从此咱们是一家~
 （不看机会的也可以帮忙转发一下哦，谢谢~）
@@ -133,8 +133,8 @@ Component({
     this.setData({list, guidePop})
   },
   /**
-  * 组件的方法列表
-  */
+   * 组件的方法列表
+   */
   methods: {
     copy () {
       wx.setClipboardData({

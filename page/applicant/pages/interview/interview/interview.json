@@ -2,8 +2,8 @@
 	"enablePullDownRefresh": true,
 	"backgroundTextStyle": "light",
   "usingComponents": {
-    "navbar": "../../../../components/business/navbar/navbar",
-    "tabBar": "../../../../components/business/tabBar/tabBar",
-    "myCalendar": "../../../../components/functional/myCalendar/myCalendar"
+    "navbar": "../../../../../components/business/navbar/navbar",
+    "tabBar": "../../../../../components/business/tabBar/tabBar",
+    "myCalendar": "../../../../../components/functional/myCalendar/myCalendar"
   }
 }

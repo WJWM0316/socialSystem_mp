@@ -98,14 +98,11 @@
 			</view>
 		</view>
 	</block>
-	<block wx:elif="{{posterType === 'company'}}">
-		<block wx:if="{{shareBtn}}">
-			<view class="shareBtn shareBtnBg"></view>
-			<view class="shareBtn" bindtap="oper">
-			  <view><i class="shareIcon iconfont icon-fenxiang"></i></view>
-			  <text>转发</text>
-			</view>
-		</block>
+	<block wx:elif="{{posterType === 'specialJob'}}">
+		<button class="shareBtn clear-style shareBtn1" bindtap="oper" style="top: {{navHeight + 12}}px">
+			<i class="shareIcon iconfont icon-fenxiang"></i>
+		</button>
+		<view class="shareBtn shareBtnBg1" style="top: {{navHeight + 14}}px"></view>
 		<view class="shareBox" hidden="{{!showChoose}}">
 			<view class="shareBg" bindtap="close">
 			</view>
@@ -118,10 +115,10 @@
 							<view class="desc">好友或群成员点开直接访问小程序</view>
 						</view>
 					</button>
-					<button form-type="submit" class="poster button5 clear-style" bindtap="jump" data-type="company">
+					<button form-type="submit" class="poster button5 clear-style" bindtap="jump" data-type="recruiter">
 						<view class="btnCon btn2">
 							<view class="title">生成精美海报<text class="icon">抓眼球</text></view>
-							<view class="desc">提炼面试官信息，发圈更抓人眼球</view>
+							<view class="desc">提炼活动核心信息，分享更抓人眼球</view>
 						</view>
 					</button>
 					<button form-type="submit" class="close clear-style" bindtap="close"  hidden="{{!showChoose}}"><i class="icon iconfont icon-cha-cu"></i></button>

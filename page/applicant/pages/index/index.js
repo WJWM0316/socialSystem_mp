@@ -425,51 +425,13 @@ Page({
     this.setData({requireOAuth})
   },
   addIntention () {
-    let data = this.data,
-        salaryFloor = 0,
-        salaryCeil = 0
-    switch (data.emolument) {
-      case 1:
-        salaryFloor = 0
-        salaryCeil = 0
-        break
-      case 2:
-        salaryFloor = 1
-        salaryCeil = 2
-        break
-      case 3:
-        salaryFloor = 3
-        salaryCeil = 6
-        break
-      case 4:
-        salaryFloor = 5
-        salaryCeil = 10
-        break
-      case 5:
-        salaryFloor = 10
-        salaryCeil = 20
-        break
-      case 6:
-        salaryFloor = 15
-        salaryCeil = 30
-        break
-      case 7:
-        salaryFloor = 20
-        salaryCeil = 40
-        break
-      case 8:
-        salaryFloor = 50
-        salaryCeil = 100
-        break
-    }
+    let data = this.data
     let lntention = {
       city: data.city,
       cityName: data.cityList[data.cityIndex].name,
       provinceName: data.cityList[data.cityIndex].provinceName,
       positionType: data.type,
-      positionName: data.positionTypeList[data.typeIndex].name,
-      salaryFloor: salaryFloor,
-      salaryCeil: salaryCeil
+      positionName: data.positionTypeList[data.typeIndex].name
     }
     if (data.positionTypeList[data.typeIndex].pid === data.positionTypeList[data.typeIndex].topPid) {
       lntention.positionType = 0

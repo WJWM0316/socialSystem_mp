@@ -105,17 +105,15 @@ Page({
    */
   init() {
     this.initTabRedDot()
-    if(app.globalData.isRecruiter) {
-      let interviewData = {
-        list: [],
-        pageNum: 1,
-        count: 20,
-        isLastPage: false,
-        isRequire: false,
-        total: 0
-      }
-      this.setData({interviewData}, () => this.getNewScheduleNumber())
+    let interviewData = {
+      list: [],
+      pageNum: 1,
+      count: 20,
+      isLastPage: false,
+      isRequire: false,
+      total: 0
     }
+    this.setData({interviewData}, () => this.getNewScheduleNumber())
   },
   onLoad(options) {
     wx.setStorageSync('choseType', 'RECRUITER')
@@ -153,12 +151,10 @@ Page({
   },
   onShow () {
     this.initDefault()
-    if (app.globalData.isRecruiter) {
+    if(app.globalData.isRecruiter) {
       this.init()
     } else {
-      app.getRoleInit = () => {
-        this.init()
-      }
+      app.getRoleInit = () => this.init()
     }
   },
   // 初始化tab红点

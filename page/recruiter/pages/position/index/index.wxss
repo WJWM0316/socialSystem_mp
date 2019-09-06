@@ -1,23 +1,22 @@
 .placeholder{
-  height: 98rpx;
+  height: 124rpx;
 }
 
 .placeholder2{
-  height: 196rpx;
+  height: 212rpx;
 }
 
 .item5 {
   overflow: hidden;
   padding: 0 30rpx;
-  margin-top: 24rpx;
 }
 
 .item5 .li {
   position: relative;
   background:rgba(255,255,255,1);
-  padding: 32rpx 28rpx;
+  padding: 36rpx 40rpx;
   margin-bottom: 24rpx;
-  box-shadow:0rpx -5rpx 40rpx 0rpx rgba(22,39,77,0.05);
+  box-shadow:0rpx 6rpx 20rpx 0rpx rgba(50,14,59,0.07);
   border-radius:10rpx;
 }
 
@@ -32,13 +31,10 @@
   line-height: 1;
 }
 
-.item5 .li .header .office-name {
+.item5 .li .office-name{
   display: inline-block;
   margin-right: 14rpx;
   vertical-align: middle;
-}
-
-.item5 .li .office-name{
   max-width:300rpx;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -55,10 +51,12 @@
   font-weight:400;
   color:rgba(146,146,146,1);
   line-height: 1;
-  margin-top: 25rpx;
+  margin-top: 18rpx;
+  padding-bottom: 36rpx;
+  border-bottom: 1px solid #E8E9EB;
 }
 
-.item5 .li .tags-box view {
+.item5 .tags-box .item {
   display: inline-block;
   margin-right: 16rpx;
   line-height: 34rpx;
@@ -67,11 +65,47 @@
   border-radius:4rpx;
 }
 
+.item5 .tags-box .view {
+  display: inline-block;
+  line-height: 34rpx;
+  padding: 0 12rpx;
+  float: right;
+}
+
+.item5 .actions {
+  overflow: hidden;
+  line-height: 34rpx;
+  height: 34rpx;
+  text-align: center;
+  padding: 36rpx 8rpx 0 8rpx;
+}
+
+.item5 .actions .item {
+  display: inline-block;
+  padding: 0 12rpx;
+  font-size:24rpx;
+  color:rgba(132,82,167,1);
+  vertical-align: middle;
+}
+
+.item5 .actions .icon {
+  margin-right: 10rpx;
+  font-size: 28rpx;
+}
+
+.item5 .actions .item:first-child {
+  float: left;
+}
+
+.item5 .actions .item:last-child {
+  float: right;
+}
+
 .item5 .li .item-status {
   font-size:26rpx;
   color:rgba(188,188,188,1);
   line-height:26rpx;
-  margin-top: 20rpx;
+  margin-top: 36rpx;
   text-align: right;
 }
 
@@ -93,103 +127,61 @@
 
 .fixed-dom{
   width: 100%;
-  background: #FFFFFF;
-  box-shadow:0rpx 11rpx 30rpx 0rpx rgba(153,193,214,0.08);
   position: fixed;
   left: 0;
   z-index: 1;
+  background: #FBFBFF;
 }
 
 .fixed-dom .seleted-bar{
-  height: 98rpx;
-  line-height: 98rpx;
+  height: 88rpx;
+  line-height: 88rpx;
   background: #FFFFFF;
-  border-bottom: 1rpx solid #E8E9EB;
-  text-align: center;
   font-weight: 700;
+  font-size:30rpx;
+  color:rgba(40,40,40,1);
+  box-shadow:0rpx 11rpx 30rpx 0rpx rgba(153,193,214,0.08);
+  border-radius:0rpx 0rpx 32rpx 32rpx;
+  margin-bottom: 36rpx;
+  padding: 0 60rpx;
 }
 
-.fixed-dom .icon-xiangyou{
+.fixed-dom .icon-disejiantou-you{
   float: right;
-  padding-right: 30rpx;
-  color: #929292;
+  padding-right: 0;
+  color: #652791;
 }
 
 .fixed-dom .tab-bar{
-  height: 98rpx;
-  line-height: 98rpx;
-  background: #FFFFFF;
+  margin: 0 40rpx 30rpx 34rpx;
 }
 
 .fixed-dom .item {
-  box-sizing: border-box;
-  padding: 0 30rpx;
   text-align: center;
-  background-color: #FFFFFF;
-  margin-left: 10rpx;
-  border-radius: 27rpx;
-  position: relative;
-  font-size:32rpx;
-  font-weight:400;
-  color:rgba(98,98,98,1);
+  margin-left: 12rpx;
+  font-size:26rpx;
   display: inline-block;
-}
-
-.fixed-dom .item::after {
-  content: '';
-  display: block;
-  width:32rpx;
-  height:8rpx;
-  background:#652791;
-  border-radius:4rpx;
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  opacity: 0;
-  visibility: hidden;
+  height:58rpx;
+  background: rgba(101,39,145,0.04);
+  border-radius:29rpx;
+  padding: 0 28rpx;
+  color: #5C565D;
+  line-height: 58rpx;
 }
 
 .fixed-dom .active {
-  font-size:32rpx;
-  font-weight:600;
-  color:rgba(40,120,255,1);
-  font-size:32rpx;
-  font-weight:600;
+  font-weight:700;
   color:rgba(40,40,40,1);
   pointer-events: none;
-}
-
-.fixed-dom .active::after {
-  opacity: 1;
-  visibility: visible;
-}
-
-.fixed-dom::after{
-  content: '';
-  display: block;
-  opacity: 0;
-}
-
-.fixed-dom .red-dot:before {
-  position: absolute;
-  top: 30rpx;
-  right: 13rpx;
-  display: block;
-  content: '';
-  background: red;
-  width:14rpx;
-  height:14rpx;
-  background:rgba(255,73,73,1);
-  border-radius: 50%;
+  background: #652791;
+  color: white;
 }
 
 .fixed-dom .publish {
   float: right;
   font-size:28rpx;
-  margin-right: 40rpx;
   color:#652791;
-  font-style: re
+  font-weight: 700;
 }
 
 .formIdBtn {

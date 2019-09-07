@@ -111,6 +111,7 @@
         "pages/interested/interested",
         "pages/organization/list/list",
         "pages/organization/choose/choose",
+        "pages/organization/add/add",
         "pages/marketingData/index/index",
         "pages/mechanism/index/index",
         "pages/mechanism/list/list",

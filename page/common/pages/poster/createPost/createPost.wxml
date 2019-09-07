@@ -1,7 +1,7 @@
 <view class="poster">
 	<navbar title="{{title}}" background="#fff" color="#22292C"></navbar>
 	<view class="imgBox">
-		<shareWord bindhidePop="hidePop" wx:if="{{imgUrl}}"></shareWord>
+		<!-- <shareWord bindhidePop="hidePop" wx:if="{{imgUrl}}"></shareWord> -->
 		<image class='showImg' src="{{imgUrl}}" style="width: 100%;" mode="widthFix"></image>
 	</view>
 	<view style="height: 90rpx;"></view>

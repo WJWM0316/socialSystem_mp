@@ -67,7 +67,7 @@ App({
     hasLogin: 0, // 判断是否登录
     userInfo: null, // 用户信息， 判断是否授权,
     navHeight: 0,
-    cdnImagePath: 'https://attach.ent.lieduoduo.ziwork.com/front-assets/images/',
+    cdnImagePath: 'https://attach.dd.lieduoduo.ziwork.com/front-assets/images/',
     companyInfo: {}, // 公司信息
     resumeInfo: {}, // 个人简历信息
     recruiterDetails: {}, // 招聘官详情信息
@@ -77,6 +77,7 @@ App({
     isBangs: false, // 是否是刘海屏，水滴屏
     telePhone: '400-065-5788',  // 联系电话
     systemInfo: wx.getSystemInfoSync(), // 系统信息
+    orgList: [], // 机构列表
     // 面试红点信息
     redDotInfos: {}
   },

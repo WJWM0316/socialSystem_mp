@@ -16,13 +16,13 @@
 		<view class="li flex-box">
 			<view class="key">产品名称</view>
 			<view class="value">
-				<input placeholder="请输入产品名称" bindinput="bindInput" data-key="product_name" value="{{product_name}}" />
+				<input placeholder="请输入产品名称" placeholder-class="holderStyle" bindinput="bindInput" data-key="product_name" value="{{product_name}}" />
 			</view>
 		</view>
 		<view class="li flex-box">
 			<view class="key">产品官网</view>
 			<view class="value">
-				<input placeholder="请输入产品官网" bindinput="bindInput" data-key="site_url" value="{{site_url}}" />
+				<input placeholder="请输入产品官网" placeholder-class="holderStyle" bindinput="bindInput" data-key="site_url" value="{{site_url}}" />
 			</view>
 		</view>
 		<view class="li">
@@ -30,10 +30,10 @@
 			<view class="value">
 				<textarea
 					placeholder="简单介绍下公司的产品"
-					placeholder-style="color:#BCBCBC"
 					bindinput="bindInput"
 					data-key="slogan"
 					maxlength="30"
+					placeholder-class="holderStyle"
 					value="{{slogan}}" />
 				<view class="calc-box"><text class="{{slogan.length > 30 ? 'red' : ''}}">{{slogan.length}}</text>/30</view>
 			</view>

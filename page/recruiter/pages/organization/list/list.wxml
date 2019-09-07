@@ -1,11 +1,11 @@
 
 <navbar title="全部机构"></navbar>
 <view class="search" style="top: {{navH}}px">
-	<input class="searchBar iconfont " type="text" placeholder="{{placeholder}}" placeholder-class="holderStyle" placeholder-style="font-family: 'iconfont'; font-weight: 300"/>
+	<input class="searchBar iconfont" value="{{keyword}}" bindinput="bindInput" type="text" placeholder="{{placeholder}}" placeholder-class="holderStyle"/>
 </view>
 <view class="organizationList">
 	<view class="list">
-		<view class="list-item" wx:for="{{orgList.list}}" wx:key="{{index}}" data-type="preview" bindtap="roouteJump" data-item="{{item}}">
+		<view class="list-item" wx:for="{{orgList}}" wx:key="{{index}}" data-type="preview" bindtap="roouteJump" data-item="{{item}}">
 			<image class="logo" src="{{item.logoInfo.smallUrl}}"></image>
 			<view class="content">
 				<view class="name ellipsis">{{item.companyName}}</view>
@@ -14,6 +14,6 @@
 		</view>
 	</view>
 </view>
-<!-- <view class="addBtn">
+<view class="addBtn">
 	<view class="btn" data-type="add" bindtap="roouteJump">添加机构</view>
-</view> -->
+</view>

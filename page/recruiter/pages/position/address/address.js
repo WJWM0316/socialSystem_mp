@@ -99,18 +99,17 @@ Page({
     formData.address = `${res.address} ${res.name}`
     formData.lat = res.latitude
     formData.lng = res.longitude
-    // formData.title = rtn.result.ad_info.location.lng
     Object.keys(formData).map(field => this.setData({[field]: formData[field]}))
-    // reverseGeocoder(res)
-    //   .then(rtn => {
-    //     const formData = {}
-    //     formData.address = `${rtn.result.address} ${rtn.result.address_reference.landmark_l2.title}`
-    //     formData.area_id = rtn.result.ad_info.adcode
-    //     formData.lat = rtn.result.ad_info.location.lat
-    //     formData.lng = rtn.result.ad_info.location.lng
-    //     // formData.title = rtn.result.ad_info.location.lng
-    //     Object.keys(formData).map(field => this.setData({[field]: formData[field]}))
-    //   })
+    reverseGeocoder(res)
+      .then(rtn => {
+        const formData = {}
+        formData.address = `${rtn.result.address} ${rtn.result.address_reference.landmark_l2.title}`
+        formData.area_id = rtn.result.ad_info.adcode
+        formData.lat = rtn.result.ad_info.location.lat
+        formData.lng = rtn.result.ad_info.location.lng
+        formData.title = rtn.result.ad_info.location.lng
+        Object.keys(formData).map(field => this.setData({[field]: formData[field]}))
+      })
   },
   /**
    * @Author   小书包
@@ -197,17 +196,18 @@ Page({
    * @return   {[type]}   [description]
    */
   getCompanyAddressDetail(options) {
+    const infos = res.data
+    const formData = {
+      id: infos.id,
+      area_id: infos.areaId,
+      address: infos.address,
+      doorplate: infos.doorplate,
+      lng: infos.lng,
+      lat: infos.lat
+    }
     const id = this.data.options.id
     getCompanyAddressDetailApi({id}).then(res => {
-      const infos = res.data
-      const formData = {
-        id: infos.id,
-        area_id: infos.areaId,
-        address: infos.address,
-        doorplate: infos.doorplate,
-        lng: infos.lng,
-        lat: infos.lat
-      }
+      
       Object.keys(formData).map(field => this.setData({[field]: formData[field]}))
     })
   },
@@ -218,6 +218,23 @@ Page({
    * @return   {[type]}   [description]
    */
   submit() {
+    const infos = this.data
+    const formData = {
+      areaId: infos.area_id,
+      address: infos.address,
+      doorplate: infos.doorplate,
+      lng: infos.lng,
+      lat: infos.lat
+    }
+    if(!formData.address) {
+      app.wxToast({title: '请选择公司地址'})
+      return
+    }
+    if (this.data.options.type === 'addOrganization') {
+      wx.setStorageSync('addAddress', formData)
+      wx.navigateBack({delta: 1})
+      return
+    }
     const action = this.data.options.id ? 'edit' : 'post'
     this[action]()
   },
@@ -260,6 +277,10 @@ Page({
     }
     if(!formData.address) {
       app.wxToast({title: '请选择公司地址'})
+      return
+    }
+    if (this.data.options.type === 'addOrganization') {
+      wx.setStorageSync('addAddRess', formData)
       return
     }
     addPositionAddressApi(formData).then(res => {

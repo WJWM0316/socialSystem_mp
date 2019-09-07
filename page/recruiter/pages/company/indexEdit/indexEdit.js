@@ -9,7 +9,8 @@ Page({
    */
   data: {
     info: {},
-    cdnImagePath: app.globalData.cdnImagePath
+    cdnImagePath: app.globalData.cdnImagePath,
+    detial: app.globalData.recruiterDetails
   },
   onShow(options) {
     this.init()

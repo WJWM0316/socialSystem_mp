@@ -111,7 +111,14 @@ Page({
         wx.navigateTo({url: `${RECRUITER}user/myAccount/myAccount`})
         break
       case 'organization':
-        wx.navigateTo({url: `${RECRUITER}organization/organizationList/organizationList`})
+        if (!this.data.recruiterInfo.isCompanyTopAdmin) {
+          wx.navigateTo({
+            url: `${COMMON}homepage/homepage?companyId=${this.data.recruiterInfo.currentCompanyId}`
+          })
+        } else {
+          wx.navigateTo({url: `${RECRUITER}organization/list/list`})
+        }
+        
         break
       default:
         break

@@ -17,15 +17,7 @@
 			</view>
 		</view>
 	</view>
-	<!-- <view class="peoples" bindtap="jumpPage" data-type="peoples">
-		<view class="txt">公司面试官</view>
-		<view class="boxs">
-			<image class="people" wx:for="{{info.recruiterList}}" src="{{item.avatar.smallUrl}}" wx:key="{{index}}" wx:if="{{index < 4}}"></image>
-			<image class="people" wx:if="{{info.recruiterList.length > 3}}" src="{{cdnImagePath}}more.png"></image>
-		</view>
-		<i class="icon iconfont icon-xiangyou"></i>
-	</view> -->
-	<view class="mainPage" bindtap="jumpPage" data-type="main">
+	<view class="mainPage" bindtap="jumpPage" data-type="main" wx:if="{{!detial.isCompanyTopAdmin}}">
 		<view class="txt">公司主页</view>
 		<i class="icon iconfont icon-xiangyou"></i>
 	</view>

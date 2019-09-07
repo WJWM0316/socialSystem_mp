@@ -1,4 +1,38 @@
 import { request } from '../require.js'
+import localstorage from '../../utils/localstorage.js'
+
+// 添加机构
+export const addCompanyApi = (data, hasLoading) => {
+  return request({
+    method: 'post',
+    url: '/company/org',
+    data,
+    hasLoading: true
+  })
+}
+
+// 获取公司机构列表
+export const getCompanyOrglistApi = (data, hasLoading) => {
+  return new Promise((resolve, reject) => {
+    let orgList = localstorage.get('orgList')
+    if (orgList) {
+      resolve(orgList)
+    } else {
+      return request({
+        method: 'get',
+        url: `/company/orglist`,
+        data,
+        hasLoading: true
+      }).then(res => {
+        resolve(res)
+        localstorage.set('orgList', {data: res.data, type: 'resetTheDay'})
+      }).catch(e => {
+        reject(e)
+      })
+    }
+  })
+}
+
 
 // 用户申请加入公司
 export const applyCompanyApi = (data, hasLoading) => {
@@ -504,12 +538,3 @@ export const getCurrentCompanyPositionListApi = (data, hasLoading) => {
   })
 }
 
-// 获取公司机构列表
-export const getCompanyOrglistApi = (data, hasLoading) => {
-  return request({
-    method: 'get',
-    url: `/company/orglist`,
-    data,
-    hasLoading: true
-  })
-}

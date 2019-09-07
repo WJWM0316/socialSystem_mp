@@ -1,0 +1,38 @@
+<view class="product-post">
+	<navbar title="添加机构" background="#fff" color="#22292C" isFixed="{{true}}"></navbar>
+	<view class="ul">
+		<view class="li flex-box">
+			<view class="key">机构Logo</view>
+			<view class="value">
+				<view class="logo">
+					<unloadFile bindresultEvent="upload" unloadType="img">
+						<image src="{{cdnPath}}pic_dafult_product.png" class="placeholder-image" mode="aspectFill"></image>
+						<image src="{{upload.smallUrl}}" wx:if="{{upload.smallUrl}}" mode="aspectFill" class="upload-image"></image>
+					</unloadFile>     
+				</view>
+				<i class="icon iconfont icon-xiangyou"></i>
+			</view>
+		</view>
+		<view class="li flex-box">
+			<view class="key">机构名称</view>
+			<view class="value">
+				<input placeholder="请输入机构名称" placeholder-class="holderStyle" bindinput="bindInput" data-key="company_name" value="{{company_name}}"/>
+			</view>
+		</view>
+		<view class="li flex-box">
+			<view class="key">联系方式</view>
+			<view class="value">
+				<input placeholder="请输入联系方式" maxlength="11" placeholder-class="holderStyle" bindinput="bindInput" data-key="phoneNum" value="{{phoneNum}}"/>
+			</view>
+		</view>
+		<view class="li flex-box">
+			<view class="key">机构地址</view>
+			<view class="value" bindtap="addAddress">
+				<input class="ellipsis" placeholder="请选择机构地址" disabled placeholder-class="holderStyle" value="{{addressData.address}}" />
+			</view>
+		</view>
+	</view>
+	<view class="footer">
+    <view class="button-save" bindtap="submit" bindtap="post">立即创建</view>
+  </view>
+</view>

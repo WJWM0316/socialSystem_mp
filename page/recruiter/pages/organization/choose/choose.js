@@ -1,6 +1,8 @@
 import{getCompanyOrglistApi} from '../../../../../api/pages/company.js'
 import {COMMON} from '../../../../../config.js'
 const app = getApp()
+let timer = null,
+    keyword = null
 Page({
 
   /**
@@ -9,6 +11,7 @@ Page({
   data: {
     placeholder: '\ue635 请输入机构名称',
     navH: app.globalData.navHeight,
+    keyword: '',
     orgList: {
       list: [],
       pageNum: 0,
@@ -21,21 +24,26 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
     this.getList()
+  },
+  bindInput (e) {
+    clearTimeout(timer)
+    let value = e.detail.value
+    keyword = value
+    timer = setTimeout(() => {
+      this.getList()
+      clearTimeout(timer)
+    }, 100)
   },
   getList () {
     let orgList = this.data.orgList,
-        pageNum = orgList.pageNum++,
         parmas = {
-          company_id: 1, // app.globalData.recruiterDetails.companyTopId
-          page: orgList.pageNum
+          company_id: app.globalData.recruiterDetails.companyTopId,
+          keyword: keyword || ''
         }
     getCompanyOrglistApi(parmas).then(res => {
-      orgList.list = orgList.list.concat(res.data)
-      orgList.isRequire = true
-      orgList.pageNum = parmas
-      let chooseItem = wx.getStorageSync('orgData')
+      if (!res.data.length) return
+      orgList = res.data
       if (chooseItem) {
         orgList.list.filter(item => {
           if (item.id === chooseItem.id) item.active = true
@@ -82,7 +90,8 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    timer = null
+    keyword = null
   },
 
   /**

@@ -39,7 +39,7 @@
 		<view class="button-placehoder" data-route="introduction" bindtap="routeJump" wx:else>添加公司介绍</view>
 	</view>
 	
-	<view class="company-images">
+	<view class="company-images" wx:if="{{!detail.isCompanyTopAdmin}}">
 		<view class="title">
 			<view class="self-icon"> <view class="fan"></view> </view> 公司图片
 			<view class="icon-button" data-route="image" bindtap="routeJump" wx:if="{{companyInfos.albumInfo.length}}"><i class="icon iconfont icon-bianji1"></i></view>
@@ -74,7 +74,7 @@
 		<view class="button-placehoder" data-route="product" bindtap="routeJump" wx:else>添加产品介绍</view>
 	</view>
 	
-	<view class="company-address">
+	<view class="company-address" wx:if="{{!detail.isCompanyTopAdmin}}">
 		<view class="title">
 			<view class="self-icon"> <view class="fan"></view> </view> 公司地址
 			<view class="icon-button" data-route="address-post" bindtap="routeJump" wx:if="{{companyInfos.address.length}}"><i class="icon iconfont icon-bianji1"></i></view>

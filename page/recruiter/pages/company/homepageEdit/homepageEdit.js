@@ -15,6 +15,7 @@ Page({
     query: {},
     companyInfos: {},
     recruitersList: [],
+    detail: app.globalData.recruiterDetails,
     companyList: [],
     jobList: []
   },

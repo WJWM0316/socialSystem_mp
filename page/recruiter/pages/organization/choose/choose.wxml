@@ -1,11 +1,11 @@
 
 <navbar title="选择机构"></navbar>
 <view class="search" style="top: {{navH}}px">
-	<input class="searchBar iconfont " type="text" placeholder="{{placeholder}}" placeholder-class="holderStyle" placeholder-style="font-family: 'iconfont'; font-weight: 300"/>
+	<input class="searchBar iconfont" value="{{keyword}}" bindInput="bindInput" type="text" placeholder="{{placeholder}}" placeholder-class="holderStyle"/>
 </view>
 <view class="organizationList">
 	<view class="list">
-		<view class="list-item" wx:for="{{orgList.list}}" wx:key="{{index}}" data-item="{{item}}" bindtap="choose" data-index="{{index}}">
+		<view class="list-item" wx:for="{{orgList}}" wx:key="{{index}}" data-item="{{item}}" bindtap="choose" data-index="{{index}}">
 			<view class="name ellipsis">{{item.companyName}}</view>
 			<view class="radio {{item.active ? 'radio-checked' : ''}}">
         <i class="icon iconfont icon-wancheng" wx:if="{{item.active}}"></i>

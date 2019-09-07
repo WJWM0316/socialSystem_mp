@@ -9,7 +9,7 @@
 
 	<view class="ul">
 
-<!-- 		<view class="li" data-route="email" bindtap="routeJump">
+		<view class="li" data-route="email" bindtap="routeJump">
 			<view class="icon-box"><i class="icon iconfont icon-youxiangrenzheng"></i></view>
 			<view class="content">
 				<view class="h3">公司邮箱认证</view>
@@ -19,7 +19,7 @@
 				<text>去认证</text>
 				<i class="icon iconfont icon-xiangyou"></i>
 			</view>
-		</view> -->
+		</view>
 		
 		<view class="li" data-route="notice" bindtap="routeJump" wx:if="{{options.from === 'join'}}">
 			<view class="icon-box"><i class="icon iconfont icon-guanliyuanrenzheng"></i></view>

@@ -23,8 +23,8 @@ Page({
       real_name: '',
       user_email: '',
       user_position: '',
-      user_positionType: '',
-      user_positionTypeValue: '',
+      position_type_id: '',
+      positionTypeName: '',
       company_name: ''
     },
     canClick: false,
@@ -32,8 +32,7 @@ Page({
     cdnImagePath: app.globalData.cdnImagePath,
     navH: app.globalData.navHeight,
     telePhone: app.globalData.telePhone,
-    height: 0,
-    applyJoin: false
+    height: 0
   },
   onLoad(options) {
     this.setData({options})
@@ -64,38 +63,40 @@ Page({
   getCompanyIdentityInfos(hasLoading = true) {
     let storage = wx.getStorageSync('createdCompany') || {}
     let options = this.data.options
-    let applyJoin = this.data.applyJoin
     let formData = {}
     getCompanyIdentityInfosApi({hasLoading}).then(res => {
       let companyInfo = res.data.companyInfo
-      let status = 0
-      applyJoin = Reflect.has(res.data, 'applyJoin') ? res.data.applyJoin : this.data.applyJoin
-      // 重新创建一条记录
+      // 失败后重新创建一条记录
       if(companyInfo.status === 2) {
         formData = {
           real_name: storage.real_name,
           user_email: storage.user_email,
           user_position: storage.user_position,
-          company_name: storage.company_name
+          company_name: storage.company_name,
+          position_type_id: storage.position_type_id,
+          positionTypeName: storage.positionTypeName
         }
-        this.setData({formData, applyJoin})
+        this.setData({formData})
       } else {
+
         formData = {
           real_name: storage.real_name || companyInfo.realName,
           user_email: storage.user_email || companyInfo.userEmail,
           user_position: storage.user_position || companyInfo.userPosition,
-          company_name: storage.company_name || companyInfo.companyName
+          company_name: storage.company_name || companyInfo.companyName,
+          position_type_id: storage.position_type_id || companyInfo.positionTypeId,
+          positionTypeName: storage.positionTypeName || companyInfo.positionTypeName
         }
-        // 重新编辑 加公司id
-        if(options.action && options.action === 'edit') formData = Object.assign(formData, {id: companyInfo.id, status: companyInfo.status})
-        if(applyJoin) formData = Object.assign(formData, {applyId: companyInfo.applyId})
+        // 重新编辑 加公司id 
+        if(Reflect.has(options, 'action')) formData = Object.assign(formData, {id: companyInfo.id})
         let createPosition = wx.getStorageSync('createPosition')
-        if (createPosition) {
-          formData.user_positionType = createPosition.type
-          formData.user_positionTypeValue = createPosition.typeName
+
+        if (createPosition.type) {
+          formData.position_type_id = createPosition.type
+          formData.positionTypeName = createPosition.typeName
         }
 
-        this.setData({formData, canClick: true, applyJoin, status})
+        this.setData({formData, canClick: true})
         wx.removeStorageSync('createPosition')
         wx.setStorageSync('createdCompany', Object.assign(formData, this.data.formData))
       }
@@ -136,7 +137,6 @@ Page({
   submit() {
     let formData = this.data.formData
     let options = this.data.options
-    let applyJoin = this.data.applyJoin
     let storage = wx.getStorageSync('createdCompany') || {} 
 
     // 验证姓名
@@ -270,7 +270,8 @@ Page({
       real_name: formData.real_name,
       user_email: formData.user_email.trim(),
       user_position: formData.user_position,
-      company_name: formData.company_name
+      company_name: formData.company_name,
+      position_type_id: formData.position_type_id
     }
     editCompanyFirstStepApi(params).then(() => {
       wx.reLaunch({url: `${RECRUITER}user/company/createdCompanyInfos/createdCompanyInfos?from=company&action=edit`})

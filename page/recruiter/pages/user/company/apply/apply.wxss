@@ -63,6 +63,7 @@
 .input-li .value {
 	height: 100%;
 	font-size:28rpx;
+	font-weight:500;
 	color:rgba(98,98,98,1);
 	text-align: right;
 	width: calc(100% - 180rpx);
@@ -84,6 +85,10 @@
 
 .input-li .text.default {
 	color: #BCBCBC;
+}
+
+.input-li .text.active {
+	color: rgba(98,98,98,1);
 }
 
 .ul {

@@ -19,6 +19,7 @@ Page({
       company_name: '',
       industry_id: 0,
       industry_id_name: '请选择行业范围',
+      financing: 0,
       employees: 0,
       company_shortname: '',
       logo: {},
@@ -42,6 +43,8 @@ Page({
         company_shortname: storage.company_shortname || infos.companyShortname,
         industry_id: storage.industry_id || infos.industryId,
         industry_id_name: storage.industry_id_name || infos.industry,
+        financing: storage.financing || infos.financing,
+        financingName: storage.financingName || infos.financingInfo,
         employees: storage.employees || infos.employees,
         employeesName: storage.employeesName || infos.employeesInfo,
         intro: storage.intro || infos.intro,
@@ -87,6 +90,11 @@ Page({
       !formData.industry_id ? reject('请选择所属行业') : resolve()
     })
 
+    // 验证融资选项
+    let checkFinancing = new Promise((resolve, reject) => {
+      !formData.financing ? reject('请选择融资情况') : resolve()
+    })
+
     // 验证人员规模
     let checkEmployees = new Promise((resolve, reject) => {
       !formData.employees ? reject('请选择人员规模') : resolve()
@@ -95,6 +103,7 @@ Page({
     Promise.all([
       checkCompanyShortName,
       checkIndustryId,
+      checkFinancing,
       checkEmployees
     ])
     .then(res => {
@@ -144,6 +153,18 @@ Page({
     let formData = this.data.formData
     formData.employees = res.detail.propsResult
     formData.employeesName = res.detail.propsDesc
+    this.setData({formData})
+  },
+  /**
+   * @Author   小书包
+   * @DateTime 2019-01-03
+   * @detail   获取融资情况
+   * @return   {[type]}   [description]
+   */
+  getFinancing(res) {
+    let formData = this.data.formData
+    formData.financing = res.detail.propsResult
+    formData.financingName = res.detail.propsDesc
     this.setData({formData})
   },
   /**

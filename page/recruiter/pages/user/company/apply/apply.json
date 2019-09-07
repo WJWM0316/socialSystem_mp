@@ -1,7 +1,7 @@
 {
 	"usingComponents": {
-    "navbar": "../../../../../components/business/navbar/navbar",
-    "changeIdentity": "../../../../../components/functional/changeIdentity/changeIdentity",
-    "bindPhone": "../../../../../components/functional/bindPhone/bindPhone"
+    "navbar": "../../../../../../components/business/navbar/navbar",
+    "changeIdentity": "../../../../../../components/functional/changeIdentity/changeIdentity",
+    "bindPhone": "../../../../../../components/functional/bindPhone/bindPhone"
   }
 }

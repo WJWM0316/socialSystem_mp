@@ -65,7 +65,7 @@
 .search-company-page input {
 	height:100%;
 	width: 100%;
-	color: #282828;
+	color: #626262;
 }
 
 .search-company-page .company-name {

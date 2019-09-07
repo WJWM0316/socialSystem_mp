@@ -42,6 +42,13 @@ let initChart = (canvas, width, height) => {
     xAxis: {
       type: 'category',
       boundaryGap: false,
+      splitLine: {
+        show: true,
+        lineStyle: {
+          type: 'solid',
+          color: '#E8E9EB'
+        }
+      },
       data: [
         '周一',
         '周二',
@@ -52,17 +59,54 @@ let initChart = (canvas, width, height) => {
         '周日'
       ],
       show: true,
-      nameLocation: 'start'
+      nameLocation: 'start',
+      // 坐标轴的颜色
+      axisLine: {
+        lineStyle: {
+          type: 'solid',
+          color: '#8452A7',
+          width: 1
+        }
+      },
+      //坐标值得具体的颜色
+      axisLabel: {
+        textStyle: {
+          color: '#8452A7'
+        }
+      },
+      // 不现实刻度尺
+      axisTick: {
+        show: false
+      }
     },
     yAxis: {
       x: 'center',
       type: 'value',
       splitLine: {
+        show: false,
         lineStyle: {
-          type: 'dashed'
+          type: 'solid'
         }
       },
-      show: true
+      show: true,
+      // 坐标轴的颜色
+      axisLine: {
+        lineStyle: {
+          type: 'solid',
+          color: '#E8E9EB',
+          width: 1
+        }
+      },
+      // 坐标值得具体的颜色
+      axisLabel: {
+        textStyle: {
+          color: '#5C565D'
+        }
+      },
+      // 不现实刻度尺
+      axisTick: {
+        show: false
+      }
     },
     series: [
       {

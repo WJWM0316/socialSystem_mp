@@ -178,5 +178,5 @@
 
   <tabBar tabType="1" id="bottomRedDotBar"></tabBar>
   <followWechat wx:if="{{userInfo}}"></followWechat>
-  <shareBtn posterType="company" id="shareBtn" shareBtn="{{false}}"></shareBtn>
+  <shareBtn posterType="company" id="shareBtn" shareBtn="{{ false }}"></shareBtn>
 </view>

@@ -27,7 +27,7 @@
 	  </view>
 
 		<view class="input-li">
-	    <view class="key">担任职位类型</view>
+	    <view class="key">职位类别</view>
 	    <view class="value" bindtap="toChooseType">
 	    	<input placeholder-class="holderStyle" placeholder="请输入担任职位类型" value="{{formData.user_positionTypeValue}}" maxlength="50" disabled/>
 	    </view>

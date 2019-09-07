@@ -1,14 +1,27 @@
 <view class="position-post">
-	<navbar title="{{pageTitle}}" background="#FFFFFF" color="#22292C" customBack bindbackEvent="backEvent"></navbar>
+	<navbar
+		title="{{pageTitle}}"
+		background="#FFFFFF"
+		color="#22292C"
+		customBack
+		bindbackEvent="backEvent">
+	</navbar>
 <!-- 	<view class="warning" bindtap="showTips"><i class="icon iconfont icon-PC"></i>前往PC端发布新职位<i class="icon iconfont icon-xiangyou"></i></view>
  -->	<view class="tips">* 职位名称、职位类别、工作地点发布后将不可修改</view>
 	<view class="entry-list">
+		
+		<view class="li link" bindtap="getMechanism" wx:if="{{isCompanyTopAdmin}}">
+			<view class="key"><text>*</text>职位所属机构</view>
+			<i class="icon iconfont icon-xiangyou"></i>
+			<view class="text2 {{formData.company_id ? '' : 'color-default'}}">{{formData.company_id || '请选择'}}</view>
+		</view>
 
 		<view class="li link" bindtap="routeJump" data-route="search" wx:if="{{!query.positionId}}">
 			<view class="key"><text>*</text>职位名称</view>
 			<i class="icon iconfont icon-xiangyou"></i>
 			<view class="text2 {{formData.position_name ? '' : 'color-default'}}">{{formData.position_name || '请填写'}}</view>
 		</view>
+
 		<view class="li link" wx:else>
 			<view class="key"><text>*</text>职位名称</view>
 			<view class="text2 {{formData.position_name ? '' : 'color-default'}}">{{formData.position_name || '请填写'}}</view>
@@ -73,7 +86,7 @@
 		</view> -->
 	</view>
 	<view class="btn-area">
-    <view class="button-submit {{canClick ? 'button-enable' : ''}}" bindtap="submit">发布</view>
+    <view class="button-submit {{canClick ? 'button-enable' : ''}}" bindtap="submit">{{query.positionId ? '保存' : '发布'}}</view>
   </view>
 </view>
 <scanCodeTips showScanBox="{{showScanBox}}"></scanCodeTips>

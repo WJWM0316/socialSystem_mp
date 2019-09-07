@@ -8,6 +8,7 @@
 
 	<view class="fixed-dom" style="top:{{navH}}px">
 		<view class="seleted-bar" wx:if="{{isSuper}}" bindtap="routeJump" data-action="mechanism">
+			<i class="icon iconfont icon-gongsi"></i>
 			选择机构
 			<i class="icon iconfont icon-disejiantou-you"></i>
 		</view>
@@ -60,7 +61,7 @@
 						<view class="item" wx:if="{{item.city}}">{{item.city}}{{item.district}}</view>
 						<view class="item">{{item.workExperienceName}}</view>
 						<view class="item">{{item.educationName}}</view>
-						<view class="view">123</view>
+						<view class="view"><i class="icon iconfont icon-chakan"></i>123</view>
 					</view>
 					<view class="actions">
 						<view class="item"><i class="icon iconfont icon-weixin"></i>分享好友</view>

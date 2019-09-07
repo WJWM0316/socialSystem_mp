@@ -26,7 +26,7 @@
 	</view>
 
 	<view class="floating-box">
-		<view class="item left001" bindtap="routeJump" data-route="interested">
+		<view class="item left001" bindtap="routeJump" data-route="dynamics">
 			<view class="number">{{indexShowCount.recruiterInterestedToJ}}</view>
 			<view class="text">看过我的<i class="icon iconfont icon-disejiantou-you"></i></view>
 		</view>
@@ -35,7 +35,7 @@
 			<view class="text">最近面试<i class="icon iconfont icon-disejiantou-you"></i></view>
 		</view>
 		<view class="item right001" bindtap="routeJump" data-route="receiveData">
-			<view class="number">{{indexShowCount.onlinePosition}}</view>
+			<view class="number">{{indexShowCount.waitingProcessInterview}}</view>
 			<view class="text">未处理申请<i class="icon iconfont icon-disejiantou-you"></i></view>
 		</view>
 	</view>
@@ -54,8 +54,8 @@
 		</view>
 	</view>
 
-	<view class="todo_ul">
-		<view class="li" wx:for="{{[1,2,3]}}" wx:key="{{index}}">
+	<view class="todo_ul" wx:if="{{viewList.length}}">
+		<view class="li" wx:for="{{viewList}}" wx:key="{{index}}">
 			<view class="img-box">
 				<!-- <image src="{{cdnImagePath}}sign1.png" mode="aspectFill" class="avatar"></image> -->
 				<!-- <image src="{{cdnImagePath}}sign1.png" mode="aspectFill" class="vip"></image> -->
@@ -158,7 +158,9 @@
 	<view class="data-box">
 		<view class="title">
 			<view class="myicon"></view>社交招聘数据
-			<view class="action">查看更多<i class="icon iconfont icon-xiangyou"></i></view>
+			<view class="action" bindtap="routeJump" data-route="echart">
+				查看更多<i class="icon iconfont icon-xiangyou"></i>
+			</view>
 		</view>
 		<view class="tab-box">
 			<view

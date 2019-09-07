@@ -228,7 +228,7 @@
 }
 
 .todos_bar_notopen {
-  padding: 40rpx 60rpx 30rpx 60rpx;
+  padding: 60rpx 60rpx 30rpx 60rpx;
   overflow: hidden;
   align-items: center;
   justify-content: center;
@@ -434,7 +434,6 @@
 
 .sale-tools{
   padding-top: 60rpx;
-  overflow: hidden;
 }
 .sale-tools .title{
   height:36rpx;
@@ -674,6 +673,8 @@
 
 .data-box .title .icon {
   color: #929292;
+  position: relative;
+  top: 4rpx;
 }
 
 .data-box .tab-box {

@@ -3,21 +3,37 @@
 	<navbar
 		title="{{title}}"
 		background="#FFFFFF"
+		customBack
+		bindbackEvent="backEvent"
 		color="#22292C">
 	</navbar>
+
+	<view class="seleted-bar" bindtap="routeJump" data-action="mechanism">
+		<i class="icon iconfont icon-gongsi"></i>
+		选择机构
+		<i class="icon iconfont icon-disejiantou-you"></i>
+	</view>
 
 	<view class="canvas-box">
 		<canvas
 			canvas-id="cardCanvas"
 			class="canvas"
 			id="cardCanvas"
-			style="width: {{canvasWidth}}px; height: {{canvasHeight}}px;">
+			style="width: {{canvasWidth}}px; height: {{canvasWidth}}px;">
 		</canvas>
+		<view class="tips">
+			小程序码头像不合适？
+			<view class="strong"><avatarCut class="avatarCut" src=""></avatarCut>重新上传头像<i class="icon iconfont icon-xiangyou"></i></view>
+		</view>
 	</view>
 	
 	<view class="footer">
-    <view bindtap="download" class="button-submit button-enable" wx:if="{{isOpenSetting}}">保存图片</view>
-    <button class="button-submit button-enable" open-type="openSetting" wx:if="{{!isOpenSetting}}"  bindtap="download">保存图片</button>
+    <button bindtap="download" class="button-submit" wx:if="{{isOpenSetting}}">
+    	<view class="cover">保存图片</view>
+    </button>
+    <button class="button-submit" open-type="openSetting" wx:if="{{!isOpenSetting}}"  bindtap="download">
+    	<view class="cover"> 保存图片 </view>
+    </button>
   </view>
 
 </view>

@@ -4,7 +4,6 @@ Page({
     options: {},
     isOpenSetting: true,
     canvasWidth: 258,
-    canvasHeight: 258,
     imgUrl: '',
     title: ''
   },
@@ -36,31 +35,61 @@ Page({
     })
   	this.draw()
   },
+  backEvent() {
+    wx.removeStorageSync('avatar')
+    wx.navigateBack({delta: 1})
+  },
   draw() {
     return new Promise((resolve, reject) => {
       let _this = this
       let ctx = wx.createCanvasContext('cardCanvas', this)
       let canvasWidth = this.data.canvasWidth
-      let canvasHeight = this.data.canvasHeight
       let avatarWidth = 100
-      let avatarHeight = 100
       let bgUrl = '../../../../images/201909011831.jpg'
       let avatarUrl = '../../../../images/201909042919.jpg'
-
-      // 绘制背景
-      ctx.drawImage(bgUrl, 0, 0, canvasWidth, canvasHeight)
-
-      // 绘制一个圆
+      let avatar = wx.getStorageSync('avatar')
+      avatarUrl = avatar.url
+      // 最外层的一个圆
       ctx.beginPath()  
-      ctx.fillStyle = '#fff'   
-      ctx.lineWidth = 5
-      ctx.arc(canvasHeight/2, canvasWidth/2, 60, 0,Math.PI * 2, false)
+      ctx.fillStyle = '#DFD5EB'   
+      ctx.arc(canvasWidth/2, canvasWidth/2, canvasWidth/2, 0,Math.PI * 2, false)
       ctx.closePath()
       ctx.fill()
       ctx.clip()
 
-      // 绘制logo
-      ctx.drawImage(avatarUrl, canvasWidth/2 - avatarWidth/2, canvasHeight/2 - avatarHeight/2, avatarWidth, avatarHeight)
+      ctx.fillStyle = '#fff'
+      // 次外层的圆
+      ctx.beginPath()  
+      ctx.arc(canvasWidth/2, canvasWidth/2, canvasWidth/2 - 1, 0,Math.PI * 2, false)
+      ctx.closePath()
+      ctx.fill()
+      ctx.clip()
+
+      // canvas的实际背景
+      ctx.beginPath()  
+      ctx.arc(canvasWidth/2, canvasWidth/2, canvasWidth/2 - 9, 0,Math.PI * 2, false)
+      ctx.closePath()
+      ctx.fill()
+      ctx.clip()
+
+      // canvas绘制背景图片
+      ctx.drawImage(bgUrl, 0, 0, canvasWidth, canvasWidth)
+
+      // 头像或者logo的白色背景
+      ctx.beginPath()  
+      ctx.arc(canvasWidth/2, canvasWidth/2, 60, 0,Math.PI * 2, false)
+      ctx.closePath()
+      ctx.fill()
+      ctx.clip()
+
+      ctx.beginPath()  
+      ctx.arc(canvasWidth/2, canvasWidth/2, 60 - 5, 0,Math.PI * 2, false)
+      ctx.closePath()
+      ctx.fill()
+      ctx.clip()
+
+      // 实际的logo或者头像
+      ctx.drawImage(avatarUrl, canvasWidth/2 - avatarWidth/2, canvasWidth/2 - avatarWidth/2, avatarWidth, avatarWidth)
 
       // 生成图片链接
       ctx.draw(true, () => {

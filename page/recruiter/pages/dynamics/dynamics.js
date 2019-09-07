@@ -58,17 +58,15 @@ Page({
    * @return   {[type]}              [description]
    */
   onPullDownRefresh(hasLoading = true) {
-    const key = this.data.tab
-    const value = {list: [], pageNum: 1, isLastPage: false, isRequire: false, onBottomStatus: 0}
+    let key = this.data.tab
+    let value = {list: [], pageNum: 1, isLastPage: false, isRequire: false, onBottomStatus: 0}
+    let callback = () => {
+      this.setData({hasReFresh: false})
+      wx.stopPullDownRefresh()
+    }
     this.setData({[key]: value, hasReFresh: true})
     this.getIndexShowCount()
-    this.getLists().then(res => {
-      this.setData({hasReFresh: false})
-      wx.stopPullDownRefresh()
-    }).catch(e => {
-      this.setData({hasReFresh: false})
-      wx.stopPullDownRefresh()
-    })
+    this.getLists().then(res => callback()).catch(e => callback())
   },
   /**
    * 页面上拉触底事件的处理函数
@@ -76,7 +74,7 @@ Page({
   onReachBottom() {
     let key = this.data.tab
     this.setData({onBottomStatus: 1})
-    if (!this.data[key].isLastPage) this.getLists()
+    if(!this.data[key].isLastPage) this.getLists()
   },
   /**
    * @Author   小书包
@@ -85,7 +83,7 @@ Page({
    */
   viewResumeDetail(e) {
     let params = e.currentTarget.dataset
-    clearReddotApi({jobHunterUid: params.jobhunteruid, reddotType: params.type}).then(() => {
+    return clearReddotApi({jobHunterUid: params.jobhunteruid, reddotType: params.type}).then(() => {
       wx.navigateTo({url: `${COMMON}resumeDetail/resumeDetail?uid=${params.jobhunteruid}`})
     })
   },
@@ -123,11 +121,8 @@ Page({
    * @return   {[type]}   [description]
    */
   getLists() {
-    if(this.data.tab === 'interestList') {
-      return this.getViewList()
-    } else {
-      return this.getInterestList()
-    }
+    let funcApi = this.data.tab === 'interestList' ? 'getViewList' : 'getInterestList'
+    return this[funcApi]()
   },
   /**
    * @Author   小书包
@@ -173,11 +168,13 @@ Page({
   formSubmit(e) {
     app.postFormId(e.detail.formId)
   },
+  /**
+   * @Author   小书包
+   * @DateTime 2019-09-06
+   * @detail   获取红点
+   * @return   {[type]}   [description]
+   */
   getIndexShowCount() {
-    return new Promise((resolve, reject) => {
-      getIndexShowCountApi({hasLoading: false}).then(res => {
-        this.setData({indexShowCount: res.data}, () => resolve(res))
-      })
-    })
+    return getIndexShowCountApi({hasLoading: false}).then(res => this.setData({indexShowCount: res.data}))
   }
 })

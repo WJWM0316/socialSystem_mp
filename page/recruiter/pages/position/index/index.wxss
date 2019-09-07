@@ -44,6 +44,7 @@
 
 .item5 .li .office-sarary {
   display: inline-block;
+  vertical-align: middle;
 }
 
 .item5 .li .tags-box {
@@ -70,6 +71,13 @@
   line-height: 34rpx;
   padding: 0 12rpx;
   float: right;
+}
+
+.item5 .tags-box .icon-chakan {
+  position: relative;
+  top: 2rpx;
+  color: #E8E9EB;
+  margin-right: 8rpx;
 }
 
 .item5 .actions {
@@ -150,6 +158,11 @@
   float: right;
   padding-right: 0;
   color: #652791;
+}
+
+.fixed-dom .icon-gongsi{
+  padding-right: 20rpx;
+  color: #8452A7;
 }
 
 .fixed-dom .tab-bar{

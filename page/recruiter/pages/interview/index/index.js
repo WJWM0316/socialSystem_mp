@@ -162,9 +162,7 @@ Page({
     this.selectComponent('#bottomRedDotBar').init()
     this.getInterviewRedDotBar().then(res => {
       let redDotInfos = res.data
-      let tabLists = this.data.tabLists
-      tabLists.map(field => field.showRedDot = redDotInfos[field.flag])
-      this.setData({tabLists, redDotInfos})
+      this.setData({redDotInfos})
     })
   },
   /**

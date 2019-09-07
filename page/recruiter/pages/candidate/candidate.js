@@ -1,23 +1,23 @@
-import {RECRUITER, COMMON, APPLICANT} from '../../../../config.js'
+import {
+  RECRUITER, 
+  COMMON, 
+  APPLICANT
+} from '../../../../config.js'
 
 import {
   getInviteListApi,
   getApplyListApi,
-  getScheduleListApi,
-  getScheduleNumberApi,
-  getNewScheduleNumberApi,
   clearTabInterviewRedDotApi,
-  clearDayInterviewRedDotApi,
   getInterviewRedDotBarApi
 } from '../../../../api/pages/interview.js'
 
-import {getRecruiterPositionListApi} from '../../../../api/pages/position.js'
+import {
+  getRecruiterPositionListApi
+} from '../../../../api/pages/position.js'
 
 const app = getApp()
 
 let chooseTime = parseInt(new Date().getTime() / 1000)
-
-import {getSelectorQuery} from "../../../../utils/util.js"
 
 let positionList = []
 
@@ -44,15 +44,6 @@ Page({
       isRequire: false,
       total: 0
     },
-    interviewData: {
-      list: [],
-      pageNum: 1,
-      count: 20,
-      isLastPage: false,
-      isRequire: false,
-      total: 0
-    },
-    dateList: [],
     applyIndex: 0,
     receiveIndex: 0,
     positionIndex: 0,
@@ -97,13 +88,6 @@ Page({
         flag: 'recruiterInviteList',
         type: 'invite_list'
       }
-      // {
-      //   text: '面试日程',
-      //   active: false,
-      //   showRedDot: 0,
-      //   flag: 'recruiterScheduleList',
-      //   type: ''
-      // }
     ],
     redDotInfos: {}
   },
@@ -158,14 +142,10 @@ Page({
         }
         if (this.data.tabIndex === 1) {
           data = 'applyData'
-          this.setData({[type]: value, [data]: dataValue}, function() {
-            this.getApplyList()
-          })
+          this.setData({[type]: value, [data]: dataValue}, () => this.getApplyList())
         } else if (this.data.tabIndex === 0) {
           data = 'receiveData'
-          this.setData({[type]: value, [data]: dataValue}, function() {
-            this.getInviteList()
-          })
+          this.setData({[type]: value, [data]: dataValue}, () => this.getApplyList())
         }
         break
     }
@@ -231,27 +211,6 @@ Page({
       this.setData({receiveData, receiveBottomStatus})
     })
   },
-  // 面试日程
-  getScheduleList(hasLoading = true) {
-    let interviewData = this.data.interviewData
-    let interviewBottomStatus = 0
-    return getScheduleListApi({count: interviewData.count, page: interviewData.pageNum, time: chooseTime}, hasLoading).then(res => {
-      const list = res.data
-      list.map(field => {
-        const time = field.arrangementInfo.appointment.split(' ')[1].slice(0, 5)
-        field.createdAtTime = time
-      })
-      interviewData.list.push(...list)
-      interviewData.isRequire = true
-      interviewData.total = res.meta.total
-      interviewData.pageNum++
-      if (!res.meta || !res.meta.nextPageUrl) {
-        interviewData.isLastPage = true
-        interviewBottomStatus = 2
-      }
-      this.setData({interviewData, interviewBottomStatus})
-    })
-  },
   chooseParentTab(e) {
     let index = e.currentTarget.dataset.index
     let tabIndex = this.data.tabIndex
@@ -284,38 +243,12 @@ Page({
           this.getApplyList()
         }
         break
-      case 2:
-        data = this.data.interviewData
-        let interviewData = {
-          list: [],
-          pageNum: 1,
-          count: 20,
-          isLastPage: false,
-          isRequire: false,
-          total: 0
-        }
-        this.setData({interviewData}, () => this.getNewScheduleNumber())
     }
-  },
-  /**
-   * @Author   小书包
-   * @DateTime 2019-04-28
-   * @detail   获取面试日程的列表
-   * @return   {[type]}   [description]
-   */
-  getNewScheduleNumber() {
-    getNewScheduleNumberApi().then(res => {
-      let dateList = res.data
-      if(!dateList.length) return
-      chooseTime = dateList[0].time
-      dateList.map((field, index) => field.active = index === 0 ? true : false)
-      this.setData({dateList}, () => this.getScheduleList())
-    })
   },
   init () {
     let options = this.data.options
     this.initTabRedDot()
-    if (app.globalData.isRecruiter) {
+    if(app.globalData.isRecruiter) {
       getRecruiterPositionListApi({is_online: 1, count: 50, page: 1}).then(res => {
         positionList = res.data
         positionList.unshift({positionName: '所有职位', id: 0})
@@ -344,16 +277,6 @@ Page({
             this.setData({positionList, applyData})
             this.getApplyList()
             break
-          case 2:
-            let interviewData = {
-              list: [],
-              pageNum: 1,
-              count: 20,
-              isLastPage: false,
-              isRequire: false,
-              total: 0
-            }
-            this.setData({positionList, interviewData}, () => this.getNewScheduleNumber())
         }
       })
     }
@@ -402,7 +325,7 @@ Page({
     let interviewBottomStatus = 2
     this.setData({applyData, receiveData, interviewData, applyBottomStatus, receiveBottomStatus, interviewBottomStatus})
   },
-  onShow () {
+  onShow() {
     this.initDefault()
     if (app.globalData.isRecruiter) {
       this.init()
@@ -438,28 +361,12 @@ Page({
   },
   /**
    * @Author   小书包
-   * @DateTime 2019-06-19
-   * @detail   清除红点
-   * @return   {[type]}        [description]
-   */
-  clearDayInterviewRedDot(date) {
-    return new Promise((resolve, reject) => {
-      clearDayInterviewRedDotApi({date}).then(() => {
-        resolve()
-        this.selectComponent('#bottomRedDotBar').init()
-      })
-    })
-  },
-  /**
-   * @Author   小书包
    * @DateTime 2019-06-25
    * @detail   获取tab红点情况
    * @return   {[type]}   [description]
    */
   getInterviewRedDotBar() {
-    return new Promise((resolve, reject) => {
-      getInterviewRedDotBarApi().then(res => resolve(res))
-    })
+    return new Promise((resolve, reject) => getInterviewRedDotBarApi().then(res => resolve(res)))
   },
   onReachBottom(e) {
     switch(this.data.tabIndex) {
@@ -477,16 +384,13 @@ Page({
           this.getApplyList(false)
         }
       break
-      case 2:
-        let interviewData = this.data.interviewData
-        if (!interviewData.isLastPage) {
-          this.setData({interviewBottomStatus: 1})
-          this.getScheduleList(false)
-        }
-      break
     }
   },
-  onPullDownRefresh () {
+  onPullDownRefresh() {
+    let callback = () => {
+      wx.stopPullDownRefresh()
+      this.setData({hasReFresh: false})
+    }
     this.selectComponent('#bottomRedDotBar').init()
     switch(this.data.tabIndex) {
       case 0:
@@ -499,10 +403,7 @@ Page({
           total: 0
         }
         this.setData({receiveData, receiveBottomStatus: 0, hasReFresh: true})
-        this.getInviteList(false).then(res => {
-          wx.stopPullDownRefresh()
-          this.setData({hasReFresh: false})
-        })
+        this.getInviteList(false).then(res => callback())
       break
       case 1:
         let applyData = {
@@ -514,31 +415,7 @@ Page({
           total: 0
         }
         this.setData({applyData, applyBottomStatus: 0, hasReFresh: true})
-        this.getApplyList(false).then(res => {
-          wx.stopPullDownRefresh()
-          this.setData({hasReFresh: false})
-        })
-      break
-      case 2:
-        let interviewData = {
-          list: [],
-          pageNum: 1,
-          count: 20,
-          isLastPage: false,
-          isRequire: false,
-          total: 0
-        }
-        let dateList = this.data.dateList
-        if(!dateList.length) {
-          wx.stopPullDownRefresh()
-          this.setData({hasReFresh: false})
-          return
-        }
-        this.setData({interviewData, interviewBottomStatus: 0, hasReFresh: true})
-        this.getScheduleList(false).then(res => {
-          wx.stopPullDownRefresh()
-          this.setData({hasReFresh: false})
-        })
+        this.getApplyList(false).then(res => callback())
       break
     }
   },

@@ -46,6 +46,7 @@ Page({
         getImgFun = getRecruiterPostApi
         title = '招聘官分享'
         params.uid = options.uid
+        params.companyId = options.companyId
         break
     }
     this.setData({title, options})

@@ -503,3 +503,13 @@ export const getCurrentCompanyPositionListApi = (data, hasLoading) => {
     hasLoading: true
   })
 }
+
+// 获取公司机构列表
+export const getCompanyOrglistApi = (data, hasLoading) => {
+  return request({
+    method: 'get',
+    url: `/company/orglist`,
+    data,
+    hasLoading: true
+  })
+}

@@ -15,6 +15,7 @@ let formIdList = [],
     sendNum = 0 // formId 发送次数
 App({
   onLaunch: function (e) {
+    this.globalData.appId = wx.getAccountInfoSync().miniProgram.appId
     // 获取导航栏高度
     this.checkUpdateVersion()
     // this.getVersionList()
@@ -56,6 +57,7 @@ App({
     console.log('onError检测', e)
   },
   globalData: {
+    appId: '',
     startRoute: '',
     identity: "", // 身份标识
     isMicroCard: 0, // 是否创建微名片

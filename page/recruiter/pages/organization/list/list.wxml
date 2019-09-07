@@ -5,15 +5,15 @@
 </view>
 <view class="organizationList">
 	<view class="list">
-		<view class="list-item" wx:for="n in 6">
-			<image class="logo" src=""></image>
+		<view class="list-item" wx:for="{{orgList.list}}" wx:key="{{index}}" data-type="preview" bindtap="roouteJump" data-item="{{item}}">
+			<image class="logo" src="{{item.logoInfo.smallUrl}}"></image>
 			<view class="content">
-				<view class="name ellipsis">萨达啊实打实大是</view>
-				<view class="address ellipsis">萨达as打算是大声道是 </view>
+				<view class="name ellipsis">{{item.companyName}}</view>
+				<view class="address ellipsis">{{item.address[0].address}}</view>
 			</view>
 		</view>
 	</view>
 </view>
-<view class="addBtn">
-	<view class="btn">添加机构</view>
-</view>
+<!-- <view class="addBtn">
+	<view class="btn" data-type="add" bindtap="roouteJump">添加机构</view>
+</view> -->

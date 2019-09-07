@@ -5,8 +5,8 @@
 </view>
 <view class="organizationList">
 	<view class="list">
-		<view class="list-item" wx:for="n in 6">
-			<view class="name ellipsis">asdasdasdasdaas阿萨德阿萨德吖</view>
+		<view class="list-item" wx:for="{{orgList.list}}" wx:key="{{index}}" data-item="{{item}}" bindtap="choose" data-index="{{index}}">
+			<view class="name ellipsis">{{item.companyName}}</view>
 			<view class="radio {{item.active ? 'radio-checked' : ''}}">
         <i class="icon iconfont icon-wancheng" wx:if="{{item.active}}"></i>
       </view>

@@ -52,7 +52,7 @@ export const request = ({name = '', method = 'post', url, host, data = {}, needK
   // 版本号
   addHttpHead['Wechat-Version'] = VERSION
 
-  addHttpHead['Mp-App-Id'] = 'wx225f017495e6e195'
+  addHttpHead['Mp-App-Id'] = getApp() && getApp().globalData.appId
 
   // 如果连接带参数scode, 则存到头部
   if (data.sCode && !data.isReload) {

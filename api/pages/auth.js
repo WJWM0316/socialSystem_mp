@@ -6,6 +6,7 @@ export const authLoginApi = (data, hasLoading) => {
   return request({
     url: '/auth/login',
     data,
+    host: 'PUBAPIHOST',
     hasLoading: false
   })
 }

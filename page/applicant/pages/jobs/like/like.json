@@ -2,7 +2,7 @@
 	"enablePullDownRefresh": true,
 	"backgroundTextStyle": "light",
   "usingComponents": {
-    "navbar": "../../../../components/business/navbar/navbar",
-    "jobList": "../../../../components/business/jobList/jobList"
+    "navbar": "../../../../../components/business/navbar/navbar",
+    "jobList": "../../../../../components/business/jobList/jobList"
   }
 }

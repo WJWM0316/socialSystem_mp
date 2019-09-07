@@ -55,7 +55,7 @@
 	</view>
 
 	<view class="todo_ul" wx:if="{{viewList.length}}">
-		<view class="li" wx:for="{{viewList}}" wx:key="{{index}}">
+		<view class="li" wx:for="{{viewList}}" wx:key="{{index}}" bindtap="viewRusumeDetail" data-uid="{{item.uid}}">
 			<view class="img-box">
 				<!-- <image src="{{cdnImagePath}}sign1.png" mode="aspectFill" class="avatar"></image> -->
 				<!-- <image src="{{cdnImagePath}}sign1.png" mode="aspectFill" class="vip"></image> -->
@@ -102,11 +102,11 @@
 		<view class="title">营销工具</view>
 		<view class="p2">帮助招聘官快速完成招聘任务</view>
 		<view class="tab-ul">
-			<view class="tab1 left top split-line">
+			<view class="tab1 left top split-line" bindtap="routeJump" data-route="shareCompany">
 				<view class="icon"></view>
 				<view class="p">转发机构主页</view>
 			</view>
-			<view class="tab1  right top">
+			<view class="tab1  right top" bindtap="routeJump" data-route="sharePosition">
 				<view class="icon"></view>
 				<view class="p">转发我的职位</view>
 			</view>
@@ -178,4 +178,5 @@
 
   <tabBar tabType="1" id="bottomRedDotBar"></tabBar>
   <followWechat wx:if="{{userInfo}}"></followWechat>
+  <shareBtn posterType="company" id="shareBtn" shareBtn="{{false}}"></shareBtn>
 </view>

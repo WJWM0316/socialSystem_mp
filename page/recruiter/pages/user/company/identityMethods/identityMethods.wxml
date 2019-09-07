@@ -1,13 +1,15 @@
 <view class="identityMethods">
 	<navbar title="认证方式" background="#fff" color="#22292C"></navbar>
 	<view class="header">
-		<view class="h1">选择认证方式</view>
-		<view class="h2">请从以下方式中选择一个，完成公司认证</view>
+		<!-- <view class="h1">选择认证方式</view>
+		<view class="h2">请从以下方式中选择一个，完成公司认证</view> -->
+		<view class="h1">开始认证</view>
+		<view class="h2">请点击下方入口进行认证</view>
 	</view>
 
 	<view class="ul">
 
-		<!-- <view class="li" data-route="email" bindtap="routeJump">
+<!-- 		<view class="li" data-route="email" bindtap="routeJump">
 			<view class="icon-box"><i class="icon iconfont icon-youxiangrenzheng"></i></view>
 			<view class="content">
 				<view class="h3">公司邮箱认证</view>

@@ -2,7 +2,7 @@
 	"enablePullDownRefresh": true,
 	"backgroundTextStyle": "light",
 	"usingComponents": {
-    "navbar": "../../../../../components/business/navbar/navbar",
-    "changeIdentity": "../../../../../components/functional/changeIdentity/changeIdentity"
+    "navbar": "../../../../../../components/business/navbar/navbar",
+    "changeIdentity": "../../../../../../components/functional/changeIdentity/changeIdentity"
   }
 }

@@ -172,6 +172,10 @@
 				<view class="value">{{companyInfos.industry}}</view>
 			</view>
 			<view class="li">
+				<view class="key">融资阶段</view>
+				<view class="value">{{companyInfos.financingInfo}}</view>
+			</view>
+			<view class="li">
 				<view class="key">人员规模</view>
 				<view class="value">{{companyInfos.employeesInfo}}</view>
 			</view>
@@ -246,23 +250,6 @@
 		</view>
 	</view>
 
-	<view class="div" wx:if="{{options.from !== 'identity' && companyInfos.status !== 1}}">
-		<view class="box" bindtap="todoAction" data-action="identity">
-			<view class="p1">认证个人身份</view>
-			<view class="p2">提前认证身份，公司过审后即可马上发布职位</view>
-			<view class="has active" wx:if="{{!identityInfos.haveIdentity}}">去认证</view>
-			<block wx:if="{{identityInfos.haveIdentity}}">
-				<view class="has" wx:if="{{identityInfos.status === 1}}">已认证</view>
-				<view class="has" wx:if="{{identityInfos.status === 0}}">审核中</view>
-				<view class="has red" wx:if="{{identityInfos.status === 2}}">未通过</view>
-			</block>
-			<!-- 
-				1.还没有填写身份信息 
-				2.个人身份认证失败 
-			-->
-			<i class="icon iconfont icon-xiangyou" wx:if="{{!identityInfos.haveIdentity || identityInfos.status === 2 || identityInfos.status === 0}}"></i>
-		</view>
-	</view>
 	<view class="tip2" wx:if="{{options.from === 'identity' && (identityInfos.status !== 1 || !identityInfos.haveIdentity)}}">
 		<view class="span">了解更多认证须知，欢迎联系我们</view>
 		<view class="strong" bindtap="callPhone">{{telePhone}}</view>

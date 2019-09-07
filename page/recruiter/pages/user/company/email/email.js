@@ -335,6 +335,7 @@ Page({
       perfectCompanyApi({
         company_name: storage.company_name,
         industry_id: storage.industry_id,
+        financing: storage.financing,
         employees: storage.employees,
         company_shortname: storage.company_shortname,
         logo: storage.logo.id,

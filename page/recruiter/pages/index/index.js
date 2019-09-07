@@ -68,59 +68,58 @@ Page({
     },
     viewList: []
   },
-  // onLoad() {
-  //   let choseType = wx.getStorageSync('choseType') || ''
-  //   this.setData({ choseType})
-  //   let that = this
-  //   if (choseType === 'APPLICANT') {
-  //     let that = this
-  //     app.wxConfirm({
-  //       title: '提示',
-  //       content: '检测到你是求职者，是否切换求职者',
-  //       confirmBack() {
-  //         wx.reLaunch({url: `${COMMON}homepage/homepage`})
-  //       },
-  //       cancelBack() {
-  //         wx.setStorageSync('choseType', 'RECRUITER')
-  //         app.getAllInfo().then(res => {
-  //           that.init()
-  //         })
-  //       }
-  //     })
-  //   }
-  // },
-  // onShow() {
-  //   if(app.loginInit) {
-  //     if(!app.globalData.hasLogin) {
-  //       wx.navigateTo({url: `${COMMON}bindPhone/bindPhone`})
-  //       return
-  //     }
-  //     this.init()
-  //   } else {
-  //     app.loginInit = () => {
-  //       if (!app.globalData.hasLogin) {
-  //         wx.navigateTo({url: `${COMMON}bindPhone/bindPhone`})
-  //         return
-  //       }
-  //       this.init()
-  //     }
-  //   }
-  // },
+  onLoad() {
+    let choseType = wx.getStorageSync('choseType') || ''
+    this.setData({ choseType})
+    let that = this
+    if (choseType === 'APPLICANT') {
+      let that = this
+      app.wxConfirm({
+        title: '提示',
+        content: '检测到你是求职者，是否切换求职者',
+        confirmBack() {
+          wx.reLaunch({url: `${COMMON}homepage/homepage`})
+        },
+        cancelBack() {
+          wx.setStorageSync('choseType', 'RECRUITER')
+          app.getAllInfo().then(res => that.init())
+        }
+      })
+    }
+  },
+  onShow() {
+    this.init()
+    return
+    if(app.loginInit) {
+      if(!app.globalData.hasLogin) {
+        wx.navigateTo({url: `${COMMON}bindPhone/bindPhone`})
+        return
+      }
+      this.init()
+    } else {
+      app.loginInit = () => {
+        if (!app.globalData.hasLogin) {
+          wx.navigateTo({url: `${COMMON}bindPhone/bindPhone`})
+          return
+        }
+        this.init()
+      }
+    }
+  },
   init () {
     if (wx.getStorageSync('choseType') === 'APPLICANT') return
-    let collectMySelf = this.data.collectMySelf
-    let browseMySelf = this.data.browseMySelf
     let userInfo = app.globalData.userInfo
+    let companyInfos = app.globalData.recruiterDetails.companyInfo
     if(app.pageInit) {
       userInfo = app.globalData.userInfo
-      let companyInfos = app.globalData.recruiterDetails.companyInfo
+      companyInfos = app.globalData.recruiterDetails.companyInfo
       this.getMixdata()
       this.setData({userInfo, companyInfos})
       this.selectComponent('#bottomRedDotBar').init()
     } else {
       app.pageInit = () => {
         userInfo = app.globalData.userInfo
-        let companyInfos = app.globalData.recruiterDetails.companyInfo
+        companyInfos = app.globalData.recruiterDetails.companyInfo
         this.getMixdata()
         this.setData({userInfo, companyInfos})
         this.selectComponent('#bottomRedDotBar').init()
@@ -229,6 +228,13 @@ Page({
       case 'echart':
         wx.navigateTo({url: `${RECRUITER}echart/echart`})
         break
+      case 'shareCompany':
+        this.selectComponent('#shareBtn').oper()
+        wx.setStorageSync('companyPosterdata', app.globalData.recruiterDetails.companyInfo)
+        break
+      case 'sharePosition':
+        wx.reLaunch({url: `${RECRUITER}position/index/index`})
+        break
       default:
         break
     }
@@ -281,5 +287,15 @@ Page({
     let params = e.currentTarget.dataset
     dataBox.tabLists.map((field, index) => field.active = index === params.index ? true : false)
     this.setData({dataBox})
+  },
+  /**
+   * @Author   小书包
+   * @DateTime 2019-09-07
+   * @detail   查看简历详情
+   * @return   {[type]}     [description]
+   */
+  viewRusumeDetail(e) {
+    let params = e.currentTarget.dataset
+    wx.navigateTo({url: `${COMMON}resumeDetail/resumeDetail?uid=${params.jobhunteruid}`})
   }
 })

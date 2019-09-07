@@ -667,8 +667,7 @@
   color:rgba(92,86,93,1);
   position: absolute;
   right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 28rpx;
 }
 
 .data-box .title .icon {

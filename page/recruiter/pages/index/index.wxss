@@ -516,23 +516,46 @@
   margin: 20rpx 30rpx;
 }
 
-.make-box .ul {
+.make-box .ul1 {
   text-align: center;
   padding-top: 38rpx;
 }
 
-.make-box .li {
+.make-box .ul1 .li {
   display: inline-block;
   vertical-align: top;
 }
 
-.make-box .left {
+.make-box .ul1 .li:first-child {
   float: left;
+  padding-left: 57rpx;
 }
 
-.make-box .right {
+.make-box .ul1 .li:last-child {
   float: right;
+  padding-right: 57rpx;
 }
+
+.make-box .ul2 {
+  text-align: center;
+  padding-top: 38rpx;
+}
+
+.make-box .ul2 .li {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.make-box .ul2 .li:first-child {
+  float: left;
+  padding-left: 57rpx;
+}
+
+.make-box .ul2 .li:last-child {
+  float: right;
+  padding-right: 59rpx;
+}
+
 
 .make-box .p {
   height:24rpx;
@@ -762,4 +785,74 @@
   font-weight:700;
   color:rgba(101,39,145,1);
   line-height:54rpx;
+}
+
+.overlay {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  top: 0;
+  background: rgba(0,0,0,.6);
+  z-index: 10000000;
+}
+
+.overlay .box {
+  background: white;
+  padding: 56rpx 50rpx 0 50rpx;
+  border-radius: 18rpx;
+  position: absolute;
+  top: 50%;
+  box-sizing: border-box;
+  transform: translateY(-50%);
+  left: 50rpx;
+  right: 50rpx;
+  height: 712rpx;
+  text-align: center;
+  transition: all ease .2s;
+}
+
+.overlay .button {
+  height:88rpx;
+  background:rgba(101,39,145,1);
+  box-shadow:0rpx 20rpx 18rpx 0rpx rgba(101,39,145,0.2);
+  border-radius:49rpx;
+  font-size:32rpx;
+  font-weight:400;
+  color:rgba(255,255,255,1);
+  text-align: center;
+  line-height: 88rpx;
+  position: absolute;
+  left: 50rpx;
+  right: 50rpx;
+  bottom: 56rpx;
+}
+
+.overlay .p1 {
+  font-size:32rpx;
+  font-weight:400;
+  color:rgba(40,40,40,1);
+  line-height:48rpx;
+  text-align: center;
+}
+
+.overlay .p2 {
+  font-size:32rpx;
+  font-weight:400;
+  color:rgba(40,40,40,1);
+  line-height:48rpx;
+  text-align: center;
+}
+
+.overlay .icon-close {
+  position: absolute;
+  top: 31rpx;
+  right: 31rpx;
+  color: #CDCBCF;
+}
+
+.overlay image {
+  width: 440rpx;
+  height: 290rpx;
+  margin: 38rpx auto 32rpx auto;
 }

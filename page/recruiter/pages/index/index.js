@@ -66,7 +66,8 @@ Page({
         }
       ]
     },
-    viewList: []
+    viewList: [],
+    showPublicPositionTips: false
   },
   onLoad() {
     let choseType = wx.getStorageSync('choseType') || ''
@@ -234,6 +235,33 @@ Page({
         break
       case 'sharePosition':
         wx.reLaunch({url: `${RECRUITER}position/index/index`})
+        break
+      case 'poster-mechanism':
+        // 该机构的职位上线状态
+        if(app.globalData.recruiterDetails.positionNum) {
+
+        } else {
+          this.setData({showPublicPositionTips: true})
+        }
+        break
+      case 'position-mechanism':
+        // 该机构的职位上线状态
+        if(app.globalData.recruiterDetails.positionNum) {
+
+        } else {
+          this.setData({showPublicPositionTips: true})
+        }
+        break
+      case 'recruiter-mechanism':
+        // 该机构的职位上线状态
+        if(app.globalData.recruiterDetails.positionNum) {
+
+        } else {
+          this.setData({showPublicPositionTips: true})
+        }
+        break
+      case 'hidePublicPositionTips':
+        this.setData({showPublicPositionTips: false})
         break
       default:
         break

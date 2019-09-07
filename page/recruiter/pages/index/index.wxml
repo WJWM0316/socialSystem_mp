@@ -123,32 +123,32 @@
 
 	<view class="make-box">
 		<view class="title"><view class="icon"></view>生成招聘海报</view>
-		<view class="ul split-line">
-			<view class="li left">
+		<view class="ul2 split-line">
+			<view class="li" bindtap="routeJump" data-route="poster-mechanism">
 				<view class="img-box"></view>
 				<view class="p">机构</view>
 			</view>
-			<view class="li center">
+			<view class="li" bindtap="routeJump" data-route="position-mechanism">
 				<view class="img-box"></view>
 				<view class="p">职位</view>
 			</view>
-			<view class="li right">
+			<view class="li" bindtap="routeJump" data-route="recruiter-mechanism">
 				<view class="img-box"></view>
 				<view class="p">招聘官</view>
 			</view>
 		</view>
 
 		<view class="title"><view class="icon"></view>生成小程序码</view>
-		<view class="ul">
-			<view class="li left" bindtap="routeJump" data-route="qr-mechanism">
+		<view class="ul1">
+			<view class="li" bindtap="routeJump" data-route="qr-mechanism">
 				<view class="img-box"></view>
 				<view class="p">机构</view>
 			</view>
-			<view class="li center" bindtap="routeJump" data-route="qr-position">
+			<view class="li" bindtap="routeJump" data-route="qr-position">
 				<view class="img-box"></view>
 				<view class="p">职位</view>
 			</view>
-			<view class="li right" bindtap="routeJump" data-route="qr-recruiter">
+			<view class="li" bindtap="routeJump" data-route="qr-recruiter">
 				<view class="img-box"></view>
 				<view class="p">招聘官</view>
 			</view>
@@ -179,4 +179,19 @@
   <tabBar tabType="1" id="bottomRedDotBar"></tabBar>
   <followWechat wx:if="{{userInfo}}"></followWechat>
   <shareBtn posterType="company" id="shareBtn" shareBtn="{{ false }}"></shareBtn>
+  
+  <view class="overlay" wx:if="{{showPublicPositionTips}}">
+		<view class="box">
+			<i class="icon iconfont icon-close" bindtap="routeJump" data-action="hidePublicPositionTips"></i>
+			<image src="{{cdnImagePath}}none_position.png"></image>
+			<view class="p1">邀请候选人面试</view>
+			<view class="p2">至少需要一个招聘中职位~</view>
+			<view
+				class="button"
+				bindtap="routeJump"
+				data-action="position">
+				去发布/开放职位
+			</view>
+		</view>
+	</view>
 </view>

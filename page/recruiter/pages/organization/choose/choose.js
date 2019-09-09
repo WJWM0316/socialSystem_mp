@@ -30,7 +30,9 @@ Page({
     clearTimeout(timer)
     let value = e.detail.value
     keyword = value
+
     timer = setTimeout(() => {
+      console.log(keyword)
       this.getList()
       clearTimeout(timer)
     }, 100)

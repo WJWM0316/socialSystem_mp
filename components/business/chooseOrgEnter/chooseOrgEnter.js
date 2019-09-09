@@ -1,4 +1,6 @@
 const app = getApp()
+import{getCompanyOrglistApi} from '../../../api/pages/company.js'
+
 import {RECRUITER} from '../../../config.js'
 Component({
   /**
@@ -13,7 +15,32 @@ Component({
    */
   data: {
     navHeight: app.globalData.navHeight,
-    choseItem: wx.getStorageSync('orgData')
+    choseItem: wx.getStorageSync('orgData'),
+    detail: app.globalData.recruiterDetails
+  },
+  pageLifetimes: {
+    show: function () {
+
+      let choseItem = wx.getStorageSync('orgData')
+      if (!choseItem) {
+        getCompanyOrglistApi().then(res => {
+          if (res.data.length) {
+            choseItem = res.data[0]
+            wx.setStorageSync('orgData', choseItem)
+          }
+        })
+      }
+      this.setData({choseItem})
+    }
+  },
+  attached () {
+    if (app.pageInit) {
+      this.setData({detail: app.globalData.recruiterDetails})
+    } else {
+      app.pageInit = () => {
+        this.setData({detail: app.globalData.recruiterDetails})
+      }
+    }
   },
   /**
    * 组件的方法列表

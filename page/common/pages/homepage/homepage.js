@@ -121,7 +121,7 @@ Page({
         getCompanyInfos = getCurCompanyInfosApi
       }
       getCompanyInfos(params).then(res => {
-        this.getCompanyOrglist(res.data.topId)
+        if (wx.getStorageSync('choseType') !== 'RECRUITER') this.getCompanyOrglist(res.data.topId)
         callBackNum++
         let requireOAuth = res.meta && res.meta.requireOAuth ? res.meta.requireOAuth : false
         const companyInfos = res.data
@@ -161,7 +161,16 @@ Page({
   },
   getCompanyOrglist (id) {
     getCompanyOrglistApi({company_id: id}).then(res => {
-      this.setData({otherOrgList: res.data})
+      if (res.data.length) {
+        let list = res.data
+        list.forEach((item, index) => {
+          if (item.id === this.data.companyInfos.id) {
+            list.splice(index, 1)
+          }
+        })
+        this.setData({otherOrgList: list})
+      } 
+      
     })
   },
   swiperChange(e) {

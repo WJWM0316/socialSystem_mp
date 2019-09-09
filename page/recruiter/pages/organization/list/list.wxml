@@ -1,7 +1,7 @@
 
 <navbar title="全部机构"></navbar>
 <view class="search" style="top: {{navH}}px">
-	<input class="searchBar iconfont" value="{{keyword}}" bindinput="bindInput" type="text" placeholder="{{placeholder}}" placeholder-class="holderStyle"/>
+	<input class="searchBar iconfont" value="{{keyword}}" bindinput="bindInput" type="text" placeholder="{{placeholder}}" placeholder-style="font-family: iconfont" placeholder-class="holderStyle"/>
 </view>
 <view class="organizationList">
 	<view class="list">

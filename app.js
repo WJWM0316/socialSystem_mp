@@ -384,7 +384,6 @@ App({
   phoneLogin(data, operType) {
     let _this = this
     return new Promise((resolve, reject) => {
-
       authLoginApi(data).then(res => {
         if (res.data.token) wx.setStorageSync('token', res.data.token)
         if (res.data.sessionToken) wx.setStorageSync('sessionToken', res.data.sessionToken)

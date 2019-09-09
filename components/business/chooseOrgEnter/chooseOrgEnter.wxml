@@ -1,4 +1,5 @@
-<view class="chooseEnter">
+<view style="height: 88rpx"></view>
+<view class="chooseEnter" style="top: {{navHeight}}px" bindtap="routeJump">
 	<i class="icon iconfont icon-gongsi"></i>
-	<text class="name">点都德-天河电</text>
+	<text class="name">{{choseItem.companyName}}</text>
 </view>

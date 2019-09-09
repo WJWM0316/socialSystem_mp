@@ -41,11 +41,12 @@ Page({
           company_id: app.globalData.recruiterDetails.companyTopId,
           keyword: keyword || ''
         }
+    let chooseItem = wx.getStorageSync('orgData')
     getCompanyOrglistApi(parmas).then(res => {
       if (!res.data.length) return
       orgList = res.data
       if (chooseItem) {
-        orgList.list.filter(item => {
+        orgList.filter(item => {
           if (item.id === chooseItem.id) item.active = true
         })
       }
@@ -56,10 +57,10 @@ Page({
     let index = e.currentTarget.dataset.index,
         item  = e.currentTarget.dataset.item,
         orgList = this.data.orgList
-    orgList.list.forEach((item) => {
+    orgList.forEach((item) => {
       if (item.active) item.active = false
     })
-    orgList.list[index].active = true
+    orgList[index].active = true
     this.setData({orgList}, () => {
       wx.setStorageSync('orgData', item)
       wx.navigateBack({delta: 1})

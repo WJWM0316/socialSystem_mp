@@ -4,14 +4,10 @@
 
 	<navbar title="职位管理"></navbar>
 
-	<view class="placeholder {{isSuper ? 'placeholder2' : ''}}"></view>
+	<chooseOrgEnter></chooseOrgEnter>
 
-	<view class="fixed-dom" style="top:{{navH}}px">
-		<view class="seleted-bar" wx:if="{{isSuper}}" bindtap="routeJump" data-action="mechanism">
-			<i class="icon iconfont icon-gongsi"></i>
-			选择机构
-			<i class="icon iconfont icon-disejiantou-you"></i>
-		</view>
+	<view class="fixed-dom" style="top: calc({{navH}}px + 88rpx)">
+		
 		<view class="tab-bar">
 			<view
 				class="item {{positionStatus === '1' ? 'active' : ''}}"

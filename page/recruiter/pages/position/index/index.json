@@ -3,6 +3,7 @@
 	"backgroundTextStyle": "light",
   "usingComponents": {
     "tab-bar": "../../../../../components/business/tabBar/tabBar",
+    "chooseOrgEnter": "../../../../../components/business/chooseOrgEnter/chooseOrgEnter",
     "navbar": "../../../../../components/business/navbar/navbar"
   }
 }

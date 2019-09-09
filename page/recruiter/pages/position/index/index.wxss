@@ -166,7 +166,7 @@
 }
 
 .fixed-dom .tab-bar{
-  margin: 0 40rpx 30rpx 34rpx;
+  margin: 36rpx 40rpx 30rpx 34rpx;
 }
 
 .fixed-dom .item {

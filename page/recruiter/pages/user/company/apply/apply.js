@@ -135,28 +135,55 @@ Page({
    * @return   {[type]}   [description]
    */
   submit() {
-    let formData = this.data.formData
+    let formData = Object.assign(wx.getStorageSync('createdCompany'), this.data.formData)
     let options = this.data.options
-    let storage = wx.getStorageSync('createdCompany') || {} 
+    let storage = wx.getStorageSync('createdCompany') || {}
+    let funcApi = Reflect.has(options, 'action') ? 'editCreateCompany' : 'createCompany'
+    let params = {}
+
+    // 编辑需要传id
+    if(Reflect.has(options, 'action')) {
+        params = Object.assign(params, {id: formData.id})
+    }
 
     // 验证姓名
     let checkRealName = new Promise((resolve, reject) => {
-      !realNameRegB.test(formData.real_name) ? reject('姓名需为2-20个中文字符') : resolve()
+      if(!realNameRegB.test(formData.real_name)) {
+        reject('姓名需为2-20个中文字符')
+      } else {
+        params = Object.assign(params, {real_name: formData.real_name})
+        resolve()
+      }
     })
 
     // 验证公司名称
     let checkCompanyName = new Promise((resolve, reject) => {
-      !companyNameReg.test(formData.company_name) ? reject('请输入有效的公司名称') : resolve()
+      if(!companyNameReg.test(formData.company_name)) {
+        reject('请输入有效的公司名称')
+      } else {
+        params = Object.assign(params, {company_name: formData.company_name})
+        resolve()
+      }
     })
 
     // 验证邮箱
     let checkUserEmail = new Promise((resolve, reject) => {
-      !emailReg.test(formData.user_email) ? reject('请填写有效的邮箱') : resolve()
+      if(!emailReg.test(formData.user_email)) {
+        reject('请填写有效的邮箱')
+      } else {
+        params = Object.assign(params, {user_email: formData.user_email.trim()})
+        resolve()
+      }
     })
 
     // 验证职位
     let checkUserPosition = new Promise((resolve, reject) => {
-      !positionReg.test(formData.user_position) ? reject('担任职务需为2-50个字') : resolve()
+      if(!positionReg.test(formData.user_position)) {
+        reject('担任职务需为2-50个字')
+      } else {
+        params = Object.assign(params, {user_position: formData.user_position})
+        resolve()
+      }
     })
 
     Promise.all([
@@ -165,10 +192,7 @@ Page({
       checkUserEmail,
       checkUserPosition
     ])
-    .then(res => {
-      let funcApi = Reflect.has(options, 'action') ? 'editCreateCompany' : 'createCompany'
-      this[funcApi]()
-    })
+    .then(res => this[funcApi](params))
     .catch(err => app.wxToast({title: err}))
   },
   /**
@@ -230,21 +254,12 @@ Page({
    * @detail   申请加入公司
    * @return   {[type]}   [description]
    */
-  createCompany() {
-    let formData = Object.assign(wx.getStorageSync('createdCompany'), this.data.formData)
-    let params = {
-      real_name: formData.real_name,
-      user_email: formData.user_email.trim(),
-      user_position: formData.user_position,
-      position_type_id: formData.user_positionType, 
-      company_name: formData.company_name
-    }
+  createCompany(params) {
     createCompanyApi(params).then(res => {
       wx.reLaunch({url: `${RECRUITER}user/company/createdCompanyInfos/createdCompanyInfos?from=company`})
       wx.removeStorageSync('createdCompany')
     })
     .catch(err => {
-
       if(err.code === 307) {
         app.wxToast({
           title: err.msg,
@@ -263,16 +278,7 @@ Page({
    * @detail   编辑申请加入公司
    * @return   {[type]}   [description]
    */
-  editCreateCompany() {
-    let formData = Object.assign(wx.getStorageSync('createdCompany') || {}, this.data.formData)
-    let params = {
-      id: formData.id,
-      real_name: formData.real_name,
-      user_email: formData.user_email.trim(),
-      user_position: formData.user_position,
-      company_name: formData.company_name,
-      position_type_id: formData.position_type_id
-    }
+  editCreateCompany(params) {
     editCompanyFirstStepApi(params).then(() => {
       wx.reLaunch({url: `${RECRUITER}user/company/createdCompanyInfos/createdCompanyInfos?from=company&action=edit`})
       wx.removeStorageSync('createdCompany')

@@ -152,7 +152,7 @@ Page({
     }
   },
   onShow() {
-    this.init();return
+    // this.init();return
     if(app.loginInit) {
       if(!app.globalData.hasLogin) {
         wx.navigateTo({url: `${COMMON}bindPhone/bindPhone`})

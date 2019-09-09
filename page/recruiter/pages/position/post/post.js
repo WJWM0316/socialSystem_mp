@@ -37,16 +37,14 @@ Page({
       describe: '',
       company_id: ''
     },
-    isCompanyTopAdmin: 0,
     query: {},
     pageTitle: '',
     canClick: false,
     showScanBox: false,
-    options: {}
+    options: {},
+    detail: app.globalData.recruiterDetails
   },
   onLoad(options) {
-    let isCompanyTopAdmin = this.data.isCompanyTopAdmin
-    isCompanyTopAdmin = app.globalData.recruiterDetails.isCompanyTopAdmin
     this.setData({pageTitle: options.positionId ? '编辑职位' : '发布职位', query: options})
   },
   onShow() {
@@ -88,6 +86,8 @@ Page({
     let options = this.data.query
     let formData = this.data.formData
     let storage = Object.assign(wx.getStorageSync('createPosition'))
+    let orgData = wx.getStorageSync('orgData')
+    if(orgData) formData.company_id = orgData.id
     if(
       storage.position_name
       || storage.area_id
@@ -147,6 +147,7 @@ Page({
       formData.lat = storage.lat || infos.lat
       formData.address_id = storage.address_id || infos.addressId
       formData.parentType = storage.parentType || infos.topPid
+      if(orgData) formData.company_id = orgData.id
       this.setData({ formData }, () => this.bindButtonStatus())
     })
   },
@@ -253,6 +254,8 @@ Page({
     let formData = {}
     let labels = []
     let action = this.data.query.positionId ? 'editPositionApi' : 'createPositionApi'
+    let orgData = wx.getStorageSync('orgData')
+
     let params = [
       'position_name',
       'type',
@@ -267,15 +270,15 @@ Page({
       'describe',
       'lng',
       'lat',
-      'address_id',
-      'company_id'
+      'address_id'
     ]
 
     params.map(field => formData[field] = this.data.formData[field])
     formData.labels = JSON.stringify(labels)
 
-    console.log(this.data.formData, formData)
+    // 编辑要加机构id
     if(this.data.query.positionId) formData.id = this.data.query.positionId
+
     if(this.data.formData.address_id) {
       delete formData.lng
       delete formData.lng
@@ -292,6 +295,7 @@ Page({
       if(!this.data.formData.company_id) {
         reject('请选择机构id')
       } else {
+        formData.company_id = orgData.id
         resolve()
       }
     })
@@ -370,10 +374,11 @@ Page({
       positionDescribe
     ]
 
-    if(this.data.isCompanyTopAdmin) {
+    // 超管要加机构id
+    if(this.data.detail.isCompanyTopAdmin) {
       checkLists = [companyId].concat(checkLists)
     }
-    console.log(checkLists)
+    console.log(this.data)
     Promise.all(checkLists).then(res => this[action](formData)).catch(err => app.wxToast({title: err}))
   },
   /**

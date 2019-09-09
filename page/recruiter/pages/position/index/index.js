@@ -1,10 +1,16 @@
-import { getRecruiterPositionListApi, getPositionListNumApi } from '../../../../../api/pages/position.js'
+import {
+  getRecruiterPositionListApi,
+  getPositionListNumApi,
+  getPositionCompanyTopListApi
+} from '../../../../../api/pages/position.js'
 
 import {RECRUITER, COMMON} from '../../../../../config.js'
 
 let app = getApp()
 let identityInfos = {},
-    offLinePositionNum = 0
+    offLinePositionNum = 0,
+    positionCard = '',
+    detail = {}
 Page({
   data: {
     navH: app.globalData.navHeight,
@@ -13,6 +19,7 @@ Page({
     onBottomStatus: 0,
     offBottomStatus: 0,
     isSuper: 1,
+    detail: {},
     onLinePosition: {
       list: [],
       pageNum: 1,
@@ -30,7 +37,8 @@ Page({
     hasReFresh: false,
     telePhone: app.globalData.telePhone,
     options: {},
-    redDotInfos: {}
+    redDotInfos: {},
+    detail: app.globalData.recruiterDetails
   },
   onLoad(options) {
     wx.setStorageSync('choseType', 'RECRUITER')
@@ -95,15 +103,21 @@ Page({
    * @return   {[type]}   [description]
    */
   getOnlineLists(hasLoading = true) {
+    let Api = this.data.detail.isCompanyTopAdmin ? getPositionCompanyTopListApi : getRecruiterPositionListApi
     return new Promise((resolve, reject) => {
       let onLinePosition = this.data.onLinePosition
       let onBottomStatus = this.data.onBottomStatus
-      getRecruiterPositionListApi({
+      let orgData = wx.getStorageSync('orgData')
+      let params = {
         is_online: 1,
         count: onLinePosition.count,
         page: onLinePosition.pageNum,
         hasLoading
-      }).then(res => {
+      }
+
+      //加个机构id
+      if(orgData) params = Object.assign(params, {company_id: orgData.id})
+      Api(params).then(res => {
         onLinePosition.list = onLinePosition.list.concat(res.data || [])
         onLinePosition.pageNum++
         onLinePosition.isRequire = true
@@ -118,15 +132,21 @@ Page({
     })
   },
   getOffLineLists(hasLoading = true) {
+    let Api = this.data.detail.isCompanyTopAdmin ? getPositionCompanyTopListApi : getRecruiterPositionListApi
     return new Promise((resolve, reject) => {
       let offLinePosition = this.data.offLinePosition
       let offBottomStatus = this.data.offBottomStatus
-      getRecruiterPositionListApi({
+      let orgData = wx.getStorageSync('orgData')
+      let params = {
         is_online: 2,
         count: offLinePosition.count,
         page: offLinePosition.pageNum,
         hasLoading
-      }).then(res => {
+      }
+
+      //加个机构id
+      if(orgData) params = Object.assign(params, {company_id: orgData.id})
+      Api(params).then(res => {
         offLinePosition.list = offLinePosition.list.concat(res.data || [])
         offLinePosition.pageNum++
         offLinePosition.isRequire = true
@@ -160,6 +180,20 @@ Page({
         break
       case 'fail':
         wx.navigateTo({url: `${COMMON}positionDetail/positionDetail?positionId=${params.positionId}&type=clear_red_dot`})
+        break
+      case 'poster-position':
+        wx.navigateTo({
+          url: `${COMMON}poster/createPost/createPost?type=positionMin&positionId=${params.positionId}`
+        })
+        break
+      case 'poster-position-long':
+        wx.navigateTo({
+          url: `${COMMON}poster/createPost/createPost?type=position&positionId=${params.positionId}`
+        })
+        break
+      case 'share':
+        let detail = this.data.onLinePosition.list.find((field, index) => index === params.index)
+        this.setData({detail}, () => detail = detail)
         break
       default:
         break
@@ -222,7 +256,17 @@ Page({
     }
     app.getBottomRedDot()
   },
+//   onShareAppMessage(options) {
+// 　　return app.wxShare({options})
+//   },
   onShareAppMessage(options) {
-　　return app.wxShare({options})
+    let detail = this.data.detail
+    console.log(detail, 'fffffff')
+　　return app.wxShare({
+      options,
+      title: sharePosition(),
+      path: `${COMMON}positionDetail/positionDetail?positionId=${that.data.query.positionId}&sCode=${detail.sCode}&sourceType=shp`,
+      imageUrl: positionCard
+    })
   }
 })

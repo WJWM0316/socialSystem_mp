@@ -94,6 +94,7 @@
   font-size:24rpx;
   color:rgba(132,82,167,1);
   vertical-align: middle;
+  line-height: unset;
 }
 
 .item5 .actions .icon {
@@ -166,7 +167,7 @@
 }
 
 .fixed-dom .tab-bar{
-  margin: 36rpx 40rpx 30rpx 34rpx;
+  padding: 36rpx 40rpx 30rpx 34rpx;
 }
 
 .fixed-dom .item {

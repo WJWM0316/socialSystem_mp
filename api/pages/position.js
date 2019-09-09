@@ -10,6 +10,16 @@ export const getPositionListApi = (data, hasLoading) => {
   })
 }
 
+// 公司下属机构的职位列表
+export const getPositionCompanyTopListApi = (data, hasLoading) => {
+  return request({
+    method: 'get',
+    url: '/position/company_top/list',
+    data,
+    hasLoading: hasLoading
+  })
+}
+
 // 获取推荐策略职位列表
 export const getRecommendApi = (data, hasLoading) => {
   return request({

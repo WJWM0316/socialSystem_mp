@@ -4,10 +4,8 @@
 
 	<navbar title="职位管理"></navbar>
 
-	<chooseOrgEnter></chooseOrgEnter>
-
-	<view class="fixed-dom" style="top: calc({{navH}}px + 88rpx)">
-		
+	<view class="fixed-dom" style="top: {{navH}}px">
+		<chooseOrgEnter></chooseOrgEnter>
 		<view class="tab-bar">
 			<view
 				class="item {{positionStatus === '1' ? 'active' : ''}}"
@@ -29,11 +27,13 @@
 		  </view>
 		</view>
 	</view>
-
+	
 	<view hidden="{{!hasReFresh}}">
 		<refreshStatus></refreshStatus>
 	</view>
-
+	
+	<view class="placeholder {{detail.isCompanyTopAdmin ? 'placeholder2' : ''}}"></view>
+	
 	<form bindsubmit="formSubmit" report-submit='{{true}}'>
 		<!--招聘中职位-->
 		<view class="item5 {{onLinePosition.list.length ? '' : 'nodata'}}" hidden="{{positionStatus === '2'}}">
@@ -42,9 +42,9 @@
 				wx:for-item="item"
 				wx:key="{{item.id}}"
 				>
-				<button 
-					form-type="submit" 
+				<button
 					class="formIdBtn clear-style"
+					form-type="submit" 
 					data-action="detail"
 					data-position-id="{{item.id}}"
 					data-company-id="{{item.companyId}}"
@@ -59,13 +59,18 @@
 						<view class="item">{{item.educationName}}</view>
 						<view class="view"><i class="icon iconfont icon-chakan"></i>123</view>
 					</view>
-					<view class="actions">
-						<view class="item"><i class="icon iconfont icon-weixin"></i>分享好友</view>
-						<view class="item"><i class="icon iconfont icon-fanhuishouye"></i>生成海报</view>
-						<view class="item"><i class="icon iconfont icon-saoma"></i>生成长图</view>
-					</view>
-					<!-- <view class="item-status"></view> -->
 				</button>
+				<view class="actions">
+					<button form-type="submit" class="share clear-style item" open-type="share" bindtap="routeJump" data-index="{{index}}" data-action="share">
+						<i class="icon iconfont icon-weixin"></i>分享好友
+					</button>
+					<button form-type="submit" class="share clear-style item" bindtap="routeJump" data-action="poster-position" data-position-id="{{item.id}}">
+						<i class="icon iconfont icon-fanhuishouye"></i>生成海报
+					</button>
+					<button form-type="submit" class="share clear-style item" bindtap="routeJump" data-action="poster-position-long" data-position-id="{{item.id}}">
+						<i class="icon iconfont icon-saoma"></i>生成长图
+					</button>
+				</view>
 			</view>
 			<bottomStatus status="{{onBottomStatus}}" listData="{{onLinePosition.list}}" desc="没有更多内容了~" marginTop="{{0}}"></bottomStatus>
 		</view>
@@ -101,4 +106,5 @@
 	</form>
 
 	<tab-bar tabType="1" id="bottomRedDotBar" bindresultevent="getResult"></tab-bar>
+	<block wx:if="{{detail.id}}"><canvasCard cardData="{{detail}}" type="position" bindgetCreatedImg="getCreatedImg"></canvasCard></block>
 </view>

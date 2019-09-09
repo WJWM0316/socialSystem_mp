@@ -320,14 +320,11 @@ Page({
   },
   getCreatedImg(e) {
     positionCard = e.detail
+    console.log(e, 'detail')
   },
   onShareAppMessage(options) {
     let that = this
     let detail = this.data.detail
-
-    if(detail.isOnline === 2 && (!detail.status || detail.status === 1 || detail.status === 3 || detail.status === 4)) {
-      return app.wxShare({options})
-    }
 
     app.shareStatistics({
       id: that.data.query.positionId,
@@ -335,10 +332,11 @@ Page({
       sCode: that.data.detail.sCode,
       channel: 'card'
     })
+    
 　　return app.wxShare({
       options,
       title: sharePosition(),
-      path: `${COMMON}positionDetail/positionDetail?positionId=${that.data.query.positionId}&sCode=${this.data.detail.sCode}&sourceType=shp`,
+      path: `${COMMON}positionDetail/positionDetail?positionId=${detail.positionId}&sCode=${detail.sCode}&sourceType=shp`,
       imageUrl: positionCard
     })
   }

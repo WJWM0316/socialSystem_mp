@@ -174,12 +174,21 @@
 				<view class="p">{{item.text}}</view>
 			</view>
 		</view>
+		<view class="number-box">
+			<view class="tab3">今日：8月26日 </view>
+			<view class="tab3">访问人数 <view class="strong yellow">123</view> </view>
+			<view class="tab3">访问次数 <view class="strong primary">123</view> </view>
+		</view>
 	</view>
 
   <tabBar tabType="1" id="bottomRedDotBar"></tabBar>
   <followWechat wx:if="{{userInfo}}"></followWechat>
-  <shareBtn posterType="company" id="shareBtn" shareBtn="{{ false }}"></shareBtn>
-  
+
+<!--   <shareBtn posterType="company" id="shareBtn" shareBtn="{{ false }}"></shareBtn>
+  <block wx:if="{{companyInfos.id}}">
+  	<canvasCard cardData="{{companyInfos}}" type="company" bindgetCreatedImg="getCreatedImg"></canvasCard>
+	</block> -->
+
   <view class="overlay" wx:if="{{showPublicPositionTips}}">
 		<view class="box">
 			<i class="icon iconfont icon-close" bindtap="routeJump" data-action="hidePublicPositionTips"></i>

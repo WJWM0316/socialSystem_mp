@@ -48,7 +48,8 @@ Page({
       let bgUrl = '../../../../images/201909011831.jpg'
       let avatarUrl = '../../../../images/201909042919.jpg'
       let avatar = wx.getStorageSync('avatar')
-      avatarUrl = avatar.url
+      if(avatar) avatarUrl = avatar.url
+      
       // 最外层的一个圆
       ctx.beginPath()  
       ctx.fillStyle = '#DFD5EB'   

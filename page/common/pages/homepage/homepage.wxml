@@ -17,27 +17,36 @@
 		<view class="banner">
 			<image
 				class="bgImg"
-				src="{{cdnImagePath}}{{choseType === 'RECRUITER' ? 'bg_b_companyxx.png' : !isIphoneX ? 'bg_b_company.png' : 'bg_b_companyx.png'}}"
-				mode="widthFix">
+				src="{{companyInfos.logoInfo.smallUrl}}">
 			</image>
 			<view class="box">
 				<view class="company-logo">
-					<image class="bgImg" src="{{companyInfos.logoInfo.smallUrl}}" mode="aspectFit"></image>
+					<image class="logo" src="{{companyInfos.logoInfo.smallUrl}}" mode="aspectFit"></image>
 				</view>
 				<view class="company-name">{{companyInfos.companyName}}</view>
 				<view class="infos">{{companyInfos.industry}} | {{companyInfos.employeesInfo}}</view>
 			</view>
-			<view class="position-box">
-				<view class="infos1">
-					<i class="icon iconfont icon-dizhi"></i>
-					{{companyInfos.address[0].address}}
+			<shareBtn></shareBtn>
+		</view>
+
+		<view class="company-team" wx:if="{{companyInfos.recruiterLists.length}}">
+			<view class="title">
+				<view class="icon"> <view class="fan"></view> </view> 招聘团队
+			</view>
+			<view class="ul">
+				<view class="li" wx:for="{{companyInfos.recruiterLists}}" wx:key="{{index}}" bindtap="routeJump" data-route="toRecruiter" data-uid="{{item.uid}}">
+					<view class="center">
+						<image class="img-box" src="{{item.avatar.smallUrl}}"></image>
+						<view class="realname">{{item.name}}</view>
+						<view class="position">{{item.position}}</view>
+					</view>
 				</view>
 			</view>
-			<view class="phone-box">
-				<i class="icon iconfont icon-shoujihaoma"></i>
-				{{companyInfos.mobile}}
+			<view class="footer" wx:if="{{companyInfos.recruiterLists.length > 3}}">
+				<view class="button" bindtap="routeJump" data-route="recruitersList">
+					查看全部招聘官<i class="icon iconfont icon-xiangyou"></i>
+				</view>
 			</view>
-			<shareBtn></shareBtn>
 		</view>
 
 		<view class="introduction" wx:if="{{companyInfos.intro || companyInfos.albumInfo.length }}">
@@ -80,8 +89,10 @@
 							<view class="username">{{item.companyName}}</view>
 							<view class="recruitment-number" wx:if="{{recruiter.positionNum}}">{{recruiter.positionNum}} 个在招职位</view>
 						</view>
-						<view class="row-two">{{item.address[0].city}}{{item.address[0].doorplate}}</view>
-						<view class="row-three">{{recruiter.randomTxt}}</view>
+						<view class="row-two">
+							<text class="address">{{item.address[0].city}}{{item.address[0].doorplate}}</text>
+							<text class="num" wx:if="{{item.onJob}}">{{item.positionNum}} 个在招职位</text>
+						</view>
 					</view>
 				</view>
 			</view>
@@ -121,25 +132,7 @@
 			</view>
 		</view>
 
-		<view class="company-team">
-			<view class="title">
-				<view class="icon"> <view class="fan"></view> </view> 招聘团队
-			</view>
-			<view class="ul">
-				<view class="li" wx:for="{{companyInfos.recruiterLists}}" wx:key="{{index}}" bindtap="routeJump" data-route="toRecruiter" data-uid="{{item.uid}}">
-					<view class="center">
-						<image class="img-box" src="{{item.avatar.smallUrl}}"></image>
-						<view class="realname">{{item.name}}</view>
-						<view class="position">{{item.position}}</view>
-					</view>
-				</view>
-			</view>
-			<view class="footer" wx:if="{{companyInfos.recruiterLists.length > 3}}">
-				<view class="button" bindtap="routeJump" data-route="recruitersList">
-					查看全部招聘官<i class="icon iconfont icon-xiangyou"></i>
-				</view>
-			</view>
-		</view>
+		
 
 		<view class="company-website" wx:if="{{companyInfos.website}}">
 			<view class="title">
@@ -148,6 +141,23 @@
 			<view class="link-box">
 				<view class="link">{{companyInfos.website}}</view>
 				<view class="button" bindtap="copyLink">复制</view>
+			</view>
+		</view>
+
+		<view class="welfare contact">
+			<view class="title">
+				<view class="icon"> <view class="fan"></view> </view> 联系方式
+			</view>
+			<view class="position-box">
+				<view class="infos1">
+					<i class="icon iconfont icon-dizhi"></i>
+					{{companyInfos.address[0].address}}
+				</view>
+			</view>
+			<view class="phone-box">
+				<i class="icon iconfont icon-shoujihaoma"></i>
+				{{companyInfos.mobile}}
+				<text class="desc">直接拨打，更快面试</text>
 			</view>
 		</view>
 

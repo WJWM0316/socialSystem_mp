@@ -12,6 +12,7 @@ Page({
     pageCount: 20,
     hasReFresh: false,
     onBottomStatus: 0,
+    detail: app.globalData.recruiterDetails,
     recruitersList: {
       list: [],
       pageNum: 1,

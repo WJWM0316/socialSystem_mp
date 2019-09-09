@@ -20,17 +20,14 @@ Component({
   },
   pageLifetimes: {
     show: function () {
-
       let choseItem = wx.getStorageSync('orgData')
-      if (!choseItem) {
-        getCompanyOrglistApi().then(res => {
-          if (res.data.length) {
-            choseItem = res.data[0]
-            wx.setStorageSync('orgData', choseItem)
-          }
-        })
-      }
-      this.setData({choseItem})
+      getCompanyOrglistApi({company_id: this.data.detail.companyTopId}).then(res => {
+        if (!choseItem && res.data.length) {
+          choseItem = res.data[0]
+          wx.setStorageSync('orgData', choseItem)
+          this.setData({choseItem})
+        }
+      })
     }
   },
   attached () {

@@ -25,8 +25,8 @@ Component({
         if (!choseItem && res.data.length) {
           choseItem = res.data[0]
           wx.setStorageSync('orgData', choseItem)
-          this.setData({choseItem})
         }
+        this.setData({choseItem})
       })
     }
   },

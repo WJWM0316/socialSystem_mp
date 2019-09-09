@@ -12,13 +12,7 @@ Page({
     placeholder: '\ue635 请输入机构名称',
     navH: app.globalData.navHeight,
     keyword: '',
-    orgList: {
-      list: [],
-      pageNum: 0,
-      isLastPage: false,
-      isRequire: false,
-      onBottomStatus: 0
-    }
+    orgList: []
   },
   /**
    * 生命周期函数--监听页面加载

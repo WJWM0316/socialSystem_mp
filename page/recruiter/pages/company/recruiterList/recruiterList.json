@@ -4,6 +4,7 @@
 	"backgroundTextStyle": "light",
   "usingComponents": {
   	"navbar": "../../../../../components/business/navbar/navbar",
-  	"roleInfoCard": "../../../../../components/business/roleInfoCard/roleInfoCard"
+  	"roleInfoCard": "../../../../../components/business/roleInfoCard/roleInfoCard",
+  	"chooseOrgEnter": "../../../../../components/business/chooseOrgEnter/chooseOrgEnter"
   }
 }

@@ -12,7 +12,6 @@ Page({
     pageCount: 20,
     hasReFresh: false,
     onBottomStatus: 0,
-    detail: app.globalData.recruiterDetails,
     recruitersList: {
       list: [],
       pageNum: 1,
@@ -21,6 +20,7 @@ Page({
       isRequire: false
     },
     isCompanyAdmin: 0,
+    isTopCompanyAdmin: 0,
     options: {},
     cdnImagePath: app.globalData.cdnImagePath
   },
@@ -46,11 +46,13 @@ Page({
     }
   },
   init() {
-    let isCompanyAdmin = this.data.isCompanyAdmin
+    let isCompanyAdmin = this.data.isCompanyAdmin,
+        isTopCompanyAdmin = this.data.isTopCompanyAdmin
     app.getRoleInfo().then(res => {
       isCompanyAdmin = res.data.isCompanyAdmin
+      isTopCompanyAdmin = res.data.isTopAdmin
       app.getBottomRedDot().then(res => this.setData({redDotInfos: app.globalData.redDotInfos}))
-      this.setData({isCompanyAdmin}, this.getLists())
+      this.setData({isCompanyAdmin, isTopCompanyAdmin}, this.getLists())
     })
   },
   /**
@@ -62,8 +64,15 @@ Page({
   getLists() {
     return new Promise((resolve, reject) => {
       let options = this.data.options
-      let params = {id: options.companyId, page: this.data.recruitersList.pageNum, count: this.data.pageCount}
-
+      let params = {page: this.data.recruitersList.pageNum, count: this.data.pageCount}
+      if (!this.data.isTopCompanyAdmin) {
+        params.id = options.companyId
+      } else {
+        let choseItem = wx.getStorageSync('orgData')
+        if (choseItem) {
+          params.id = choseItem.id
+        }
+      }
       getRecruitersListApi(params).then(res => {
         let recruitersList = this.data.recruitersList
         let onBottomStatus = res.meta && res.meta.nextPageUrl ? 0 : 2

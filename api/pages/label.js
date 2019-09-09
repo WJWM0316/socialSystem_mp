@@ -45,7 +45,7 @@ export const getFieldListApi = (data, hasLoading) => {
 export const getTeamlightspotApi = (data, hasLoading) => {
   return request({
     method: 'get',
-    url: '/lightspot/list',
+    url: '/welfare/list',
     data,
     hasLoading: true
   })
@@ -55,7 +55,7 @@ export const getTeamlightspotApi = (data, hasLoading) => {
 export const diyTeamlabApi = (data, hasLoading) => {
   return request({
     method: 'post',
-    url: '/lightspot/diylab',
+    url: '/welfare/diylab',
     data,
     hasLoading: true
   })
@@ -65,7 +65,7 @@ export const diyTeamlabApi = (data, hasLoading) => {
 export const saveTeamlabApi = (data, hasLoading) => {
   return request({
     method: 'put',
-    url: '/lightspot/save',
+    url: '/welfare/save',
     data,
     hasLoading: true
   })

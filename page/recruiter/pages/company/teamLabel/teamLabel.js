@@ -139,7 +139,8 @@ Page({
       listId.push(item.id)
     })
     let data = {
-      labels: JSON.stringify(listId)
+      welfare: listId.join(','),
+      company_id: app.globalData.recruiterDetails.currentCompanyId
     }
     saveTeamlabApi(data).then(res => {
       app.wxToast({

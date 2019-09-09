@@ -1,43 +1,10 @@
-<view class="applicant-job">
-	<navbar title="店长多多" background="#652791" color="#fff" wx:if="{{tabFixed}}"></navbar>
+<view class="applicant-job" style="padding-top: 105rpx">
+	<navbar title="店长多多" background="#652791" color="#fff"></navbar>
 	<view hidden="{{!hasReFresh}}">
     <refreshStatus></refreshStatus>
   </view>
-  <view class="head" style="{{tabFixed ? 'margin-top:' + -navH + 'px' : ''}}">
-    <view class="bannerBox" wx:if="{{bannerList.length > 0}}">
-      <swiper
-        class="swiper"
-        autoplay
-        circular
-        bindchange="autoplay"
-        style="height: {{bannerH}}px"
-        >
-        <swiper-item wx:for="{{bannerList}}" wx:key="{{index}}" bindtap="jumpBanner" data-url="{{item.targetUrl || item.otherUrl}}">
-          <image class="banner" wx:if="{{isBangs}}" src="{{item.bigImgUrl}}" mode="widthFix"></image>
-          <image class="banner" wx:else src="{{item.smallImgUrl}}" mode="widthFix"></image>
-        </swiper-item>
-      </swiper>
-      <view class="swiper-dots" wx:if="{{bannerList.length > 1}}">
-        <view wx:for="{{bannerList}}" wx:key="{{index}}" class="swiper-dots-item {{bannerIndex === index ? 'active' : ''}}"></view>
-      </view>
-    </view>
-    <block  wx:else>
-      <image class="banner" wx:if="{{!isBangs}}" src="{{cdnImagePath}}bg_homepageh.png?a=3" mode="widthFix"></image>
-      <image class="banner" wx:else src="{{cdnImagePath}}bg_homepageh_3.png" mode="widthFix"></image>
-    </block>
-    <view class='more'>
-      <view class="moreActive" bindtap='toMore'>
-        <view class="left">
-          <view class="title">发现更多面试官</view>
-          <view class="info">Ta们都在积极抢人，欢迎围观</view>
-        </view>
-        <view class="right">
-          <image class="avatar" lazy-load wx:for="{{moreRecruiter}}" wx:key="{{index}}" src="{{item.smallUrl}}" wx:if="{{index <= 2}}"></image>
-          <image class="avatar" wx:if="{{moreRecruiter.length > 3}}" src="{{cdnImagePath}}more.png"></image>
-        </view>
-      </view>    
-    </view>
-    <view class="select-box {{tabFixed ? 'fixed' : ''}}" style="{{tabFixed ? 'top:' + navH + 'px' : ''}}">
+  <view class="head" style="top: {{navH}}px">
+    <view class="select-box {{tabFixed ? 'fixed' : ''}}">
       <view class="select-tab">
         <view class="item {{tabType === item.type ? 'cur' : ''}} {{item.active ? 'actived' : ''}}"  bindtap="choseTab" data-type="{{item.type}}" wx:for="{{tabList}}" wx:key="{{index}}"><text class="txt">{{item.name}}</text><i class="icon iconfont icon-zhishibiao"></i></view>
       </view>
@@ -64,8 +31,4 @@
     <bottomStatus status="{{onBottomStatus}}" listData="{{positionList.list}}"></bottomStatus>
   </view>
   <tabBar id="bottomRedDotBar"></tabBar>
-  <auth wx:if="{{requireOAuth}}" bindauthSuccess="authSuccess"></auth>
-  <bindPhone hide="{{hideLoginBox}}" hasClose="{{false}}"></bindPhone>
-  <adPop></adPop>
-  <followWechat userInfo="{{userInfo}}"></followWechat>
 </view>

@@ -63,6 +63,7 @@ App({
     isMicroCard: 0, // 是否创建微名片
     isRecruiter: 0, // 是否认证成为招聘官
     isJobhunter: 0, // 是否注册成求职者
+    currentCompanyId: 0, // C端用户当前机构
     hasExpect: 1, // 有求职意向
     hasLogin: 0, // 判断是否登录
     userInfo: null, // 用户信息， 判断是否授权,
@@ -200,6 +201,7 @@ App({
         } else {
           this.globalData.isRecruiter = 0
         }
+        if (res0.data.currentCompanyId) this.globalData.currentCompanyId = res0.data.currentCompanyId
         if (res0.data.isJobhunter) {
           this.globalData.isJobhunter = 1
         } else {

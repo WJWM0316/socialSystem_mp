@@ -2,8 +2,12 @@
   background: #FBFBFF;
 }
 .head {
+  width: 100%;
   background: #fff;
   box-shadow:0rpx 0rpx 20rpx 0rpx rgba(50,14,59,0.08);
+  position: fixed;
+  left: 0;
+  z-index: 1;
 }
 .bannerBox {
   position: relative;
@@ -155,7 +159,6 @@
 .select-box {
   width: 100%;
   font-size: 0;
-  position: relative;
 }
 .select-box.fixed {
   position: fixed;

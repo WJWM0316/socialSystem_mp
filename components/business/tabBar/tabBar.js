@@ -72,12 +72,12 @@ Component({
         path: `${COMMON}homepage/homepage`
       },
       {
-        title: '足迹',
-        flag: 'footprint',
-        iconPath: `${cdnImagePath}tab_footprint@3x.png`,
-        selectedIconPath: `${cdnImagePath}tab_footprint_pre@3x.png`,
-        active: false,
-        path: `${APPLICANT}footprint/footprint`
+        title: '职位',
+        flag: 'position',
+        iconPath: `${cdnImagePath}tab_company@3x.png`,
+        selectedIconPath: `${cdnImagePath}tab_company_pre@3x.png`,
+        active: true,
+        path: `${APPLICANT}index/index`
       },
       {
         title: '面试',

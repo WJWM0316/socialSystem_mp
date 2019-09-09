@@ -88,18 +88,9 @@ Page({
     }
     this.setData({positionList, bannerH, options})
     let init = () => {
-      this.getAdBannerList()
-      this.getAvartList()
       this.getFilterData().then(() => {
         this.getRecord()
         hasOnload = true
-        if (app.getRoleInit) {
-          this.initPage()
-        } else {
-          app.getRoleInit = () => {
-            this.initPage()
-          }
-        }
       })
     }
     if (app.loginInit) {
@@ -113,21 +104,8 @@ Page({
   onUnload () {
   },
   onShow (options) {
-    if (hasOnload) {
-      this.initPage()
-    }
     let init = () => {
-      app.wxReportAnalytics('enterPage_report', {
-        haslogin: app.globalData.hasLogin,
-        isjobhunter: app.globalData.isJobhunter,
-        userinfo: app.globalData.userInfo ? 1 : 0
-      })
       this.setData({hasLogin: app.globalData.hasLogin, userInfo: app.globalData.userInfo, isJobhunter: app.globalData.isJobhunter})
-      let bannerList = this.data.bannerList
-      if (app.globalData.isJobhunter && bannerList.length > 0 && bannerList[bannerList.length - 1].smallImgUrl === 'https://attach.lieduoduo.ziwork.com/front-assets/images/banner_resume.png') {
-        bannerList.splice(bannerList.length - 1, 1)
-        this.setData({bannerList, bannerIndex: 0})
-      }
       if (app.pageInit) {
         this.selectComponent('#bottomRedDotBar').init()
         this.setData({hasExpect: app.globalData.hasExpect})
@@ -145,45 +123,7 @@ Page({
         init()
       }
     }
-    if (wx.getStorageSync('choseType') === 'RECRUITER') {
-      app.wxConfirm({
-        title: '提示',
-        content: '检测到你是招聘官，是否切换招聘端',
-        confirmBack() {
-          wx.reLaunch({
-            url: `${RECRUITER}index/index`
-          })
-        },
-        cancelBack() {
-          wx.setStorageSync('choseType', 'APPLICANT')
-          app.getAllInfo()
-        }
-      })
-    }
   },
-  initPage () {
-    let jumpCreate = () => {
-      if (!app.globalData.isMicroCard && wx.getStorageSync('choseType') !== 'RECRUITER') {
-        app.wxToast({
-          title: '前往求职飞船',
-          icon: 'loading',
-          callback () {
-            wx.reLaunch({
-              url: `${APPLICANT}createUser/createUser?micro=true`
-            })
-          }
-        })
-      }
-    }
-    if (!app.globalData.hasLogin) {
-      this.setData({hideLoginBox: false})
-    } else {
-      let timer = setTimeout(() => {
-        jumpCreate()
-        clearTimeout(timer)
-      }, 500)
-    }
-  }, 
   getAvartList() {
     getAvartListApi().then(res => {
       const moreRecruiter = res.data.moreRecruiter
@@ -359,6 +299,8 @@ Page({
   },
   getPositionList(hasLoading = true) {
     let params = {count: this.data.pageCount, page: this.data.positionList.pageNum, is_record: 1, ...app.getSource()}
+    
+    if (app.globalData.currentCompanyId) params.company_id = app.globalData.currentCompanyId
     if(this.data.city) {
       params = Object.assign(params, {city: this.data.city})
     }

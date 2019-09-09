@@ -46,7 +46,70 @@ Page({
     },
     banner: {},
     bannerIndex: 0,
-    companyInfos: {},
+    companyInfos: {
+      "id": 662,
+      "vkey": "9rklsb5q",
+      "companyShortname": "银信科技",
+      "companyName": "北京银信长远科技股份有限公司",
+      "logo": 0,
+      "financing": "7",
+      "industryId": 110000,
+      "industry": "移动互联网",
+      "employees": "4",
+      "businessLicense": 0,
+      "onJob": 0,
+      "email": "",
+      "emailStatus": 0,
+      "website": "",
+      "status": 1,
+      "oneSentenceIntro": "",
+      "intro": "",
+      "createdUid": 975,
+      "isPerfect": 0,
+      "wherefrom": "3",
+      "customerLevel": 0,
+      "advisorGroupId": 0,
+      "advisorUid": 0,
+      "adminUid": 0,
+      "groupId": 0,
+      "creator": 0,
+      "updater": 0,
+      "createdAt": "2019-02-22 19:31:01",
+      "updatedAt": "2019-02-26 16:18:17",
+      "deletedAt": null,
+      "album": [],
+      "address": [],
+      "product": [],
+      "integrityRate": "45%",
+      "isAdmin": false,
+      "sCode": "mv186qvv",
+      "logoInfo": {
+        "id": 0,
+        "vkey": "",
+        "attachType": "img",
+        "attachTypeDesc": "图片",
+        "url": "https://attach.lieduoduo.ziwork.com/default/company.png",
+        "fileName": "company.png",
+        "size": 2908,
+        "sizeM": "2.8KB",
+        "createdAt": "",
+        "extension": "",
+        "width": 140,
+        "height": 140,
+        "middleUrl": "https://attach.lieduoduo.ziwork.com/default/company.png!330xauto",
+        "smallUrl": "https://attach.lieduoduo.ziwork.com/default/company.png!130xauto"
+      },
+      "albumInfo": [],
+      "financingInfo": "已上市",
+      "employeesInfo": "500-999人",
+      "positionNum": 38,
+      "businessLicenseInfo": [],
+      "onJobInfo": [],
+      "adminName": "无",
+      "advisorName": "无",
+      "statusDesc": "上线",
+      "customerLevelDesc": "未定类"
+    },
     dataBox: {
       tabLists: [
         {
@@ -89,8 +152,7 @@ Page({
     }
   },
   onShow() {
-    this.init()
-    return
+    this.init();return
     if(app.loginInit) {
       if(!app.globalData.hasLogin) {
         wx.navigateTo({url: `${COMMON}bindPhone/bindPhone`})
@@ -115,14 +177,14 @@ Page({
       userInfo = app.globalData.userInfo
       companyInfos = app.globalData.recruiterDetails.companyInfo
       this.getMixdata()
-      this.setData({userInfo, companyInfos})
+      this.setData({userInfo})
       this.selectComponent('#bottomRedDotBar').init()
     } else {
       app.pageInit = () => {
         userInfo = app.globalData.userInfo
         companyInfos = app.globalData.recruiterDetails.companyInfo
         this.getMixdata()
-        this.setData({userInfo, companyInfos})
+        this.setData({userInfo})
         this.selectComponent('#bottomRedDotBar').init()
       }
     }
@@ -239,7 +301,8 @@ Page({
       case 'poster-mechanism':
         // 该机构的职位上线状态
         if(app.globalData.recruiterDetails.positionNum) {
-
+          wx.navigateTo({url: `${COMMON}poster/company/company`})
+          wx.setStorageSync('companyPosterdata', this.data.companyInfos)
         } else {
           this.setData({showPublicPositionTips: true})
         }
@@ -247,7 +310,7 @@ Page({
       case 'position-mechanism':
         // 该机构的职位上线状态
         if(app.globalData.recruiterDetails.positionNum) {
-
+          wx.navigateTo({url: `${COMMON}poster/createPost/createPost?type=positionMin&positionId=6864`})
         } else {
           this.setData({showPublicPositionTips: true})
         }
@@ -255,7 +318,7 @@ Page({
       case 'recruiter-mechanism':
         // 该机构的职位上线状态
         if(app.globalData.recruiterDetails.positionNum) {
-
+          wx.navigateTo({url: `${COMMON}poster/createPost/createPost`})
         } else {
           this.setData({showPublicPositionTips: true})
         }

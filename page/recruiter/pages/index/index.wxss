@@ -785,6 +785,78 @@
   font-weight:700;
   color:rgba(101,39,145,1);
   line-height:54rpx;
+  position: relative;
+}
+
+.data-box .number {
+  height:54rpx;
+  font-size:54rpx;
+  font-weight:700;
+  color:rgba(101,39,145,1);
+  line-height:54rpx;
+}
+
+.data-box .number-box{
+  text-align: center;
+  font-size:24rpx;
+  color:rgba(40,40,40,1);
+  margin: 0 40rpx 0 50rpx;
+  padding: 32rpx 0;
+  height: 90rpx;
+  line-height: 90rpx;
+  position: relative;
+}
+
+.data-box .number-box:before{
+  content: '';
+  display: block;
+  height: 1px;
+  background: #EFE9F4;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/*.data-box .number-box:after{
+  width: 0;
+  height: 0;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 10rpx;
+  border-style: solid;
+  border-color: #FFE266 transparent transparent transparent;
+  display: block;
+  content: '';
+  bottom: -20rpx;
+}*/
+
+.data-box .number-box .tab3{
+  text-align: center;
+  font-size:24rpx;
+  color:rgba(40,40,40,1);
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+}
+
+.data-box .number-box .tab3:first-child{
+  float: left;
+}
+
+.data-box .number-box .tab3:last-child{
+  float: right;
+}
+
+.data-box .number-box .strong.yellow{
+  display: inline;
+  color: #FF7F4C;
+}
+
+.data-box .number-box .strong.primary{
+  display: inline;
+  color: #8452A7;
 }
 
 .overlay {

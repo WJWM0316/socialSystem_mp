@@ -1,5 +1,5 @@
 {
   "usingComponents": {
-  	"navbar": "../../../../components/business/navbar/navbar"
+  	"navbar": "../../../../../components/business/navbar/navbar"
   }
 }

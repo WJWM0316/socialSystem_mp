@@ -127,10 +127,12 @@
 		</view>
 	</block>
 	<block wx:else>
-		<view class="shareBtn shareBtnBg"></view>
-		<button open-type="share" class="shareBtn clear-style" form-type="submit">
-			<view><i class="shareIcon iconfont icon-fenxiang"></i></view>
-		  <text>转发</text>
-		</button>
+		<block wx:if="{{shareBtn}}">
+			<view class="shareBtn shareBtnBg"></view>
+			<button open-type="share" class="shareBtn clear-style" form-type="submit">
+				<view><i class="shareIcon iconfont icon-fenxiang"></i></view>
+			  <text>转发</text>
+			</button>
+		</block>
 	</block>
 </form>

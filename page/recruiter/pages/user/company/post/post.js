@@ -77,7 +77,7 @@ Page({
    * @detail   保存当前页面的数据
    * @return   {[type]}   [description]
    */
-  submit() {
+  checkInput() {
     let formData = this.data.formData
 
     // 验证公司简称
@@ -100,21 +100,15 @@ Page({
       !formData.employees ? reject('请选择人员规模') : resolve()
     })
 
+    formData.company_shortname = formData.company_shortname.trim()
+
     Promise.all([
       checkCompanyShortName,
       checkIndustryId,
       checkFinancing,
       checkEmployees
     ])
-    .then(res => {
-      formData.company_shortname = formData.company_shortname.trim()
-      wx.setStorageSync('createdCompany', formData)
-      wx.navigateTo({url: `${RECRUITER}user/company/identityMethods/identityMethods?companyId=${formData.id}`})
-      // perfectCompanyApi(params).then(res => {
-      //   wx.navigateTo({url: `${RECRUITER}user/company/identityMethods/identityMethods?companyId=${res.data.companyId}`})
-      // })
-    })
-    .catch(err => app.wxToast({title: err}))
+    .then(res => this.submit(formData)).catch(err => app.wxToast({title: err}))
   },
   /**
    * @Author   小书包
@@ -192,5 +186,48 @@ Page({
   savaBeforeUpload() {
     let storage = wx.getStorageSync('createdCompany') || {}
     wx.setStorageSync('createdCompany', Object.assign(storage, this.data.formData))
+  },
+  submit(formData) {
+    let params = {
+      company_name: formData.company_name,
+      industry_id: formData.industry_id,
+      financing: formData.financing,
+      employees: formData.employees,
+      company_shortname: formData.company_shortname,
+      logo: formData.logo.id,
+      intro: formData.intro,
+      // business_license: this.data.formData.business_license.id,
+      // on_job: this.data.formData.on_job.id,
+      id: formData.id
+    }
+    perfectCompanyApi(params).then(res => {
+      wx.removeStorageSync('createdCompany')
+      wx.reLaunch({url: `${RECRUITER}user/company/status/status?from=company`})
+    })
+    .catch(err => {
+      if(err.code === 307) {
+        app.wxToast({
+          title: err.msg,
+          callback() {
+            wx.reLaunch({url: `${RECRUITER}user/company/status/status?from=company`})
+          }
+        })
+        return
+      }
+
+      if(err.code === 808) {
+        app.wxToast({
+          title: err.msg,
+          callback() {
+            wx.removeStorageSync('createdCompany')
+            wx.reLaunch({url: `${RECRUITER}user/company/status/status?from=company`})
+          }
+        })
+        return
+      }
+
+      app.wxToast({ title: err.msg })
+      
+    })
   }
 })

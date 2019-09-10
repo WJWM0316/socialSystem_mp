@@ -251,7 +251,8 @@ Page({
         wx.navigateTo({url: `${RECRUITER}createQr/createQr?type=qr-mechanism`})
         break
       case 'qr-position':
-        wx.navigateTo({url: `${RECRUITER}createQr/createQr?type=qr-position`})
+        wx.navigateTo({url: `${RECRUITER}organization/position/position?type=qr-position`})
+        // wx.navigateTo({url: `${RECRUITER}createQr/createQr?type=qr-position`})
         break
       case 'qr-recruiter':
         wx.navigateTo({url: `${RECRUITER}createQr/createQr?type=qr-recruiter`})

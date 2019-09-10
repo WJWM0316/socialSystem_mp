@@ -163,10 +163,10 @@
 				<view class="key">公司全称</view>
 				<view class="value">{{companyInfos.companyName}}</view>
 			</view>
-			<view class="li">
+<!-- 			<view class="li">
 				<view class="key">公司简称</view>
 				<view class="value">{{companyInfos.companyName}}</view>
-			</view>
+			</view> -->
 			<view class="li">
 				<view class="key">所属行业</view>
 				<view class="value">{{companyInfos.industry}}</view>

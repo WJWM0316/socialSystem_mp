@@ -853,17 +853,44 @@
 .data-box .number-box .strong.yellow{
   display: inline;
   color: #FF7F4C;
+  font-weight: 700;
+}
+
+.data-box .number-box .strong.yellow::before{
+  width:12rpx;
+  height:12rpx;
+  background:#FF7F4C;
+  display: block;
+  border-radius: 50%;
+  content: '';
+  position: absolute;
+  left: -20rpx;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .data-box .number-box .strong.primary{
   display: inline;
   color: #8452A7;
+  font-weight: 700;
+}
+
+.data-box .number-box .strong.primary::before{
+  width:12rpx;
+  height:12rpx;
+  background:#8452A7;
+  display: block;
+  border-radius: 50%;
+  content: '';
+  position: absolute;
+  left: -20rpx;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .data-box .index-echart {
   padding: 27rpx 20rpx 42rpx 27rpx;
 }
-
 .overlay {
   position: fixed;
   left: 0;

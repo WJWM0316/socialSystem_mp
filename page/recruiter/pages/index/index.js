@@ -52,33 +52,48 @@ Page({
         {
           number: '520',
           text: '职位浏览次数',
-          active: true
+          active: true,
+          data: {
+            key: ['周a', '周b', '周c', '周d', '周e', '周f', '周g'],
+            value: [
+              [18, 36, 65, 30, 78, 40, 33],
+              [12, 50, 51, 35, 70, 30, 20]
+            ]
+          }
         },
         {
           number: '666',
           text: '招聘官浏览次数',
-          active: false
+          active: false,
+          data: {
+            key: ['周1', '周2', '周3', '周4', '周5', '周6', '周7'],
+            value: [
+              [18, 36, 65, 30, 78, 40, 33],
+              [12, 50, 51, 35, 70, 30, 20]
+            ]
+          }
         },
         {
           number: '6.6k',
           text: '机构浏览次数',
-          active: false
+          active: false,
+          data: {
+            key: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+            value: [
+              [18, 36, 65, 30, 78, 40, 33],
+              [12, 50, 51, 35, 70, 30, 20]
+            ]
+          }
         }
       ]
     },
-    echartKey: [
-      '周一',
-      '周二',
-      '周三',
-      '周四',
-      '周五',
-      '周六',
-      '周日'
-    ],
-    echartValue: [
-      [18, 36, 65, 30, 78, 40, 33],
-      [12, 50, 51, 35, 70, 30, 20]
-    ],
+    echartData: {
+      key: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+      value: [
+        [18, 36, 65, 30, 78, 40, 33],
+        [12, 50, 51, 35, 70, 30, 20]
+      ]
+    },
     viewList: [],
     showPublicPositionTips: false
   },
@@ -120,6 +135,9 @@ Page({
     }
   },
   init () {
+    setTimeout(() => {
+      this.selectComponent('#indexEchart').init()
+    }, 2000)
     if (wx.getStorageSync('choseType') === 'APPLICANT') return
     let userInfo = app.globalData.userInfo
     let companyInfos = app.globalData.recruiterDetails.companyInfo
@@ -326,8 +344,16 @@ Page({
   onClickDataTab(e) {
     let dataBox = this.data.dataBox
     let params = e.currentTarget.dataset
-    dataBox.tabLists.map((field, index) => field.active = index === params.index ? true : false)
-    this.setData({dataBox})
+    let echartData = this.data.echartData
+    let result = null
+    dataBox.tabLists.map((field, index) => {
+      field.active = false
+      if(index === params.index) {
+        field.active = true
+        echartData = field.data
+      }
+    })
+    this.setData({dataBox, echartData}, () => this.selectComponent('#indexEchart').init())
   },
   /**
    * @Author   小书包

@@ -63,7 +63,6 @@ Page({
       recruiter: app.globalData.recruiterDetails.uid,
       ...app.getSource()
     }
-
     if(orgData) params = Object.assign(params, {companyId: orgData.id})
     return Api(params).then(res => {
       offLinePositionNum = res.data.offline

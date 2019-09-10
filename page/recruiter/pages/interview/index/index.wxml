@@ -53,6 +53,7 @@
 						<i class="icon iconfont icon-lishijilu"></i>{{item.createdAtTime}}
 					</view>
 				</view>
+				<view class="row-three">候选人来自<view class="strong">小程序码扫码</view></view>
 				<view class="row-two">
 					<i class="icon iconfont icon-mianshizhiwei"></i>
 					面试职位：<text>{{item.positionId ? item.positionName : '未选择面试职位'}}</text>

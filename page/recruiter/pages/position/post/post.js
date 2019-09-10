@@ -377,8 +377,10 @@ Page({
     // 超管要加机构id
     if(this.data.detail.isCompanyTopAdmin) {
       checkLists = [companyId].concat(checkLists)
+    } else {
+      formData.company_id = app.globalData.recruiterDetails.companyInfo.id
     }
-    console.log(this.data)
+
     Promise.all(checkLists).then(res => this[action](formData)).catch(err => app.wxToast({title: err}))
   },
   /**

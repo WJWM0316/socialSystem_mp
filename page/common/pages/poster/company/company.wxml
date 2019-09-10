@@ -1,5 +1,5 @@
 <view class="poster">
-	<navbar title="{{info.companyShortname}}" background="#fff" color="#22292C"></navbar>
+	<navbar title="{{info.companyName}}" background="#fff" color="#22292C"></navbar>
 	<canvas canvas-id="canvas" id="canvas" class="canvas" style="width:750px;height:5000px"></canvas>
 	<view class="imgBox" wx:if="{{imgUrl}}">
 		<image class='showImg' src="{{imgUrl}}" style="width: 100%;" mode="widthFix"></image>

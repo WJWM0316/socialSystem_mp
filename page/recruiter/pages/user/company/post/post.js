@@ -40,7 +40,7 @@ Page({
       let infos = res.data.companyInfo
       let formData = {
         company_name: infos.companyName,
-        company_shortname: storage.company_shortname || infos.companyShortname,
+        company_shortname: storage.company_shortname || infos.companyName,
         industry_id: storage.industry_id || infos.industryId,
         industry_id_name: storage.industry_id_name || infos.industry,
         financing: storage.financing || infos.financing,

@@ -62,7 +62,7 @@ Page({
     ctx.setTextAlign('center')
     ctx.setFillStyle('#282828')
     ctx.setFontSize(46)
-    ellipsis(ctx, info.companyShortname, 500, 375, 290)
+    ellipsis(ctx, info.companyName, 500, 375, 290)
     ctx.setFontSize(24)
     ellipsis(ctx, `${info.industry} · ${info.employeesDesc}`, 500, 375, 334)
     ctx.setTextAlign('left')
@@ -79,6 +79,10 @@ Page({
     drawLabel(ctx, info.lightspotInfo, {x: 97, y: 364, r: 24, fontSize: 24, color: '#652791'})
 
     let bgObject = {}
+
+
+
+    
     positionList.map((item, index) => {
       if (index < 3) positionItem(item, index)
     })

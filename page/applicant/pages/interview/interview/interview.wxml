@@ -92,7 +92,7 @@
 								<view class="name">{{item.recruiterRealname}}</view>
 								<view class="zhiwei">{{item.recruiterPositionName}}</view>
 							</view>
-							<view class="degress">{{item.companyShortname}}</view>
+							<view class="degress">{{item.companyName}}</view>
 						</view>
 					</view>
 					<view class="reddot" wx:if="{{item.redDot}}"></view>
@@ -136,7 +136,7 @@
 								<view class="name">{{item.recruiterRealname}}</view>
 								<view class="zhiwei">{{item.recruiterPositionName}}</view>
 							</view>
-							<view class="degress">{{item.companyShortname}}</view>
+							<view class="degress">{{item.companyName}}</view>
 						</view>
 					</view>
 					<view class="reddot" wx:if="{{item.redDot}}"></view>
@@ -181,7 +181,7 @@
 									<view class="name">{{item.recruiterRealname}}</view>
 									<view class="zhiwei">{{item.recruiterPositionName}}</view>
 								</view>
-								<view class="degress">{{item.companyShortname}}</view>
+								<view class="degress">{{item.companyName}}</view>
 							</view>
 							<view class="time {{item.status < 50 ? 'active' : ''}} {{item.redDot ? 'redDot' : ''}}" wx:if="{{item.createdAtTime}}">
 								<i class="icon iconfont icon-lishijilu"></i>{{item.createdAtTime}}

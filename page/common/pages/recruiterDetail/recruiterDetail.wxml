@@ -1,6 +1,6 @@
 <form bindsubmit="formSubmit" report-submit='{{true}}'>
   <view class="recruiterDetail" wx:if="{{info.hasDeleted === 0}}">
-    <navbar title="{{info.companyInfo.companyShortname}}-{{info.position}}" background="#fff" color="#22292C" showHome="{{true}}" customBack bindbackEvent="backEvent"></navbar>
+    <navbar title="{{info.companyInfo.companyName}}-{{info.position}}" background="#fff" color="#22292C" showHome="{{true}}" customBack bindbackEvent="backEvent"></navbar>
     <view hidden="{{!hasReFresh}}">
       <refreshStatus></refreshStatus>
     </view>
@@ -17,7 +17,7 @@
       </div>
       <view class="userInfo">
         <view class="name">{{info.name}}</view>
-        <view class="position">{{info.companyShortname}} | {{info.position}}</view>
+        <view class="position">{{info.companyName}} | {{info.position}}</view>
         <view class="sign" wx:if="{{info.signature}}">{{info.signature}}</view>
       </view>
     </view>

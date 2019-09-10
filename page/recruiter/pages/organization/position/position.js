@@ -116,7 +116,7 @@ Page({
             longitude: res.data.lng,
             latitude: res.data.lat,
             label: {
-              content: res.data.companyInfo.companyShortname,
+              content: res.data.companyInfo.companyName,
               fontSize:'18rpx',
               color:'#282828',
               anchorX: '30rpx',
@@ -148,7 +148,7 @@ Page({
             longitude: res.data.lng,
             latitude: res.data.lat,
             label: {
-              content: res.data.companyInfo.companyShortname,
+              content: res.data.companyInfo.companyName,
               fontSize:'18rpx',
               color:'#282828',
               anchorX: '30rpx',

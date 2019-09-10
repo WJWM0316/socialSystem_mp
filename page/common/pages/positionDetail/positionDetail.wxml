@@ -70,7 +70,7 @@
 						<view class="img-box"><image mode="aspectFill" src="{{detail.companyInfo.logoInfo.smallUrl}}" mode="aspectFit"></image></view>
 					</view>
 					<view class="content">
-						<view class="company-name">{{detail.companyInfo.companyShortname}}</view>
+						<view class="company-name">{{detail.companyInfo.companyName}}</view>
 						<view class="infos">{{detail.companyInfo.industry}} · {{detail.companyInfo.employeesInfo}}</view>
 					</view>
 					<view class="right">

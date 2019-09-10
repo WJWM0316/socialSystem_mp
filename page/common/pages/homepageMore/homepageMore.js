@@ -29,7 +29,7 @@ Page({
       longitude,
       latitude,
       label: {
-        content: companyInfos.companyShortname,
+        content: companyInfos.companyName,
         fontSize:'18rpx',
         color:'#282828',
         anchorX: '30rpx',

@@ -57,30 +57,18 @@ Page({
    */
   getPositionListNum() {
     let Api = this.data.detail.isCompanyTopAdmin ? getCompanyTopPositionListNumApi : getPositionListNumApi
-    let onLinePosition = {
-      list: [],
-      pageNum: 1,
-      count: 20,
-      isLastPage: false,
-      isRequire: false
-    }
-    let offLinePosition = {
-      list: [],
-      pageNum: 1,
-      count: 20,
-      isLastPage: false,
-      isRequire: false
-    }
+    let orgData = wx.getStorageSync('orgData')
     let redDotInfos = {}
-    return Api({
+    let params = {
       recruiter: app.globalData.recruiterDetails.uid,
       ...app.getSource()
-    }).then(res => {
+    }
+
+    if(orgData) params = Object.assign(params, {companyId: orgData.id})
+    return Api(params).then(res => {
       offLinePositionNum = res.data.offline
       redDotInfos = app.globalData.redDotInfos
       this.setData({
-        onLinePosition,
-        offLinePosition,
         onLinePositionNum: res.data.online,
         redDotInfos
       })

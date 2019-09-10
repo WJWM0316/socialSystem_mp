@@ -25,7 +25,7 @@ export const getCompanyOrglistApi = (data, hasLoading) => {
         hasLoading: true
       }).then(res => {
         resolve(res)
-        localstorage.set('orgList', {data: res.data, type: 'resetTheDay'})
+        if (res.data.length) localstorage.set('orgList', {data: res.data, type: 'resetTheDay'})
       }).catch(e => {
         reject(e)
       })

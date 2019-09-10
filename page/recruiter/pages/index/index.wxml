@@ -102,10 +102,10 @@
 		<view class="title">营销工具</view>
 		<view class="p2">帮助招聘官快速完成招聘任务</view>
 		<view class="tab-ul">
-			<view class="tab1 left top split-line" bindtap="routeJump" data-route="shareCompany">
+			<button class="tab1 left top split-line clear-style" open-type="share" bindtap="routeJump" data-route="shareCompany">
 				<view class="icon"></view>
 				<view class="p">转发机构主页</view>
-			</view>
+			</button>
 			<view class="tab1  right top" bindtap="routeJump" data-route="sharePosition">
 				<view class="icon"></view>
 				<view class="p">转发我的职位</view>

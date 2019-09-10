@@ -470,6 +470,7 @@
   height: 76rpx;
   line-height: 76rpx;
   box-sizing: border-box;
+  text-align: left;
 }
 
 .sale-tools .split-line::after{

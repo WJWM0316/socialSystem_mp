@@ -13,7 +13,7 @@
 			<view class="header">
 				<view class="content">
 					<view class="realname">{{recruiterInfo.name}}</view>
-					<view class="degree-name">{{recruiterInfo.companyShortname}} | {{recruiterInfo.position}}</view>
+					<view class="degree-name">{{recruiterInfo.companyName}} | {{recruiterInfo.position}}</view>
 					<view class="perfects">完善度{{recruiterInfo.percent}}%</view>
 				</view>
 				<view class="img-box">
@@ -26,7 +26,7 @@
 		</view>
 	</form>
 	<view class="entry-list">
-		<view class="li" bindtap="routeJump" data-route="company" wx:if="{{recruiterInfo.isCompanyAdmin}}">
+		<view class="li" bindtap="routeJump" data-route="company" wx:if="{{recruiterInfo.isCompanyTopAdmin}}">
 			<i class="icon iconfont icon-gongsi1 label-icon"></i>
 			<view class="text">我的公司</view>
 			<i class="icon iconfont icon-xiangyou"></i>

@@ -189,7 +189,7 @@ Page({
     let that = this
 　　return app.wxShare({
       options,
-      btnTitle: `${this.data.companyInfos.companyShortname}正在招聘，马上约面，极速入职！我在店长多多等你！`,
+      btnTitle: `${this.data.companyInfos.companyName}正在招聘，马上约面，极速入职！我在店长多多等你！`,
       btnImageUrl: positionCard,
       btnPath: `${COMMON}homepage/homepage?companyId=${this.data.companyInfos.id}`
     })

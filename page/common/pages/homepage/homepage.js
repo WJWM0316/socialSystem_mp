@@ -119,7 +119,7 @@ Page({
           longitude,
           latitude,
           label: {
-            content: companyInfos.companyShortname,
+            content: companyInfos.companyName,
             fontSize:'18rpx',
             color:'#282828',
             anchorX: '30rpx',
@@ -244,7 +244,7 @@ Page({
     }
 　　return app.wxShare({
       options,
-      title: `${that.data.companyInfos.companyShortname}正在招聘，马上约面，极速入职！我在店长多多等你！`,
+      title: `${that.data.companyInfos.companyName}正在招聘，马上约面，极速入职！我在店长多多等你！`,
       path: `${COMMON}homepage/homepage?companyId=${companyId}&sCode=${this.data.companyInfos.sCode}&sourceType=shc`,
       imageUrl: imageUrl
     })

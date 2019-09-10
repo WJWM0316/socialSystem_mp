@@ -165,7 +165,7 @@
 			</view>
 			<view class="li">
 				<view class="key">公司简称</view>
-				<view class="value">{{companyInfos.companyShortname}}</view>
+				<view class="value">{{companyInfos.companyName}}</view>
 			</view>
 			<view class="li">
 				<view class="key">所属行业</view>

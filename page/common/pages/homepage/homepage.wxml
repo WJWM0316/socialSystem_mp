@@ -1,9 +1,8 @@
 <form bindsubmit="formSubmit" report-submit='{{true}}'>
 
 	<view class="homepage" wx:if="{{companyInfos.status === 1}}">
-
 		<navbar
-			title="{{companyInfos.companyShortname}}"
+			title="{{companyInfos.companyName}}"
 			background="{{choseType === 'RECRUITER' ? '#fff' : '#652791'}}" color="{{choseType === 'RECRUITER' ? '#22292C' : '#fff'}}"
 			showBack="{{choseType === 'RECRUITER'}}"
 			showHome="{{choseType === 'RECRUITER'}}"
@@ -34,7 +33,7 @@
 				<view class="icon"> <view class="fan"></view> </view> 招聘团队
 			</view>
 			<view class="ul">
-				<view class="li" wx:for="{{companyInfos.recruiterLists}}" wx:key="{{index}}" bindtap="routeJump" data-route="toRecruiter" data-uid="{{item.uid}}">
+				<view class="li" wx:for="{{companyInfos.recruiterLists}}" wx:if="{{index < 3}}" wx:key="{{index}}" bindtap="routeJump" data-route="toRecruiter" data-uid="{{item.uid}}">
 					<view class="center">
 						<image class="img-box" src="{{item.avatar.smallUrl}}"></image>
 						<view class="realname">{{item.name}}</view>

@@ -39,7 +39,7 @@
 						</view>
 						<view class="row-two">
 							<view class="company">
-								<i class="icon iconfont icon-gongsi"></i>{{item.companyShortname}}
+								<i class="icon iconfont icon-gongsi"></i>{{item.companyName}}
 							</view>
 		          <view class="position" wx:if="{{item.positionNum}}">
 		          	<i class="icon iconfont icon-zhiwei"></i>

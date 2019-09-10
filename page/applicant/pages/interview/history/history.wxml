@@ -92,7 +92,7 @@
 									</view>
 									<view class="time {{item.status > 50 ? '' : 'color'}}">{{item.arrangementInfo.appointment}}</view>
 								</view>
-								<view class="infos2">{{item.companyShortname}}</view>
+								<view class="infos2">{{item.companyName}}</view>
 							</view>
 						</view>
 						<view class="row-two">

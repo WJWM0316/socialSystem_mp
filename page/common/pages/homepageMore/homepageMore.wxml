@@ -1,5 +1,5 @@
 		
-<navbar title="{{companyInfos.companyShortname}}" background="#fff" color="#22292C" showHome="{{true}}"></navbar>
+<navbar title="{{companyInfos.companyName}}" background="#fff" color="#22292C" showHome="{{true}}"></navbar>
 
 <view class="production-box" wx:if="{{companyInfos.product.length}}">
 	<view class="title">

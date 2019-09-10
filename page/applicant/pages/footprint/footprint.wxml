@@ -26,7 +26,7 @@
 					</view>
 					<view class="content">
 						<view class="row-one">
-							{{item.companyShortname}}
+							{{item.companyName}}
 							<view class="position" wx:if="{{item.positionNum}}">
 		          	<text class="num">{{item.positionNum}} 个在招职位</text>
 		          </view>
@@ -66,7 +66,7 @@
 						</view>
 						<view class="row-two">
 							<view class="company">
-								<i class="icon iconfont icon-gongsi"></i>{{item.companyShortname}}
+								<i class="icon iconfont icon-gongsi"></i>{{item.companyName}}
 							</view>
 		          <view class="position" wx:if="{{item.positionNum}}">
 		          	<i class="icon iconfont icon-zhiwei"></i>

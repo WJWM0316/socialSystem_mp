@@ -860,6 +860,10 @@
   color: #8452A7;
 }
 
+.data-box .index-echart {
+  padding: 27rpx 20rpx 42rpx 27rpx;
+}
+
 .overlay {
   position: fixed;
   left: 0;

@@ -23,9 +23,9 @@ Page({
       real_name: '',
       user_email: '',
       user_position: '',
-      user_positionType: '',
-      user_positionTypeValue: '',
-      company_name: ''
+      company_name: '',
+      position_type_id: '',
+      positionTypeName: ''
     },
     canClick: false,
     options: {},
@@ -76,7 +76,10 @@ Page({
           real_name: storage.real_name,
           user_email: storage.user_email,
           user_position: storage.user_position,
-          company_name: storage.company_name
+          company_name: storage.company_name,
+          company_name: storage.company_name,
+          position_type_id: storage.position_type_id,
+          positionTypeName: storage.positionTypeName
         }
         this.setData({formData, applyJoin})
       } else {
@@ -84,17 +87,18 @@ Page({
           real_name: storage.real_name || companyInfo.realName,
           user_email: storage.user_email || companyInfo.userEmail,
           user_position: storage.user_position || companyInfo.userPosition,
-          company_name: storage.company_name || companyInfo.companyName
+          company_name: storage.company_name || companyInfo.companyName,
+          position_type_id: storage.position_type_id || companyInfo.positionTypeId,
+          positionTypeName: storage.positionTypeName || companyInfo.positionTypeName
         }
         // 重新编辑 加公司id
         if(options.action && options.action === 'edit') formData = Object.assign(formData, {id: companyInfo.id, status: companyInfo.status})
         if(applyJoin) formData = Object.assign(formData, {applyId: companyInfo.applyId})
         let createPosition = wx.getStorageSync('createPosition')
-        if (createPosition) {
-          formData.user_positionType = createPosition.type
-          formData.user_positionTypeValue = createPosition.typeName
+        if(createPosition) {
+          formData.position_type_id = createPosition.type
+          formData.positionTypeName = createPosition.typeName
         }
-
         this.setData({formData, canClick: true, applyJoin, status})
         wx.removeStorageSync('createPosition')
         wx.setStorageSync('createdCompany', Object.assign(formData, this.data.formData))
@@ -146,7 +150,7 @@ Page({
 
     // 验证公司名称
     let checkCompanyName = new Promise((resolve, reject) => {
-      formData.company_name.trim() ? reject('请输入有效的公司名称') : resolve()
+      !formData.company_name.trim() ? reject('请输入有效的公司名称') : resolve()
     })
 
     // 验证邮箱
@@ -246,7 +250,7 @@ Page({
       user_email: formData.user_email.trim(),
       user_position: formData.user_position,
       company_name: formData.company_name,
-      position_type_id: formData.user_positionType, 
+      position_type_id: formData.position_type_id, 
       company_id: formData.id
     }
     hasApplayRecordApi().then(res => {
@@ -290,6 +294,7 @@ Page({
       user_email: formData.user_email.trim(),
       user_position: formData.user_position,
       company_name: formData.company_name,
+      position_type_id: formData.position_type_id,
       company_id: formData.id
     }
     // 判断公司是否存在
@@ -363,7 +368,7 @@ Page({
       real_name: formData.real_name,
       user_email: formData.user_email.trim(),
       user_position: formData.user_position,
-      position_type_id: formData.user_positionType, 
+      position_type_id: formData.position_type_id, 
       company_name: formData.company_name
     }
     createCompanyApi(params).then(res => {
@@ -406,7 +411,8 @@ Page({
       real_name: formData.real_name,
       user_email: formData.user_email.trim(),
       user_position: formData.user_position,
-      company_name: formData.company_name
+      company_name: formData.company_name,
+      position_type_id: formData.position_type_id
     }
     editCompanyFirstStepApi(params).then(() => {
       wx.reLaunch({url: `${RECRUITER}user/company/createdCompanyInfos/createdCompanyInfos?from=company&action=edit`})
@@ -445,6 +451,8 @@ Page({
   },
 
   toChooseType () {
+    let storage = wx.getStorageSync('createdCompany') || {}
+    wx.setStorageSync('createdCompany', Object.assign(storage, this.data.formData))
     wx.navigateTo({url: `${COMMON}category/category`})
   }
 })

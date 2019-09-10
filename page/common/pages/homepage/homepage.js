@@ -62,36 +62,14 @@ Page({
   },
   onShow() {
     if (app.loginInit) {
-      this.initPage()
       this.init()
     } else {
       app.loginInit = () => {
-        this.initPage()
         this.init()
       }
     }
   },
-  initPage () {
-    let jumpCreate = () => {
-      if (!app.globalData.isJobhunter && wx.getStorageSync('choseType') !== 'RECRUITER') {
-        app.wxToast({
-          title: '前往求职飞船',
-          icon: 'loading',
-          callback () {
-            wx.reLaunch({
-              url: `${APPLICANT}createUser/createUser?micro=true`
-            })
-          }
-        })
-      }
-    }
-    if (app.globalData.hasLogin) {
-      let timer = setTimeout(() => {
-        jumpCreate()
-        clearTimeout(timer)
-      }, 500)      
-    }
-  },
+
   getDomNodePosition() {
     getSelectorQuery('.banner').then(res => {
       domHeight = res.height

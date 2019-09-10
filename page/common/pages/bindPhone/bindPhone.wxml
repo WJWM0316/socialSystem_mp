@@ -13,10 +13,10 @@
       <view class="phone">
         <input class="phoneInput" type="number" value="{{phone}}" placeholder="请输入手机号码" placeholder-style="color: #A59CB6" bindconfirm="getPhone" bindinput="getPhone" maxlength="11"></input>
       </view>
-      <view class="code">
+      <view class="code"  wx:if="{{false}}">
         <input class="phoneInput" type="number" value="{{password}}" placeholder="请输入密码123456" placeholder-style="color: #A59CB6" bindconfirm="getPhone" bindinput="getNumber" maxlength="11"></input>
       </view>
-      <view class="code" wx:if="{{false}}">
+      <view class="code">
         <view class="inputBox">
           <input class="codeInput" type="number" value="{{code}}" placeholder="请输入短信验证码" bindinput="getCode" placeholder-style="color: #A59CB6"></input>
         </view>

@@ -112,7 +112,7 @@ Page({
   bindPhone() {
     if (!this.data.canClick) return
     let data = {
-      email: this.data.phone,
+      mobile: this.data.phone,
       password: this.data.password,
       code: this.data.code,
       captchaKey,

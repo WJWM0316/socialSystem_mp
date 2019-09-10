@@ -179,6 +179,9 @@
 			<view class="tab3">访问人数 <view class="strong yellow">123</view> </view>
 			<view class="tab3">访问次数 <view class="strong primary">123</view> </view>
 		</view>
+		<view class="index-echart">
+			<!-- <lineChart height="{{'375rpx'}}" key="{{echartKey}}" value="{{echartValue}}"></lineChart> -->
+		</view>
 	</view>
 
   <tabBar tabType="1" id="bottomRedDotBar"></tabBar>

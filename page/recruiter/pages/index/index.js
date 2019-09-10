@@ -46,70 +46,7 @@ Page({
     },
     banner: {},
     bannerIndex: 0,
-    companyInfos: {
-      "id": 662,
-      "vkey": "9rklsb5q",
-      "companyShortname": "银信科技",
-      "companyName": "北京银信长远科技股份有限公司",
-      "logo": 0,
-      "financing": "7",
-      "industryId": 110000,
-      "industry": "移动互联网",
-      "employees": "4",
-      "businessLicense": 0,
-      "onJob": 0,
-      "email": "",
-      "emailStatus": 0,
-      "website": "",
-      "status": 1,
-      "oneSentenceIntro": "",
-      "intro": "",
-      "createdUid": 975,
-      "isPerfect": 0,
-      "wherefrom": "3",
-      "customerLevel": 0,
-      "advisorGroupId": 0,
-      "advisorUid": 0,
-      "adminUid": 0,
-      "groupId": 0,
-      "creator": 0,
-      "updater": 0,
-      "createdAt": "2019-02-22 19:31:01",
-      "updatedAt": "2019-02-26 16:18:17",
-      "deletedAt": null,
-      "album": [],
-      "address": [],
-      "product": [],
-      "integrityRate": "45%",
-      "isAdmin": false,
-      "sCode": "mv186qvv",
-      "logoInfo": {
-        "id": 0,
-        "vkey": "",
-        "attachType": "img",
-        "attachTypeDesc": "图片",
-        "url": "https://attach.lieduoduo.ziwork.com/default/company.png",
-        "fileName": "company.png",
-        "size": 2908,
-        "sizeM": "2.8KB",
-        "createdAt": "",
-        "extension": "",
-        "width": 140,
-        "height": 140,
-        "middleUrl": "https://attach.lieduoduo.ziwork.com/default/company.png!330xauto",
-        "smallUrl": "https://attach.lieduoduo.ziwork.com/default/company.png!130xauto"
-      },
-      "albumInfo": [],
-      "financingInfo": "已上市",
-      "employeesInfo": "500-999人",
-      "positionNum": 38,
-      "businessLicenseInfo": [],
-      "onJobInfo": [],
-      "adminName": "无",
-      "advisorName": "无",
-      "statusDesc": "上线",
-      "customerLevelDesc": "未定类"
-    },
+    companyInfos: {},
     dataBox: {
       tabLists: [
         {
@@ -129,6 +66,19 @@ Page({
         }
       ]
     },
+    echartKey: [
+      '周一',
+      '周二',
+      '周三',
+      '周四',
+      '周五',
+      '周六',
+      '周日'
+    ],
+    echartValue: [
+      [18, 36, 65, 30, 78, 40, 33],
+      [12, 50, 51, 35, 70, 30, 20]
+    ],
     viewList: [],
     showPublicPositionTips: false
   },
@@ -152,7 +102,7 @@ Page({
     }
   },
   onShow() {
-    // this.init();return
+    this.init();return
     if(app.loginInit) {
       if(!app.globalData.hasLogin) {
         wx.navigateTo({url: `${COMMON}bindPhone/bindPhone`})

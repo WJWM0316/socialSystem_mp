@@ -1,7 +1,8 @@
 import {
   getRecruiterPositionListApi,
   getPositionListNumApi,
-  getPositionCompanyTopListApi
+  getPositionCompanyTopListApi,
+  getCompanyTopPositionListNumApi
 } from '../../../../../api/pages/position.js'
 
 import {RECRUITER, COMMON} from '../../../../../config.js'
@@ -9,8 +10,8 @@ import {RECRUITER, COMMON} from '../../../../../config.js'
 let app = getApp()
 let identityInfos = {},
     offLinePositionNum = 0,
-    positionCard = '',
-    detail = {}
+    positionCard = ''
+    
 Page({
   data: {
     navH: app.globalData.navHeight,
@@ -45,6 +46,17 @@ Page({
     if(Reflect.has(options, 'positionStatus')) this.setData({positionStatus: options.positionStatus})
   },
   onShow() {
+    this.selectComponent('#bottomRedDotBar').init()
+    this.getPositionListNum().then(() => this.getLists())
+  },
+  /**
+   * @Author   小书包
+   * @DateTime 2019-09-10
+   * @detail   获取各种职位的数量
+   * @return   {[type]}   [description]
+   */
+  getPositionListNum() {
+    let Api = this.data.detail.isCompanyTopAdmin ? getCompanyTopPositionListNumApi : getPositionListNumApi
     let onLinePosition = {
       list: [],
       pageNum: 1,
@@ -60,8 +72,7 @@ Page({
       isRequire: false
     }
     let redDotInfos = {}
-    this.selectComponent('#bottomRedDotBar').init()
-    getPositionListNumApi({
+    return Api({
       recruiter: app.globalData.recruiterDetails.uid,
       ...app.getSource()
     }).then(res => {
@@ -72,7 +83,7 @@ Page({
         offLinePosition,
         onLinePositionNum: res.data.online,
         redDotInfos
-      }, () => this.getLists())
+      })
     })
   },
   formSubmit(e) {
@@ -84,27 +95,20 @@ Page({
    * @detail   获取列表数据
    * @return   {[type]}   [description]
    */
-  getLists() {
-    switch(this.data.positionStatus) {
-      case '1':
-        return this.getOnlineLists()
-        break;
-      case '2':
-        return this.getOffLineLists()
-        break;
-      default:
-        break;
-    }
+  getLists(hasLoading = true) {
+    let Api = this.data.positionStatus === '1' ? 'getOnlineLists' : 'getOffLineLists'
+    return this[Api](hasLoading)
   },
   /**
    * @Author   小书包
    * @DateTime 2018-12-27
-   * @detail   获取列表数据
+   * @detail   获取在线职位
    * @return   {[type]}   [description]
    */
   getOnlineLists(hasLoading = true) {
     let Api = this.data.detail.isCompanyTopAdmin ? getPositionCompanyTopListApi : getRecruiterPositionListApi
     return new Promise((resolve, reject) => {
+
       let onLinePosition = this.data.onLinePosition
       let onBottomStatus = this.data.onBottomStatus
       let orgData = wx.getStorageSync('orgData')
@@ -114,26 +118,29 @@ Page({
         page: onLinePosition.pageNum,
         hasLoading
       }
-
       //加个机构id
       if(orgData) params = Object.assign(params, {company_id: orgData.id})
       Api(params).then(res => {
         onLinePosition.list = onLinePosition.list.concat(res.data || [])
         onLinePosition.pageNum++
         onLinePosition.isRequire = true
-        if (!res.meta || !res.meta.nextPageUrl) {
-          onLinePosition.isLastPage = true
-          onBottomStatus = 2
-        } else {
-          onBottomStatus = 0
-        }
+        onLinePosition.isLastPage = !res.meta || !res.meta.nextPageUrl ? true : false
+        onBottomStatus = !res.meta || !res.meta.nextPageUrl ? 2 : 0
         this.setData({onLinePosition, onBottomStatus}, () => resolve(res))
       })
     })
   },
+  /**
+   * @Author   小书包
+   * @DateTime 2019-09-10
+   * @detail   获取下线职位
+   * @param    {Boolean}  hasLoading [description]
+   * @return   {[type]}              [description]
+   */
   getOffLineLists(hasLoading = true) {
     let Api = this.data.detail.isCompanyTopAdmin ? getPositionCompanyTopListApi : getRecruiterPositionListApi
     return new Promise((resolve, reject) => {
+
       let offLinePosition = this.data.offLinePosition
       let offBottomStatus = this.data.offBottomStatus
       let orgData = wx.getStorageSync('orgData')
@@ -143,19 +150,14 @@ Page({
         page: offLinePosition.pageNum,
         hasLoading
       }
-
       //加个机构id
       if(orgData) params = Object.assign(params, {company_id: orgData.id})
       Api(params).then(res => {
         offLinePosition.list = offLinePosition.list.concat(res.data || [])
         offLinePosition.pageNum++
         offLinePosition.isRequire = true
-        if (!res.meta || !res.meta.nextPageUrl) {
-          offLinePosition.isLastPage = true
-          offBottomStatus = 2
-        } else {
-          offBottomStatus = 0
-        }
+        offLinePosition.isLastPage = !res.meta || !res.meta.nextPageUrl ? true : false
+        offLinePosition = !res.meta || !res.meta.nextPageUrl ? 2 : 0
         this.setData({offLinePosition, offBottomStatus}, () => resolve(res))
       })
     })
@@ -199,16 +201,17 @@ Page({
         break
     }
   },
-  /* 子级tab栏切换 */
+  /**
+   * @Author   小书包
+   * @DateTime 2019-09-10
+   * @detail   子级tab栏切换
+   * @return   {[type]}     [description]
+   */
   onClickTab(e) {
     let positionStatus = e.currentTarget.dataset.status
-    this.selectComponent('#bottomRedDotBar').init()
-    if(positionStatus === '2') {
-      if(!this.data.offLinePosition.isRequire) this.getOffLineLists()
-    } else {
-      if(!this.data.onLinePosition.isRequire) this.getOnlineLists()
-    }
-    this.setData({positionStatus})
+    let value = positionStatus === '2' ? this.data.offLinePosition : this.data.onLinePosition
+    this.setData({positionStatus}, () => this.selectComponent('#bottomRedDotBar').init())
+    if(!value.isRequire) this.getLists(false)
   },
   getResult(e) {
     this.setData({redDotInfos: e.detail})
@@ -216,52 +219,36 @@ Page({
   /**
    * @Author   小书包
    * @DateTime 2019-01-21
-   * @detail   detail
+   * @detail   触底加载
    * @return   {[type]}     [description]
    */
   onReachBottom(e) {
-    if (this.data.positionStatus === '1') {
-      let onLinePosition = this.data.onLinePosition
-      if(!onLinePosition.isLastPage) this.setData({onBottomStatus: 1}, () => this.getOnlineLists(false))
-    } else {
-      let offLinePosition = this.data.offLinePosition
-      if(!offLinePosition.isLastPage) this.setData({offBottomStatus: 1}, () => this.getOffLineLists(false))
-    }
+    let key = this.data.positionStatus == '1' ? 'onLinePosition' : 'offLinePosition'
+    let value = this.data[key]
+    if(!value.isLastPage) this.setData({onBottomStatus: 1}, () => this.getLists(false))
   },
   onPullDownRefresh(e) {
     let callback = () => {
       wx.stopPullDownRefresh()
       this.setData({hasReFresh: false})
     }
-    let onLinePosition = {
+
+    let key = this.data.positionStatus == '1' ? 'onLinePosition' : 'offLinePosition'
+
+    let value = {
       list: [],
       pageNum: 1,
       count: 20,
       isLastPage: false,
       isRequire: false
     }
-    let offLinePosition = {
-      list: [],
-      pageNum: 1,
-      count: 20,
-      isLastPage: false,
-      isRequire: false
-    }
-    if(this.data.positionStatus === '1') {
-      this.setData({onLinePosition, onBottomStatus: 0, hasReFresh: true})
-      this.getOnlineLists(false).then(res => callback()).catch(e => callback())
-    } else {
-      this.setData({offLinePosition, offBottomStatus: 0, hasReFresh: true})
-      this.getOffLineLists(false).then(res => callback()).catch(e => callback())
-    }
-    app.getBottomRedDot()
+    
+    this.setData({[key]: value, onBottomStatus: 0, hasReFresh: true}, () => app.getBottomRedDot())
+    this.getLists(false).then(() => callback()).catch(() => callback())
+    this.getPositionListNum()
   },
-//   onShareAppMessage(options) {
-// 　　return app.wxShare({options})
-//   },
   onShareAppMessage(options) {
     let detail = this.data.detail
-    console.log(detail, 'fffffff')
 　　return app.wxShare({
       options,
       title: sharePosition(),

@@ -68,6 +68,15 @@ export const getPositionListNumApi = (data, hasLoading) => {
   })
 }
 
+export const getCompanyTopPositionListNumApi = (data, hasLoading) => {
+  return request({
+    method: 'get',
+    url: '/position/company_top/statustotal',
+    data,
+    hasLoading: false
+  })
+}
+
 // 创建职位
 export const createPositionApi = (data, hasLoading) => {
   return request({

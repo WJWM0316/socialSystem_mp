@@ -7,6 +7,7 @@
   	"auth": "../../../../../components/functional/auth/auth",
   	"canvasCard": "../../../../../components/business/canvasCard/canvasCard",
   	"interviewBar": "../../../../../components/business/interviewBar/interviewBar",
-  	"roleInfoCard": "../../../../../components/business/roleInfoCard/roleInfoCard"
+  	"roleInfoCard": "../../../../../components/business/roleInfoCard/roleInfoCard",
+    "chooseOrgEnter": "../../../../../components/business/chooseOrgEnter/chooseOrgEnter"
   }
 }

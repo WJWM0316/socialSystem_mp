@@ -185,10 +185,10 @@
 				1： 邮箱验证
 				2： 营业执照加相关证明 
 			-->
-			<view class="li" wx:if="{{companyInfos.verificationMethod}}">
+<!-- 			<view class="li" wx:if="{{companyInfos.verificationMethod}}">
 				<view class="key">认证方式</view>
 				<view class="value">{{companyInfos.verificationMethod === 1 ? '邮箱验证' : '营业执照加相关证明'}}</view>
-			</view>
+			</view> -->
 		</view>
 	</view>
 

@@ -70,7 +70,7 @@
 		</view>
 
 	  <view class="btn-area">
-	    <view bindtap="submit" class="button-submit button-enable">下一步</view>
+	    <view bindtap="checkInput" class="button-submit button-enable">下一步</view>
 	  </view>
 
 	</view>

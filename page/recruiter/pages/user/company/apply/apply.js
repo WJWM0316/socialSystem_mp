@@ -69,6 +69,7 @@ Page({
     getCompanyIdentityInfosApi({hasLoading}).then(res => {
       let companyInfo = res.data.companyInfo
       let status = 0
+      let createPosition = wx.getStorageSync('createPosition')
       applyJoin = Reflect.has(res.data, 'applyJoin') ? res.data.applyJoin : this.data.applyJoin
       // 重新创建一条记录
       if(companyInfo.status === 2) {
@@ -80,6 +81,10 @@ Page({
           company_name: storage.company_name,
           position_type_id: storage.position_type_id,
           positionTypeName: storage.positionTypeName
+        }
+        if(createPosition) {
+          formData.position_type_id = createPosition.type
+          formData.positionTypeName = createPosition.typeName
         }
         this.setData({formData, applyJoin})
       } else {
@@ -94,7 +99,6 @@ Page({
         // 重新编辑 加公司id
         if(options.action && options.action === 'edit') formData = Object.assign(formData, {id: companyInfo.id, status: companyInfo.status})
         if(applyJoin) formData = Object.assign(formData, {applyId: companyInfo.applyId})
-        let createPosition = wx.getStorageSync('createPosition')
         if(createPosition) {
           formData.position_type_id = createPosition.type
           formData.positionTypeName = createPosition.typeName

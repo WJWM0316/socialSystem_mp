@@ -126,6 +126,14 @@ App({
               that.globalData.hasLogin = 0
               console.log('用户未绑定手机号', 'sessionToken', res.data.authToken)
               wx.setStorageSync('sessionToken', res.data.authToken)
+              if (res.data.userWechatInfo.nickname) that.globalData.userInfo = res.data.userWechatInfo
+              that.getRoleInfo()
+              console.log('用户已认证')
+            } else {
+              // if(res.data.userInfo.nickname) that.globalData.userInfo = res.data.userInfo
+              that.globalData.hasLogin = 0
+              console.log('用户未绑定手机号', 'sessionToken', res.data.sessionToken)
+              wx.setStorageSync('sessionToken', res.data.sessionToken)
             }
             // 登陆回调
             if (that.loginInit) {

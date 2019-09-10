@@ -180,7 +180,7 @@
 			<view class="tab3">访问次数 <view class="strong primary">123</view> </view>
 		</view>
 		<view class="index-echart">
-			<lineChart height="{{'375rpx'}}" key="{{echartKey}}" value="{{echartValue}}"></lineChart>
+			<lineChart height="{{'375rpx'}}" id="indexEchart" infos="{{echartData}}"></lineChart>
 		</view>
 	</view>
 

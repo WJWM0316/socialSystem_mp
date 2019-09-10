@@ -25,6 +25,7 @@ Page({
     this.setData({title, options})
   },
   onShow() {
+    console.log(app.globalData.recruiterDetails)
     let that = this
     wx.getSetting({
       success(res) {

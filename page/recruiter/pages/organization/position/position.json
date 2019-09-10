@@ -1,0 +1,12 @@
+{
+	"enablePullDownRefresh": true,
+	"backgroundTextStyle": "light",
+  "usingComponents": {
+  	"shareBtn": "../../../../../components/layout/shareBtn/shareBtn",
+  	"navbar": "../../../../../components/business/navbar/navbar",
+  	"auth": "../../../../../components/functional/auth/auth",
+  	"canvasCard": "../../../../../components/business/canvasCard/canvasCard",
+  	"interviewBar": "../../../../../components/business/interviewBar/interviewBar",
+  	"roleInfoCard": "../../../../../components/business/roleInfoCard/roleInfoCard"
+  }
+}

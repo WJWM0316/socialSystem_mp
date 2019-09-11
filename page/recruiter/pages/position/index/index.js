@@ -61,20 +61,16 @@ Page({
 
     let setOrg = () => {
       if (app.globalData.recruiterDetails.isCompanyTopAdmin) {
-        console.log(44444444444444)
         if (app.setOrgInit) {
-          console.log(33333333333333)
           this.getPositionListNum()
           this.getLists()
         } else {
           app.setOrgInit = () => {
-            console.log(2222222222222)
             this.getPositionListNum()
             this.getLists()
           }
         }
       } else {
-        console.log(1111111111111111)
         this.getPositionListNum()
         this.getLists()
       }

@@ -37,10 +37,18 @@ Page({
       isLastPage: false,
       isRequire: false
     }
-    this.setData({onLinePositionList}, () => this.getOnlineLists(true))
+    let detail = app.globalData.recruiterDetails
+    if(app.setOrgInit) {
+      this.setData({onLinePositionList, detail}, () => this.getOnlineLists(true))
+    } else {
+      app.getAllInfo().then(res => {
+        detail = app.globalData.recruiterDetails
+        this.setData({onLinePositionList, detail}, () => this.getOnlineLists(true))
+      })
+    }
+    
   },
   getOnlineLists(hasLoading = true) {
-    console.log(this.data)
     let Api = this.data.detail.isCompanyTopAdmin ? getPositionCompanyTopListApi : getRecruiterPositionListApi
     return new Promise((resolve, reject) => {
 

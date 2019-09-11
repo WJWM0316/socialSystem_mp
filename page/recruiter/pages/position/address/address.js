@@ -13,7 +13,7 @@ import {COMMON, RECRUITER} from '../../../../../config.js'
 
 import { reverseGeocoder } from '../../../../../utils/map.js'
 
-const app = getApp()
+let app = getApp()
 
 Page({
   data: {
@@ -23,11 +23,15 @@ Page({
     address: '',
     lng: '',
     lat: '',
-    title: ''
+    title: '',
+    detail: app.globalData.recruiterDetails
   },
   onLoad(options) {
     this.setData({options})
     if(options.id) this.read(options)
+  },
+  onShow() {
+    this.setData({detail: app.globalData.recruiterDetails})
   },
   /**
    * @Author   小书包
@@ -47,10 +51,10 @@ Page({
   selectAddress() {
     let that = this
     // 获取权限
-    const getPermission = () => {
+    let getPermission = () => {
       wx.getSetting({
         success: rtn => {
-          const statu = rtn.authSetting
+          let statu = rtn.authSetting
           if(!statu['scope.userLocation']) {
             app.wxConfirm({
               title: '是否授权当前位置',
@@ -94,15 +98,15 @@ Page({
    * @return   {[type]}       [description]
    */
   reverseGeocoder(res) {
-    const storage = wx.getStorageSync('createPosition')
-    const formData = {}
+    let storage = wx.getStorageSync('createPosition')
+    let formData = {}
     formData.address = `${res.address} ${res.name}`
     formData.lat = res.latitude
     formData.lng = res.longitude
     Object.keys(formData).map(field => this.setData({[field]: formData[field]}))
     reverseGeocoder(res)
       .then(rtn => {
-        const formData = {}
+        let formData = {}
         formData.address = `${rtn.result.address} ${rtn.result.address_reference.landmark_l2.title}`
         formData.area_id = rtn.result.ad_info.adcode
         formData.lat = rtn.result.ad_info.location.lat
@@ -118,14 +122,14 @@ Page({
    * @return   {[type]}   [description]
    */
   delete() {
-    const type = this.data.options.type === 'position' ? 'Position' : 'Company'
-    const action = `delete${type}Address`
-    const that = this
+    let type = this.data.options.type === 'position' ? 'Position' : 'Company'
+    let action = `delete${type}Address`
+    let that = this
     app.wxConfirm({
       title: '删除地址',
       content: '地址删除后将无法恢复，是否确定删除？',
       confirmBack() {
-        const storage = wx.getStorageSync('createPosition')
+        let storage = wx.getStorageSync('createPosition')
         // 如果删除的地址于之前选择的地址
         if(storage.address_id === that.data.id) {
           storage.address = ''
@@ -143,8 +147,8 @@ Page({
    * @return   {[type]}   [description]
    */
   edit() {
-    const type = this.data.options.type === 'position' ? 'Position' : 'Company'
-    const action = `edit${type}Address`
+    let type = this.data.options.type === 'position' ? 'Position' : 'Company'
+    let action = `edit${type}Address`
     this[action]()
   },
   /**
@@ -154,8 +158,8 @@ Page({
    * @return   {[type]}   [description]
    */
   post() {
-    const type = this.data.options.type === 'position' ? 'Position' : 'Company'
-    const action = `post${type}Address`
+    let type = this.data.options.type === 'position' ? 'Position' : 'Company'
+    let action = `post${type}Address`
     this[action]()
   },
   /**
@@ -165,8 +169,8 @@ Page({
    * @return   {[type]}   [description]
    */
   read(options) {
-    const type = this.data.options.type === 'position' ? 'Position' : 'Company'
-    const action = `get${type}AddressDetail`
+    let type = this.data.options.type === 'position' ? 'Position' : 'Company'
+    let action = `get${type}AddressDetail`
     this[action](options)
   },
   /**
@@ -177,8 +181,8 @@ Page({
    */
   getPositionAddressDetail(options) {
     getPositionAddressDetailApi({id: options.id}).then(res => {
-      const infos = res.data
-      const formData = {
+      let infos = res.data
+      let formData = {
         id: infos.id,
         area_id: infos.areaId,
         address: infos.address,
@@ -196,8 +200,8 @@ Page({
    * @return   {[type]}   [description]
    */
   getCompanyAddressDetail(options) {
-    const infos = res.data
-    const formData = {
+    let infos = res.data
+    let formData = {
       id: infos.id,
       area_id: infos.areaId,
       address: infos.address,
@@ -205,7 +209,7 @@ Page({
       lng: infos.lng,
       lat: infos.lat
     }
-    const id = this.data.options.id
+    let id = this.data.options.id
     getCompanyAddressDetailApi({id}).then(res => {
       
       Object.keys(formData).map(field => this.setData({[field]: formData[field]}))
@@ -218,8 +222,8 @@ Page({
    * @return   {[type]}   [description]
    */
   submit() {
-    const infos = this.data
-    const formData = {
+    let infos = this.data
+    let formData = {
       areaId: infos.area_id,
       address: infos.address,
       doorplate: infos.doorplate,
@@ -235,7 +239,7 @@ Page({
       wx.navigateBack({delta: 1})
       return
     }
-    const action = this.data.options.id ? 'edit' : 'post'
+    let action = this.data.options.id ? 'edit' : 'post'
     this[action]()
   },
   /**
@@ -267,14 +271,16 @@ Page({
    * @return   {[type]}   [description]
    */
   postPositionAddress() {
-    const infos = this.data
-    const formData = {
+    let orgData = wx.getStorageSync('orgData')
+    let infos = this.data
+    let formData = {
       areaId: infos.area_id,
       address: infos.address,
       doorplate: infos.doorplate,
       lng: infos.lng,
       lat: infos.lat
     }
+    
     if(!formData.address) {
       app.wxToast({title: '请选择公司地址'})
       return
@@ -282,6 +288,10 @@ Page({
     if (this.data.options.type === 'addOrganization') {
       wx.setStorageSync('addAddRess', formData)
       return
+    }
+    //加个机构id
+    if(this.data.detail.isCompanyTopAdmin) {
+      if(orgData) formData = Object.assign(formData, {company_id: orgData.id})
     }
     addPositionAddressApi(formData).then(res => {
       wx.navigateBack({delta: 1})
@@ -294,8 +304,8 @@ Page({
    * @return   {[type]}   [description]
    */
   postCompanyAddress() {
-    const infos = this.data
-    const formData = {
+    let infos = this.data
+    let formData = {
       area_id: infos.area_id,
       address: infos.address,
       doorplate: infos.doorplate,
@@ -318,8 +328,8 @@ Page({
    * @return   {[type]}   [description]
    */
   editPositionAddress() {
-    const infos = this.data
-    const formData = {
+    let infos = this.data
+    let formData = {
       id: infos.id,
       areaId: infos.area_id,
       address: infos.address,
@@ -328,7 +338,7 @@ Page({
       doorplate: infos.doorplate
     }
     editPositionAddressApi(formData).then(() => {
-      const storage = wx.getStorageSync('createPosition') || {}
+      let storage = wx.getStorageSync('createPosition') || {}
       storage.address_id = infos.id
       storage.address = infos.address
       wx.setStorageSync('createPosition', storage)
@@ -343,8 +353,8 @@ Page({
    * @return   {[type]}   [description]
    */
   editCompanyAddress() {
-    const infos = this.data
-    const formData = {
+    let infos = this.data
+    let formData = {
       id: infos.id,
       area_id: infos.area_id,
       address: infos.address,

@@ -802,17 +802,6 @@
   position: relative;
 }
 
-.data-box .number-box:before{
-  content: '';
-  display: block;
-  height: 1px;
-  background: #EFE9F4;
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
-
 /*.data-box .number-box:after{
   width: 0;
   height: 0;
@@ -840,7 +829,7 @@
   float: left;
 }
 
-.data-box .number-box .tab3:last-child{
+.data-box .number-box .tab3:nth-child(2){
   float: right;
 }
 
@@ -882,6 +871,14 @@
   transform: translateY(-50%);
 }
 
+.recruiter-split-line{
+  position: absolute;
+  left: 50%;
+  bottom: -12rpx;
+  width: 540rpx;
+  height: 12rpx;
+  transform: translateX(-50%);
+}
 .data-box .index-echart {
   padding: 27rpx 20rpx 42rpx 27rpx;
 }

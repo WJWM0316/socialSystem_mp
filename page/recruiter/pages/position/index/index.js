@@ -44,7 +44,6 @@ Page({
     if(Reflect.has(options, 'positionStatus')) this.setData({positionStatus: options.positionStatus})
   },
   onShow() {
-    let detail = {}
     let onLinePosition = {
       list: [],
       pageNum: 1,
@@ -60,20 +59,20 @@ Page({
       isRequire: false
     }
 
-    if(app.pageInit) {
-      detail = app.globalData.recruiterDetails
+    let detail = app.globalData.recruiterDetails
+    if(detail.uid) {
       this.setData({detail, onLinePosition, offLinePosition}, () => {
         this.selectComponent('#bottomRedDotBar').init()
         this.getPositionListNum().then(() => this.getLists())
       })
     } else {
-      app.pageInit = () => {
+      app.getAllInfo().then(res => {
         detail = app.globalData.recruiterDetails
         this.setData({detail, onLinePosition, offLinePosition}, () => {
           this.selectComponent('#bottomRedDotBar').init()
           this.getPositionListNum().then(() => this.getLists())
         })
-      }
+      })
     }
     
   },
@@ -133,7 +132,9 @@ Page({
         hasLoading
       }
       //加个机构id
-      if(orgData) params = Object.assign(params, {company_id: orgData.id})
+      if(this.data.detail.isCompanyTopAdmin) {
+        if(orgData) params = Object.assign(params, {company_id: orgData.id})
+      }
       Api(params).then(res => {
         onLinePosition.list = onLinePosition.list.concat(res.data || [])
         onLinePosition.pageNum++
@@ -165,7 +166,9 @@ Page({
         hasLoading
       }
       //加个机构id
-      if(orgData) params = Object.assign(params, {company_id: orgData.id})
+      if(this.data.detail.isCompanyTopAdmin) {
+        if(orgData) params = Object.assign(params, {company_id: orgData.id})
+      }
       Api(params).then(res => {
         offLinePosition.list = offLinePosition.list.concat(res.data || [])
         offLinePosition.pageNum++

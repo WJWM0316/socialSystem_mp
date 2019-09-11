@@ -98,7 +98,7 @@
 						<view class="item">{{item.workExperienceName}}</view>
 						<view class="item">{{item.educationName}}</view>
 					</view>
-					<view class="item-status {{item.status === 4 ? 'fail' : ''}} {{item.status === 2 || item.status === 3 ? 'under-review' : ''}} {{item.status === 0 ? 'close' : ''}}">{{filters.positionFilter(item.status)}}</view>
+					<view class="item-status {{item.status === 4 ? 'fail' : ''}} {{item.status === 2 || item.status === 3 ? 'under-review' : ''}} {{item.status === 0 ? 'close' : ''}}" style="margin-top: 0">{{filters.positionFilter(item.status)}}</view>
 				</button>
 			</view>
 			<bottomStatus status="{{offBottomStatus}}" listData="{{offLinePosition.list}}" desc="没有更多内容了~" marginTop="{{0}}"></bottomStatus>

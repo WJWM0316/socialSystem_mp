@@ -178,6 +178,7 @@
 			<view class="tab3">今日：8月26日 </view>
 			<view class="tab3">访问人数 <view class="strong yellow">0</view> </view>
 			<view class="tab3">访问次数 <view class="strong primary">0</view> </view>
+			<image src="{{cdnImagePath}}recruiter-split-line.png" mode="aspectFill" class="recruiter-split-line"></image>
 		</view>
 		<view class="index-echart">
 			<lineChart height="{{'375rpx'}}" id="indexEchart" infos="{{echartData}}"></lineChart>

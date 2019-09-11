@@ -18,7 +18,6 @@ Page({
     onBottomStatus: 0,
     offBottomStatus: 0,
     isSuper: 1,
-    detail: {},
     onLinePosition: {
       list: [],
       pageNum: 1,
@@ -44,6 +43,7 @@ Page({
     if(Reflect.has(options, 'positionStatus')) this.setData({positionStatus: options.positionStatus})
   },
   onShow() {
+
     let onLinePosition = {
       list: [],
       pageNum: 1,
@@ -59,20 +59,39 @@ Page({
       isRequire: false
     }
 
-    let detail = app.globalData.recruiterDetails
-    if(detail.uid) {
-      this.setData({detail, onLinePosition, offLinePosition}, () => {
+    let setOrg = () => {
+      if (app.globalData.recruiterDetails.isCompanyTopAdmin) {
+        console.log(44444444444444)
+        if (app.setOrgInit) {
+          console.log(33333333333333)
+          this.getPositionListNum()
+          this.getLists()
+        } else {
+          app.setOrgInit = () => {
+            console.log(2222222222222)
+            this.getPositionListNum()
+            this.getLists()
+          }
+        }
+      } else {
+        console.log(1111111111111111)
+        this.getPositionListNum()
+        this.getLists()
+      }
+    }
+
+    if(app.pageInit) {
+      this.setData({detail: app.globalData.recruiterDetails, onLinePosition, offLinePosition}, () => {
         this.selectComponent('#bottomRedDotBar').init()
-        this.getPositionListNum().then(() => this.getLists())
+        setOrg()
       })
     } else {
-      app.getAllInfo().then(res => {
-        detail = app.globalData.recruiterDetails
-        this.setData({detail, onLinePosition, offLinePosition}, () => {
+      app.pageInit = () => {
+        this.setData({detail: app.globalData.recruiterDetails, onLinePosition, offLinePosition}, () => {
           this.selectComponent('#bottomRedDotBar').init()
-          this.getPositionListNum().then(() => this.getLists())
+          setOrg()
         })
-      })
+      }
     }
     
   },

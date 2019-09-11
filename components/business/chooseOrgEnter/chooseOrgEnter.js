@@ -7,7 +7,28 @@ Component({
    * 组件的属性列表
    */
   properties: {
-
+    detail: {
+      type: Object,
+      value: {},
+      observer (newVal, oldVal) {
+        if (!newVal) return
+        if (newVal.isCompanyTopAdmin) {
+          let choseItem = wx.getStorageSync('orgData')
+          getCompanyOrglistApi({company_id: this.data.detail.companyTopId}).then(res => {
+            if (res.data.length) {
+              choseItem = res.data[0]
+              wx.setStorageSync('orgData', choseItem)
+              if (app.setOrgInit) {
+                app.setOrgInit()
+              } else {
+                app.setOrgInit = function () {}
+              }
+            }
+            this.setData({choseItem})
+          })
+        }
+      }
+    }
   },
 
   /**
@@ -15,29 +36,16 @@ Component({
    */
   data: {
     navHeight: app.globalData.navHeight,
-    choseItem: wx.getStorageSync('orgData'),
-    detail: app.globalData.recruiterDetails
+    choseItem: wx.getStorageSync('orgData')
   },
   pageLifetimes: {
     show: function () {
       let choseItem = wx.getStorageSync('orgData')
-      getCompanyOrglistApi({company_id: this.data.detail.companyTopId}).then(res => {
-        if (!choseItem && res.data.length) {
-          choseItem = res.data[0]
-          wx.setStorageSync('orgData', choseItem)
-        }
-        this.setData({choseItem})
-      })
+      this.setData({choseItem})
     }
   },
   attached () {
-    if (app.pageInit) {
-      this.setData({detail: app.globalData.recruiterDetails})
-    } else {
-      app.pageInit = () => {
-        this.setData({detail: app.globalData.recruiterDetails})
-      }
-    }
+    
   },
   /**
    * 组件的方法列表

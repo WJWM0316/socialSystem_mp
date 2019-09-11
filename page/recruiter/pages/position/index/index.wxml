@@ -5,7 +5,9 @@
 	<navbar title="职位管理"></navbar>
 
 	<view class="fixed-dom" style="top: {{navH}}px">
-		<chooseOrgEnter></chooseOrgEnter>
+
+		<chooseOrgEnter detail="{{detail}}"></chooseOrgEnter>
+
 		<view class="tab-bar">
 			<view
 				class="item {{positionStatus === '1' ? 'active' : ''}}"

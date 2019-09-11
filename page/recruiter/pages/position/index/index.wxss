@@ -54,7 +54,6 @@
   line-height: 1;
   margin-top: 18rpx;
   padding-bottom: 36rpx;
-  border-bottom: 1px solid #E8E9EB;
 }
 
 .item5 .tags-box .item {
@@ -86,6 +85,7 @@
   height: 34rpx;
   text-align: center;
   padding: 36rpx 8rpx 0 8rpx;
+  border-top: 1px solid #E8E9EB;
 }
 
 .item5 .actions .item {

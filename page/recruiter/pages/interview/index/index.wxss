@@ -334,7 +334,7 @@
   font-weight:400;
   color:rgba(98,98,98,1);
   line-height:1.1;
-  padding: 0 40rpx 38rpx 40rpx;
+  padding: 38rpx 40rpx 38rpx 40rpx;
   background: #fff;
 }
 
@@ -522,7 +522,7 @@
   font-size:24rpx;
   font-weight:300;
   color:rgba(102,102,102,1);
-  padding: 34rpx 40rpx 21rpx 40rpx;
+  padding: 34rpx 40rpx 0 40rpx;
   background: #fff;
 }
 

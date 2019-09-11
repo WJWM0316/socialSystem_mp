@@ -54,7 +54,9 @@ Page({
         hasLoading
       }
       //加个机构id
-      if(orgData) params = Object.assign(params, {company_id: orgData.id})
+      if(this.data.detail.isCompanyTopAdmin) {
+        if(orgData) params = Object.assign(params, {company_id: orgData.id})
+      }
       Api(params).then(res => {
         onLinePositionList.list = onLinePositionList.list.concat(res.data || [])
         onLinePositionList.pageNum++

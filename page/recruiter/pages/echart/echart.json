@@ -3,6 +3,7 @@
 	"backgroundTextStyle": "light",
   "usingComponents": {
     "navbar": "../../../../components/business/navbar/navbar",
-    "ec-canvas": "../../../../ec-canvas/ec-canvas"
+    "ec-canvas": "../../../../ec-canvas/ec-canvas",
+    "lineChart": "../../../../components/business/lineChart/lineChart"
   }
 }

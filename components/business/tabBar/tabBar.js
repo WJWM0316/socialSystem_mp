@@ -32,8 +32,8 @@ Component({
       {
         title: '候选人',
         flag: 'candidate',
-        iconPath: `${cdnImagePath}tab_dynamics.png`,
-        selectedIconPath: `${cdnImagePath}tab_dynamics_active.png`,
+        iconPath: `${cdnImagePath}tab_b_houxuanren@2x.png`,
+        selectedIconPath: `${cdnImagePath}tab_b_houxuanren_pre@2x.png`,
         active: false,
         path: `${RECRUITER}candidate/candidate`
       },

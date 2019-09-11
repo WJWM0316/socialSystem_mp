@@ -8,9 +8,7 @@ import {
 import {RECRUITER, COMMON} from '../../../../../config.js'
 import {sharePosition} from '../../../../../utils/shareWord.js'
 let app = getApp()
-let identityInfos = {},
-    offLinePositionNum = 0,
-    positionCard = ''
+let positionCard = ''
     
 Page({
   data: {
@@ -46,8 +44,37 @@ Page({
     if(Reflect.has(options, 'positionStatus')) this.setData({positionStatus: options.positionStatus})
   },
   onShow() {
-    this.selectComponent('#bottomRedDotBar').init()
-    this.getPositionListNum().then(() => this.getLists())
+    let onLinePosition = {
+      list: [],
+      pageNum: 1,
+      count: 20,
+      isLastPage: false,
+      isRequire: false
+    }
+    let offLinePosition = {
+      list: [],
+      pageNum: 1,
+      count: 20,
+      isLastPage: false,
+      isRequire: false
+    }
+
+    let detail = app.globalData.recruiterDetails
+    if(detail.uid) {
+      this.setData({detail, onLinePosition, offLinePosition}, () => {
+        this.selectComponent('#bottomRedDotBar').init()
+        this.getPositionListNum().then(() => this.getLists())
+      })
+    } else {
+      app.getAllInfo().then(res => {
+        detail = app.globalData.recruiterDetails
+        this.setData({detail, onLinePosition, offLinePosition}, () => {
+          this.selectComponent('#bottomRedDotBar').init()
+          this.getPositionListNum().then(() => this.getLists())
+        })
+      })
+    }
+    
   },
   /**
    * @Author   小书包
@@ -65,7 +92,6 @@ Page({
     }
     if(orgData) params = Object.assign(params, {companyId: orgData.id})
     return Api(params).then(res => {
-      offLinePositionNum = res.data.offline
       redDotInfos = app.globalData.redDotInfos
       this.setData({
         onLinePositionNum: res.data.online,
@@ -101,12 +127,14 @@ Page({
       let orgData = wx.getStorageSync('orgData')
       let params = {
         is_online: 1,
-        count: onLinePosition.count,
+        count: 20,
         page: onLinePosition.pageNum,
         hasLoading
       }
       //加个机构id
-      if(orgData) params = Object.assign(params, {company_id: orgData.id})
+      if(this.data.detail.isCompanyTopAdmin) {
+        if(orgData) params = Object.assign(params, {company_id: orgData.id})
+      }
       Api(params).then(res => {
         onLinePosition.list = onLinePosition.list.concat(res.data || [])
         onLinePosition.pageNum++
@@ -133,18 +161,20 @@ Page({
       let orgData = wx.getStorageSync('orgData')
       let params = {
         is_online: 2,
-        count: offLinePosition.count,
+        count: 20,
         page: offLinePosition.pageNum,
         hasLoading
       }
       //加个机构id
-      if(orgData) params = Object.assign(params, {company_id: orgData.id})
+      if(this.data.detail.isCompanyTopAdmin) {
+        if(orgData) params = Object.assign(params, {company_id: orgData.id})
+      }
       Api(params).then(res => {
         offLinePosition.list = offLinePosition.list.concat(res.data || [])
         offLinePosition.pageNum++
         offLinePosition.isRequire = true
         offLinePosition.isLastPage = !res.meta || !res.meta.nextPageUrl ? true : false
-        offLinePosition = !res.meta || !res.meta.nextPageUrl ? 2 : 0
+        offBottomStatus = !res.meta || !res.meta.nextPageUrl ? 2 : 0
         this.setData({offLinePosition, offBottomStatus}, () => resolve(res))
       })
     })

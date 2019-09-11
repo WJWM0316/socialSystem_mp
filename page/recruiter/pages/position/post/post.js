@@ -49,14 +49,7 @@ Page({
   },
   onShow() {
     let detail = app.globalData.recruiterDetails
-    if(app.setOrgInit) {
-      this.setData({detail}, () => this.getUpdateInfos())
-    } else {
-      app.getAllInfo().then(res => {
-        detail = app.globalData.recruiterDetails
-        this.setData({detail}, () => this.getUpdateInfos())
-      })
-    }
+    this.setData({detail}, () => this.getUpdateInfos())
   },
   backEvent() {
     if(this.data.query.positionId) {

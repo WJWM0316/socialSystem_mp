@@ -1,6 +1,8 @@
 //app.js
 import {loginApi, checkSessionKeyApi, bindPhoneApi, uploginApi, authLoginApi} from 'api/pages/auth.js'
 import {formIdApi, shareStatistics, readyStatistics, getVersionListApi} from 'api/pages/common.js'
+import{getCompanyOrglistApi} from 'api/pages/company.js'
+
 import {getPersonalResumeApi} from 'api/pages/center.js'
 import {getRecruiterDetailApi} from 'api/pages/recruiter.js'
 import {COMMON,RECRUITER,APPLICANT} from "config.js"
@@ -168,6 +170,22 @@ App({
           this.globalData.recruiterDetails = res0.data
           this.globalData.isRecruiter = 1
           pageInit()
+          if (res0.data.isCompanyTopAdmin) {
+            let choseItem = wx.getStorageSync('orgData')
+            if (!choseItem) {
+              getCompanyOrglistApi({company_id: this.data.detail.companyTopId}).then(res => {
+                if (res.data.length) {
+                  choseItem = res.data[0]
+                  wx.setStorageSync('orgData', choseItem)
+                  if (this.setOrgInit) { // 页面初始化
+                    this.setOrgInit() //执行定义的回调函数
+                  } else {
+                    this.setOrgInit = function () {}
+                  }
+                }
+              })
+            }
+          }
           resolve(res0.data)
         }).catch((e) => {
           reject(e)

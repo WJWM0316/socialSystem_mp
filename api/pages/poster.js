@@ -54,3 +54,14 @@ export const getRecruiterPostApi = (data, hasLoading) => {
     hasLoading: hasLoading
   })
 }
+
+// 招聘官
+export const getCompanyPostApi = (data, hasLoading) => {
+  return request({
+    method: 'get',
+    url: '/company',
+    data,
+    host: 'NODEHOST',
+    hasLoading: hasLoading
+  })
+}

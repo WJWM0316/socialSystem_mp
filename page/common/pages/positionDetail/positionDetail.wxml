@@ -22,8 +22,8 @@
 					<view><i class="icon iconfont icon-zhiwei"></i>{{detail.workExperienceName}}</view>
 					<view><i class="icon iconfont icon-xueli"></i>{{detail.educationName}}</view>
 				</view>
-				<view class="welfare-ul" wx:if="{{detail.lightspotInfo.length}}">
-					<view class="li" wx:for="{{detail.lightspotInfo}}" wx:key="{{index}}" wx:for-item="item">{{item}}</view>
+				<view class="welfare-ul" wx:if="{{detail.companyInfo.welfare.length}}">
+					<view class="li" wx:for="{{detail.companyInfo.welfare}}" wx:key="{{index}}" wx:for-item="item">{{item.title}}</view>
 				</view>
 			</view>
 		</view>

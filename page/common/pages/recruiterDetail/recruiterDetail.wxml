@@ -32,14 +32,14 @@
             <view class="data"><text class="num">{{info.viewedCount}}</text>人气</view>
             <view class="data"><text class="num">{{info.influence}}</text>影响力<i class="icon iconfont icon-zhushi" bindtap="toggleShowRules"></i></view>
           </view>
-          <view class="button-bg"  hidden="{{info.isCall}}">
+          <!-- <view class="button-bg"  hidden="{{info.isCall}}">
             <button hidden="{{info.isCall}}" form-type="submit" class="callBtn clear-style" bindtap="callBtn">为Ta打Call，提高影响力</button>
             <image src="{{cdnImagePath}}button_bg.png"></image>
           </view>
           <view class="button-bg" hidden="{{!info.isCall}}">
             <button open-type="share" hidden="{{!info.isCall}}" form-type="submit" class="callBtn isCalled clear-style" bindtap="shareBtn">帮Ta转发集Call</button>
             <image src="{{cdnImagePath}}button_bg.png"></image>
-          </view>   
+          </view>   --> 
         </view>
         <view class="labelEdit {{info.personalizedLabels.length > 0 ? 'hasLabelEdit': ''}}" wx:if="{{isOwner && showEdit}}">
           <view class="title">

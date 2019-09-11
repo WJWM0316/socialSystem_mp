@@ -14,10 +14,8 @@
 	  </view>
 
 		<view class="banner">
-			<image
-				class="bgImg"
-				src="{{companyInfos.logoInfo.smallUrl}}">
-			</image>
+			<view class="filterBg"><image class="bgImg" src="{{companyInfos.logoInfo.smallUrl}}"></image></view>
+			
 			<view class="box">
 				<view class="company-logo">
 					<image class="logo" src="{{companyInfos.logoInfo.smallUrl}}" mode="aspectFit"></image>
@@ -81,7 +79,7 @@
 				<view class="li" wx:for="{{otherOrgList}}" wx:key="{{index}}" bindtap="routeJump" data-route="toOrg" data-id="{{item.id}}" wx:if="{{index < 3}}">
 					<view class="img-box">
 						<image src="{{item.logoInfo.smallUrl}}" class="avatar" mode="aspectFit"></image>
-						<image src="{{cdnImagePath}}sign1.png" mode="aspectFill" class="sign1"></image>
+						<!-- <image src="{{cdnImagePath}}sign1.png" mode="aspectFill" class="sign1"></image> -->
 					</view>
 					<view class="content">
 						<view class="row-one">
@@ -100,7 +98,7 @@
 			</view>
 		</view>
 		
-		<view class="welfare">
+		<view class="welfare" wx:if="{{companyInfos.welfare.length}}">
 			<view class="title">
 				<view class="icon"> <view class="fan"></view> </view> 团队福利
 			</view>
@@ -153,7 +151,7 @@
 					{{companyInfos.address[0].address}}
 				</view>
 			</view>
-			<view class="phone-box">
+			<view class="phone-box" bindtap="callPhone">
 				<i class="icon iconfont icon-shoujihaoma"></i>
 				{{companyInfos.mobile}}
 				<text class="desc">直接拨打，更快面试</text>

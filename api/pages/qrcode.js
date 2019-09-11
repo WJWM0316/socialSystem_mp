@@ -4,9 +4,8 @@ import { request } from '../require.js'
 export const getPositionQrcodeApi = (data, hasLoading) => {
   return request({
     method: 'get',
-    url: '/share/position_share',
+    url: '/forward/position',
     data,
-    // host: 'PUBAPIHOST',
     hasLoading: hasLoading
   })
 }
@@ -15,9 +14,8 @@ export const getPositionQrcodeApi = (data, hasLoading) => {
 export const getCompanyQrcodeApi = (data, hasLoading) => {
   return request({
     method: 'get',
-    url: '/share/company_share',
+    url: '/forward/company',
     data,
-    // host: 'PUBAPIHOST',
     hasLoading: hasLoading
   })
 }
@@ -26,9 +24,8 @@ export const getCompanyQrcodeApi = (data, hasLoading) => {
 export const getResumerCodeApi = (data, hasLoading) => {
   return request({
     method: 'get',
-    url: '/share/resume_share',
+    url: '/forward/resume',
     data,
-    // host: 'PUBAPIHOST',
     hasLoading: hasLoading
   })
 }
@@ -37,9 +34,8 @@ export const getResumerCodeApi = (data, hasLoading) => {
 export const getRecruiterQrcodeApi = (data, hasLoading) => {
   return request({
     method: 'get',
-    url: '/share/recruiter_share',
+    url: '/forward/recruiter',
     data,
-    // host: 'PUBAPIHOST',
     hasLoading: hasLoading
   })
 }

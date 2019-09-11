@@ -185,12 +185,13 @@ Page({
     this.getMixdata()
   },
   onShareAppMessage(options) {
-    let that = this
+    let that = this,
+        companyInfos = wx.getStorageSync('choseType') !== 'RECRUITER' ? this.data.companyInfos : app.globalData.recruiterDetails.companyInfo
 　　return app.wxShare({
       options,
-      btnTitle: `${this.data.companyInfos.companyName}正在招聘，马上约面，极速入职！我在店长多多等你！`,
+      btnTitle: `${companyInfos.companyName}正在招聘，马上约面，极速入职！我在店长多多等你！`,
       btnImageUrl: positionCard,
-      btnPath: `${COMMON}homepage/homepage?companyId=${this.data.companyInfos.id}`
+      btnPath: `${COMMON}homepage/homepage?companyId=${companyInfos.id}`
     })
   },
   getCreatedImg(e) {
@@ -269,7 +270,7 @@ Page({
       case 'poster-mechanism':
         // 该机构的职位上线状态
         if(this.data.detail.positionNum) {
-          wx.navigateTo({url: `${COMMON}poster/company/company`})
+          wx.navigateTo({url: `${COMMON}poster/createPost/createPost?type=company&companyId=${this.data.detail.companyId}`})
           wx.setStorageSync('companyPosterdata', this.data.companyInfos)
         } else {
           this.setData({showPublicPositionTips: true})
@@ -278,7 +279,7 @@ Page({
       case 'position-mechanism':
         // 该机构的职位上线状态
         if(this.data.detail.positionNum) {
-          wx.navigateTo({url: `${COMMON}poster/createPost/createPost?type=positionMin&positionId=6864`})
+          wx.navigateTo({url: `${RECRUITER}organization/position/position?type=ps-position`})
         } else {
           this.setData({showPublicPositionTips: true})
         }

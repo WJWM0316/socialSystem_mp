@@ -82,12 +82,14 @@ Page({
     wx.setStorageSync('choseType', 'RECRUITER')
     wx.reLaunch({url: `${RECRUITER}index/index`})
   },
-  
-
   bindMain(e) {
     wx.navigateTo({url: `${COMMON}recruiterDetail/recruiterDetail?uid=${e.currentTarget.dataset.uid}`})
   },
-
+  callPhone () {
+    wx.makePhoneCall({
+      phoneNumber: this.data.companyInfos.mobile
+    })
+  },
   getCompanyDetail(hasLoading = true, isReload = false) {
     return new Promise((resolve, reject) => {
       let getCompanyInfos = null,

@@ -1,4 +1,4 @@
-import {getRapidlyViwePostApi, getPositionPostApi, getPositionMinPostApi, getResumePostApi, getRecruiterPostApi} from '../../../../../api/pages/poster.js'
+import {getRapidlyViwePostApi, getPositionPostApi, getPositionMinPostApi, getResumePostApi, getRecruiterPostApi, getCompanyPostApi} from '../../../../../api/pages/poster.js'
 let app = getApp()
 Page({
 
@@ -42,6 +42,11 @@ Page({
         title = '简历分享'
         params.uid = options.uid
         break
+      case 'company':
+        getImgFun = getCompanyPostApi
+        title = '机构分享'
+        params.id = options.companyId
+        break
       case 'recruiter':
         getImgFun = getRecruiterPostApi
         title = '招聘官分享'
@@ -52,7 +57,6 @@ Page({
     this.setData({title, options})
     getImgFun(params).then(res => {
       if (res.data.posterData) wx.setStorageSync('posterData', res.data.posterData)
-      
       this.setData({imgUrl: res.data.url})
     })
   },

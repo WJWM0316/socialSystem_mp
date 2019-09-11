@@ -1,4 +1,4 @@
-<block wx:if="{{detail.isCompanyTopAdmin}}">
+<block wx:if="{{detail.isCompanyTopAdmin && choseItem.id}}">
 	<view style="height: 88rpx"></view>
 	<view class="chooseEnter" style="top: {{navHeight}}px" bindtap="routeJump">
 		<i class="icon iconfont icon-gongsi"></i>

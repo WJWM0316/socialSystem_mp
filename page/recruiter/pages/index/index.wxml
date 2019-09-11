@@ -195,7 +195,7 @@
 
   <view class="overlay" wx:if="{{showPublicPositionTips}}">
 		<view class="box">
-			<i class="icon iconfont icon-close" bindtap="routeJump" data-action="hidePublicPositionTips"></i>
+			<i class="icon iconfont icon-close" bindtap="routeJump" data-route="hidePublicPositionTips"></i>
 			<image src="{{cdnImagePath}}none_position.png"></image>
 			<view class="p1">邀请候选人面试</view>
 			<view class="p2">至少需要一个招聘中职位~</view>

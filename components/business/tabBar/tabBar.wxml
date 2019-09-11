@@ -17,7 +17,7 @@
 		  			wx:if="{{item.flag === 'interview' && redDot.jobhunterInterviewTotal && identity === 'APPLICANT'}}"></view>
 		  		<view
 		  			class="reddot-mine"
-		  			wx:if="{{item.flag === 'interview' && redDot.recruiterInterviewTotal && identity === 'RECRUITER'}}"></view>
+		  			wx:if="{{item.flag === 'candidate' && redDot.recruiterInterviewTotal && identity === 'RECRUITER'}}"></view>
 		  		<view
 		  			class="reddot-mine"
 		  			wx:if="{{item.flag === 'position' && redDot.positionOfflineBar && identity === 'RECRUITER'}}"></view>

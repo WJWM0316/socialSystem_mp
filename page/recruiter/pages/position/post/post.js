@@ -42,13 +42,21 @@ Page({
     canClick: false,
     showScanBox: false,
     options: {},
-    detail: app.globalData.recruiterDetails
+    detail: {}
   },
   onLoad(options) {
     this.setData({pageTitle: options.positionId ? '编辑职位' : '发布职位', query: options})
   },
   onShow() {
-    this.getUpdateInfos()
+    let detail = app.globalData.recruiterDetails
+    if(app.setOrgInit) {
+      this.setData({detail}, () => this.getUpdateInfos())
+    } else {
+      app.getAllInfo().then(res => {
+        detail = app.globalData.recruiterDetails
+        this.setData({detail}, () => this.getUpdateInfos())
+      })
+    }
   },
   backEvent() {
     if(this.data.query.positionId) {

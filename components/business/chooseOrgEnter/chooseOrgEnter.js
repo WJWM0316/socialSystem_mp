@@ -15,7 +15,7 @@ Component({
         if (newVal.isCompanyTopAdmin) {
           let choseItem = wx.getStorageSync('orgData')
           if(choseItem) {
-            this.setData({choseItem})
+            app.setOrgInit = function () {}
             return
           }
           getCompanyOrglistApi({company_id: this.data.detail.companyTopId}).then(res => {

@@ -88,7 +88,7 @@
         </view>
   		</view>
   	</view>
-    <view class="toggleIdentity" bindtap="toggleIdentity">
+    <view class="toggleIdentity" bindtap="toggleIdentity" wx:if="{{isRecruiter}}">
       <view class="key">
         <i class="icon iconfont icon-qiehuanshenfen"></i>
         <view class="text">{{isRecruiter ? '切换到我的招聘主页' : '我也要招人'}}</view>

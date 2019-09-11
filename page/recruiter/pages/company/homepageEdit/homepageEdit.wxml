@@ -1,5 +1,5 @@
 <view class="homepage">
-	<navbar title="编辑公司主页" background="#FFFFFF" color="#22292C"></navbar>
+	<navbar title="{{query.type === 'org' ? '编辑机构主页' : '编辑公司主页'}}" background="#FFFFFF" color="#22292C"></navbar>
 
 	<view class="base-info">
 		<view class="head">

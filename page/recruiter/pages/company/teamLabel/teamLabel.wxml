@@ -1,5 +1,5 @@
 <view class="tabsPage">
-  <navbar title="公司福利"></navbar>
+  <navbar title="{{options.type === 'org' ? '团队福利' : '公司福利'}}"></navbar>
   <block>
     <view class="content">
       <view class="head">已选择标签<text class="number"><text class="num">{{choseList.length}}</text>/8</text></view>
@@ -8,7 +8,7 @@
       </view>
       <view class="head"></view>
       <view class="tabs">
-        <text class="tab {{item.select ? 'checked' : ''}}" wx:for="{{teamList}}" wx:key="{{index}}" bindtap="choseTab" data-tabData="{{item}}">{{item.title}}</text>
+        <text class="tab {{item.isSel ? 'checked' : ''}}" wx:for="{{teamList}}" wx:key="{{index}}" bindtap="choseTab" data-tabData="{{item}}">{{item.title}}</text>
       </view>
       <view class="msg">找不到想要的标签？</view>
       <view class="addLabel" bindtap="openPop">添加自定义标签</view>

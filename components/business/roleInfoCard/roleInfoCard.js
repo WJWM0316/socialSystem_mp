@@ -19,6 +19,10 @@ Component({
     glass: {
       type: Boolean,
       value: false
+    },
+    options: {
+      type: Object,
+      value: {}
     }
   },
 
@@ -55,7 +59,7 @@ Component({
     },
     jumpEditBase() {
       wx.redirectTo({
-        url: `${RECRUITER}company/homepageEdit/homepageEdit?companyId=${this.data.cardData.id}`
+        url: `${RECRUITER}company/homepageEdit/homepageEdit?companyId=${this.data.cardData.id}&type=${this.data.options.type}`
       })
       // wx.navigateTo({
       //   url: `${RECRUITER}company/baseEdit/baseEdit`

@@ -87,7 +87,7 @@
 							<view class="recruitment-number" wx:if="{{recruiter.positionNum}}">{{recruiter.positionNum}} 个在招职位</view>
 						</view>
 						<view class="row-two">
-							<text class="address">{{item.address[0].city}}{{item.address[0].doorplate}}</text>
+							<text class="address">{{item.address[0].city}}{{item.address[0].district}}</text>
 							<text class="num" wx:if="{{item.onJob}}">{{item.positionNum}} 个在招职位</text>
 						</view>
 					</view>

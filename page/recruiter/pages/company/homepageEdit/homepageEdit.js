@@ -39,7 +39,11 @@ Page({
         wx.navigateTo({url: `${RECRUITER}position/addressList/addressList?type=company&selected=0`})
         break
       case 'base':
-        wx.navigateTo({url: `${RECRUITER}company/baseEdit/baseEdit`})
+        if (this.data.query.type === 'org') {
+          wx.navigateTo({url: `${RECRUITER}organization/add/add?companyId=${this.data.query.companyId}`})
+        } else {
+          wx.navigateTo({url: `${RECRUITER}company/baseEdit/baseEdit?type=${this.data.query.type}`})
+        }
         break
       case 'product':
         wx.navigateTo({url: `${RECRUITER}company/postProduct/postProduct?companyId=${app.globalData.recruiterDetails.companyInfo.id}`})

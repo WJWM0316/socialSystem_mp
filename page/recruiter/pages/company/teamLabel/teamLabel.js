@@ -9,6 +9,7 @@ Page({
   data: {
     teamList: [],
     choseList: [],
+    options: {},
     limitNum: 8,
     customLabel: '', // 自定义标签
     hidePop: true // 打开自定pop
@@ -18,14 +19,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    getTeamlightspotApi().then(res => {
+    getTeamlightspotApi({company_id: app.globalData.recruiterDetails.currentCompanyId}).then(res => {
       let choseList = []
       res.data.map((item, index) => {
-        if (item.select) {
+        if (item.isSel) {
           choseList.push(item)
         }
       })
-      this.setData({teamList: res.data, choseList})
+      this.setData({teamList: res.data, choseList, options})
     })
   },
   openPop () {

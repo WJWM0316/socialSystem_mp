@@ -13,9 +13,24 @@ Page({
     	smallUrl: '',
       id: ''
     },
+    options: {},
     cdnPath: app.globalData.cdnImagePath,
   },
   onLoad(options) {
+    this.setData({options})
+    let orgList = wx.getStorageSync('orgList')
+    if (options.companyId && orgList) {
+      console.log(orgList, 22222222222222222)
+      let orgData = orgList.filter(item => {
+        return item.id === options.companyId
+      })
+      console.log(orgData, 111)
+      let company_name = orgData[0].companyName,
+          phoneNum     = orgData[0].mobile,
+          addressData  = orgData[0].address[0],
+          logoInfo     = orgData[0].upload
+      this.setData({company_name, phoneNum, addressData, logoInfo})
+    }
   },
   onShow () {
     let addAddress = wx.getStorageSync('addAddress')

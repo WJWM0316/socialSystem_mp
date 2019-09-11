@@ -6,7 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    info: {}
+    info: {},
+    options: {}
   },
 
   /**
@@ -14,7 +15,7 @@ Page({
    */
   onLoad: function (options) {
     let info = app.globalData.companyInfo
-    this.setData({info})
+    this.setData({options, info})
   },
   changeVal(e) {
     let info = this.data.info

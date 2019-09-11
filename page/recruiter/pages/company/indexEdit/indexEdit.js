@@ -9,8 +9,12 @@ Page({
    */
   data: {
     info: {},
+    options: {},
     cdnImagePath: app.globalData.cdnImagePath,
     detial: app.globalData.recruiterDetails
+  },
+  onLoad (options) {
+    this.setData({options})
   },
   onShow(options) {
     this.init()
@@ -30,7 +34,7 @@ Page({
     switch(e.currentTarget.dataset.type) {
       case 'main':
         wx.navigateTo({
-          url: `${COMMON}homepage/homepage?companyId=${app.globalData.recruiterDetails.companyInfo.id}`
+          url: `${COMMON}homepage/homepage?companyId=${app.globalData.recruiterDetails.companyInfo.id}&type=${this.data.options.type}`
         })
         // if (app.globalData.recruiterDetails.isCompanyAdmin) {
         //   wx.navigateTo({
@@ -49,7 +53,7 @@ Page({
       break
       case 'bright':
         wx.navigateTo({
-          url: `${RECRUITER}company/teamLabel/teamLabel`
+          url: `${RECRUITER}company/teamLabel/teamLabel?type=${this.data.options.type}`
         })
       break
     }

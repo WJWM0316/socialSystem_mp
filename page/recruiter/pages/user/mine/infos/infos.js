@@ -112,7 +112,7 @@ Page({
         break
       case 'organization':
         if (!this.data.recruiterInfo.isCompanyTopAdmin) {
-          wx.navigateTo({url: `${RECRUITER}company/indexEdit/indexEdit`})
+          wx.navigateTo({url: `${RECRUITER}company/indexEdit/indexEdit?type=org`})
         } else {
           wx.navigateTo({url: `${RECRUITER}organization/list/list`})
         }

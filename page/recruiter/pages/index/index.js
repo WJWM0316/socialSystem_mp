@@ -50,50 +50,44 @@ Page({
     dataBox: {
       tabLists: [
         {
-          number: '520',
+          number: '0',
           text: '职位浏览次数',
           active: true,
           data: {
-            key: ['周a', '周b', '周c', '周d', '周e', '周f', '周g'],
+            key: ['08-22', '08-23', '08-24', '08-25', '08-26', '08-27', '08-28'],
             value: [
-              [18, 36, 65, 30, 78, 40, 33],
-              [12, 50, 51, 35, 70, 30, 20]
+              [0, 0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0, 0]
             ]
           }
         },
         {
-          number: '666',
+          number: '0',
           text: '招聘官浏览次数',
           active: false,
           data: {
-            key: ['周1', '周2', '周3', '周4', '周5', '周6', '周7'],
+            key: ['08-22', '08-23', '08-24', '08-25', '08-26', '08-27', '08-28'],
             value: [
-              [18, 36, 65, 30, 78, 40, 33],
-              [12, 50, 51, 35, 70, 30, 20]
+              [0, 0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0, 0]
             ]
           }
         },
         {
-          number: '6.6k',
+          number: '0',
           text: '机构浏览次数',
           active: false,
           data: {
-            key: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+            key: ['08-22', '08-23', '08-24', '08-25', '08-26', '08-27', '08-28'],
             value: [
-              [18, 36, 65, 30, 78, 40, 33],
-              [12, 50, 51, 35, 70, 30, 20]
+              [0, 0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0, 0]
             ]
           }
         }
       ]
     },
-    echartData: {
-      key: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
-      value: [
-        [18, 36, 65, 30, 78, 40, 33],
-        [12, 50, 51, 35, 70, 30, 20]
-      ]
-    },
+    echartData: {},
     viewList: [],
     showPublicPositionTips: false
   },
@@ -134,25 +128,27 @@ Page({
     }
   },
   init () {
-    setTimeout(() => {
-      this.selectComponent('#indexEchart').init()
-    }, 2000)
+    let echartData = this.data.echartData
     if (wx.getStorageSync('choseType') === 'APPLICANT') return
     let userInfo = app.globalData.userInfo
     let companyInfos = app.globalData.recruiterDetails.companyInfo
     if(app.pageInit) {
       userInfo = app.globalData.userInfo
       companyInfos = app.globalData.recruiterDetails.companyInfo
+      echartData = this.data.dataBox.tabLists[0].data
       this.getMixdata()
-      this.setData({userInfo})
+      this.setData({userInfo, echartData})
       this.selectComponent('#bottomRedDotBar').init()
+      this.selectComponent('#indexEchart').init()
     } else {
       app.pageInit = () => {
         userInfo = app.globalData.userInfo
         companyInfos = app.globalData.recruiterDetails.companyInfo
+        echartData = this.data.dataBox.tabLists[0].data
         this.getMixdata()
-        this.setData({userInfo})
+        this.setData({userInfo, echartData})
         this.selectComponent('#bottomRedDotBar').init()
+        this.selectComponent('#indexEchart').init()
       }
     }
   },

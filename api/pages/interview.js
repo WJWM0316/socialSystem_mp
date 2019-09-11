@@ -313,7 +313,7 @@ export const clearTabInterviewRedDotApi = (data) => {
 // 清除日程红点
 export const clearDayInterviewRedDotApi = (data) => {
   return request({
-    url: `/interview/deleteScheduleTabRedDot/${data.type}`,
+    url: `/interview/deleteScheduleTabRedDot/${data.date}`,
     method: 'delete',
     // data,
     hasLoading: false

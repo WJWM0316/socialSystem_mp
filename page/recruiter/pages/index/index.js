@@ -117,19 +117,18 @@ Page({
     }
   },
   onShow() {
-    this.init();return
     if(app.loginInit) {
-      // if(!app.globalData.hasLogin) {
-      //   wx.navigateTo({url: `${COMMON}bindPhone/bindPhone`})
-      //   return
-      // }
+      if(!app.globalData.hasLogin) {
+        wx.navigateTo({url: `${COMMON}bindPhone/bindPhone`})
+        return
+      }
       this.init()
     } else {
       app.loginInit = () => {
-        // if (!app.globalData.hasLogin) {
-        //   wx.navigateTo({url: `${COMMON}bindPhone/bindPhone`})
-        //   return
-        // }
+        if (!app.globalData.hasLogin) {
+          wx.navigateTo({url: `${COMMON}bindPhone/bindPhone`})
+          return
+        }
         this.init()
       }
     }

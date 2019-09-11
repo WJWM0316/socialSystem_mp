@@ -105,7 +105,7 @@
 				<view class="icon"> <view class="fan"></view> </view> 团队福利
 			</view>
 			<view class="ul">
-				<view class="li" wx:for="{{[1,2]}}" wx:key="{{index}}" wx:for-item="item">美女如云</view>
+				<view class="li" wx:for="{{companyInfos.welfare}}" wx:key="{{index}}" wx:for-item="item">{{item.title}}</view>
 			</view>
 		</view>
 

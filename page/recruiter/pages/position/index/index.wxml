@@ -61,7 +61,7 @@
 					</view>
 				</button>
 				<view class="actions">
-					<button form-type="submit" class="share clear-style item" open-type="share" bindtap="routeJump" data-index="{{index}}" data-action="share">
+					<button form-type="submit" class="share clear-style item" open-type="share" bindtap="routeJump" data-id="{{item.id}}" data-index="{{index}}" data-action="share">
 						<i class="icon iconfont icon-weixin"></i>分享好友
 					</button>
 					<button form-type="submit" class="share clear-style item" bindtap="routeJump" data-action="poster-position" data-position-id="{{item.id}}">

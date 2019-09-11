@@ -47,11 +47,19 @@
 
 		<vieW class="echart-box">
 			<view class="title">近期趋势</view>
-			<view class="btn-box">
-				<view class="btn1">近7天</view>
-				<view class="btn2">近30天</view>
+			<view class="infos">
+				<view class="number-box">
+					<view class="tab3 yellow">访问人数</view>
+					<view class="tab3 primary">访问次数</view>
+				</view>
+				<view class="btn-box">
+					<view class="btn1">近7天</view>
+					<view class="btn2">近30天</view>
+				</view>
 			</view>
-			<ec-canvas class="ec-canvas" id="mychart-dom-line" canvas-id="mychart-line" ec="{{ ec }}"></ec-canvas>
+			<view class="data-echart">
+				<lineChart height="{{'375rpx'}}" id="dataEchart" infos="{{echartData}}"></lineChart>
+			</view>
 		</vieW>
 	</view>
 

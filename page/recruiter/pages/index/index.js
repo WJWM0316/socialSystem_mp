@@ -54,7 +54,7 @@ Page({
           text: '职位浏览次数',
           active: true,
           data: {
-            key: ['08-22', '08-23', '08-24', '08-25', '08-26', '08-27', '08-28'],
+            key: ['22', '23', '24', '25', '26', '27', '28'],
             value: [
               [0, 0, 0, 0, 0, 0, 0],
               [0, 0, 0, 0, 0, 0, 0]
@@ -66,7 +66,7 @@ Page({
           text: '招聘官浏览次数',
           active: false,
           data: {
-            key: ['08-22', '08-23', '08-24', '08-25', '08-26', '08-27', '08-28'],
+            key: ['22', '23', '24', '25', '26', '27', '28'],
             value: [
               [0, 0, 0, 0, 0, 0, 0],
               [0, 0, 0, 0, 0, 0, 0]
@@ -78,7 +78,7 @@ Page({
           text: '机构浏览次数',
           active: false,
           data: {
-            key: ['08-22', '08-23', '08-24', '08-25', '08-26', '08-27', '08-28'],
+            key: ['22', '23', '24', '25', '26', '27', '28'],
             value: [
               [0, 0, 0, 0, 0, 0, 0],
               [0, 0, 0, 0, 0, 0, 0]
@@ -119,7 +119,7 @@ Page({
       this.init()
     } else {
       app.loginInit = () => {
-        if (!app.globalData.hasLogin) {
+        if(!app.globalData.hasLogin) {
           wx.navigateTo({url: `${COMMON}bindPhone/bindPhone`})
           return
         }
@@ -139,7 +139,7 @@ Page({
       this.getMixdata()
       this.setData({userInfo, echartData})
       this.selectComponent('#bottomRedDotBar').init()
-      this.selectComponent('#indexEchart').init()
+      setTimeout(() => this.selectComponent('#indexEchart').init(), 1000)
     } else {
       app.pageInit = () => {
         userInfo = app.globalData.userInfo
@@ -148,7 +148,7 @@ Page({
         this.getMixdata()
         this.setData({userInfo, echartData})
         this.selectComponent('#bottomRedDotBar').init()
-        this.selectComponent('#indexEchart').init()
+        setTimeout(() => this.selectComponent('#indexEchart').init(), 1000)
       }
     }
   },

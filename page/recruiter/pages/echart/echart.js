@@ -133,6 +133,16 @@ Page({
     navH: app.globalData.navHeight,
     ec: {
       onInit: initChart
+    },
+    echartData: {
+      key: ['22', '23', '24', '25', '26', '27', '28'],
+      value: [
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0]
+      ]
     }
+  },
+  onShow() {
+    setTimeout(() => this.selectComponent('#dataEchart').init(), 1000)
   }
 })

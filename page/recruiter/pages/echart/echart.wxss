@@ -212,7 +212,6 @@
 }
 
 .echart-box {
-  height: 400rpx;
   margin: 0 42rpx;
   position: relative;
 }
@@ -228,31 +227,104 @@
 	font-weight:700;
 	color:rgba(53,57,67,1);
 	line-height:32rpx;
+	margin-bottom: 30rpx;
+}
+
+.echart-box .infos {
+	height:48rpx;
+	line-height: 48rpx;
+	font-size: 24rpx;
 }
 
 .echart-box .btn-box {
 	width:244rpx;
 	height:48rpx;
 	border-radius:23rpx;
-	border:1rpx solid rgba(132,82,167,1);
-	overflow: hidden;
-	position: absolute;
-	right: 0;
-	top: 50rpx;
 	display: flex;
 	line-height: 48rpx;
 	text-align: center;
 	font-size: 24rpx;
+	float: right;
 }
 
 .echart-box .btn1 {
 	background:rgba(132,82,167,1);
 	color:#fff;
 	flex: 1;
+	width:122rpx;
+	background:rgba(132,82,167,1);
+	border-radius:23rpx 0rpx 0rpx 23rpx;
+	box-sizing: border-box;
+	border:1rpx solid rgba(132,82,167,1);
 }
 
 .echart-box .btn2 {
 	background: white;
 	color:#8452A7;
 	flex: 1;
+	width:122rpx;
+	border-radius:0 23rpx 23rpx 0;
+	border:1rpx solid rgba(132,82,167,1);
+	box-sizing: border-box;
+}
+
+.data-echart{
+	position: relative;
+	padding: 0 0 68rpx 12rpx;
+	margin-top: 53rpx;
+}
+
+.echart-box .number-box{
+  text-align: left;
+  font-size:24rpx;
+  color:rgba(40,40,40,1);
+  position: relative;
+  height: 48rpx;
+  line-height: 48rpx;
+  float: left;
+  padding-left: 20rpx;
+}
+
+/*.echart-box .number-box:after{
+  width: 0;
+  height: 0;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 10rpx;
+  border-style: solid;
+  border-color: #FFE266 transparent transparent transparent;
+  display: block;
+  content: '';
+  bottom: -20rpx;
+}*/
+
+.echart-box .number-box .tab3{
+  text-align: left;
+  font-size:24rpx;
+  color:rgba(40,40,40,1);
+  display: inline-block;
+  position: relative;
+  margin-right: 60rpx;
+}
+
+.echart-box .number-box .tab3::before{
+  width:14rpx;
+	height:14rpx;
+	background:rgba(255,127,76,1);
+	position: absolute;
+	left: -20rpx;
+	top: 50%;
+	transform: translateY(-50%);
+	content: '';
+	display: block;
+	border-radius: 50%;
+}
+
+.echart-box .number-box .tab3.primary::before{
+  background:#8452A7;
+}
+
+.echart-box .number-box .tab3.yellow::before{
+  background:#FF7F4C;
 }

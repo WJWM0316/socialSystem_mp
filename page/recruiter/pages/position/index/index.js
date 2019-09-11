@@ -60,7 +60,7 @@ Page({
     }
 
     let detail = app.globalData.recruiterDetails
-    if(detail.uid) {
+    if(app.setOrgInit) {
       this.setData({detail, onLinePosition, offLinePosition}, () => {
         this.selectComponent('#bottomRedDotBar').init()
         this.getPositionListNum().then(() => this.getLists())

@@ -3,7 +3,9 @@ import {
   openPositionApi,
   getRecruiterPositionListApi,
   getfilterPositionListApi,
-  getPositionListNumApi
+  getPositionListNumApi,
+  getCompanyTopPositionListNumApi,
+  getPositionCompanyTopListApi
 } from "../../../../api/pages/position.js"
 
 import {
@@ -42,6 +44,7 @@ Page({
     api: '',
     identityInfos: {},
     openPayPop: false,
+    detail: app.globalData.recruiterDetails,
     chargeData: {}, // 扣点信息
   },
   onLoad(options) {
@@ -49,7 +52,7 @@ Page({
     if(wx.getStorageSync('choseType') === 'RECRUITER') {
       api = this.data.nowTab === 'online' ? 'getonLinePositionListB' : 'getoffLinePositionListB'
       // 招聘端则判断个人身份是否已经认证 不然不能发布职位
-      this.getCompanyIdentityInfos()
+      // this.getCompanyIdentityInfos()
     } else {
       api = 'getonLinePositionListC'
     }
@@ -75,7 +78,7 @@ Page({
       this.setData({onLinePositionList: value})
       return;
     }
-    this.setData({onLinePositionList}, () => this.getLists())
+    this.setData({onLinePositionList, detail: app.globalData.recruiterDetails}, () => this.getLists())
   },
   /**
    * @Author   小书包
@@ -84,13 +87,19 @@ Page({
    * @return   {[type]}   [description]
    */
   getLists() {
-
     // 求职端
     if(wx.getStorageSync('choseType') !== 'RECRUITER') {
       return this.getonLinePositionListC()
     }
-
-    getPositionListNumApi().then(res => {
+    let Api = this.data.detail.isCompanyTopAdmin ? getCompanyTopPositionListNumApi : getPositionListNumApi
+    let orgData = wx.getStorageSync('orgData')
+    let params = {
+      recruiter: this.data.detail.uid
+    }
+    if(this.data.detail.isCompanyTopAdmin) {
+      if(orgData) params = Object.assign(params, {companyId: orgData.id})
+    }
+    Api(params).then(res => {
       let api = ''
       let nowTab = this.data.nowTab
       if(!res.data.online) {
@@ -113,13 +122,19 @@ Page({
     return new Promise((resolve, reject) => {
       let options = this.data.options
       let onLinePositionList = this.data.onLinePositionList
+      let orgData = wx.getStorageSync('orgData')
       let params = {
         is_online: 1,
         count: onLinePositionList.count,
         page: onLinePositionList.pageNum,
         hasLoading
       }
-      getRecruiterPositionListApi(params).then(res => {
+      let Api = this.data.detail.isCompanyTopAdmin ? getPositionCompanyTopListApi : getRecruiterPositionListApi
+      //加个机构id
+      if(this.data.detail.isCompanyTopAdmin) {
+        if(orgData) params = Object.assign(params, {company_id: orgData.id})
+      }
+      Api(params).then(res => {
 
         let onBottomStatus = res.meta && res.meta.nextPageUrl ? 0 : 2
         let list = res.data || []
@@ -179,7 +194,9 @@ Page({
     return new Promise((resolve, reject) => {
       let options = this.data.options
       let onLinePositionList = this.data.onLinePositionList
-      let api = wx.getStorageSync('choseType') === 'RECRUITER' ? 'getRecruiterPositionListApi' : 'getPositionListApi'
+      let temApi = this.data.detail.isCompanyTopAdmin ? getPositionCompanyTopListApi : getRecruiterPositionListApi
+      let api = wx.getStorageSync('choseType') === 'RECRUITER' ? temApi : getPositionListApi
+      let orgData = wx.getStorageSync('orgData')
       let params = {
         is_online: 2,
         status: '0,1,2',
@@ -187,7 +204,12 @@ Page({
         page: onLinePositionList.pageNum,
         hasLoading
       }
-      getRecruiterPositionListApi(params).then(res => {
+
+      //加个机构id
+      if(this.data.detail.isCompanyTopAdmin) {
+        if(orgData) params = Object.assign(params, {company_id: orgData.id})
+      }
+      api(params).then(res => {
         let onBottomStatus = res.meta && res.meta.nextPageUrl ? 0 : 2
         onLinePositionList.list = onLinePositionList.list.concat(res.data || [])
         onLinePositionList.pageNum++

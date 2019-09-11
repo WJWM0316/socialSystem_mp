@@ -6,7 +6,7 @@ import {
 } from '../../../../../api/pages/position.js'
 
 import {RECRUITER, COMMON} from '../../../../../config.js'
-
+import {sharePosition} from '../../../../../utils/shareWord.js'
 let app = getApp()
 let positionCard = ''
     
@@ -262,12 +262,12 @@ Page({
     this.getPositionListNum()
   },
   onShareAppMessage(options) {
-    let detail = this.data.detail
+    let id = options.target.dataset.id
 　　return app.wxShare({
       options,
-      title: sharePosition(),
-      path: `${COMMON}positionDetail/positionDetail?positionId=${that.data.query.positionId}&sCode=${detail.sCode}&sourceType=shp`,
-      imageUrl: positionCard
+      btnTitle: sharePosition(),
+      btnPath: `${COMMON}positionDetail/positionDetail?positionId=${id}&sCode=${this.data.detail.sCode}&sourceType=shp`,
+      btnImageUrl: positionCard
     })
   }
 })

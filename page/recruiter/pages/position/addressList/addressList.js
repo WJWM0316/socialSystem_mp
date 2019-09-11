@@ -1,7 +1,7 @@
 import {getCompanyAddressListApi, getPositionAddressListApi} from "../../../../../api/pages/company.js"
 import {RECRUITER} from '../../../../../config.js'
 
-const app = getApp()
+let app = getApp()
 
 Page({
   data: {
@@ -22,10 +22,11 @@ Page({
     this.setData({options})
   },
   onShow() {
-    const options = this.data.options
-    const action = options.type === 'position' ? 'getPositionAddressList' : 'getCompanyAddressList'
-    const addressList = {list: [], pageNum: 1, isLastPage: false, isRequire: false}
-    this.setData({addressList})
+    let detail = app.globalData.recruiterDetails
+    let options = this.data.options
+    let action = options.type === 'position' ? 'getPositionAddressList' : 'getCompanyAddressList'
+    let addressList = {list: [], pageNum: 1, isLastPage: false, isRequire: false}
+    this.setData({addressList, detail})
     this[action]()
   },
   /**
@@ -36,11 +37,11 @@ Page({
    */
   getCompanyAddressList(hasLoading = true) {
     return new Promise((resolve, reject) => {
-      const params = {id: app.globalData.recruiterDetails.companyInfo.id,  count: this.data.pageCount, page: this.data.addressList.pageNum, hasLoading}
-      const options = this.data.options
+      let params = {id: app.globalData.recruiterDetails.companyInfo.id,  count: this.data.pageCount, page: this.data.addressList.pageNum, hasLoading}
+      let options = this.data.options
       getCompanyAddressListApi(params).then(res => {
-        const addressList = this.data.addressList
-        const onBottomStatus = res.meta && res.meta.nextPageUrl ? 0 : 2
+        let addressList = this.data.addressList
+        let onBottomStatus = res.meta && res.meta.nextPageUrl ? 0 : 2
         addressList.list = addressList.list.concat(res.data)
         addressList.isLastPage = res.meta && res.meta.nextPageUrl ? false : true
         addressList.pageNum = addressList.pageNum + 1
@@ -58,11 +59,18 @@ Page({
    */
   getPositionAddressList(hasLoading = true) {
     return new Promise((resolve, reject) => {
-      const options = this.data.options
-      const params = {count: this.data.pageCount, page: this.data.addressList.pageNum, hasLoading}
+      let options = this.data.options
+      let orgData = wx.getStorageSync('orgData')
+      let params = {count: this.data.pageCount, page: this.data.addressList.pageNum, hasLoading}
+      // 超管要加机构id
+      if(this.data.detail.isCompanyTopAdmin) {
+        params = Object.assign(params, {company_id: orgData.id})
+      } else {
+        params = Object.assign(params, {company_id: app.globalData.recruiterDetails.companyInfo.id})
+      }
       getPositionAddressListApi(params).then(res => {
-        const addressList = this.data.addressList
-        const onBottomStatus = res.meta && res.meta.nextPageUrl ? 0 : 2
+        let addressList = this.data.addressList
+        let onBottomStatus = res.meta && res.meta.nextPageUrl ? 0 : 2
         addressList.list = addressList.list.concat(res.data)
         addressList.isLastPage = res.meta && res.meta.nextPageUrl ? false : true
         addressList.pageNum = addressList.pageNum + 1
@@ -79,9 +87,9 @@ Page({
    * @return   {[type]}     [description]
    */
   onClick(e) {
-    const params = e.currentTarget.dataset
-    const addressList = this.data.addressList
-    const storage = wx.getStorageSync('createPosition') || {}
+    let params = e.currentTarget.dataset
+    let addressList = this.data.addressList
+    let storage = wx.getStorageSync('createPosition') || {}
     addressList.list.map((field, index) => {
       if(params.id === index) {
         console.log(field)
@@ -102,7 +110,7 @@ Page({
    */
   add() {
     // 判断是公司地址还是职位地址
-    const options = this.data.options
+    let options = this.data.options
     wx.navigateTo({url: `${RECRUITER}position/address/address?type=${options.type}&selected=${options.selected}`})
   },
   /**
@@ -112,9 +120,9 @@ Page({
    * @return   {[type]}     [description]
    */
   edit(e) {
-    const params = e.currentTarget.dataset
+    let params = e.currentTarget.dataset
     // 判断是公司地址还是职位地址
-    const options = this.data.options
+    let options = this.data.options
     // 缓存的历史记录页面 好像超过了最大数
     wx.redirectTo({url: `${RECRUITER}position/address/address?id=${params.id}&type=${options.type}&selected=${options.selected}`})
   },
@@ -125,13 +133,13 @@ Page({
    * @return   {[type]}              [description]
    */
   onPullDownRefresh(hasLoading = true) {
-    const addressList = {list: [], pageNum: 1, isLastPage: false, isRequire: false}
-    const options = this.data.options
-    const action = options.type === 'position' ? 'getPositionAddressList' : 'getCompanyAddressList'
+    let addressList = {list: [], pageNum: 1, isLastPage: false, isRequire: false}
+    let options = this.data.options
+    let action = options.type === 'position' ? 'getPositionAddressList' : 'getCompanyAddressList'
     this.setData({addressList, hasReFresh: true})
     this[action]().then(res => {
-        const addressList = {list: [], pageNum: 1, isLastPage: false, isRequire: false}
-        const onBottomStatus = res.meta && res.meta.nextPageUrl ? 0 : 2
+        let addressList = {list: [], pageNum: 1, isLastPage: false, isRequire: false}
+        let onBottomStatus = res.meta && res.meta.nextPageUrl ? 0 : 2
         addressList.list = res.data
         addressList.isLastPage = res.meta && res.meta.nextPageUrl ? false : true
         addressList.pageNum = 2
@@ -148,9 +156,9 @@ Page({
    * @return   {[type]}   [description]
    */
   onReachBottom() {
-    const addressList = this.data.addressList
-    const options = this.data.options
-    const action = options.type === 'position' ? 'getPositionAddressList' : 'getCompanyAddressList'
+    let addressList = this.data.addressList
+    let options = this.data.options
+    let action = options.type === 'position' ? 'getPositionAddressList' : 'getCompanyAddressList'
     if (!addressList.isLastPage) {
       this[action](false).then(() => this.setData({onBottomStatus: 1}))
     }

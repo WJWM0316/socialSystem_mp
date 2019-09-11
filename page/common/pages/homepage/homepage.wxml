@@ -146,7 +146,13 @@
 				<view class="icon"> <view class="fan"></view> </view> 联系方式
 			</view>
 			<view class="position-box">
-				<view class="infos1">
+				<view
+					class="infos1"
+					bindtap="viewMap"
+					data-address="{{companyInfos.address[0].address}}"
+					data-doorplate="{{companyInfos.address[0].doorplate}}"
+					data-latitude="{{companyInfos.address[0].lat}}"
+					data-longitude="{{companyInfos.address[0].lng}}">
 					<i class="icon iconfont icon-dizhi"></i>
 					{{companyInfos.address[0].address}}
 				</view>

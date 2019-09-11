@@ -262,3 +262,16 @@
   color:#652791;
   float: right;
 }
+
+.nodata{
+  width: 100%;
+  text-align: center;
+  font-size: 24rpx;
+  color: #929292;
+  margin-top: 50rpx;
+}
+
+.nodata .strong{
+  display: inline;
+  color: #652791;
+}

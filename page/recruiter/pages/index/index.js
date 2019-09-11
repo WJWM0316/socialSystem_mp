@@ -117,19 +117,18 @@ Page({
     }
   },
   onShow() {
-    this.init();return
     if(app.loginInit) {
-      // if(!app.globalData.hasLogin) {
-      //   wx.navigateTo({url: `${COMMON}bindPhone/bindPhone`})
-      //   return
-      // }
+      if(!app.globalData.hasLogin) {
+        wx.navigateTo({url: `${COMMON}bindPhone/bindPhone`})
+        return
+      }
       this.init()
     } else {
       app.loginInit = () => {
-        // if (!app.globalData.hasLogin) {
-        //   wx.navigateTo({url: `${COMMON}bindPhone/bindPhone`})
-        //   return
-        // }
+        if (!app.globalData.hasLogin) {
+          wx.navigateTo({url: `${COMMON}bindPhone/bindPhone`})
+          return
+        }
         this.init()
       }
     }
@@ -269,7 +268,7 @@ Page({
         break
       case 'poster-mechanism':
         // 该机构的职位上线状态
-        if(app.globalData.recruiterDetails.positionNum) {
+        if(this.data.detail.positionNum) {
           wx.navigateTo({url: `${COMMON}poster/company/company`})
           wx.setStorageSync('companyPosterdata', this.data.companyInfos)
         } else {
@@ -278,7 +277,7 @@ Page({
         break
       case 'position-mechanism':
         // 该机构的职位上线状态
-        if(app.globalData.recruiterDetails.positionNum) {
+        if(this.data.detail.positionNum) {
           wx.navigateTo({url: `${COMMON}poster/createPost/createPost?type=positionMin&positionId=6864`})
         } else {
           this.setData({showPublicPositionTips: true})
@@ -286,7 +285,7 @@ Page({
         break
       case 'recruiter-mechanism':
         // 该机构的职位上线状态
-        if(app.globalData.recruiterDetails.positionNum) {
+        if(this.data.detail.positionNum) {
           wx.navigateTo({url: `${COMMON}poster/createPost/createPost`})
         } else {
           this.setData({showPublicPositionTips: true})

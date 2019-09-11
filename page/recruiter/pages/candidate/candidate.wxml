@@ -90,7 +90,7 @@
 						</view>
 					</view>
 					<view class="reddot" wx:if="{{item.redDot}}"></view>
-					<view class="row-three">候选人来自<view class="strong">小程序码扫码</view></view>
+					<view class="row-three" wx:if="{{item.channelCode}}">候选人来自<view class="strong">{{item.channelCode}}</view></view>
 					<view class="row-two">
 						<view class="infos">
 							<view class="day">{{item.createdAt}}</view>
@@ -139,7 +139,7 @@
 						</view>
 					</view>
 					<view class="reddot" wx:if="{{item.redDot}}"></view>
-					<view class="row-three">候选人来自<view class="strong">小程序码扫码</view></view>
+					<view class="row-three" wx:if="{{item.channelCode}}">候选人来自<view class="strong">{{item.channelCode}}</view></view>
 					<view class="row-two">
 						<view class="infos">
 							<view class="day">{{item.createdAt}}</view>

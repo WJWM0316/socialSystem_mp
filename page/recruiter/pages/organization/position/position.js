@@ -101,5 +101,8 @@ Page({
     let buttonClick = this.data.buttonClick
     if(!buttonClick) return
     wx.redirectTo({url: `${RECRUITER}createQr/createQr?type=qr-position`})
+  },
+  publicPosition() {
+    wx.navigateTo({url: `${RECRUITER}position/post/post`})
   }
 })

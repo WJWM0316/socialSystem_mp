@@ -157,7 +157,6 @@ Component({
    */
   methods: {
     init() {
-      console.log(this.data)
       setOptions(this.data.infos.key, this.data.infos.value)
       chartLine.setOption(getOptions())
     }

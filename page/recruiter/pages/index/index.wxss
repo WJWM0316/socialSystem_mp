@@ -503,7 +503,6 @@
 .sale-tools .icon{
   width: 76rpx;
   height: 76rpx;
-  background: rgba(0,0,0,.1);
   display: inline-block;
   margin-right: 20rpx;
   vertical-align: middle;
@@ -571,7 +570,6 @@
   width: 66rpx;
   height: 66rpx;
   display: inline-block;
-  background: rgba(0,0,0,.1);
 }
 
 .make-box .split-line {
@@ -606,7 +604,6 @@
   top: -4rpx;
   content: '';
   display: inline-block;
-  z-index: 1;
   box-sizing: border-box;
 }
 
@@ -618,7 +615,6 @@
   top: 0;
   content: '';
   display: inline-block;
-  z-index: 2;
   border:2rpx solid rgba(101,39,145,1);
   box-sizing: border-box;
 }
@@ -668,7 +664,6 @@
   top: -4rpx;
   content: '';
   display: inline-block;
-  z-index: 1;
   box-sizing: border-box;
 }
 
@@ -680,7 +675,6 @@
   top: 0;
   content: '';
   display: inline-block;
-  z-index: 2;
   border:2rpx solid rgba(101,39,145,1);
   box-sizing: border-box;
 }

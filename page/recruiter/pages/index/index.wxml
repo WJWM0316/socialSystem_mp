@@ -102,20 +102,20 @@
 		<view class="title">营销工具</view>
 		<view class="p2">帮助招聘官快速完成招聘任务</view>
 		<view class="tab-ul">
-			<button class="tab1 left top split-line clear-style" open-type="share" bindtap="routeJump" data-route="shareCompany">
-				<view class="icon"></view>
+			<view class="tab1 left top split-line clear-style" bindtap="routeJump" data-route="shareCompany">
+				<image src="{{cdnImagePath}}bnt_my_company.png" mode="aspectFill" class="icon"></image>
 				<view class="p">转发机构主页</view>
-			</button>
+			</view>
 			<view class="tab1  right top" bindtap="routeJump" data-route="sharePosition">
-				<view class="icon"></view>
+				<image src="{{cdnImagePath}}btn_my_job.png" mode="aspectFill" class="icon"></image>
 				<view class="p">转发我的职位</view>
 			</view>
 			<view class="tab1 left bottom split-line" bindtap="routeJump" data-route="publicPosition">
-				<view class="icon"></view>
+				<image src="{{cdnImagePath}}btn_my_sendjob.png" mode="aspectFill" class="icon"></image>
 				<view class="p">发布职位</view>
 			</view>
 			<view class="tab1 right bottom" bindtap="routeJump" data-route="receiveData">
-				<view class="icon"></view>
+				<image src="{{cdnImagePath}}btn_my_resume.png" mode="aspectFill" class="icon"></image>
 				<view class="p">面试管理</view>
 			</view>
 		</view>
@@ -125,15 +125,15 @@
 		<view class="title"><view class="icon"></view>生成招聘海报</view>
 		<view class="ul2 split-line">
 			<view class="li" bindtap="routeJump" data-route="poster-mechanism">
-				<view class="img-box"></view>
+				<image src="{{cdnImagePath}}btn_hb_jigou.png" mode="aspectFill" class="img-box"></image>
 				<view class="p">机构</view>
 			</view>
 			<view class="li" bindtap="routeJump" data-route="position-mechanism">
-				<view class="img-box"></view>
+				<image src="{{cdnImagePath}}btn_hb_job.png" mode="aspectFill" class="img-box"></image>
 				<view class="p">职位</view>
 			</view>
 			<view class="li" bindtap="routeJump" data-route="recruiter-mechanism">
-				<view class="img-box"></view>
+				<image src="{{cdnImagePath}}btn_hb_zhaopinguan.png" mode="aspectFill" class="img-box"></image>
 				<view class="p">招聘官</view>
 			</view>
 		</view>
@@ -141,15 +141,15 @@
 		<view class="title"><view class="icon"></view>生成小程序码</view>
 		<view class="ul1">
 			<view class="li" bindtap="routeJump" data-route="qr-mechanism">
-				<view class="img-box"></view>
+				<image src="{{cdnImagePath}}btn_code_jigou.png" mode="aspectFill" class="img-box"></image>
 				<view class="p">机构</view>
 			</view>
 			<view class="li" bindtap="routeJump" data-route="qr-position">
-				<view class="img-box"></view>
+				<image src="{{cdnImagePath}}btn_code_job.png" mode="aspectFill" class="img-box"></image>
 				<view class="p">职位</view>
 			</view>
 			<view class="li" bindtap="routeJump" data-route="qr-recruiter">
-				<view class="img-box"></view>
+				<image src="{{cdnImagePath}}btn_code_zhaopinguan.png" mode="aspectFill" class="img-box"></image>
 				<view class="p">招聘官</view>
 			</view>
 		</view>

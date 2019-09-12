@@ -48,8 +48,25 @@ Page({
     if(Reflect.has(options, 'tab')) this.setData({tab: options.tab})
   },
   onShow() {
-    this.getIndexShowCount()
-    this.getLists()
+    let interestList = {
+      list: [],
+      pageNum: 1,
+      isLastPage: false,
+      isRequire: false,
+      onBottomStatus: 0
+    }
+    let viewList = {
+      list: [],
+      pageNum: 1,
+      isLastPage: false,
+      isRequire: false,
+      onBottomStatus: 0
+    }
+    this.setData({interestList, viewList}, () => {
+      this.getIndexShowCount()
+      this.getLists()
+    })
+    
   },
   /**
    * @Author   小书包

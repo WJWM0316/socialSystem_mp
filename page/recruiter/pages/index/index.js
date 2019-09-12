@@ -276,7 +276,7 @@ Page({
       case 'recruiter-mechanism':
         // 该机构的职位上线状态
         if(this.data.detail.positionNum) {
-          wx.navigateTo({url: `${COMMON}poster/createPost/createPost`})
+          wx.navigateTo({url: `${COMMON}poster/createPost/createPost?type=recruiter&uid=${this.data.detail.uid}`})
         } else {
           this.setData({showPublicPositionTips: true})
         }

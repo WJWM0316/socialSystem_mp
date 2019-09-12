@@ -115,7 +115,6 @@ Page({
         wx.navigateTo({url: `${RECRUITER}createQr/createQr?type=qr-position`})
         break
       case 'ps-position':
-        console.log(this.data.params, 1111)
         wx.navigateTo({
           url: `${COMMON}poster/createPost/createPost?type=position&positionId=${this.data.params.item.id}`
         })

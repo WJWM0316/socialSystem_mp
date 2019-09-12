@@ -718,6 +718,7 @@
   line-height:26rpx;
   text-align: center;
   margin-top: 48rpx;
+  padding-bottom: 50rpx;
 }
 
 .generating-applets .icon{

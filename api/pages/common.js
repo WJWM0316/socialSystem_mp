@@ -218,11 +218,31 @@ export const clearReddotApi  = (data, hasLoading) => {
   })
 }
 
-// 数去数据接口
+// 社交招聘数据（首页）
 export const getIndexDataApi  = (data, hasLoading) => {
   return request({
     method: 'get',
     url: `/social/data/index`,
+    data,
+    hasLoading: false
+  })
+}
+
+// 社交招聘数据
+export const getSocialDataCompanyApi  = (data, hasLoading) => {
+  return request({
+    method: 'get',
+    url: `/social/data/company`,
+    data,
+    hasLoading: false
+  })
+}
+
+// 社交招聘数据筛选类型
+export const getSocialDataTypeApi  = (data, hasLoading) => {
+  return request({
+    method: 'get',
+    url: `/social/data/type`,
     data,
     hasLoading: false
   })

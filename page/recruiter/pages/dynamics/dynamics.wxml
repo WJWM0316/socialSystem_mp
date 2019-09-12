@@ -18,7 +18,7 @@
 		<refreshStatus></refreshStatus>
 	</view>
 
-	<view class="list-box viewList" wx:if="{{tab === 'viewList'}}">
+	<view class="list-box viewList" hidden="{{tab === 'viewList'}}">
 		<form bindsubmit="formSubmit" report-submit='{{true}}'>
 			<button
 				form-type="submit"
@@ -68,7 +68,7 @@
 		</bottomStatus>
 	</view>
 
-	<view class="list-box interestList" wx:if="{{tab === 'interestList'}}">
+	<view class="list-box interestList" hidden="{{tab === 'interestList'}}">
 		<form bindsubmit="formSubmit" report-submit='{{true}}'> 
 			<button
 				form-type="submit"

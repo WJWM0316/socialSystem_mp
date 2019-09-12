@@ -27,7 +27,7 @@
 	</form>
 	<view class="entry-list">
 		<view class="li" bindtap="routeJump" data-route="company" wx:if="{{recruiterInfo.isCompanyTopAdmin}}">
-			<i class="icon iconfont icon-gongsi1 label-icon"></i>
+			<i class="icon iconfont icon-gongsi label-icon"></i>
 			<view class="text">我的公司</view>
 			<i class="icon iconfont icon-xiangyou"></i>
 		</view>

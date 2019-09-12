@@ -1,7 +1,7 @@
 <view class="page_index">
 
 	<navbar
-		title="{{background !== 'transparent' ? '猎多多' : ''}}" 
+		title="{{background !== 'transparent' ? '首页' : ''}}" 
 		background="{{background}}"
 		color="#fff"
 		isFixed="{{isFixed}}">
@@ -201,7 +201,7 @@
 	</view>
 
   <tabBar tabType="1" id="bottomRedDotBar"></tabBar>
-  <followWechat wx:if="{{userInfo}}"></followWechat>
+  <!-- <followWechat wx:if="{{userInfo}}"></followWechat> -->
 
 <!--   <shareBtn posterType="company" id="shareBtn" shareBtn="{{ false }}"></shareBtn>
   <block wx:if="{{companyInfos.id}}">

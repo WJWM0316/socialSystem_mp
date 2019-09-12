@@ -162,7 +162,7 @@
 				</view>
 			</view>
 			<view class="phone-box" bindtap="callPhone" wx:if="{{companyInfos.mobile}}">
-				<i class="icon iconfont icon-shoujihaoma"></i>
+				<i class="icon iconfont icon-dianhua"></i>
 				{{companyInfos.mobile}}
 				<text class="desc">直接拨打，更快面试</text>
 			</view>

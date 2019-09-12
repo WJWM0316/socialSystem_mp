@@ -18,7 +18,8 @@ Page({
     currentData: {
       countPv: "34.2k",
       countUv: "14.5k"
-    }
+    },
+    detail: app.globalData.recruiterDetails
   },
   onShow() {
     let detail = app.globalData.recruiterDetails
@@ -28,6 +29,7 @@ Page({
     })
   },
   getSocialDataCompany(data) {
+    let orgData = wx.getStorageSync('orgData')
     let params = {}
     let item1 = this.data.scrollLists.find(field => field.active)
     let item2 = this.data.tabBar.find(field => field.active)

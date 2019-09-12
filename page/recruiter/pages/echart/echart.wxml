@@ -6,15 +6,7 @@
 		color="#22292C">
 	</navbar>
 	
-	<view class="floating-bar" style="top: {{navH}}px">
-		<view class="label">
-			<i class="icon iconfont icon-gongsi"></i>
-			点都德-天河电
-		</view>
-		<i class="icon iconfont icon-disejiantou-you"></i>
-	</view>
-
-	<view class="placeholder"> </view>
+	<chooseOrgEnter detail="{{detail}}"></chooseOrgEnter>
 
 	<view class="scroll-tab">
 		<view

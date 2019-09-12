@@ -1,9 +1,9 @@
 <view class="company-introdution">
-	<navbar title="编辑公司介绍" background="#fff" color="#22292C"></navbar>
+	<navbar title="{{options.type === 'org' ? '编辑机构介绍' : '编辑公司介绍'}}" background="#fff" color="#22292C"></navbar>
 	<view class="edit-box">
 			<textarea
 				bindinput="bindInput"
-				placeholder="描述您公司的背景和业务"
+				placeholder="{{options.type === 'org' ? '描述您机构的背景和业务' : '描述您公司的背景和业务'}}"
 				maxlength="5000"
 				value="{{intro}}" />
 			<view class="controls">

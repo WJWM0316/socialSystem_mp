@@ -11,7 +11,8 @@ import {
 } from '../../../../config.js'
 
 import {
-  getAdBannerApi
+  getAdBannerApi,
+  getIndexDataApi
 } from '../../../../api/pages/common'
 
 let app = getApp()
@@ -23,36 +24,39 @@ Page({
   data: {
     cdnImagePath: app.globalData.cdnImagePath,
     navH: app.globalData.navHeight,
-    choseType: '',
-    pageCount: 20,
     background: 'transparent',
     hasReFresh: false,
-    onBottomStatus: 0,
     isFixed: true,
     detail: {},
     welcomeWord: '',
     indexShowCount: {
       jobHunterInterestedToR: 0,
       recentInterview: 0,
-      onlinePosition: 0,
       waitingProcessInterview: 0,
       moreRecruiter: [],
-      rankDetail: {
-        currentRank: 0,
-        influence: 0,
-        popularity: 0
-      },
       recruiterInterestedToJ: 0
     },
     banner: {},
     bannerIndex: 0,
     companyInfos: {},
     dataBox: {
-      tabLists: [
+      list: [
+        {
+          number: '0',
+          text: '机构浏览次数',
+          active: true,
+          data: {
+            key: ['22', '23', '24', '25', '26', '27', '28'],
+            value: [
+              [0, 0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0, 0]
+            ]
+          }
+        },
         {
           number: '0',
           text: '职位浏览次数',
-          active: true,
+          active: false,
           data: {
             key: ['22', '23', '24', '25', '26', '27', '28'],
             value: [
@@ -72,22 +76,13 @@ Page({
               [0, 0, 0, 0, 0, 0, 0]
             ]
           }
-        },
-        {
-          number: '0',
-          text: '机构浏览次数',
-          active: false,
-          data: {
-            key: ['22', '23', '24', '25', '26', '27', '28'],
-            value: [
-              [0, 0, 0, 0, 0, 0, 0],
-              [0, 0, 0, 0, 0, 0, 0]
-            ]
-          }
         }
-      ]
+      ],
+      yesterday: '',
+      dayPv: '',
+      dayUv: '',
+      activeIndex: 0
     },
-    echartData: {},
     viewList: [],
     showPublicPositionTips: false
   },
@@ -128,27 +123,25 @@ Page({
     }
   },
   init () {
-    let echartData = this.data.echartData
     if (wx.getStorageSync('choseType') === 'APPLICANT') return
     let userInfo = app.globalData.userInfo
     let companyInfos = app.globalData.recruiterDetails.companyInfo
     if(app.pageInit) {
       userInfo = app.globalData.userInfo
       companyInfos = app.globalData.recruiterDetails.companyInfo
-      echartData = this.data.dataBox.tabLists[0].data
       this.getMixdata()
-      this.setData({userInfo, echartData})
+      this.setData({userInfo})
       this.selectComponent('#bottomRedDotBar').init()
+      this.getIndexData().then(res => this.selectComponent('#indexEchart').init())
       setTimeout(() => this.selectComponent('#indexEchart').init(), 1000)
     } else {
       app.pageInit = () => {
         userInfo = app.globalData.userInfo
         companyInfos = app.globalData.recruiterDetails.companyInfo
-        echartData = this.data.dataBox.tabLists[0].data
         this.getMixdata()
-        this.setData({userInfo, echartData})
+        this.setData({userInfo})
         this.selectComponent('#bottomRedDotBar').init()
-        setTimeout(() => this.selectComponent('#indexEchart').init(), 1000)
+        this.getIndexData().then(res => this.selectComponent('#indexEchart').init())
       }
     }
   },
@@ -341,16 +334,9 @@ Page({
   onClickDataTab(e) {
     let dataBox = this.data.dataBox
     let params = e.currentTarget.dataset
-    let echartData = this.data.echartData
-    let result = null
-    dataBox.tabLists.map((field, index) => {
-      field.active = false
-      if(index === params.index) {
-        field.active = true
-        echartData = field.data
-      }
-    })
-    this.setData({dataBox, echartData}, () => this.selectComponent('#indexEchart').init())
+    dataBox.list.map((field, index) => field.active = index === params.index ? true : false)
+    dataBox.activeIndex = Number(params.index)
+    this.setData({dataBox}, () => this.selectComponent('#indexEchart').init())
   },
   /**
    * @Author   小书包
@@ -361,5 +347,52 @@ Page({
   viewRusumeDetail(e) {
     let params = e.currentTarget.dataset
     wx.navigateTo({url: `${COMMON}resumeDetail/resumeDetail?uid=${params.jobhunteruid}`})
+  },
+  /**
+   * @Author   小书包
+   * @DateTime 2019-09-12
+   * @detail   获取数据接口
+   * @return   {[type]}   [description]
+   */
+  getIndexData() {
+    return getIndexDataApi().then(res => {
+      let dataBox = this.data.dataBox
+      let echartData = this.data.echartData
+      // let myDay = new Date()
+      // myDay.setTime(myDay.getTime() - 1 * 24 * 60 * 60 * 1000)
+      // dataBox.yesterday = myDay.getMonth() + 1 + '月' + myDay.getDate() + '日'
+
+      let key = []
+      let value = [[],[]]
+      dataBox.list[0].number = res.data.currentData.company
+      dataBox.list[1].number = res.data.currentData.position
+      dataBox.list[2].number = res.data.currentData.recruiter
+      
+      res.data.history.map((v, i, arr) => {
+        let date = new Date(v.date)
+        let item = null
+        item = i === 0 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
+        // if(i === 0) {
+        //   item = date.getMonth() + 1 + '月' + date.getDate() + '日'
+        // } else {
+        //   item = date.getDate()
+        // }
+        key.push(item)
+        value[0].push(v.uv)
+        value[1].push(v.pv)
+        if(i === arr.length - 1) {
+          dataBox.dayPv = v.pv
+          dataBox.dayUv = v.uv
+          let myDay = new Date(v.date)
+          dataBox.yesterday = myDay.getMonth() + 1 + '月' + myDay.getDate() + '日'
+        }
+      })
+      dataBox.list.map(v => {
+        v.data.key = key
+        v.data.value = value
+      })
+      dataBox.activeIndex = 0
+      this.setData({ dataBox })
+    })
   }
 })

@@ -132,7 +132,6 @@ export const scanQrcodeApi = (data, hasLoading) => {
   })
 }
 
-
 // 确认登录
 export const scanLoginApi = (data, hasLoading) => {
   return request({
@@ -214,6 +213,16 @@ export const clearReddotApi  = (data, hasLoading) => {
   return request({
     method: 'delete',
     url: `/reddot/clear/${data.jobHunterUid}`,
+    data,
+    hasLoading: false
+  })
+}
+
+// 数去数据接口
+export const getIndexDataApi  = (data, hasLoading) => {
+  return request({
+    method: 'get',
+    url: `/social/data/index`,
     data,
     hasLoading: false
   })

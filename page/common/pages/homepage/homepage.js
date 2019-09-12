@@ -40,7 +40,7 @@ Page({
     isFixed: false,
     isRecruiter: app.globalData.isRecruiter,
     isIphoneX: app.globalData.isIphoneX,
-
+    isBangs: app.globalData.isBangs,
     map: {
       longitude: 0,
       latitude: 0,
@@ -176,6 +176,9 @@ Page({
         break
       case 'recruitersList':
         wx.navigateTo({url: `${RECRUITER}user/company/recruiterList/recruiterList?companyId=${this.data.companyInfos.id}`})
+        break
+      case 'otherOrgList':
+        wx.navigateTo({url: `${RECRUITER}organization/list/list?companyId=${this.data.companyInfos.id}`})
         break
       case 'introductionMore':
         wx.navigateTo({url: `${COMMON}homepageMore/homepageMore`})

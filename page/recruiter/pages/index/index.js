@@ -237,6 +237,11 @@ Page({
         wx.navigateTo({url: `${RECRUITER}position/post/post`})
         break
       case 'qr-mechanism':
+        // 超管可以选择机构
+        if (app.globalData.recruiterDetails.isCompanyTopAdmin) {
+          wx.navigateTo({url: `${RECRUITER}organization/choose/choose?type=createQr&companyId=${app.globalData.recruiterDetails.companyTopId}`})
+          return
+        }
         wx.navigateTo({url: `${RECRUITER}createQr/createQr?type=qr-mechanism`})
         break
       case 'qr-position':
@@ -257,6 +262,11 @@ Page({
         wx.reLaunch({url: `${RECRUITER}position/index/index`})
         break
       case 'poster-mechanism':
+        // 超管可以选择机构
+        if (app.globalData.recruiterDetails.isCompanyTopAdmin) {
+          wx.navigateTo({url: `${RECRUITER}organization/choose/choose?type=createPost&companyId=${app.globalData.recruiterDetails.companyTopId}`})
+          return
+        }
         // 该机构的职位上线状态
         if(this.data.detail.positionNum) {
           wx.navigateTo({url: `${COMMON}poster/createPost/createPost?type=company&companyId=${this.data.detail.companyId}`})
@@ -276,7 +286,7 @@ Page({
       case 'recruiter-mechanism':
         // 该机构的职位上线状态
         if(this.data.detail.positionNum) {
-          wx.navigateTo({url: `${COMMON}poster/createPost/createPost`})
+          wx.navigateTo({url: `${COMMON}poster/createPost/createPost?type=recruiter&uid=${app.globalData.recruiterDetails.uid}`})
         } else {
           this.setData({showPublicPositionTips: true})
         }

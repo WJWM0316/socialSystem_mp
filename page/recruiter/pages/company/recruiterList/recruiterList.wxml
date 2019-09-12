@@ -1,5 +1,5 @@
 <view class="recruiterList">
-	<navbar title="公司面试官" background="#fff" color="#22292C"></navbar>
+	<navbar title="全部招聘官" background="#fff" color="#22292C"></navbar>
 		<chooseOrgEnter></chooseOrgEnter>
 	  <view class="todo-tab" bindtap="routeJump" wx:if="{{isCompanyAdmin && !isTopCompanyAdmin}}">
 	  	<i class="icon iconfont icon-tongzhi icon1"></i>

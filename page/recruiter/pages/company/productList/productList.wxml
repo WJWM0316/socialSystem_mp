@@ -12,7 +12,9 @@
 				</view>
 				<view class="second">{{item.lightspot}}</view>
 			</view>
-			<view class="edit-box" bindtap="edit" data-id="{{item.id}}"><i class="icon iconfont icon-bianji"></i></view>
+
+			<view wx:if="{{options.type !== 'choose'}}" class="edit-box" bindtap="edit" data-id="{{item.id}}"><i class="icon iconfont icon-bianji"></i></view>
+			<view wx:else><i class="icon iconfont icon-bianji"></i></view>
 		</view>
 	</view>
 	<view class="footer">

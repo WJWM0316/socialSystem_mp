@@ -32,7 +32,7 @@
 			<i class="icon iconfont icon-xiangyou"></i>
 		</view>
 		<view class="li" bindtap="routeJump" data-route="organization">
-			<i class="icon iconfont icon-gongsi1 label-icon"></i>
+			<i class="icon iconfont icon-wodejigou label-icon"></i>
 			<view class="text">我的机构</view>
 			<i class="icon iconfont icon-xiangyou"></i>
 		</view>

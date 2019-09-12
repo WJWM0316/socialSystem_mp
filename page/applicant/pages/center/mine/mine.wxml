@@ -42,7 +42,7 @@
     <view class="entry-list">
   		<view class="li" bindtap="jump" data-type="interest">
   			<view>
-          <i class="icon iconfont icon-ganxingqu"></i>
+          <i class="icon iconfont icon-wodeguanzhux"></i>
           <view class="text">我关注的</view>
         </view>
   			<view class='arrow-box'>

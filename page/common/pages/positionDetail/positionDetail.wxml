@@ -71,7 +71,7 @@
 					</view>
 					<view class="content">
 						<view class="company-name">{{detail.companyInfo.companyName}}</view>
-						<view class="infos">{{detail.companyInfo.industry}} · {{detail.companyInfo.employeesInfo}}</view>
+						<view class="infos">{{detail.companyInfo.industry}} · {{detail.companyInfo.financingInfo}} · {{detail.companyInfo.employeesInfo}}</view>
 					</view>
 					<view class="right">
 						<i class="icon iconfont icon-xiangyou"></i>

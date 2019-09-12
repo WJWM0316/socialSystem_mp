@@ -150,11 +150,6 @@ Page({
                       id = options.uid
                       break
                   }
-                  app.shareStatistics({
-                    id: id,
-                    type: paramsType,
-                    channel: paramsChannel
-                  })
                 }
               })
             },

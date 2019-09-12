@@ -1,6 +1,7 @@
 <form bindsubmit="formSubmit" report-submit='{{true}}'>
 
 	<view class="homepage" wx:if="{{companyInfos.status === 1}}">
+
 		<navbar
 			title="{{companyInfos.companyName}}"
 			background="{{choseType === 'RECRUITER' ? '#fff' : '#652791'}}" color="{{choseType === 'RECRUITER' ? '#22292C' : '#fff'}}"
@@ -14,14 +15,17 @@
 	  </view>
 
 		<view class="banner">
-			<view class="filterBg"><image class="bgImg" src="{{companyInfos.logoInfo.smallUrl}}"></image></view>
+			<view class="filterBg" style="height: {{!isBangs ? '225rpx' : '272rpx'}}">
+				<image class="logoBg" src="{{cdnImagePath}}{{!isBangs ? 'headCom1.png?a=2' : 'headCom2.png?a=2'}}" mode="widthFix"></image>
+				<image class="bgImg" src="{{companyInfos.logoInfo.smallUrl}}" mode="widthFix"></image>
+			</view>
 			
 			<view class="box">
 				<view class="company-logo">
 					<image class="logo" src="{{companyInfos.logoInfo.smallUrl}}" mode="aspectFit"></image>
 				</view>
 				<view class="company-name">{{companyInfos.companyName}}</view>
-				<view class="infos">{{companyInfos.industry}} | {{companyInfos.employeesInfo}}</view>
+				<view class="infos">{{companyInfos.industry}} | {{companyInfos.financingInfo}} | {{companyInfos.employeesInfo}}</view>
 			</view>
 			<shareBtn></shareBtn>
 		</view>
@@ -46,7 +50,7 @@
 			</view>
 		</view>
 
-		<view class="introduction" wx:if="{{companyInfos.intro || companyInfos.albumInfo.length }}">
+		<view class="introduction" wx:if="{{companyInfos.intro || companyInfos.albumInfo.length}}">
 			<view class="title">
 				<view class="icon"> <view class="fan"></view> </view> 公司介绍
 			</view>
@@ -94,7 +98,7 @@
 				</view>
 			</view>
 			<view class="footer" wx:if="{{otherOrgList.length > 3}}">
-				<view class="button" bindtap="routeJump" data-route="recruitersList">查看全部分机构<i class="icon iconfont icon-xiangyou"></i></view>
+				<view class="button" bindtap="routeJump" data-route="otherOrgList">查看全部分机构<i class="icon iconfont icon-xiangyou"></i></view>
 			</view>
 		</view>
 		
@@ -113,23 +117,23 @@
 			</view>
 			<view class="ul">
 				<button form-type="submit" class="clear-style li" wx:for="{{companyInfos.product}}" wx:key="{{index}}" wx:for-item="item">
-					<view class="base">
-						<view class="img-box">
-							<image mode="aspectFit" src="{{item.logoInfo.smallUrl}}" />
-						</view>
-						<view class="content">
-							<view class="row-one">
-								<view class="username">{{item.productName}}</view>
-								<view class="recruitment-number">{{item.slogan}}</view>
+					<div class="contentInner">
+						<view class="base">
+							<view class="img-box">
+								<image mode="aspectFit" src="{{item.logoInfo.smallUrl}}" />
+							</view>
+							<view class="content">
+								<view class="row-one">
+									<view class="username">{{item.productName}}</view>
+									<view class="recruitment-number">{{item.slogan}}</view>
+								</view>
 							</view>
 						</view>
-					</view>
-					<view class="row-two"># {{item.lightspot}}</view>
+						<view class="row-two"># {{item.lightspot}}</view>
+					</div>
 				</button>
 			</view>
 		</view>
-
-		
 
 		<view class="company-website" wx:if="{{companyInfos.website}}">
 			<view class="title">

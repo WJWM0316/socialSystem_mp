@@ -1,5 +1,5 @@
 import{getCompanyOrglistApi} from '../../../../../api/pages/company.js'
-import {COMMON} from '../../../../../config.js'
+import {COMMON, RECRUITER} from '../../../../../config.js'
 const app = getApp()
 let timer = null,
     keyword = null
@@ -12,12 +12,14 @@ Page({
     placeholder: '\ue635 请输入机构名称',
     navH: app.globalData.navHeight,
     keyword: '',
-    orgList: []
+    orgList: [],
+    options: {}
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({options})
     this.getList()
   },
   bindInput (e) {
@@ -26,7 +28,6 @@ Page({
     keyword = value
 
     timer = setTimeout(() => {
-      console.log(keyword)
       this.getList()
       clearTimeout(timer)
     }, 100)
@@ -41,7 +42,7 @@ Page({
     getCompanyOrglistApi(parmas).then(res => {
       if (!res.data.length) return
       orgList = res.data
-      if (chooseItem) {
+      if (chooseItem && !this.data.options.type) {
         orgList.filter(item => {
           if (item.id === chooseItem.id) item.active = true
         })
@@ -58,8 +59,16 @@ Page({
     })
     orgList[index].active = true
     this.setData({orgList}, () => {
-      wx.setStorageSync('orgData', item)
-      wx.navigateBack({delta: 1})
+      if (!this.data.options.type) {
+        wx.setStorageSync('orgData', item)
+        wx.navigateBack({delta: 1})
+      } else {
+        if (this.data.options.type === 'createQr') {
+          wx.redirectTo({url: `${RECRUITER}createQr/createQr?type=qr-mechanism`})
+        } else {
+          wx.redirectTo({url: `${COMMON}poster/createPost/createPost?type=company&companyId=${item.id}`})
+        }
+      }
     })
   },
   /**

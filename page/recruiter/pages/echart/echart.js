@@ -21,8 +21,11 @@ Page({
   onShow() {
     let detail = app.globalData.recruiterDetails
     this.setData({detail}, () => {
-      this.setDateLists()
-      this.getSocialDataType().then(() => this.getSocialDataCompany())
+      let btnLists = []
+      this.setData({btnLists}, () => {
+        this.setDateLists()
+        this.getSocialDataType().then(() => this.getSocialDataCompany())
+      })
     })
   },
   getSocialDataCompany(data) {
@@ -31,13 +34,18 @@ Page({
     let item1 = this.data.scrollLists.find(field => field.active)
     let item2 = this.data.tabBar.find(field => field.active)
     let item3 = this.data.btnLists.find(field => field.active)
+    let dataBox = this.data.dataBox
     params.contentType = item2.value
     params.dataType = item1.value
+    dataBox.key = []
+    dataBox.value = []
+    this.setData({dataBox})
     if(this.data.detail.isCompanyTopAdmin) {
       params.companyId = orgData.id
     } else {
       params.companyId = app.globalData.recruiterDetails.companyInfo.id
     }
+    console.log(this.data)
     params.startDate = item3.startDate
     params.endDate = item3.endDate
     return getSocialDataCompanyApi(params).then(res => {
@@ -58,7 +66,6 @@ Page({
       dataBox.value = value
       currentData = res.data.currentData
       this.setData({dataBox, currentData}, () => this.selectComponent('#dataEchart').init())
-      console.log(this.data.dataBox)
     })
   },
   getSocialDataType() {
@@ -92,8 +99,8 @@ Page({
     let startDate1 = this.formatDate(new Date(start1))
     let endDate1 = this.formatDate(new Date(end1))
     let item1 = {
-      startDate1,
-      endDate1,
+      startDate: startDate1,
+      endDate: endDate1,
       active: true,
       text: '近7天',
       id: 7
@@ -106,8 +113,8 @@ Page({
     let startDate2 = this.formatDate(new Date(start2))
     let endDate2 = this.formatDate(new Date(end2))
     let item2 = {
-      startDate2,
-      endDate2,
+      startDate: startDate2,
+      endDate: endDate2,
       active: false,
       text: '近30天',
       id: 30

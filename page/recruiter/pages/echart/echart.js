@@ -29,6 +29,7 @@ Page({
     })
   },
   getSocialDataCompany(data) {
+    console.log(this.data, 'before')
     let orgData = wx.getStorageSync('orgData')
     let params = {}
     let item1 = this.data.scrollLists.find(field => field.active)
@@ -45,7 +46,6 @@ Page({
     } else {
       params.companyId = app.globalData.recruiterDetails.companyInfo.id
     }
-    console.log(this.data)
     params.startDate = item3.startDate
     params.endDate = item3.endDate
     return getSocialDataCompanyApi(params).then(res => {
@@ -66,6 +66,7 @@ Page({
       dataBox.value = value
       currentData = res.data.currentData
       this.setData({dataBox, currentData}, () => this.selectComponent('#dataEchart').init())
+      console.log(this.data, 'after')
     })
   },
   getSocialDataType() {

@@ -1,5 +1,6 @@
 import {
 	addCompanyApi,
+  putEditCompanyApi
 } from '../../../../../api/pages/company.js'
 import {RECRUITER} from '../../../../../config.js'
 let app = getApp()
@@ -18,18 +19,20 @@ Page({
   },
   onLoad(options) {
     this.setData({options})
-    let orgList = wx.getStorageSync('orgList')
-    if (options.companyId && orgList) {
-      console.log(orgList, 22222222222222222)
-      let orgData = orgList.filter(item => {
-        return item.id === options.companyId
-      })
-      console.log(orgData, 111)
-      let company_name = orgData[0].companyName,
-          phoneNum     = orgData[0].mobile,
-          addressData  = orgData[0].address[0],
-          logoInfo     = orgData[0].upload
-      this.setData({company_name, phoneNum, addressData, logoInfo})
+    let orgList = wx.getStorageSync('orgList').data,
+        companyData = {}
+    if (options.companyId) {
+      if (app.globalData.recruiterDetails.isCompanyTopAdmin) {
+        let orgData = orgList.filter(item => {return item.id === parseInt(options.companyId)})
+        companyData = orgData[0]
+      } else {
+        companyData = app.globalData.recruiterDetails.companyInfo
+      }
+      let company_name = companyData.companyName,
+          phoneNum     = companyData.mobile,
+          addressData  = companyData.address[0],
+          upload       = companyData.logoInfo
+      this.setData({company_name, phoneNum, addressData, upload})
     }
   },
   onShow () {
@@ -68,9 +71,19 @@ Page({
           mobile: data.phoneNum,
           address: [data.addressData]
         }
-    addCompanyApi(params).then(res => {
+    let funApi = null,
+        title  = ''
+    if (this.data.options.companyId) {
+      funApi = putEditCompanyApi
+      title  = '编辑成功'
+      params.id = this.data.options.companyId
+    } else {
+      funApi = addCompanyApi
+      title  = '创建成功'
+    }
+    funApi(params).then(res => {
       app.wxToast({
-        title: '创建成功',
+        title: title,
         icon: 'success',
         callback () {
           wx.navigateBack({delta: 1})

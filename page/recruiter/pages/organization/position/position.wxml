@@ -12,7 +12,7 @@
   <chooseOrgEnter></chooseOrgEnter>
   
   <view class="radio-group">
-    <view class="li" wx:for="{{onLinePositionList.list}}" wx:key="{{index}}" bindtap="onClick" data-index="{{index}}">
+    <view class="li" wx:for="{{onLinePositionList.list}}" wx:key="{{index}}" bindtap="onClick" data-item="{{item}}" data-index="{{index}}">
       <view class="content">
         <view class="title">
           <view class="txt1">{{item.positionName}}</view>

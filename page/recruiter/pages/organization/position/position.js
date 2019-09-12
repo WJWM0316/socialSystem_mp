@@ -110,7 +110,18 @@ Page({
   submit() {
     let buttonClick = this.data.buttonClick
     if(!buttonClick) return
-    wx.redirectTo({url: `${RECRUITER}createQr/createQr?type=qr-position`})
+    switch (this.data.options.type) {
+      case 'qr-position':
+        wx.navigateTo({url: `${RECRUITER}createQr/createQr?type=qr-position`})
+        break
+      case 'ps-position':
+        console.log(this.data.params, 1111)
+        wx.navigateTo({
+          url: `${COMMON}poster/createPost/createPost?type=position&positionId=${this.data.params.item.id}`
+        })
+        break
+    }
+    
   },
   publicPosition() {
     wx.navigateTo({url: `${RECRUITER}position/post/post`})

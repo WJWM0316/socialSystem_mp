@@ -1,5 +1,5 @@
 <view class="product-post">
-	<navbar title="添加机构" background="#fff" color="#22292C" isFixed="{{true}}"></navbar>
+	<navbar title="{{options.companyId ? '编辑机构' : '添加机构'}}" background="#fff" color="#22292C" isFixed="{{true}}"></navbar>
 	<view class="ul">
 		<view class="li flex-box">
 			<view class="key">机构Logo</view>
@@ -33,6 +33,6 @@
 		</view>
 	</view>
 	<view class="footer">
-    <view class="button-save" bindtap="submit" bindtap="post">立即创建</view>
+    <view class="button-save" bindtap="submit" bindtap="post">{{options.companyId ? '编辑机构' : '立即创建'}}</view>
   </view>
 </view>

@@ -17,21 +17,23 @@
 	<view class="placeholder"> </view>
 
 	<view class="scroll-tab">
-		<view class="li active">全部</view>
-		<view class="li">海报扫码</view>
-		<view class="li">小程序码扫码</view>
-		<view class="li">长图扫码</view>
-		<view class="li">分享</view>
-		<view class="li">长按</view>
-		<view class="li">其他</view>
+		<view
+			class="li {{item.active ? 'active' : ''}}"
+			wx:for="{{scrollLists}}"
+			wx:key="{{index}}"
+			bindtap="onTabClick1"
+			data-value="{{item.value}}">{{item.name}}</view>
 	</view>
 	
 	<view class="content">
 
 		<view class="tab-bar">
-			<view class="li active">职位详情页</view>
-			<view class="li">招聘官主页</view>
-			<view class="li">机构主页</view>
+			<view 
+				class="li {{item.active ? 'active' : ''}}" 
+				wx:for="{{tabBar}}" 
+				wx:key="{{index}}"
+				bindtap="onTabClick2"
+				data-value="{{item.value}}">{{item.name}}</view>
 		</view>
 		
 		<view class="data">
@@ -53,12 +55,16 @@
 					<view class="tab3 primary">访问次数</view>
 				</view>
 				<view class="btn-box">
-					<view class="btn1">近7天</view>
-					<view class="btn2">近30天</view>
+					<view
+						class="btn {{ item.active ? 'active' : ''}}"
+						bindtap="onTabClick"
+						wx:for="{{btnLists}}"
+						wx:key="{{index}}"
+						data-index="{{index}}">{{item.text}}</view>
 				</view>
 			</view>
 			<view class="data-echart">
-				<lineChart height="{{'375rpx'}}" id="dataEchart" infos="{{echartData}}"></lineChart>
+				<lineChart height="{{'375rpx'}}" id="dataEchart" infos="{{dataBox}}"></lineChart>
 			</view>
 		</vieW>
 	</view>

@@ -128,7 +128,7 @@ Page({
    */
   bindInput(e) {
     const name = e.detail.value
-    this.debounce(this.getLabelLIsts, null, 500, name)
+    this.debounce(this.getLabelLIsts, null, 100, name)
   },
   /**
    * @Author   小书包

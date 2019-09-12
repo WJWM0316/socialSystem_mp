@@ -157,7 +157,7 @@
 					{{companyInfos.address[0].address}}
 				</view>
 			</view>
-			<view class="phone-box" bindtap="callPhone">
+			<view class="phone-box" bindtap="callPhone" wx:if="{{companyInfos.mobile}}">
 				<i class="icon iconfont icon-shoujihaoma"></i>
 				{{companyInfos.mobile}}
 				<text class="desc">直接拨打，更快面试</text>
@@ -177,9 +177,9 @@
 	</view>
 
 	<notFound
-		msg="{{'oops！找不到这个公司了~'}}"
+		msg="{{'oops！找不到这个机构了~'}}"
 		showHomeBtn="{{showHomeBtn}}"
-		title="{{'公司详情'}}"
+		title="{{'机构详情'}}"
 		wx:if="{{companyInfos.status === 0 || companyInfos.noComany}}">
 	</notFound>
 

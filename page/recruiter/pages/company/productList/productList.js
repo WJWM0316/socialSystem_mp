@@ -31,6 +31,7 @@ Page({
     wx.navigateTo({url: `${RECRUITER}company/postProduct/postProduct?productId=${productId}`})
   },
   add() {
+    // this.selectComponent('#shareBtn').oper()
     wx.navigateTo({url: `${RECRUITER}company/postProduct/postProduct`})
   }
 })

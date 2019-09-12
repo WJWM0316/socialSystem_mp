@@ -105,7 +105,7 @@
 				</button>
 			</form>
 		</view>
-    <bottomStatus  marginTop="{{260}}" status="{{onBottomStatus}}" listData="{{interviewList.list}}" desc="{{hasLogin ? (isJobhunter ? '没有面试记录~' : '你与offer之间就差一份简历~') : '大量名企高薪职位等你开撩'}}">
+    <bottomStatus  marginTop="{{260}}" status="{{onBottomStatus}}" listData="{{interviewList.list}}" desc="{{hasLogin ? (isJobhunter ? '没有面试记录~' : '你与offer之间就差一份简历~') : '还没有数据哦，赶紧去主页看看心仪的好职位吧~'}}">
 		</bottomStatus>
 	</view>
 </view>

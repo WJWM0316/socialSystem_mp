@@ -1,6 +1,29 @@
 <!--components/layout/shareBtn/shareBtn.wxml-->
 
-<form bindsubmit="formSubmit" report-submit='{{true}}'>  
+<form bindsubmit="formSubmit" report-submit='{{true}}'>
+	<block wx:if="{{posterType === 'production'}}">
+
+		<view class="shareBox" hidden="{{!showChoose}}" catchtouchmove>
+			<view class="shareBg" bindtap="close">
+			</view>
+			<view class="posChoseBox" animation="{{animationData}}">
+				<view class="choseBox choseBoxBg"></view>
+				<view class="choseBox">
+					<button form-type="submit" class="share clear-style" bindtap="jump" data-type="chooseProduction">
+						<view class="btnCon btn1">
+							<view class="title">从公司产品中选择</view>
+						</view>
+					</button>
+					<button form-type="submit" class="poster clear-style" bindtap="jump" data-type="addProduction">
+						<view class="btnCon btn2">
+							<view class="title">新建机构产品</view>
+						</view>
+					</button>
+					<button form-type="submit" class="close clear-style" bindtap="close"  hidden="{{!showChoose}}"><i class="icon iconfont icon-cha-cu"></i></button>
+				</view>
+			</view>
+		</view>
+	</block>
 	<block wx:if="{{posterType === 'position'}}">
 		<view class="shareBtn shareBtnBg"></view>
 		<button form-type="submit" class="formIdBtn clear-style shareBtn" bindtap="oper">

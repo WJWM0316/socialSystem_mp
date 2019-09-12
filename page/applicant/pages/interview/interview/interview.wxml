@@ -107,7 +107,7 @@
 				</view>
 			</button>
 		</form>
-		<bottomStatus status="{{applyBottomStatus}}" listData="{{applyData.list}}" desc="{{hasLogin ? (isJobhunter ? '你还没有面试申请记录哟~' : '你与offer之间就差一份简历~') : '大量名企高薪职位等你开撩'}}">
+		<bottomStatus status="{{applyBottomStatus}}" listData="{{applyData.list}}" desc="{{hasLogin ? (isJobhunter ? '你还没有面试申请记录哟~' : '你与offer之间就差一份简历~') : '还没有数据哦，赶紧去主页看看心仪的好职位吧~'}}">
 		</bottomStatus>
 	</view>
 
@@ -151,7 +151,7 @@
 				</view>
 			</button>
 		</form>
-		<bottomStatus status="{{receiveBottomStatus}}" listData="{{receiveData.list}}" desc="{{hasLogin ? (isJobhunter ? '你还没有面试邀请记录哟~' : '你与offer之间就差一份简历~') : '大量名企高薪职位等你开撩'}}">
+		<bottomStatus status="{{receiveBottomStatus}}" listData="{{receiveData.list}}" desc="{{hasLogin ? (isJobhunter ? '你还没有面试邀请记录哟~' : '你与offer之间就差一份简历~') : '还没有数据哦，赶紧去主页看看心仪的好职位吧~'}}">
 		</bottomStatus>
 	</view>
 
@@ -197,7 +197,7 @@
 				</view>
 			</button>
 		</form>
-		<bottomStatus status="{{interviewBottomStatus}}" listData="{{interviewData.list}}" desc="{{hasLogin ? (isJobhunter ? '你还没有面试记录哟~' : '你与offer之间就差一份简历~') : '大量名企高薪职位等你开撩'}}">
+		<bottomStatus status="{{interviewBottomStatus}}" listData="{{interviewData.list}}" desc="{{hasLogin ? (isJobhunter ? '你还没有面试记录哟~' : '你与offer之间就差一份简历~') : '还没有数据哦，赶紧去主页看看心仪的好职位吧~'}}">
 		</bottomStatus>
 	</view>
 	<tabBar id="bottomRedDotBar"></tabBar>

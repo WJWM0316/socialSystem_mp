@@ -1,4 +1,4 @@
-import {COMMON} from '../../../config.js'
+import {COMMON, RECRUITER} from '../../../config.js'
 import localstorage from '../../../utils/localstorage.js'
 const app = getApp()
 const animation = wx.createAnimation({
@@ -86,6 +86,14 @@ Component({
           break
         case 'specialJob':
           wx.navigateTo({url: `${COMMON}poster/createPost/createPost?type=rapidlyViwe`})
+          break
+        case 'production':
+          if (e.currentTarget.dataset.type === 'chooseProduction') {
+            wx.navigateTo({url: `${RECRUITER}company/productList/productList?type=choose&companyId=${app.globalData.recruiterDetails.companyTopId}`})
+          }
+          else {
+            wx.navigateTo({url: `${RECRUITER}company/postProduct/postProduct`})
+          }
           break
       }
       wx.setStorageSync('posterData', this.data.posterData)

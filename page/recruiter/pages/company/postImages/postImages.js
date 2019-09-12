@@ -53,8 +53,9 @@ Page({
     this.setData({imgList})
   },
   submit() {
-    const images = this.data.imgList.map(field => field.id)
-    const id = this.data.options.companyId
+    let images = this.data.imgList.map(field => field.id)
+    let id = this.data.options.companyId
+    if (images.length > 20) images = images.slice(0, 20)
     editCompanyAlbumApi({id, images: images.join(',')})
       .then(() => {
         app.wxToast({title: '保存成功'})

@@ -74,8 +74,8 @@ Component({
       {
         title: '职位',
         flag: 'position',
-        iconPath: `${cdnImagePath}tab_company@3x.png`,
-        selectedIconPath: `${cdnImagePath}tab_company_pre@3x.png`,
+        iconPath: `${cdnImagePath}tab_job_nor@3x.png`,
+        selectedIconPath: `${cdnImagePath}tab_job_sel@3x.png`,
         active: true,
         path: `${APPLICANT}index/index`
       },

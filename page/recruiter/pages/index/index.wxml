@@ -122,6 +122,22 @@
 	</view>
 
 	<view class="make-box">
+<!-- 		<view class="title"><view class="icon"></view>转发小程序</view>
+		<view class="ul2 split-line">
+			<view class="li" bindtap="routeJump" data-route="poster-mechanism">
+				<image src="{{cdnImagePath}}icon-share-jigou_20190912.png" mode="aspectFill" class="img-box"></image>
+				<view class="p">机构</view>
+			</view>
+			<view class="li" bindtap="routeJump" data-route="sharePosition">
+				<image src="{{cdnImagePath}}icon-share-job_20190912.png" mode="aspectFill" class="img-box"></image>
+				<view class="p">职位</view>
+			</view>
+			<view class="li" bindtap="routeJump" data-route="recruiter-mechanism">
+				<image src="{{cdnImagePath}}icon-share-zhaopinguan_20190912.png" mode="aspectFill" class="img-box"></image>
+				<view class="p">招聘官</view>
+			</view>
+		</view> -->
+		
 		<view class="title"><view class="icon"></view>生成招聘海报</view>
 		<view class="ul2 split-line">
 			<view class="li" bindtap="routeJump" data-route="poster-mechanism">
@@ -137,7 +153,6 @@
 				<view class="p">招聘官</view>
 			</view>
 		</view>
-
 		<view class="title"><view class="icon"></view>生成小程序码</view>
 		<view class="ul1">
 			<view class="li" bindtap="routeJump" data-route="qr-mechanism">

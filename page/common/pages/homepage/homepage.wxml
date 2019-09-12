@@ -164,7 +164,8 @@
 			</view>
 		</view>
 
-
+		<view class="technical-support">猎多多提供技术支持</view>
+		<view class="generating-applets" bindtap="getCompanyApplyInfo">我也要生成企业专属招聘小程序<i class="icon iconfont icon-xiangyou"></i></view>
 
 		<view class="toggle" bindtap="toggle" wx:if="{{choseType !== 'RECRUITER'}}">
 			<image class="icon" src="{{cdnImagePath}}{{isRecruiter ? 'btn_b_hp_zhoapin.png' : 'btn_b_hp_zhaoren.png'}}"></image>

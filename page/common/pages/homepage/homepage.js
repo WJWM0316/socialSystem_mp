@@ -1,7 +1,8 @@
 import {
   getCompanyInfosApi,
   getCurCompanyInfosApi,
-  getCompanyOrglistApi
+  getCompanyOrglistApi,
+  getCompanyApplyInfoApi
 } from '../../../../api/pages/company.js'
 
 import {
@@ -224,6 +225,37 @@ Page({
     positionCard = e.detail
   },
   onPullDownRefresh() {
+  },
+  getCompanyApplyInfo() {
+    getCompanyApplyInfoApi({company_id: this.data.companyInfos.id}).then(res => {
+    }).catch(e => {
+      switch(e.code) {
+        case 1:
+          app.wxConfirm({
+            title: '身份切换',
+            content: `是否切换为招聘官身份`,
+            cancelText: '取消',
+            confirmText: '确定',
+            confirmBack: () => {
+              app.toggleIdentity()
+            },
+            cancelBack: () => {}
+          })
+          break
+        case 2:
+          app.wxConfirm({
+            title: '提示',
+            content: `你已经是招聘官，请前往你的企业专属招聘小程序登录使用。`,
+            showCancel: false,
+            confirmText: '关闭',
+            confirmBack: () => {},
+            cancelBack: () => {}
+          })
+          break
+        default:
+          break
+      }
+    })
   },
   onShareAppMessage(options) {
     let that = this

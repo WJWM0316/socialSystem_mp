@@ -132,7 +132,7 @@ Page({
       this.getMixdata()
       this.setData({userInfo})
       this.selectComponent('#bottomRedDotBar').init()
-      this.getIndexData().then(res => this.selectComponent('#indexEchart').init())
+      this.getIndexData({contentType: 1}).then(res => this.selectComponent('#indexEchart').init())
       setTimeout(() => this.selectComponent('#indexEchart').init(), 1000)
     } else {
       app.pageInit = () => {
@@ -141,7 +141,7 @@ Page({
         this.getMixdata()
         this.setData({userInfo})
         this.selectComponent('#bottomRedDotBar').init()
-        this.getIndexData().then(res => this.selectComponent('#indexEchart').init())
+        this.getIndexData({contentType: 1}).then(res => this.selectComponent('#indexEchart').init())
       }
     }
   },
@@ -258,7 +258,7 @@ Page({
         break
       case 'poster-mechanism':
         // 该机构的职位上线状态
-        if(this.data.detail.positionNum) {
+        if(app.globalData.recruiterDetails.companyInfo.positionTotal.online) {
           wx.navigateTo({url: `${COMMON}poster/createPost/createPost?type=company&companyId=${this.data.detail.companyId}`})
           wx.setStorageSync('companyPosterdata', this.data.companyInfos)
         } else {
@@ -334,9 +334,12 @@ Page({
   onClickDataTab(e) {
     let dataBox = this.data.dataBox
     let params = e.currentTarget.dataset
+    let callback = () => {
+      this.getIndexData({contentType: params.index + 1}).then(() => this.selectComponent('#indexEchart').init())
+    }
     dataBox.list.map((field, index) => field.active = index === params.index ? true : false)
     dataBox.activeIndex = Number(params.index)
-    this.setData({dataBox}, () => this.selectComponent('#indexEchart').init())
+    this.setData({dataBox}, () => callback())
   },
   /**
    * @Author   小书包
@@ -354,8 +357,8 @@ Page({
    * @detail   获取数据接口
    * @return   {[type]}   [description]
    */
-  getIndexData() {
-    return getIndexDataApi().then(res => {
+  getIndexData(params) {
+    return getIndexDataApi(params).then(res => {
       let dataBox = this.data.dataBox
       let echartData = this.data.echartData
       // let myDay = new Date()

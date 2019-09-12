@@ -30,18 +30,18 @@
 
 	<view class="introduction">
 		<view class="title">
-			<view class="self-icon"> <view class="fan"></view> </view> 公司介绍
+			<view class="self-icon"> <view class="fan"></view> </view> {{query.type === 'org' ? '机构介绍' : '公司介绍'}}
 			<view class="icon-button" data-route="introduction" bindtap="routeJump" wx:if="{{companyInfos.intro}}"><i class="icon iconfont icon-bianji1"></i></view>
 		</view>
 		<view class="company-detail" wx:if="{{companyInfos.intro}}">
 			<text class="p">{{companyInfos.intro}}</text>
 		</view>
-		<view class="button-placehoder" data-route="introduction" bindtap="routeJump" wx:else>添加公司介绍</view>
+		<view class="button-placehoder" data-route="introduction" bindtap="routeJump" wx:else>{{query.type === 'org' ? '添加机构介绍' : '添加公司介绍'}}</view>
 	</view>
 	
 	<view class="company-images" wx:if="{{!detail.isCompanyTopAdmin}}">
 		<view class="title">
-			<view class="self-icon"> <view class="fan"></view> </view> 公司图片
+			<view class="self-icon"> <view class="fan"></view> </view> {{query.type === 'org' ? '机构图片' : '公司图片'}}
 			<view class="icon-button" data-route="image" bindtap="routeJump" wx:if="{{companyInfos.albumInfo.length}}"><i class="icon iconfont icon-bianji1"></i></view>
 		</view>
 		<view class="ul" wx:if="{{companyInfos.albumInfo.length}}">
@@ -76,7 +76,7 @@
 	
 	<view class="company-address" wx:if="{{!detail.isCompanyTopAdmin}}">
 		<view class="title">
-			<view class="self-icon"> <view class="fan"></view> </view> 公司地址
+			<view class="self-icon"> <view class="fan"></view> </view> {{query.type === 'org' ? '机构地址' : '公司地址'}}
 			<view class="icon-button" data-route="address-post" bindtap="routeJump" wx:if="{{companyInfos.address.length}}"><i class="icon iconfont icon-bianji1"></i></view>
 		</view>
 		<block  wx:if="{{companyInfos.address.length}}">

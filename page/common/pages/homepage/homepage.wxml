@@ -93,7 +93,7 @@
 					</view>
 				</view>
 			</view>
-			<view class="footer" wx:if="{{recruitersList.length > 3}}">
+			<view class="footer" wx:if="{{otherOrgList.length > 3}}">
 				<view class="button" bindtap="routeJump" data-route="recruitersList">查看全部分机构<i class="icon iconfont icon-xiangyou"></i></view>
 			</view>
 		</view>
@@ -115,7 +115,7 @@
 				<button form-type="submit" class="clear-style li" wx:for="{{companyInfos.product}}" wx:key="{{index}}" wx:for-item="item">
 					<view class="base">
 						<view class="img-box">
-							<image mode="aspectFill" src="{{item.logoInfo.smallUrl}}" />
+							<image mode="aspectFit" src="{{item.logoInfo.smallUrl}}" />
 						</view>
 						<view class="content">
 							<view class="row-one">

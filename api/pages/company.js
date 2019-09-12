@@ -54,6 +54,16 @@ export const editApplyCompanyApi = (data, hasLoading) => {
   })
 }
 
+// put编辑公司机构
+export const putEditCompanyApi = (data, hasLoading) => {
+  return request({
+    method: 'put',
+    url: `/company/${data.id}`,
+    data,
+    hasLoading: true
+  })
+}
+
 // 判断是否有申请记录
 export const hasApplayRecordApi = (data, hasLoading) => {
   return request({

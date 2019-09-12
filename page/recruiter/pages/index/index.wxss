@@ -473,14 +473,14 @@
   text-align: left;
 }
 
-.sale-tools .split-line::after{
+.sale-tools .split-line::before{
   display: block;
   height: 30rpx;
   background: #E8E9EB;
   width: 2rpx;
   content: '';
   position: absolute;
-  right: 0;
+  right: 0 !important;
   top: 50%;
   transform: translateY(-50%);
 }

@@ -6,7 +6,8 @@ let noToastUrlArray = [
   '/company/edit_first_step/',
   '/company/notifyadmin',
   '/company/edit_first_step',
-  '/company/self_help_verification'
+  '/company/self_help_verification',
+  '/company/apply_info'
 ]
 let apiVersionList = null
 let toAuth = false,

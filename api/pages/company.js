@@ -548,3 +548,12 @@ export const getCurrentCompanyPositionListApi = (data, hasLoading) => {
   })
 }
 
+// 创建公司页获取详情
+export const getCompanyApplyInfoApi = (data, hasLoading) => {
+  return request({
+    url: `/company/apply_info`,
+    method: 'post',
+    data,
+    hasLoading: false
+  })
+}

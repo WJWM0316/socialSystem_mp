@@ -8,16 +8,13 @@ let app = getApp()
 Page({
   data: {
     navH: app.globalData.navHeight,
-    dataBox: {
-      key: [],
-      value: []
-    },
+    dataBox: {},
     scrollLists: [],
     tabBar: [],
     btnLists: [],
     currentData: {
-      countPv: "34.2k",
-      countUv: "14.5k"
+      countPv: "0",
+      countUv: "0"
     },
     detail: app.globalData.recruiterDetails
   },
@@ -61,6 +58,7 @@ Page({
       dataBox.value = value
       currentData = res.data.currentData
       this.setData({dataBox, currentData}, () => this.selectComponent('#dataEchart').init())
+      console.log(this.data.dataBox)
     })
   },
   getSocialDataType() {

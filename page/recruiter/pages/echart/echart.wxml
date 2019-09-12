@@ -56,7 +56,7 @@
 				</view>
 			</view>
 			<view class="data-echart">
-				<lineChart height="{{'375rpx'}}" id="dataEchart" infos="{{dataBox}}"></lineChart>
+				<lineChart height="{{'375rpx'}}" id="dataEchart" infos="{{ dataBox }}"></lineChart>
 			</view>
 		</vieW>
 	</view>

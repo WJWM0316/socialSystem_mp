@@ -1,6 +1,7 @@
 import {getSelectorQuery} from "../../../../utils/util.js"
 import {getOthersRecruiterDetailApi, getRecruiterDetailApi, giveMecallApi, putLabelFavorApi, removeLabelFavorApi} from "../../../../api/pages/recruiter.js"
 import {getPositionListApi} from "../../../../api/pages/position.js"
+import {getRecruiterQrcodeApi} from '../../../../api/pages/qrcode.js'
 import {getMyCollectUserApi, deleteMyCollectUserApi} from "../../../../api/pages/collect.js"
 import {COMMON,RECRUITER,APPLICANT} from "../../../../config.js"
 import {shareRecruiter} from '../../../../utils/shareWord.js'
@@ -309,12 +310,7 @@ Page({
     if(info.hasDeleted) {
       return app.wxShare({options})
     }
-    app.shareStatistics({
-      id: that.data.options.uid,
-      type: 'recruiter',
-      sCode: that.data.info.sCode,
-      channel: 'card'
-    })
+    app.shareStatistics({type: 'recruiter', infos: info, forwardType: 1})
 　　return app.wxShare({
       options,
       title: shareRecruiter(),

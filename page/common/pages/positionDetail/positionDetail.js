@@ -6,7 +6,6 @@ import {
   getPositionListNumApi,
   getMyPositionApi
 } from '../../../../api/pages/position.js'
-
 import {
   getMycollectPositionApi,
   deleteMycollectPositionApi
@@ -325,18 +324,11 @@ Page({
   onShareAppMessage(options) {
     let that = this
     let detail = this.data.detail
-
-    app.shareStatistics({
-      id: that.data.query.positionId,
-      type: 'position',
-      sCode: that.data.detail.sCode,
-      channel: 'card'
-    })
-    
+    app.shareStatistics({type: 'position', infos: detail, forwardType: 1})
 　　return app.wxShare({
       options,
       title: sharePosition(),
-      path: `${COMMON}positionDetail/positionDetail?positionId=${detail.positionId}&sCode=${detail.sCode}&sourceType=shp`,
+      path: `${COMMON}positionDetail/positionDetail?positionId=${detail.id}&sCode=${detail.sCode}&sourceType=shp`,
       imageUrl: positionCard
     })
   }

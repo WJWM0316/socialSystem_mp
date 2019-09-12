@@ -26,12 +26,12 @@
       <view class="line"></view>
     </view>
     <view class="mainContent">
-      <view class="contentBox">
+      <view class="contentBox" wx:if="{{false}}">
         <view class="dataShow" wx:if="{{!isOwner || !showEdit}}">
-          <view class="dataBox">
+          <!-- <view class="dataBox">
             <view class="data"><text class="num">{{info.viewedCount}}</text>人气</view>
             <view class="data"><text class="num">{{info.influence}}</text>影响力<i class="icon iconfont icon-zhushi" bindtap="toggleShowRules"></i></view>
-          </view>
+          </view> -->
           <!-- <view class="button-bg"  hidden="{{info.isCall}}">
             <button hidden="{{info.isCall}}" form-type="submit" class="callBtn clear-style" bindtap="callBtn">为Ta打Call，提高影响力</button>
             <image src="{{cdnImagePath}}button_bg.png"></image>
@@ -93,7 +93,7 @@
       </view>
 
       <view class="position" wx:if="{{!isOwner || !showEdit}}">
-        <company roleType="detailCompany" cardData="{{info.companyInfo}}"></company>
+        <company roleType="detailCompany" cardData="{{info.companyInfo}}" wx:if="{{!info.isCompanyAdmin}}"></company>
         <view class="positionList" wx:if="{{positionList.total}}">
           <button form-type="submit" class="clear-style positionItem" wx:for="{{positionList.list}}" wx:key="{{index}}" bindtap="jumpPage" data-id="{{item.id}}">
             <view class="positionHead"><text class="positionTitle">{{item.positionName}}</text><text class="money">{{item.emolumentMin * 1000}}~{{item.emolumentMax * 1000}}<text class="moneyTxt">元/月</text></text></view>

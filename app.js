@@ -2,7 +2,7 @@
 import {loginApi, checkSessionKeyApi, bindPhoneApi, uploginApi, authLoginApi} from 'api/pages/auth.js'
 import {formIdApi, shareStatistics, readyStatistics, getVersionListApi} from 'api/pages/common.js'
 import{getCompanyOrglistApi} from 'api/pages/company.js'
-
+import {getPositionQrcodeApi, getRecruiterQrcodeApi, getResumerCodeApi, getCompanyQrcodeApi} from 'api/pages/qrcode.js'
 import {getPersonalResumeApi} from 'api/pages/center.js'
 import {getRecruiterDetailApi} from 'api/pages/recruiter.js'
 import {COMMON,RECRUITER,APPLICANT} from "config.js"
@@ -799,9 +799,21 @@ App({
     }
   },
   // 操作统计
-  shareStatistics ({id, type, channel, sCode}) {
-    shareStatistics({id, type, channel, sCode}).then(res => {
-    })
+  shareStatistics ({type, infos, forwardType}) {
+    switch (type) {
+      case 'position':
+        getPositionQrcodeApi({positionId: infos.id, forwardType})
+        break
+      case 'recruiter':
+        getRecruiterQrcodeApi({recruiterUid: infos.uid, companyId: infos.currentCompanyId, forwardType})
+        break
+      case 'resumer':
+        getResumerCodeApi({resumeUid: infos.uid, forwardType})
+        break
+      case 'company':
+        getCompanyQrcodeApi({companyId: infos.id, forwardType})
+        break
+    }
   },
   // 浏览统计
   readyStatistics ({id=0, page, channel, sCode}) {

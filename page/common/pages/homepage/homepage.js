@@ -270,22 +270,18 @@ Page({
     if(!companyInfos.status) {
       return app.wxShare({options})
     }
-    app.shareStatistics({
-      id: that.data.query.companyId,
-      type: 'company',
-      sCode: that.data.companyInfos.sCode,
-      channel: 'card'
-    })
+    
     if(positionCard){
       imageUrl = positionCard
     }
     if (!this.data.query.companyId) {
       companyId = companyInfos.id
     }
+    app.shareStatistics({type: 'company', infos: companyInfos, forwardType: 1})
 　　return app.wxShare({
       options,
-      title: `${that.data.companyInfos.companyName}正在招聘，马上约面，极速入职！我在店长多多等你！`,
-      path: `${COMMON}homepage/homepage?companyId=${companyId}&sCode=${this.data.companyInfos.sCode}&sourceType=shc`,
+      title: `${companyInfos.companyName}正在招聘，马上约面，极速入职！我在店长多多等你！`,
+      path: `${COMMON}homepage/homepage?companyId=${companyId}&sCode=${companyInfos.sCode}&sourceType=shc`,
       imageUrl: imageUrl
     })
   }

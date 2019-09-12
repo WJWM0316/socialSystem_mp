@@ -63,10 +63,10 @@ Page({
   },
   onShow() {
     if (app.loginInit) {
-      this.init()
+      this.getCompanyDetail().then(() => this.setData({isRecruiter: app.globalData.isRecruiter}))
     } else {
       app.loginInit = () => {
-        this.init()
+        this.getCompanyDetail().then(() => this.setData({isRecruiter: app.globalData.isRecruiter}))
       }
     }
   },
@@ -76,9 +76,9 @@ Page({
       domHeight = res.height
     })
   },
-  init() {
-    return Promise.all([this.getCompanyDetail()]).then(() => this.setData({isRecruiter: app.globalData.isRecruiter}))
-  },
+  // init() {
+  //   return Promise.all([this.getCompanyDetail()]).then(() => this.setData({isRecruiter: app.globalData.isRecruiter}))
+  // },
   toggle () {
     wx.setStorageSync('choseType', 'RECRUITER')
     wx.reLaunch({url: `${RECRUITER}index/index`})
@@ -189,7 +189,6 @@ Page({
 
   viewMap(e) {
     const params = e.currentTarget.dataset
-    console.log(params)
     wx.openLocation({
       latitude: Number(params.latitude),
       longitude: Number(params.longitude),
@@ -225,6 +224,11 @@ Page({
     positionCard = e.detail
   },
   onPullDownRefresh() {
+    this.setData({hasReFresh: true})
+    this.getCompanyDetail(false, false).then(() => {
+      this.setData({isRecruiter: app.globalData.isRecruiter, hasReFresh: false})
+      wx.stopPullDownRefresh()
+    })
   },
   getCompanyApplyInfo() {
     getCompanyApplyInfoApi({company_id: this.data.companyInfos.id}).then(res => {

@@ -158,7 +158,7 @@ export const getCurCompanyInfosApi = (data, hasLoading) => {
     method: 'get',
     url: `/company/getCurrentCompany`,
     data,
-    hasLoading: true
+    hasLoading: false
   })
 }
 

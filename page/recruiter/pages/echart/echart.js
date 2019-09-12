@@ -14,7 +14,11 @@ Page({
     },
     scrollLists: [],
     tabBar: [],
-    btnLists: []
+    btnLists: [],
+    currentData: {
+      countPv: "34.2k",
+      countUv: "14.5k"
+    }
   },
   onShow() {
     let detail = app.globalData.recruiterDetails
@@ -41,7 +45,9 @@ Page({
       let dataBox = this.data.dataBox
       let key = []
       let value = [[],[]]
-      res.data.dateData.map((v,i,arr) => {
+      let currentData = this.data.currentData
+      let list = item3.id === 7 ? res.data.dateData.slice(-7) : res.data.dateData
+      list.map((v,i,arr) => {
         let date = new Date(v.date)
         let item = null
         item = i === 0 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
@@ -51,7 +57,8 @@ Page({
       })
       dataBox.key = key
       dataBox.value = value
-      this.setData({dataBox}, () => this.selectComponent('#dataEchart').init())
+      currentData = res.data.currentData
+      this.setData({dataBox, currentData}, () => this.selectComponent('#dataEchart').init())
     })
   },
   getSocialDataType() {
@@ -88,7 +95,8 @@ Page({
       startDate1,
       endDate1,
       active: true,
-      text: '近7天'
+      text: '近7天',
+      id: 7
     }
 
     let start2 = new Date()
@@ -101,7 +109,8 @@ Page({
       startDate2,
       endDate2,
       active: false,
-      text: '近30天'
+      text: '近30天',
+      id: 30
     }
 
     btnLists.push(item1, item2)

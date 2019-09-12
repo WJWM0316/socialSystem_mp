@@ -38,11 +38,11 @@
 		
 		<view class="data">
 			<view class="item">
-				<view class="number">520</view>
+				<view class="number">{{currentData.countUv}}</view>
 				<view class="text">访问总人数</view>
 			</view>
 			<view class="item">
-				<view class="number">520</view>
+				<view class="number">{{currentData.countPv}}</view>
 				<view class="text">访问总次数</view>
 			</view>
 		</view>

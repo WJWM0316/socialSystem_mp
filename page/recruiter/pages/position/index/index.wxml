@@ -64,13 +64,13 @@
 				</button>
 				<view class="actions">
 					<button form-type="submit" class="share clear-style item" open-type="share" bindtap="routeJump" data-id="{{item.id}}" data-index="{{index}}" data-action="share">
-						<i class="icon iconfont icon-weixin"></i>分享好友
+						<i class="icon iconfont icon-fenxianghaoyou"></i>分享好友
 					</button>
 					<button form-type="submit" class="share clear-style item" bindtap="routeJump" data-action="poster-position" data-position-id="{{item.id}}">
-						<i class="icon iconfont icon-fanhuishouye"></i>生成海报
+						<i class="icon iconfont icon-xingzhuangjiehe"></i>生成海报
 					</button>
 					<button form-type="submit" class="share clear-style item" bindtap="routeJump" data-action="poster-position-long" data-position-id="{{item.id}}">
-						<i class="icon iconfont icon-saoma"></i>生成长图
+						<i class="icon iconfont icon-shengchengchangtu"></i>生成长图
 					</button>
 				</view>
 			</view>

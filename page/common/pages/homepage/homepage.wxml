@@ -117,7 +117,7 @@
 			</view>
 			<view class="ul">
 				<button form-type="submit" class="clear-style li" wx:for="{{companyInfos.product}}" wx:key="{{index}}" wx:for-item="item">
-					<div class="contentInner">
+					<view class="contentInner">
 						<view class="base">
 							<view class="img-box">
 								<image mode="aspectFit" src="{{item.logoInfo.smallUrl}}" />
@@ -130,7 +130,7 @@
 							</view>
 						</view>
 						<view class="row-two"># {{item.lightspot}}</view>
-					</div>
+					</view>
 				</button>
 			</view>
 		</view>

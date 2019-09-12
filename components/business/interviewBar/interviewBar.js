@@ -311,6 +311,7 @@ Component({
 
       // 判断用户是否登录
       if (app.loginInit) {
+        console.log(app.globalData.hasLogin, 1111111111111)
         if (!app.globalData.hasLogin) {
           this.setData({showLoginBox: true})
         } else {
@@ -380,7 +381,9 @@ Component({
           let type = this.data.type
           if ((identity !== 'RECRUITER' && type === 'position') || (identity === 'RECRUITER' && type === 'resume')) {
             if(this.data.currentPage === 'resumeDetail') {
+
               this.getPositionListNum().then(res => {
+                console.log(222222222)
                 if(!res.data.online) {
                   this.setData({show: true})
                 } else {

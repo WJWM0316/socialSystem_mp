@@ -5,8 +5,7 @@
     <view class="head">
       <image class="img" mode="widthFix" src="{{cdnImagePath}}authBg.png"></image>
       <view class="msg">
-        <view class="title">欢迎来到多多招聘系统</view>
-        <view class="txt">店铺招人神器</view>
+        <text class="title">欢迎使用\n多多招聘系统</text>
       </view>
     </view>
     <view class="form">

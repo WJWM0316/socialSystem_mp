@@ -172,10 +172,14 @@ Page({
   onPullDownRefresh() {
     this.selectComponent('#bottomRedDotBar').init()
     this.getMixdata()
+    wx.stopPullDownRefresh()
   },
   onShareAppMessage(options) {
     let that = this,
         companyInfos = wx.getStorageSync('choseType') !== 'RECRUITER' ? this.data.companyInfos : app.globalData.recruiterDetails.companyInfo
+    if (app.globalData.recruiterDetails.isCompanyTopAdmin) {
+      companyInfos.id = app.globalData.recruiterDetails.currentCompanyId + 1
+    }
 　　return app.wxShare({
       options,
       btnTitle: `${companyInfos.companyName}正在招聘，马上约面，极速入职！我在店长多多等你！`,
@@ -293,6 +297,9 @@ Page({
         break
       case 'hidePublicPositionTips':
         this.setData({showPublicPositionTips: false})
+        break
+      case 'candidate':
+        wx.reLaunch({url: `${RECRUITER}candidate/candidate`})
         break
       default:
         break

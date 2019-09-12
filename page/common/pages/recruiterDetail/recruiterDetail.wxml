@@ -93,7 +93,9 @@
       </view>
 
       <view class="position" wx:if="{{!isOwner || !showEdit}}">
+
         <company roleType="detailCompany" cardData="{{info.companyInfo}}" wx:if="{{!info.isCompanyTopAdmin}}"></company>
+
         <view class="positionList" wx:if="{{positionList.total}}">
           <button form-type="submit" class="clear-style positionItem" wx:for="{{positionList.list}}" wx:key="{{index}}" bindtap="jumpPage" data-id="{{item.id}}">
             <view class="positionHead"><text class="positionTitle">{{item.positionName}}</text><text class="money">{{item.emolumentMin * 1000}}~{{item.emolumentMax * 1000}}<text class="moneyTxt">元/月</text></text></view>

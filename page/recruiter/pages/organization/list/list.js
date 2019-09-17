@@ -11,12 +11,15 @@ Page({
   data: {
     placeholder: '\ue635 请输入机构名称',
     navH: app.globalData.navHeight,
-    orgList: []
+    cdnImagePath: app.globalData.cdnImagePath,
+    orgList: [],
+    options: {}
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({options})
     this.getList()
   },
   bindInput (e) {
@@ -81,11 +84,16 @@ Page({
     keyword = null
   },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
+  onShareAppMessage(options) {
+    let imageUrl = `${this.data.cdnImagePath}shareC.png`,
+        companyInfos = options.target.dataset.item
+    app.shareStatistics({type: 'company', infos: companyInfos, forwardType: 2})
+　　return app.wxShare({
+      options,
+      btnTitle: `${companyInfos.companyName}正在招聘，马上约面，极速入职！我在店长多多等你！`,
+      btnPath: `${COMMON}homepage/homepage?companyId=${companyInfos.id}&sCode=${companyInfos.sCode}&sourceType=shc`,
+      btnImageUrl: imageUrl
+    })
   },
 
   /**

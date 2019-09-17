@@ -34,6 +34,8 @@
 	height: 108rpx;
 	position: relative;
 	border-bottom: 1rpx solid #E8E9EB;
+  box-sizing: content-box;
+  text-align: left;
 }
 .list-item:last-child {
 	border: none;

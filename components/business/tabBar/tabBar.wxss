@@ -26,7 +26,7 @@
 .tabIcon {
   width: 54rpx;
   height: 54rpx;
-  display: inline-block;
+  display: block;
 }
 .tabBar-item .p {
   font-size: 20rpx;

@@ -102,7 +102,7 @@
 		<view class="title">营销工具</view>
 		<view class="p2">帮助招聘官快速完成招聘任务</view>
 		<view class="tab-ul">
-			<button class="tab1 left top split-line clear-style" open-type="share">
+			<button class="tab1 left top split-line clear-style" open-type="{{!isCompanyTopAdmin ? 'share' : ''}}" bindtap="{{isCompanyTopAdmin ? 'routeJump' : ''}}" data-route="{{isCompanyTopAdmin ? 'shareCompany' : ''}}">
 				<image src="{{cdnImagePath}}bnt_my_company.png" mode="aspectFill" class="icon"></image>
 				<view class="p">转发机构主页</view>
 			</button>

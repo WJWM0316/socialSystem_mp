@@ -265,7 +265,7 @@ Page({
     if (that.data.info.sourceType === 500 && !this.data.options.relaySourceVkey) {
       params = `${params}&adviser=true`
     }
-    app.shareStatistics({type: 'resumer', infos: info, forwardType: 1})
+    app.shareStatistics({type: 'resumer', infos: info, forwardType: 2})
 　　return app.wxShare({
       options,
       title: shareResume(),

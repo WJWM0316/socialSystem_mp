@@ -3,7 +3,7 @@ const automator = require('miniprogram-automator')
 describe('index', () => {
   let miniProgram
   let page
-
+  
   beforeAll(async () => {
     miniProgram = await automator.launch({
       projectPath: 'path/to/socialSystem_mp'

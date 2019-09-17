@@ -112,7 +112,7 @@ Page({
     if(!buttonClick) return
     switch (this.data.options.type) {
       case 'qr-position':
-        wx.navigateTo({url: `${RECRUITER}createQr/createQr?type=qr-position`})
+        wx.navigateTo({url: `${RECRUITER}createQr/createQr?type=qr-position&positionId=${this.data.params.item.id}`})
         break
       case 'ps-position':
         wx.navigateTo({

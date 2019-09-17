@@ -302,7 +302,7 @@ Page({
     if (!this.data.query.companyId) {
       companyId = companyInfos.id
     }
-    app.shareStatistics({type: 'company', infos: companyInfos, forwardType: 1})
+    app.shareStatistics({type: 'company', infos: companyInfos, forwardType: 2})
 　　return app.wxShare({
       options,
       title: `${companyInfos.companyName}正在招聘，马上约面，极速入职！我在店长多多等你！`,

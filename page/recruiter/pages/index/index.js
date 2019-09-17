@@ -132,7 +132,7 @@ Page({
       this.getMixdata()
       this.setData({userInfo, companyInfos, isCompanyTopAdmin})
       this.selectComponent('#bottomRedDotBar').init()
-      this.getIndexData({contentType: 1}).then(res => this.selectComponent('#indexEchart').init())
+      this.getIndexData(0).then(res => this.selectComponent('#indexEchart').init())
     } else {
       app.pageInit = () => {
         let userInfo = app.globalData.userInfo
@@ -141,7 +141,7 @@ Page({
         this.getMixdata()
         this.setData({userInfo, companyInfos, isCompanyTopAdmin})
         this.selectComponent('#bottomRedDotBar').init()
-        this.getIndexData({contentType: 1}).then(res => this.selectComponent('#indexEchart').init())
+        this.getIndexData(0).then(res => this.selectComponent('#indexEchart').init())
       }
     }
   },
@@ -360,7 +360,7 @@ Page({
     let dataBox = this.data.dataBox
     let params = e.currentTarget.dataset
     let callback = () => {
-      this.getIndexData({contentType: params.index + 1}).then(() => this.selectComponent('#indexEchart').init())
+      this.getIndexData(params.index).then(() => this.selectComponent('#indexEchart').init())
     }
     dataBox.list.map((field, index) => field.active = index === params.index ? true : false)
     dataBox.activeIndex = Number(params.index)
@@ -389,7 +389,7 @@ Page({
    * @detail   获取数据接口
    * @return   {[type]}   [description]
    */
-  getIndexData(data, index = 0) {
+  getIndexData(index = 0) {
     let orgData = wx.getStorageSync('orgData')
     let start = new Date()
     let end = new Date()
@@ -408,73 +408,106 @@ Page({
     return getIndexDataApi(params).then(res => {
       let dataBox = this.data.dataBox
       let echartData = this.data.echartData
-      let companyKey = []
-      let companyValue = [[],[]]
+      let tem = [
+        {
+          key: [],
+          value: [[],[]]
+        },
+        {
+          key: [],
+          value: [[],[]]
+        },
+        {
+          key: [],
+          value: [[],[]]
+        }
+      ]
 
-      let positionKey = []
-      let positionValue = [[],[]]
-
-      let recruiterKey = []
-      let recruiterValue = [[],[]]
-
+      let setDefault = () => {
+        let tem = {}
+        let key = []
+        for(let i = 7; i > 0; i--) {
+          let start = new Date(), day
+          start.setTime(start.getTime() - 24 * i * 60 * 60 * 1000)
+          day = start.getDate()
+          if(i === 7) day = start.getMonth() + 1 + '月' + start.getDate() + '日'
+          key.push(day)
+        }
+        return {
+          key,
+          value: [[0,0,0,0,0,0], [0,0,0,0,0,0]]
+        }
+      }
+      let defaultData = setDefault()
       dataBox.list[0].number = res.data.companyPv
       dataBox.list[1].number = res.data.positionPv
       dataBox.list[2].number = res.data.recruiterPv
       
-      // console.log(res.data.data.recruiter.data)
-      res.data.data.company.data.map((v, i, arr) => {
-        let date = new Date(v.date)
-        let item = null
-        item = i === 0 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
-        companyKey.push(item)
-        companyValue[1].push(v.companyVisitUv)
-        companyValue[0].push(v.companyVisitPv)
-        // if(i === arr.length - 1) {
-        //   dataBox.dayPv = v.companyVisitPv
-        //   dataBox.dayUv = v.companyVisitUv
-        //   let myDay = new Date(v.date)
-        //   dataBox.yesterday = myDay.getMonth() + 1 + '月' + myDay.getDate() + '日'
-        // }
-      })
-      console.log(companyKey, companyValue)
-      res.data.data.position.data.data.map((v, i, arr) => {
-        let date = new Date(v.date)
-        let item = null
-        item = i === 0 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
-        positionKey.push(item)
-        positionValue[1].push(v.recruiterVisitUv)
-        positionValue[0].push(v.recruiterVisitPv)
-        // if(i === arr.length - 1) {
-        //   dataBox.dayPv = v.recruiterVisitPv
-        //   dataBox.dayUv = v.recruiterVisitUv
-        //   let myDay = new Date(v.date)
-        //   dataBox.yesterday = myDay.getMonth() + 1 + '月' + myDay.getDate() + '日'
-        // }
-      })
+      if(res.data.data.company.data.length) {
+        res.data.data.company.data.map((v, i, arr) => {
+          let date = new Date(v.date)
+          let item = null
+          item = i === 0 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
+          tem[0].key.push(item)
+          tem[0].value[0].push(v.companyVisitPv)
+          tem[0].value[1].push(v.companyVisitUv)
+          // if(i === arr.length - 1) {
+          //   dataBox.dayPv = v.companyVisitPv
+          //   dataBox.dayUv = v.companyVisitUv
+          //   let myDay = new Date(v.date)
+          //   dataBox.yesterday = myDay.getMonth() + 1 + '月' + myDay.getDate() + '日'
+          // }
+        })
+      } else {
+        tem[0].key = defaultData.key
+        tem[0].value = defaultData.value
+      }
+      
+      if(res.data.data.position.data.data.length) {
+        res.data.data.position.data.data.map((v, i, arr) => {
+          let date = new Date(v.date)
+          let item = null
+          item = i === 0 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
+          tem[1].key.push(item)
+          tem[1].value[0].push(v.recruiterVisitPv)
+          tem[1].value[1].push(v.recruiterVisitUv)
+          // if(i === arr.length - 1) {
+          //   dataBox.dayPv = v.recruiterVisitPv
+          //   dataBox.dayUv = v.recruiterVisitUv
+          //   let myDay = new Date(v.date)
+          //   dataBox.yesterday = myDay.getMonth() + 1 + '月' + myDay.getDate() + '日'
+          // }
+        })
+      } else {
+        tem[1].key = defaultData.key
+        tem[1].value = defaultData.value
+      }
 
-      res.data.data.recruiter.data.map((v, i, arr) => {
-        let date = new Date(v.date)
-        let item = null
-        item = i === 0 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
-        recruiterKey.push(item)
-        recruiterValue[1].push(v.recruiterVisitUv)
-        recruiterValue[0].push(v.recruiterVisitPv)
-        // if(i === arr.length - 1) {
-        //   dataBox.dayPv = v.recruiterVisitPv
-        //   dataBox.dayUv = v.recruiterVisitUv
-        //   let myDay = new Date(v.date)
-        //   dataBox.yesterday = myDay.getMonth() + 1 + '月' + myDay.getDate() + '日'
-        // }
+      if(res.data.data.recruiter.data.length) {
+        res.data.data.recruiter.data.map((v, i, arr) => {
+          let date = new Date(v.date)
+          let item = null
+          item = i === 0 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
+          tem[2].key.push(item)
+          tem[2].value[0].push(v.recruiterVisitPv)
+          tem[2].value[1].push(v.recruiterVisitUv)
+          // if(i === arr.length - 1) {
+          //   dataBox.dayPv = v.recruiterVisitPv
+          //   dataBox.dayUv = v.recruiterVisitUv
+          //   let myDay = new Date(v.date)
+          //   dataBox.yesterday = myDay.getMonth() + 1 + '月' + myDay.getDate() + '日'
+          // }
+        })
+      } else {
+        tem[2].key = defaultData.key
+        tem[2].value = defaultData.value
+      }
+      
+      dataBox.list.map((v,i,arr) => {
+        v.data.key = tem[i].key
+        v.data.value = tem[i].value
       })
-
-      // dataBox.list[0].data.key = companyKey
-      // dataBox.list[0].data.value = companyValue
-      // dataBox.list[1].data.key = positionKey
-      // dataBox.list[1].data.value = positionValue
-      // dataBox.list[2].data.key = recruiterKey
-      // dataBox.list[2].data.value = recruiterValue
-      dataBox.activeIndex = 0
-      console.log(dataBox)
+      dataBox.activeIndex = index
       this.setData({ dataBox })
     })
   }

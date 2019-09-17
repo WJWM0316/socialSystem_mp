@@ -8,9 +8,25 @@ let app = getApp()
 Page({
   data: {
     navH: app.globalData.navHeight,
-    dataBox: {},
+    dataBox: {
+      list: [],
+      activeIndex: 0
+    },
     scrollLists: [],
-    tabBar: [],
+    tabBar: [
+      {
+        name: '机构主页',
+        active: true
+      },
+      {
+        name: '职位详情页',
+        active: false
+      },
+      {
+        name: '招聘官主页',
+        active: false
+      }
+    ],
     btnLists: [],
     currentData: {
       countPv: "0",
@@ -28,18 +44,53 @@ Page({
       })
     })
   },
-  getSocialDataCompany(data) {
+  getSocialDataCompany() {
     let orgData = wx.getStorageSync('orgData')
     let params = {}
     let item1 = this.data.scrollLists.find(field => field.active)
-    // let item2 = this.data.tabBar.find(field => field.active)
     let item3 = this.data.btnLists.find(field => field.active)
+    let index = this.data.tabBar.findIndex(field => field.active)
     let dataBox = this.data.dataBox
-    // params.contentType = item2.value
+
+    let tem = [
+      {
+        key: [],
+        value: [[],[]]
+      },
+      {
+        key: [],
+        value: [[],[]]
+      },
+      {
+        key: [],
+        value: [[],[]]
+      }
+    ]
+
+    let setDefault = () => {
+      let tem = {}
+      let key = []
+      let value = [[],[]]
+
+      for(let i = item3.id; i > 0; i--) {
+        let start = new Date(), day
+        start.setTime(start.getTime() - 24 * i * 60 * 60 * 1000)
+        day = start.getDate()
+        if(i === item3.id) day = start.getMonth() + 1 + '月' + start.getDate() + '日'
+        key.push(day)
+      }
+
+      for(let i = item3.id; i > 0; i--) {
+        value[0].push(0)
+        value[1].push(0)
+      }
+      return {key, value}
+    }
+    
     params.dataType = item1.value
     dataBox.key = []
     dataBox.value = []
-    this.setData({dataBox})
+
     if(this.data.detail.isCompanyTopAdmin) {
       params.companyId = orgData.id
     } else {
@@ -47,32 +98,84 @@ Page({
     }
     params.startDate = item3.startDate
     params.endDate = item3.endDate
+
     return getSocialDataCompanyApi(params).then(res => {
       let dataBox = this.data.dataBox
-      let key = []
-      let value = [[],[]]
       let currentData = this.data.currentData
-      let list = item3.id === 7 ? res.data.dateData.slice(-7) : res.data.dateData
-      list.map((v,i,arr) => {
-        let date = new Date(v.date)
-        let item = null
-        item = i === 0 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
-        key.push(item)
-        value[1].push(v.uv)
-        value[0].push(v.pv)
-      })
-      dataBox.key = key
-      dataBox.value = value
-      currentData = res.data.currentData
+      let defaultData = setDefault()
+
+      // 机构主页
+      if(res.data.data.company.data.length) {
+        let list = item3.id === 7 ? res.data.data.company.data.slice(-7) : res.data.data.company.data
+        list.map((v,i,arr) => {
+          let date = new Date(v.date)
+          let item = null
+          item = i === 0 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
+          tem[0].key.push(item)
+          tem[0].value[0].push(v.companyVisitPv)
+          tem[0].value[1].push(v.companyVisitUv)
+          tem[0].pv = res.data.data.company.pv
+          tem[0].uv = res.data.data.company.uv
+        })
+      } else {
+        tem[0].key = defaultData.key
+        tem[0].value = defaultData.value
+        tem[0].pv = 0
+        tem[0].uv = 0
+      }
+
+      // 职位详情
+      if(res.data.data.position.data.length) {
+        let list = item3.id === 7 ? res.data.data.position.data.slice(-7) : res.data.data.position.data
+        list.map((v,i,arr) => {
+          let date = new Date(v.date)
+          let item = null
+          item = i === 0 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
+          tem[1].key.push(item)
+          tem[1].value[0].push(v.recruiterVisitPv)
+          tem[1].value[1].push(v.recruiterVisitUv)
+          tem[1].pv = res.data.data.position.pv
+          tem[1].uv = res.data.data.position.uv
+        })
+      } else {
+        tem[1].key = defaultData.key
+        tem[1].value = defaultData.value
+        tem[1].pv = 0
+        tem[1].uv = 0
+      }
+
+      // 招聘管主页
+      if(res.data.data.recruiter.data.length) {
+        let list = item3.id === 7 ? res.data.data.recruiter.data.slice(-7) : res.data.data.recruiter.data
+        list.map((v,i,arr) => {
+          let date = new Date(v.date)
+          let item = null
+          item = i === 0 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
+          tem[2].key.push(item)
+          tem[2].value[0].push(v.recruiterVisitPv)
+          tem[2].value[1].push(v.recruiterVisitUv)
+          tem[2].pv = res.data.data.recruiter.pv
+          tem[2].uv = res.data.data.recruiter.uv
+        })
+      } else {
+        tem[2].key = defaultData.key
+        tem[2].value = defaultData.value
+        tem[2].pv = 0
+        tem[2].uv = 0
+      }
+      tem.map((v,i,arr) => dataBox.list.push(v))
+      dataBox.activeIndex = index
+      currentData.countPv = tem[index].pv
+      currentData.countUv = tem[index].uv
+      dataBox.list[index].key = defaultData.key
+      dataBox.list[index].value = defaultData.value
       this.setData({dataBox, currentData}, () => this.selectComponent('#dataEchart').init())
     })
   },
   getSocialDataType() {
     return getSocialDataTypeApi().then(res => {
       let scrollLists = res.data.firstTab
-      // let tabBar = res.data.secondTab
       scrollLists[0].active = true
-      // tabBar[0].active = true
       this.setData({scrollLists})
     })
   },
@@ -131,7 +234,8 @@ Page({
   onTabClick2(e) {
     let params = e.currentTarget.dataset
     let tabBar = this.data.tabBar
-    tabBar.map(v => v.active = v.value === params.value ? true : false)
-    this.setData({tabBar}, () => this.getSocialDataCompany())
+    let dataBox = this.data.dataBox
+    tabBar.map((v,i) => v.active = i === params.index ? true : false)
+    this.setData({tabBar, dataBox}, () => this.getSocialDataCompany())
   }
 })

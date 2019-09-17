@@ -12,13 +12,11 @@
 	background:rgba(255,220,41,1);
 	border-radius:44rpx;
 	font-size:30rpx;
-	color:#CDCBCF;
 	text-align: center;
-	color:rgba(255,255,255,1);
-	font-size:30rpx;
 	color:rgba(40,40,40,1);
 	position: relative;
-	z-index: 2
+	z-index: 2;
+  font-weight: 700;
 }
 
 .button-submit::before{
@@ -71,9 +69,7 @@
 }
 .canvas {
 	position: fixed;
-	top: 0;
-	right: -100%;
-	opacity: 0
+	top: -1000px;
 }
 .seleted-bar {
   height: 88rpx;

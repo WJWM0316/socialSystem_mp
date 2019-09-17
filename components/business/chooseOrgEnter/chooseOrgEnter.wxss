@@ -9,6 +9,7 @@
 	border-radius:0rpx 0rpx 32rpx 32rpx;
 	box-sizing: border-box;
 	position: fixed;
+  z-index: 1;
 }
 .chooseEnter:after {
 	font-family: 'iconfont';

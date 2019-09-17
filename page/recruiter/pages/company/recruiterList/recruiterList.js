@@ -21,6 +21,7 @@ Page({
     isCompanyAdmin: 0,
     isTopCompanyAdmin: 0,
     options: {},
+    detail: {},
     cdnImagePath: app.globalData.cdnImagePath
   },
   onLoad(options) {
@@ -28,21 +29,27 @@ Page({
   },
   onShow() {
     let recruitersList = {list: [], pageNum: 1, isLastPage: false, isRequire: false}
-
+    let setOrg = () => {
+      if (app.globalData.recruiterDetails.isCompanyTopAdmin) {
+        if (app.setOrgInit) {
+          this.init()
+        } else {
+          app.setOrgInit = () => {
+            this.init()
+          }
+        }
+      } else {
+        this.init()
+      }
+    }
     if (app.pageInit) {
-      this.setData({recruitersList}, () => this.init())
+      this.setData({recruitersList, detail: app.globalData.recruiterDetails}, () => setOrg())
     } else {
-      app.pageInit = () => this.setData({recruitersList}, () => this.init())
+      app.pageInit = () => this.setData({recruitersList, detail: app.globalData.recruiterDetails}, () => setOrg())
     }
   },
   init() {
-    let isCompanyAdmin = this.data.isCompanyAdmin,
-        isTopCompanyAdmin = this.data.isTopCompanyAdmin
-    return app.getRoleInfo().then(res => {
-      isCompanyAdmin = res.data.isCompanyAdmin
-      isTopCompanyAdmin = res.data.isTopAdmin
-      this.setData({isCompanyAdmin, isTopCompanyAdmin}, () => this.getRecruitersList())
-    })
+    return this.getRecruitersList()
   },
   /**
    * @Author   小书包
@@ -54,7 +61,7 @@ Page({
     return new Promise((resolve, reject) => {
       let options = this.data.options
       let params = {page: this.data.recruitersList.pageNum, count: this.data.pageCount}
-      if(!this.data.isTopCompanyAdmin) {
+      if(!app.globalData.recruiterDetails.isCompanyTopAdmin) {
         params.id = options.companyId
       } else {
         let choseItem = wx.getStorageSync('orgData')

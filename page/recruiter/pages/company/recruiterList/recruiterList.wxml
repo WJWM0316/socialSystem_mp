@@ -1,14 +1,12 @@
 <view class="recruiterList">
-	<navbar title="全部招聘官" background="#fff" color="#22292C"></navbar>
-		<chooseOrgEnter></chooseOrgEnter>
-	  <view class="todo-tab" bindtap="routeJump" wx:if="{{isCompanyAdmin && !isTopCompanyAdmin}}">
+	<navbar title="全部招聘官"></navbar>
+		<chooseOrgEnter detail="{{detail}}"></chooseOrgEnter>
+	  <view class="todo-tab" bindtap="routeJump" wx:if="{{detail.isCompanyAdmin && !detail.isCompanyTopAdmin}}">
 	  	<i class="icon iconfont icon-tongzhi icon1"></i>
 	  	面试官加入申请
   		<view class="red-dot" wx:if="{{redDotInfos.applyAuditBar}}"></view>
   		<i class="icon iconfont icon-xiangyou icon2"></i>
  	  </view>
-
-		
 
 		<view hidden="{{!hasReFresh}}">
 	    <refreshStatus></refreshStatus>

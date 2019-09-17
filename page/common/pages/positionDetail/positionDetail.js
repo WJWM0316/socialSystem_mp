@@ -28,7 +28,6 @@ Page({
     recruiterInfo: {},
     findMore: {},
     hasReFresh: false,
-    requireOAuth: false,
     cdnPath: app.globalData.cdnImagePath
   },
   onLoad(options) {
@@ -104,10 +103,6 @@ Page({
     // 需要清除红点
     if(query.type && query.type === 'clear_red_dot') {
       return getMyPositionApi({id: this.data.query.positionId, hasLoading, isReload, ...app.getSource()}).then(res => {
-        let requireOAuth = null
-        if (this.data.query.sCode && !app.globalData.userInfo) {
-          requireOAuth = true
-        }
         if (res.data.lng) {
           res.data.markers = []
           res.data.markers.push({
@@ -124,7 +119,6 @@ Page({
           })
         }
         this.setData({
-          requireOAuth: requireOAuth,
           detail: res.data, 
           companyInfos: res.data.companyInfo, 
           recruiterInfo: res.data.recruiterInfo, 
@@ -136,10 +130,6 @@ Page({
     // 正常获取数据
     return getPositionApi({id: this.data.query.positionId, hasLoading, isReload, ...app.getSource()})
       .then(res => {
-        let requireOAuth = null
-        if (this.data.query.sCode && !app.globalData.userInfo) {
-          requireOAuth = true
-        }
         if (res.data.lng) {
           res.data.markers = []
           res.data.markers.push({
@@ -156,7 +146,6 @@ Page({
           })
         }
         this.setData({
-          requireOAuth: requireOAuth,
           detail: res.data, 
           companyInfos: res.data.companyInfo, 
           recruiterInfo: res.data.recruiterInfo, 
@@ -164,10 +153,6 @@ Page({
         })
         if(this.selectComponent('#interviewBar')) this.selectComponent('#interviewBar').init()
     })
-  },
-  authSuccess () {
-    let requireOAuth = false
-    this.setData({requireOAuth})
   },
 
   /**

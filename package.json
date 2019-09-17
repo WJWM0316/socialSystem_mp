@@ -13,5 +13,8 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {}
+  "dependencies": {},
+  "devDependencies": {
+    "miniprogram-automator": "^0.5.9"
+  }
 }

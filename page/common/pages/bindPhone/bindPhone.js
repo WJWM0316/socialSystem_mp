@@ -1,5 +1,5 @@
 import {COMMON,RECRUITER} from '../../../../config.js'
-import {sendCodeApi, checkSessionKeyApi, changeNewCaptchaApi} from "../../../../api/pages/auth.js"
+import {sendCodeApi, changeNewCaptchaApi} from "../../../../api/pages/auth.js"
 import {quickLoginApi} from '../../../../api/pages/auth.js'
 
 let mobileNumber = 0

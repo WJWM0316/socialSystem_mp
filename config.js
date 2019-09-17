@@ -4,7 +4,7 @@
 
 // 环境切换
 // 0 是测试环境  1 是正式环境
-export const environment = 1
+export const environment = 0
 export const VERSION = 104
 export let APPLICANTHOST = '',
 					 RECRUITERHOST = '',
@@ -13,13 +13,9 @@ export let APPLICANTHOST = '',
 					 NODEHOST = ''
 if (environment === 0) {
 	// 测试服接口
-	// APPLICANTHOST = 'https://qiuzhi-api.lieduoduo.ziwork.com'
-	// RECRUITERHOST = 'https://zhaopin-api.lieduoduo.ziwork.com'
-	// PUBAPIHOST = 'https://pub-api.lieduoduo.ziwork.com'
-	// WEBVIEW = `https://h5.lieduoduo.ziwork.com/`
-	APPLICANTHOST = 'https://qiuzhi-api.dd.lieduoduo.com'
-	RECRUITERHOST = 'https://zhaopin-api.dd.lieduoduo.com'
-	PUBAPIHOST = 'https://pub-api.dd.lieduoduo.com'
+	APPLICANTHOST = 'https://qiuzhi-api.dd.lieduoduo.ziwork.com'
+	RECRUITERHOST = 'https://zhaopin-api.dd.lieduoduo.ziwork.com'
+	PUBAPIHOST = 'https://pub-api.dd.lieduoduo.ziwork.com'
 	NODEHOST = 'https://node.dd.lieduoduo.ziwork.com/frontEnd' // 'http://localhost:3001/frontEnd' 
 	WEBVIEW = `https://h5.lieduoduo.ziwork.com/`
 } else {

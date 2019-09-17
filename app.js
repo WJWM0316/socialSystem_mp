@@ -226,9 +226,11 @@ App({
   },
   // 检查微信授权
   checkLogin () {
+    let sessionToken = wx.getStorageSync('sessionToken')
+    if (!sessionToken) return
     let that = this
     return new Promise((resolve, reject) => {
-      checkSessionKeyApi({session_token: wx.getStorageSync('sessionToken')}).then(res0 => {
+      checkSessionKeyApi({session_token: sessionToken}).then(res0 => {
         wx.getUserInfo({
           success: res => {
             // 可以将 res 发送给后台解码出 unionId
@@ -326,6 +328,7 @@ App({
     if (e.detail.errMsg === 'getPhoneNumber:ok') {
       let data = {
         iv_key: e.detail.iv,
+        code: wx.getStorageSync('code'),
         data: e.detail.encryptedData
       }
       return new Promise((resolve, reject) => {

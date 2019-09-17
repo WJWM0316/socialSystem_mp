@@ -196,6 +196,7 @@
   font-size:28rpx;
   color:#652791;
   font-weight: 700;
+  line-height: 58rpx;
 }
 
 .formIdBtn {

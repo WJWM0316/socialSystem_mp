@@ -61,7 +61,7 @@
 			<view class="text2 color-default">{{pageInfos.rtVersionName}}</view>
 		</view> -->
 
-		<view class="li" bindtap="routeJump" data-route="identity">
+<!-- 		<view class="li" bindtap="routeJump" data-route="identity">
 			<i class="icon iconfont icon-renzheng label-icon"></i>
 			<i class="icon iconfont icon-xiangyou" wx:if="{{!pageInfos.identityAuth}}"></i>
 			<view class="text">认证</view>
@@ -70,7 +70,7 @@
 			<view class="text2 color-pedding" wx:if="{{!pageInfos.identityAuth && pageInfos.identityStatus === 0}}">认证审核中</view>
 			<view class="text2 color-fail" wx:if="{{!pageInfos.identityAuth && pageInfos.identityStatus === 2}}">认证审核失败</view>
 		</view>
-
+ -->
 		<!-- <view class="li">
 			<i class="icon iconfont icon-kefu label-icon"></i>
 			<view class="text">在线咨询</view>

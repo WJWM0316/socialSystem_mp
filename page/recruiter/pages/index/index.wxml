@@ -217,7 +217,7 @@
 			<view
 				class="button"
 				bindtap="routeJump"
-				data-action="position">
+				data-route="position">
 				去发布/开放职位
 			</view>
 		</view>

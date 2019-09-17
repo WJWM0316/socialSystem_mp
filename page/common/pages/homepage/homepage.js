@@ -34,7 +34,7 @@ Page({
     query: {},
     companyInfos: {},
     otherOrgList: [],
-
+    hasLogin: 0,
     cdnImagePath: app.globalData.cdnImagePath,
     typeId: null,
     isFixed: false,
@@ -62,11 +62,12 @@ Page({
     positionCard = ''
   },
   onShow() {
+    let hasLogin = wx.getStorageSync('token')
     if (app.loginInit) {
-      this.getCompanyDetail().then(() => this.setData({isRecruiter: app.globalData.isRecruiter}))
+      this.getCompanyDetail().then(() => this.setData({isRecruiter: app.globalData.isRecruiter, hasLogin}))
     } else {
       app.loginInit = () => {
-        this.getCompanyDetail().then(() => this.setData({isRecruiter: app.globalData.isRecruiter}))
+        this.getCompanyDetail().then(() => this.setData({isRecruiter: app.globalData.isRecruiter, hasLogin}))
       }
     }
   },
@@ -239,7 +240,24 @@ Page({
     })
   },
   getCompanyApplyInfo() {
+    // 没有登录 择进入登录页面
+    if(!this.data.hasLogin) {
+      wx.navigateTo({url: `${APPLICANT}center/mine/mine`})
+      return
+    }
     getCompanyApplyInfoApi({company_id: this.data.companyInfos.id}).then(res => {
+      wx.setStorageSync('choseType', 'RECRUITER')
+      switch(res.data.step) {
+        case 1:
+          wx.reLaunch({url: `${RECRUITER}user/company/apply/apply`})
+          break
+        case 2:
+          wx.reLaunch({url: `${RECRUITER}user/company/createdCompanyInfos/createdCompanyInfos`})
+          break
+        default:
+          wx.reLaunch({url: `${RECRUITER}user/company/status/status?from=company`})
+          break
+      }
     }).catch(e => {
       switch(e.code) {
         case 1:

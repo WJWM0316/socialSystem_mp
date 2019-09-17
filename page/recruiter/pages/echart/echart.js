@@ -29,7 +29,6 @@ Page({
     })
   },
   getSocialDataCompany(data) {
-    console.log(this.data, 'before')
     let orgData = wx.getStorageSync('orgData')
     let params = {}
     let item1 = this.data.scrollLists.find(field => field.active)
@@ -59,14 +58,13 @@ Page({
         let item = null
         item = i === 0 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
         key.push(item)
-        value[0].push(v.uv)
-        value[1].push(v.pv)
+        value[1].push(v.uv)
+        value[0].push(v.pv)
       })
       dataBox.key = key
       dataBox.value = value
       currentData = res.data.currentData
       this.setData({dataBox, currentData}, () => this.selectComponent('#dataEchart').init())
-      console.log(this.data, 'after')
     })
   },
   getSocialDataType() {

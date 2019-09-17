@@ -255,7 +255,7 @@ Page({
           wx.reLaunch({url: `${RECRUITER}user/company/createdCompanyInfos/createdCompanyInfos`})
           break
         default:
-          wx.reLaunch({url: `${RECRUITER}user/company/status/status?from=company`})
+          wx.reLaunch({url: `${RECRUITER}user/company/status/status?from=${res.data.status === 1 ?'company' : 'join'}`})
           break
       }
     }).catch(e => {

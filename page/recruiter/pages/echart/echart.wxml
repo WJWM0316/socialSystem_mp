@@ -25,7 +25,7 @@
 				wx:for="{{tabBar}}" 
 				wx:key="{{index}}"
 				bindtap="onTabClick2"
-				data-value="{{item.value}}">{{item.name}}</view>
+				data-index="{{index}}">{{item.name}}</view>
 		</view>
 		
 		<view class="data">
@@ -56,7 +56,7 @@
 				</view>
 			</view>
 			<view class="data-echart">
-				<lineChart height="{{'375rpx'}}" id="dataEchart" infos="{{ dataBox }}"></lineChart>
+				<lineChart height="{{'375rpx'}}" id="dataEchart" infos="{{ dataBox.list[dataBox.activeIndex] }}"></lineChart>
 			</view>
 		</vieW>
 	</view>

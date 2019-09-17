@@ -98,6 +98,7 @@ Page({
   bindChange(e) {
     let type = ''
     let value = 0
+    console.log(e.currentTarget.dataset.type)
     switch(e.currentTarget.dataset.type) {
       case 'applyStatus':
         type = 'applyIndex'
@@ -145,7 +146,7 @@ Page({
           this.setData({[type]: value, [data]: dataValue}, () => this.getApplyList())
         } else if (this.data.tabIndex === 0) {
           data = 'receiveData'
-          this.setData({[type]: value, [data]: dataValue}, () => this.getApplyList())
+          this.setData({[type]: value, [data]: dataValue}, () => this.getInviteList())
         }
         break
     }
@@ -248,6 +249,7 @@ Page({
   init () {
     let options = this.data.options
     this.initTabRedDot()
+    console.log(this.data.tabIndex)
     if(app.globalData.isRecruiter) {
       getRecruiterPositionListApi({is_online: 1, count: 50, page: 1}).then(res => {
         positionList = res.data

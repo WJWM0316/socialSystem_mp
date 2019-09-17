@@ -29,14 +29,13 @@ Page({
     })
   },
   getSocialDataCompany(data) {
-    console.log(this.data, 'before')
     let orgData = wx.getStorageSync('orgData')
     let params = {}
     let item1 = this.data.scrollLists.find(field => field.active)
-    let item2 = this.data.tabBar.find(field => field.active)
+    // let item2 = this.data.tabBar.find(field => field.active)
     let item3 = this.data.btnLists.find(field => field.active)
     let dataBox = this.data.dataBox
-    params.contentType = item2.value
+    // params.contentType = item2.value
     params.dataType = item1.value
     dataBox.key = []
     dataBox.value = []
@@ -59,23 +58,22 @@ Page({
         let item = null
         item = i === 0 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
         key.push(item)
-        value[0].push(v.uv)
-        value[1].push(v.pv)
+        value[1].push(v.uv)
+        value[0].push(v.pv)
       })
       dataBox.key = key
       dataBox.value = value
       currentData = res.data.currentData
       this.setData({dataBox, currentData}, () => this.selectComponent('#dataEchart').init())
-      console.log(this.data, 'after')
     })
   },
   getSocialDataType() {
     return getSocialDataTypeApi().then(res => {
       let scrollLists = res.data.firstTab
-      let tabBar = res.data.secondTab
+      // let tabBar = res.data.secondTab
       scrollLists[0].active = true
-      tabBar[0].active = true
-      this.setData({scrollLists, tabBar})
+      // tabBar[0].active = true
+      this.setData({scrollLists})
     })
   },
   onTabClick(e) {

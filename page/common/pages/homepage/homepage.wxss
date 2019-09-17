@@ -25,7 +25,7 @@
 .banner {
   overflow: hidden;
   position: relative;
-  margin-bottom: 30rpx;
+  margin-bottom: 42rpx;
 }
 .filterBg {
   width: 100%;
@@ -66,10 +66,13 @@
   position: relative;
   overflow: hidden;
   display: inline-block;
+  vertical-align: text-bottom;
 }
 
 .position-box{
   padding: 0 40rpx;
+  position: relative;
+  line-height: 36rpx;
 }
 
 .position-box .infos1 {
@@ -96,14 +99,17 @@
 }
 .position-box .icon-dizhi{
   position: absolute;
-  top: 50%;
-  left: 0rpx;
-  font-size: 26rpx;
+  top: 54%;
+  left: 40rpx;
+  font-size: 30rpx;
   font-weight: 400;
-  transform: translate3d(0, -50%, 0);
-  color: #5C565D;
+  transform: translateY(-50%);
+  color: #000000;
   display: inline-block;
-  margin-right: 10rpx;
+  width: 36rpx;
+  height: 36rpx;
+  line-height: 36rpx;
+  text-align: left;
 }
 
 .position-box .nearly {
@@ -131,6 +137,15 @@
   display: inline-block;
   margin-right: 10rpx;
 }
+
+.phone-box .icon-dianhua{
+  font-size: 28rpx;
+  font-weight: 400;
+  color: #000000;
+  display: inline-block;
+  margin-right: 5rpx;
+}
+
 .phone-box .desc {
   font-size:22rpx;
   color:#652791;
@@ -148,11 +163,11 @@
 
 .banner .company-name {
   font-size:40rpx;
-  font-weight:500;
+  font-weight:700;
   color:rgba(40,40,40,1);
   line-height: 1;
   text-align: center;
-  margin: 20rpx auto 18rpx auto;
+  margin: 28rpx auto 16rpx auto;
 }
 
 .banner .infos {
@@ -204,6 +219,7 @@
 .mechanism .li .img-box .avatar{
   width: 100%;
   height: 100%;
+  border-radius:24rpx;
 }
 
 .mechanism .img-box .sign1 {
@@ -232,7 +248,7 @@
   font-weight:500;
   color:rgba(40,40,40,1);
   float: left;
-  max-width: 300rpx;
+  max-width: 400rpx;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -384,7 +400,7 @@
   margin: 0 30rpx;
   background:rgba(255,255,255,1);
   box-shadow:0px 4rpx 20rpx 0rpx rgba(101,39,145,0.1);
-  border-radius:10rpx;
+  border-radius:16rpx;
   margin-bottom: 24rpx;
 }
 
@@ -440,7 +456,7 @@
   background: white;
   background:rgba(255,255,255,1);
   box-shadow:0px 4rpx 20rpx 0rpx rgba(101,39,145,0.1);
-  border-radius:10rpx;
+  border-radius:16rpx;
   overflow: hidden;
 }
 
@@ -578,7 +594,7 @@
   background: white;
   background:rgba(255,255,255,1);
   box-shadow:0px 4rpx 20rpx 0rpx rgba(101,39,145,0.1);
-  border-radius:10rpx;
+  border-radius:16rpx;
   overflow: hidden;
   margin-bottom: 24rpx;
 }
@@ -653,7 +669,7 @@
   background: white;
   background:rgba(255,255,255,1);
   box-shadow:0px 4rpx 20rpx 0rpx rgba(101,39,145,0.1);
-  border-radius:10rpx;
+  border-radius:16rpx;
   overflow: hidden;
   margin-bottom: 24rpx;
 }

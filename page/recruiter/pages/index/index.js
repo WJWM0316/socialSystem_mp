@@ -406,8 +406,8 @@ Page({
         //   item = date.getDate()
         // }
         key.push(item)
-        value[0].push(v.uv)
-        value[1].push(v.pv)
+        value[1].push(v.uv)
+        value[0].push(v.pv)
         if(i === arr.length - 1) {
           dataBox.dayPv = v.pv
           dataBox.dayUv = v.uv

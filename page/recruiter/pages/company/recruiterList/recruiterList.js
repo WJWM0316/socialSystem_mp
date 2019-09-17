@@ -15,7 +15,6 @@ Page({
     recruitersList: {
       list: [],
       pageNum: 1,
-      count: 20,
       isLastPage: false,
       isRequire: false
     },
@@ -28,31 +27,21 @@ Page({
     this.setData({options})
   },
   onShow() {
-    let recruiterInfo = app.globalData.recruiterDetails
-    let recruitersList = {
-      list: [],
-      pageNum: 1,
-      isLastPage: false,
-      isRequire: false
-    }
+    let recruitersList = {list: [], pageNum: 1, isLastPage: false, isRequire: false}
 
-    this.setData({recruitersList})
     if (app.pageInit) {
-      this.init()
+      this.setData({recruitersList}, () => this.init())
     } else {
-      app.pageInit = () => {
-        this.init()
-      }
+      app.pageInit = () => this.setData({recruitersList}, () => this.init())
     }
   },
   init() {
     let isCompanyAdmin = this.data.isCompanyAdmin,
         isTopCompanyAdmin = this.data.isTopCompanyAdmin
-    app.getRoleInfo().then(res => {
+    return app.getRoleInfo().then(res => {
       isCompanyAdmin = res.data.isCompanyAdmin
       isTopCompanyAdmin = res.data.isTopAdmin
-      app.getBottomRedDot().then(res => this.setData({redDotInfos: app.globalData.redDotInfos}))
-      this.setData({isCompanyAdmin, isTopCompanyAdmin}, this.getLists())
+      this.setData({isCompanyAdmin, isTopCompanyAdmin}, () => this.getRecruitersList())
     })
   },
   /**
@@ -61,11 +50,11 @@ Page({
    * @detail   获取招聘团队
    * @return   {[type]}   [description]
    */
-  getLists() {
+  getRecruitersList() {
     return new Promise((resolve, reject) => {
       let options = this.data.options
       let params = {page: this.data.recruitersList.pageNum, count: this.data.pageCount}
-      if (!this.data.isTopCompanyAdmin) {
+      if(!this.data.isTopCompanyAdmin) {
         params.id = options.companyId
       } else {
         let choseItem = wx.getStorageSync('orgData')
@@ -158,7 +147,7 @@ Page({
     let recruitersList = this.data.recruitersList
     if (!recruitersList.isLastPage) {
       this.setData({onBottomStatus: 1})
-      this.getLists(false)
+      this.getRecruitersList(false)
     }
   },
   /**
@@ -169,17 +158,12 @@ Page({
    */
   onPullDownRefresh() {
     let recruitersList = {list: [], pageNum: 1, isLastPage: false, isRequire: false}
+    let callback = () => {
+      this.setData({recruitersList, hasReFresh: false, redDotInfos: app.globalData.redDotInfos})
+      wx.stopPullDownRefresh()
+    }
     this.setData({recruitersList, hasReFresh: true, onBottomStatus: 1})
-    app.getBottomRedDot().then(res => this.setData({redDotInfos: app.globalData.redDotInfos}))
-    this.getLists().then(res => {
-      let recruitersList = this.data.recruitersList
-      let onBottomStatus = res.meta && res.meta.nextPageUrl ? 0 : 2
-      recruitersList.list = res.data
-      recruitersList.isLastPage = res.meta && res.meta.nextPageUrl ? false : true
-      recruitersList.pageNum = 2
-      recruitersList.isRequire = true
-      this.setData({recruitersList, onBottomStatus, hasReFresh: false}, () => wx.stopPullDownRefresh())
-    })
+    this.init().then(() => callback())
   },
   routeJump() {
     wx.navigateTo({url: `${RECRUITER}company/verify/verify`})

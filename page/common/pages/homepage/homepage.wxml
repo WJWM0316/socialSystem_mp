@@ -25,7 +25,7 @@
 					<image class="logo" src="{{companyInfos.logoInfo.smallUrl}}" mode="aspectFit"></image>
 				</view>
 				<view class="company-name">{{companyInfos.companyName}}</view>
-				<view class="infos">{{companyInfos.industry}} | {{companyInfos.financingInfo}} | {{companyInfos.employeesInfo}}</view>
+				<view class="infos">{{companyInfos.industry}} · {{companyInfos.financingInfo}} · {{companyInfos.employeesInfo}}</view>
 			</view>
 			<shareBtn></shareBtn>
 		</view>
@@ -150,6 +150,7 @@
 				<view class="icon"> <view class="fan"></view> </view> 联系方式
 			</view>
 			<view class="position-box">
+				<i class="icon iconfont icon-dizhi"></i>
 				<view
 					class="infos1"
 					bindtap="viewMap"
@@ -157,7 +158,6 @@
 					data-doorplate="{{companyInfos.address[0].doorplate}}"
 					data-latitude="{{companyInfos.address[0].lat}}"
 					data-longitude="{{companyInfos.address[0].lng}}">
-					<i class="icon iconfont icon-dizhi"></i>
 					{{companyInfos.address[0].address}}
 				</view>
 			</view>

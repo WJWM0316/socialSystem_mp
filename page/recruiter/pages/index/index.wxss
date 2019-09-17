@@ -567,8 +567,8 @@
 }
 
 .make-box .img-box {
-  width: 66rpx;
-  height: 66rpx;
+  width: 76rpx;
+  height: 76rpx;
   display: inline-block;
 }
 

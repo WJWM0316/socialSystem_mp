@@ -111,7 +111,7 @@ Page({
       wx.downloadFile({
         url: bgUrl,
         success(res) {
-          avatarUrl = loadResult(res, resolve)
+          bgUrl = loadResult(res, resolve)
         },
         fail(e) {
           app.wxToast({title: '图片加载失败，请重新生成', callback() {wx.navigateBack({ delta: 1 })}})

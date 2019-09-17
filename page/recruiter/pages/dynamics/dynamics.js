@@ -75,7 +75,7 @@ Page({
    * @return   {[type]}              [description]
    */
   onPullDownRefresh(hasLoading = true) {
-    let key = this.data.tab
+    let key = this.data.tab === 'interestList' ? 'viewList' : 'interestList'
     let value = {list: [], pageNum: 1, isLastPage: false, isRequire: false, onBottomStatus: 0}
     let callback = () => {
       this.setData({hasReFresh: false})

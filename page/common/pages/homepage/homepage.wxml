@@ -25,7 +25,7 @@
 					<image class="logo" src="{{companyInfos.logoInfo.smallUrl}}" mode="aspectFit"></image>
 				</view>
 				<view class="company-name">{{companyInfos.companyName}}</view>
-				<view class="infos">{{companyInfos.industry}} | {{companyInfos.financingInfo}} | {{companyInfos.employeesInfo}}</view>
+				<view class="infos">{{companyInfos.industry}} · {{companyInfos.financingInfo}} · {{companyInfos.employeesInfo}}</view>
 			</view>
 			<shareBtn></shareBtn>
 		</view>

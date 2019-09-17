@@ -25,7 +25,7 @@
 .banner {
   overflow: hidden;
   position: relative;
-  margin-bottom: 30rpx;
+  margin-bottom: 42rpx;
 }
 .filterBg {
   width: 100%;
@@ -66,6 +66,7 @@
   position: relative;
   overflow: hidden;
   display: inline-block;
+  vertical-align: text-bottom;
 }
 
 .position-box{
@@ -162,11 +163,11 @@
 
 .banner .company-name {
   font-size:40rpx;
-  font-weight:500;
+  font-weight:700;
   color:rgba(40,40,40,1);
   line-height: 1;
   text-align: center;
-  margin: 20rpx auto 18rpx auto;
+  margin: 28rpx auto 16rpx auto;
 }
 
 .banner .infos {

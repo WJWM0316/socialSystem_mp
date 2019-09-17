@@ -32,10 +32,10 @@ Page({
     let orgData = wx.getStorageSync('orgData')
     let params = {}
     let item1 = this.data.scrollLists.find(field => field.active)
-    let item2 = this.data.tabBar.find(field => field.active)
+    // let item2 = this.data.tabBar.find(field => field.active)
     let item3 = this.data.btnLists.find(field => field.active)
     let dataBox = this.data.dataBox
-    params.contentType = item2.value
+    // params.contentType = item2.value
     params.dataType = item1.value
     dataBox.key = []
     dataBox.value = []
@@ -70,10 +70,10 @@ Page({
   getSocialDataType() {
     return getSocialDataTypeApi().then(res => {
       let scrollLists = res.data.firstTab
-      let tabBar = res.data.secondTab
+      // let tabBar = res.data.secondTab
       scrollLists[0].active = true
-      tabBar[0].active = true
-      this.setData({scrollLists, tabBar})
+      // tabBar[0].active = true
+      this.setData({scrollLists})
     })
   },
   onTabClick(e) {

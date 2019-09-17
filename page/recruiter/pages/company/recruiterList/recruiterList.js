@@ -54,7 +54,6 @@ Page({
     return new Promise((resolve, reject) => {
       let options = this.data.options
       let params = {page: this.data.recruitersList.pageNum, count: this.data.pageCount}
-      console.log(!this.data.isTopCompanyAdmin, 'init')
       if(!this.data.isTopCompanyAdmin) {
         params.id = options.companyId
       } else {

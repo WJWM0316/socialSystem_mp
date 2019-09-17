@@ -84,7 +84,8 @@ Page({
       activeIndex: 0
     },
     viewList: [],
-    showPublicPositionTips: false
+    showPublicPositionTips: false,
+    userInfo: app.globalData.recruiterDetails
   },
   onLoad() {
     let choseType = wx.getStorageSync('choseType') || ''
@@ -133,7 +134,6 @@ Page({
       this.setData({userInfo})
       this.selectComponent('#bottomRedDotBar').init()
       this.getIndexData({contentType: 1}).then(res => this.selectComponent('#indexEchart').init())
-      setTimeout(() => this.selectComponent('#indexEchart').init(), 1000)
     } else {
       app.pageInit = () => {
         userInfo = app.globalData.userInfo
@@ -371,50 +371,105 @@ Page({
     let params = e.currentTarget.dataset
     wx.navigateTo({url: `${COMMON}resumeDetail/resumeDetail?uid=${params.jobhunteruid}`})
   },
+  formatDate(timestamp) {
+    let date = new Date(timestamp)
+    let YY = date.getFullYear() + '-'
+    let MM = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-'
+    let DD = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate())
+    return YY + MM + DD
+  },
   /**
    * @Author   小书包
    * @DateTime 2019-09-12
    * @detail   获取数据接口
    * @return   {[type]}   [description]
    */
-  getIndexData(params) {
+  getIndexData(data, index = 0) {
+    let orgData = wx.getStorageSync('orgData')
+    let start = new Date()
+    let end = new Date()
+    start.setTime(start.getTime() - 24 * 7 * 60 * 60 * 1000)
+    end.setTime(end.getTime() - 1 * 24 * 60 * 60 * 1000)
+    let startDate = this.formatDate(new Date(start))
+    let endDate = this.formatDate(new Date(end))
+    let params = {
+      startDate,
+      endDate,
+    }
+    if(app.globalData.recruiterDetails.isCompanyTopAdmin) {
+      params.companyId = orgData.id
+    }
+
     return getIndexDataApi(params).then(res => {
       let dataBox = this.data.dataBox
       let echartData = this.data.echartData
-      // let myDay = new Date()
-      // myDay.setTime(myDay.getTime() - 1 * 24 * 60 * 60 * 1000)
-      // dataBox.yesterday = myDay.getMonth() + 1 + '月' + myDay.getDate() + '日'
+      let companyKey = []
+      let companyValue = [[],[]]
 
-      let key = []
-      let value = [[],[]]
-      dataBox.list[0].number = res.data.currentData.company
-      dataBox.list[1].number = res.data.currentData.position
-      dataBox.list[2].number = res.data.currentData.recruiter
+      let positionKey = []
+      let positionValue = [[],[]]
+
+      let recruiterKey = []
+      let recruiterValue = [[],[]]
+
+      dataBox.list[0].number = res.data.companyPv
+      dataBox.list[1].number = res.data.positionPv
+      dataBox.list[2].number = res.data.recruiterPv
       
-      res.data.history.map((v, i, arr) => {
+      // console.log(res.data.data.recruiter.data)
+      res.data.data.company.data.map((v, i, arr) => {
         let date = new Date(v.date)
         let item = null
         item = i === 0 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
-        // if(i === 0) {
-        //   item = date.getMonth() + 1 + '月' + date.getDate() + '日'
-        // } else {
-        //   item = date.getDate()
+        companyKey.push(item)
+        companyValue[1].push(v.companyVisitUv)
+        companyValue[0].push(v.companyVisitPv)
+        // if(i === arr.length - 1) {
+        //   dataBox.dayPv = v.companyVisitPv
+        //   dataBox.dayUv = v.companyVisitUv
+        //   let myDay = new Date(v.date)
+        //   dataBox.yesterday = myDay.getMonth() + 1 + '月' + myDay.getDate() + '日'
         // }
-        key.push(item)
-        value[1].push(v.uv)
-        value[0].push(v.pv)
-        if(i === arr.length - 1) {
-          dataBox.dayPv = v.pv
-          dataBox.dayUv = v.uv
-          let myDay = new Date(v.date)
-          dataBox.yesterday = myDay.getMonth() + 1 + '月' + myDay.getDate() + '日'
-        }
       })
-      dataBox.list.map(v => {
-        v.data.key = key
-        v.data.value = value
+      console.log(companyKey, companyValue)
+      res.data.data.position.data.data.map((v, i, arr) => {
+        let date = new Date(v.date)
+        let item = null
+        item = i === 0 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
+        positionKey.push(item)
+        positionValue[1].push(v.recruiterVisitUv)
+        positionValue[0].push(v.recruiterVisitPv)
+        // if(i === arr.length - 1) {
+        //   dataBox.dayPv = v.recruiterVisitPv
+        //   dataBox.dayUv = v.recruiterVisitUv
+        //   let myDay = new Date(v.date)
+        //   dataBox.yesterday = myDay.getMonth() + 1 + '月' + myDay.getDate() + '日'
+        // }
       })
+
+      res.data.data.recruiter.data.map((v, i, arr) => {
+        let date = new Date(v.date)
+        let item = null
+        item = i === 0 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
+        recruiterKey.push(item)
+        recruiterValue[1].push(v.recruiterVisitUv)
+        recruiterValue[0].push(v.recruiterVisitPv)
+        // if(i === arr.length - 1) {
+        //   dataBox.dayPv = v.recruiterVisitPv
+        //   dataBox.dayUv = v.recruiterVisitUv
+        //   let myDay = new Date(v.date)
+        //   dataBox.yesterday = myDay.getMonth() + 1 + '月' + myDay.getDate() + '日'
+        // }
+      })
+
+      // dataBox.list[0].data.key = companyKey
+      // dataBox.list[0].data.value = companyValue
+      // dataBox.list[1].data.key = positionKey
+      // dataBox.list[1].data.value = positionValue
+      // dataBox.list[2].data.key = recruiterKey
+      // dataBox.list[2].data.value = recruiterValue
       dataBox.activeIndex = 0
+      console.log(dataBox)
       this.setData({ dataBox })
     })
   }

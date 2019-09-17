@@ -55,7 +55,7 @@ export const getRecruiterPostApi = (data, hasLoading) => {
   })
 }
 
-// 招聘官
+// 公司
 export const getCompanyPostApi = (data, hasLoading) => {
   return request({
     method: 'get',

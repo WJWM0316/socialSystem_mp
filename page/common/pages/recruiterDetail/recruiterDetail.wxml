@@ -26,21 +26,7 @@
       <view class="line"></view>
     </view>
     <view class="mainContent">
-      <view class="contentBox" wx:if="{{false}}">
-        <view class="dataShow" wx:if="{{!isOwner || !showEdit}}">
-          <!-- <view class="dataBox">
-            <view class="data"><text class="num">{{info.viewedCount}}</text>人气</view>
-            <view class="data"><text class="num">{{info.influence}}</text>影响力<i class="icon iconfont icon-zhushi" bindtap="toggleShowRules"></i></view>
-          </view> -->
-          <!-- <view class="button-bg"  hidden="{{info.isCall}}">
-            <button hidden="{{info.isCall}}" form-type="submit" class="callBtn clear-style" bindtap="callBtn">为Ta打Call，提高影响力</button>
-            <image src="{{cdnImagePath}}button_bg.png"></image>
-          </view>
-          <view class="button-bg" hidden="{{!info.isCall}}">
-            <button open-type="share" hidden="{{!info.isCall}}" form-type="submit" class="callBtn isCalled clear-style" bindtap="shareBtn">帮Ta转发集Call</button>
-            <image src="{{cdnImagePath}}button_bg.png"></image>
-          </view>   --> 
-        </view>
+      <view class="contentBox">
         <view class="labelEdit {{info.personalizedLabels.length > 0 ? 'hasLabelEdit': ''}}" wx:if="{{isOwner && showEdit}}">
           <view class="title">
             <view class="icon">
@@ -92,7 +78,7 @@
         </view>
       </view>
 
-      <view class="position" wx:if="{{!isOwner || !showEdit}}">
+      <view class="position" wx:if="{{!isOwner || !showEdit}}" hidden="{{info.isCompanyTopAdmin && !positionList.total}}">
 
         <company roleType="detailCompany" cardData="{{info.companyInfo}}" wx:if="{{!info.isCompanyTopAdmin}}"></company>
 
@@ -124,6 +110,7 @@
         options="{{options}}"
         wx:if="{{info.vkey && !isOwner}}">
     </interviewBar>
+
     <shareBtn posterType="recruiter" id="shareBtn" shareBtn="{{false}}" wx:if="{{isOwner && !showEdit}}"></shareBtn>
     <view class="foot-bar" wx:if="{{isOwner && !showEdit}}">
       <view class="button button-edit" bindtap="edit">编辑主页</view>
@@ -146,6 +133,7 @@
         </view>
       </view>
     </view>
+    
   </view>
   <notFound msg="{{'oops！这个面试官失踪了~'}}" title="{{'面试官详情'}}" wx:if="{{info.hasDeleted === 1}}"></notFound>
 </form>

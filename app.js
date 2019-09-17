@@ -794,7 +794,7 @@ App({
   getCurrentPagePath (index) {
     var pages = getCurrentPages() //获取加载的页面
     if (!index && index !== 0) index = pages.length - 1
-    let pageUrl = pages[index].route
+    let pageUrl = pages[index] && pages[index].route
     if (pages[index] && pages[index].options && this.splicingParams(pages[index].options)) {
       return `/${pageUrl}?${this.splicingParams(pages[index].options)}`
     } else {

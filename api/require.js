@@ -111,16 +111,6 @@ export const request = ({name = '', method = 'post', url, host, data = {}, needK
   // 请求中间件
   const promise = new Promise((resolve, reject) => {
     let saveApiData = {}
-    // if (name) {
-    //   if (!apiVersionList && wx.getStorageSync('apiVersionList')) {
-    //     apiVersionList = wx.getStorageSync('apiVersionList')
-    //   }
-    //   saveApiData = wx.getStorageSync('saveApiData') || {}
-    //   if (apiVersionList[name] && saveApiData[name] && apiVersionList[name].version === saveApiData[name].version) {
-    //     resolve(saveApiData[name].data)
-    //     return
-    //   }
-    // }
     // 开启菊花图
     if (data.hasOwnProperty('hasLoading')) {
       hasLoading = data.hasLoading

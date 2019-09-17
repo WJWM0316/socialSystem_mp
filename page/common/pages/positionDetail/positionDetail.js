@@ -324,7 +324,7 @@ Page({
   onShareAppMessage(options) {
     let that = this
     let detail = this.data.detail
-    app.shareStatistics({type: 'position', infos: detail, forwardType: 1})
+    app.shareStatistics({type: 'position', infos: detail, forwardType: 2})
 　　return app.wxShare({
       options,
       title: sharePosition(),

@@ -13,11 +13,12 @@
 	</block>
 
 	<view class="canvas-box">
+		<view class="showImgBox"><image class="showImg" src="{{imgUrl}}" wx:if="{{imgUrl}}"></image></view>
 		<canvas
 			canvas-id="cardCanvas"
 			class="canvas"
 			id="cardCanvas"
-			style="width: {{canvasWidth}}px; height: {{canvasWidth}}px;">
+			style="width: 406px; height: 406px">
 		</canvas>
 		<view class="tips" wx:if="{{options.type === 'qr-recruiter'}}">
 			小程序码头像不合适？

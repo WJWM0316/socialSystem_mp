@@ -76,7 +76,7 @@ Page({
     } else {
       bannerH = app.globalData.systemInfo.screenWidth/(750/468)
     }
-    if (options.needAuth && wx.getStorageSync('choseType') === 'RECRUITER') { // 是否从不服来赞过来的B身份 强制C端身份
+    if (!options.companyId) {
       wx.setStorageSync('choseType', 'APPLICANT')
     }
     identity = app.identification(options)

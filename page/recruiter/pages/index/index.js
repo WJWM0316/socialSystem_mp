@@ -89,7 +89,7 @@ Page({
   },
   onLoad() {
     let choseType = wx.getStorageSync('choseType') || ''
-    this.setData({ choseType})
+    this.setData({choseType})
     let that = this
     if (choseType === 'APPLICANT') {
       let that = this
@@ -125,21 +125,21 @@ Page({
   },
   init () {
     if (wx.getStorageSync('choseType') === 'APPLICANT') return
-    let userInfo = app.globalData.userInfo
-    let companyInfos = app.globalData.recruiterDetails.companyInfo
     if(app.pageInit) {
-      userInfo = app.globalData.userInfo
-      companyInfos = app.globalData.recruiterDetails.companyInfo
+      let userInfo = app.globalData.userInfo
+      let companyInfos = app.globalData.recruiterDetails.companyInfo
+      let isCompanyTopAdmin = app.globalData.recruiterDetails.isCompanyTopAdmin
       this.getMixdata()
-      this.setData({userInfo})
+      this.setData({userInfo, companyInfos, isCompanyTopAdmin})
       this.selectComponent('#bottomRedDotBar').init()
       this.getIndexData({contentType: 1}).then(res => this.selectComponent('#indexEchart').init())
     } else {
       app.pageInit = () => {
-        userInfo = app.globalData.userInfo
-        companyInfos = app.globalData.recruiterDetails.companyInfo
+        let userInfo = app.globalData.userInfo
+        let companyInfos = app.globalData.recruiterDetails.companyInfo
+        let isCompanyTopAdmin = app.globalData.recruiterDetails.isCompanyTopAdmin
         this.getMixdata()
-        this.setData({userInfo})
+        this.setData({userInfo, companyInfos, isCompanyTopAdmin})
         this.selectComponent('#bottomRedDotBar').init()
         this.getIndexData({contentType: 1}).then(res => this.selectComponent('#indexEchart').init())
       }
@@ -246,7 +246,7 @@ Page({
           wx.navigateTo({url: `${RECRUITER}organization/choose/choose?type=createQr&companyId=${app.globalData.recruiterDetails.companyTopId}`})
           return
         }
-        wx.navigateTo({url: `${RECRUITER}createQr/createQr?type=qr-mechanism`})
+        wx.navigateTo({url: `${RECRUITER}createQr/createQr?type=qr-mechanism&companyId=${app.globalData.recruiterDetails.companyTopId}`})
         break
       case 'qr-position':
         if(this.data.detail.positionNum) {
@@ -256,12 +256,17 @@ Page({
         }
         break
       case 'qr-recruiter':
-        wx.navigateTo({url: `${RECRUITER}createQr/createQr?type=qr-recruiter`})
+        wx.navigateTo({url: `${RECRUITER}createQr/createQr?type=qr-recruiter&uid=${app.globalData.recruiterDetails.uid}&companyId=${this.data.detail.companyId}`})
         break
       case 'echart':
         wx.navigateTo({url: `${RECRUITER}echart/echart`})
         break
       case 'shareCompany':
+        // 超管可以选择机构
+        if (app.globalData.recruiterDetails.isCompanyTopAdmin) {
+          wx.navigateTo({url: `${RECRUITER}organization/list/list?type=shareCompany&companyId=${app.globalData.recruiterDetails.companyTopId}`})
+          return
+        }
         this.selectComponent('#shareBtn').oper()
         wx.setStorageSync('companyPosterdata', app.globalData.recruiterDetails.companyInfo)
         break
@@ -293,7 +298,7 @@ Page({
       case 'recruiter-mechanism':
         // 该机构的职位上线状态
         if(this.data.detail.positionNum) {
-          wx.navigateTo({url: `${COMMON}poster/createPost/createPost?type=recruiter&uid=${app.globalData.recruiterDetails.uid}`})
+          wx.navigateTo({url: `${COMMON}poster/createPost/createPost?type=recruiter&uid=${app.globalData.recruiterDetails.uid}&companyId=${this.data.detail.companyId}`})
         } else {
           this.setData({showPublicPositionTips: true})
         }

@@ -52,7 +52,29 @@
 .canvas-box .canvas{
 	margin: 0 auto;
 }
-
+.showImgBox {
+	width: 440rpx;
+	height: 440rpx;
+	margin: 0 auto;
+	border-radius: 50%;
+  background: #fff;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1rpx solid #e3d9ed;
+}
+.showImg {
+	width: 406rpx;
+	height: 406rpx;
+	display: block;
+}
+.canvas {
+	position: fixed;
+	top: 0;
+	right: -100%;
+	opacity: 0
+}
 .seleted-bar {
   height: 88rpx;
   line-height: 88rpx;

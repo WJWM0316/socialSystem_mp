@@ -310,7 +310,7 @@ Page({
     if(info.hasDeleted) {
       return app.wxShare({options})
     }
-    app.shareStatistics({type: 'recruiter', infos: info, forwardType: 1})
+    app.shareStatistics({type: 'recruiter', infos: info, forwardType: 2})
 　　return app.wxShare({
       options,
       title: shareRecruiter(),

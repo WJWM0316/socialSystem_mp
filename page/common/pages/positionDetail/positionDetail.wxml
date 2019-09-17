@@ -145,6 +145,5 @@
 			type="position"
 			options="{{query}}"
 			wx:if="{{detail.vkey && !isOwner}}"></interviewBar>
-		<auth wx:if="{{requireOAuth}}" bindauthSuccess="authSuccess"></auth>
 	</view>
 </form>

@@ -59,7 +59,7 @@
 						<view class="item" wx:if="{{item.city}}">{{item.city}}{{item.district}}</view>
 						<view class="item">{{item.workExperienceName}}</view>
 						<view class="item">{{item.educationName}}</view>
-						<view class="view"><i class="icon iconfont icon-chakan"></i>123</view>
+						<!-- <view class="view"><i class="icon iconfont icon-chakan"></i>123</view> -->
 					</view>
 				</button>
 				<view class="actions">

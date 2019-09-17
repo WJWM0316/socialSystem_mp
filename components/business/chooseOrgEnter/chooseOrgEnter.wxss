@@ -1,4 +1,4 @@
-@import '../../../iconfont.wxss'
+@import '../../../iconfont.wxss';
 
 .chooseEnter {
   width: 100%;

@@ -103,9 +103,8 @@ Page({
         if (wx.getStorageSync('choseType') === 'RECRUITER') {
           wx.setStorageSync('choseType', 'APPLICANT')
           wx.reLaunch({url: app.getCurrentPagePath()})
-        } else {
-          getCompanyInfos = getCurCompanyInfosApi
         }
+        getCompanyInfos = getCurCompanyInfosApi
       }
       getCompanyInfos(params).then(res => {
         if (wx.getStorageSync('choseType') !== 'RECRUITER') this.getCompanyOrglist(res.data.topId)

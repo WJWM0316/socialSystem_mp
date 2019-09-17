@@ -1,6 +1,6 @@
 {
   "pages": [
-    "page/common/pages/startPage/startPage",
+    "page/common/pages/homepage/homepage",
     "page/common/pages/changeMobile/changeMobile",
     "page/common/pages/bindPhone/bindPhone",
     "page/common/pages/auth/auth",
@@ -8,7 +8,6 @@
     "page/common/pages/positionDetail/positionDetail",
     "page/common/pages/recruiterDetail/recruiterDetail",
     "page/common/pages/resumeDetail/resumeDetail",
-    "page/common/pages/homepage/homepage",
     "page/common/pages/arrangement/arrangement",
     "page/common/pages/rank/rank",
     "page/common/pages/careerChance/careerChance",

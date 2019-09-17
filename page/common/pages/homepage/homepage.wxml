@@ -16,8 +16,10 @@
 
 		<view class="banner">
 			<view class="filterBg" style="height: {{!isBangs ? '225rpx' : '272rpx'}}">
+				<view class="bgImg" style="background: url({{companyInfos.logoInfo.smallUrl}}) center left no-repeat; background-size: 100% auto; filter: blur(10rpx);"></view>
+				
+				<view class="bgImg" style="background: url({{companyInfos.logoInfo.smallUrl}}) center left no-repeat; background-size: 100% auto; filter: blur(35rpx);"></view>
 				<image class="logoBg" src="{{cdnImagePath}}{{!isBangs ? 'headCom1.png?a=2' : 'headCom2.png?a=2'}}" mode="widthFix"></image>
-				<image class="bgImg" src="{{companyInfos.logoInfo.smallUrl}}" mode="widthFix"></image>
 			</view>
 			
 			<view class="box">

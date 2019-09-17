@@ -70,44 +70,88 @@ Page({
     wx.navigateBack({delta: 1})
   },
   draw() {
-    return new Promise((resolve, reject) => {
-      let _this = this
-      let ctx = wx.createCanvasContext('cardCanvas', this)
-      let bgUrl = this.data.qrUrl
-      let avatarUrl = app.globalData.recruiterDetails.avatars[0].smallUrl
-      let avatar = wx.getStorageSync('avatar')
-      if(avatar) avatarUrl = avatar.url
-      ctx.fillRect(0, 0, 406, 406)
+    let bgUrl = this.data.qrUrl
+    let avatarUrl = app.globalData.recruiterDetails.avatars[0].smallUrl
+    let avatar = wx.getStorageSync('avatar')
+    if(avatar) avatarUrl = avatar.url
 
-      // 画二维码
-      ctx.drawImage(bgUrl, 0, 0, 406, 406)
-
-      ctx.beginPath()  
-      ctx.fillStyle = '#DFD5EB'   
-      ctx.arc(203, 203, 90, 0, Math.PI * 2, false)
-      ctx.closePath()
-      ctx.fill()
-      ctx.clip()
-
-      // 画头像
-      ctx.drawImage(avatarUrl, 113, 113, 180, 180)
-
-      // 生成图片链接
-      ctx.draw(true, () => {
-      setTimeout(() => {
-        wx.canvasToTempFilePath({
-          x: 0,
-          y: 0,
-          quality: 1,
-          canvasId: 'cardCanvas',
-          success(res) {
-            _this.setData({imgUrl: res.tempFilePath})
-            wx.hideLoading()
+    const loadResult = (res, resolve) => {
+      let timer = null
+      timer = setTimeout(() => {
+        app.wxToast({
+          title: '图片加载失败，请重新生成',
+          callback() {
+            wx.navigateBack({
+              delta: 1
+            })
           }
         })
-      }, 500)
+      }, this.data.timerSecond)
+      if (res.statusCode === 200) {
+        resolve(res)
+        clearTimeout(timer)
+        return res.tempFilePath
+      }
+    }
+
+    let loadAvatar = new Promise((resolve, reject) => {
+      // 头像
+      wx.downloadFile({
+        url: avatarUrl,
+        success(res) {
+          avatarUrl = loadResult(res, resolve)
+        },
+        fail(e) {
+          app.wxToast({title: '图片加载失败，请重新生成', callback() {wx.navigateBack({ delta: 1 })}})
+        }
+      })
     })
-      resolve()
+    let loadBgUrl = new Promise((resolve, reject) => {
+      // 头像
+      wx.downloadFile({
+        url: bgUrl,
+        success(res) {
+          bgUrl = loadResult(res, resolve)
+        },
+        fail(e) {
+          app.wxToast({title: '图片加载失败，请重新生成', callback() {wx.navigateBack({ delta: 1 })}})
+        }
+      })
+    })
+
+    Promise.all([loadAvatar, loadBgUrl]).then((result) => {
+      return new Promise((resolve, reject) => {
+        let _this = this
+        let ctx = wx.createCanvasContext('cardCanvas', this)
+        ctx.fillRect(0, 0, 406, 406)
+
+        // 画二维码
+        ctx.drawImage(bgUrl, 0, 0, 406, 406)
+
+        ctx.beginPath()  
+        ctx.arc(203, 203, 90, 0, Math.PI * 2, false)
+        ctx.clip()
+
+        // 画头像
+        ctx.drawImage(avatarUrl, 113, 113, 180, 180)
+
+        // 生成图片链接
+        ctx.draw(true, () => {
+          setTimeout(() => {
+            wx.canvasToTempFilePath({
+              x: 0,
+              y: 0,
+              quality: 1,
+              canvasId: 'cardCanvas',
+              success(res) {
+                _this.setData({imgUrl: res.tempFilePath})
+                wx.hideLoading()
+              }
+            })
+          }, 500)
+        })
+        resolve()
+      })
     })
   },
   download() {

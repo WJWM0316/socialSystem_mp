@@ -8,6 +8,7 @@ let app = getApp()
 Page({
   data: {
     navH: app.globalData.navHeight,
+    hasReFresh: false,
     dataBox: {
       list: [],
       activeIndex: 0
@@ -105,6 +106,7 @@ Page({
       let defaultData = setDefault()
 
       // 机构主页
+      console.log(res.data.data, 'fffffffff')
       if(res.data.data.company.data.length) {
         let list = item3.id === 7 ? res.data.data.company.data.slice(-7) : res.data.data.company.data
         list.map((v,i,arr) => {
@@ -237,5 +239,20 @@ Page({
     let dataBox = this.data.dataBox
     tabBar.map((v,i) => v.active = i === params.index ? true : false)
     this.setData({tabBar, dataBox}, () => this.getSocialDataCompany())
+  },
+  /**
+   * @Author   小书包
+   * @DateTime 2019-01-21
+   * @detail   下拉重新获取数据
+   * @return   {[type]}              [description]
+   */
+  onPullDownRefresh(hasLoading = true) {
+    let callback = () => {
+      this.setData({hasReFresh: false})
+      wx.stopPullDownRefresh()
+    }
+    this.setData({hasReFresh: true}, () => {
+      this.getSocialDataCompany().then(res => callback()).catch(e => callback())
+    })
   }
 })

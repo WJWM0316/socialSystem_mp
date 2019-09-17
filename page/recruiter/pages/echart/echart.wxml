@@ -7,6 +7,10 @@
 	</navbar>
 	
 	<chooseOrgEnter detail="{{detail}}"></chooseOrgEnter>
+	
+	<view hidden="{{!hasReFresh}}">
+		<refreshStatus></refreshStatus>
+	</view>
 
 	<view class="scroll-tab">
 		<view

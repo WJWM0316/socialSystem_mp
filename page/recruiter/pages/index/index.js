@@ -125,24 +125,21 @@ Page({
   },
   init () {
     if (wx.getStorageSync('choseType') === 'APPLICANT') return
-    if(app.pageInit) {
-      let userInfo = app.globalData.userInfo
+    let callback = () => {
+      let userInfo = app.globalData.recruiterDetails
       let companyInfos = app.globalData.recruiterDetails.companyInfo
       let isCompanyTopAdmin = app.globalData.recruiterDetails.isCompanyTopAdmin
       this.getMixdata()
       this.setData({userInfo, companyInfos, isCompanyTopAdmin})
       this.selectComponent('#bottomRedDotBar').init()
-      this.getIndexData(0).then(res => this.selectComponent('#indexEchart').init())
-    } else {
-      app.pageInit = () => {
-        let userInfo = app.globalData.userInfo
-        let companyInfos = app.globalData.recruiterDetails.companyInfo
-        let isCompanyTopAdmin = app.globalData.recruiterDetails.isCompanyTopAdmin
-        this.getMixdata()
-        this.setData({userInfo, companyInfos, isCompanyTopAdmin})
-        this.selectComponent('#bottomRedDotBar').init()
+      setTimeout(() => {
         this.getIndexData(0).then(res => this.selectComponent('#indexEchart').init())
-      }
+      }, 16.7)
+    }
+    if(app.pageInit) {
+      callback()
+    } else {
+      app.pageInit = () => callback()
     }
   },
   getMixdata() {
@@ -444,39 +441,26 @@ Page({
       dataBox.list[2].number = res.data.recruiterPv
       
       if(res.data.data.company.data.length) {
-        res.data.data.company.data.map((v, i, arr) => {
+        res.data.data.company.data.reverse().map((v, i, arr) => {
           let date = new Date(v.date)
           let item = null
           item = i === 0 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
           tem[0].key.push(item)
           tem[0].value[0].push(v.companyVisitPv)
           tem[0].value[1].push(v.companyVisitUv)
-          // if(i === arr.length - 1) {
-          //   dataBox.dayPv = v.companyVisitPv
-          //   dataBox.dayUv = v.companyVisitUv
-          //   let myDay = new Date(v.date)
-          //   dataBox.yesterday = myDay.getMonth() + 1 + '月' + myDay.getDate() + '日'
-          // }
         })
       } else {
         tem[0].key = defaultData.key
         tem[0].value = defaultData.value
       }
-      
-      if(res.data.data.position.data.data.length) {
-        res.data.data.position.data.data.map((v, i, arr) => {
+      if(res.data.data.position.data.length) {
+        res.data.data.position.data.reverse().map((v, i, arr) => {
           let date = new Date(v.date)
           let item = null
           item = i === 0 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
           tem[1].key.push(item)
-          tem[1].value[0].push(v.recruiterVisitPv)
-          tem[1].value[1].push(v.recruiterVisitUv)
-          // if(i === arr.length - 1) {
-          //   dataBox.dayPv = v.recruiterVisitPv
-          //   dataBox.dayUv = v.recruiterVisitUv
-          //   let myDay = new Date(v.date)
-          //   dataBox.yesterday = myDay.getMonth() + 1 + '月' + myDay.getDate() + '日'
-          // }
+          tem[1].value[0].push(v.positionVisitPv)
+          tem[1].value[1].push(v.positionVisitUv)
         })
       } else {
         tem[1].key = defaultData.key
@@ -484,19 +468,13 @@ Page({
       }
 
       if(res.data.data.recruiter.data.length) {
-        res.data.data.recruiter.data.map((v, i, arr) => {
+        res.data.data.recruiter.data.reverse().map((v, i, arr) => {
           let date = new Date(v.date)
           let item = null
           item = i === 0 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
           tem[2].key.push(item)
           tem[2].value[0].push(v.recruiterVisitPv)
           tem[2].value[1].push(v.recruiterVisitUv)
-          // if(i === arr.length - 1) {
-          //   dataBox.dayPv = v.recruiterVisitPv
-          //   dataBox.dayUv = v.recruiterVisitUv
-          //   let myDay = new Date(v.date)
-          //   dataBox.yesterday = myDay.getMonth() + 1 + '月' + myDay.getDate() + '日'
-          // }
         })
       } else {
         tem[2].key = defaultData.key

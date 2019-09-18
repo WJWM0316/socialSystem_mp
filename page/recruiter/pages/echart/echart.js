@@ -109,7 +109,7 @@ Page({
 
       // 机构主页
       if(company.data.length) {
-        company.data.map((v,i,arr) => {
+        company.data.reverse().map((v,i,arr) => {
           let date = new Date(v.date)
           let item = i === 0 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
           tem[0].key.push(item)
@@ -127,12 +127,12 @@ Page({
 
       // 职位详情
       if(position.data.length) {
-        position.data.map((v,i,arr) => {
+        position.data.reverse().map((v,i,arr) => {
           let date = new Date(v.date)
           let item = i === 0 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
           tem[1].key.push(item)
-          tem[1].value[0].push(v.recruiterVisitPv)
-          tem[1].value[1].push(v.recruiterVisitUv)
+          tem[1].value[0].push(v.positionVisitPv)
+          tem[1].value[1].push(v.positionVisitUv)
           tem[1].pv = position.pv
           tem[1].uv = position.uv
         })
@@ -145,7 +145,7 @@ Page({
 
       // 招聘管主页
       if(recruiter.data.length) {
-        recruiter.data.map((v,i,arr) => {
+        recruiter.data.reverse().map((v,i,arr) => {
           let date = new Date(v.date)
           let item = i === 0 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
           tem[2].key.push(item)
@@ -206,8 +206,8 @@ Page({
 
     let start2 = new Date()
     let end2 = new Date()
-    start2.setTime(start2.getTime() - 24 * 7 * 60 * 60 * 2000)
-    end2.setTime(end2.getTime() - 2 * 24 * 60 * 60 * 2000)
+    start2.setTime(start2.getTime() - 30 * 24 * 60 * 60 * 1000)
+    end2.setTime(end2.getTime() - 1 * 24 * 60 * 60 * 1000)
     let startDate2 = this.formatDate(new Date(start2))
     let endDate2 = this.formatDate(new Date(end2))
     let item2 = {

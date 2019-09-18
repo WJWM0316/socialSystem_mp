@@ -245,7 +245,7 @@ Page({
           wx.navigateTo({url: `${RECRUITER}organization/choose/choose?type=createQr&companyId=${app.globalData.recruiterDetails.companyTopId}`})
           return
         }
-        wx.navigateTo({url: `${RECRUITER}createQr/createQr?type=qr-mechanism&companyId=${app.globalData.recruiterDetails.companyTopId}`})
+        wx.navigateTo({url: `${RECRUITER}createQr/createQr?type=qr-mechanism&companyId=${this.data.detail.companyId}`})
         break
       case 'qr-position':
         if(this.data.detail.positionNum) {

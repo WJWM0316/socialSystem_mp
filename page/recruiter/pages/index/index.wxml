@@ -11,6 +11,8 @@
 		<refreshStatus></refreshStatus>
 	</view>
 	
+	<view hidden="{{true}}"><chooseOrgEnter detail="{{userInfo}}"></chooseOrgEnter></view>
+
 	<view class="index-bannar">
 		<image src="{{cdnImagePath}}recruiter_mine_new_bg.png"></image>
 	</view>
@@ -201,12 +203,6 @@
 	</view>
 
   <tabBar tabType="1" id="bottomRedDotBar"></tabBar>
-  <!-- <followWechat wx:if="{{userInfo}}"></followWechat> -->
-
-<!--   <shareBtn posterType="company" id="shareBtn" shareBtn="{{ false }}"></shareBtn>
-  <block wx:if="{{companyInfos.id}}">
-  	<canvasCard cardData="{{companyInfos}}" type="company" bindgetCreatedImg="getCreatedImg"></canvasCard>
-	</block> -->
 
   <view class="overlay" wx:if="{{showPublicPositionTips}}">
 		<view class="box">

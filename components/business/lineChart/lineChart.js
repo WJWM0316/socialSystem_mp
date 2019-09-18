@@ -50,7 +50,7 @@ Component({
         containLabel: true,
         left: '0%',
         bottom: '0%',
-        right: '4%',
+        right: '8%',
         top: '4%'
       },
       tooltip: {

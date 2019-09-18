@@ -881,7 +881,7 @@
   transform: translateX(-50%);
 }
 .data-box .index-echart {
-  padding: 27rpx 20rpx 42rpx 27rpx;
+  padding: 27rpx 10rpx 42rpx 20rpx;
 }
 .overlay {
   position: fixed;

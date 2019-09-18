@@ -427,7 +427,7 @@ Page({
           let start = new Date(), day
           start.setTime(start.getTime() - 24 * i * 60 * 60 * 1000)
           day = start.getDate()
-          if(i === 7) day = start.getMonth() + 1 + '月' + start.getDate() + '日'
+          if(i === 7 || i === 1) day = start.getMonth() + 1 + '月' + start.getDate() + '日'
           key.push(day)
         }
         return {
@@ -443,8 +443,7 @@ Page({
       if(res.data.data.company.data.length) {
         res.data.data.company.data.reverse().map((v, i, arr) => {
           let date = new Date(v.date)
-          let item = null
-          item = i === 0 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
+          let item = i === 0 || i === arr.length - 1 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
           tem[0].key.push(item)
           tem[0].value[0].push(v.companyVisitPv)
           tem[0].value[1].push(v.companyVisitUv)
@@ -456,8 +455,7 @@ Page({
       if(res.data.data.position.data.length) {
         res.data.data.position.data.reverse().map((v, i, arr) => {
           let date = new Date(v.date)
-          let item = null
-          item = i === 0 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
+          let item = i === 0 || i === arr.length - 1 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
           tem[1].key.push(item)
           tem[1].value[0].push(v.positionVisitPv)
           tem[1].value[1].push(v.positionVisitUv)
@@ -470,8 +468,7 @@ Page({
       if(res.data.data.recruiter.data.length) {
         res.data.data.recruiter.data.reverse().map((v, i, arr) => {
           let date = new Date(v.date)
-          let item = null
-          item = i === 0 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
+          let item = i === 0 || i === arr.length - 1 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
           tem[2].key.push(item)
           tem[2].value[0].push(v.recruiterVisitPv)
           tem[2].value[1].push(v.recruiterVisitUv)

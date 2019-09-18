@@ -77,8 +77,9 @@ Page({
         let start = new Date(), day
         start.setTime(start.getTime() - 24 * i * 60 * 60 * 1000)
         day = start.getDate()
-        if(i === item3.id) day = start.getMonth() + 1 + '月' + start.getDate() + '日'
+        if(i === item3.id || i === 1) day = start.getMonth() + 1 + '月' + start.getDate() + '日'
         key.push(day)
+        console.log(i)
       }
 
       for(let i = item3.id; i > 0; i--) {
@@ -111,7 +112,7 @@ Page({
       if(company.data.length) {
         company.data.reverse().map((v,i,arr) => {
           let date = new Date(v.date)
-          let item = i === 0 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
+          let item = i === 0 || i === arr.length - 1 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
           tem[0].key.push(item)
           tem[0].value[0].push(v.companyVisitPv)
           tem[0].value[1].push(v.companyVisitUv)
@@ -129,7 +130,7 @@ Page({
       if(position.data.length) {
         position.data.reverse().map((v,i,arr) => {
           let date = new Date(v.date)
-          let item = i === 0 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
+          let item = i === 0 || i === arr.length - 1 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
           tem[1].key.push(item)
           tem[1].value[0].push(v.positionVisitPv)
           tem[1].value[1].push(v.positionVisitUv)
@@ -147,7 +148,7 @@ Page({
       if(recruiter.data.length) {
         recruiter.data.reverse().map((v,i,arr) => {
           let date = new Date(v.date)
-          let item = i === 0 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
+          let item = i === 0 || i === arr.length - 1 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
           tem[2].key.push(item)
           tem[2].value[0].push(v.recruiterVisitPv)
           tem[2].value[1].push(v.recruiterVisitUv)

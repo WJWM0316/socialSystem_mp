@@ -212,7 +212,6 @@
 }
 
 .echart-box {
-  margin: 0 42rpx;
   position: relative;
 }
 
@@ -227,13 +226,14 @@
 	font-weight:700;
 	color:rgba(53,57,67,1);
 	line-height:32rpx;
-	margin-bottom: 30rpx;
+  margin: 0 42rpx 30rpx 42rpx;
 }
 
 .echart-box .infos {
 	height:48rpx;
 	line-height: 48rpx;
 	font-size: 24rpx;
+  margin: 0 42rpx;
 }
 
 .echart-box .btn-box {
@@ -268,7 +268,7 @@
 
 .data-echart{
 	position: relative;
-	padding: 0 0 68rpx 12rpx;
+	padding: 0 40rpx 68rpx 54rpx;
 	margin-top: 53rpx;
 }
 

@@ -12,7 +12,8 @@ import {
 } from '../../../../api/pages/interview.js'
 
 import {
-  getRecruiterPositionListApi
+  getRecruiterPositionListApi,
+  getPositionCompanyTopListApi
 } from '../../../../api/pages/position.js'
 
 const app = getApp()
@@ -89,7 +90,8 @@ Page({
         type: 'invite_list'
       }
     ],
-    redDotInfos: {}
+    redDotInfos: {},
+    detail: app.globalData.recruiterDetails
   },
   // 查看面试历史
   jumpInterviewPage() {
@@ -98,7 +100,6 @@ Page({
   bindChange(e) {
     let type = ''
     let value = 0
-    console.log(e.currentTarget.dataset.type)
     switch(e.currentTarget.dataset.type) {
       case 'applyStatus':
         type = 'applyIndex'
@@ -248,39 +249,59 @@ Page({
   },
   init () {
     let options = this.data.options
+    let detail = app.globalData.recruiterDetails
+    //加个机构id
+    if(this.data.detail.isCompanyTopAdmin) {
+      if(orgData) params = Object.assign(params, {company_id: orgData.id})
+    }
+    let callback = () => {
+      if(app.globalData.isRecruiter) {
+        let funcApi = this.data.detail.isCompanyTopAdmin ? getPositionCompanyTopListApi : getRecruiterPositionListApi
+        let orgData = wx.getStorageSync('orgData')
+        let params = {is_online: 1, count: 50, page: 1}
+        funcApi(params).then(res => {
+          positionList = res.data
+          positionList.unshift({positionName: '所有职位', id: 0})
+          switch(this.data.tabIndex) {
+            case 0:
+              let receiveData = {
+                list: [],
+                pageNum: 1,
+                count: 20,
+                isLastPage: false,
+                isRequire: false,
+                total: 0
+              }
+              this.setData({positionList, receiveData})
+              this.getInviteList()
+              break
+            case 1:
+              let applyData = {
+                list: [],
+                pageNum: 1,
+                count: 20,
+                isLastPage: false,
+                isRequire: false,
+                total: 0
+              }
+              this.setData({positionList, applyData})
+              this.getApplyList()
+              break
+          }
+        })
+      }
+    }
+
     this.initTabRedDot()
-    console.log(this.data.tabIndex)
-    if(app.globalData.isRecruiter) {
-      getRecruiterPositionListApi({is_online: 1, count: 50, page: 1}).then(res => {
-        positionList = res.data
-        positionList.unshift({positionName: '所有职位', id: 0})
-        switch(this.data.tabIndex) {
-          case 0:
-            let receiveData = {
-              list: [],
-              pageNum: 1,
-              count: 20,
-              isLastPage: false,
-              isRequire: false,
-              total: 0
-            }
-            this.setData({positionList, receiveData})
-            this.getInviteList()
-            break
-          case 1:
-            let applyData = {
-              list: [],
-              pageNum: 1,
-              count: 20,
-              isLastPage: false,
-              isRequire: false,
-              total: 0
-            }
-            this.setData({positionList, applyData})
-            this.getApplyList()
-            break
-        }
-      })
+
+    if(app.pageInit) {
+      detail = app.globalData.recruiterDetails
+      this.setData({detail}, () => callback())
+    } else {
+      app.pageInit = () => {
+        detail = app.globalData.recruiterDetails
+        this.setData({detail}, () => callback())
+      }
     }
   },
   onLoad(options) {
@@ -332,9 +353,7 @@ Page({
     if (app.globalData.isRecruiter) {
       this.init()
     } else {
-      app.getRoleInit = () => {
-        this.init()
-      }
+      app.getRoleInit = () => this.init()
     }
   },
   // 初始化tab红点

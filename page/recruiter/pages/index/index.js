@@ -132,7 +132,7 @@ Page({
       this.getMixdata()
       this.setData({userInfo, companyInfos, isCompanyTopAdmin})
       this.selectComponent('#bottomRedDotBar').init()
-      this.getIndexData(0).then(res => setTimeout(() => this.selectComponent('#indexEchart').init(), 1000))
+      this.getIndexData(0).then(res => this.selectComponent('#indexEchart').init())
     } else {
       app.pageInit = () => {
         let userInfo = app.globalData.userInfo
@@ -141,7 +141,7 @@ Page({
         this.getMixdata()
         this.setData({userInfo, companyInfos, isCompanyTopAdmin})
         this.selectComponent('#bottomRedDotBar').init()
-        this.getIndexData(0).then(res => setTimeout(() => this.selectComponent('#indexEchart').init(), 1000))
+        this.getIndexData(0).then(res => this.selectComponent('#indexEchart').init())
       }
     }
   },

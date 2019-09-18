@@ -127,10 +127,8 @@ Component({
    */
   methods: {
     init() {
-      // setOptions(this.data.infos.key, this.data.infos.value)
-      // chartLine.setOption(getOptions())
       this.setOptions(this.data.infos.key, this.data.infos.value)
-      chartLine.setOption(this.data.options)
+      if(chartLine) chartLine.setOption(this.data.options)
     },
     setOptions(key, value) {
       this.data.options.series = []

@@ -111,8 +111,7 @@ Page({
       if(company.data.length) {
         company.data.map((v,i,arr) => {
           let date = new Date(v.date)
-          let item = null
-          item = i === 0 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
+          let item = i === 0 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
           tem[0].key.push(item)
           tem[0].value[0].push(v.companyVisitPv)
           tem[0].value[1].push(v.companyVisitUv)
@@ -130,8 +129,7 @@ Page({
       if(position.data.length) {
         position.data.map((v,i,arr) => {
           let date = new Date(v.date)
-          let item = null
-          item = i === 0 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
+          let item = i === 0 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
           tem[1].key.push(item)
           tem[1].value[0].push(v.recruiterVisitPv)
           tem[1].value[1].push(v.recruiterVisitUv)
@@ -149,8 +147,7 @@ Page({
       if(recruiter.data.length) {
         recruiter.data.map((v,i,arr) => {
           let date = new Date(v.date)
-          let item = null
-          item = i === 0 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
+          let item = i === 0 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
           tem[2].key.push(item)
           tem[2].value[0].push(v.recruiterVisitPv)
           tem[2].value[1].push(v.recruiterVisitUv)

@@ -20,4 +20,4 @@
   </view>
 </view>
 </form>
-<scanCodeTips showScanBox="{{showScanBox}}" wx:if="{{showScanBox}}"></scanCodeTips>
+<scanCodeTips showScanBox="{{showScanBox}}"></scanCodeTips>

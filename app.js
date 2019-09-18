@@ -716,8 +716,10 @@ App({
       }
     })
     if (obj.s) obj.sourceType = obj.s
-    if (obj.pid) obj.positionId = obj.pid
-    if (obj.cid) obj.companyId = obj.cid
+    if (obj.p) obj.positionId = obj.p
+    if (obj.j) obj.uid = obj.j
+    if (obj.r) obj.uid = obj.r
+    if (obj.c) obj.companyId = obj.c
     return obj
   },
   // 判断来源记录
@@ -738,9 +740,8 @@ App({
     } else {
       if (curPath.options && curPath.options.scene) {
         curPath.options = this.getSceneParams(curPath.options.scene)
-        if (curPath.options.s) {
-          curPath.options.sourceType = curPath.options.s
-        }
+        if (curPath.options.s) curPath.options.sourceType = curPath.options.s
+        if (curPath.options._q) params._q = curPath.options._q
       }
       if (curPath.options && curPath.options.sourceType) { // 链接带特殊参数
         params.sourceType = curPath.options.sourceType

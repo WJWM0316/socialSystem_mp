@@ -83,7 +83,7 @@ Page({
       dayUv: '',
       activeIndex: 0
     },
-    viewList: [],
+    dynamics: [],
     showPublicPositionTips: false,
     userInfo: app.globalData.recruiterDetails,
     pageShow: true
@@ -158,7 +158,7 @@ Page({
         return
       }
       getIndexShowCountApi({hasLoading: false}).then(res => {
-        this.setData({indexShowCount: res.data, detail: res.data.recruiterInfo}, () => resolve(res))
+        this.setData({indexShowCount: res.data, detail: res.data.recruiterInfo, dynamics: res.data.dynamics}, () => resolve(res))
       })
     })
   },
@@ -378,7 +378,7 @@ Page({
    */
   viewRusumeDetail(e) {
     let params = e.currentTarget.dataset
-    wx.navigateTo({url: `${COMMON}resumeDetail/resumeDetail?uid=${params.jobhunteruid}`})
+    wx.navigateTo({url: `${COMMON}resumeDetail/resumeDetail?uid=${params.uid}`})
   },
   formatDate(timestamp) {
     let date = new Date(timestamp)

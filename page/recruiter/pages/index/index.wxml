@@ -191,12 +191,12 @@
 				<view class="p">{{item.text}}</view>
 			</view>
 		</view>
-		<view class="number-box">
+		<!-- <view class="number-box">
 			<view class="tab3">昨日：{{dataBox.yesterday}} </view>
 			<view class="tab3">访问次数 <view class="strong primary">{{dataBox.dayPv}}</view> </view>
 			<view class="tab3">访问人数 <view class="strong yellow">{{dataBox.dayUv}}</view> </view>
 			<image src="{{cdnImagePath}}recruiter-split-line.png" mode="aspectFill" class="recruiter-split-line"></image>
-		</view>
+		</view> -->
 		<view class="index-echart">
 			<lineChart height="{{'375rpx'}}" id="indexEchart" infos="{{ dataBox.list[dataBox.activeIndex].data }}"></lineChart>
 		</view>

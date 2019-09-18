@@ -120,7 +120,8 @@ Component({
         }
       },
       series: []
-    }
+    },
+    chartLine: null
   },
   /**
    * 组件的方法列表
@@ -131,6 +132,7 @@ Component({
       if(chartLine) chartLine.setOption(this.data.options)
     },
     setOptions(key, value) {
+      console.log(key, value)
       this.data.options.series = []
       this.data.options.xAxis.data = key
       value.map(field => {

@@ -1,11 +1,13 @@
 <!--page/common/pages/bindPhone/bindPhone.wxml-->
-<navbar title="登录" background="transparent" color="#fff"></navbar>
+<navbar title="" background="transparent" color="#fff"></navbar>
 <form bindsubmit="formSubmit" report-submit='{{true}}'>
   <view class="bindPhone">
     <view class="head">
       <image class="img" mode="widthFix" src="{{cdnImagePath}}authBg.png"></image>
       <view class="msg">
-        <text class="title">欢迎使用\n多多招聘系统</text>
+        <view class="h11">欢迎使用</view>
+        <view class="h44">多多社交招聘系统</view>
+        <!-- <text class="title">欢迎使用\n多多社交招聘系统</text> -->
       </view>
     </view>
     <view class="form">

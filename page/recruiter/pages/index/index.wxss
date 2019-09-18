@@ -882,6 +882,7 @@
 }
 .data-box .index-echart {
   padding: 27rpx 10rpx 42rpx 20rpx;
+  min-height: 375rpx;
 }
 .overlay {
   position: fixed;

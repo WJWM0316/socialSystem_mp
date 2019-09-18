@@ -83,9 +83,10 @@ Page({
       dayUv: '',
       activeIndex: 0
     },
-    viewList: [],
+    dynamics: [],
     showPublicPositionTips: false,
-    userInfo: app.globalData.recruiterDetails
+    userInfo: app.globalData.recruiterDetails,
+    pageShow: true
   },
   onLoad() {
     let choseType = wx.getStorageSync('choseType') || ''
@@ -107,6 +108,7 @@ Page({
     }
   },
   onShow() {
+    this.setData({pageShow: true})
     if(app.loginInit) {
       if(!app.globalData.hasLogin) {
         wx.navigateTo({url: `${COMMON}bindPhone/bindPhone`})
@@ -156,7 +158,7 @@ Page({
         return
       }
       getIndexShowCountApi({hasLoading: false}).then(res => {
-        this.setData({indexShowCount: res.data, detail: res.data.recruiterInfo}, () => resolve(res))
+        this.setData({indexShowCount: res.data, detail: res.data.recruiterInfo, dynamics: res.data.dynamics}, () => resolve(res))
       })
     })
   },
@@ -243,7 +245,7 @@ Page({
           wx.navigateTo({url: `${RECRUITER}organization/choose/choose?type=createQr&companyId=${app.globalData.recruiterDetails.companyTopId}`})
           return
         }
-        wx.navigateTo({url: `${RECRUITER}createQr/createQr?type=qr-mechanism&companyId=${app.globalData.recruiterDetails.companyTopId}`})
+        wx.navigateTo({url: `${RECRUITER}createQr/createQr?type=qr-mechanism&companyId=${this.data.detail.companyId}`})
         break
       case 'qr-position':
         if(this.data.detail.positionNum) {
@@ -256,7 +258,12 @@ Page({
         wx.navigateTo({url: `${RECRUITER}createQr/createQr?type=qr-recruiter&uid=${app.globalData.recruiterDetails.uid}&companyId=${this.data.detail.companyId}`})
         break
       case 'echart':
-        wx.navigateTo({url: `${RECRUITER}echart/echart`})
+        wx.navigateTo({
+          url: `${RECRUITER}echart/echart`,
+          success: () => {
+            setTimeout(() => this.setData({pageShow: false}), 600)
+          }
+        })
         break
       case 'shareCompany':
         // 超管可以选择机构
@@ -371,7 +378,7 @@ Page({
    */
   viewRusumeDetail(e) {
     let params = e.currentTarget.dataset
-    wx.navigateTo({url: `${COMMON}resumeDetail/resumeDetail?uid=${params.jobhunteruid}`})
+    wx.navigateTo({url: `${COMMON}resumeDetail/resumeDetail?uid=${params.uid}`})
   },
   formatDate(timestamp) {
     let date = new Date(timestamp)

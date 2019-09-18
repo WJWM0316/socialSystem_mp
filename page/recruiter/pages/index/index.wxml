@@ -29,7 +29,7 @@
 
 	<view class="floating-box">
 		<view class="item left001" bindtap="routeJump" data-route="dynamics">
-			<view class="number">{{indexShowCount.recruiterInterestedToJ}}</view>
+			<view class="number">{{indexShowCount.browseMyselfCount}}</view>
 			<view class="text">看过我的<i class="icon iconfont icon-disejiantou-you"></i></view>
 		</view>
 		<view class="item center001" bindtap="routeJump" data-route="interview">
@@ -56,27 +56,31 @@
 		</view>
 	</view>
 
-	<view class="todo_ul" wx:if="{{viewList.length}}">
-		<view class="li" wx:for="{{viewList}}" wx:key="{{index}}" bindtap="viewRusumeDetail" data-uid="{{item.uid}}">
+	<view class="todo_ul" wx:if="{{dynamics.length}}">
+		<view class="li" wx:for="{{dynamics}}" wx:key="{{index}}" bindtap="viewRusumeDetail" data-uid="{{item.uid}}" wx:if="{{index !== 3}}">
 			<view class="img-box">
-				<!-- <image src="{{cdnImagePath}}sign1.png" mode="aspectFill" class="avatar"></image> -->
-				<!-- <image src="{{cdnImagePath}}sign1.png" mode="aspectFill" class="vip"></image> -->
+				<image src="{{item.avatar.smallUrl}}" mode="aspectFill" class="avatar"></image>
 			</view>
 			<view class="content">
 				<view class="row1">
 					<view class="left">
-						<view class="name">张杰</view>
-						<view class="infos1">产品经理 | 老虎科技</view>
+						<view class="name">{{item.name}}</view>
+						<view class="infos1" wx:if="{{item.lastCompanyName}}">{{item.positionName}} | {{item.lastCompanyName}}</view>
 					</view>
 				</view>
 				<view class="row2">
 					<view class="limit">
-						他
-						<i class="icon iconfont icon-biaojiweiganxingqu"></i>
-						你的
-						<view class="strong">产品总监</view>
+						<block wx:if="{{ item.isCollect }}">
+							{{ item.gender === 2 ? '她' : '他' }}
+							<i class="icon iconfont icon-biaojiweiganxingqu"></i>
+							你的
+						</block>
+						<block wx:if="{{item.isBrowse}}">
+							查看了你的职位
+						</block>
+						<view class="strong">{{item.positionName}}</view>
 					</view>
-					<view class="time">刚刚</view>
+					<view class="time">{{item.viewAt}}</view>
 				</view>
 			</view>
 		</view>
@@ -198,7 +202,7 @@
 			<image src="{{cdnImagePath}}recruiter-split-line.png" mode="aspectFill" class="recruiter-split-line"></image>
 		</view> -->
 		<view class="index-echart">
-			<lineChart height="{{'375rpx'}}" id="indexEchart" infos="{{ dataBox.list[dataBox.activeIndex].data }}"></lineChart>
+			<lineChart height="{{'375rpx'}}" id="indexEchart" infos="{{ dataBox.list[dataBox.activeIndex].data }}" wx:if="{{pageShow}}"></lineChart>
 		</view>
 	</view>
 

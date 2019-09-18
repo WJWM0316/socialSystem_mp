@@ -21,6 +21,27 @@
   color: #fff;
   line-height: 56rpx;
 }
+
+.bindPhone .msg .h11 {
+  font-size: 64rpx;
+  font-weight: 700;
+  color: #fff;
+  line-height: 56rpx;
+  font-weight:800;
+  color:rgba(255,255,255,1);
+  letter-spacing: 4rpx;
+}
+
+.bindPhone .msg .h44 {
+  height:36rpx;
+  font-size:36rpx;
+  /*font-weight:700;*/
+  color:rgba(255,255,255,1);
+  line-height:36rpx;
+  margin-top: 22rpx;
+  letter-spacing: 2rpx;
+}
+
 .bindPhone .msg .txt {
   font-size: 32rpx;
   font-weight: 500;

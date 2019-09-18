@@ -79,7 +79,6 @@ Page({
         day = start.getDate()
         if(i === item3.id || i === 1) day = start.getMonth() + 1 + '月' + start.getDate() + '日'
         key.push(day)
-        console.log(i)
       }
 
       for(let i = item3.id; i > 0; i--) {

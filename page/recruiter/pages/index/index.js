@@ -85,7 +85,8 @@ Page({
     },
     viewList: [],
     showPublicPositionTips: false,
-    userInfo: app.globalData.recruiterDetails
+    userInfo: app.globalData.recruiterDetails,
+    pageShow: true
   },
   onLoad() {
     let choseType = wx.getStorageSync('choseType') || ''
@@ -107,6 +108,7 @@ Page({
     }
   },
   onShow() {
+    this.setData({pageShow: true})
     if(app.loginInit) {
       if(!app.globalData.hasLogin) {
         wx.navigateTo({url: `${COMMON}bindPhone/bindPhone`})
@@ -256,7 +258,12 @@ Page({
         wx.navigateTo({url: `${RECRUITER}createQr/createQr?type=qr-recruiter&uid=${app.globalData.recruiterDetails.uid}&companyId=${this.data.detail.companyId}`})
         break
       case 'echart':
-        wx.navigateTo({url: `${RECRUITER}echart/echart`})
+        wx.navigateTo({
+          url: `${RECRUITER}echart/echart`,
+          success: () => {
+            setTimeout(() => this.setData({pageShow: false}), 600)
+          }
+        })
         break
       case 'shareCompany':
         // 超管可以选择机构

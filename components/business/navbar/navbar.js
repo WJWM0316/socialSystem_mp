@@ -8,7 +8,7 @@ Component({
   properties: {
     title: {
       type: String,
-      value: '店长多多'
+      value: '多多社交招聘系统'
     },
     showNav: {
       type: Boolean,

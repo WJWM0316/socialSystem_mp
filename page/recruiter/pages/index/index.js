@@ -15,6 +15,11 @@ import {
   getIndexDataApi
 } from '../../../../api/pages/common'
 
+import {
+  getPositionListNumApi,
+  getCompanyTopPositionListNumApi
+} from '../../../../api/pages/position.js'
+
 let app = getApp()
 
 let fixedDomPosition = 0,
@@ -30,11 +35,9 @@ Page({
     detail: {},
     welcomeWord: '',
     indexShowCount: {
-      jobHunterInterestedToR: 0,
       recentInterview: 0,
       waitingProcessInterview: 0,
-      moreRecruiter: [],
-      recruiterInterestedToJ: 0
+      browseMyselfCount: 0
     },
     banner: {},
     bannerIndex: 0,
@@ -86,7 +89,8 @@ Page({
     dynamics: [],
     showPublicPositionTips: false,
     userInfo: app.globalData.recruiterDetails,
-    pageShow: true
+    pageShow: true,
+    positionInfos: {}
   },
   onLoad() {
     let choseType = wx.getStorageSync('choseType') || ''
@@ -134,9 +138,6 @@ Page({
       this.getMixdata()
       this.setData({userInfo, companyInfos, isCompanyTopAdmin})
       this.selectComponent('#bottomRedDotBar').init()
-      setTimeout(() => {
-        this.getIndexData(0).then(res => this.selectComponent('#indexEchart').init())
-      }, 16.7)
     }
     if(app.pageInit) {
       callback()
@@ -147,9 +148,15 @@ Page({
   getMixdata() {
     this.getIndexShowCount().then(() => this.getBanner())
     this.getWelcomeWord()
+    setTimeout(() => {
+      this.getIndexData().then(res => this.selectComponent('#indexEchart').init())
+    }, 16.7)
   },
   getBanner() {
-    return getAdBannerApi({location: 'recruiter_index', hasLoading: false}).then(res => this.setData({banner: res.data}))
+    return getAdBannerApi({
+      location: 'recruiter_index', 
+      hasLoading: false
+    }).then(res => this.setData({banner: res.data}))
   },
   getIndexShowCount() {
     return new Promise((resolve, reject) => {
@@ -158,7 +165,11 @@ Page({
         return
       }
       getIndexShowCountApi({hasLoading: false}).then(res => {
-        this.setData({indexShowCount: res.data, detail: res.data.recruiterInfo, dynamics: res.data.dynamics}, () => resolve(res))
+        this.setData({
+          indexShowCount: res.data, 
+          detail: res.data.recruiterInfo, 
+          dynamics: res.data.dynamics
+        }, () => resolve(res))
       })
     })
   },
@@ -186,9 +197,6 @@ Page({
       btnPath: `${COMMON}homepage/homepage?companyId=${companyInfos.id}`
     })
   },
-  getCreatedImg(e) {
-    positionCard = e.detail
-  },
   /**
    * @Author   小书包
    * @DateTime 2019-01-23
@@ -202,11 +210,9 @@ Page({
       if (this.data.background !== 'transparent') this.setData({isFixed: false, background: 'transparent'})
     }
   },
-  formSubmit(e) {
-    app.postFormId(e.detail.formId)
-  },
   routeJump(e) {
     let route = e.currentTarget.dataset.route
+    let orgData = wx.getStorageSync('orgData')
     switch(route) {
       case 'interested':
         wx.navigateTo({url: `${RECRUITER}dynamics/dynamics?tab=viewList`})
@@ -245,17 +251,25 @@ Page({
           wx.navigateTo({url: `${RECRUITER}organization/choose/choose?type=createQr&companyId=${app.globalData.recruiterDetails.companyTopId}`})
           return
         }
-        wx.navigateTo({url: `${RECRUITER}createQr/createQr?type=qr-mechanism&companyId=${this.data.detail.companyId}`})
+        if(this.data.positionInfos.online) {
+          wx.navigateTo({url: `${RECRUITER}createQr/createQr?type=qr-mechanism&companyId=${this.data.detail.companyId}`})
+        } else {
+          this.setData({showPublicPositionTips: true})
+        }
         break
       case 'qr-position':
-        if(this.data.detail.positionNum) {
+        if(this.data.positionInfos.online) {
           wx.navigateTo({url: `${RECRUITER}organization/position/position?type=qr-position`})
         } else {
           this.setData({showPublicPositionTips: true})
         }
         break
       case 'qr-recruiter':
-        wx.navigateTo({url: `${RECRUITER}createQr/createQr?type=qr-recruiter&uid=${app.globalData.recruiterDetails.uid}&companyId=${this.data.detail.companyId}`})
+        if(this.data.positionInfos.online) {
+          wx.navigateTo({url: `${RECRUITER}createQr/createQr?type=qr-recruiter&uid=${app.globalData.recruiterDetails.uid}&companyId=${orgData.id}`})
+        } else {
+          this.setData({showPublicPositionTips: true})
+        }
         break
       case 'echart':
         wx.navigateTo({
@@ -284,25 +298,25 @@ Page({
           return
         }
         // 该机构的职位上线状态
-        if(app.globalData.recruiterDetails.companyInfo.positionTotal.online) {
+        if(this.data.positionInfos.online) {
           wx.navigateTo({url: `${COMMON}poster/createPost/createPost?type=company&companyId=${this.data.detail.companyId}`})
           wx.setStorageSync('companyPosterdata', this.data.companyInfos)
         } else {
           this.setData({showPublicPositionTips: true})
         }
         break
-      case 'position-mechanism':
+      case 'poster-position':
         // 该机构的职位上线状态
-        if(this.data.detail.positionNum) {
+        if(this.data.positionInfos.online) {
           wx.navigateTo({url: `${RECRUITER}organization/position/position?type=ps-position`})
         } else {
           this.setData({showPublicPositionTips: true})
         }
         break
-      case 'recruiter-mechanism':
+      case 'poster-recruiter':
         // 该机构的职位上线状态
-        if(this.data.detail.positionNum) {
-          wx.navigateTo({url: `${COMMON}poster/createPost/createPost?type=recruiter&uid=${app.globalData.recruiterDetails.uid}&companyId=${this.data.detail.companyId}`})
+        if(this.data.positionInfos.online) {
+          wx.navigateTo({url: `${COMMON}poster/createPost/createPost?type=recruiter&uid=${app.globalData.recruiterDetails.uid}&companyId=${orgData.id}`})
         } else {
           this.setData({showPublicPositionTips: true})
         }
@@ -316,9 +330,6 @@ Page({
       default:
         break
     }
-  },
-  share() {
-    this.selectComponent('#shareBtn').oper()
   },
   /**
    * @Author   小书包
@@ -394,6 +405,7 @@ Page({
    * @return   {[type]}   [description]
    */
   getIndexData(index = 0) {
+    let getPositionNumApi = this.data.userInfo.isCompanyTopAdmin ? getCompanyTopPositionListNumApi : getPositionListNumApi
     let orgData = wx.getStorageSync('orgData')
     let start = new Date()
     let end = new Date()
@@ -401,13 +413,17 @@ Page({
     end.setTime(end.getTime() - 1 * 24 * 60 * 60 * 1000)
     let startDate = this.formatDate(new Date(start))
     let endDate = this.formatDate(new Date(end))
-    let params = {
-      startDate,
-      endDate,
-    }
+
+    let params = {startDate, endDate,}
+
+    let params2 = {recruiter: app.globalData.recruiterDetails.uid}
+
     if(app.globalData.recruiterDetails.isCompanyTopAdmin) {
       params.companyId = orgData.id
+      params2.companyId = orgData.id
     }
+
+    getPositionNumApi(params2).then(res => this.setData({positionInfos: res.data}))
 
     return getIndexDataApi(params).then(res => {
       let dataBox = this.data.dataBox

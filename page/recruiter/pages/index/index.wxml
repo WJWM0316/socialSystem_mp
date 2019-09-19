@@ -150,11 +150,11 @@
 				<image src="{{cdnImagePath}}btn_hb_jigou.png" mode="aspectFill" class="img-box"></image>
 				<view class="p">机构</view>
 			</view>
-			<view class="li" bindtap="routeJump" data-route="position-mechanism">
+			<view class="li" bindtap="routeJump" data-route="poster-position">
 				<image src="{{cdnImagePath}}btn_hb_job.png" mode="aspectFill" class="img-box"></image>
 				<view class="p">职位</view>
 			</view>
-			<view class="li" bindtap="routeJump" data-route="recruiter-mechanism">
+			<view class="li" bindtap="routeJump" data-route="poster-recruiter">
 				<image src="{{cdnImagePath}}btn_hb_zhaopinguan.png" mode="aspectFill" class="img-box"></image>
 				<view class="p">招聘官</view>
 			</view>
@@ -212,13 +212,13 @@
 		<view class="box">
 			<i class="icon iconfont icon-close" bindtap="routeJump" data-route="hidePublicPositionTips"></i>
 			<image src="{{cdnImagePath}}none_position.png"></image>
-			<view class="p1">邀请候选人面试</view>
+			<view class="p1">生成招聘海报</view>
 			<view class="p2">至少需要一个招聘中职位~</view>
 			<view
 				class="button"
 				bindtap="routeJump"
 				data-route="position">
-				去发布/开放职位
+				发布职位
 			</view>
 		</view>
 	</view>

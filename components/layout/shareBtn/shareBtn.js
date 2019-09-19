@@ -64,6 +64,7 @@ Component({
       })
     },
     jump(e) {
+      let orgData = wx.getStorageSync('orgData')
       switch(this.data.posterType) {
         case 'position':
           if (e.currentTarget.dataset.type === 'position')
@@ -82,7 +83,11 @@ Component({
           })
           break
         case 'recruiter':
-          wx.navigateTo({url: `${COMMON}poster/createPost/createPost?type=recruiter&uid=${this.data.params}`})
+          if(app.globalData.recruiterDetails.isCompanyTopAdmin) {
+            wx.navigateTo({url: `${COMMON}poster/createPost/createPost?type=recruiter&uid=${this.data.posterData.uid}&companyId=${orgData.id}`})
+          } else {
+            wx.navigateTo({url: `${COMMON}poster/createPost/createPost?type=recruiter&uid=${this.data.posterData.uid}&companyId=${app.globalData.recruiterDetails.companyInfo.id}`})
+          }
           break
         case 'specialJob':
           wx.navigateTo({url: `${COMMON}poster/createPost/createPost?type=rapidlyViwe`})

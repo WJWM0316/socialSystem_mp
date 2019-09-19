@@ -12,6 +12,7 @@ Page({
     placeholder: '\ue635 请输入机构名称',
     navH: app.globalData.navHeight,
     cdnImagePath: app.globalData.cdnImagePath,
+    isTopAdmin: app.globalData.isTopAdmin,
     orgList: [],
     options: {}
   },

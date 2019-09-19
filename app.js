@@ -66,6 +66,7 @@ App({
     isRecruiter: 0, // 是否认证成为招聘官
     isJobhunter: 0, // 是否注册成求职者
     currentCompanyId: 0, // C端用户当前机构
+    isTopAdmin: 0, // 是不是超管
     hasExpect: 1, // 有求职意向
     hasLogin: 0, // 判断是否登录
     userInfo: null, // 用户信息， 判断是否授权,
@@ -88,13 +89,6 @@ App({
   login() {
     let that = this
     return new Promise((resolve, reject) => {
-      // 登陆回调
-      // if (that.loginInit) {
-      //   that.loginInit()
-      // }
-      // that.loginInit = function () {}
-      // that.getRoleInfo()
-      // resolve('sss')
       wx.login({
         success: function (res0) {
           if (!wx.getStorageSync('choseType')) wx.setStorageSync('choseType', 'APPLICANT')
@@ -198,27 +192,17 @@ App({
   getRoleInfo() {
     return new Promise((resolve, reject) => {
       getUserRoleApi().then(res0 => {
-        if (res0.data.isRecruiter) {
-          this.globalData.isRecruiter = 1
-        } else {
-          this.globalData.isRecruiter = 0
-        }
+        if (res0.data.isRecruiter) this.globalData.isRecruiter = res0.data.isRecruiter
+        if (res0.data.isJobhunter) this.globalData.isJobhunter = res0.data.isJobhunter
+        if (res0.data.hasCard) this.globalData.isMicroCard = res0.data.hasCard || 0
         if (res0.data.currentCompanyId) this.globalData.currentCompanyId = res0.data.currentCompanyId
-        if (res0.data.isJobhunter) {
-          this.globalData.isJobhunter = 1
-        } else {
-          this.globalData.isJobhunter = 0
-        }
-        if (res0.data.hasCard) {
-          this.globalData.isMicroCard = 1
-        } else {
-          this.globalData.isMicroCard = 0
-        }
+        if (res0.data.isTopAdmin) this.globalData.isTopAdmin = res0.data.isTopAdmin
         if (this.getRoleInit) { // 登陆初始化
           this.getRoleInit() //执行定义的回调函数
         } else {
           this.getRoleInit = function () {}
         }
+
         this.getAllInfo()
         resolve(res0)
       })

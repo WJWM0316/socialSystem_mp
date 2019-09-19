@@ -266,7 +266,12 @@ Page({
         break
       case 'qr-recruiter':
         if(this.data.positionInfos.online) {
-          wx.navigateTo({url: `${RECRUITER}createQr/createQr?type=qr-recruiter&uid=${app.globalData.recruiterDetails.uid}&companyId=${orgData.id}`})
+          if (app.globalData.recruiterDetails.isCompanyTopAdmin) {
+            wx.navigateTo({url: `${RECRUITER}createQr/createQr?type=qr-recruiter&uid=${app.globalData.recruiterDetails.uid}&companyId=${orgData.id}`})
+          } else {
+            wx.navigateTo({url: `${RECRUITER}createQr/createQr?type=qr-recruiter&uid=${app.globalData.recruiterDetails.uid}&companyId=${app.globalData.recruiterDetails.companyInfo.id}`})
+          }
+          
         } else {
           this.setData({showPublicPositionTips: true})
         }
@@ -316,7 +321,11 @@ Page({
       case 'poster-recruiter':
         // 该机构的职位上线状态
         if(this.data.positionInfos.online) {
-          wx.navigateTo({url: `${COMMON}poster/createPost/createPost?type=recruiter&uid=${app.globalData.recruiterDetails.uid}&companyId=${orgData.id}`})
+          if (app.globalData.recruiterDetails.isCompanyTopAdmin) {
+            wx.navigateTo({url: `${COMMON}poster/createPost/createPost?type=recruiter&uid=${app.globalData.recruiterDetails.uid}&companyId=${orgData.id}`})
+          } else {
+            wx.navigateTo({url: `${COMMON}poster/createPost/createPost?type=recruiter&uid=${app.globalData.recruiterDetails.uid}&companyId=${app.globalData.recruiterDetails.companyInfo.id}`})
+          }
         } else {
           this.setData({showPublicPositionTips: true})
         }

@@ -64,9 +64,15 @@ Page({
   onShow() {
     let hasLogin = wx.getStorageSync('token')
     if (app.loginInit) {
+      if(wx.getStorageSync('choseType') !== 'RECRUITER') {
+        this.selectComponent('#bottomRedDotBar').init()
+      }
       this.getCompanyDetail().then(() => this.setData({isRecruiter: app.globalData.isRecruiter, hasLogin}))
     } else {
       app.loginInit = () => {
+        if(wx.getStorageSync('choseType') !== 'RECRUITER') {
+          this.selectComponent('#bottomRedDotBar').init()
+        }
         this.getCompanyDetail().then(() => this.setData({isRecruiter: app.globalData.isRecruiter, hasLogin}))
       }
     }

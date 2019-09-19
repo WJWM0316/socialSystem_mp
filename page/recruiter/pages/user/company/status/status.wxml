@@ -156,7 +156,7 @@
 	<view class="section" wx:if="{{options.from === 'company' && companyInfos.status !== 1}}">
 		<view class="title">
 			<view class="label">您的公司信息</view>
-			<view class="jump" bindtap="todoAction" data-action="modifyCompany">申请信息有误？去更改</view>
+			<view class="jump" bindtap="todoAction" data-action="modifyCompany_close">申请信息有误？去更改</view>
 		</view>
 		<view class="ul">
 			<view class="li">
@@ -216,7 +216,7 @@
 	<view class="section" wx:if="{{options.from === 'join' && companyInfos.status !== 1}}">
 		<view class="title">
 			<view class="label">您的申请</view>
-			<view class="jump" bindtap="todoAction" data-action="applyModify">申请信息有误？去更改</view>
+			<view class="jump" bindtap="todoAction" data-action="applyModify_close">申请信息有误？去更改</view>
 		</view>
 		<view class="ul">
 			<view class="li">

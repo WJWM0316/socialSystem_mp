@@ -73,8 +73,9 @@ Page({
    * @return   {[type]}     [description]
    */
   routeJump(e) {
-    const route = e.currentTarget.dataset.route
-    const pageInfos = this.data.pageInfos
+    let route = e.currentTarget.dataset.route
+    let pageInfos = this.data.pageInfos
+    let orgData = wx.getStorageSync('orgData')
     switch(route) {
       case 'company':
         wx.navigateTo({url: `${RECRUITER}company/indexEdit/indexEdit`})
@@ -89,7 +90,11 @@ Page({
         wx.navigateTo({url: `${COMMON}settings/settings`})
         break
       case 'poster':
-        wx.navigateTo({url: `${COMMON}poster/createPost/createPost?type=recruiter&uid=${this.data.recruiterInfo.uid}&companyId=${this.data.recruiterInfo.currentCompanyId}`})
+        if(app.globalData.recruiterDetails.isCompanyTopAdmin) {
+          wx.navigateTo({url: `${COMMON}poster/createPost/createPost?type=recruiter&uid=${this.data.recruiterInfo.uid}&companyId=${orgData.id}`})
+        } else {
+          wx.navigateTo({url: `${COMMON}poster/createPost/createPost?type=recruiter&uid=${this.data.recruiterInfo.uid}&companyId=${app.globalData.recruiterDetails.companyInfo.id}`})
+        }
         break
       case 'team':
         wx.navigateTo({
@@ -189,7 +194,7 @@ Page({
    */
   viewIdentity() {
     
-    const pageInfos = this.data.pageInfos
+    let pageInfos = this.data.pageInfos
 
     //未认证
     if(!pageInfos.identityAuth && (pageInfos.identityStatus !== 0 && pageInfos.identityStatus !== 1 && pageInfos.identityStatus !== 2)) {

@@ -822,11 +822,12 @@
 }
 
 .data-box .number-box .tab3:first-child{
-  float: left;
+  /*float: left;*/
+  margin-right: 80rpx;
 }
 
 .data-box .number-box .tab3:nth-child(2){
-  float: right;
+  /*float: right;*/
 }
 
 .data-box .number-box .strong.yellow{

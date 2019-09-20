@@ -92,7 +92,7 @@ Page({
     app.shareStatistics({type: 'company', infos: companyInfos, forwardType: 2})
 　　return app.wxShare({
       options,
-      btnTitle: `${companyInfos.companyName}正在招聘，马上约面，极速入职！我在店长多多等你！`,
+      btnTitle: `${companyInfos.companyName}正在招人，马上约面，极速入职！我在这里等你！`,
       btnPath: `${COMMON}homepage/homepage?companyId=${companyInfos.id}&sCode=${companyInfos.sCode}&sourceType=shc`,
       btnImageUrl: imageUrl
     })

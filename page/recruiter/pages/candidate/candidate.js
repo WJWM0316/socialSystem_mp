@@ -438,10 +438,6 @@ Page({
       break
     }
   },
-  onShareAppMessage(options) {
-    let that = this
-　　return app.wxShare({options})
-  },
   /**
    * @Author   小书包
    * @DateTime 2019-03-01

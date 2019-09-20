@@ -313,7 +313,7 @@ Page({
     app.shareStatistics({type: 'recruiter', infos: info, forwardType: 2})
 　　return app.wxShare({
       options,
-      title: `${shareRecruiter()}{${app.globalData.currentCompanyName}}`,
+      title: `${shareRecruiter()}【${app.globalData.currentCompanyName}】`,
       path: `${COMMON}recruiterDetail/recruiterDetail?uid=${that.data.options.uid}&sCode=${that.data.info.sCode}&sourceType=shr`,
       imageUrl: recruiterCard
     })

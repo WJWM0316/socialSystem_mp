@@ -299,21 +299,10 @@ Page({
   },
   getPositionList(hasLoading = true) {
     let params = {count: this.data.pageCount, page: this.data.positionList.pageNum, is_record: 1, ...app.getSource()}
-    let orgData = wx.getStorageSync('orgData')
-    if(orgData) {
-      params.company_id = app.globalData.currentCompanyId
-    } else {
-      if (app.globalData.currentCompanyId) params.company_id = app.globalData.currentCompanyId
-    }
-    if(this.data.city) {
-      params = Object.assign(params, {city: this.data.city})
-    }
-    if(this.data.type) {
-      params = Object.assign(params, {type: this.data.type})
-    }
-    if (this.data.emolument) {
-      params = Object.assign(params, {emolument_id: this.data.emolument})
-    }
+    params.company_id = this.data.options.currentCompanyId ? this.data.options.currentCompanyId : app.globalData.currentCompanyId
+    if(this.data.city) params = Object.assign(params, {city: this.data.city})
+    if(this.data.type) params = Object.assign(params, {type: this.data.type})
+    if (this.data.emolument) params = Object.assign(params, {emolument_id: this.data.emolument})
     if(!this.data.type) {
       delete params.type
     }
@@ -414,10 +403,11 @@ Page({
     }
   },
   onShareAppMessage(options) {
+    let title = ''
 　　return app.wxShare({
       options,
-      title: shareChance,
-      path: `${APPLICANT}index/index`
+      title:  `你要的高薪福利，都在【${app.globalData.currentCompanyName}】`,
+      path: `${APPLICANT}index/index?currentCompanyId=${app.globalData.currentCompanyId}`
     })
   }
 })

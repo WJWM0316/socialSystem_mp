@@ -2,7 +2,7 @@
 export const shareC = '小程序找工作，就上店长多多！机会多，面试多！'
 
 // 分享小程序B端
-export const shareB = '招聘，就上店长多多！心仪候选人直接开撩！'
+export const shareB = '招聘，就上多多招聘！心仪候选人直接开撩！'
 
 // 分享简历
 export const shareResume = (res) => {

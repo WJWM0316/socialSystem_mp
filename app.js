@@ -509,7 +509,7 @@ App({
     let that = this
     // 设置菜单中的转发按钮触发转发事件时的转发内容
     if (!title) {
-      title = wx.getStorageSync('choseType') !== 'RECRUITER' ? shareC : shareB
+      title = wx.getStorageSync('choseType') !== 'RECRUITER' ? `【${app.globalData.currentCompanyName}】正在招人，我在这里等你！` : shareB
     }
     if (!path) {
       let companyId = this.globalData.companyInfo && this.globalData.companyInfo.id

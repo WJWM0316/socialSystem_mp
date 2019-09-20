@@ -150,7 +150,7 @@ export const request = ({name = '', method = 'post', url, host, data = {}, needK
           if (msg.httpStatus === 200) {
             resolve(msg)
           } else {
-            if ((msg.httpStatus === 401 && msg.code === 1016) && msg.httpStatus !== 401 && msg.code !== 809 && msg.code !== 701 && msg.code !== 801 && msg.code !== 910 && !noToastUrlArray.some(now => url.includes(now))) {
+            if (msg.httpStatus !== 401 && msg.code !== 809 && msg.code !== 701 && msg.code !== 801 && msg.code !== 910 && !noToastUrlArray.some(now => url.includes(now))) {
               getApp().wxToast({title: msg.msg})
             }
             reject(msg)
@@ -189,6 +189,7 @@ export const request = ({name = '', method = 'post', url, host, data = {}, needK
                 })
               }
               if (msg.code === 1016) {
+                getApp().wxToast({title: msg.msg})
                 wx.login({
                   success: function (res0) {
                     wx.setStorageSync('code', res0.code)

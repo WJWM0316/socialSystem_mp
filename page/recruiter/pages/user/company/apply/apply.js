@@ -36,11 +36,22 @@ Page({
     applyJoin: false
   },
   onLoad(options) {
+    wx.setStorageSync('choseType', 'RECRUITER')
     this.setData({options})
   },
   onShow() {
-    this.getBannerHeight()
-    this.getCompanyIdentityInfos(false)
+    let init = () => {
+      this.getBannerHeight()
+      this.getCompanyIdentityInfos(false)
+    }
+    
+    if (app.loginInit) {
+      init()
+    } else {
+      app.loginInit = () => {
+        init()
+      }
+    }
   },
   backEvent() {
     wx.removeStorageSync('createdCompany')

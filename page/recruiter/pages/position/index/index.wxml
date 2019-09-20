@@ -108,5 +108,5 @@
 	</form>
 
 	<tab-bar tabType="1" id="bottomRedDotBar" bindresultevent="getResult"></tab-bar>
-	<block wx:if="{{detail.id}}"><canvasCard cardData="{{detail}}" type="position" bindgetCreatedImg="getCreatedImg"></canvasCard></block>
+	<canvasCard wx:if="{{positionItem.id}}" cardData="{{positionItem}}" type="position" bindgetCreatedImg="getCreatedImg"></canvasCard>
 </view>

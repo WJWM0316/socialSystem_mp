@@ -12,7 +12,7 @@
   <chooseOrgEnter></chooseOrgEnter>
   
   <view class="radio-group">
-    <view class="li" wx:for="{{onLinePositionList.list}}" wx:key="{{index}}" bindtap="onClick" data-item="{{item}}" data-index="{{index}}">
+    <view class="li" wx:for="{{onLinePositionList.list}}" wx:key="{{index}}" bindtap="onClick" data-index="{{index}}">
       <view class="content">
         <view class="title">
           <view class="txt1">{{item.positionName}}</view>
@@ -38,6 +38,7 @@
   <!-- <bottomStatus status="{{onBottomStatus}}" listData="{{onLinePositionList.list}}" desc="没有更多职位了，赶紧去发布职位吧！发布职位>>"></bottomStatus> -->
   
   <view class="footer">
-  	<view class="button-submit {{buttonClick ? 'button-enable' : ''}}" bindtap="submit">下一步</view>
+  	<button class="button-submit {{buttonClick ? 'button-enable' : ''}}" bindtap="submit" open-type="{{options.type === 'ps-position-min' ? 'share' : ''}}">下一步</button>
 	</view>
+  <canvasCard wx:if="{{params.id && options.type === 'ps-position-min'}}" cardData="{{params}}" type="position" bindgetCreatedImg="getCreatedImg"></canvasCard>
 </view>

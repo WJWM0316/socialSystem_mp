@@ -63,7 +63,7 @@
 				</view>
 			</button>
 		</form>
-		<bottomStatus status="{{ onBottomStatus }}" listData="{{viewList.list}}" desc="还没有数据哦，赶紧去主页看看心仪的好职位吧~" marginTop="{{40}}">
+		<bottomStatus status="{{ onBottomStatus }}" listData="{{viewList.list}}" desc="还没有数据哦，去分享发现更多优质候选人~" marginTop="{{40}}">
 			<button class="jump" bindtap="routeJump">去分享</button>
 		</bottomStatus>
 	</view>
@@ -112,7 +112,7 @@
 				</view>
 			</button>
 		</form>
-		<bottomStatus status="{{onBottomStatus}}" listData="{{interestList.list}}" desc="还没有数据哦，赶紧去主页看看心仪的好职位吧~" marginTop="{{40}}">
+		<bottomStatus status="{{onBottomStatus}}" listData="{{interestList.list}}" desc="还没有数据哦，去分享发现更多优质候选人~" marginTop="{{40}}">
 			<button class="jump" bindtap="routeJump">去分享</button>
 		</bottomStatus>
 	</view>

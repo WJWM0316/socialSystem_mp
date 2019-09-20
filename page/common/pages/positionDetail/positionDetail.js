@@ -304,7 +304,6 @@ Page({
   },
   getCreatedImg(e) {
     positionCard = e.detail
-    console.log(e, 'detail')
   },
   onShareAppMessage(options) {
     let that = this

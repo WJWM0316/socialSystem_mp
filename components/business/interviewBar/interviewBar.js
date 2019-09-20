@@ -13,7 +13,8 @@ import {
   getPositionApi,
   openPositionApi,
   closePositionApi,
-  getPositionListNumApi
+  getPositionListNumApi,
+  getCompanyTopPositionListNumApi
 } from '../../../api/pages/position.js'
 
 import {
@@ -155,10 +156,17 @@ Component({
      * @return   {[type]}   [description]
      */
     getPositionListNum() {
+      let funcApi = app.globalData.recruiterDetails.isCompanyTopAdmin ? getCompanyTopPositionListNumApi : getPositionListNumApi
+      let orgData = wx.getStorageSync('orgData')
+      let params = {
+        recruiter: app.globalData.recruiterDetails.uid
+      }
+      if(app.globalData.recruiterDetails.isCompanyTopAdmin) {
+        if(orgData) params = Object.assign(params, {companyId: orgData.id})
+      }
       return new Promise((resolve, reject) => {
-        getPositionListNumApi().then(res => {
-          this.setData({positionInfos: res.data})
-          resolve(res)
+        setTimeout(() => {
+          funcApi(params).then(res => this.setData({positionInfos: res.data}, () => resolve(res)))
         })
       })
     },
@@ -381,9 +389,7 @@ Component({
           let type = this.data.type
           if ((identity !== 'RECRUITER' && type === 'position') || (identity === 'RECRUITER' && type === 'resume')) {
             if(this.data.currentPage === 'resumeDetail') {
-
               this.getPositionListNum().then(res => {
-                console.log(222222222)
                 if(!res.data.online) {
                   this.setData({show: true})
                 } else {

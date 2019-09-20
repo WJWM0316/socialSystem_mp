@@ -410,6 +410,7 @@
   line-height: 24rpx;
   padding-top: 18rpx;
   overflow: hidden;
+  padding-right: 10rpx;
 }
 
 .todo_ul .strong {
@@ -455,43 +456,34 @@
 }
 
 .sale-tools .tab-ul{
-  background:rgba(255,255,255,1);
-  box-shadow:0rpx 6rpx 20rpx 0rpx rgba(50,14,59,0.07);
   border-radius:16rpx;
-  margin: 30rpx 30rpx 0 30rpx;
+  padding: 30rpx 30rpx 20rpx 30rpx;
   overflow: hidden;
-  padding: 42rpx 40rpx 40rpx;
 }
 
 .sale-tools .tab1{
-  width: 50%;
-  float: left;
+  width: calc(50% - 9rpx);
   position: relative;
-  height: 76rpx;
+  text-align: left;
+  height:148rpx;
+  background:rgba(255,255,255,1);
+  box-shadow:0rpx 6rpx 20rpx 0rpx rgba(50,14,59,0.07);
+  border-radius:16rpx;
   line-height: 76rpx;
   box-sizing: border-box;
-  text-align: left;
+  padding: 36rpx 0;
 }
 
-.sale-tools .split-line::before{
-  display: block;
-  height: 30rpx;
-  background: #E8E9EB;
-  width: 2rpx;
-  content: '';
-  position: absolute;
-  right: 0 !important;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.sale-tools .top{
-  margin-bottom: 60rpx;
+.sale-tools .left{
+  float: left;
+  padding-left: 64rpx;
 }
 
 .sale-tools .right{
-  padding-left: 33rpx;
+  float: right;
+  padding-left: 54rpx;
 }
+
 
 .sale-tools .p{
   font-size:26rpx;
@@ -513,7 +505,7 @@
   box-shadow:0rpx 6rpx 20rpx 0rpx rgba(50,14,59,0.07);
   border-radius:16rpx;
   padding: 60rpx 40rpx;
-  margin: 20rpx 30rpx;
+  margin: 0rpx 30rpx 30rpx 30rpx;
 }
 
 .make-box .ul1 {
@@ -544,6 +536,9 @@
 .make-box .ul2 .li {
   display: inline-block;
   vertical-align: top;
+  background: transparent;
+  padding: 0;
+  line-height: unset;
 }
 
 .make-box .ul2 .li:first-child {

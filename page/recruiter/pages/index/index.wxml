@@ -50,7 +50,8 @@
 				<view class="number" wx:if="{{indexShowCount.dynamicTotal}}">{{indexShowCount.dynamicTotal}}</view>个新增动态
 			</view>
 			<view class="none" wx:else>
-				暂无动态
+				查看更多动态
+				<!-- 暂无动态 -->
 			</view>
 			<i class="icon iconfont icon-xiangyou"></i>
 		</view>
@@ -65,20 +66,18 @@
 				<view class="row1">
 					<view class="left">
 						<view class="name">{{item.name}}</view>
-						<view class="infos1" wx:if="{{item.lastCompanyName}}">{{item.positionName}} | {{item.lastCompanyName}}</view>
+						<view class="infos1" wx:if="{{item.lastCompanyName}}">{{item.lastPosition}} | {{item.lastCompanyName}}</view>
 					</view>
 				</view>
 				<view class="row2">
 					<view class="limit">
-						<block wx:if="{{ item.isCollect }}">
-							{{ item.gender === 2 ? '她' : '他' }}
-							<i class="icon iconfont icon-biaojiweiganxingqu"></i>
-							你的
-						</block>
-						<block wx:if="{{item.isBrowse}}">
-							查看了你的职位
-						</block>
-						<view class="strong">{{item.positionName}}</view>
+						{{ item.gender === 2 ? '她' : '他' }}
+						<i class="icon iconfont icon-biaojiweiganxingqu"></i>
+						你的
+						<view class="strong">
+							<block wx:if="{{item.positionName}}">{{item.positionName}}</block>
+							<block wx:if="{{!item.positionName}}">个人主页</block>
+						</view>
 					</view>
 					<view class="time">{{item.viewAt}}</view>
 				</view>
@@ -108,41 +107,33 @@
 		<view class="title">营销工具</view>
 		<view class="p2">帮助招聘官快速完成招聘任务</view>
 		<view class="tab-ul">
-			<button class="tab1 left top split-line clear-style" open-type="{{!isCompanyTopAdmin ? 'share' : ''}}" bindtap="{{isCompanyTopAdmin ? 'routeJump' : ''}}" data-route="{{isCompanyTopAdmin ? 'shareCompany' : ''}}">
+			<view class="tab1 left"bindtap="routeJump" data-route="publicPosition">
 				<image src="{{cdnImagePath}}bnt_my_company.png" mode="aspectFill" class="icon"></image>
-				<view class="p">转发机构主页</view>
-			</button>
-			<view class="tab1  right top" bindtap="routeJump" data-route="sharePosition">
-				<image src="{{cdnImagePath}}btn_my_job.png" mode="aspectFill" class="icon"></image>
-				<view class="p">转发我的职位</view>
-			</view>
-			<view class="tab1 left bottom split-line" bindtap="routeJump" data-route="publicPosition">
-				<image src="{{cdnImagePath}}btn_my_sendjob.png" mode="aspectFill" class="icon"></image>
 				<view class="p">发布职位</view>
 			</view>
-			<view class="tab1 right bottom" bindtap="routeJump" data-route="receiveData">
-				<image src="{{cdnImagePath}}btn_my_resume.png" mode="aspectFill" class="icon"></image>
+			<view class="tab1 right" bindtap="routeJump" data-route="receiveData">
+				<image src="{{cdnImagePath}}btn_my_job.png" mode="aspectFill" class="icon"></image>
 				<view class="p">面试管理</view>
 			</view>
 		</view>
 	</view>
 
 	<view class="make-box">
-<!-- 		<view class="title"><view class="icon"></view>转发小程序</view>
+		<view class="title"><view class="icon"></view>转发小程序</view>
 		<view class="ul2 split-line">
-			<view class="li" bindtap="routeJump" data-route="poster-mechanism">
+			<button class="li" open-type="{{!isCompanyTopAdmin ? 'share' : ''}}" bindtap="routeJump" data-route="{{isCompanyTopAdmin ? 'shareCompany' : 'type-company'}}">
 				<image src="{{cdnImagePath}}icon-share-jigou_20190912.png" mode="aspectFill" class="img-box"></image>
 				<view class="p">机构</view>
-			</view>
-			<view class="li" bindtap="routeJump" data-route="sharePosition">
+			</button>
+			<view class="li" bindtap="routeJump" data-route="sharePositionMin">
 				<image src="{{cdnImagePath}}icon-share-job_20190912.png" mode="aspectFill" class="img-box"></image>
 				<view class="p">职位</view>
 			</view>
-			<view class="li" bindtap="routeJump" data-route="recruiter-mechanism">
+			<button class="li" open-type="share" data-type="recruiter">
 				<image src="{{cdnImagePath}}icon-share-zhaopinguan_20190912.png" mode="aspectFill" class="img-box"></image>
 				<view class="p">招聘官</view>
-			</view>
-		</view> -->
+			</button>
+		</view>
 		
 		<view class="title"><view class="icon"></view>生成招聘海报</view>
 		<view class="ul2 split-line">
@@ -207,6 +198,8 @@
 	</view>
 
   <tabBar tabType="1" id="bottomRedDotBar"></tabBar>
+  <!-- <shareBtn></shareBtn> -->
+  <canvasCard wx:if="{{userInfo.uid}}" cardData="{{userInfo}}" type="recruiter" bindgetCreatedImg="getCreatedImg"></canvasCard>
 
   <view class="overlay" wx:if="{{showPublicPositionTips}}">
 		<view class="box">

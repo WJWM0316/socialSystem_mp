@@ -36,7 +36,8 @@ Page({
     telePhone: app.globalData.telePhone,
     options: {},
     redDotInfos: {},
-    detail: app.globalData.recruiterDetails
+    detail: app.globalData.recruiterDetails,
+    positionItem: {}
   },
   onLoad(options) {
     wx.setStorageSync('choseType', 'RECRUITER')
@@ -226,8 +227,9 @@ Page({
         })
         break
       case 'share':
-        let detail = this.data.onLinePosition.list.find((field, index) => index === params.index)
-        this.setData({detail}, () => detail = detail)
+        this.setData({positionItem: {}})
+        let positionItem = this.data.onLinePosition.list.find((field, index) => index === params.index)
+        this.setData({positionItem})
         break
       default:
         break
@@ -278,6 +280,10 @@ Page({
     this.setData({[key]: value, onBottomStatus: 0, hasReFresh: true}, () => app.getBottomRedDot())
     this.getLists(false).then(() => callback()).catch(() => callback())
     this.getPositionListNum()
+  },
+  getCreatedImg(e) {
+    positionCard = e.detail
+    console.log(e, 'e')
   },
   onShareAppMessage(options) {
     let id = options.target.dataset.id

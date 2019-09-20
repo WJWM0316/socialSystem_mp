@@ -20,10 +20,13 @@ import {
   getCompanyTopPositionListNumApi
 } from '../../../../api/pages/position.js'
 
+import {shareRecruiter} from '../../../../utils/shareWord.js'
+
 let app = getApp()
 
 let fixedDomPosition = 0,
-    positionCard = null
+    positionCard = null,
+    recruiterCard = null
 
 Page({
   data: {
@@ -48,37 +51,19 @@ Page({
           number: '0',
           text: '机构浏览次数',
           active: true,
-          data: {
-            key: ['22', '23', '24', '25', '26', '27', '28'],
-            value: [
-              [0, 0, 0, 0, 0, 0, 0],
-              [0, 0, 0, 0, 0, 0, 0]
-            ]
-          }
+          data: {}
         },
         {
           number: '0',
           text: '职位浏览次数',
           active: false,
-          data: {
-            key: ['22', '23', '24', '25', '26', '27', '28'],
-            value: [
-              [0, 0, 0, 0, 0, 0, 0],
-              [0, 0, 0, 0, 0, 0, 0]
-            ]
-          }
+          data: {}
         },
         {
           number: '0',
           text: '招聘官浏览次数',
           active: false,
-          data: {
-            key: ['22', '23', '24', '25', '26', '27', '28'],
-            value: [
-              [0, 0, 0, 0, 0, 0, 0],
-              [0, 0, 0, 0, 0, 0, 0]
-            ]
-          }
+          data: {}
         }
       ],
       yesterday: '',
@@ -90,7 +75,8 @@ Page({
     showPublicPositionTips: false,
     userInfo: app.globalData.recruiterDetails,
     pageShow: true,
-    positionInfos: {}
+    positionInfos: {},
+    shareType: ''
   },
   onLoad() {
     let choseType = wx.getStorageSync('choseType') || ''
@@ -132,12 +118,17 @@ Page({
   init () {
     if (wx.getStorageSync('choseType') === 'APPLICANT') return
     let callback = () => {
-      let userInfo = app.globalData.recruiterDetails
-      let companyInfos = app.globalData.recruiterDetails.companyInfo
-      let isCompanyTopAdmin = app.globalData.recruiterDetails.isCompanyTopAdmin
-      this.getMixdata()
-      this.setData({userInfo, companyInfos, isCompanyTopAdmin})
-      this.selectComponent('#bottomRedDotBar').init()
+      // 处理海报生成问题
+      this.setData({userInfo: {}})
+      app.getAllInfo().then(res => {
+        let userInfo = res
+        let companyInfos = res.companyInfo
+        let isCompanyTopAdmin = res.isCompanyTopAdmin
+        this.getMixdata()
+        this.setData({userInfo, companyInfos, isCompanyTopAdmin})
+        this.selectComponent('#bottomRedDotBar').init()
+      })
+      
     }
     if(app.pageInit) {
       callback()
@@ -190,11 +181,20 @@ Page({
     if (app.globalData.recruiterDetails.isCompanyTopAdmin) {
       companyInfos.id = app.globalData.recruiterDetails.currentCompanyId + 1
     }
+    let btnTitle = `${companyInfos.companyName}正在招聘，马上约面，极速入职！我在店长多多等你！`
+    let btnImageUrl = positionCard
+    let btnPath = `${COMMON}homepage/homepage?companyId=${companyInfos.id}`
+    if(options.target.dataset.type === 'recruiter') {
+      btnTitle = shareRecruiter()
+      btnImageUrl = recruiterCard
+      btnPath = `${COMMON}recruiterDetail/recruiterDetail?uid=${this.data.userInfo.uid}&sCode=${this.data.userInfo.sCode}&sourceType=shr`
+    }
+    
 　　return app.wxShare({
       options,
-      btnTitle: `${companyInfos.companyName}正在招聘，马上约面，极速入职！我在店长多多等你！`,
-      btnImageUrl: positionCard,
-      btnPath: `${COMMON}homepage/homepage?companyId=${companyInfos.id}`
+      btnTitle,
+      btnImageUrl,
+      btnPath
     })
   },
   /**
@@ -335,6 +335,22 @@ Page({
         break
       case 'candidate':
         wx.reLaunch({url: `${RECRUITER}candidate/candidate`})
+        break
+      case 'shareRecruiter':
+        break
+      case 'sharePositionMin':
+        // 该机构的职位上线状态
+        if(this.data.positionInfos.online) {
+          wx.navigateTo({url: `${RECRUITER}organization/position/position?type=ps-position-min`})
+        } else {
+          this.setData({showPublicPositionTips: true})
+        }
+        break
+      case 'type-recruiter':
+        this.setData({shareType: 'type-recruiter'})
+        break
+      case 'type-company':
+        this.setData({shareType: 'type-company'})
         break
       default:
         break
@@ -517,5 +533,8 @@ Page({
       dataBox.activeIndex = index
       this.setData({ dataBox })
     })
+  },
+  getCreatedImg(e) {
+    recruiterCard = e.detail
   }
 })

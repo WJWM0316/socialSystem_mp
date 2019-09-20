@@ -61,7 +61,7 @@
           <view class="phone {{!info.wechat ? 'noWechat' : ''}}"><i class="imgIcon iconfont icon-shoujihaoma"></i><text class="data">{{info.mobile}}</text><text class="btn" bindtap="call">拨打电话</text></view>
           <view class="wechat" wx:if="{{info.wechat}}"><i class="imgIcon iconfont icon-weixin"></i><text class="data">{{info.wechat}}</text><text class="btn" bindtap="wechat">复制微信号</text></view>
         </view>
-        <view class="declaration {{isOwner ? 'recruiterMain' : ''}}" wx:if="{{(!isOwner && info.manifestos.length > 0) || (isOwner && showEdit)}}">
+    <!--     <view class="declaration {{isOwner ? 'recruiterMain' : ''}}" wx:if="{{(!isOwner && info.manifestos.length > 0) || (isOwner && showEdit)}}">
           <view class="title">
             <view class="icon">
               <view class="fan"></view>
@@ -75,7 +75,7 @@
             </view>
           </view>
           <view wx:if="{{isOwner}}" class="addDeclaration" bindtap="editJump" data-type="addDeclaration">添加招聘宣言</view>
-        </view>
+        </view> -->
       </view>
 
       <view class="position" wx:if="{{!isOwner || !showEdit}}" hidden="{{info.isCompanyTopAdmin && !positionList.total}}">

@@ -9,8 +9,11 @@ import {
 
 import {RECRUITER, COMMON} from '../../../../../config.js'
 
-let app = getApp()
+import {sharePosition} from '../../../../../utils/shareWord.js'
 
+
+let app = getApp(),
+    positionCard = null
 Page({
   data: {
     options: {},
@@ -86,12 +89,15 @@ Page({
     let result = {}
     let onLinePositionList = this.data.onLinePositionList
     let buttonClick = this.data.buttonClick
+    // 处理海报不生成的问题
+    this.setData({params: {}})
     onLinePositionList.list.map((field, index) => {
       field.active = false
       if(index === params.index) {
         field.active = true
         result = field
         buttonClick = true
+        params = field
       }
     })
     this.setData({params, onLinePositionList, buttonClick})
@@ -112,11 +118,11 @@ Page({
     if(!buttonClick) return
     switch (this.data.options.type) {
       case 'qr-position':
-        wx.navigateTo({url: `${RECRUITER}createQr/createQr?type=qr-position&positionId=${this.data.params.item.id}`})
+        wx.navigateTo({url: `${RECRUITER}createQr/createQr?type=qr-position&positionId=${this.data.params.id}`})
         break
       case 'ps-position':
         wx.navigateTo({
-          url: `${COMMON}poster/createPost/createPost?type=position&positionId=${this.data.params.item.id}`
+          url: `${COMMON}poster/createPost/createPost?type=position&positionId=${this.data.params.id}`
         })
         break
     }
@@ -124,5 +130,22 @@ Page({
   },
   publicPosition() {
     wx.navigateTo({url: `${RECRUITER}position/post/post`})
+  },
+  getCreatedImg(e) {
+    positionCard = e.detail
+  },
+  onShareAppMessage(options) {
+    let that = this
+    let infos = this.data.params
+    console.log(infos, 'infos')
+　　return app.wxShare({
+      options,
+      title: sharePosition(),
+      path: `${COMMON}positionDetail/positionDetail?positionId=${infos.id}&sCode=${infos.sCode}&sourceType=shp`,
+      imageUrl: positionCard,
+      success: function() {
+        wx.navigateBack({delta: 1 })
+      }
+    })
   }
 })

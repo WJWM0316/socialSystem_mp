@@ -55,6 +55,8 @@ export const request = ({name = '', method = 'post', url, host, data = {}, needK
 
   addHttpHead['Mp-App-Id'] = getApp() && getApp().globalData.appId
 
+  addHttpHead['Role'] = wx.getStorageSync('choseType') !== "RECRUITER" ? 'j' : 'r' 
+
   // 如果连接带参数scode, 则存到头部
   if (data.sCode && !data.isReload) {
     addHttpHead['Act-Code'] = data.sCode
@@ -187,6 +189,9 @@ export const request = ({name = '', method = 'post', url, host, data = {}, needK
                 })
               }
               if (msg.code === 1016) {
+                setTimeout(() => {
+                  getApp().wxToast({title: msg.msg})
+                }, 300)
                 wx.login({
                   success: function (res0) {
                     wx.setStorageSync('code', res0.code)

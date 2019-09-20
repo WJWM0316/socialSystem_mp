@@ -13,6 +13,7 @@ Page({
     navH: app.globalData.navHeight,
     cdnImagePath: app.globalData.cdnImagePath,
     isTopAdmin: app.globalData.isTopAdmin,
+    choseType: wx.getStorageSync('choseType'),
     orgList: [],
     options: {}
   },

@@ -155,20 +155,6 @@ export const request = ({name = '', method = 'post', url, host, data = {}, needK
           }
           switch (msg.httpStatus) {
             case 200:
-              // if (name) {
-              //   saveApiData = wx.getStorageSync('saveApiData') || {}
-              //   if (!saveApiData[name]) {
-              //     saveApiData[name] = {}
-              //     saveApiData[name].version = 0
-              //     saveApiData[name].data = res.data
-              //     wx.setStorageSync('saveApiData', saveApiData)
-              //   }
-              //   if (!apiVersionList || !apiVersionList[name] || (apiVersionList[name] && apiVersionList[name].version !== saveApiData[name].version)) {
-              //     saveApiData[name].version = !apiVersionList[name] ? 0 : apiVersionList[name].version
-              //     saveApiData[name].data = res.data
-              //     wx.setStorageSync('saveApiData', saveApiData)
-              //   }
-              // } 
               break
             case 401:
               // 需要用到token， 需要绑定手机号
@@ -198,6 +184,16 @@ export const request = ({name = '', method = 'post', url, host, data = {}, needK
                   wx.redirectTo({
                     url: getApp().getCurrentPagePath()
                   })
+                })
+              }
+              if (msg.code === 1016) {
+                wx.login({
+                  success: function (res0) {
+                    wx.setStorageSync('code', res0.code)
+                  },
+                  fail: function (e) {
+                    console.log('wxLogin登录失败', e)
+                  }
                 })
               }
               break

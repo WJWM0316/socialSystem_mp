@@ -303,6 +303,21 @@ Page({
     if(this.data.city) params = Object.assign(params, {city: this.data.city})
     if(this.data.type) params = Object.assign(params, {type: this.data.type})
     if (this.data.emolument) params = Object.assign(params, {emolument_id: this.data.emolument})
+    let orgData = wx.getStorageSync('orgData')
+    if(orgData) {
+      params.company_id = orgData.id
+    } else {
+      if (app.globalData.currentCompanyId) params.company_id = app.globalData.currentCompanyId
+    }
+    if(this.data.city) {
+      params = Object.assign(params, {city: this.data.city})
+    }
+    if(this.data.type) {
+      params = Object.assign(params, {type: this.data.type})
+    }
+    if (this.data.emolument) {
+      params = Object.assign(params, {emolument_id: this.data.emolument})
+    }
     if(!this.data.type) {
       delete params.type
     }

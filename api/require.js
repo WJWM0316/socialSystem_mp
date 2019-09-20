@@ -189,7 +189,9 @@ export const request = ({name = '', method = 'post', url, host, data = {}, needK
                 })
               }
               if (msg.code === 1016) {
-                getApp().wxToast({title: msg.msg})
+                setTimeout(() => {
+                  getApp().wxToast({title: msg.msg})
+                }, 300)
                 wx.login({
                   success: function (res0) {
                     wx.setStorageSync('code', res0.code)

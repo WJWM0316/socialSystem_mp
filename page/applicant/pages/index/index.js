@@ -301,7 +301,7 @@ Page({
     let params = {count: this.data.pageCount, page: this.data.positionList.pageNum, is_record: 1, ...app.getSource()}
     let orgData = wx.getStorageSync('orgData')
     if(orgData) {
-      params.company_id = app.globalData.currentCompanyId
+      params.company_id = orgData.id
     } else {
       if (app.globalData.currentCompanyId) params.company_id = app.globalData.currentCompanyId
     }

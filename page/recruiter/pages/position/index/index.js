@@ -285,7 +285,7 @@ Page({
     positionCard = e.detail
   },
   onShareAppMessage(options) {
-    let id = options.target.dataset.id
+    let id = options.target && options.target.dataset.id
 　　return app.wxShare({
       options,
       btnTitle: sharePosition(),

@@ -506,10 +506,11 @@ App({
   },
   // 微信分享
   wxShare({options, title, path, imageUrl, noImg, btnTitle, btnPath, btnImageUrl}) {
+    console.log(title)
     let that = this
     // 设置菜单中的转发按钮触发转发事件时的转发内容
     if (!title) {
-      title = wx.getStorageSync('choseType') !== 'RECRUITER' ? `【${app.globalData.currentCompanyName}】正在招人，我在这里等你！` : shareB
+      title = `【${this.globalData.currentCompanyName}】正在招人，我在这里等你！`
     }
     if (!path) {
       let companyId = this.globalData.companyInfo && this.globalData.companyInfo.id

@@ -184,6 +184,7 @@ Page({
     let btnTitle = `${companyInfos.companyName}正在招聘，马上约面，极速入职！我在店长多多等你！`
     let btnImageUrl = positionCard
     let btnPath = `${COMMON}homepage/homepage?companyId=${companyInfos.id}`
+    
     if(options.target.dataset.type === 'recruiter') {
       btnTitle = shareRecruiter()
       btnImageUrl = recruiterCard

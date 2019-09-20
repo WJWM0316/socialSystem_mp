@@ -191,6 +191,7 @@ Page({
         wx.setStorageSync('companyInfos', this.data.companyInfos)
         break
       case 'toOrg':
+        wx.setStorageSync('orgData', item.item)
         wx.navigateTo({url: `${COMMON}homepage/homepage?companyId=${item.id}`})
         break
       case 'toRecruiter':

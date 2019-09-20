@@ -71,9 +71,17 @@
 				</view>
 				<view class="row2">
 					<view class="limit">
-						{{ item.gender === 2 ? '她' : '他' }}
-						<i class="icon iconfont icon-biaojiweiganxingqu"></i>
-						你的
+						<block wx:if="{{item.isCollect && item.positionName}}">
+							{{ item.gender === 2 ? '她' : '他' }}
+							<i class="icon iconfont icon-biaojiweiganxingqu"></i>
+							你的
+						</block>
+						<block wx:if="{{item.isBrowse && item.positionName}}">
+							查看了你的职位
+						</block>
+						<block wx:if="{{!item.positionName}}">
+							查看了你的
+						</block>
 						<view class="strong">
 							<block wx:if="{{item.positionName}}">{{item.positionName}}</block>
 							<block wx:if="{{!item.positionName}}">个人主页</block>

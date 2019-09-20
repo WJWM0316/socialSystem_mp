@@ -299,8 +299,12 @@ Page({
   },
   getPositionList(hasLoading = true) {
     let params = {count: this.data.pageCount, page: this.data.positionList.pageNum, is_record: 1, ...app.getSource()}
-    
-    if (app.globalData.currentCompanyId) params.company_id = app.globalData.currentCompanyId
+    let orgData = wx.getStorageSync('orgData')
+    if(orgData) {
+      params.company_id = app.globalData.currentCompanyId
+    } else {
+      if (app.globalData.currentCompanyId) params.company_id = app.globalData.currentCompanyId
+    }
     if(this.data.city) {
       params = Object.assign(params, {city: this.data.city})
     }

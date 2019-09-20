@@ -82,7 +82,7 @@
 				<view class="icon"> <view class="fan"></view> </view> 其他分机构
 			</view>
 			<view class="ul">
-				<view class="li" wx:for="{{otherOrgList}}" wx:key="{{index}}" bindtap="routeJump" data-route="toOrg" data-id="{{item.id}}" wx:if="{{index < 3}}">
+				<view class="li" wx:for="{{otherOrgList}}" wx:key="{{index}}" bindtap="routeJump" data-route="toOrg" data-id="{{item.id}}" wx:if="{{index < 3}}" data-item="{{item}}">
 					<view class="img-box">
 						<image src="{{item.logoInfo.smallUrl}}" class="avatar" mode="aspectFit"></image>
 						<!-- <image src="{{cdnImagePath}}sign1.png" mode="aspectFill" class="sign1"></image> -->
@@ -170,8 +170,8 @@
 			</view>
 		</view>
 
-		<view class="technical-support">猎多多提供技术支持</view>
-		<view class="generating-applets" bindtap="getCompanyApplyInfo">我也要生成企业专属招聘小程序<i class="icon iconfont icon-xiangyou"></i></view>
+		<view class="technical-support" wx:if="{{choseType !== 'RECRUITER'}}">猎多多提供技术支持</view>
+		<view class="generating-applets" bindtap="getCompanyApplyInfo" wx:if="{{choseType !== 'RECRUITER'}}">我也要生成企业专属招聘小程序<i class="icon iconfont icon-xiangyou"></i></view>
 
 	<!-- 	<view class="toggle" bindtap="toggle" wx:if="{{choseType !== 'RECRUITER'}}">
 			<image class="icon" src="{{cdnImagePath}}{{isRecruiter ? 'btn_b_hp_zhoapin.png' : 'btn_b_hp_zhaoren.png'}}"></image>

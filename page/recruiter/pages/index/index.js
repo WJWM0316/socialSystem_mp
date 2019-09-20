@@ -181,7 +181,7 @@ Page({
     if (app.globalData.recruiterDetails.isCompanyTopAdmin) {
       companyInfos.id = app.globalData.recruiterDetails.currentCompanyId + 1
     }
-    let btnTitle = `${companyInfos.companyName}正在招聘，马上约面，极速入职！我在店长多多等你！`
+    let btnTitle = `${companyInfos.companyName}正在招聘，马上约面，极速入职！`
     let btnImageUrl = positionCard
     let btnPath = `${COMMON}homepage/homepage?companyId=${companyInfos.id}`
     

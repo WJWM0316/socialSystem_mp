@@ -1,6 +1,4 @@
 // 分享小程序C端
-export const shareC = '小程序找工作，就上店长多多！机会多，面试多！'
-
 // 分享小程序B端
 export const shareB = '招聘，就上多多招聘！心仪候选人直接开撩！'
 
@@ -21,13 +19,13 @@ export const shareResume = (res) => {
 // 分享招聘官
 export const shareRecruiter = (res) => {
 	let txtList = [
-		'【工作易得，知音难觅，壮士约乎？】TA正在店长多多招人！',
-		'【我不想懂天文地理，我只想懂你~】TA正在店长多多招人！',
-		'【公司的进口零食得找个人清一清了】TA正在店长多多招人！',
-		'【我看你骨骼精奇，是块耐磨的料子】TA正在店长多多招人！',
-		'【好看的和能干的，都欢迎来开撩哦】TA正在店长多多招人！',
-		'【把握住缘分，搞不好能成为同事~】TA正在店长多多招人！',
-		'【我这么Nice的面试官已经不多见了！】TA正在店长多多招人！'
+		'【工作易得，知音难觅，壮士约乎？】TA正在招人！',
+		'【我不想懂天文地理，我只想懂你~】TA正在招人！',
+		'【公司的进口零食得找个人清一清了】TA正在招人！',
+		'【我看你骨骼精奇，是块耐磨的料子】TA正在招人！',
+		'【好看的和能干的，都欢迎来开撩哦】TA正在招人！',
+		'【把握住缘分，搞不好能成为同事~】TA正在招人！',
+		'【我这么Nice的面试官已经不多见了！】TA正在招人！'
 	]
 	let random = Math.floor((Math.random()*txtList.length))
 	return txtList[random]
@@ -58,7 +56,7 @@ export const shareInterviewr = '邀请你面试一个优秀候选人，快去Loo
 export const shareRanking = '全国的面试官，都在这里招聘'
 
 // 分享职业机会
-export const shareChance = '你要的高薪福利好，都藏在店长多多'
+export const shareChance = '你要的高薪福利好，都藏在'
 
 
 

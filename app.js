@@ -67,6 +67,7 @@ App({
     isJobhunter: 0, // 是否注册成求职者
     currentCompanyId: 0, // C端用户当前机构
     isTopAdmin: 0, // 是不是超管
+    currentCompanyName: '', // 当前机构名称
     hasExpect: 1, // 有求职意向
     hasLogin: 0, // 判断是否登录
     userInfo: null, // 用户信息， 判断是否授权,
@@ -197,6 +198,7 @@ App({
         if (res0.data.hasCard) this.globalData.isMicroCard = res0.data.hasCard || 0
         if (res0.data.currentCompanyId) this.globalData.currentCompanyId = res0.data.currentCompanyId
         if (res0.data.isTopAdmin) this.globalData.isTopAdmin = res0.data.isTopAdmin
+        if (res0.data.currentCompanyName) this.globalData.currentCompanyName = res0.data.currentCompanyName
         if (this.getRoleInit) { // 登陆初始化
           this.getRoleInit() //执行定义的回调函数
         } else {

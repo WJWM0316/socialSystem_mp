@@ -49,7 +49,7 @@ export const sharePosition = (res) => {
 }
 
 // 分享公司
-export const shareCompany = '正在招聘，马上约面，极速入职！我在店长多多等你！'
+export const shareCompany = '正在招人，马上约面，极速入职！我在这里等你！'
 
 // 分享面试
 export const shareInterviewr = '邀请你面试一个优秀候选人，快去Look吧~'

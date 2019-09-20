@@ -381,13 +381,14 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function (options) {
+    let that = this
     let btnImageUrl = `${this.data.cdnImagePath}shareB.png`
     if(positionCard){
       btnImageUrl = positionCard
     }
     return app.wxShare({
       options,
-      btnTitle: shareInterviewr,
+      btnTitle: `${that.data.info.recruiterInfo.realname}邀请你面试一个优秀候选人，快去看看吧~`,
       btnImageUrl: btnImageUrl,
       btnPath: `${COMMON}arrangement/arrangement?id=${this.options.id}`
     })

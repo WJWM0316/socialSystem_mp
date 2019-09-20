@@ -266,9 +266,10 @@ Page({
       params = `${params}&adviser=true`
     }
     app.shareStatistics({type: 'resumer', infos: info, forwardType: 2})
+    let title = identity === 'APPLICANT' ? shareResume() : '发现一枚优秀候选人，快来看看吧~'
 　　return app.wxShare({
       options,
-      title: shareResume(),
+      title: title,
       path: `${url}${params}`,
       btnImageUrl: btnImageUrl
     })

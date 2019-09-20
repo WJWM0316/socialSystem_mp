@@ -151,6 +151,7 @@ Page({
       })
     })
   },
+  
   getCompanyOrglist (id) {
     getCompanyOrglistApi({company_id: id}).then(res => {
       if (res.data.length) {
@@ -310,7 +311,7 @@ Page({
     app.shareStatistics({type: 'company', infos: companyInfos, forwardType: 2})
 　　return app.wxShare({
       options,
-      title: `${companyInfos.companyName}正在招聘，马上约面，极速入职！我在店长多多等你！`,
+      title: `${companyInfos.companyName}正在招人，马上约面，极速入职！我在这里等你！`,
       path: `${COMMON}homepage/homepage?companyId=${companyId}&sCode=${companyInfos.sCode}&sourceType=shc`,
       imageUrl: imageUrl
     })

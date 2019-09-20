@@ -283,7 +283,6 @@ Page({
   },
   getCreatedImg(e) {
     positionCard = e.detail
-    console.log(e, 'e')
   },
   onShareAppMessage(options) {
     let id = options.target.dataset.id

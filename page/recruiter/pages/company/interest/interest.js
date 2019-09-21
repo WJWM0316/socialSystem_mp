@@ -48,7 +48,7 @@ Page({
   alert1() {
     app.wxConfirm({
       title: '升级专业版',
-      content: `了解更多店长多多招聘权益，欢迎联系我们~`,
+      content: `了解更多多多社交招聘系统招聘权益，欢迎联系我们~`,
       cancelText: '考虑一下',
       confirmText: '联系客服',
       confirmBack: () => {
@@ -62,7 +62,7 @@ Page({
   alert2() {
     app.wxConfirm({
       title: '服务续费',
-      content: `了解更多店长多多招聘权益，欢迎联系我们~`,
+      content: `了解更多多多社交招聘系统招聘权益，欢迎联系我们~`,
       cancelText: '考虑一下',
       confirmText: '联系客服',
       confirmBack: () => {

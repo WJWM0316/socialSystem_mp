@@ -170,7 +170,7 @@
 			</view>
 		</view>
 
-		<view class="technical-support" wx:if="{{choseType !== 'RECRUITER'}}">猎多多提供技术支持</view>
+		<view class="technical-support" wx:if="{{choseType !== 'RECRUITER'}}">多多社交招聘系统提供技术支持</view>
 		<view class="generating-applets" bindtap="getCompanyApplyInfo" wx:if="{{choseType !== 'RECRUITER'}}">我也要生成企业专属招聘小程序<i class="icon iconfont icon-xiangyou"></i></view>
 
 	<!-- 	<view class="toggle" bindtap="toggle" wx:if="{{choseType !== 'RECRUITER'}}">

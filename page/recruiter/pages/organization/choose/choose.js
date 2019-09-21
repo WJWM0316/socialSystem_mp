@@ -36,11 +36,11 @@ Page({
     let orgList = this.data.orgList,
         parmas = {
           company_id: app.globalData.recruiterDetails.companyTopId,
-          keyword: keyword || ''
+          keyword: keyword || '',
+          hasKeyword: true
         }
     let chooseItem = wx.getStorageSync('orgData')
     getCompanyOrglistApi(parmas).then(res => {
-      if (!res.data.length) return
       orgList = res.data
       if (chooseItem && !this.data.options.type) {
         orgList.filter(item => {

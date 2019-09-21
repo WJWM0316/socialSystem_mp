@@ -67,6 +67,7 @@ Component({
             } else {
               result = [0, 0]
             }
+            if (!result.length) result = [0, 0]
             pickerData[index] = [list, list[result[0]].children]
             item.result = result
             item.created = true

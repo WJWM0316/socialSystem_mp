@@ -1,5 +1,5 @@
 <view class="applicant-job">
-	<navbar title="店长多多" background="#652791" color="#fff"></navbar>
+	<navbar title="多多社交招聘系统" background="#652791" color="#fff"></navbar>
 
 	<view hidden="{{!hasReFresh}}">
     <refreshStatus></refreshStatus>

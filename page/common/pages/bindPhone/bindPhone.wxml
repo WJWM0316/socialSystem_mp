@@ -39,6 +39,6 @@
         </view>
       </button>
     </view>
-<!--     <view class="userAgreement" bindtap="toJump">登录店长多多代表你已同意<text class="btn">《店长多多用户协议》</text></view>
+<!--     <view class="userAgreement" bindtap="toJump">登录多多社交招聘系统代表你已同意<text class="btn">《多多社交招聘系统用户协议》</text></view>
  -->  </view>
 </form>

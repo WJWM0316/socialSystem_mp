@@ -15,7 +15,7 @@ export const addCompanyApi = (data, hasLoading) => {
 export const getCompanyOrglistApi = (data, hasLoading) => {
   return new Promise((resolve, reject) => {
     let orgList = localstorage.get('orgList')
-    if (orgList && !data.keyword) {
+    if (orgList && !data.hasKeyword) {
       resolve(orgList)
     } else {
       return request({
@@ -25,7 +25,7 @@ export const getCompanyOrglistApi = (data, hasLoading) => {
         hasLoading: true
       }).then(res => {
         resolve(res)
-        if (res.data.length) localstorage.set('orgList', {data: res.data, type: 'resetTheDay'})
+        if (res.data.length && !data.hasKeyword) localstorage.set('orgList', {data: res.data, type: 'resetTheDay'})
       }).catch(e => {
         reject(e)
       })

@@ -24,7 +24,7 @@
 
 		<view class="li link {{formData.company_shortname ? 'clear-bottom' : ''}}">
 			<view class="key"><text>*</text>公司简称</view>
-			<input type="text" class="companyShortName {{formData.company_shortname ? 'color' : ''}}" placeholder="示例：猎多多" placeholder-class="defaultColor" value="{{formData.company_shortname}}" bindinput="bindInput" maxlength="10" bindfocus="setFocusByFocus" bindblur="setFocusByBlur"></input>
+			<input type="text" class="companyShortName {{formData.company_shortname ? 'color' : ''}}" placeholder="示例：多多社交招聘系统" placeholder-class="defaultColor" value="{{formData.company_shortname}}" bindinput="bindInput" maxlength="10" bindfocus="setFocusByFocus" bindblur="setFocusByBlur"></input>
 		</view>
 
 		<view class="exemple" wx:if="{{formData.company_shortname || isFocus}}">注： 公司简称能让候选人记住你的公司，可以是品牌名/产品名/关键字等，创建后不可修改</view>

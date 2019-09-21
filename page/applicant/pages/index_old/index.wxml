@@ -1,5 +1,5 @@
 <view>
-  <navbar title="店长多多"  background="{{background}}" color="#fff" isFixed="{{isFixed}}"></navbar>
+  <navbar title="多多社交招聘系统"  background="{{background}}" color="#fff" isFixed="{{isFixed}}"></navbar>
 
   <view hidden="{{!hasReFresh}}">
     <refreshStatus></refreshStatus>

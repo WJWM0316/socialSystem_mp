@@ -1,6 +1,7 @@
 {
   "pages": [
     "page/common/pages/homepage/homepage",
+    "page/common/pages/startPage/startPage",
     "page/common/pages/changeMobile/changeMobile",
     "page/common/pages/bindPhone/bindPhone",
     "page/common/pages/auth/auth",
@@ -25,7 +26,7 @@
   ],
   "window": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "店长多多",
+    "navigationBarTitleText": "多多社交招聘系统",
     "navigationBarBackgroundColor": "#F8F8F8",
     "backgroundColor": "#F8F8F8",
     "navigationStyle": "custom"

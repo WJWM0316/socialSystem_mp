@@ -4,7 +4,7 @@
   <view class="head">
     <image class="img" mode="widthFix" src="{{cdnImagePath}}bindPhoneBg.png"></image>
   </view>
-  <view class="welcome">欢迎来到店长多多</view>
+  <view class="welcome">欢迎来到多多社交招聘系统</view>
   <text class="msgTxt">为了给你更好的求职招聘体验 \n 请允许我们获得你的基础授权</text>
   <view class="txt1">平台承诺，授权信息将不会提供给第三方</view>
   <button class="authBtn" open-type="getUserInfo" bindgetuserinfo="onGotUserInfo" lang="zh_CN">好的，去授权</button>

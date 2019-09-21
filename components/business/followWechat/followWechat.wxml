@@ -10,7 +10,7 @@
 	<view class="followWechatPop">
 		<view class="followPop" wx:if="{{showPop}}">
 			<view class="inner">
-				<view class="title">关注店长多多公众号</view>
+				<view class="title">关注多多社交招聘系统公众号</view>
 				<i class="close icon iconfont icon-close"  bindtap="close" data-type="showPop"></i>
 				<swiper class="swiper"
 					indicator-dots
@@ -25,12 +25,12 @@
 					<swiper-item class="swiper-item"><image lazy-load class="img" src="{{cdnImagePath}}follow3.png"></image></swiper-item>
 					<swiper-item class="swiper-item"><image lazy-load class="img" src="{{cdnImagePath}}follow4.png"></image></swiper-item>
 				</swiper>
-				<view class="txt">关注步骤：点击右上角【···】选择【关于店长多多】，进入【相关公众号】点击【关注公众号】</view>
+				<view class="txt">关注步骤：点击右上角【···】选择【关于多多社交招聘系统】，进入【相关公众号】点击【关注公众号】</view>
 			</view>
 		</view>
 		<view class="authPop" wx:if="{{authPop}}">
 			<view class="inner">
-				<view class="title">关注店长多多公众号</view>
+				<view class="title">关注多多社交招聘系统公众号</view>
 				<i class="close icon iconfont icon-close"  bindtap="close" data-type="authPop"></i>
 				<view class="txt">因小程序限制，关注公众号前需关联身份，便于获得相关面试通知</view>
 				<button  class="btn" open-type="getUserInfo" form-type="submit" bindgetuserinfo="onGotUserInfo" lang="zh_CN">

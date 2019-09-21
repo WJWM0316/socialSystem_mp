@@ -122,7 +122,7 @@ Component({
       this.setData({show: false})
       app.wxConfirm({
         title: '',
-        content: `您当前认证身份信息已提交申请，店长多多将尽快审核处理，请耐心的等待，感谢您的配合~`,
+        content: `您当前认证身份信息已提交申请，多多社交招聘系统将尽快审核处理，请耐心的等待，感谢您的配合~`,
         cancelText: '联系客服',
         confirmText: '我知道了',
         confirmBack: () => {
@@ -509,7 +509,7 @@ Component({
             if(identityInfos.status === 0 || identityInfos.status === 2) {
               app.wxConfirm({
                 title: '',
-                content: `您当前认证身份信息已提交申请，店长多多将尽快审核处理，请耐心的等待，感谢您的配合~`,
+                content: `您当前认证身份信息已提交申请，多多社交招聘系统将尽快审核处理，请耐心的等待，感谢您的配合~`,
                 cancelText: '联系客服',
                 confirmText: '我知道了',
                 confirmBack: () => {

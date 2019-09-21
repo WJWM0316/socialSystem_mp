@@ -15,7 +15,7 @@ export const addCompanyApi = (data, hasLoading) => {
 export const getCompanyOrglistApi = (data, hasLoading) => {
   return new Promise((resolve, reject) => {
     let orgList = localstorage.get('orgList')
-    if (orgList && !data.hasKeyword) {
+    if (orgList && !data.hasKeyword && false) {
       resolve(orgList)
     } else {
       return request({

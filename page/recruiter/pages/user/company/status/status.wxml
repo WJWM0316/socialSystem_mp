@@ -231,10 +231,10 @@
 				<view class="key">担任职务</view>
 				<view class="value">{{companyInfos.userPosition}}</view>
 			</view>
-			<view class="li">
+			<!-- <view class="li">
 				<view class="key">接收简历邮箱</view>
 				<view class="value">{{companyInfos.userEmail}}</view>
-			</view>
+			</view> -->
 			<view class="li item">
 				<view class="img-box">
 					<image src="{{companyInfos.adminInfo.avatar.smallUrl}}" mode="scaleToFill" ></image>

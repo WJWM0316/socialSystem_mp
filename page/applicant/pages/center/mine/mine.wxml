@@ -78,7 +78,7 @@
         </view>
   		</view>
 
-  		<view class="li" bindtap="jump" data-type="settings">
+  		<view class="li" bindtap="jump" data-type="settings" wx:if="{{hasLogin}}">
   			<view>
           <i class="icon iconfont icon-shezhi"></i>
   			  <view class="text">设置</view>

@@ -3,7 +3,7 @@
     <image lazy-load class="img" src="{{cardData.avatar.smallUrl || cardData.logoInfo.smallUrl || cardData.logo.smallUrl}}" mode="aspectFit"></image>
     <view class="companyMsg" wx:if="{{!isMain}}">
       <view class="name">{{cardData.name}}</view>
-      <view class="detail">{{cardData.industry}} · {{cardData.employeesDesc}}</view>
+      <view class="detail">{{cardData.industry}}<block wx:if="{{cardData.employeesDesc}}"> · {{cardData.employeesDesc}}</block></view>
     </view>
     <view class="companyMsg" wx:else>
       <view class="name">{{cardData.companyShortname}}</view>

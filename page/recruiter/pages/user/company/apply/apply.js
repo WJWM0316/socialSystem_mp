@@ -21,7 +21,6 @@ Page({
   data: {
     formData: {
       real_name: '',
-      user_email: '',
       user_position: '',
       company_name: '',
       position_type_id: '',
@@ -86,7 +85,6 @@ Page({
       if(companyInfo.status === 2) {
         formData = {
           real_name: storage.real_name,
-          user_email: storage.user_email,
           user_position: storage.user_position,
           company_name: storage.company_name,
           company_name: storage.company_name,
@@ -101,7 +99,6 @@ Page({
       } else {
         formData = {
           real_name: storage.real_name || companyInfo.realName,
-          user_email: storage.user_email || companyInfo.userEmail,
           user_position: storage.user_position || companyInfo.userPosition,
           company_name: storage.company_name || companyInfo.companyName,
           position_type_id: storage.position_type_id || companyInfo.positionTypeId,
@@ -128,7 +125,7 @@ Page({
    */
   bindBtnStatus() {
     let formData = this.data.formData
-    let bindKeys = ['real_name', 'user_position', 'user_email', 'company_name']
+    let bindKeys = ['real_name', 'user_position', 'company_name']
     let canClick = bindKeys.every(field => this.data.formData[field])
     this.setData({ canClick })
   },
@@ -142,7 +139,7 @@ Page({
     let field = e.currentTarget.dataset.field
     let formData = this.data.formData
     let value = e.detail.value
-    if(field === 'user_email' || field === 'real_name') value = value.replace(/\s+/g,'')
+    if(field === 'real_name') value = value.replace(/\s+/g,'')
     formData[field] = value
     this.setData({formData: Object.assign(this.data.formData, formData)})
   },
@@ -168,11 +165,6 @@ Page({
       !formData.company_name.trim() ? reject('请输入有效的公司名称') : resolve()
     })
 
-    // 验证邮箱
-    let checkUserEmail = new Promise((resolve, reject) => {
-      !emailReg.test(formData.user_email) ? reject('请填写有效的邮箱') : resolve()
-    })
-
     // 验证职位
     let checkUserPosition = new Promise((resolve, reject) => {
       !positionReg.test(formData.user_position) ? reject('担任职务需为2-50个字') : resolve()
@@ -181,7 +173,6 @@ Page({
     Promise.all([
       checkRealName,
       checkCompanyName,
-      checkUserEmail,
       checkUserPosition
     ])
     .then(res => {
@@ -262,7 +253,6 @@ Page({
     let storage = wx.getStorageSync('createdCompany') || {}
     let params = {
       real_name: formData.real_name,
-      user_email: formData.user_email.trim(),
       user_position: formData.user_position,
       company_name: formData.company_name,
       position_type_id: formData.position_type_id, 
@@ -306,7 +296,6 @@ Page({
     let params = {
       id: formData.applyId,
       real_name: formData.real_name,
-      user_email: formData.user_email.trim(),
       user_position: formData.user_position,
       company_name: formData.company_name,
       position_type_id: formData.position_type_id,
@@ -381,7 +370,6 @@ Page({
     let formData = Object.assign(wx.getStorageSync('createdCompany'), this.data.formData)
     let params = {
       real_name: formData.real_name,
-      user_email: formData.user_email.trim(),
       user_position: formData.user_position,
       position_type_id: formData.position_type_id, 
       company_name: formData.company_name
@@ -424,7 +412,6 @@ Page({
     let params = {
       id: formData.id,
       real_name: formData.real_name,
-      user_email: formData.user_email.trim(),
       user_position: formData.user_position,
       company_name: formData.company_name,
       position_type_id: formData.position_type_id

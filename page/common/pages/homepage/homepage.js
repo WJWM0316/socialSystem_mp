@@ -247,11 +247,6 @@ Page({
     })
   },
   getCompanyApplyInfo() {
-    // 没有登录 择进入登录页面
-    if(!this.data.hasLogin) {
-      wx.navigateTo({url: `${APPLICANT}center/mine/mine`})
-      return
-    }
     getCompanyApplyInfoApi({company_id: this.data.companyInfos.id}).then(res => {
       wx.setStorageSync('choseType', 'RECRUITER')
       switch(res.data.step) {

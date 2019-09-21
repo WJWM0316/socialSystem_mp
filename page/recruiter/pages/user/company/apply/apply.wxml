@@ -40,12 +40,12 @@
 	    </view>
 	  </view>
 
-	  <view class="input-li clear-bottom">
+	 <!--  <view class="input-li clear-bottom">
 	    <view class="key">接收简历邮箱</view>
 	    <view class="value">
 	    	<input placeholder-class="holderStyle" placeholder="请输入公司邮箱地址" bindinput="bindInput" data-field="user_email" value="{{formData.user_email}}" />
 	    </view>
-	  </view>
+	  </view> -->
 
 	  <view class="tips">
 	  	<view class="span">如需咨询服务，请拨打</view>

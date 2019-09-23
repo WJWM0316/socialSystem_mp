@@ -115,7 +115,7 @@ Component({
             addLabel(item.labelName, index)
           })
           ctx.setFillStyle('#8452A7')
-          let position = `${info.companyInfo.companyShortname} | ${info.position}`
+          let position = `${info.companyInfo.companyName} | ${info.position}`
           ctx.setFontSize(24)
           ctx.setTextAlign('center')
           ellipsis(ctx, position, 285, 210, 277, '#282828', {color: '#FFDC29', r: 25, y:243, maxWidth: 420})
@@ -141,7 +141,7 @@ Component({
           positionX = ellipsis(ctx, `${info.workExperienceName}`, 155, positionX + 20, 259, '#ffffff', {color: '#8452A7', padding: 12, margin: 12, height: 34, x: positionX + 8, y:234})
           positionX = ellipsis(ctx, `${info.educationName}`, 155, positionX + 20, 259, '#ffffff', {color: '#8452A7', padding: 12, margin: 12, height: 34, x: positionX + 8, y:234})
           ctx.setFontSize(26)
-          ellipsis(ctx, info.companyInfo.companyShortname, 380, 24, 312)
+          ellipsis(ctx, info.companyInfo.companyName, 380, 24, 312)
         break
         case 'resume':
           ctx.setTextAlign('left')
@@ -174,7 +174,7 @@ Component({
           ctx.setFontSize(30)
           ctx.setTextAlign('center')
           ctx.setFillStyle('#ffffff')
-          ellipsis(ctx, info.companyShortname, 380, 210, 230)
+          ellipsis(ctx, info.companyName, 380, 210, 230)
           ctx.setFontSize(22)
           ctx.setTextAlign('center')
           let position3 = 20

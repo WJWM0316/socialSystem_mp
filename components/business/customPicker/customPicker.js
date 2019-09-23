@@ -15,7 +15,10 @@ Component({
     },
     pickerType: { // 组件内部数据展示
       type: Object,
-      value: []
+      value: [],
+      observer: function(newVal, oldVal) {
+        console.log(newVal, oldVal, 12121212)
+      }
     },
     activeIndex: {
       type: Number,
@@ -34,10 +37,17 @@ Component({
     pickerData: [] // picker数据
   },
   attached () {
+    console.log(this.data.pickerType, 22222222222)
     pickerResult = {}
     for (let i = 0; i < 65; i++) {
       year.push(curYear - i)
     }
+  },
+  detached: function() {
+    lock = false
+    pickerResult = {}
+    year = []
+    console.log(this.data.pickerType, 111111)
   },
   /**
    * 组件的方法列表
@@ -48,6 +58,7 @@ Component({
           index = this.data.activeIndex,
           pickerType = this.data.pickerType,
           pickerData = this.data.pickerData
+            console.log(this.data.pickerType, 444444444444444444444)
       switch (item.type) {
         case 'region':
           this.getRegionData().then(res => {
@@ -150,6 +161,7 @@ Component({
           })
           break
       }
+
     },
     getRegionData () {
       return getAreaListApi()

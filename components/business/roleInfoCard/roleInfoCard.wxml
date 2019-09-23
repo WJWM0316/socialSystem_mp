@@ -28,7 +28,7 @@
         </view>
       </view>
     </view>
-    <view class="contact" wx:if="{{false}}">
+    <view class="contact" wx:if="{{choseType === 'RECRUITER'}}">
       <view class="mobile" bindtap="makePhoneCall" wx:if="{{(cardData.mobile || cardData.jobhunterMobile) && cardData.lastInterviewStatus !== 52}}">手机：<text class="txt">{{cardData.mobile || cardData.jobhunterMobile}}</text></view>
       <view class="wechat" bindtap="setClipboardData" wx:if="{{(cardData.wechat || cardData.jobhunterWechat) && cardData.lastInterviewStatus !== 52}}">微信：<text class="txt">{{cardData.wechat || cardData.jobhunterWechat}}</text></view>
       <view class="waiting" wx:if="{{!cardData.mobile && cardData.lastInterviewStatus !== 52}}">候选人接受邀请后，可查看联系方式</view>

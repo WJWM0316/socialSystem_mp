@@ -30,6 +30,7 @@ Component({
    * 组件的初始数据
    */
   data: {
+    choseType: wx.getStorageSync('choseType'),
     isCompanyAdmin: false,
     cdnImagePath: app.globalData.cdnImagePath
   },

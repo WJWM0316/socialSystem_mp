@@ -113,6 +113,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(this.data.pickerType, 3333333333333333333333333333)
     directChat = ''
     if (app.loginInit) {
       this.getStep()
@@ -137,6 +138,8 @@ Page({
     }
     this.setData({options})
     watch.setWatcher(this)
+  },
+  onUnload () {
   },
   watch: {    
     step: function(newVal, oldVal) {
@@ -1053,12 +1056,6 @@ Page({
 
   },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作

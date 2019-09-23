@@ -61,11 +61,11 @@
             </view>
           </block>
         </view>
-        <view class="contact commentBox" wx:if="{{(!isOwner) || (isOwner && showEdit)}}">
+<!--         <view class="contact commentBox" wx:if="{{(!isOwner) || (isOwner && showEdit)}}">
           <view class="intentTitle"><view class="commontIcon"><view class="box"></view></view> 联系方式</view>
           <view class="phone {{!info.wechat ? 'noWechat' : ''}}"><i class="imgIcon iconfont icon-shoujihaoma"></i><text class="data">{{info.mobile}}</text><text class="btn" bindtap="call">拨打电话</text></view>
           <view class="wechat" wx:if="{{info.wechat}}"><i class="imgIcon iconfont icon-weixin"></i><text class="data">{{info.wechat}}</text><text class="btn" bindtap="wechat">复制微信号</text></view>
-        </view>
+        </view> -->
         <!-- 意向 -->
         <view class="intent commentBox" wx:if="{{(!isOwner && info.expects.length > 0) || isOwner}}">
           <view class="intentTitle"><view class="commontIcon"><view class="box"></view></view> 求职意向</view>

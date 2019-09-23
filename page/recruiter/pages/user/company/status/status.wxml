@@ -66,7 +66,7 @@
 	<!-- 创建公司 end -->
 	
 	<!-- 身份认证 start -->
-	<view class="header" wx:if="{{options.from === 'identity'}}">
+<!-- 	<view class="header" wx:if="{{options.from === 'identity'}}">
 		<image
 			src="{{cdnImagePath}}pic_await001.png"
 			mode="scaleToFill"
@@ -103,7 +103,7 @@
 			<view class="h3">实名认证审核已通过</view>
 			<view class="p10">恭喜，你的资料已认证成功!</view>
 		</block>
-	</view>
+	</view> -->
 	<!-- 身份认证 end -->
 
 	<!-- 申请加入 start -->
@@ -156,7 +156,7 @@
 	<view class="section" wx:if="{{options.from === 'company' && companyInfos.status !== 1}}">
 		<view class="title">
 			<view class="label">您的公司信息</view>
-			<!-- <view class="jump" bindtap="todoAction" data-action="modifyCompany_close">申请信息有误？去更改</view> -->
+			<view class="jump" bindtap="todoAction" data-action="modifyCompany" wx:if="{{companyInfos.status === 2}}">申请信息有误？去更改</view>
 		</view>
 		<view class="ul">
 			<view class="li">
@@ -192,10 +192,10 @@
 		</view>
 	</view>
 
-	<view class="section" wx:if="{{options.from === 'identity' && identityInfos.status !== 1}}">
+<!-- 	<view class="section" wx:if="{{options.from === 'identity' && identityInfos.status !== 1}}">
 		<view class="title">
 			<view class="label">认证信息</view>
-			<!-- <view class="jump" bindtap="todoAction" data-action="identity">申请信息有误？去更改</view> -->
+			<view class="jump" bindtap="todoAction" data-action="identity" wx:if="{companyInfos.status === 2}">申请信息有误？去更改</view>
 		</view>
 		<view class="ul">
 			<view class="li">
@@ -211,12 +211,12 @@
 				<view class="value">{{identityInfos.identityNum ? '已上传' : '未上传'}}</view>
 			</view>
 		</view>
-	</view>
+	</view> -->
 
 	<view class="section" wx:if="{{options.from === 'join' && companyInfos.status !== 1}}">
 		<view class="title">
 			<view class="label">您的申请</view>
-			<!-- <view class="jump" bindtap="todoAction" data-action="applyModify_close">申请信息有误？去更改</view> -->
+			<view class="jump" bindtap="todoAction" data-action="applyModify" wx:if="{{companyInfos.status === 2}}">申请信息有误？去更改</view>
 		</view>
 		<view class="ul">
 			<view class="li">

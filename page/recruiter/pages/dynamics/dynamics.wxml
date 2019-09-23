@@ -43,8 +43,8 @@
 								</view>
 							</view>
 							<view class="degress" wx:if="{{item.lastCompanyName || item.lastPosition}}">
-								<block wx:if="{{item.lastCompanyName}}">{{item.lastCompanyName}}</block>
-								<block wx:if="{{item.lastPosition}}"> | {{item.lastPosition}}</block>
+								<block wx:if="{{item.lastPosition}}">{{item.lastPosition}}</block>
+								<block wx:if="{{item.lastCompanyName}}"> | {{item.lastCompanyName}}</block>
 							</view>
 						</view>
 					</view>
@@ -93,8 +93,8 @@
 								</view>
 							</view>
 							<view class="degress" wx:if="{{item.lastCompanyName || item.lastPosition}}">
-								<block wx:if="{{item.lastCompanyName}}">{{item.lastCompanyName}}</block>
-								<block wx:if="{{item.lastPosition}}"> | {{item.lastPosition}}</block>
+								<block wx:if="{{item.lastPosition}}">{{item.lastPosition}}</block>
+								<block wx:if="{{item.lastCompanyName}}"> | {{item.lastCompanyName}}</block>
 							</view>
 						</view>
 					</view>

@@ -109,7 +109,7 @@
 	</view>
 	
 	<view class="sale-tools">
-		<view class="title">营销工具</view>
+		<view class="title">招聘工具</view>
 		<view class="p2">帮助招聘官快速完成招聘任务</view>
 		<view class="tab-ul">
 			<view class="tab1 left"bindtap="routeJump" data-route="publicPosition">

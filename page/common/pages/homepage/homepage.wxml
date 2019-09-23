@@ -73,7 +73,7 @@
 				</swiper>
 			</view>
 			<view class="company-detail {{!companyInfos.albumInfo.length ? 'gt' : ''}}" wx:if="{{companyInfos.intro}}">
-				<text class="p">{{companyInfos.intro}}</text>
+				<shrinkText textData="{{companyInfos.intro}}"></shrinkText>
 			</view>
 		</view>
 		

@@ -95,7 +95,8 @@ Page({
           formData.position_type_id = createPosition.type
           formData.positionTypeName = createPosition.typeName
         }
-        this.setData({formData, applyJoin})
+        // 审核失败 强制走第一步
+        this.setData({formData, applyJoin: false})
       } else {
         formData = {
           real_name: storage.real_name || companyInfo.realName,

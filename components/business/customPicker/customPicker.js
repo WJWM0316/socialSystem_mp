@@ -15,10 +15,7 @@ Component({
     },
     pickerType: { // 组件内部数据展示
       type: Object,
-      value: [],
-      observer: function(newVal, oldVal) {
-        console.log(newVal, oldVal, 12121212)
-      }
+      value: []
     },
     activeIndex: {
       type: Number,
@@ -37,7 +34,6 @@ Component({
     pickerData: [] // picker数据
   },
   attached () {
-    console.log(this.data.pickerType, 22222222222)
     pickerResult = {}
     for (let i = 0; i < 65; i++) {
       year.push(curYear - i)
@@ -47,7 +43,6 @@ Component({
     lock = false
     pickerResult = {}
     year = []
-    console.log(this.data.pickerType, 111111)
   },
   /**
    * 组件的方法列表

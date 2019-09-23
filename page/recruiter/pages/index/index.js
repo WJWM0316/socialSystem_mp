@@ -185,7 +185,7 @@ Page({
     let btnImageUrl = positionCard
     let btnPath = `${COMMON}homepage/homepage?companyId=${companyInfos.id}`
     
-    if(options.target.dataset.type === 'recruiter') {
+    if(options.target && options.target.dataset.type === 'recruiter') {
       btnTitle = shareRecruiter()
       btnImageUrl = recruiterCard
       btnPath = `${COMMON}recruiterDetail/recruiterDetail?uid=${this.data.userInfo.uid}&sCode=${this.data.userInfo.sCode}&sourceType=shr`

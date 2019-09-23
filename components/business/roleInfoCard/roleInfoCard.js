@@ -30,13 +30,24 @@ Component({
    * 组件的初始数据
    */
   data: {
-    choseType: wx.getStorageSync('choseType'),
+    choseType: '',
     isCompanyAdmin: false,
     cdnImagePath: app.globalData.cdnImagePath
   },
   attached() {
-    let isCompanyAdmin = app.globalData.recruiterDetails.isCompanyAdmin || 0
-    this.setData({isCompanyAdmin})
+    let choseType = wx.getStorageSync('choseType'),
+        isCompanyAdmin = 0
+    if (app.getRoleInit) {
+      isCompanyAdmin = app.globalData.recruiterDetails.isCompanyAdmin || 0
+      this.setData({isCompanyAdmin, choseType})
+    } else {
+      app.getRoleInit = () => {
+        isCompanyAdmin = app.globalData.recruiterDetails.isCompanyAdmin || 0
+        this.setData({isCompanyAdmin, choseType})
+      }
+    }
+    
+    this.setData({isCompanyAdmin, choseType})
   },
   /**
    * 组件的方法列表

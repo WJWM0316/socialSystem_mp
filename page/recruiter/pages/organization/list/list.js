@@ -34,11 +34,10 @@ Page({
     }, 100)
   },
   getList () {
+    let options = this.data.options
     let orgList = this.data.orgList,
-        parmas = {
-          company_id: app.globalData.recruiterDetails.companyTopId,
-          keyword: keyword || ''
-        }
+        parmas = {company_id: options.companyId }
+        if(keyword) parmas.keyword = keyword
     getCompanyOrglistApi(parmas).then(res => {
       if (!res.data.length) return
       orgList = res.data

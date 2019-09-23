@@ -141,7 +141,7 @@ Page({
     this.getWelcomeWord()
     setTimeout(() => {
       this.getIndexData().then(res => this.selectComponent('#indexEchart').init())
-    }, 16.7)
+    }, 500)
   },
   getBanner() {
     return getAdBannerApi({

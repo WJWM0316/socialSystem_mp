@@ -48,6 +48,7 @@
 							</view>
 						</view>
 					</view>
+					<view class="row-three" wx:if="{{item.origin}}">候选人来自<view class="strong">{{item.origin}}</view></view>
 					<view class="row-two">
 						<view class="day">{{item.viewAt}}</view>
 						<view class="action">
@@ -98,7 +99,7 @@
 							</view>
 						</view>
 					</view>
-					<view class="row-three">候选人来自<view class="strong">小程序码扫码</view></view>
+					<view class="row-three" wx:if="{{item.origin}}">候选人来自<view class="strong">{{item.origin}}</view></view>
 					<view class="row-two">
 						<view class="day">{{item.viewAt}}</view>
 						<view class="action">

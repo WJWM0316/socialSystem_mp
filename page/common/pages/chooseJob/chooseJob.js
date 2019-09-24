@@ -26,6 +26,7 @@ let app = getApp()
 
 Page({
   data: {
+    detail: app.globalData.recruiterDetails,
     options: {},
     identity: '',
     onBottomStatus: 0,

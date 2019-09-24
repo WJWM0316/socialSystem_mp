@@ -40,13 +40,13 @@
           </view>
           <view wx:if="{{info.personalizedLabels.length === 0}}" class="addDeclaration" bindtap="editJump" data-type="labels">添加个人标签</view>
         </view>
-        <view class="profile" wx:if="{{(!isOwner && info.brief) || (isOwner && showEdit)}}">
+        <view class="profile" wx:if="{{(!isOwner && info.brief) || isOwner}}">
           <view class="title">
             <view class="icon">
               <view class="fan"></view>
             </view>
             <text class="txt">个人简介</text>
-            <i wx:if="{{isOwner && info.brief}}" class="editBtn iconfont icon-bianji1" bindtap="editJump" data-type="profile"></i>
+            <i wx:if="{{isOwner && info.brief}}" class="editBtn iconfont icon-bianji1" bindtap="editJump" data-type="profile" wx:if="{{showEdit}}"></i>
           </view>
           <view wx:if="{{!info.brief}}" class="addDeclaration" bindtap="editJump" data-type="profile">添加个人简介</view>
           <shrinkText textData="{{info.brief}}"></shrinkText>
@@ -78,7 +78,7 @@
         </view> -->
       </view>
 
-      <view class="position" wx:if="{{!isOwner || !showEdit}}" hidden="{{info.isCompanyTopAdmin && !positionList.total}}">
+      <view class="position" wx:if="{{!isOwner || !showEdit}}">
 
         <company roleType="detailCompany" cardData="{{info.companyInfo}}" wx:if="{{!info.isCompanyTopAdmin}}"></company>
 
@@ -91,6 +91,10 @@
               <text>{{item.educationName}}</text>
             </view>
           </button>
+        </view>
+        <view class="nopositionList" wx:if="{{!positionList.total && isOwner && identity === 'RECRUITER'}}">
+          <image class="pic" src="{{cdnImagePath}}emptyState.png"></image>
+          <view class="no-position-tips">还没有职位信息哦，赶紧去发布职位吧！<view class="strong" bindtap="publicPosition">发布职位>></view></view>
         </view>
       </view>
       <!-- <bottomStatus status="{{positionList.onBottomStatus}}" listData="{{positionList.list}}"></bottomStatus> -->

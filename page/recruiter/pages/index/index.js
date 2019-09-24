@@ -353,6 +353,56 @@ Page({
       case 'type-company':
         this.setData({shareType: 'type-company'})
         break
+      case 'path-mechanism':
+        app.wxConfirm({
+          title: '成功生成链接',
+          content: `链接为：${COMMON}homepage/homepage`,
+          confirmText: '复制链接',
+          showCancel: false,
+          confirmBack: () => {
+            wx.setClipboardData({data: `${COMMON}homepage/homepage` })
+          }
+        })
+        break
+      case 'path-position':
+        if(this.data.positionInfos.online) {
+          app.wxConfirm({
+            title: '成功生成链接',
+            content: `链接为：${COMMON}homepage/homepage`,
+            confirmText: '复制链接',
+            showCancel: false,
+            confirmBack: () => {
+              wx.setClipboardData({data: `${COMMON}homepage/homepage` })
+            }
+          })
+        } else {
+          app.wxConfirm({
+            title: '提示',
+            content: `您尚未发布职位，请前往发布职位后再生成链接吧。`,
+            cancelText: '取消',
+            confirmText: '发布职位',
+            confirmBack: () => {
+              wx.navigateTo({url: `${RECRUITER}position/post/post`})
+            },
+            cancelBack: () => {}
+          })
+        }
+        break
+      case 'path-recruiter':
+        if(this.data.positionInfos.online) {
+          app.wxConfirm({
+            title: '成功生成链接',
+            content: `链接为：${COMMON}homepage/homepage`,
+            confirmText: '复制链接',
+            showCancel: false,
+            confirmBack: () => {
+              wx.setClipboardData({data: `${COMMON}homepage/homepage` })
+            }
+          })
+        } else {
+          this.setData({showPublicPositionTips: true})
+        }
+        break
       default:
         break
     }

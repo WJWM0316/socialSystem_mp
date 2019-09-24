@@ -53,7 +53,7 @@
 						<i class="icon iconfont icon-lishijilu"></i>{{item.createdAtTime}}
 					</view>
 				</view>
-				<view class="row-three" wx:if="{{item.channelCode}}">候选人来自<view class="strong">{{item.channelCode}}</view></view>
+				<view class="row-three" wx:if="{{item.origin}}">候选人来自<view class="strong">{{item.origin}}</view></view>
 				<view class="row-two">
 					<i class="icon iconfont icon-mianshizhiwei"></i>
 					面试职位：<text>{{item.positionId ? item.positionName : '未选择面试职位'}}</text>

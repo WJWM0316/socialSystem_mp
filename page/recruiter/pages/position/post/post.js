@@ -35,7 +35,8 @@ Page({
       education: '25',
       educationName: '本科',
       describe: '',
-      company_id: ''
+      company_id: '',
+      skills: []
     },
     query: {},
     pageTitle: '',
@@ -123,6 +124,7 @@ Page({
       formData.address_id = storage.address_id
       formData.parentType = storage.parentType
       formData.company_id = storage.company_id
+      formData.skills = storage.skills
       this.setData({ formData }, () => this.bindButtonStatus())
       return
     }
@@ -148,6 +150,7 @@ Page({
       formData.lat = storage.lat || infos.lat
       formData.address_id = storage.address_id || infos.addressId
       formData.parentType = storage.parentType || infos.topPid
+      formData.skills = storage.skills || infos.skillsLabel
       if(orgData) formData.company_id = orgData.id
       this.setData({ formData }, () => this.bindButtonStatus())
     })
@@ -178,9 +181,8 @@ Page({
     let url = this.data.query.positionId
       ? `${RECRUITER}position/${route}/${route}?positionId=${this.data.query.positionId}`
       : `${RECRUITER}position/${route}/${route}`
-
-    if(route === 'skills' && !this.data.type) {
-      app.wxToast({title: '请先选择职业类型别'})
+    if(route === 'skills' && !this.data.formData.type) {
+      app.wxToast({title: '请选择职位类别'})
     } else {
       wx.navigateTo({ url })
       wx.setStorageSync('createPosition', this.data.formData)
@@ -275,6 +277,7 @@ Page({
     ]
 
     params.map(field => formData[field] = this.data.formData[field])
+    this.data.formData.skills.map((field, index) => labels.push({id: field.labelId, is_diy: 0}))
     formData.labels = JSON.stringify(labels)
 
     // 编辑要加机构id
@@ -329,6 +332,15 @@ Page({
       }
     })
 
+    // 技能要求
+    let skillsCheck = new Promise((resolve, reject) => {
+      if(!this.data.formData.skills.length) {
+        reject('请选择技能要求')
+      } else {
+        resolve()
+      }
+    })
+
     // 验证薪资是否已经选择
     let positionEmolument = new Promise((resolve, reject) => {
       if(!this.data.formData.emolument_min) {
@@ -369,6 +381,7 @@ Page({
       positionName, 
       positionType, 
       positionAddress,
+      skillsCheck,
       positionEmolument,
       positionExperience,
       positionEducation,

@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "navbar": "../../../../components/business/navbar/navbar",
-    "payPop": "../../../../components/business/payPop/payPop"
+    "payPop": "../../../../components/business/payPop/payPop",
+    "chooseOrgEnter": "../../../../components/business/chooseOrgEnter/chooseOrgEnter"
   }
 }

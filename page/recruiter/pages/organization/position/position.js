@@ -113,6 +113,10 @@ Page({
         wx.navigateTo({
           url: `${COMMON}poster/createPost/createPost?type=position&positionId=${this.data.params.id}`
         })
+      case 'path-position':
+        wx.navigateTo({
+          url: `${COMMON}poster/createPost/createPost?type=position&positionId=${this.data.params.id}`
+        })
         break
     }
     

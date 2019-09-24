@@ -44,7 +44,6 @@ Page({
     if(Reflect.has(options, 'positionStatus')) this.setData({positionStatus: options.positionStatus})
   },
   onShow() {
-
     let onLinePosition = {
       list: [],
       pageNum: 1,
@@ -106,7 +105,9 @@ Page({
       recruiter: app.globalData.recruiterDetails.uid,
       ...app.getSource()
     }
-    if(orgData) params = Object.assign(params, {companyId: orgData.id})
+    if(this.data.detail.isCompanyTopAdmin) {
+      if(orgData) params = Object.assign(params, {companyId: orgData.id})
+    }
     return Api(params).then(res => {
       redDotInfos = app.globalData.redDotInfos
       this.setData({

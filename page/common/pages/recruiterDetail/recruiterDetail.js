@@ -34,6 +34,7 @@ Page({
     cdnImagePath: app.globalData.cdnImagePath,
     showEdit: false,
     showRules: false,
+    identity: ''
   },
   /**
    * 生命周期函数--监听页面加载
@@ -45,7 +46,7 @@ Page({
       this.setData({isApplicant: true})
     }
     identity = app.identification(options)
-    this.setData({options})
+    this.setData({options, identity})
   },
   backEvent() {
     if(this.data.showEdit) {
@@ -345,6 +346,11 @@ Page({
   },
   toggleShowRules() {
     this.setData({showRules: !this.data.showRules})
+  },
+  publicPosition() {
+    wx.navigateTo({
+      url: `${RECRUITER}position/post/post`
+    })
   },
   stopPageScroll() {return false },
 

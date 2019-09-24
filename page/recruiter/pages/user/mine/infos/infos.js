@@ -119,7 +119,7 @@ Page({
         if (!this.data.recruiterInfo.isCompanyTopAdmin) {
           wx.navigateTo({url: `${RECRUITER}company/indexEdit/indexEdit?type=org`})
         } else {
-          wx.navigateTo({url: `${RECRUITER}organization/list/list`})
+          wx.navigateTo({url: `${RECRUITER}organization/list/list?companyId=${this.data.recruiterInfo.companyTopId}`})
         }
         
         break

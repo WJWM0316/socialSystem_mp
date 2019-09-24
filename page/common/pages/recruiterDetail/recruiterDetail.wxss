@@ -767,3 +767,23 @@
 .hidden {
   overflow-y: hidden;
 }
+
+.no-position-tips{
+  font-size: 24rpx;
+  font-weight: 300;
+  color: #626262;
+  line-height: 48rpx;
+  text-align: center;
+}
+
+.nopositionList .pic{
+  width: 340rpx;
+  height: 240rpx;
+  margin: 0 auto 26rpx;
+  display: block;
+}
+
+.no-position-tips .strong{
+  color: rgba(101,39,145,1);
+  display: inline;
+}

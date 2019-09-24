@@ -1,6 +1,6 @@
 <view class="job-list">
   <navbar title="{{ (options.type === 'confirm_chat' || options.type === 'reject_chat') ? '处理申请' : '选择职位'}}" background="#FFFFFF" color="#22292C"></navbar>
-
+  <chooseOrgEnter detail="{{detail}}"></chooseOrgEnter>
   <view class="position-tab" wx:if="{{identity === 'RECRUITER' && options.type === 'recruiter_chat'}}">
     <view class="name">可选择以下职位</view>
     <view class="public" bindtap="publicPosition"><i class="icon iconfont icon-bianji"></i>发布职位</view>

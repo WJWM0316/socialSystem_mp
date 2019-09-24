@@ -531,9 +531,11 @@
   background:rgba(239,233,244,1);
   margin-left: 8rpx;
   padding: 0 12rpx;
-  vertical-align: middle;
+  vertical-align: text-top;
   font-size:20rpx;
   color:rgba(101,39,145,1);
+  position: relative;
+  top: -2rpx;
 }
 
 .scroll-box {

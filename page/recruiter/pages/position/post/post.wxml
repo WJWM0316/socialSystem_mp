@@ -43,14 +43,14 @@
 			<i class="icon iconfont icon-xiangyou"></i>
 			<view class="text2 {{formData.address ? '' : 'color-default'}}">{{formData.address || '请选择'}}</view>
 		</view>
-<!-- 		<view class="li link" bindtap="routeJump" data-route="skills">
+		<view class="li link" bindtap="routeJump" data-route="skills">
 			<view class="key"><text>*</text>技能要求</view>
 			<i class="icon iconfont icon-xiangyou"></i>
-			<view class="text2 {{skills.length ? '' : 'color-default'}}" wx:if="{{!skills.length}}">请选择</view>
+			<view class="text2 {{skills.length ? '' : 'color-default'}}" wx:if="{{!formData.skills.length}}">请选择</view>
 			<view class="text2" wx:else>
-				<text wx:for="{{skills}}" wx:for-item="item" wx:key="index">{{item.name}}{{index < skills.length - 1 ? '、' : ''}}</text>
+				<text wx:for="{{formData.skills}}" wx:for-item="item" wx:key="index">{{item.name}}{{index < formData.skills.length - 1 ? '、' : ''}}</text>
 			</view>
-		</view> -->
+		</view>
 		<view class="li dropdown marginB24">
 			<view class="key"><text>*</text>薪资范围</view>
 			<i class="icon iconfont icon-xiangyou"></i>

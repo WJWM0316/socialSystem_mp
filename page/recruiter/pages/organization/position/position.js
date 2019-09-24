@@ -124,6 +124,10 @@ Page({
         wx.navigateTo({
           url: `${COMMON}poster/createPost/createPost?type=position&positionId=${this.data.params.id}`
         })
+      case 'path-position':
+        wx.navigateTo({
+          url: `${COMMON}poster/createPost/createPost?type=position&positionId=${this.data.params.id}`
+        })
         break
     }
     
@@ -137,7 +141,6 @@ Page({
   onShareAppMessage(options) {
     let that = this
     let infos = this.data.params
-    console.log(infos, 'infos')
 　　return app.wxShare({
       options,
       title: sharePosition(),

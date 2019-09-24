@@ -83,7 +83,6 @@ export const request = ({name = '', method = 'post', url, host, data = {}, needK
     delete addHttpHead['Channel-Url']
   }
 
-  delete data['sCode']
   delete data['isReload']
   delete data['sourceType']
   delete data['sourcePath']

@@ -133,7 +133,7 @@ Page({
         })
         return
       }
-      if(wx.getStorageSync('orgData')) {
+      if(wx.getStorageSync('isSetAuto')) {
         if(orgData) {
           let homepageUrl = `${COMMON}homepage/homepage?companyId=${orgData.id}`
           app.wxConfirm({

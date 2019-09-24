@@ -181,9 +181,10 @@ Page({
     if (app.globalData.recruiterDetails.isCompanyTopAdmin) {
       companyInfos.id = app.globalData.recruiterDetails.currentCompanyId + 1
     }
+    console.log(companyInfos, 111111111)
     let btnTitle = `${companyInfos.companyName}正在招聘，马上约面，极速入职！`
     let btnImageUrl = positionCard
-    let btnPath = `${COMMON}homepage/homepage?companyId=${companyInfos.id}`
+    let btnPath = `${COMMON}homepage/homepage?companyId=${companyInfos.id}&sCode=${app.globalData.recruiterDetails.sCode}&sourceType=shr`
     
     if(options.target && options.target.dataset.type === 'recruiter') {
       btnTitle = shareRecruiter()

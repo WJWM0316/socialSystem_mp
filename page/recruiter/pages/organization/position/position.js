@@ -87,9 +87,14 @@ Page({
    */
   onClick(e) {
     let item = e.currentTarget.dataset.item
-    wx.navigateTo({
-      url: `${COMMON}poster/createPost/createPost?type=position&positionId=${item.id}`
-    })
+    if (this.data.options.type === 'qr-position') {
+      wx.navigateTo({url: `${RECRUITER}createQr/createQr?type=qr-position&positionId=${item.id}`})
+    } else {
+      wx.navigateTo({
+        url: `${COMMON}poster/createPost/createPost?type=position&positionId=${item.id}`
+      })
+    }
+    
   },
   /**
    * @Author   小书包

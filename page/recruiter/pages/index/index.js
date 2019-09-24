@@ -116,6 +116,40 @@ Page({
     }
   },
   init () {
+    let autoMake = () => {
+      let positionData = wx.getStorageSync('positionData')
+      let orgData = wx.getStorageSync('orgData')
+      if(positionData) {
+        let positionUrl = `${COMMON}positionDetail/positionDetail?positionId=${positionData.id}`
+        app.wxConfirm({
+          title: '成功生成链接',
+          content: `链接为：${positionUrl}`,
+          confirmText: '复制链接',
+          showCancel: false,
+          confirmBack: () => {
+            wx.removeStorageSync('positionData')
+            wx.setClipboardData({data: positionUrl })
+          }
+        })
+        return
+      }
+      if(wx.getStorageSync('isSetAuto')) {
+        if(orgData) {
+          let homepageUrl = `${COMMON}homepage/homepage?companyId=${orgData.id}`
+          app.wxConfirm({
+            title: '成功生成链接',
+            content: `链接为：${homepageUrl}`,
+            confirmText: '复制链接',
+            showCancel: false,
+            confirmBack: () => {
+              wx.removeStorageSync('isSetAuto')
+              wx.setClipboardData({data: homepageUrl })
+            }
+          })
+        }
+        return
+      }
+    }
     if (wx.getStorageSync('choseType') === 'APPLICANT') return
     let callback = () => {
       // 处理海报生成问题
@@ -128,7 +162,7 @@ Page({
         this.setData({userInfo, companyInfos, isCompanyTopAdmin})
         this.selectComponent('#bottomRedDotBar').init()
       })
-      
+      // autoMake()
     }
     if(app.pageInit) {
       callback()
@@ -355,9 +389,14 @@ Page({
         this.setData({shareType: 'type-company'})
         break
       case 'path-mechanism':
+        if (app.globalData.recruiterDetails.isCompanyTopAdmin) {
+          wx.setStorageSync('isSetAuto', 1)
+          wx.navigateTo({url: `${RECRUITER}organization/list/list?type=shareCompany&companyId=${app.globalData.recruiterDetails.companyTopId}`})
+          return
+        }
         app.wxConfirm({
           title: '成功生成链接',
-          content: `链接为：${COMMON}homepage/homepage`,
+          content: `链接为：${COMMON}homepage/homepage?companyId=${this.data.detail.companyId}`,
           confirmText: '复制链接',
           showCancel: false,
           confirmBack: () => {
@@ -367,15 +406,7 @@ Page({
         break
       case 'path-position':
         if(this.data.positionInfos.online) {
-          app.wxConfirm({
-            title: '成功生成链接',
-            content: `链接为：${COMMON}homepage/homepage`,
-            confirmText: '复制链接',
-            showCancel: false,
-            confirmBack: () => {
-              wx.setClipboardData({data: `${COMMON}homepage/homepage` })
-            }
-          })
+          wx.navigateTo({url: `${RECRUITER}organization/position/position?type=path-position`})
         } else {
           app.wxConfirm({
             title: '提示',
@@ -390,19 +421,15 @@ Page({
         }
         break
       case 'path-recruiter':
-        if(this.data.positionInfos.online) {
-          app.wxConfirm({
-            title: '成功生成链接',
-            content: `链接为：${COMMON}homepage/homepage`,
-            confirmText: '复制链接',
-            showCancel: false,
-            confirmBack: () => {
-              wx.setClipboardData({data: `${COMMON}homepage/homepage` })
-            }
-          })
-        } else {
-          this.setData({showPublicPositionTips: true})
-        }
+        app.wxConfirm({
+          title: '成功生成链接',
+          content: `链接为：${COMMON}recruiterDetail/recruiterDetail?uid=${app.globalData.recruiterDetails.uid}`,
+          confirmText: '复制链接',
+          showCancel: false,
+          confirmBack: () => {
+            wx.setClipboardData({data: `${COMMON}recruiterDetail/recruiterDetail?uid=${app.globalData.recruiterDetails.uid}` })
+          }
+        })
         break
       default:
         break

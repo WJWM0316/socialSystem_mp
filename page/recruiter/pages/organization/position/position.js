@@ -31,8 +31,6 @@ Page({
   },
   onLoad(options) {
     this.setData({options})
-  },
-  onShow() {
     let onLinePositionList = {
       list: [],
       pageNum: 1,
@@ -49,6 +47,9 @@ Page({
         this.setData({onLinePositionList, detail}, () => this.getOnlineLists(true))
       })
     }
+  },
+  onShow() {
+    
     
   },
   getOnlineLists(hasLoading = true) {
@@ -85,22 +86,10 @@ Page({
    * @return   {[type]}     [description]
    */
   onClick(e) {
-    let params = e.currentTarget.dataset
-    let result = {}
-    let onLinePositionList = this.data.onLinePositionList
-    let buttonClick = this.data.buttonClick
-    // 处理海报不生成的问题
-    this.setData({params: {}})
-    onLinePositionList.list.map((field, index) => {
-      field.active = false
-      if(index === params.index) {
-        field.active = true
-        result = field
-        buttonClick = true
-        params = field
-      }
+    let item = e.currentTarget.dataset.item
+    wx.navigateTo({
+      url: `${COMMON}poster/createPost/createPost?type=position&positionId=${item.id}`
     })
-    this.setData({params, onLinePositionList, buttonClick})
   },
   /**
    * @Author   小书包
@@ -135,13 +124,12 @@ Page({
     positionCard = e.detail
   },
   onShareAppMessage(options) {
-    let that = this
-    let infos = this.data.params
-    console.log(infos, 'infos')
+    let that = this,
+        item  = options.target.dataset.item
 　　return app.wxShare({
       options,
       title: sharePosition(),
-      path: `${COMMON}positionDetail/positionDetail?positionId=${infos.id}&sCode=${infos.sCode}&sourceType=shp`,
+      path: `${COMMON}positionDetail/positionDetail?positionId=${item.id}&sCode=${item.sCode}&sourceType=shp`,
       imageUrl: positionCard,
       success: function() {
         wx.navigateBack({delta: 1 })

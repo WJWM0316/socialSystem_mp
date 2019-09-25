@@ -110,7 +110,7 @@
           <view class="no-position-tips">还没有职位信息哦，赶紧去发布职位吧！<view class="strong" bindtap="publicPosition">发布职位>></view></view>
         </view>
       </view>
-      <applyEntry wx:if="{{identity !== 'RECRUITER'}}" companyId="{{info.companyInfo.id}}"></applyEntry>
+      <!-- <applyEntry wx:if="{{identity !== 'RECRUITER'}}" companyId="{{info.companyInfo.id}}"></applyEntry> -->
       <button form-type="submit" class="clear-style" wx:if="{{!realIsOwner}}">
         <view class="collection icon iconfont icon-ganxingqu" wx:if="{{!info.interested}}" bindtap="collect"></view>
         <view class="collection icon iconfont icon-biaojiweiganxingqu" wx:else bindtap="collect"></view>

@@ -54,6 +54,22 @@ Page({
       case 'add':
         wx.navigateTo({url: `${RECRUITER}organization/add/add`})
         break
+      case 'path-mechanism':
+        app.wxConfirm({
+          title: '成功生成链接',
+          content: `链接为：${COMMON}homepage/homepage?companyId=${item.id}`,
+          confirmText: '复制链接',
+          showCancel: false,
+          confirmBack: () => {
+            wx.setClipboardData({
+              data: `${COMMON}homepage/homepage?companyId=${item.id}`,
+              success: () => {
+                wx.navigateBack({delta: 1 })
+              }
+            })
+          }
+        })
+        break
     }
   },
   /**

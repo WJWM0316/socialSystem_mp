@@ -116,40 +116,6 @@ Page({
     }
   },
   init () {
-    let autoMake = () => {
-      let positionData = wx.getStorageSync('positionData')
-      let orgData = wx.getStorageSync('orgData')
-      if(positionData) {
-        let positionUrl = `${COMMON}positionDetail/positionDetail?positionId=${positionData.id}`
-        app.wxConfirm({
-          title: '成功生成链接',
-          content: `链接为：${positionUrl}`,
-          confirmText: '复制链接',
-          showCancel: false,
-          confirmBack: () => {
-            wx.removeStorageSync('positionData')
-            wx.setClipboardData({data: positionUrl })
-          }
-        })
-        return
-      }
-      if(wx.getStorageSync('isSetAuto')) {
-        if(orgData) {
-          let homepageUrl = `${COMMON}homepage/homepage?companyId=${orgData.id}`
-          app.wxConfirm({
-            title: '成功生成链接',
-            content: `链接为：${homepageUrl}`,
-            confirmText: '复制链接',
-            showCancel: false,
-            confirmBack: () => {
-              wx.removeStorageSync('isSetAuto')
-              wx.setClipboardData({data: homepageUrl })
-            }
-          })
-        }
-        return
-      }
-    }
     if (wx.getStorageSync('choseType') === 'APPLICANT') return
     let callback = () => {
       // 处理海报生成问题
@@ -162,7 +128,6 @@ Page({
         this.setData({userInfo, companyInfos, isCompanyTopAdmin})
         this.selectComponent('#bottomRedDotBar').init()
       })
-      // autoMake()
     }
     if(app.pageInit) {
       callback()
@@ -389,10 +354,10 @@ Page({
         break
       case 'path-mechanism':
         if (app.globalData.recruiterDetails.isCompanyTopAdmin) {
-          wx.setStorageSync('isSetAuto', 1)
-          wx.navigateTo({url: `${RECRUITER}organization/list/list?type=shareCompany&companyId=${app.globalData.recruiterDetails.companyTopId}`})
+          wx.navigateTo({url: `${RECRUITER}organization/list/list?type=path-mechanism&companyId=${app.globalData.recruiterDetails.companyTopId}`})
           return
         }
+        // 机构管理员
         app.wxConfirm({
           title: '成功生成链接',
           content: `链接为：${COMMON}homepage/homepage?companyId=${this.data.detail.companyId}`,
@@ -404,6 +369,7 @@ Page({
         })
         break
       case 'path-position':
+        // 已经有在线职位
         if(this.data.positionInfos.online) {
           wx.navigateTo({url: `${RECRUITER}organization/position/position?type=path-position`})
         } else {

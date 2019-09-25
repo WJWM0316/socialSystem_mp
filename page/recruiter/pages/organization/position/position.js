@@ -87,9 +87,27 @@ Page({
    */
   onClick(e) {
     let item = e.currentTarget.dataset.item
-    wx.navigateTo({
-      url: `${COMMON}poster/createPost/createPost?type=position&positionId=${item.id}`
-    })
+    let positionUrl = `${COMMON}positionDetail/positionDetail?positionId=${item.id}`
+    if(this.data.options.type === 'path-position') {
+      app.wxConfirm({
+        title: '成功生成链接',
+        content: `链接为：${positionUrl}`,
+        confirmText: '复制链接',
+        showCancel: false,
+        confirmBack: () => {
+          wx.setClipboardData({
+            data: positionUrl,
+            success: () => {
+              wx.navigateBack({delta: 1 })
+            }
+          })
+        }
+      })
+    } else {
+      wx.navigateTo({
+        url: `${COMMON}poster/createPost/createPost?type=position&positionId=${item.id}`
+      })
+    }
   },
   /**
    * @Author   小书包
@@ -113,9 +131,6 @@ Page({
         wx.navigateTo({
           url: `${COMMON}poster/createPost/createPost?type=position&positionId=${this.data.params.id}`
         })
-      case 'path-position':
-        wx.setStorageSync('positionData', this.data.params)
-        wx.navigateBack({delta: 1 })
         break
     }
     

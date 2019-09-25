@@ -1,5 +1,5 @@
 <view>
-	<navbar title="选择职位类别" color="#22292C" background="#ffffff"></navbar>
+	<navbar title="选择职位类别"></navbar>
 	<view style="height: 120rpx;"></view>
 	<view class="search-box" style="top: {{statusBarHeight}}px">
 		<view class="mask"></view>
@@ -51,6 +51,18 @@
 					data-index="{{index}}"
 					bindtap="onClick2"
 					data-order="second">{{second.name}}</view>
+			</view>
+			<view class="column third" wx:if="{{positionTypeList[index1].children.length}}">
+				<view 
+				wx:for="{{positionTypeList[index1].children[index2].children}}" 
+				class="item {{third.active ? 'active' : ''}}"
+			  wx:key="{{index}}"
+			  data-index="{{index}}"
+			  bindtap="onClick3"
+			  wx:for-item="third">
+					{{third.name}}
+					<i class="icon iconfont icon-wancheng" wx:if="{{third.active}}"></i>
+				</view>
 			</view>
 		</view>
 	</view>

@@ -4,6 +4,10 @@
 		<text class="txt mobile">绑定手机号</text>
 		<i class="icon iconfont icon-xiangyou"></i>
 	</view>
+	<view class="changePhone" bindtap="toggleShowPhone" wx:if="{{identity === 'RECRUITER'}}">
+		<text class="txt mobile">隐私设置</text>
+		<i class="icon iconfont icon-xiangyou"></i>
+	</view>
 <!-- 	<view class="toggle" bindtap="toggleIdentity">
 		<text class="txt">切换为“{{identity}}”身份</text>
 		<i class="icon iconfont icon-xiangyou"></i>

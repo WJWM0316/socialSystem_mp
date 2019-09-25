@@ -11,10 +11,6 @@ import {
   RECRUITER
 } from '../../../../config.js'
 
-import {
-  getPositionListApi
-} from "../../../../api/pages/position.js"
-
 import {getSelectorQuery} from "../../../../utils/util.js"
 import { agreedTxtC, agreedTxtB } from '../../../../utils/randomCopy.js'
 

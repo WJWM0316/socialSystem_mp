@@ -59,7 +59,7 @@
 						<view class="item" wx:if="{{item.city}}">{{item.city}}{{item.district}}</view>
 						<view class="item">{{item.workExperienceName}}</view>
 						<view class="item">{{item.educationName}}</view>
-						<!-- <view class="view"><i class="icon iconfont icon-chakan"></i>123</view> -->
+						<view class="view" wx:if="{{item.browseUsers}}"><i class="icon iconfont icon-chakan"></i>{{item.browseUsers}}</view>
 					</view>
 				</button>
 				<view class="actions">
@@ -99,6 +99,7 @@
 						<view class="item" wx:if="{{item.city}}">{{item.city}}{{item.district}}</view>
 						<view class="item">{{item.workExperienceName}}</view>
 						<view class="item">{{item.educationName}}</view>
+						<view class="view" wx:if="{{item.browseUsers}}"><i class="icon iconfont icon-chakan"></i>{{item.browseUsers}}</view>
 					</view>
 					<view class="item-status {{item.status === 4 ? 'fail' : ''}} {{item.status === 2 || item.status === 3 ? 'under-review' : ''}} {{item.status === 0 ? 'close' : ''}}" style="margin-top: 0">{{filters.positionFilter(item.status)}}</view>
 				</button>

@@ -1,6 +1,6 @@
 import {getSelectorQuery} from "../../../../utils/util.js"
 import {getOthersRecruiterDetailApi, getRecruiterDetailApi, giveMecallApi, putLabelFavorApi, removeLabelFavorApi} from "../../../../api/pages/recruiter.js"
-import {getPositionListApi} from "../../../../api/pages/position.js"
+import {getPositionListApi, getPositionCompanyTopListApi} from "../../../../api/pages/position.js"
 import {getRecruiterQrcodeApi} from '../../../../api/pages/qrcode.js'
 import {getMyCollectUserApi, deleteMyCollectUserApi} from "../../../../api/pages/collect.js"
 import {COMMON,RECRUITER,APPLICANT} from "../../../../config.js"
@@ -100,11 +100,25 @@ Page({
   getPositionLists(hasLoading = true) {
     return new Promise((resolve, reject) => {
       let isOwner = this.data.isOwner
+      let funcApi = null
+      let orgData = wx.getStorageSync('orgData')
       let params = {recruiter: this.data.options.uid, count: this.data.pageCount, page: this.data.positionList.pageNum, hasLoading}
       if(isOwner) {
         params = Object.assign(params, {is_online: 1})
       }
-      getPositionListApi(params).then(res => {
+
+      if(wx.getStorageSync('choseType') !== 'RECRUITER') {
+        funcApi = getPositionListApi
+      } else {
+        if(app.globalData.recruiterDetails.isCompanyTopAdmin) {
+          params = Object.assign(params, {company_id: orgData.id})
+          funcApi = getPositionCompanyTopListApi
+        } else {
+          funcApi = getPositionListApi
+        }
+      }
+
+      funcApi(params).then(res => {
         let positionList = this.data.positionList
         positionList.onBottomStatus = res.meta && res.meta.nextPageUrl ? 0 : 2
         positionList.list = positionList.list.concat(res.data)

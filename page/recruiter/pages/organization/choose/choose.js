@@ -64,6 +64,7 @@ Page({
         wx.navigateBack({delta: 1})
       } else {
         if (this.data.options.type === 'createQr') {
+          wx.setStorageSync('avatar', item.logoInfo)
           wx.redirectTo({url: `${RECRUITER}createQr/createQr?type=qr-mechanism&companyId=${item.id}`})
         } else {
           wx.redirectTo({url: `${COMMON}poster/createPost/createPost?type=company&companyId=${item.id}`})

@@ -39,17 +39,10 @@ Page({
       if (options.type !== 'qr-recruiter') {
         setData.imgUrl = res.data.qrCodeUrl
       }
-      this.setData(setData, () => {
-        if (options.type === 'qr-recruiter') {
-          this.draw()
-        } else {
-          this.draw1()
-        }
-      })
+      this.setData(setData, () => this.draw())
     })
   },
   onShow() {
-    console.log(app.globalData.recruiterDetails)
     let that = this
     wx.getSetting({
       success(res) {
@@ -70,66 +63,18 @@ Page({
     wx.removeStorageSync('avatar')
     wx.navigateBack({delta: 1})
   },
-  draw1() {
-    return new Promise((resolve, reject) => {
-      let _this = this
-      let ctx = wx.createCanvasContext('cardCanvas', this)
-      let bgUrl = this.data.qrUrl
-      let loadResult = (res, resolve) => {
-        let timer = null
-        timer = setTimeout(() => {
-          app.wxToast({
-            title: '图片加载失败，请重新生成',
-            callback() {
-              wx.navigateBack({
-                delta: 1
-              })
-            }
-          })
-        }, this.data.timerSecond)
-        if (res.statusCode === 200) {
-          resolve(res)
-          clearTimeout(timer)
-          return res.tempFilePath
-        }
-      }
-
-      let loadBgUrl = new Promise((resolve, reject) => {
-        wx.downloadFile({
-          url: bgUrl,
-          success(res) {
-            bgUrl = loadResult(res, resolve)
-          },
-          fail(e) {
-            app.wxToast({title: '图片加载失败，请重新生成', callback() {wx.navigateBack({ delta: 1 })}})
-          }
-        })
-      })
-      Promise.all([loadBgUrl]).then((result) => {
-        ctx.drawImage(bgUrl, 0, 0, 406, 406)
-        ctx.draw(true, () => {
-          setTimeout(() => {
-            wx.canvasToTempFilePath({
-              x: 0,
-              y: 0,
-              quality: 1,
-              canvasId: 'cardCanvas',
-              success(res) {
-                _this.setData({imgUrl: res.tempFilePath})
-                wx.hideLoading()
-              }
-            })
-          }, 500)
-        })
-      })
-      resolve()
-    })
-  },
   draw() {
+    let options = this.data.options
     let bgUrl = this.data.qrUrl
-    let avatarUrl = app.globalData.recruiterDetails.avatars[0].smallUrl
     let avatar = wx.getStorageSync('avatar')
-    if(avatar) avatarUrl = avatar.url
+    let avatarUrl = null
+    if(options.type === 'qr-recruiter') {
+      avatarUrl = app.globalData.recruiterDetails.avatars[0].smallUrl
+      if(avatar) avatarUrl = avatar.url
+    } else {
+      if(avatar) avatarUrl = avatar.url
+      if(!app.globalData.recruiterDetails.isCompanyTopAdmin) avatarUrl = app.globalData.recruiterDetails.companyInfo.logo.url
+    }
 
     const loadResult = (res, resolve) => {
       let timer = null
@@ -204,7 +149,7 @@ Page({
                 wx.hideLoading()
               }
             })
-          }, 500)
+          }, 16.7)
         })
         resolve()
       })

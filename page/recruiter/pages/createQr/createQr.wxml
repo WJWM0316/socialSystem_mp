@@ -8,9 +8,9 @@
 		color="#22292C">
 	</navbar>
 
-	<block wx:if="{{options.type !== 'qr-recruiter'}}">
-		<chooseOrgEnter></chooseOrgEnter>
-	</block>
+<!-- 	<block wx:if="{{options.type !== 'qr-recruiter'}}">
+		<chooseOrgEnter detail="{{detail}}"></chooseOrgEnter>
+	</block> -->
 
 	<view class="canvas-box">
 		<view class="showImgBox"><image class="showImg" src="{{imgUrl}}" wx:if="{{imgUrl}}"></image></view>

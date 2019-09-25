@@ -4,7 +4,7 @@
 
 // 环境切换
 // 0 是测试环境  1 是正式环境
-export const environment = 1
+export const environment = 0
 export const VERSION = 104
 export let APPLICANTHOST = '',
 					 RECRUITERHOST = '',

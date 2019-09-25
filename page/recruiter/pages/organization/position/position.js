@@ -87,7 +87,7 @@ Page({
    */
   onClick(e) {
     let item = e.currentTarget.dataset.item
-    let positionUrl = `${COMMON}positionDetail/positionDetail?positionId=${item.id}`
+    let positionUrl = `${COMMON}positionDetail/positionDetail?positionId=${item.id}`.slice(1)
     if(this.data.options.type === 'path-position') {
       app.wxConfirm({
         title: '成功生成链接',
@@ -98,7 +98,12 @@ Page({
           wx.setClipboardData({
             data: positionUrl,
             success: () => {
-              wx.navigateBack({delta: 1 })
+              app.wxToast({
+                title: '成功复制链接',
+                callback() {
+                  wx.navigateBack({delta: 1 })
+                }
+              })
             }
           })
         }

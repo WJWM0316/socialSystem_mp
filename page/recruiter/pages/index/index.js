@@ -354,6 +354,7 @@ Page({
         this.setData({shareType: 'type-company'})
         break
       case 'path-mechanism':
+        let homepageUrl = `${COMMON}homepage/homepage?companyId=${this.data.detail.companyId}`.slice(1)
         if (app.globalData.recruiterDetails.isCompanyTopAdmin) {
           wx.navigateTo({url: `${RECRUITER}organization/list/list?type=path-mechanism&companyId=${app.globalData.recruiterDetails.companyTopId}`})
           return
@@ -361,11 +362,11 @@ Page({
         // 机构管理员
         app.wxConfirm({
           title: '成功生成链接',
-          content: `链接为：${COMMON}homepage/homepage?companyId=${this.data.detail.companyId}`,
+          content: `链接为：${homepageUrl}`,
           confirmText: '复制链接',
           showCancel: false,
           confirmBack: () => {
-            wx.setClipboardData({data: `${COMMON}homepage/homepage` })
+            wx.setClipboardData({data: homepageUrl })
           }
         })
         break
@@ -387,13 +388,19 @@ Page({
         }
         break
       case 'path-recruiter':
+        let recruiterUrl = `${COMMON}recruiterDetail/recruiterDetail?uid=${app.globalData.recruiterDetails.uid}`.slice(1)
         app.wxConfirm({
           title: '成功生成链接',
-          content: `链接为：${COMMON}recruiterDetail/recruiterDetail?uid=${app.globalData.recruiterDetails.uid}`,
+          content: `链接为：${recruiterUrl}`,
           confirmText: '复制链接',
           showCancel: false,
           confirmBack: () => {
-            wx.setClipboardData({data: `${COMMON}recruiterDetail/recruiterDetail?uid=${app.globalData.recruiterDetails.uid}` })
+            wx.setClipboardData({
+              data: recruiterUrl,
+              success: () => {
+                app.wxToast({title: '成功复制链接'})
+              }
+            })
           }
         })
         break

@@ -9,6 +9,7 @@
     "tabBar": "../../../../components/business/tabBar/tabBar",
   	"navbar": "../../../../components/business/navbar/navbar",
     "shrinkText": "../../../../components/functional/shrinkText/shrinkText",
-  	"notFound": "../../../../components/layout/notFound/notFound"
+  	"notFound": "../../../../components/layout/notFound/notFound",
+    "applyEntry": "../../../../components/business/applyEntry/applyEntry"
   }
 }

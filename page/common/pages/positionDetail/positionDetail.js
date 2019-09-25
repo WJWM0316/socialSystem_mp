@@ -28,14 +28,15 @@ Page({
     recruiterInfo: {},
     findMore: {},
     hasReFresh: false,
-    cdnPath: app.globalData.cdnImagePath
+    cdnPath: app.globalData.cdnImagePath,
+    identity: ''
   },
   onLoad(options) {
     positionCard = ''
     if (options.scene) options = app.getSceneParams(options.scene)
     identity = app.identification(options)
     this.findMorePsList(options)
-    this.setData({query: options})
+    this.setData({query: options, identity})
     if (options.todoAction === 'collect') {
       let e = {
         currentTarget : {

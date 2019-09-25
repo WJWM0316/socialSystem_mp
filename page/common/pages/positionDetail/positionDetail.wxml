@@ -110,9 +110,10 @@
 		</block>
 		<!-- 正常职位 end-->
 
-		<view class="make-homepage" wx:if="{{ !isRecruiter }}">
+<!-- 		<view class="make-homepage" wx:if="{{ !isRecruiter }}">
 			<view bindtap="todoAction" data-type="make">我也要招人<i class="icon iconfont icon-disejiantou-you"></i></view>
-		</view>
+		</view> -->
+		<applyEntry wx:if="{{identity !== 'RECRUITER'}}" companyId="{{detail.companyInfo.id}}"></applyEntry>
 
 		<button
 			wx:if="{{!isOwner && (detail.isOnline === 1 && (detail.status === 1 || detail.status === 2))}}"

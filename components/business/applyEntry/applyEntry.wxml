@@ -1,0 +1,6 @@
+<view class="technical-support">
+  猎多多提供技术支持
+</view>
+<view class="generating-applets" bindtap="getCompanyApplyInfo">
+  我也要生成企业专属招聘小程序<i class="icon iconfont icon-xiangyou"></i>
+</view>

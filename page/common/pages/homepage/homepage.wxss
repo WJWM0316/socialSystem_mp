@@ -734,10 +734,9 @@
 }
 
 .generating-applets {
-  height:26rpx;
   font-size:24rpx;
   color:rgba(188,188,188,1);
-  line-height:26rpx;
+  line-height:1;
   text-align: center;
   margin-top: 48rpx;
   padding-bottom: 50rpx;

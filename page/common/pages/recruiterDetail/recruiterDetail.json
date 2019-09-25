@@ -9,6 +9,7 @@
     "interviewBar": "../../../../components/business/interviewBar/interviewBar",
     "company": "../../../../components/business/roleInfoCard/roleInfoCard",
     "canvasCard": "../../../../components/business/canvasCard/canvasCard",
-    "notFound": "../../../../components/layout/notFound/notFound"
+    "notFound": "../../../../components/layout/notFound/notFound",
+    "applyEntry": "../../../../components/business/applyEntry/applyEntry"
   }
 }

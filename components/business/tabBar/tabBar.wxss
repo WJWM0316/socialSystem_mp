@@ -15,7 +15,6 @@
 }
 .tabBar-item {
   flex: 1;
-  height: 100%;
   text-align: center;
   position: relative;
   height: 98rpx;
@@ -62,7 +61,6 @@
   height:36rpx;
   background:#FF4949;
   border-radius:18rpx;
-  border-radius: 50%;
   position: absolute;
   top: -5rpx;
   right: -32rpx;

@@ -31,6 +31,6 @@
 	  		<cover-view class="p">{{item.title}}</cover-view>
 	  </cover-view>
 	</cover-view>
-	<cover-view class="cover-viewBlock" wx:if="{{isIphoneX}}"></cover-view>
+	<cover-view class="viewBlock" wx:if="{{isIphoneX}}"></cover-view>
 </cover-view>
 <cover-view class="extraBlock {{isIphoneX ? 'extraIphoneX' : ''}}"></cover-view>

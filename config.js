@@ -16,7 +16,7 @@ if (environment === 0) {
 	APPLICANTHOST = 'https://qiuzhi-api.dd.lieduoduo.ziwork.com'
 	RECRUITERHOST = 'https://zhaopin-api.dd.lieduoduo.ziwork.com'
 	PUBAPIHOST = 'https://pub-api.dd.lieduoduo.ziwork.com'
-	NODEHOST = 'http://localhost:3001/frontEnd' // 'https://node.dd.lieduoduo.ziwork.com/frontEnd' 
+	NODEHOST = 'https://node.dd.lieduoduo.ziwork.com/frontEnd'  // 'http://localhost:3001/frontEnd' // 
 	WEBVIEW = `https://h5.lieduoduo.ziwork.com/`
 } else {
 	// 正式服环境

@@ -49,7 +49,6 @@ Page({
     })
   },
   onShow() {
-    console.log(app.globalData.recruiterDetails)
     let that = this
     wx.getSetting({
       success(res) {
@@ -126,10 +125,22 @@ Page({
     })
   },
   draw() {
+    let options = this.data.options
     let bgUrl = this.data.qrUrl
-    let avatarUrl = app.globalData.recruiterDetails.avatars[0].smallUrl
     let avatar = wx.getStorageSync('avatar')
-    if(avatar) avatarUrl = avatar.url
+    let orgData = wx.getStorageSync('orgData')
+    let avatarUrl = null
+    
+    if(options.type === 'qr-recruiter') {
+      avatarUrl = app.globalData.recruiterDetails.avatars[0].smallUrl
+      if(avatar) avatarUrl = avatar.url
+    } else {
+      if(!app.globalData.recruiterDetails.isCompanyTopAdmin) {
+        avatarUrl = app.globalData.recruiterDetails.companyInfo.logo.url
+      } else {
+        if(orgData) avatarUrl = orgData.logoInfo.url
+      }
+    }
 
     const loadResult = (res, resolve) => {
       let timer = null
@@ -162,6 +173,7 @@ Page({
         }
       })
     })
+
     let loadBgUrl = new Promise((resolve, reject) => {
       // 头像
       wx.downloadFile({
@@ -184,7 +196,7 @@ Page({
         // 画二维码
         ctx.drawImage(bgUrl, 0, 0, 406, 406)
 
-        ctx.beginPath()  
+        ctx.beginPath()
         ctx.arc(203, 203, 90, 0, Math.PI * 2, false)
         ctx.clip()
 
@@ -204,7 +216,7 @@ Page({
                 wx.hideLoading()
               }
             })
-          }, 500)
+          }, 16.7)
         })
         resolve()
       })

@@ -87,14 +87,34 @@ Page({
    */
   onClick(e) {
     let item = e.currentTarget.dataset.item
-    if (this.data.options.type === 'qr-position') {
+    let positionUrl = `${COMMON}positionDetail/positionDetail?positionId=${item.id}`.slice(1)
+    if(this.data.options.type === 'path-position') {
+      app.wxConfirm({
+        title: '成功生成链接',
+        content: `链接为：${positionUrl}`,
+        confirmText: '复制链接',
+        showCancel: false,
+        confirmBack: () => {
+          wx.setClipboardData({
+            data: positionUrl,
+            success: () => {
+              app.wxToast({
+                title: '成功复制链接',
+                callback() {
+                  wx.navigateBack({delta: 1 })
+                }
+              })
+            }
+          })
+        }
+      })
+    } else if (this.data.options.type === 'qr-position') {
       wx.navigateTo({url: `${RECRUITER}createQr/createQr?type=qr-position&positionId=${item.id}`})
     } else {
       wx.navigateTo({
         url: `${COMMON}poster/createPost/createPost?type=position&positionId=${item.id}`
       })
     }
-    
   },
   /**
    * @Author   小书包
@@ -118,9 +138,6 @@ Page({
         wx.navigateTo({
           url: `${COMMON}poster/createPost/createPost?type=position&positionId=${this.data.params.id}`
         })
-      case 'path-position':
-        wx.setStorageSync('positionData', this.data.params)
-        wx.navigateBack({delta: 1 })
         break
     }
     

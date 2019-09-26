@@ -54,6 +54,28 @@ Page({
       case 'add':
         wx.navigateTo({url: `${RECRUITER}organization/add/add`})
         break
+      case 'path-mechanism':
+        let homepageUrl = `${COMMON}homepage/homepage?companyId=${item.id}`.slice(1)
+        app.wxConfirm({
+          title: '成功生成链接',
+          content: `链接为：${homepageUrl}`,
+          confirmText: '复制链接',
+          showCancel: false,
+          confirmBack: () => {
+            wx.setClipboardData({
+              data: homepageUrl,
+              success: () => {
+                app.wxToast({
+                  title: '成功复制链接',
+                  callback() {
+                    wx.navigateBack({delta: 1 })
+                  }
+                })
+              }
+            })
+          }
+        })
+        break
     }
   },
   /**

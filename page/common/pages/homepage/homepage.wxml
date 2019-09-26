@@ -54,7 +54,7 @@
 
 		<view class="introduction" wx:if="{{companyInfos.intro || companyInfos.albumInfo.length}}">
 			<view class="title">
-				<view class="icon"> <view class="fan"></view> </view> 公司介绍
+				<view class="icon"> <view class="fan"></view> </view> 关于我们
 			</view>
 			<view class="swiper-box" wx:if="{{companyInfos.albumInfo.length}}">
 				<view class="num-box">{{swiperIndex + 1}}/{{companyInfos.albumInfo.length}}</view>
@@ -169,9 +169,8 @@
 				<text class="desc">直接拨打，更快面试</text>
 			</view>
 		</view>
-
-		<view class="technical-support" wx:if="{{choseType !== 'RECRUITER'}}">多多社交招聘系统提供技术支持</view>
-		<view class="generating-applets" bindtap="getCompanyApplyInfo" wx:if="{{choseType !== 'RECRUITER'}}">我也要生成企业专属招聘小程序<i class="icon iconfont icon-xiangyou"></i></view>
+		
+		<applyEntry wx:if="{{choseType !== 'RECRUITER' && !info.hideDdPromote}}" companyId="{{companyInfos.id}}"></applyEntry>
 
 	<!-- 	<view class="toggle" bindtap="toggle" wx:if="{{choseType !== 'RECRUITER'}}">
 			<image class="icon" src="{{cdnImagePath}}{{isRecruiter ? 'btn_b_hp_zhoapin.png' : 'btn_b_hp_zhaoren.png'}}"></image>

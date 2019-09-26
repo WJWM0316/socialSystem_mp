@@ -221,7 +221,6 @@ export const getOrdersListApi = (data, hasLoading) => {
   })
 }
 
-
 // 获取精选顾问tab红点
 export const getRecommendReddotApi = (data, hasLoading) => {
   return request({
@@ -232,4 +231,20 @@ export const getRecommendReddotApi = (data, hasLoading) => {
   })
 }
 
+// 隐藏手机号
+export const showMobileRecruiterApi = (data, hasLoading) => {
+  return request({
+    url: '/recruiter/hide_mobile',
+    method: 'put',
+    hasLoading: hasLoading
+  })
+}
 
+// 展示手机号
+export const hideMobileRecruiterApi = (data, hasLoading) => {
+  return request({
+    url: '/recruiter/hide_mobile',
+    method: 'delete',
+    hasLoading: false
+  })
+}

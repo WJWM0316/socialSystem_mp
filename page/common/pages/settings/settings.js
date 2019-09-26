@@ -7,17 +7,21 @@ Page({
    * 页面的初始数据
    */
   data: {
-    identity: "面试官"
+    identityDesc: "面试官",
+    identity: wx.getStorageSync('choseType')
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    if (wx.getStorageSync('choseType') === 'RECRUITER') {
-      this.setData({identity: "求职者"})
+  // onLoad: function (options) {
+  //   if (wx.getStorageSync('choseType') === 'RECRUITER') {
+  //     this.setData({identityDesc: "求职者"})
+  //   } else {
+  //     this.setData({identityDesc: "面试官"})
+  //   }
+  // },
+  onShow() {
+    if(wx.getStorageSync('choseType') === 'RECRUITER') {
+      this.setData({identityDesc: "求职者", identity: wx.getStorageSync('choseType')})
     } else {
-      this.setData({identity: "面试官"})
+      this.setData({identityDesc: "面试官", identity: wx.getStorageSync('choseType')})
     }
   },
   upLogin() {
@@ -37,51 +41,15 @@ Page({
   toggleIdentity() {
     app.wxConfirm({
       title: '身份切换',
-      content: `是否切换为${this.data.identity}身份`,
+      content: `是否切换为${this.data.identityDesc}身份`,
       confirmBack() {
         app.toggleIdentity()
       }
     })
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
+  toggleShowPhone() {
+    wx.navigateTo({
+      url: `${COMMON}hidePhone/hidePhone`
+    })
   }
 })

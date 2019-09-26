@@ -1,0 +1,58 @@
+.hidePhone {
+	background: #FAFCFF;
+}
+.li {
+	margin-top: 24rpx;
+	padding-left: 40rpx;
+	background: #fff;
+	position: relative;
+	overflow: hidden;
+}
+.li .top {
+	padding-top: 46rpx;
+}
+.li .tips {
+	padding-top: 20rpx;
+	font-size:22rpx;
+	color:#CCCCCC;
+	line-height:1;
+	padding-bottom: 46rpx;
+}
+
+.radio-box {
+  width: 102rpx;
+  text-align: center;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.myRadio {
+  width:36rpx;
+  height:36rpx;
+  position: relative;
+  display: inline-block;
+  border-radius: 50%;
+  border: 1px solid #BCBCBC;
+  line-height: 36rpx;
+  text-align: center;
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.myRadio.active {
+  background: #652791;
+  color: white;
+  border: unset;
+}
+
+.myRadio.active .icon{
+  font-size: 24rpx;
+  display:inline-block;
+  transform:translateY(-4rpx);
+}

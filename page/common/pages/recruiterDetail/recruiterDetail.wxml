@@ -1,9 +1,17 @@
 <form bindsubmit="formSubmit" report-submit='{{true}}'>
   <view class="recruiterDetail" wx:if="{{info.hasDeleted === 0}}">
-    <navbar title="{{info.companyInfo.companyName}}-{{info.position}}" background="#fff" color="#22292C" showHome="{{true}}" customBack bindbackEvent="backEvent"></navbar>
+    <navbar
+      title="{{info.companyInfo.companyName}}-{{info.position}}"
+      background="#fff"
+      color="#22292C"
+      showHome="{{true}}"
+      customBack
+      bindbackEvent="backEvent">
+    </navbar>
     <view hidden="{{!hasReFresh}}">
       <refreshStatus></refreshStatus>
     </view>
+
     <view class="header" wx:if="{{!isOwner || !showEdit}}">
       <image class="bgImg" src="{{cdnImagePath}}bg_detail.png" mode="aspectFill"></image>
       <shareBtn wx:if="{{!isOwner}}"></shareBtn>
@@ -21,10 +29,12 @@
         <view class="sign" wx:if="{{info.signature}}">{{info.signature}}</view>
       </view>
     </view>
+
     <view class="head" wx:if="{{isOwner && showEdit}}">
       <roleInfoCard my-class="roleInfoCard" roleType="recruiter" cardData="{{info}}" isMain="{{true}}"></roleInfoCard>
       <view class="line"></view>
     </view>
+    
     <view class="mainContent">
       <view class="contentBox">
         <view class="labelEdit {{info.personalizedLabels.length > 0 ? 'hasLabelEdit': ''}}" wx:if="{{isOwner && showEdit}}">
@@ -51,16 +61,19 @@
           <view wx:if="{{!info.brief}}" class="addDeclaration" bindtap="editJump" data-type="profile">添加个人简介</view>
           <shrinkText textData="{{info.brief}}"></shrinkText>
         </view>
-       <!--  <view class="contact" wx:if="{{(!isOwner) || (isOwner && showEdit)}}">
+        <view class="contact" wx:if="{{!info.hideMobile || info.wechat}}">
           <view class="title">
             <view class="icon">
               <view class="fan"></view>
             </view>
             <text class="txt">联系方式</text>
           </view>
-          <view class="phone {{!info.wechat ? 'noWechat' : ''}}"><i class="imgIcon iconfont icon-shoujihaoma"></i><text class="data">{{info.mobile}}</text><text class="btn" bindtap="call">拨打电话</text></view>
+          <view class="phone {{!info.wechat ? 'noWechat' : ''}}" wx:if="{{!info.hideMobile}}">
+            <i class="imgIcon iconfont icon-shoujihaoma"></i>
+            <text class="data">{{info.mobile}}</text><text class="btn" bindtap="call">拨打电话</text>
+          </view>
           <view class="wechat" wx:if="{{info.wechat}}"><i class="imgIcon iconfont icon-weixin"></i><text class="data">{{info.wechat}}</text><text class="btn" bindtap="wechat">复制微信号</text></view>
-        </view> -->
+        </view>
     <!--     <view class="declaration {{isOwner ? 'recruiterMain' : ''}}" wx:if="{{(!isOwner && info.manifestos.length > 0) || (isOwner && showEdit)}}">
           <view class="title">
             <view class="icon">
@@ -82,7 +95,7 @@
 
         <company roleType="detailCompany" cardData="{{info.companyInfo}}" wx:if="{{!info.isCompanyTopAdmin}}"></company>
 
-        <view class="positionList" wx:if="{{positionList.total}}">
+        <view class="positionList" wx:if="{{positionList.list.length}}">
           <button form-type="submit" class="clear-style positionItem" wx:for="{{positionList.list}}" wx:key="{{index}}" bindtap="jumpPage" data-id="{{item.id}}">
             <view class="positionHead"><text class="positionTitle">{{item.positionName}}</text><text class="money">{{item.emolumentMin * 1000}}~{{item.emolumentMax * 1000}}<text class="moneyTxt">元/月</text></text></view>
             <view class="positionDeatil">
@@ -92,13 +105,12 @@
             </view>
           </button>
         </view>
-        <view class="nopositionList" wx:if="{{!positionList.total && isOwner && identity === 'RECRUITER'}}">
+        <view class="nopositionList" wx:if="{{!positionList.list.length && isOwner && identity === 'RECRUITER'}}">
           <image class="pic" src="{{cdnImagePath}}emptyState.png"></image>
           <view class="no-position-tips">还没有职位信息哦，赶紧去发布职位吧！<view class="strong" bindtap="publicPosition">发布职位>></view></view>
         </view>
       </view>
-      <!-- <bottomStatus status="{{positionList.onBottomStatus}}" listData="{{positionList.list}}"></bottomStatus> -->
-      <view class="more meToo" bindtap="create" wx:if="{{!isRecruiter}}">我也要招人<view class="icon iconfont icon-disejiantou-you"></view></view>
+      <applyEntry wx:if="{{identity !== 'RECRUITER' && !info.companyInfo.hideDdPromote}}" companyId="{{info.companyInfo.id}}"></applyEntry>
       <button form-type="submit" class="clear-style" wx:if="{{!realIsOwner}}">
         <view class="collection icon iconfont icon-ganxingqu" wx:if="{{!info.interested}}" bindtap="collect"></view>
         <view class="collection icon iconfont icon-biaojiweiganxingqu" wx:else bindtap="collect"></view>

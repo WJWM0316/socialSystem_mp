@@ -23,15 +23,15 @@ Page({
         companyData = {}
     if (options.companyId) {
       if (app.globalData.recruiterDetails.isCompanyTopAdmin) {
-        let orgData = orgList.filter(item => {return item.id === parseInt(options.companyId)})
-        companyData = orgData[0]
+        let orgData = orgList.find(item => item.id == options.companyId)
+        companyData = orgData
       } else {
         companyData = app.globalData.recruiterDetails.companyInfo
       }
       let company_name = companyData.companyName,
           phoneNum     = companyData.mobile,
           addressData  = companyData.address[0],
-          upload       = companyData.logoInfo
+          upload       = companyData.logo
       this.setData({company_name, phoneNum, addressData, upload})
     }
   },

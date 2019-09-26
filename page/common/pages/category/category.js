@@ -70,7 +70,7 @@ Page({
     if (!positionTypeList[params.index] || !positionTypeList[params.index].children) return
     positionTypeList.map((field, index) => field.active = index === params.index ? true : false)
     positionTypeList[params.index].children.map((field, index) => field.active = index === this.data.index1 ? true : false)
-    positionTypeList[params.index].children[this.data.index1].active = true
+    positionTypeList[params.index].children[this.data.index1].children[this.data.index2].active = true
     this.setData({index1: params.index, positionTypeList, showMask: true})
   },
   /**
@@ -82,17 +82,9 @@ Page({
   onClick2(e) {
     const params = e.currentTarget.dataset
     const positionTypeList = this.data.positionTypeList
-    if (!positionTypeList[this.data.index1].children[params.index]) return
+    if (!positionTypeList[params.index].children) return
     positionTypeList[this.data.index1].children.map((field, index) => field.active = index === params.index ? true : false)
-    this.setData({index2: params.index, positionTypeList, showMask: false})
-    const result = this.data.positionTypeList[this.data.index1].children[params.index]
-    const storage = wx.getStorageSync('createPosition') || {}
-    storage.type = result.labelId
-    storage.typeName = result.name
-    if(this.data.positionTypeList[this.data.index1].labelId !== storage.parentType) storage.skills = []
-    storage.parentType = this.data.positionTypeList[this.data.index1].labelId
-    wx.setStorageSync('createPosition', storage)
-    wx.navigateBack({delta: 1})
+    this.setData({index2: params.index, positionTypeList, showMask: true})
   },
   /**
    * @Author   小书包
@@ -128,7 +120,7 @@ Page({
    */
   bindInput(e) {
     const name = e.detail.value
-    this.debounce(this.getLabelLIsts, null, 100, name)
+    this.debounce(this.getLabelLIsts, null, 500, name)
   },
   /**
    * @Author   小书包

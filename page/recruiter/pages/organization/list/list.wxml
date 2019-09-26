@@ -5,7 +5,14 @@
 </view>
 <view class="organizationList">
 	<view class="list">
-		<button class="list-item clear-style" open-type="{{options.type === 'shareCompany' ? 'share' : ''}}" wx:for="{{orgList}}" wx:key="{{index}}" data-type="preview" bindtap="{{options.type === 'shareCompany' ? '' : 'roouteJump'}}" data-item="{{item}}">
+		<button
+			class="list-item clear-style"
+			open-type="{{options.type === 'shareCompany' ? 'share' : ''}}"
+			wx:for="{{orgList}}"
+			wx:key="{{index}}"
+			data-type="{{options.type === 'path-mechanism' ? 'path-mechanism' : 'preview'}}"
+			bindtap="{{options.type === 'shareCompany' ? '' : 'roouteJump'}}"
+			data-item="{{item}}">
 			<image class="logo" src="{{item.logoInfo.smallUrl}}"></image>
 			<view class="content">
 				<view class="name ellipsis">{{item.companyName}}</view>
@@ -14,6 +21,6 @@
 		</button>
 	</view>
 </view>
-<view class="addBtn" wx:if="{{options.type !== 'shareCompany' && isTopAdmin && choseType === 'RECRUITER'}}">
+<view class="addBtn" wx:if="{{(options.type !== 'shareCompany' || options.type !== 'path-mechanism') && isTopAdmin && choseType === 'RECRUITER'}}">
 	<view class="btn" data-type="add" bindtap="roouteJump">添加机构</view>
 </view>

@@ -17,7 +17,7 @@
 				<view class="key">所属行业</view>
 				<view class="value">{{companyInfos.industry}}</view>
 			</view>
-			<view class="li">
+			<view class="li" wx:if="{{query.type !== 'org'}}">
 				<view class="key">融资阶段</view>
 				<view class="value">{{companyInfos.financingInfo}}</view>
 			</view>

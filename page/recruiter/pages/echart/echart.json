@@ -3,7 +3,7 @@
 	"backgroundTextStyle": "light",
   "usingComponents": {
     "navbar": "../../../../components/business/navbar/navbar",
-    "lineChart": "../../../../components/business/lineChart/lineChart",
+    "lineChart": "../../components/lineChart/lineChart",
     "chooseOrgEnter": "../../../../components/business/chooseOrgEnter/chooseOrgEnter"
   }
 }

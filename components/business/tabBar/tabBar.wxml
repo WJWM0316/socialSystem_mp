@@ -1,36 +1,36 @@
 <!--components/business/tabBar/tabBar.wxml-->
-<view class="tabBar {{isIphoneX ? 'iphoneX' : ''}}">
-	<view class="tabList">
-	  <view
+<cover-view class="tabBar {{isIphoneX ? 'iphoneX' : ''}}">
+	<cover-view class="tabList">
+	  <cover-view
 	  	class="tabBar-item {{item.active ? 'tabBar-item-active' : ''}}"
 	  	wx:for="{{list}}"
 	  	wx:key="{{index}}">
-	  		<view class="tap" data-path="{{item.path}}" bindtap="toggle" data-index="{{index}}"></view>
-	  		<view class="icon-box_01">
-		  		<image class="tabIcon" src="{{item.iconPath}}" hidden="{{item.active}}"></image>
-		  		<image class="tabIcon" src="{{item.selectedIconPath}}" hidden="{{!item.active}}"></image>
-		  		<view
+	  		<cover-view class="tap" data-path="{{item.path}}" bindtap="toggle" data-index="{{index}}"></cover-view>
+	  		<cover-view class="icon-box_01">
+		  		<cover-image class="tabIcon" src="{{item.iconPath}}" hidden="{{item.active}}"></cover-image>
+		  		<cover-image class="tabIcon" src="{{item.selectedIconPath}}" hidden="{{!item.active}}"></cover-image>
+		  		<cover-view
 		  			class="reddot-mine"
-		  			wx:if="{{item.flag === 'dynamics' && redDot.redDotJobHunterDynamicStatus && identity === 'APPLICANT'}}"></view>
-		  		<view
+		  			wx:if="{{item.flag === 'dynamics' && redDot.redDotJobHunterDynamicStatus && identity === 'APPLICANT'}}"></cover-view>
+		  		<cover-view
 		  			class="reddot-mine"
-		  			wx:if="{{item.flag === 'interview' && redDot.jobhunterInterviewTotal && identity === 'APPLICANT'}}"></view>
-		  		<view
+		  			wx:if="{{item.flag === 'intercover-view' && redDot.jobhunterIntercover-viewTotal && identity === 'APPLICANT'}}"></cover-view>
+		  		<cover-view
 		  			class="reddot-mine"
-		  			wx:if="{{item.flag === 'candidate' && redDot.recruiterInterviewTotal && identity === 'RECRUITER'}}"></view>
-		  		<view
+		  			wx:if="{{item.flag === 'candidate' && redDot.recruiterIntercover-viewTotal && identity === 'RECRUITER'}}"></cover-view>
+		  		<cover-view
 		  			class="reddot-mine"
-		  			wx:if="{{item.flag === 'interview' && redDot.recruiterScheduleList && identity === 'RECRUITER'}}"></view>
-		  		<view
+		  			wx:if="{{item.flag === 'intercover-view' && redDot.recruiterScheduleList && identity === 'RECRUITER'}}"></cover-view>
+		  		<cover-view
 		  			class="reddot-mine"
-		  			wx:if="{{item.flag === 'position' && redDot.positionOfflineBar && identity === 'RECRUITER'}}"></view>
-		  		<view
+		  			wx:if="{{item.flag === 'position' && redDot.positionOfflineBar && identity === 'RECRUITER'}}"></cover-view>
+		  		<cover-view
 		  			class="reddot-mine"
-		  			wx:if="{{item.flag === 'mine' && redDot.applyAuditBar && identity === 'RECRUITER'}}"></view>
-	  		</view>
-	  		<view class="p">{{item.title}}</view>
-	  </view>
-	</view>
-	<view class="viewBlock" wx:if="{{isIphoneX}}"></view>
-</view>
-<view class="extraBlock {{isIphoneX ? 'extraIphoneX' : ''}}"></view>
+		  			wx:if="{{item.flag === 'mine' && redDot.applyAuditBar && identity === 'RECRUITER'}}"></cover-view>
+	  		</cover-view>
+	  		<cover-view class="p">{{item.title}}</cover-view>
+	  </cover-view>
+	</cover-view>
+	<cover-view class="cover-viewBlock" wx:if="{{isIphoneX}}"></cover-view>
+</cover-view>
+<cover-view class="extraBlock {{isIphoneX ? 'extraIphoneX' : ''}}"></cover-view>

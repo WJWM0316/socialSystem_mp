@@ -15,13 +15,20 @@
 				<view class="txt">公司全称</view>
 				<view class="value">{{info.companyName}}</view>
 			</view>
-			<view class="item disabled" bindtap="disabled">
+<!-- 			<view class="item disabled" bindtap="disabled">
 				<view class="txt">公司简称</view>
 				<view class="value">{{info.companyName}}</view>
-			</view>
+			</view> -->
 			<view class="item disabled" bindtap="disabled">
 				<view class="txt">所属行业</view>
 				<view class="value">{{info.industry}}</view>
+			</view>
+			<view class="item">
+				<view class="txt">融资阶段</view>
+				<view class="value">
+					<myPicker pickerType="financing" setResult="{{info.financingInfo}}" rangeKey="text" bindresultevent="getResult" data-type="financing"></myPicker>
+				</view>
+				<i class="icon iconfont icon-xiangyou"></i>
 			</view>
 			<view class="item">
 				<view class="txt red">公司规模</view>

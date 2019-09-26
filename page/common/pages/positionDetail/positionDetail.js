@@ -123,7 +123,8 @@ Page({
           detail: res.data, 
           companyInfos: res.data.companyInfo, 
           recruiterInfo: res.data.recruiterInfo, 
-          isOwner: res.data.isOwner && identity === 'RECRUITER' ? true : false
+          isOwner: res.data.isOwner && identity === 'RECRUITER' ? true : false,
+          identity: wx.getStorageSync('choseType')
         })
         if(this.selectComponent('#interviewBar')) this.selectComponent('#interviewBar').init()
       })
@@ -150,7 +151,8 @@ Page({
           detail: res.data, 
           companyInfos: res.data.companyInfo, 
           recruiterInfo: res.data.recruiterInfo, 
-          isOwner: res.data.isOwner && identity === 'RECRUITER' ? true : false
+          isOwner: res.data.isOwner && identity === 'RECRUITER' ? true : false,
+          identity: wx.getStorageSync('choseType')
         })
         if(this.selectComponent('#interviewBar')) this.selectComponent('#interviewBar').init()
     })

@@ -46,7 +46,7 @@ Page({
       this.setData({isApplicant: true})
     }
     identity = app.identification(options)
-    this.setData({options, identity})
+    this.setData({options})
   },
   backEvent() {
     if(this.data.showEdit) {
@@ -85,7 +85,7 @@ Page({
         } else {
           info.hasDeleted = 0
         }
-        this.setData({isOwner, info, realIsOwner: res.data.isOwner}, function() {
+        this.setData({isOwner, info, realIsOwner: res.data.isOwner, identity: wx.getStorageSync('choseType')}, function() {
           if(this.selectComponent('#interviewBar')) this.selectComponent('#interviewBar').init()
           this.getDomNodePosition()
           if (this.data.isOwner) {

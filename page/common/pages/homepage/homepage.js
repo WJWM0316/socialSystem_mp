@@ -49,7 +49,6 @@ Page({
     choseType: '',
     showNav: false
   },
-  
   onLoad(options) {
     if (options.scene) options = app.getSceneParams(options.scene)
     let showNav = this.data.showNav
@@ -137,6 +136,7 @@ Page({
           }
         })
         this.setData({companyInfos, map, requireOAuth, callBackNum}, () => {
+          console.log(this.data, 'jjjj')
           this.getDomNodePosition()
           resolve(res)
         })

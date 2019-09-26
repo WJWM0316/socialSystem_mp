@@ -1,0 +1,67 @@
+.hidePhone {
+	background: #FAFCFF;
+}
+.li {
+	margin-top: 24rpx;
+	padding-left: 40rpx;
+	background: #fff;
+	position: relative;
+	overflow: hidden;
+  height: 120rpx;
+  line-height: 120rpx;
+}
+
+.tips {
+	padding-top: 24rpx;
+	font-size:24rpx;
+	color:#bcbcbc;
+	line-height:1;
+  padding: 24rpx 0 40rpx 40rpx;
+}
+
+.radio-box {
+  text-align: center;
+  height: 100%;
+  position: absolute;
+  right: 40rpx;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.my-switch-button {
+  position: relative;
+  height: 40rpx;
+  width: 80rpx;
+  display: inline-block;
+  position: relative;
+  outline: none;
+  border-radius: 20rpx;
+  background: #e8e9eb;
+  cursor: pointer;
+  transition: border-color .3s,background-color .3s;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0;
+}
+
+.my-switch-button::before {
+  height: 40rpx;
+  width: 40rpx;
+  border-radius: 50%;
+  background: white;
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: all ease .3s;
+}
+
+.my-switch-button-active{
+  background: rgba(101,39,145,0.8);
+}
+
+.my-switch-button-active::before{
+  left: calc(80rpx - 40rpx);
+}

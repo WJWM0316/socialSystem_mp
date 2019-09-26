@@ -49,7 +49,7 @@ Page({
   },
   toggleShowPhone() {
     wx.navigateTo({
-      url: `${COMMON}hidePhone/hidePhone`
+      url: `${COMMON}privacySetting/privacySetting`
     })
   }
 })

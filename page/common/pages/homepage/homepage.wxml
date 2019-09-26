@@ -31,7 +31,6 @@
 			</view>
 			<shareBtn></shareBtn>
 		</view>
-
 		<view class="company-team" wx:if="{{companyInfos.recruiterLists.length}}">
 			<view class="title">
 				<view class="icon"> <view class="fan"></view> </view> 招聘团队
@@ -170,7 +169,7 @@
 			</view>
 		</view>
 		
-		<applyEntry wx:if="{{choseType !== 'RECRUITER' && !info.hideDdPromote}}" companyId="{{companyInfos.id}}"></applyEntry>
+		<applyEntry wx:if="{{choseType !== 'RECRUITER' && !companyInfos.hideDdPromote}}" companyId="{{companyInfos.id}}"></applyEntry>
 
 	<!-- 	<view class="toggle" bindtap="toggle" wx:if="{{choseType !== 'RECRUITER'}}">
 			<image class="icon" src="{{cdnImagePath}}{{isRecruiter ? 'btn_b_hp_zhoapin.png' : 'btn_b_hp_zhaoren.png'}}"></image>

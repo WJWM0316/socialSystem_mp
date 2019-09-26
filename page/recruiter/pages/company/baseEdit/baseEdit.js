@@ -25,6 +25,10 @@ Page({
   getResult(e) {
     let info = this.data.info
     switch(e.currentTarget.dataset.type) {
+      case 'financing':
+        info.financing = e.detail.propsResult
+        info.financingInfo = e.detail.propsDesc
+        break
       case 'staffMembers':
         info.employees = e.detail.propsResult
         info.employeesInfo = e.detail.propsDesc
@@ -44,7 +48,8 @@ Page({
       id: info.id,
       employees: info.employees,
       logo: info.logoInfo.id,
-      website: info.website
+      website: info.website,
+      financing: info.financing
     }
     putCompanyInfoApi(data).then(res => {
       app.wxToast({
@@ -58,53 +63,5 @@ Page({
         }
       })
     })
-  },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
   }
 })

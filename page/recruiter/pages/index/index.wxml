@@ -173,15 +173,15 @@
 		<view class="title"><view class="icon"></view>生成页面路径</view>
 		<view class="ul1">
 			<view class="li" bindtap="routeJump" data-route="path-mechanism">
-				<image src="{{cdnImagePath}}btn_code_jigou.png" mode="aspectFill" class="img-box"></image>
+				<image src="{{cdnImagePath}}btn_link_jigou.png" mode="aspectFill" class="img-box"></image>
 				<view class="p">机构</view>
 			</view>
 			<view class="li" bindtap="routeJump" data-route="path-position">
-				<image src="{{cdnImagePath}}btn_code_job.png" mode="aspectFill" class="img-box"></image>
+				<image src="{{cdnImagePath}}btn_link_job.png" mode="aspectFill" class="img-box"></image>
 				<view class="p">职位</view>
 			</view>
 			<view class="li" bindtap="routeJump" data-route="path-recruiter">
-				<image src="{{cdnImagePath}}btn_code_zhaopinguan.png" mode="aspectFill" class="img-box"></image>
+				<image src="{{cdnImagePath}}btn_link_zhaopinguan.png" mode="aspectFill" class="img-box"></image>
 				<view class="p">招聘官</view>
 			</view>
 		</view>

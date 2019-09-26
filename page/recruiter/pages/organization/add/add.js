@@ -82,12 +82,14 @@ Page({
       title  = '创建成功'
     }
     funApi(params).then(res => {
-      app.wxToast({
-        title: title,
-        icon: 'success',
-        callback () {
-          wx.navigateBack({delta: 1})
-        }
+      app.getAllInfo().then(res => {
+        app.wxToast({
+          title: title,
+          icon: 'success',
+          callback () {
+            wx.navigateBack({delta: 1})
+          }
+        })
       })
     })
   }

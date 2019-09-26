@@ -18,6 +18,10 @@
 				<view class="value">{{companyInfos.industry}}</view>
 			</view>
 			<view class="li">
+				<view class="key">融资阶段</view>
+				<view class="value">{{companyInfos.financingInfo}}</view>
+			</view>
+			<view class="li">
 				<view class="key">公司规模</view>
 				<view class="value">{{companyInfos.employeesInfo}}</view>
 			</view>

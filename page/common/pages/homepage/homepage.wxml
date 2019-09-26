@@ -1,7 +1,7 @@
 <form bindsubmit="formSubmit" report-submit='{{true}}'>
 
 	<view class="homepage" wx:if="{{companyInfos.status === 1}}">
-<!-- 		<view style="opacity: {{showNav ? 1 : 0}}">
+		<view style="opacity: {{showNav ? 1 : 0}}">
 			<navbar
 				title="{{companyInfos.companyName}}"
 				background="{{choseType === 'RECRUITER' ? '#fff' : '#652791'}}" color="{{choseType === 'RECRUITER' ? '#22292C' : '#fff'}}"
@@ -9,7 +9,7 @@
 				showHome="{{choseType === 'RECRUITER'}}"
 				>
 			</navbar>
-		</view> -->
+		</view>
 
 		<view hidden="{{!hasReFresh}}">
 	    <refreshStatus></refreshStatus>

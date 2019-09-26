@@ -8,7 +8,7 @@
     "followWechat": "../../../../components/business/followWechat/followWechat",
     "navbar": "../../../../components/business/navbar/navbar",
     "shareBtn": "../../../../components/layout/shareBtn/shareBtn",
-    "lineChart": "../../../../components/business/lineChart/lineChart",
+    "lineChart": "../../components/lineChart/lineChart",
     "chooseOrgEnter": "../../../../components/business/chooseOrgEnter/chooseOrgEnter"
   }
 }

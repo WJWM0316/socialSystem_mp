@@ -1,4 +1,4 @@
-import * as echarts from '../../../ec-canvas/echarts.min.js'
+import * as echarts from '../ec-canvas/echarts.min.js'
 
 let app = getApp()
 
@@ -132,7 +132,6 @@ Component({
       if(chartLine) chartLine.setOption(this.data.options)
     },
     setOptions(key, value) {
-      console.log(key, value)
       this.data.options.series = []
       this.data.options.xAxis.data = key
       value.map(field => {

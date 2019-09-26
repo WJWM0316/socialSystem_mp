@@ -1,20 +1,21 @@
 <form bindsubmit="formSubmit" report-submit='{{true}}'>
 
 	<view class="homepage" wx:if="{{companyInfos.status === 1}}">
-
-		<navbar
-			title="{{companyInfos.companyName}}"
-			background="{{choseType === 'RECRUITER' ? '#fff' : '#652791'}}" color="{{choseType === 'RECRUITER' ? '#22292C' : '#fff'}}"
-			showBack="{{choseType === 'RECRUITER'}}"
-			showHome="{{choseType === 'RECRUITER'}}"
-			wx:if="{{showNav}}">
-		</navbar>
+		<view style="opacity: {{showNav ? 1 : 0}}">
+			<navbar
+				title="{{companyInfos.companyName}}"
+				background="{{choseType === 'RECRUITER' ? '#fff' : '#652791'}}" color="{{choseType === 'RECRUITER' ? '#22292C' : '#fff'}}"
+				showBack="{{choseType === 'RECRUITER'}}"
+				showHome="{{choseType === 'RECRUITER'}}"
+				>
+			</navbar>
+		</view>
 
 		<view hidden="{{!hasReFresh}}">
 	    <refreshStatus></refreshStatus>
 	  </view>
 
-		<view class="banner">
+		<view class="banner" style="margin-top: -{{navH}}px">
 			<view class="filterBg" style="height: {{!isBangs ? '225rpx' : '272rpx'}}">
 				<view class="bgImg" style="background: url({{companyInfos.logoInfo.smallUrl}}) center left no-repeat; background-size: 100% auto; filter: blur(10rpx);"></view>
 				

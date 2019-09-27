@@ -3,11 +3,15 @@
     <image lazy-load class="img" src="{{cardData.avatar.smallUrl || cardData.logoInfo.smallUrl || cardData.logo.smallUrl}}" mode="aspectFit"></image>
     <view class="companyMsg" wx:if="{{!isMain}}">
       <view class="name">{{cardData.name}}</view>
-      <view class="detail">{{cardData.industry}}<block wx:if="{{cardData.employeesDesc}}"> · {{cardData.employeesDesc}}</block></view>
+      <view class="detail">
+        {{cardData.industry}}
+        <block wx:if="{{cardData.financingDesc}}"> · {{cardData.financingDesc}}</block>
+        <block wx:if="{{cardData.employeesDesc}}"> · {{cardData.employeesDesc}}</block>
+      </view>
     </view>
     <view class="companyMsg" wx:else>
-      <view class="name">{{cardData.companyShortname}}</view>
-      <view class="detail">{{cardData.companyName}}</view>
+      <view class="name">{{cardData.companyName}}</view>
+      <!-- <view class="detail">{{cardData.companyName}}</view> -->
     </view>
     <i bindtap="jumpEditBase" class="editIcon iconfont icon-bianji1" wx:if="{{isMain && isCompanyAdmin}}"></i>
     <i class="icon iconfont icon-xiangyou" wx:if="{{!isMain}}"></i>

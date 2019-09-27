@@ -178,7 +178,7 @@ Component({
           ctx.setFontSize(22)
           ctx.setTextAlign('center')
           let position3 = 20
-          position3 = ellipsis(ctx, `${info.industry} | ${info.employeesInfo || info.employeesDesc}`, 390, 210, 265)
+          position3 = ellipsis(ctx, `${info.industry} | ${info.financingInfo} | ${info.employeesInfo || info.employeesDesc}`, 390, 210, 265)
         break
         case 'interview':
           ctx.setTextAlign('left')

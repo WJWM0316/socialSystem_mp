@@ -1,5 +1,5 @@
 <view class="indexEdit">
-	<navbar title="{{options.type === 'org' ? '我的机构' : '我的公司'}}" background="#fff" color="#22292C"></navbar>
+	<navbar title="{{options.from === 'organization' ? '我的机构' : '我的公司'}}" background="#fff" color="#22292C"></navbar>
 	<view class="head">
 		<roleInfoCard class="roleInfoCard" roleType="company" isMain="{{true}}" cardData="{{info}}" options="{{options}}"></roleInfoCard>
 		<view class="msg">
@@ -7,7 +7,7 @@
 				<view class="txt">所属行业</view>
 				<view class="value">{{info.industry}}</view>
 			</view>
-			<view class="item" wx:if="{{options.type !== 'org'}}">
+			<view class="item">
 				<view class="txt">融资阶段</view>
 				<view class="value">{{info.financingInfo}}</view>
 			</view>
@@ -21,12 +21,12 @@
 			</view>
 		</view>
 	</view>
-	<view class="mainPage" bindtap="jumpPage" data-type="main" wx:if="{{!detial.isCompanyTopAdmin}}">
-		<view class="txt">{{options.type === 'org' ? '机构主页' : '公司主页'}}</view>
+	<view class="mainPage" bindtap="jumpPage" data-type="main" wx:if="{{options.from === 'organization'}}">
+		<view class="txt">机构主页</view>
 		<i class="icon iconfont icon-xiangyou"></i>
 	</view>
-	<view class="team" bindtap="jumpPage" data-type="bright">
-		<view class="txt">{{options.type === 'org' ? '团队福利' : '公司福利'}}</view>
+	<view class="team" bindtap="jumpPage" data-type="bright" wx:if="{{options.from !== 'organization'}}">
+		<view class="txt">公司福利</view>
 		<i class="icon iconfont icon-xiangyou"></i>
 	</view>
 </view>

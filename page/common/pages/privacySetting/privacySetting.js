@@ -1,6 +1,8 @@
 import {
   showMobileRecruiterApi,
-  hideMobileRecruiterApi
+  hideMobileRecruiterApi,
+  showWechatRecruiterApi,
+  hideWechatRecruiterApi
 } from '../../../../api/pages/recruiter.js'
 
 let app = getApp()
@@ -19,9 +21,9 @@ Page({
     })
   },
   toggleWechat() {
-    let funcApi = this.data.detail.hideMobile ? hideMobileRecruiterApi : showMobileRecruiterApi
+    let funcApi = this.data.detail.hideWechat ? hideWechatRecruiterApi : showWechatRecruiterApi
     funcApi().then(() => {
-      app.globalData.recruiterDetails.hideMobile = this.data.detail.hideMobile ? 0 : 1
+      app.globalData.recruiterDetails.hideWechat = this.data.detail.hideWechat ? 0 : 1
       this.setData({detail: app.globalData.recruiterDetails})
     })
   }

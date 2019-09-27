@@ -111,7 +111,6 @@ Page({
         funcApi = getPositionListApi
       } else {
         if(app.globalData.recruiterDetails.isCompanyTopAdmin) {
-          params = Object.assign(params, {company_id: orgData.id})
           funcApi = getPositionCompanyTopListApi
         } else {
           funcApi = getPositionListApi

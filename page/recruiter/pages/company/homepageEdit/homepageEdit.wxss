@@ -112,8 +112,8 @@
 }
 
 .base-info .h1 {
-  font-size:40rpx;
-  font-weight:bold;
+  font-size:36rpx;
+  font-weight:700;
   color:rgba(40,40,40,1);
   line-height: 1;
   margin-bottom: 16rpx;

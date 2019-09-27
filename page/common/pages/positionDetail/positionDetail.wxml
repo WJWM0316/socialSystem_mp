@@ -94,7 +94,7 @@
 						<text class="btn" bindtap="call">拨打电话</text>
 	        </view>
 				</view>
-				<view class="tab-company-address wechat" data-type="wechat" bindtap="todoAction" wx:if="{{detail.recruiterInfo.wechat}}">
+				<view class="tab-company-address wechat" data-type="wechat" bindtap="todoAction" wx:if="{{detail.recruiterInfo.wechat && !detail.recruiterInfo.hideWechat}}">
 					<view class="address_left">
 						<view class="leftBox">
 							<i class="imgIcon iconfont icon-weixin"></i><text class="adress_txt">{{detail.recruiterInfo.wechat}}</text>

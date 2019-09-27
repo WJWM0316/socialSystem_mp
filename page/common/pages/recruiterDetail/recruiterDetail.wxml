@@ -13,7 +13,7 @@
     </view>
 
     <view class="header" wx:if="{{!isOwner || !showEdit}}">
-      <image class="bgImg" src="{{cdnImagePath}}bg_detail.png" mode="aspectFill"></image>
+      <image class="bgImg" src="{{cdnImagePath}}bg_detail.png" mode="widthFix"></image>
       <shareBtn wx:if="{{!isOwner}}"></shareBtn>
       <div class="content">
         <button form-type="submit" class="clear-style avatar" bindtap="readAvatar">

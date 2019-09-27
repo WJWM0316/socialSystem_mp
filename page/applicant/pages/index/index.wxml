@@ -30,5 +30,8 @@
     <jobList personality="jobItem" list="{{positionList.list}}" list-type="interview" current-tab="all"></jobList>
     <bottomStatus status="{{onBottomStatus}}" listData="{{positionList.list}}"></bottomStatus>
   </view>
+<!--   <block wx:if="{{companyInfos.id}}">
+    <canvasCard cardData="{{companyInfos}}" type="company" bindgetCreatedImg="getCreatedImg"></canvasCard>
+  </block> -->
   <tabBar id="bottomRedDotBar"></tabBar>
 </view>

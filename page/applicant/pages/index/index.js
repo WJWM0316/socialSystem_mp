@@ -65,7 +65,8 @@ Page({
     hasLogin: 0,
     isJobhunter: 0,
     hasExpect: 1,
-    recommended: 0 // 是否有推荐策略
+    recommended: 0, // 是否有推荐策略
+    // companyInfos: app.globalData.companyInfo
   },
   onLoad(options) {
     hasOnload = false
@@ -417,12 +418,12 @@ Page({
       this.getPositionList(false)
     }
   },
-  onShareAppMessage(options) {
-    let title = ''
-　　return app.wxShare({
-      options,
-      title:  `你要的高薪福利，都在【${app.globalData.currentCompanyName}】`,
-      path: `${APPLICANT}index/index?currentCompanyId=${app.globalData.currentCompanyId}`
-    })
-  }
+//   onShareAppMessage(options) {
+//     let title = ''
+// 　　return app.wxShare({
+//       options,
+//       title:  `你要的高薪福利，都在【${app.globalData.currentCompanyName}】`,
+//       path: `${APPLICANT}index/index?currentCompanyId=${app.globalData.currentCompanyId}`
+//     })
+//   }
 })

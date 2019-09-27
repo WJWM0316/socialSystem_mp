@@ -300,7 +300,6 @@ Page({
       companyId = companyInfos.id
     }
     app.shareStatistics({type: 'company', infos: companyInfos, forwardType: 2})
-    console.log(companyInfos, 1111111111)
 　　return app.wxShare({
       options,
       title: `${companyInfos.companyName}正在招人，马上约面，极速入职！我在这里等你！`,

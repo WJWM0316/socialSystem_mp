@@ -92,7 +92,7 @@
       </view>
 
       <view class="position" wx:if="{{!isOwner || !showEdit}}">
-        <view class="title" wx:if="{{info.isCompanyTopAdmin}}">
+        <view class="title" wx:if="{{info.isCompanyTopAdmin && positionList.list.length}}">
           <view class="icon">
             <view class="fan"></view>
           </view>

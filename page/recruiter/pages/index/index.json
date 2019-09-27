@@ -4,7 +4,7 @@
   "usingComponents": {
   	"choose": "../../../../components/business/choose/choose",
     "tabBar": "../../../../components/business/tabBar/tabBar",
-     "canvasCard": "../../../../components/business/canvasCard/canvasCard",
+    "canvasCard": "../../../../components/business/canvasCard/canvasCard",
     "followWechat": "../../../../components/business/followWechat/followWechat",
     "navbar": "../../../../components/business/navbar/navbar",
     "shareBtn": "../../../../components/layout/shareBtn/shareBtn",

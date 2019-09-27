@@ -52,7 +52,7 @@ Page({
     switch (type) {
       case 'preview':
         if(app.globalData.isTopAdmin) {
-          ///
+          wx.navigateTo({url: `${RECRUITER}company/indexEdit/indexEdit`})
         } else {
           wx.navigateTo({url: `${COMMON}homepage/homepage?companyId=${item.id}`})
         }

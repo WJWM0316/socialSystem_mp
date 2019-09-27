@@ -81,9 +81,9 @@ Page({
     let formData = this.data.formData
 
     // 验证公司简称
-    let checkCompanyShortName = new Promise((resolve, reject) => {
-      !formData.company_shortname.trim() ? reject('请输入公司简称') : resolve()
-    })
+    // let checkCompanyShortName = new Promise((resolve, reject) => {
+    //   !formData.company_shortname.trim() ? reject('请输入公司简称') : resolve()
+    // })
 
     // 验证行业选项
     let checkIndustryId = new Promise((resolve, reject) => {
@@ -103,7 +103,7 @@ Page({
     formData.company_shortname = formData.company_shortname.trim()
 
     Promise.all([
-      checkCompanyShortName,
+      // checkCompanyShortName,
       checkIndustryId,
       checkFinancing,
       checkEmployees

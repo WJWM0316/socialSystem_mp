@@ -248,3 +248,21 @@ export const hideMobileRecruiterApi = (data, hasLoading) => {
     hasLoading: false
   })
 }
+
+// 隐藏微信号
+export const showWechatRecruiterApi = (data, hasLoading) => {
+  return request({
+    url: '/recruiter/hide_wechat',
+    method: 'put',
+    hasLoading: hasLoading
+  })
+}
+
+// 展示微信号
+export const hideWechatRecruiterApi = (data, hasLoading) => {
+  return request({
+    url: '/recruiter/hide_wechat',
+    method: 'delete',
+    hasLoading: false
+  })
+}

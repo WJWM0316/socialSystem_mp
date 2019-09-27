@@ -1,6 +1,7 @@
 import {
 	addCompanyApi,
-  putEditCompanyApi
+  putEditCompanyApi,
+  getCompanyOrglistApi
 } from '../../../../../api/pages/company.js'
 import {RECRUITER} from '../../../../../config.js'
 let app = getApp()
@@ -31,7 +32,7 @@ Page({
       let company_name = companyData.companyName,
           phoneNum     = companyData.mobile,
           addressData  = companyData.address[0],
-          upload       = companyData.logo
+          upload       = Object.prototype.toString.apply(companyData.logo) === "[object Number]" ? companyData.logoInfo : companyData.logo
       this.setData({company_name, phoneNum, addressData, upload})
     }
   },
@@ -82,15 +83,22 @@ Page({
       title  = '创建成功'
     }
     funApi(params).then(res => {
-      app.getAllInfo().then(res => {
-        app.wxToast({
-          title: title,
-          icon: 'success',
-          callback () {
-            wx.navigateBack({delta: 1})
-          }
+      this.getCompanyOrglist().then(() => {
+        app.getAllInfo().then(res => {
+          app.wxToast({
+            title: title,
+            icon: 'success',
+            callback () {
+              wx.navigateBack({delta: 1})
+            }
+          })
         })
       })
+    })
+  },
+  getCompanyOrglist() {
+    return new Promise((resolve, reject) => {
+      getCompanyOrglistApi({company_id: app.globalData.recruiterDetails.companyTopId}).then(res => resolve(res))
     })
   }
 })

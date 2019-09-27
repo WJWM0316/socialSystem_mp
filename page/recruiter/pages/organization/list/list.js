@@ -51,8 +51,8 @@ Page({
         type = e.currentTarget.dataset.type
     switch (type) {
       case 'preview':
-        if(app.globalData.isTopAdmin) {
-          wx.navigateTo({url: `${RECRUITER}company/indexEdit/indexEdit`})
+        if(app.globalData.recruiterDetails.isCompanyTopAdmin) {
+          wx.navigateTo({url: `${RECRUITER}company/indexEdit/indexEdit?type=org&from=organization&companyId=${item.id}`})
         } else {
           wx.navigateTo({url: `${COMMON}homepage/homepage?companyId=${item.id}`})
         }
@@ -85,27 +85,6 @@ Page({
     }
   },
   /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
@@ -123,12 +102,5 @@ Page({
       btnPath: `${COMMON}homepage/homepage?companyId=${companyInfos.id}&sCode=${companyInfos.sCode}&sourceType=shc`,
       btnImageUrl: imageUrl
     })
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
   }
 })

@@ -136,7 +136,6 @@ Page({
           }
         })
         this.setData({companyInfos, map, requireOAuth, callBackNum}, () => {
-          console.log(this.data, 'jjjj')
           this.getDomNodePosition()
           resolve(res)
         })

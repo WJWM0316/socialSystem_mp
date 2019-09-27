@@ -70,12 +70,12 @@ Component({
       })
     },
     jumpEditBase() {
-      wx.redirectTo({
-        url: `${RECRUITER}company/homepageEdit/homepageEdit?companyId=${this.data.cardData.id}&type=${this.data.options.type}`
-      })
-      // wx.navigateTo({
-      //   url: `${RECRUITER}company/baseEdit/baseEdit`
-      // })
+      console.log(this.data.options)
+      let url = `${RECRUITER}company/homepageEdit/homepageEdit?companyId=${this.data.cardData.id}&type=${this.data.options.type}`
+      if(this.data.options.from) {
+        url += `&from=${this.data.options.from}` 
+      }
+      wx.redirectTo({url })
     },
     jumpCompany() {
       if (this.data.isMain) { return }

@@ -78,7 +78,7 @@ Page({
     let orgData = wx.getStorageSync('orgData')
     switch(route) {
       case 'company':
-        wx.navigateTo({url: `${RECRUITER}company/indexEdit/indexEdit`})
+        wx.navigateTo({url: `${RECRUITER}company/indexEdit/indexEdit?companyId=${app.globalData.recruiterDetails.companyInfo.id}`})
         break
       case 'base':
         wx.navigateTo({url: `${RECRUITER}user/mine/base/base`})
@@ -117,7 +117,7 @@ Page({
         break
       case 'organization':
         if (!this.data.recruiterInfo.isCompanyTopAdmin) {
-          wx.navigateTo({url: `${RECRUITER}company/indexEdit/indexEdit?type=org`})
+          wx.navigateTo({url: `${RECRUITER}company/indexEdit/indexEdit?type=org&from=organization&companyId=${app.globalData.recruiterDetails.companyInfo.id}`})
         } else {
           wx.navigateTo({url: `${RECRUITER}organization/list/list?companyId=${this.data.recruiterInfo.companyTopId}`})
         }

@@ -193,7 +193,7 @@ Page({
       industry_id: formData.industry_id,
       financing: formData.financing,
       employees: formData.employees,
-      company_shortname: formData.company_shortname,
+      // company_shortname: formData.company_shortname,
       logo: formData.logo.id,
       intro: formData.intro,
       // business_license: this.data.formData.business_license.id,

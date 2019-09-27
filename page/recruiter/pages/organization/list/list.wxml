@@ -21,6 +21,6 @@
 		</button>
 	</view>
 </view>
-<view class="addBtn" wx:if="{{(options.type !== 'shareCompany' || options.type !== 'path-mechanism') && isTopAdmin && choseType === 'RECRUITER'}}">
+<view class="addBtn" wx:if="{{showBtn && isTopAdmin && choseType === 'RECRUITER'}}">
 	<view class="btn" data-type="add" bindtap="roouteJump">添加机构</view>
 </view>

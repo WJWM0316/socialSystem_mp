@@ -37,8 +37,7 @@
   outline: none;
   border-radius: 20rpx;
   background: #e8e9eb;
-  cursor: pointer;
-  transition: border-color .3s,background-color .3s;
+  transition: background-color .3s;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);

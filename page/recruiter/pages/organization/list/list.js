@@ -15,13 +15,15 @@ Page({
     isTopAdmin: app.globalData.isTopAdmin,
     choseType: wx.getStorageSync('choseType'),
     orgList: [],
-    options: {}
+    options: {},
+    showBtn: false
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({options})
+    let showBtn = !['shareCompany', 'path-mechanism'].includes(options.type)
+    this.setData({options, showBtn})
     this.getList()
   },
   bindInput (e) {
@@ -49,7 +51,11 @@ Page({
         type = e.currentTarget.dataset.type
     switch (type) {
       case 'preview':
-        wx.navigateTo({url: `${COMMON}homepage/homepage?companyId=${item.id}`})
+        if(app.globalData.isTopAdmin) {
+          ///
+        } else {
+          wx.navigateTo({url: `${COMMON}homepage/homepage?companyId=${item.id}`})
+        }
         break
       case 'add':
         wx.navigateTo({url: `${RECRUITER}organization/add/add`})

@@ -12,8 +12,8 @@
 		<block wx:if="{{detail.hideMobile}}">已开启，手机号将不在“职位详情页”和“招聘官主页”展示</block>
 		<block wx:if="{{!detail.hideMobile}}">已关闭，手机号将在“职位详情页”和“招聘官主页”展示</block>
 	</view>
-<!-- 
-	<view class="li" bindtap="toggleShowPhone">
+
+	<view class="li" bindtap="toggleWechat">
 		<view class="top">
 			<text>对候选人隐藏微信号</text>
 			<view class="radio-box">
@@ -24,5 +24,5 @@
 	<view class="tips">
 		<block wx:if="{{detail.hideMobile}}">已开启，微信号将不在“职位详情页”和“招聘官主页”展示</block>
 		<block wx:if="{{!detail.hideMobile}}">已关闭，微信号将在“职位详情页”和“招聘官主页”展示</block>
-	</view> -->
+	</view>
 </view>

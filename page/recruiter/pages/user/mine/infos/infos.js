@@ -121,7 +121,6 @@ Page({
         } else {
           wx.navigateTo({url: `${RECRUITER}organization/list/list?companyId=${this.data.recruiterInfo.companyTopId}`})
         }
-        
         break
       default:
         break

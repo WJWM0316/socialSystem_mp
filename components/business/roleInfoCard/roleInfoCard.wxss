@@ -54,7 +54,7 @@
 }
 .roleInfoCard .companyMsg .name, .roleInfoCard .applicantMsg .name, .roleInfoCard .recruiterMsg .name {
   font-size: 36rpx;
-  font-weight: 500;
+  font-weight: 700;
   color: #282828;
   line-height: 36rpx;
   overflow: hidden;

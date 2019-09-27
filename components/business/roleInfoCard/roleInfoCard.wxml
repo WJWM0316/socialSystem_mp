@@ -10,7 +10,7 @@
       </view>
     </view>
     <view class="companyMsg" wx:else>
-      <view class="name">{{cardData.companyShortname}}</view>
+      <view class="name">{{cardData.companyName}}</view>
       <!-- <view class="detail">{{cardData.companyName}}</view> -->
     </view>
     <i bindtap="jumpEditBase" class="editIcon iconfont icon-bianji1" wx:if="{{isMain && isCompanyAdmin}}"></i>

@@ -26,7 +26,6 @@ Page({
     let options = this.data.options
     if(options.from) {
       let info = orgList.data.find(v => v.id == options.companyId)
-      info.companyShortname = info.companyName
       this.setData({info})
     } else {
       getCompanyInfosApi({id}).then(res => {

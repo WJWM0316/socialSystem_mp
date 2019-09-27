@@ -8,7 +8,7 @@
 			</view>
 			<view class="content">
 				<view class="h1">{{companyInfos.companyName}}</view>
-				<view class="h2" wx:if="{{options.from !== 'organization'}}">{{companyInfos.companyShortname}}</view>
+				<!-- <view class="h2" wx:if="{{options.from !== 'organization'}}">{{companyInfos.companyShortname}}</view> -->
 			</view>
 			<view class="edit-box" data-route="base" bindtap="routeJump"><i class="icon iconfont icon-bianji1"></i></view>
 		</view>

@@ -22,9 +22,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let showBtn = !['shareCompany', 'path-mechanism'].includes(options.type)
-    this.setData({options, showBtn})
-    this.getList()
+    let showBtn = ['recruiter-org'].includes(options.type) && app.globalData.recruiterDetails.isCompanyTopAdmin && wx.getStorageSync('choseType') === 'RECRUITER'
+    this.setData({options, showBtn}, () => this.getList())
   },
   bindInput (e) {
     clearTimeout(timer)

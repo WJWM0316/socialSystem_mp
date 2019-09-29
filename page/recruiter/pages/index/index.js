@@ -76,7 +76,8 @@ Page({
     userInfo: app.globalData.recruiterDetails,
     pageShow: true,
     positionInfos: {},
-    shareType: ''
+    shareType: '',
+    tipsType: ''
   },
   onLoad() {
     let choseType = wx.getStorageSync('choseType') || ''
@@ -214,6 +215,7 @@ Page({
   routeJump(e) {
     let route = e.currentTarget.dataset.route
     let orgData = wx.getStorageSync('orgData')
+    this.setData({tipsType: route})
     switch(route) {
       case 'interested':
         wx.navigateTo({url: `${RECRUITER}dynamics/dynamics?tab=viewList`})
@@ -364,10 +366,12 @@ Page({
           title: '成功生成链接',
           content: `链接为：${homepageUrl}`,
           confirmText: '复制链接',
-          showCancel: false,
+          showCancel: true,
+          cancelText: '取消',
           confirmBack: () => {
             wx.setClipboardData({data: homepageUrl })
-          }
+          },
+          cancelBack: () => {}
         })
         break
       case 'path-position':
@@ -375,16 +379,17 @@ Page({
         if(this.data.positionInfos.online) {
           wx.navigateTo({url: `${RECRUITER}organization/position/position?type=path-position`})
         } else {
-          app.wxConfirm({
-            title: '提示',
-            content: `您尚未发布职位，请前往发布职位后再生成链接吧。`,
-            cancelText: '取消',
-            confirmText: '发布职位',
-            confirmBack: () => {
-              wx.navigateTo({url: `${RECRUITER}position/post/post`})
-            },
-            cancelBack: () => {}
-          })
+          this.setData({showPublicPositionTips: true})
+          // app.wxConfirm({
+          //   title: '提示',
+          //   content: `您尚未发布职位，请前往发布职位后再生成链接吧。`,
+          //   cancelText: '取消',
+          //   confirmText: '发布职位',
+          //   confirmBack: () => {
+          //     wx.navigateTo({url: `${RECRUITER}position/post/post`})
+          //   },
+          //   cancelBack: () => {}
+          // })
         }
         break
       case 'path-recruiter':

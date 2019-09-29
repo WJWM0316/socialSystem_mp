@@ -61,7 +61,7 @@
           <view wx:if="{{!info.brief}}" class="addDeclaration" bindtap="editJump" data-type="profile">添加个人简介</view>
           <shrinkText textData="{{info.brief}}"></shrinkText>
         </view>
-        <view class="contact" wx:if="{{!info.hideMobile || !info.hideWechat}}">
+        <view class="contact" wx:if="{{!info.hideMobile || (!info.hideWechat && info.wechat)}}">
           <view class="title">
             <view class="icon">
               <view class="fan"></view>

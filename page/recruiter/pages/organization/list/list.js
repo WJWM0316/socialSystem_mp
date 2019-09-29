@@ -66,6 +66,9 @@ Page({
           content: `链接为：${homepageUrl}`,
           confirmText: '复制链接',
           showCancel: false,
+          showCancel: true,
+          cancelText: '取消',
+          cancelBack: () => {},
           confirmBack: () => {
             wx.setClipboardData({
               data: homepageUrl,

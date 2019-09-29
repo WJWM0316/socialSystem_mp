@@ -217,15 +217,25 @@
 		</view>
 	</view>
 
-  <tabBar tabType="1" id="bottomRedDotBar"></tabBar>
+  <tabBar id="bottomRedDotBar" tabType="{{showPublicPositionTips ? '' : '1'}}"></tabBar>
   <!-- <shareBtn></shareBtn> -->
   <canvasCard wx:if="{{userInfo.uid}}" cardData="{{userInfo}}" type="recruiter" bindgetCreatedImg="getCreatedImg"></canvasCard>
 
-  <view class="overlay" wx:if="{{showPublicPositionTips}}">
+  <view class="overlay" wx:if="{{showPublicPositionTips}}" catchtouchmove>
 		<view class="box">
 			<i class="icon iconfont icon-close" bindtap="routeJump" data-route="hidePublicPositionTips"></i>
 			<image src="{{cdnImagePath}}none_position.png"></image>
-			<view class="p1">生成招聘海报</view>
+			<view class="p1">
+				<block wx:if="{{tipsType === 'sharePositionMin'}}">转发小程序</block>
+				<block wx:elif="{{tipsType === 'poster-position'}}">生成招聘海报</block>
+				<block wx:elif="{{tipsType === 'poster-recruiter'}}">生成招聘海报</block>
+				<block wx:elif="{{tipsType === 'poster-mechanism'}}">生成招聘海报</block>
+				<block wx:elif="{{tipsType === 'qr-mechanism'}}">生成小程序码</block>
+				<block wx:elif="{{tipsType === 'qr-position'}}">生成小程序码</block>
+				<block wx:elif="{{tipsType === 'qr-recruiter'}}">生成小程序码</block>
+				<block wx:elif="{{tipsType === 'path-position'}}">生成页面路径</block>
+				<block wx:else>生成招聘海报</block>
+			</view>
 			<view class="p2">至少需要一个招聘中职位~</view>
 			<view
 				class="button"

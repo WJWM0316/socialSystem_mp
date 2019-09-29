@@ -887,7 +887,7 @@
   right: 0;
   top: 0;
   background: rgba(0,0,0,.6);
-  z-index: 10000000;
+  z-index: 200;
 }
 
 .overlay .box {
@@ -939,9 +939,10 @@
 
 .overlay .icon-close {
   position: absolute;
-  top: 31rpx;
-  right: 31rpx;
+  top: 0rpx;
+  right: 0rpx;
   color: #CDCBCF;
+  padding: 31rpx;
 }
 
 .overlay image {

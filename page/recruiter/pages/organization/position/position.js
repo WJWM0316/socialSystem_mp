@@ -93,7 +93,8 @@ Page({
         title: '成功生成链接',
         content: `链接为：${positionUrl}`,
         confirmText: '复制链接',
-        showCancel: false,
+        showCancel: true,
+        cancelText: '取消',
         confirmBack: () => {
           wx.setClipboardData({
             data: positionUrl,
@@ -106,7 +107,8 @@ Page({
               })
             }
           })
-        }
+        },
+        cancelBack: () => {}
       })
     } else if (this.data.options.type === 'qr-position') {
       wx.navigateTo({url: `${RECRUITER}createQr/createQr?type=qr-position&positionId=${item.id}`})

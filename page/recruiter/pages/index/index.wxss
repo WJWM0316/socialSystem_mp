@@ -177,7 +177,7 @@
 .welcome .icon-shouyejiantou {
   float: right;
   color: rgba(255,255,255,.35);
-  font-size: 24rpx;
+  font-size: 20rpx;
 }
 
 .welcome .img-box {

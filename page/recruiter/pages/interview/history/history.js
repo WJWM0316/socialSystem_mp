@@ -83,7 +83,7 @@ Page({
         },
         {
           id: 'none',
-          name: '无职位约面',
+          name: '未选职位约面',
           active: false
         }
       ]

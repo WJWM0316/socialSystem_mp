@@ -68,7 +68,6 @@ Page({
     let positionModel = this.data.positionModel
     timeModel.show = false
     positionModel.show = false
-    console.log(this.data)
     this.setData({timeModel, positionModel})
   },
   onTapTime(e) {
@@ -154,7 +153,6 @@ Page({
     let end = new Date(endTime.date).getTime()
     let timeStamp = end - start
     let day = Math.floor(timeStamp / 86400000)
-    console.log(day)
     return day > 30
   },
   /**
@@ -271,7 +269,7 @@ Page({
         interviewList.isRequire = true
         interviewList.total = res.meta.total
         this.setData({interviewList, onBottomStatus}, () => resolve(res))
-      })
+      }).catch(() => reject())
     })
   },
   /**

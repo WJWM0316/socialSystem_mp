@@ -100,7 +100,7 @@
 				</view>
 			</view>
 			<view class="footer" wx:if="{{otherOrgList.length > 3}}">
-				<view class="button" bindtap="routeJump" data-route="otherOrgList">查看全部分机构<i class="icon iconfont icon-xiangyou"></i></view>
+				<view class="button" bindtap="routeJump" data-route="otherOrgList">查看全部机构<i class="icon iconfont icon-xiangyou"></i></view>
 			</view>
 		</view>
 		

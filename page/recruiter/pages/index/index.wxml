@@ -23,7 +23,7 @@
 			<view class="img-box">
 				<image mode="aspectFill" src="{{detail.avatar.smallUrl}}" class="image"></image>
 			</view>
-			<i class="icon iconfont icon-youyi"></i>
+			<i class="icon iconfont icon-shouyejiantou"></i>
 		</view>
 	</view>
 

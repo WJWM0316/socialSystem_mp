@@ -36,6 +36,13 @@
 			<view class="text">我的机构</view>
 			<i class="icon iconfont icon-xiangyou"></i>
 		</view>
+
+		<view class="li" bindtap="routeJump" data-route="myinterest">
+			<i class="icon iconfont icon-ganxingqu label-icon"></i>
+			<i class="icon iconfont icon-xiangyou"></i>
+			<view class="text">我感兴趣的</view>
+		</view>
+		
 		<view class="li" bindtap="routeJump" data-route="team">
 			<i class="icon iconfont icon-zhaopintuandui label-icon"></i>
 			<view class="text {{redDotInfos.applyAuditBar ? 'reddot' : ''}}">招聘团队</view>

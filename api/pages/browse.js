@@ -71,3 +71,13 @@ export const deleteBrowseUserApi = (data, hasLoading) => {
     hasLoading
   })
 }
+
+// 查询我感兴趣的
+export const getSearchMyCollectListApi = (data, hasLoading) => {
+  return request({
+    url: '/collect/search_my_collect',
+    method: 'get',
+    data,
+    hasLoading
+  })
+}

@@ -79,7 +79,7 @@
 		
 		<view class="mechanism" wx:if="{{otherOrgList.length}}">
 			<view class="title">
-				<view class="icon"> <view class="fan"></view> </view> 其他分机构
+				<view class="icon"> <view class="fan"></view> </view> 其他机构
 			</view>
 			<view class="ul">
 				<view class="li" wx:for="{{otherOrgList}}" wx:key="{{index}}" bindtap="routeJump" data-route="toOrg" data-id="{{item.id}}" wx:if="{{index < 3}}" data-item="{{item}}">

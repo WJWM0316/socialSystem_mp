@@ -228,11 +228,9 @@ Page({
       wx.saveImageToPhotosAlbum({
         filePath: that.data.imgUrl,
         success: function (e) {
-          console.log(that.data, 'success')
           app.wxToast({title: '已保存至相册', icon: 'success'})
         },
         fail: function (e) {
-          console.log(e)
           app.wxToast({title: '保存失败'})
         }
       })

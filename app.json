@@ -113,7 +113,6 @@
         "pages/organization/list/list",
         "pages/organization/choose/choose",
         "pages/organization/add/add",
-        "pages/marketingData/index/index",
         "pages/echart/echart",
         "pages/createQr/createQr",
         "pages/candidate/candidate",

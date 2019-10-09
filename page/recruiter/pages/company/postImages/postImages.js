@@ -22,10 +22,9 @@ Page({
    * @return   {[type]}   [description]
    */
   getCompanyDetail(options) {
-    getCompanyInfosApi({id: options.companyId})
-      .then(res => {
-        this.setData({imgList: res.data.albumInfo})
-      })
+    getCompanyInfosApi({id: options.companyId}).then(res => {
+      this.setData({imgList: res.data.albumInfo})
+    })
   },
   /**
    * @Author   小书包
@@ -56,10 +55,9 @@ Page({
     let images = this.data.imgList.map(field => field.id)
     let id = this.data.options.companyId
     if (images.length > 20) images = images.slice(0, 20)
-    editCompanyAlbumApi({id, images: images.join(',')})
-      .then(() => {
-        app.wxToast({title: '保存成功'})
-        wx.navigateBack({delta: 1})
-      })
+    editCompanyAlbumApi({id, images: images.join(',')}).then(() => {
+      app.wxToast({title: '保存成功'})
+      wx.navigateBack({delta: 1})
+    })
   }
 })

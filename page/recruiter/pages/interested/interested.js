@@ -44,16 +44,15 @@ Page({
   getMyCollectUsers(hasLoading = true) {
     return new Promise((resolve, reject) => {
       let params = {count: this.data.pageCount, page: this.data.collectUsers.pageNum, ...app.getSource()}
-      getSearchMyCollectListApi(params, hasLoading)
-        .then(res => {
-          let collectUsers = this.data.collectUsers
-          let onBottomStatus = res.meta && res.meta.nextPageUrl ? 0 : 2
-          collectUsers.list = collectUsers.list.concat(res.data)
-          collectUsers.isLastPage = res.meta && res.meta.nextPageUrl ? false : true
-          collectUsers.pageNum = collectUsers.pageNum + 1
-          collectUsers.isRequire = true
-          this.setData({collectUsers, onBottomStatus}, () => resolve(res))
-        })
+      getSearchMyCollectListApi(params, hasLoading).then(res => {
+        let collectUsers = this.data.collectUsers
+        let onBottomStatus = res.meta && res.meta.nextPageUrl ? 0 : 2
+        collectUsers.list = collectUsers.list.concat(res.data)
+        collectUsers.isLastPage = res.meta && res.meta.nextPageUrl ? false : true
+        collectUsers.pageNum = collectUsers.pageNum + 1
+        collectUsers.isRequire = true
+        this.setData({collectUsers, onBottomStatus}, () => resolve(res))
+      })
     })
   },
   /**

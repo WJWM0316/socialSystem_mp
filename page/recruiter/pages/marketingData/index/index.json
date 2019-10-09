@@ -1,6 +1,0 @@
-{
-  "usingComponents": {
-    "navbar": "../../../../../components/business/navbar/navbar",
-    "chooseOrgEnter": "../../../../../components/business/chooseOrgEnter/chooseOrgEnter"
-  }
-}

@@ -33,20 +33,19 @@ Page({
    * @return   {[type]}   [description]
    */
   getCompanyProductInfos(options) {
-    getCompanyProductInfosApi({id: options.productId})
-      .then(res => {
-        const infos = res.data
-        const formData = {
-          company_id: infos.companyId,
-          logo: infos.logo.id,
-          slogan: infos.slogan,
-          lightspot: infos.lightspot,
-          site_url: infos.siteUrl,
-          upload: infos.logo,
-          product_name: infos.productName
-        }
-        Object.keys(formData).map(field => this.setData({[field]: formData[field]}))
-      })
+    getCompanyProductInfosApi({id: options.productId}).then(res => {
+      const infos = res.data
+      const formData = {
+        company_id: infos.companyId,
+        logo: infos.logo.id,
+        slogan: infos.slogan,
+        lightspot: infos.lightspot,
+        site_url: infos.siteUrl,
+        upload: infos.logo,
+        product_name: infos.productName
+      }
+      Object.keys(formData).map(field => this.setData({[field]: formData[field]}))
+    })
   },
   /**
    * @Author   小书包
@@ -113,10 +112,7 @@ Page({
     formData.slogan = infos.slogan
     formData.lightspot = infos.lightspot
     formData.site_url = infos.site_url
-    createCompanyProductApi(formData)
-      .then(() => {
-        wx.navigateBack({delta: 1})
-      })
+    createCompanyProductApi(formData).then(() => wx.navigateBack({delta: 1}))
   },
   /**
    * @Author   小书包
@@ -134,16 +130,10 @@ Page({
     formData.lightspot = infos.lightspot
     formData.site_url = infos.site_url
     formData.id = infos.options.productId
-    editCompanyProductInfosApi(formData)
-      .then(() => {
-        wx.navigateBack({delta: 1})
-      })
+    editCompanyProductInfosApi(formData).then(() => wx.navigateBack({delta: 1}))
   },
   delete() {
     const options = this.data.options
-    deleteCompanyProductInfosApi({id: options.productId})
-      .then(() => {
-        wx.navigateBack({delta: 1})
-      })
+    deleteCompanyProductInfosApi({id: options.productId}).then(() => wx.navigateBack({delta: 1}))
   }
 })

@@ -18,6 +18,7 @@
   text-align: center;
   position: relative;
   height: 98rpx;
+  overflow: unset;
 }
 .viewBlock {
   height: 68rpx;
@@ -26,12 +27,13 @@
   width: 54rpx;
   height: 54rpx;
   display: block;
+  line-height: unset;
 }
 .tabBar-item .p {
   font-size: 20rpx;
   font-weight: 400;
   color:rgba(185,191,203,1);
-  line-height: 20rpx;
+  overflow: unset;
 }
 
 .tabBar-item .tap {
@@ -41,6 +43,7 @@
   bottom: 0;
   top: 0;
   z-index: 1;
+  overflow: unset;
 }
 
 .tabBar-item-active.tabBar-item .p  {
@@ -77,6 +80,10 @@
   position: relative;
   margin-top: 11rpx;
   text-align: center;
+  overflow: unset;
+  line-height: unset;
+  height: 54rpx;
+  position: relative;
 }
 
 .reddot-mine {
@@ -85,6 +92,15 @@
   background:rgba(255,73,73,1);
   border-radius: 50%;
   position: absolute;
-  right: -9rpx;
-  top: -1rpx;
+  right: 0;
+  top: 0;
+  display: block;
+  line-height: unset;
+  overflow: unset;
+  white-space: unset;
+}
+
+.up{
+  position: relative;
+  top: -5rpx;
 }

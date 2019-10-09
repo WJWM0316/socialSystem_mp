@@ -49,7 +49,13 @@ Page({
         wx.navigateTo({url: `${RECRUITER}company/postProduct/postProduct?companyId=${app.globalData.recruiterDetails.companyInfo.id}`})
         break
       case 'product-edit':
-        wx.navigateTo({url: `${RECRUITER}company/productList/productList?companyId=${app.globalData.recruiterDetails.companyInfo.id}`})
+        let url = ''
+        if(this.data.query.from) {
+          url += `${RECRUITER}company/productList/productList?companyId=${this.data.query.companyId}&from=${this.data.query.from}&topId=${app.globalData.recruiterDetails.companyInfo.id}`
+        } else {
+          url = `${RECRUITER}company/productList/productList?companyId=${app.globalData.recruiterDetails.companyInfo.id}`
+        }
+        wx.navigateTo({url})
         break
       case 'image':
         wx.navigateTo({url: `${RECRUITER}company/postImages/postImages?companyId=${app.globalData.recruiterDetails.companyInfo.id}`})

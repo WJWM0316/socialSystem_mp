@@ -1,7 +1,15 @@
 <view class="productList">
-	<navbar title="产品列表" background="#fff" color="#22292C"></navbar>
+	<navbar title="{{options.type === 'choose' ? '从公司产品中选择' : '产品列表'}}" background="#fff" color="#22292C"></navbar>
+	<view hidden="{{!hasReFresh}}">
+    <refreshStatus></refreshStatus>
+  </view>
 	<view class="ul">
-		<view class="li" wx:for="{{productList}}" wx:key="{{index}}" wx:for-item="item">
+		<view
+			class="li {{item.topId ? 'company-product' : ''}}"
+			wx:for="{{productList.list}}"
+			bindtap="{{options.type === 'choose' ? 'getThis' : ''}}"
+			data-index="{{index}}"
+			wx:key="{{index}}">
 			<view class="logo-box">
 				<image src="{{item.logo.smallUrl}}" mode="aspectFill"></image>
 			</view>
@@ -12,13 +20,20 @@
 				</view>
 				<view class="second">{{item.lightspot}}</view>
 			</view>
-
-			<view wx:if="{{options.type !== 'choose'}}" class="edit-box" bindtap="edit" data-id="{{item.id}}"><i class="icon iconfont icon-bianji"></i></view>
-			<view wx:else><i class="icon iconfont icon-bianji"></i></view>
+			<view
+				wx:if="{{options.type !== 'choose' && options.from === 'organization' && !item.topId}}"
+				class="edit-box"
+				bindtap="edit"
+				data-id="{{item.id}}">
+				<i class="icon iconfont icon-bianji"></i>
+			</view>
+			<view class="label" wx:if="{{item.topId && options.from === 'organization'}}">公司产品</view>
+			<view wx:if="{{ !options.from && options.type !== 'choose'}}" data-id="111"><i class="icon iconfont icon-bianji"></i></view>
+      <view class="myRadio {{item.active ? 'active' : ''}}" wx:if="{{options.type === 'choose'}}">
+        <i class="icon iconfont icon-wancheng" wx:if="{{item.active}}"></i>
+      </view>
 		</view>
 	</view>
-	<view class="footer">
-    <button class="button-save" bindtap="add">新增</button>
-  </view>
+	<view class="footer"> <button class="button-save" bindtap="add">新增</button> </view>
 </view>
-<shareBtn posterType="production" id="shareBtn"></shareBtn>
+<shareBtn posterType="production" id="shareBtn" shareBtn="{{false}}"></shareBtn>

@@ -14,13 +14,13 @@
 			  			wx:if="{{item.flag === 'dynamics' && redDot.redDotJobHunterDynamicStatus && identity === 'APPLICANT'}}"></cover-view>
 			  		<cover-view
 			  			class="reddot-mine"
-			  			wx:if="{{item.flag === 'intercover-view' && redDot.jobhunterIntercover-viewTotal && identity === 'APPLICANT'}}"></cover-view>
+			  			wx:if="{{item.flag === 'interview' && redDot.jobhunterInterviewTotal && identity === 'APPLICANT'}}"></cover-view>
 			  		<cover-view
 			  			class="reddot-mine"
-			  			wx:if="{{item.flag === 'candidate' && redDot.recruiterIntercover-viewTotal && identity === 'RECRUITER'}}"></cover-view>
+			  			wx:if="{{item.flag === 'candidate' && redDot.recruiterInterviewTotal && identity === 'RECRUITER'}}"></cover-view>
 			  		<cover-view
 			  			class="reddot-mine"
-			  			wx:if="{{item.flag === 'intercover-view' && redDot.recruiterScheduleList && identity === 'RECRUITER'}}"></cover-view>
+			  			wx:if="{{item.flag === 'interview' && redDot.recruiterScheduleList && identity === 'RECRUITER'}}"></cover-view>
 			  		<cover-view
 			  			class="reddot-mine"
 			  			wx:if="{{item.flag === 'position' && redDot.positionOfflineBar && identity === 'RECRUITER'}}"></cover-view>
@@ -28,7 +28,7 @@
 			  			class="reddot-mine"
 			  			wx:if="{{item.flag === 'mine' && redDot.applyAuditBar && identity === 'RECRUITER'}}"></cover-view>
 		  		</cover-view>
-		  		<cover-view class="p">{{item.title}}</cover-view>
+		  		<cover-view class="p up">{{item.title}}</cover-view>
 		  </cover-view>
 		</cover-view>
 		<cover-view class="viewBlock" wx:if="{{isIphoneX}}"></cover-view>

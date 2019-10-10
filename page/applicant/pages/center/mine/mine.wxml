@@ -39,6 +39,7 @@
         <button class="save-resume-pic clear-style" form-type="submit" catchtap="share">转发我的简历</button>
       </block>
   	</view>
+    <view class="createBox" wx:if='{{isMicroCard && !isJobhunter}}'>你与offer之间还差一份简历~<view class="btn" bindtap="completeResume">去创建<i class="icon iconfont icon-disejiantou-you"></i></view></view>
     <!-- bottom -->
     <view class="entry-list">
   		<view class="li" bindtap="jump" data-type="interest">

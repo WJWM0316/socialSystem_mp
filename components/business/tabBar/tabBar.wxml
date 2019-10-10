@@ -63,7 +63,7 @@
 			  			class="reddot-mine"
 			  			wx:if="{{item.flag === 'mine' && redDot.applyAuditBar && identity === 'RECRUITER'}}"></view>
 		  		</view>
-		  		<view class="p">{{item.title}}</view>
+		  		<view class="p cup">{{item.title}}</view>
 		  </view>
 		</view>
 		<view class="viewBlock" wx:if="{{isIphoneX}}"></view>

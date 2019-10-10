@@ -82,7 +82,11 @@ Page({
 
     if(options.type == 'choose') {
       if(result) {
-        formData.company_id = orgData.id
+        if(app.globalData.recruiterDetails.isCompanyAdmin && !app.globalData.recruiterDetails.isCompanyTopAdmin) {
+          formData.company_id = app.globalData.recruiterDetails.companyInfo.id
+        } else {
+          formData.company_id = orgData.id
+        }
         formData.product_ids = result.id
         addCompanyProductSelApi(formData).then(() => callback())
       } else {

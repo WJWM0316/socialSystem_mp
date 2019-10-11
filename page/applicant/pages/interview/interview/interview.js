@@ -476,6 +476,10 @@ Page({
         })
       break
       case 1:
+        if (!this.data.isJobhunter) {
+          wx.stopPullDownRefresh()
+          return
+        }
         let receiveData = {
           list: [],
           pageNum: 1,
@@ -494,6 +498,10 @@ Page({
         })
       break
       case 2:
+        if (!this.data.isJobhunter) {
+          wx.stopPullDownRefresh()
+          return
+        }
         let interviewData = {
           list: [],
           pageNum: 1,

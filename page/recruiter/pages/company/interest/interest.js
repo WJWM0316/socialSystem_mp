@@ -40,7 +40,6 @@ Page({
       getRecruiterInterestApi().then(res => {
         let infos = res.data
         infos.limitDay = this.getDay(infos.expired)
-        console.log(infos)
         this.setData({infos}, () => resolve(res))
       })
     })

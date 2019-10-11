@@ -79,7 +79,7 @@
 		
 		<view class="mechanism" wx:if="{{otherOrgList.length}}">
 			<view class="title">
-				<view class="icon"> <view class="fan"></view> </view> 其他分机构
+				<view class="icon"> <view class="fan"></view> </view> 其他机构
 			</view>
 			<view class="ul">
 				<view class="li" wx:for="{{otherOrgList}}" wx:key="{{index}}" bindtap="routeJump" data-route="toOrg" data-id="{{item.id}}" wx:if="{{index < 3}}" data-item="{{item}}">
@@ -100,7 +100,7 @@
 				</view>
 			</view>
 			<view class="footer" wx:if="{{otherOrgList.length > 3}}">
-				<view class="button" bindtap="routeJump" data-route="otherOrgList">查看全部分机构<i class="icon iconfont icon-xiangyou"></i></view>
+				<view class="button" bindtap="routeJump" data-route="otherOrgList">查看全部机构<i class="icon iconfont icon-xiangyou"></i></view>
 			</view>
 		</view>
 		

@@ -24,3 +24,5 @@
 <view class="addBtn" wx:if="{{showBtn}}">
 	<view class="btn" data-type="add" bindtap="roouteJump">添加机构</view>
 </view>
+
+<!-- <shareBtn posterType="production" id="shareBtn" shareBtn="{{false}}"></shareBtn> -->

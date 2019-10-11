@@ -10,7 +10,7 @@ Page({
    */
   data: {
     myInfo: {},
-    hasLogin: 0,
+    hasLogin: 1,
     hideBind: true,
     hasReFresh: false,
     isMicroCard: false,

@@ -340,6 +340,16 @@ export const editCompanyProductInfosApi = (data, hasLoading) => {
   })
 }
 
+// 选择保存公司产品
+export const addCompanyProductSelApi = (data, hasLoading) => {
+  return request({
+    method: 'post',
+    url: `/company/productsel`,
+    data,
+    hasLoading: true
+  })
+}
+
 // 删除公司产品信息
 export const deleteCompanyProductInfosApi = (data, hasLoading) => {
   return request({

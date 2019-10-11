@@ -122,6 +122,9 @@ Page({
           wx.navigateTo({url: `${RECRUITER}organization/list/list?companyId=${this.data.recruiterInfo.companyTopId}&type=recruiter-org`})
         }
         break
+      case 'myinterest':
+        wx.navigateTo({url: `${RECRUITER}interested/interested`})
+        break
       default:
         break
     }

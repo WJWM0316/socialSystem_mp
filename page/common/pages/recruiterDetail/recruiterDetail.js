@@ -119,12 +119,12 @@ Page({
 
       funcApi(params).then(res => {
         let positionList = this.data.positionList
-        positionList.onBottomStatus = res.meta && res.meta.nextPageUrl ? 0 : 2
+        positionList.onBottomStatus = res.data.length === 20 ? 0 : 2
         positionList.list = positionList.list.concat(res.data)
-        positionList.isLastPage = res.meta && res.meta.nextPageUrl ? false : true
+        positionList.isLastPage = res.data.length === 20 ? false : true
         positionList.pageNum = positionList.pageNum + 1
         positionList.isRequire = true
-        positionList.total = res.meta.total
+        // positionList.total = res.meta.total
         isLock = 0
         this.setData({positionList}, () => resolve(res))
       })
@@ -341,7 +341,6 @@ Page({
   onReachBottom() {
     let positionList = this.data.positionList
     if (!positionList.isLastPage && !isLock ) {
-      console.log('c')
       this.getPositionLists(false)
     }
   },

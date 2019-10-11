@@ -43,7 +43,7 @@ Component({
         ],
         top: 15,
         left: 'left',
-        // backgroundColor: 'yellow',
+        backgroundColor: 'yellow',
         z: 100
       },
       grid: {
@@ -120,8 +120,7 @@ Component({
         }
       },
       series: []
-    },
-    chartLine: null
+    }
   },
   /**
    * 组件的方法列表
@@ -133,10 +132,11 @@ Component({
     },
     setOptions(key, value) {
       this.data.options.series = []
+      this.data.options.legend.data = ['A', 'B']
       this.data.options.xAxis.data = key
-      value.map(field => {
+      value.map((field, index) => {
         this.data.options.series.push({
-          // name: 'A',
+          name: this.data.options.legend.data[index],
           type: 'line',
           smooth: true,
           data: field

@@ -94,10 +94,6 @@ Page({
     },
     lastCompany: '',
     lastPosition: '',
-    positionTypeId: 0,
-    positionTypeName: '',
-    degree: '',
-    degreeId: 0,
     cityNum: '', //城市id
     city: '',
     openPicker: false,
@@ -107,13 +103,13 @@ Page({
       {type: 'region', title: '所在城市', value: '', placeholder: '请选择'},
       {type: 'birthday', title: '出生年月', value: '', placeholder: '请选择'},
       {type: 'workTime', title: '工作时间', value: '', placeholder: '请选择'}
-    ]
+    ],
+    showTipPop: true // 提示性pop开关
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(this.data.pickerType, 3333333333333333333333333333)
     directChat = ''
     if (app.loginInit) {
       this.getStep()
@@ -139,8 +135,6 @@ Page({
     this.setData({options})
     watch.setWatcher(this)
   },
-  onUnload () {
-  },
   watch: {    
     step: function(newVal, oldVal) {
       if (newVal !== oldVal) {
@@ -163,6 +157,7 @@ Page({
     }
   },
   progress (step) {
+    let that = this
     this.setData({step}, () => {
       this.setData({active: step})
       if (step < 8) {
@@ -178,6 +173,7 @@ Page({
       } else {
         app.getAllInfo().then(res => {
           app.globalData.isMicroCard = true
+          app.globalData.isJobhunter = true
           timer = setTimeout(() => {
             if (!directChat) {
               let success = () => {
@@ -200,6 +196,9 @@ Page({
                 }, 1000)
               }
               if (getCurrentPages().length > 1) {
+                if (that.data.options.fromType === 'guideCard') {
+                  wx.setStorageSync('appendCreatUser', {firstIndex: that.data.options.firstIndex, secondIndex: that.data.options.secondIndex})
+                }
                 wx.navigateBack({
                   delta: 1,
                   success () {
@@ -208,7 +207,7 @@ Page({
                 })
               } else {
                 wx.reLaunch({
-                  url: `${COMMON}homepage/homepage`
+                  url: `${APPLICANT}index/index`
                 })
               }
             } else {
@@ -222,6 +221,9 @@ Page({
         })
       }
     })
+  },
+  closeTipPop () {
+    this.setData({showTipPop: false})
   },
   toggle (e) {
     let getData = e.currentTarget.dataset
@@ -394,53 +396,64 @@ Page({
     }
   },
   createMicro () {
-    let data = this.data
+    let data = this.data,
+        that = this
     let params = {
+      avatar: data.avatar.id,
       gender: data.gender,
       name: data.name,
       birth: data.birth,
       cityNum: data.cityNum,
       startWorkYear: data.startWorkYear,
-      degree: data.degreeId,
-      positionTypeId: data.positionTypeId
+      lastCompany: data.lastCompany,
+      lastPosition: data.lastPosition
     }
-    params.avatar = data.avatar && data.avatar.id
     let title = ''
-    if (!params.gender) {
+    if (!params.avatar) {
+      title = '请上传头像'
+    } else if (!params.gender) {
       title = '请选择性别'
     } else if (!params.name) {
       title = '请输入姓名'
     } else if (!userNameReg.test(params.name)) {
       title = '姓名需为2-20个汉字或英文'
     } else if (!params.cityNum) {
-      title = '请选择所在城市'
+      title = '请选择所在地'
     } else if (!params.birth) {
       title = '请选择出生年月'
     } else if (!params.startWorkYear && params.startWorkYear !== 0) {
       title = '请选择参加工作时间'
     } else if (params.startWorkYear) {
-      if (!params.positionTypeId) {
-        title = '请选择做过的工作（职位类型）'
+      if (!params.lastCompany) {
+        title = '请输入最近在职公司名称'
+      } else if (!companyNameReg.test(params.lastCompany)) {
+        title = '公司名称需为2-50个字符'
+      } else if (!params.lastPosition) {
+        title = '请输入职位名称'
+      } else if (!positionReg.test(params.lastPosition)) {
+        title = '职位名称需为2-20个字符'
       }
-    } else if (!params.degree) {
-      title = '请选择您的最高学历'
-    } 
+    }
     if (title) {
       app.wxToast({title})
       return
     }
     postMicroApi(params).then(res => {
-      app.getAllInfo().then(() => {
-        app.globalData.isJobhunter = true
-        app.wxToast({
-          title: '创建成功',
-          icon: 'success',
-          callback () {
+      app.globalData.isMicroCard = true
+      app.wxToast({
+        title: '创建成功',
+        icon: 'success',
+        callback () {
+          if (that.data.options.type === 'specialJob') {
             wx.reLaunch({
-              url: `${COMMON}homepage/homepage`
+              url: `${APPLICANT}specialJob/specialJob`
+            })
+          } else {
+            wx.reLaunch({
+              url: `${APPLICANT}index/index`
             })
           }
-        })
+        }
       })
     })
   },
@@ -790,14 +803,10 @@ Page({
         break
       case 'education':
         var index = this.data.edCurrent,
-            edData = this.data.edData,
-            degree = '',
-            degreeId = 0
+            edData = this.data.edData
         edData[index].degree = e.detail.propsResult
         edData[index].degreeDesc = e.detail.propsDesc
-        degree = e.detail.propsDesc
-        degreeId = e.detail.propsResult
-        this.setData({edData, degree, degreeId})
+        this.setData({edData})
         break
       case 'salary':
         let intention = this.data.intention
@@ -1005,9 +1014,7 @@ Page({
         listValue.position = positionType.typeName
         listValue.positionId = positionType.type
       }
-      let positionTypeName = positionType.typeName,
-          positionTypeId = positionType.type
-      this.setData({[listType]: listValue, positionTypeId, positionTypeName}, () => {
+      this.setData({[listType]: listValue}, () => {
         wx.removeStorageSync('createPosition')
       })
     }
@@ -1056,6 +1063,12 @@ Page({
 
   },
 
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+
+  },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作

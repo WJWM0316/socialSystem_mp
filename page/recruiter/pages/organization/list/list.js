@@ -51,12 +51,14 @@ Page({
     switch (type) {
       case 'preview':
         if(app.globalData.recruiterDetails.isCompanyTopAdmin) {
+          wx.setStorageSync('orgData', item)
           wx.navigateTo({url: `${RECRUITER}company/indexEdit/indexEdit?type=org&from=organization&companyId=${item.id}`})
         } else {
           wx.navigateTo({url: `${COMMON}homepage/homepage?companyId=${item.id}`})
         }
         break
       case 'add':
+        // this.selectComponent('#shareBtn').oper()
         wx.navigateTo({url: `${RECRUITER}organization/add/add`})
         break
       case 'path-mechanism':
@@ -66,6 +68,9 @@ Page({
           content: `链接为：${homepageUrl}`,
           confirmText: '复制链接',
           showCancel: false,
+          showCancel: true,
+          cancelText: '取消',
+          cancelBack: () => {},
           confirmBack: () => {
             wx.setClipboardData({
               data: homepageUrl,
@@ -90,7 +95,6 @@ Page({
     timer = null
     keyword = null
   },
-
   onShareAppMessage(options) {
     let imageUrl = `${this.data.cdnImagePath}shareC.png`,
         companyInfos = options.target.dataset.item

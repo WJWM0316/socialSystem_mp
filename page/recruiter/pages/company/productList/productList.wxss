@@ -33,9 +33,9 @@
 .productList .li {
 	background:rgba(255,255,255,1);
 	position: relative;
-	display: flex;
   padding: 32rpx 40rpx;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 .productList .li:after {
@@ -60,10 +60,9 @@
 	border:2rpx solid rgba(232,233,235,1);
 	border-radius: 50%;
 	display: inline-block;
-	position: absolute;
-	left: 40rpx;
-	top: 32rpx;
 	overflow: hidden;
+	float: left;
+	margin-right: 32rpx;
 }
 
 .productList .logo-box image {
@@ -80,8 +79,9 @@
 }
 
 .productList .content {
-	flex: 1;
-	padding: 0 108rpx 0 150rpx;
+	width: calc(100% - 220rpx);
+	float: left;
+	box-sizing: border-box;
 }
 
 .productList .first {
@@ -136,4 +136,52 @@
   border-color: transparent transparent #F8F8F8 transparent;
   display: block;
   content: '';
+}
+
+.productList .label{
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	right: 40rpx;
+	width:132rpx;
+	height:46rpx;
+	background:rgba(239,233,244,1);
+	border-radius:100rpx;
+	font-size:24rpx;
+	color:rgba(101,39,145,1);
+	line-height:26rpx;
+	line-height: 46rpx;
+	text-align: center;
+}
+
+.company-product .content{
+	padding-right: 130rpx;
+}
+
+.myRadio {
+  width:36rpx;
+  height:36rpx;
+  position: relative;
+  display: inline-block;
+  border-radius: 50%;
+  border: 1px solid #BCBCBC;
+  line-height: 36rpx;
+  text-align: center;
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  right: 25rpx;
+  transform: translate(-50%, -50%);
+}
+
+.myRadio.active {
+  background: #652791;
+  color: white;
+  border: unset;
+}
+
+.myRadio.active .icon{
+  font-size: 24rpx;
+  display:inline-block;
+  transform:translateY(-4rpx);
 }

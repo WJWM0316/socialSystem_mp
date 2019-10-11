@@ -165,19 +165,19 @@
   height:52rpx;
   background:rgba(255,255,255,0.1);
   border-radius:36rpx;
-  width: 140rpx;
+  width: 124rpx;
   display: inline-block;
   vertical-align: middle;
   position: relative;
   box-sizing: border-box;
-  padding: 0 24rpx;
+  padding: 0 14rpx 0 24rpx;
   line-height: 52rpx;
 }
 
-.welcome .icon-youyi {
+.welcome .icon-shouyejiantou {
   float: right;
   color: rgba(255,255,255,.35);
-  font-size: 24rpx;
+  font-size: 20rpx;
 }
 
 .welcome .img-box {
@@ -887,7 +887,7 @@
   right: 0;
   top: 0;
   background: rgba(0,0,0,.6);
-  z-index: 10000000;
+  z-index: 200;
 }
 
 .overlay .box {
@@ -939,9 +939,10 @@
 
 .overlay .icon-close {
   position: absolute;
-  top: 31rpx;
-  right: 31rpx;
+  top: 0rpx;
+  right: 0rpx;
   color: #CDCBCF;
+  padding: 31rpx;
 }
 
 .overlay image {

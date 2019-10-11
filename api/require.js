@@ -7,7 +7,10 @@ let noToastUrlArray = [
   '/company/notifyadmin',
   '/company/edit_first_step',
   '/company/self_help_verification',
-  '/company/apply_info'
+  '/company/apply_info',
+  '/interview/newScheduleNumber',
+  '/interview/invite',
+  '/interview/newHistory'
 ]
 let apiVersionList = null
 let toAuth = false,
@@ -202,7 +205,12 @@ export const request = ({name = '', method = 'post', url, host, data = {}, needK
               }
               break
             case 400:
-              if (msg.code === 703) {
+              let noJumpUrlArray = [
+                '/interview/newScheduleNumber',
+                '/interview/invite',
+                '/interview/newHistory'
+              ]
+              if (msg.code === 703 && !noJumpUrlArray.some(now => url.includes(now))) {
                 wx.reLaunch({
                   url: `${APPLICANT}createUser/createUser?micro=true`
                 })

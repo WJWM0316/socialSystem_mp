@@ -27,9 +27,6 @@ if (environment === 0) {
 	WEBVIEW = `https://h5.lieduoduo.com/`
 }
 
-export let replace = !environment ? {path1: 'https://attach.ent.lieduoduo.ziwork.com', path2: 'https://qiuzhi-api.ent.lieduoduo.ziwork.com/tupian'} : {path1: 'https://attach.ent.lieduoduo.com', path2: 'https://qiuzhi-api.ent.lieduoduo.com/tupian'}
-
-
 // 招聘端page
 export const RECRUITER = '/page/recruiter/pages/'
 

@@ -38,7 +38,7 @@ Component({
     let loadAvatar = new Promise((resolve, reject) => {
       // 头像
       wx.downloadFile({
-        url: avatarImg.replace(replace.path1, replace.path2),
+        url: avatarImg,
         success(res) {
           if (res.statusCode === 200) {
             resolve(res)

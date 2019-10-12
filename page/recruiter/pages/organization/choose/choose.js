@@ -1,4 +1,4 @@
-import{getCompanyOrglistApi} from '../../../../../api/pages/company.js'
+import{getCompanyOrglistApi, setCompanyDefaultOrgApi} from '../../../../../api/pages/company.js'
 import {COMMON, RECRUITER} from '../../../../../config.js'
 const app = getApp()
 let timer = null,
@@ -66,52 +66,25 @@ Page({
         if (this.data.options.type === 'createQr') {
           wx.setStorageSync('orgData', item)
           wx.redirectTo({url: `${RECRUITER}createQr/createQr?type=qr-mechanism&companyId=${item.id}`})
+        } else if(this.data.options.type === 'setOrg'){
+          this.setCompanyDefaultOrg(item)
         } else {
           wx.redirectTo({url: `${COMMON}poster/createPost/createPost?type=company&companyId=${item.id}`})
         }
       }
     })
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  setCompanyDefaultOrg(item) {
+    setCompanyDefaultOrgApi({company_id: item.id }).then(() => {
+      app.globalData.recruiterDetails.companyInfo.defaultOrgInfo = {
+        id: item.id,
+        companyName: item.companyName
+      }
+      wx.navigateBack({delta: 1})
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
   onUnload: function () {
     timer = null
     keyword = null
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
   }
 })

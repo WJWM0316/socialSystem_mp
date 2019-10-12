@@ -1,0 +1,13 @@
+
+<view class="hidePhone">
+	<navbar title="机构展示设置" background="#fff" color="#22292C"></navbar>
+	<view class="li" bindtap="routeJump">
+		<view class="label">默认展示机构</view>
+		<view class="value">
+			<text class="{{defaultOrgInfo.companyName ? '' : 'default'}} ">{{defaultOrgInfo.companyName ? defaultOrgInfo.companyName : '请选择机构'}}</text><i class="icon iconfont icon-xiangyou"></i>
+    </view>
+	</view>
+	<view class="tips">
+		设置后，候选人通过搜索进入小程序时，将直接进入设置的默认展示的机构。
+	</view>
+</view>

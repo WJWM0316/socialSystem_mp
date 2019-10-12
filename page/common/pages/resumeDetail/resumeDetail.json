@@ -8,6 +8,7 @@
     "shrinkText": "../../../../components/functional/shrinkText/shrinkText",
     "interviewBar": "../../../../components/business/interviewBar/interviewBar",
     "actionSheet": "../../../../components/layout/actionSheet/actionSheet",
-    "notFound": "../../../../components/layout/notFound/notFound"
+    "notFound": "../../../../components/layout/notFound/notFound",
+    "applyEntry": "../../../../components/business/applyEntry/applyEntry"
   }
 }

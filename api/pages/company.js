@@ -567,3 +567,13 @@ export const getCompanyApplyInfoApi = (data, hasLoading) => {
     hasLoading: false
   })
 }
+
+// 设置，取消公司默认机构
+export const setCompanyDefaultOrgApi = (data, hasLoading) => {
+  return request({
+    url: `/company/defaultorg`,
+    method: 'put',
+    data,
+    hasLoading: false
+  })
+}

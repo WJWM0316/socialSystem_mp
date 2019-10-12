@@ -116,7 +116,8 @@
         "pages/echart/echart",
         "pages/createQr/createQr",
         "pages/candidate/candidate",
-        "pages/organization/position/position"
+        "pages/organization/position/position",
+        "pages/organization/setOrg/setOrg"
       ]
     }
   ],

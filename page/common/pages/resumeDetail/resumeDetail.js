@@ -97,13 +97,14 @@ Page({
       if (this.data.options.adviser) params.resumeSource = 500
       if (this.data.options.relaySourceVkey) params.relaySourceVkey = this.data.options.relaySourceVkey
       getOtherResumeApi(params).then(res => {
-        this.setData({info: res.data, isOwner: res.data.isOwner && identity === 'APPLICANT' && !this.data.options.preview, realIsOwner: res.data.isOwner}, function() {
+        this.setData({info: res.data, isOwner: res.data.isOwner && identity === 'APPLICANT' && !this.data.options.preview, realIsOwner: res.data.isOwner, identity}, function() {
           if (this.data.isOwner) {
             app.globalData.resumeInfo = res.data
           }
           if (this.selectComponent('#interviewBar')) {
             this.selectComponent('#interviewBar').init()
           }
+          console.log(this.data)
           resolve(res)
         })
       }).catch(e => {

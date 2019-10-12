@@ -8,6 +8,10 @@
 		<text class="txt mobile">隐私设置</text>
 		<i class="icon iconfont icon-xiangyou"></i>
 	</view>
+	<view class="changePhone" bindtap="setOrganization" wx:if="{{identity === 'RECRUITER' && detail.isCompanyTopAdmin}}">
+		<text class="txt mobile">机构展示设置</text>
+		<i class="icon iconfont icon-xiangyou"></i>
+	</view>
 <!-- 	<view class="toggle" bindtap="toggleIdentity">
 		<text class="txt">切换为“{{identity}}”身份</text>
 		<i class="icon iconfont icon-xiangyou"></i>

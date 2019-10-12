@@ -8,7 +8,8 @@ Page({
    */
   data: {
     identityDesc: "面试官",
-    identity: wx.getStorageSync('choseType')
+    identity: wx.getStorageSync('choseType'),
+    detail: app.globalData.recruiterDetails
   },
   // onLoad: function (options) {
   //   if (wx.getStorageSync('choseType') === 'RECRUITER') {
@@ -19,9 +20,9 @@ Page({
   // },
   onShow() {
     if(wx.getStorageSync('choseType') === 'RECRUITER') {
-      this.setData({identityDesc: "求职者", identity: wx.getStorageSync('choseType')})
+      this.setData({identityDesc: "求职者", identity: wx.getStorageSync('choseType'), detail: app.globalData.recruiterDetails})
     } else {
-      this.setData({identityDesc: "面试官", identity: wx.getStorageSync('choseType')})
+      this.setData({identityDesc: "面试官", identity: wx.getStorageSync('choseType'), detail: app.globalData.recruiterDetails})
     }
   },
   upLogin() {
@@ -50,6 +51,11 @@ Page({
   toggleShowPhone() {
     wx.navigateTo({
       url: `${COMMON}privacySetting/privacySetting`
+    })
+  },
+  setOrganization() {
+    wx.navigateTo({
+      url: `${RECRUITER}organization/setOrg/setOrg`
     })
   }
 })

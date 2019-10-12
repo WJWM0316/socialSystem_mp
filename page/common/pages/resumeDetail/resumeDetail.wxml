@@ -146,6 +146,7 @@
           </view>
           <text class="add" data-editName="more" bindtap="edit" wx:if="{{!info.moreIntroduce.introduce && info.moreIntroduce.imgs.length === 0 && isOwner}}" data-id="0">完善更多介绍</text>
         </view>
+        <!-- <applyEntry wx:if="{{identity !== 'RECRUITER'}}" companyId="{{1}}" ></applyEntry> -->
       </view>
       <block>
         <button form-type="submit" wx:if="{{!options.preview && !isOwner}}" hidden="{{options.adviser && info.sourceType !== 500 || info.advisor.glass}}" class="clear-style collect" bindtap="collect">

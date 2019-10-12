@@ -216,7 +216,16 @@ Page({
         }
         if (app.globalData.hasLogin && !app.globalData.isJobhunter) {
           let path = app.getCurrentPagePath()
-          wx.navigateTo({url: `${APPLICANT}createUser/createUser?directChat=${encodeURIComponent(path)}&todoAction=collect&from=6`})
+          app.getRoleInfo().then(res => {
+            let url = ''
+            if(!res.data.hasCard) {
+              url = `${APPLICANT}createUser/createUser?directChat=${encodeURIComponent(path)}&todoAction=collect&from=6&micro=true`
+            } else {
+              url = `${APPLICANT}createUser/createUser?directChat=${encodeURIComponent(path)}&todoAction=collect&from=6`
+            }
+            wx.navigateTo({url})
+          })
+          // wx.navigateTo({url: `${APPLICANT}createUser/createUser?directChat=${encodeURIComponent(path)}&todoAction=collect&from=6`})
           return
         }
         getMycollectPositionApi({id: this.data.query.positionId}).then(res => {

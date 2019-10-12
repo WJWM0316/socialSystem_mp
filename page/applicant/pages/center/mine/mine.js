@@ -124,8 +124,14 @@ Page({
         })
         break
       case 'toCreate':
-        wx.navigateTo({
-          url: `${APPLICANT}createUser/createUser`
+        app.getRoleInfo().then(res => {
+          let url = ''
+          if(!res.data.hasCard) {
+            url = `${APPLICANT}createUser/createUser?micro=true`
+          } else {
+            url = `${APPLICANT}createUser/createUser`
+          }
+          wx.navigateTo({url})
         })
         break
       case 'interested_in_me':

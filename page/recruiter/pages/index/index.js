@@ -77,7 +77,12 @@ Page({
     pageShow: true,
     positionInfos: {},
     shareType: '',
-    tipsType: ''
+    tipsType: '',
+    model: {
+      show: false,
+      title: '成功生成链接',
+      link: ''
+    }
   },
   onLoad() {
     let choseType = wx.getStorageSync('choseType') || ''
@@ -214,6 +219,7 @@ Page({
   routeJump(e) {
     let route = e.currentTarget.dataset.route
     let orgData = wx.getStorageSync('orgData')
+    let model = this.data.model
     this.setData({tipsType: route})
     switch(route) {
       case 'interested':
@@ -360,18 +366,9 @@ Page({
           wx.navigateTo({url: `${RECRUITER}organization/list/list?type=path-mechanism&companyId=${app.globalData.recruiterDetails.companyTopId}`})
           return
         }
-        // 机构管理员
-        app.wxConfirm({
-          title: '成功生成链接',
-          content: `链接为：${homepageUrl}`,
-          confirmText: '复制链接',
-          showCancel: true,
-          cancelText: '取消',
-          confirmBack: () => {
-            wx.setClipboardData({data: homepageUrl })
-          },
-          cancelBack: () => {}
-        })
+        model.link = homepageUrl
+        model.show = true
+        this.setData({model})
         break
       case 'path-position':
         // 已经有在线职位
@@ -379,36 +376,13 @@ Page({
           wx.navigateTo({url: `${RECRUITER}organization/position/position?type=path-position`})
         } else {
           this.setData({showPublicPositionTips: true})
-          // app.wxConfirm({
-          //   title: '提示',
-          //   content: `您尚未发布职位，请前往发布职位后再生成链接吧。`,
-          //   cancelText: '取消',
-          //   confirmText: '发布职位',
-          //   confirmBack: () => {
-          //     wx.navigateTo({url: `${RECRUITER}position/post/post`})
-          //   },
-          //   cancelBack: () => {}
-          // })
         }
         break
       case 'path-recruiter':
         let recruiterUrl = `${COMMON}recruiterDetail/recruiterDetail?uid=${app.globalData.recruiterDetails.uid}`.slice(1)
-        app.wxConfirm({
-          title: '成功生成链接',
-          content: `链接为：${recruiterUrl}`,
-          confirmText: '复制链接',
-          showCancel: true,
-          cancelText: '取消',
-          cancelBack: () => {},
-          confirmBack: () => {
-            wx.setClipboardData({
-              data: recruiterUrl,
-              success: () => {
-                app.wxToast({title: '成功复制链接'})
-              }
-            })
-          }
-        })
+        model.link = recruiterUrl
+        model.show = true
+        this.setData({model})
         break
       default:
         break
@@ -594,5 +568,13 @@ Page({
   },
   getCreatedImg(e) {
     recruiterCard = e.detail
+  },
+  confirmBtn() {
+    wx.setClipboardData({
+      data: this.data.model.link,
+      success: () => {
+        app.wxToast({title: '成功复制链接'})
+      }
+    })
   }
 })

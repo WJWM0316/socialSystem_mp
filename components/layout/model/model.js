@@ -10,6 +10,9 @@ Component({
     }
   },
   methods: {
+    stopPageScroll() {
+      return false
+    },
     cancel() {
       this.triggerEvent('cancel')
       this.setData({show: false})

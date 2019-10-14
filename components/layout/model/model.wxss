@@ -11,41 +11,50 @@
 .model .box {
   position: fixed;
   top: 50%;
-  left: 40rpx;
-  right: 40rpx;
+  left: 90rpx;
+  right: 90rpx;
   z-index: 21;
   background: #fff;
   transform: translateY(-50%);
+  border-radius: 16rpx;
+  box-sizing: border-box;
+  padding: 40rpx 50rpx;
 }
  
 .model .title {
   padding: 30rpx 40rpx 30rpx 40rpx;
-  font-size: 28rpx;
-  color: #aaa;
   text-align: center;
+  height:44rpx;
+  font-size:36rpx;
+  font-weight:700;
+  color:rgba(40,40,40,1);
+  line-height:44rpx;
+  padding-top: 10rpx;
+  padding-bottom: 20rpx;
 }
  
 .model .body {
-  height: 90rpx;
+  min-height: 90rpx;
   display: flex;
+  text-align: center;
 }
 
 .model .footer {
-  height: 90rpx;
+  height: 42rpx;
   display: flex;
-  line-height: 90rpx;
+  line-height: 42rpx;
   text-align: center;
-  font-size: 30rpx;
-  border-top: 1rpx solid #e5e5e6;
+  font-size:34rpx;
+  color:rgba(188,188,188,1);
 }
 
 .button-cancle {
-  color: #aaa;
+  color: #BCBCBC;
   flex: 1;
 }
  
 .button-confirm {
-  color: #3cc51f;
+  color: #652791;
   border-left: 1rpx solid #e5e5e6;
   flex: 1;
 }

@@ -1,0 +1,66 @@
+.toolManual {
+	min-height: 100vh;
+	background: #EFE9F4;
+}
+
+.fixed-dom{
+	height:80rpx;
+	line-height: 80rpx;
+	background:rgba(255,255,255,1);
+	padding-left: 64rpx;
+	position: relative;
+	overflow: hidden;
+}
+
+.fixed-dom .item{
+	font-size:28rpx;
+	color:rgba(146,146,146,1);
+	display: inline-block;
+	margin-right: 58rpx;
+	position: relative;
+}
+
+.fixed-dom .item::after {
+  content: '';
+  display: block;
+  width:40rpx;
+  height:6rpx;
+  background: #652791;
+  border-radius:4rpx;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  visibility: hidden;
+}
+
+.fixed-dom .active {
+  font-weight:700;
+  color:#282828;
+  pointer-events: none;
+}
+
+.fixed-dom .active::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+.pages {
+	padding-top: 60rpx;
+}
+
+.pages .title {
+	height:65rpx;
+	font-size:46rpx;
+	font-weight:700;
+	color:#282828;
+	line-height:65rpx;
+	text-align: center;
+	padding-bottom: 32rpx;
+}
+
+.pages .strong {
+	color: #652791;
+	display: inline;
+}

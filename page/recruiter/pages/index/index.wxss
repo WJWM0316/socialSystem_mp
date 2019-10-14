@@ -950,3 +950,23 @@
   height: 290rpx;
   margin: 38rpx auto 32rpx auto;
 }
+
+.link11{
+  width: 100%;
+  font-size:28rpx;
+  font-weight:300;
+  color:rgba(40,40,40,1);
+  line-height:42rpx;
+  word-break:break-all;
+  overflow: hidden;
+}
+
+.tips11{
+  font-size:28rpx;
+  font-weight:300;
+  color:rgba(40,40,40,1);
+  line-height:42rpx;
+  margin: 20rpx auto;
+  text-align: center;
+  width: 100%;
+}

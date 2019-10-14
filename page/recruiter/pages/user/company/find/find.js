@@ -77,7 +77,11 @@ Page({
     let formData = this.data.formData
     formData.company_name = name
     this.setData({formData, canClick: true}, () => this.bindButtonStatus())
-    getCompanyNameListApi({name: name, ...app.getSource()}).then(res => {
+    let params = {name: name, ...app.getSource()}
+    if(this.data.options.type === 'company') {
+      params = Object.assign(params, {is_org: 0})
+    }
+    getCompanyNameListApi(params).then(res => {
       let nameList = res.data
       nameList.map(field => {
         field.html = field.companyName.replace(new RegExp(name,'g'),`<span style="color: #652791;">${name}</span>`)

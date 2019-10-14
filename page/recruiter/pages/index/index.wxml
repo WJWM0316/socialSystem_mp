@@ -217,6 +217,14 @@
 		</view>
 	</view>
 
+	<appModel
+		title="{{model.title}}"
+		show="{{model.show}}"
+		bindconfirm="confirmBtn">
+		<view class="link11">链接为：{{model.link}}</view>
+		<view class="tips11">链接使用说明</view>
+	</appModel>
+
   <tabBar id="bottomRedDotBar" tabType="{{showPublicPositionTips ? '' : '1'}}"></tabBar>
   <!-- <shareBtn></shareBtn> -->
   <canvasCard wx:if="{{userInfo.uid}}" cardData="{{userInfo}}" type="recruiter" bindgetCreatedImg="getCreatedImg"></canvasCard>

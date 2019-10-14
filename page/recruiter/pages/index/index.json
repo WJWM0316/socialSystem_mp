@@ -9,6 +9,7 @@
     "navbar": "../../../../components/business/navbar/navbar",
     "shareBtn": "../../../../components/layout/shareBtn/shareBtn",
     "lineChart": "../../components/lineChart/lineChart",
-    "chooseOrgEnter": "../../../../components/business/chooseOrgEnter/chooseOrgEnter"
+    "chooseOrgEnter": "../../../../components/business/chooseOrgEnter/chooseOrgEnter",
+    "appModel": "../../../../components/layout/model/model"
   }
 }

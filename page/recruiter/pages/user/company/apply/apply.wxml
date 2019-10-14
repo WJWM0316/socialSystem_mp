@@ -25,6 +25,13 @@
 	    	<view class="text {{formData.company_name ? 'active' : 'default'}}">{{formData.company_name ? formData.company_name : '请输入公司全称'}}</view>
 	    </view>
 	  </view>
+		
+		<view class="input-li" bindtap="getCompanyName" wx:if="{{options.from === 'join'}}">
+	    <view class="key">所属机构</view>
+	    <view class="value">
+	    	<view class="text {{formData.company_name ? 'active' : 'default'}}">{{formData.company_name ? formData.company_name : '请输入公司全称'}}</view>
+	    </view>
+	  </view>
 
 		<view class="input-li">
 	    <view class="key">职位类别</view>
@@ -55,9 +62,9 @@
 
 	<view class="footer">
     <view bindtap="submit" class="button-submit button-enable">下一步</view>
-    <view class="enter">
+<!--     <view class="enter">
 			<text class="toggle left01" bindtap="toggle">前往求职端</text>|<text class="changePhone right01" bindtap="changePhone">换个账号</text>
-  	</view>
+  	</view> -->
   </view>
 
 </view>

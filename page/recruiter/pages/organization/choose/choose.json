@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-    "navbar": "../../../../../components/business/navbar/navbar"
+    "navbar": "../../../../../components/business/navbar/navbar",
+    "model": "../../../../../components/layout/model/model"
   }
 }

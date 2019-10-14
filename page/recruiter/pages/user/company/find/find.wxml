@@ -28,51 +28,5 @@
 		<view class="bottomBox">
 			<view bindtap="submit" class="button-submit {{canClick ? 'button-enable' : ''}}">下一步</view>
 		</view>
-		
-	</view>
-	<view class="certification-layout {{showMaskBox ? 'certification-layout-show' : ''}}">
-		<view class="mask {{showMaskBox ? 'certification-layout-show' : ''}}"></view>
-		<view class="box {{showMaskBox ? 'box-show' : ''}}">
-			<i class="icon iconfont icon-close"  bindtap="close"></i>
-			<block wx:if="{{type === 'create'}}">
-				<view class="h1">了解创建公司审核流程</view>
-				<view class="ul">
-					<view class="item">
-						<view class="img-box"><view class="circle">1</view></view>
-						<view class="text">
-							<view class="h2">验证公司信息</view>
-							<view class="p">通过录入公司信息与营业执照，工牌名片/在职证明等，验证公司信息；</view>
-						</view>
-					</view>
-					<view class="item">
-						<view class="img-box"><view class="circle">2</view></view>
-						<view class="text">
-							<view class="h2">验证个人身份信息</view>
-							<view class="p">通过录入身份证信息，验证您的本人身份；</view>
-						</view>
-					</view>
-				</view>
-			</block>
-			<block wx:else>
-				<view class="h1">了解面试官身份审核流程</view>
-				<view class="ul">
-					<view class="item">
-						<view class="img-box"><view class="circle">1</view></view>
-						<view class="text">
-							<view class="h2">验证个人身份信息</view>
-							<view class="p">通过录入身份证信息，验证您的本人身份；</view>
-						</view>
-					</view>
-					<view class="item">
-						<view class="img-box"><view class="circle">2</view></view>
-						<view class="text">
-							<view class="h2">验证您与所申请公司的关系 </view>
-							<view class="p">通过提交个人信息与身份信息，公司管理员将验证您所属关系</view>
-						</view>
-					</view>
-				</view>
-			</block>
-			<button class="button-know" bindtap="closeMask">开始审核</button>
-		</view>
 	</view>
 </view>

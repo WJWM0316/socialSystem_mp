@@ -1,0 +1,51 @@
+.model .mask {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 20;
+  background: rgba(0, 0, 0, 0.5);
+}
+ 
+.model .box {
+  position: fixed;
+  top: 50%;
+  left: 40rpx;
+  right: 40rpx;
+  z-index: 21;
+  background: #fff;
+  transform: translateY(-50%);
+}
+ 
+.model .title {
+  padding: 30rpx 40rpx 30rpx 40rpx;
+  font-size: 28rpx;
+  color: #aaa;
+  text-align: center;
+}
+ 
+.model .body {
+  height: 90rpx;
+  display: flex;
+}
+
+.model .footer {
+  height: 90rpx;
+  display: flex;
+  line-height: 90rpx;
+  text-align: center;
+  font-size: 30rpx;
+  border-top: 1rpx solid #e5e5e6;
+}
+
+.button-cancle {
+  color: #aaa;
+  flex: 1;
+}
+ 
+.button-confirm {
+  color: #3cc51f;
+  border-left: 1rpx solid #e5e5e6;
+  flex: 1;
+}

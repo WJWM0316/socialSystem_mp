@@ -10,11 +10,12 @@ import {RECRUITER, COMMON} from '../../../../../config.js'
 let app = getApp()
 Page({
   data: {
-    defaultOrgInfo: app.globalData.recruiterDetails.companyInfo.defaultOrgInfo
+    defaultOrgInfo: {}
   },
   onShow() {
-    console.log(app.globalData.recruiterDetails.companyInfo.defaultOrgInfo)
-    this.setData({defaultOrgInfo: app.globalData.recruiterDetails.companyInfo.defaultOrgInfo})
+    if(wx.getStorageSync('choseType') !== 'APPLICANT') {
+      this.setData({defaultOrgInfo: app.globalData.recruiterDetails.companyInfo.defaultOrgInfo})
+    }
   },
   routeJump() {
     const companyTopId = app.globalData.recruiterDetails.companyTopId

@@ -13,12 +13,20 @@ Page({
     navH: app.globalData.navHeight,
     keyword: '',
     orgList: [],
-    options: {}
+    options: {},
+    title: '添加机构',
+    showModel: false,
+    keyword2: '',
+    activeItem: true,
+    organization: {
+      companyName: '',
+      id: ''
+    }
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad(options) {
     this.setData({options})
     this.getList()
   },
@@ -35,7 +43,7 @@ Page({
   getList () {
     let orgList = this.data.orgList,
         parmas = {
-          company_id: app.globalData.recruiterDetails.companyTopId,
+          company_id: app.globalData.recruiterDetails.companyTopId || 1,
           keyword: keyword || '',
           hasKeyword: true
         }
@@ -68,6 +76,8 @@ Page({
           wx.redirectTo({url: `${RECRUITER}createQr/createQr?type=qr-mechanism&companyId=${item.id}`})
         } else if(this.data.options.type === 'setOrg'){
           this.setCompanyDefaultOrg(item)
+        } else if(this.data.options.type === 'org') {
+          this.setData({activeItem: false})
         } else {
           wx.redirectTo({url: `${COMMON}poster/createPost/createPost?type=company&companyId=${item.id}`})
         }
@@ -86,5 +96,29 @@ Page({
   onUnload: function () {
     timer = null
     keyword = null
+  },
+  confirm() {
+    let organization = this.data.organization
+    organization.id = 2
+    organization.companyName = this.data.keyword2
+    this.setData({organization})
+  },
+  cancel() {
+    let organization = this.data.organization
+    organization.id = ''
+    this.setData({organization})
+  },
+  open() {
+    let organization = this.data.organization
+    // organization.id = 2
+    this.setData({showModel: true, organization})
+  },
+  change(e) {
+    this.setData({keyword2: e.detail.value})
+  },
+  setActive() {
+    let orgList = this.data.orgList
+    orgList.map(field => field.active = false)
+    this.setData({orgList, activeItem: true})
   }
 })

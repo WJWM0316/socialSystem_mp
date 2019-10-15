@@ -4,24 +4,24 @@
 	<view class="search" wx:if="{{options.type !== 'org'}}" style="top: {{navH}}px">
 		<input class="searchBar iconfont" value="{{keyword}}" bindinput="bindInput" type="text" placeholder="{{placeholder}}" placeholder-style="font-family: iconfont" placeholder-class="holderStyle"/>
 	</view>
+	<block wx:if="{{options.type === 'org'}}">
+		<view class="list-item1" wx:if="{{!organization_name}}">
+			<view class="h11">以下机构为该公司所属机构</view>
+			<view class="h22">没找到对应的机构名称？ <view class="strong" bindtap="open">去添加>></view></view>
+		</view>
+		<view class="list-item2" wx:if="{{organization_name}}">
+			<view class="h1111">我添加的 <view class="strong" bindtap="open">去修改>></view></view>
+		</view>
+		<view class="list-item3" bindtap="setActive" wx:if="{{organization_name}}">
+			<view class="h222">{{organization_name}}</view>
+			<view class="radio {{activeItem ? 'radio-checked' : ''}}">
+        <i class="icon iconfont icon-wancheng" wx:if="{{activeItem}}"></i>
+      </view>
+		</view>
+		<view class="h111" wx:if="{{organization_name}}">以下机构为该公司所属机构</view>
+	</block>
 	<view class="organizationList {{options.type === 'org' ? 'orgul' : ''}}">
 		<view class="list">
-				<block wx:if="{{options.type === 'org'}}">
-					<view class="list-item1" wx:if="{{!organization.id}}">
-						<view class="h11">以下机构为该公司所属机构</view>
-						<view class="h22">没找到对应的机构名称？ <view class="strong" bindtap="open">去添加>></view></view>
-					</view>
-					<view class="list-item2" bindtap="setActive" wx:else>
-						<view>
-							<view class="h11">我添加的 <view class="strong" bindtap="open">去修改>></view></view>
-							<view class="h222">{{organization.companyName}}</view>
-						</view>
-						<view class="radio {{activeItem ? 'radio-checked' : ''}}">
-			        <i class="icon iconfont icon-wancheng" wx:if="{{activeItem}}"></i>
-			      </view>
-					</view>
-					<view class="h11" wx:if="{{organization.id}}">以下机构为该公司所属机构</view>
-				</block>
 			<view class="list-item" wx:for="{{orgList}}" wx:key="{{index}}" data-item="{{item}}" bindtap="choose" data-index="{{index}}">
 				<view class="name ellipsis">{{item.companyName}}</view>
 				<view class="radio {{item.active || options.orgId == item.id ? 'radio-checked' : ''}}">
@@ -31,9 +31,13 @@
 		</view>
 	</view>
 	<model
-		title="{{title}}"
+		title="添加机构"
 		show="{{showModel}}"
+		showCancel="{{false}}"
 		bindconfirm="confirm">
-		<input class="input110" bindinput="change" type="text" placeholder="请输入机构名称" value="{{keyword2}}" />
+		<input class="input110" bindinput="change" type="text" placeholder="请输入机构名称" value="{{keyword2}}" placeholder-class="holderStyle"/>
 	</model>
+	<view class="bottomBox" wx:if="{{options.type === 'org'}}">
+		<view bindtap="submit" class="button-submit {{canClick ? 'button-enable' : ''}}">下一步</view>
+	</view>
 </view>

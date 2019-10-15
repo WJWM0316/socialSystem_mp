@@ -24,7 +24,9 @@ Page({
       user_position: '',
       company_name: '',
       position_type_id: '',
-      positionTypeName: ''
+      positionTypeName: '',
+      company_id: '',
+      organization_name: ''
     },
     canClick: false,
     options: {},
@@ -35,6 +37,7 @@ Page({
     applyJoin: false
   },
   onLoad(options) {
+    console.log(options)
     wx.setStorageSync('choseType', 'RECRUITER')
     this.setData({options})
   },
@@ -75,47 +78,26 @@ Page({
     let storage = wx.getStorageSync('createdCompany') || {}
     let options = this.data.options
     let applyJoin = this.data.applyJoin
-    let formData = {}
+    let formData = this.data.formData
     getCompanyIdentityInfosApi({hasLoading}).then(res => {
       let companyInfo = res.data.companyInfo
       let status = 0
       let createPosition = wx.getStorageSync('createPosition')
-      applyJoin = Reflect.has(res.data, 'applyJoin') ? res.data.applyJoin : this.data.applyJoin
-      // 重新创建一条记录
-      if(companyInfo.status === 2) {
-        formData = {
-          real_name: storage.real_name,
-          user_position: storage.user_position,
-          company_name: storage.company_name,
-          company_name: storage.company_name,
-          position_type_id: storage.position_type_id,
-          positionTypeName: storage.positionTypeName
-        }
-        if(createPosition) {
-          formData.position_type_id = createPosition.type
-          formData.positionTypeName = createPosition.typeName
-        }
-        // 审核失败 强制走第一步
-        this.setData({formData, applyJoin: false})
-      } else {
-        formData = {
-          real_name: storage.real_name || companyInfo.realName,
-          user_position: storage.user_position || companyInfo.userPosition,
-          company_name: storage.company_name || companyInfo.companyName,
-          position_type_id: storage.position_type_id || companyInfo.positionTypeId,
-          positionTypeName: storage.positionTypeName || companyInfo.positionTypeName
-        }
-        // 重新编辑 加公司id
-        if(options.action && options.action === 'edit') formData = Object.assign(formData, {id: companyInfo.id, status: companyInfo.status})
-        if(applyJoin) formData = Object.assign(formData, {applyId: companyInfo.applyId})
-        if(createPosition) {
-          formData.position_type_id = createPosition.type
-          formData.positionTypeName = createPosition.typeName
-        }
-        this.setData({formData, canClick: true, applyJoin, status})
-        wx.removeStorageSync('createPosition')
-        wx.setStorageSync('createdCompany', Object.assign(formData, this.data.formData))
+      applyJoin = res.data.joinType === 3 ? true : false
+      formData.real_name = storage.real_name || companyInfo.realName
+      formData.user_position = storage.user_position || companyInfo.userPosition
+      formData.company_name = storage.company_name || companyInfo.companyName
+      formData.position_type_id = storage.position_type_id || companyInfo.positionTypeId
+      formData.positionTypeName = storage.positionTypeName || companyInfo.positionTypeName
+      formData.company_id = storage.company_id || companyInfo.topId
+      formData.organization_name = storage.organization_name || companyInfo.organizationName
+      // 重新编辑 加公司id
+      if(applyJoin) formData = Object.assign(formData, {applyId: companyInfo.applyId})
+      if(createPosition) {
+        formData.position_type_id = createPosition.type
+        formData.positionTypeName = createPosition.typeName
       }
+      this.setData({formData, canClick: true, applyJoin, status}, () => wx.removeStorageSync('createPosition'))
     })
   },
   /**
@@ -177,16 +159,7 @@ Page({
       checkUserPosition
     ])
     .then(res => {
-      if(options.action && options.action === 'edit') {
-        // 对于已有的数据 直接编辑 编辑加入或者创建的信息
-        if(applyJoin) {
-          this.editJoinCompany()
-        } else {
-          this.editCreateCompany()
-        }
-      } else {
-        this.createCompany()
-      }
+      this.createCompany()
     })
     .catch(err => app.wxToast({title: err}))
   },
@@ -245,6 +218,23 @@ Page({
   },
   /**
    * @Author   小书包
+   * @DateTime 2019-04-08
+   * @detail   获取机构名称
+   * @return   {[type]}   [description]
+   */
+  getOrgName() {
+    let storage = wx.getStorageSync('createdCompany') || {}
+    let options = this.data.options
+    let formData = this.data.formData
+    wx.navigateTo({
+      url: `${RECRUITER}organization/choose/choose?type=org&companyId=${formData.company_id || storage.company_id}`,
+      success: () => {
+        wx.setStorageSync('createdCompany', Object.assign(storage, this.data.formData))
+      }
+    })
+  },
+  /**
+   * @Author   小书包
    * @DateTime 2019-01-11
    * @detail   申请加入公司
    * @return   {[type]}   [description]
@@ -257,7 +247,8 @@ Page({
       user_position: formData.user_position,
       company_name: formData.company_name,
       position_type_id: formData.position_type_id, 
-      company_id: formData.id
+      company_id: formData.id,
+      organization_name: formData.organization_name
     }
     hasApplayRecordApi().then(res => {
       // 当前公司已经申请过
@@ -368,6 +359,7 @@ Page({
    * @return   {[type]}   [description]
    */
   createCompany() {
+    let options = this.data.options
     let formData = Object.assign(wx.getStorageSync('createdCompany'), this.data.formData)
     let params = {
       real_name: formData.real_name,
@@ -375,8 +367,14 @@ Page({
       position_type_id: formData.position_type_id, 
       company_name: formData.company_name
     }
+    if(options.type) {
+      params = Object.assign(params, {
+        company_id: formData.company_id,
+        organization_name: formData.organization_name
+      })
+    }
     createCompanyApi(params).then(res => {
-      wx.reLaunch({url: `${RECRUITER}user/company/createdCompanyInfos/createdCompanyInfos?from=company`})
+      wx.reLaunch({url: `${RECRUITER}user/company/createdCompanyInfos/createdCompanyInfos?from=company&type=${res.data.joinType === 1 ? 'company' : 'create_org'}`})
       wx.removeStorageSync('createdCompany')
     })
     // 公司存在 直接走加入流程

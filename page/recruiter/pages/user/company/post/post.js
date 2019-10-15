@@ -23,7 +23,8 @@ Page({
       employees: 0,
       company_shortname: '',
       logo: {},
-      intro: ''
+      intro: '',
+      address: ''
     },
     companyLabelField: [],
     options: {},
@@ -35,23 +36,29 @@ Page({
   },
   onShow() {
     let storage = wx.getStorageSync('createdCompany') || {}
+    let addressInfos = wx.getStorageSync('addAddress')
     getLabelFieldApi().then(res => this.setData({companyLabelField: res.data}))
     getCompanyIdentityInfosApi({hasLoading: false}).then(res => {
       let infos = res.data.companyInfo
-      let formData = {
-        company_name: infos.companyName,
-        company_shortname: storage.company_shortname || infos.companyName,
-        industry_id: storage.industry_id || infos.industryId,
-        industry_id_name: storage.industry_id_name || infos.industry,
-        financing: storage.financing || infos.financing,
-        financingName: storage.financingName || infos.financingInfo,
-        employees: storage.employees || infos.employees,
-        employeesName: storage.employeesName || infos.employeesInfo,
-        intro: storage.intro || infos.intro,
-        logo: storage.logo || infos.logoInfo,
-        id: infos.id,
-        business_license: storage.business_license || infos.businessLicenseInfo,
-        on_job: storage.on_job || infos.onJobInfo
+      let formData = this.data.formData
+      formData.company_name = infos.companyName
+      formData.company_shortname = storage.company_shortname || infos.companyName
+      formData.industry_id = storage.industry_id || infos.industryId
+      formData.industry_id_name = storage.industry_id_name || infos.industry
+      formData.financing = storage.financing || infos.financing
+      formData.financingName = storage.financingName || infos.financingInfo
+      formData.employees = storage.employees || infos.employees
+      formData.employeesName = storage.employeesName || infos.employeesInfo
+      formData.intro = storage.intro || infos.intro
+      formData.logo = storage.logo || infos.logoInfo
+      formData.id = infos.id
+      formData.organization_name = infos.organization_name
+      // formData.business_license = storage.business_license || infos.businessLicenseInfo,
+      // formData.on_job = storage.on_job || infos.onJobInfo,
+      formData.organization_name = storage.organization_name || infos.organizationName
+      if(addressInfos) {
+        formData.address = addressInfos.address + addressInfos.doorplate
+        wx.removeStorageSync('addAddress')
       }
       this.setData({formData})
     })
@@ -78,36 +85,55 @@ Page({
    * @return   {[type]}   [description]
    */
   checkInput() {
-    let formData = this.data.formData
+    let formData = this.data.formData,
+        options = this.data.options,
+        checkLists = [],
+        checkCompanyShortName = '',
+        checkIndustryId = '',
+        checkFinancing = '',
+        checkEmployees = '',
+        logo = '',
+        address = ''
 
-    // 验证公司简称
-    // let checkCompanyShortName = new Promise((resolve, reject) => {
-    //   !formData.company_shortname.trim() ? reject('请输入公司简称') : resolve()
-    // })
+    if(options.type === 'company') {
+      // 验证公司简称
+      // checkCompanyShortName = new Promise((resolve, reject) => {
+      //   !formData.company_shortname.trim() ? reject('请输入公司简称') : resolve()
+      // })
 
-    // 验证行业选项
-    let checkIndustryId = new Promise((resolve, reject) => {
-      !formData.industry_id ? reject('请选择所属行业') : resolve()
-    })
+      // 验证行业选项
+      checkIndustryId = new Promise((resolve, reject) => {
+        !formData.industry_id ? reject('请选择所属行业') : resolve()
+      })
 
-    // 验证融资选项
-    let checkFinancing = new Promise((resolve, reject) => {
-      !formData.financing ? reject('请选择融资情况') : resolve()
-    })
+      // 验证融资选项
+      checkFinancing = new Promise((resolve, reject) => {
+        !formData.financing ? reject('请选择融资情况') : resolve()
+      })
 
-    // 验证人员规模
-    let checkEmployees = new Promise((resolve, reject) => {
-      !formData.employees ? reject('请选择人员规模') : resolve()
-    })
+      // 验证人员规模
+      checkEmployees = new Promise((resolve, reject) => {
+        !formData.employees ? reject('请选择人员规模') : resolve()
+      })
 
-    formData.company_shortname = formData.company_shortname.trim()
+      // formData.company_shortname = formData.company_shortname.trim()
+      checkLists = [
+        //checkCompanyShortName,
+        checkIndustryId,
+        checkFinancing,
+        checkEmployees
+      ]
+    } else {
+      logo = new Promise((resolve, reject) => {
+        !formData.logo.id ? reject('请上传机构图片') : resolve()
+      })
+      address = new Promise((resolve, reject) => {
+        !formData.address ? reject('请选择机构地址') : resolve()
+      })
+      checkLists = [logo, address]
+    }
 
-    Promise.all([
-      // checkCompanyShortName,
-      checkIndustryId,
-      checkFinancing,
-      checkEmployees
-    ])
+    Promise.all(checkLists)
     .then(res => this.submit(formData)).catch(err => app.wxToast({title: err}))
   },
   /**
@@ -183,26 +209,43 @@ Page({
     wx.setStorageSync('createdCompany', Object.assign(storage, this.data.formData))
     wx.navigateTo({url: `${RECRUITER}company/introducingEdit/introducingEdit`})
   },
+  routeAddress() {
+    let storage = wx.getStorageSync('createdCompany') || {}
+    wx.setStorageSync('createdCompany', Object.assign(storage, this.data.formData))
+    wx.navigateTo({url: `${RECRUITER}position/address/address?type=addOrganization`})
+  },
   savaBeforeUpload() {
     let storage = wx.getStorageSync('createdCompany') || {}
     wx.setStorageSync('createdCompany', Object.assign(storage, this.data.formData))
   },
   submit(formData) {
-    let params = {
-      company_name: formData.company_name,
-      industry_id: formData.industry_id,
-      financing: formData.financing,
-      employees: formData.employees,
-      // company_shortname: formData.company_shortname,
-      logo: formData.logo.id,
-      intro: formData.intro,
-      // business_license: this.data.formData.business_license.id,
-      // on_job: this.data.formData.on_job.id,
-      id: formData.id
+    let options = this.data.options
+    let params = {}
+    if(options.type === 'company') {
+      params = Object.assign(params, {
+        company_name: formData.company_name,
+        industry_id: formData.industry_id,
+        financing: formData.financing,
+        employees: formData.employees,
+        // company_shortname: formData.company_shortname,
+        logo: formData.logo.id,
+        intro: formData.intro,
+        // business_license: this.data.formData.business_license.id,
+        // on_job: this.data.formData.on_job.id,
+        id: formData.id
+      })
+    } else {
+      params = Object.assign(params, {
+        logo: formData.logo.id,
+        intro: formData.intro,
+        id: formData.id,
+        address: formData.address,
+        company_name: formData.organization_name
+      })
     }
     perfectCompanyApi(params).then(res => {
       wx.removeStorageSync('createdCompany')
-      wx.reLaunch({url: `${RECRUITER}user/company/status/status?from=company`})
+      wx.reLaunch({url: `${RECRUITER}user/company/status/status?from=${options.type === 'company' ? 'company' : 'create_org'}`})
     })
     .catch(err => {
       if(err.code === 307) {

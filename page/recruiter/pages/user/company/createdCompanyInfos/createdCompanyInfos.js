@@ -57,7 +57,8 @@ Page({
    * @return   {[type]}   [description]
    */
   changeIndentifyMethods() {
-    wx.navigateTo({url: `${RECRUITER}user/company/post/post`})
+    let options = this.data.options
+    wx.navigateTo({url: `${RECRUITER}user/company/post/post?type=${options.type === 'company' ? 'company' : 'create_org'}`})
   },
   /**
    * @Author   小书包

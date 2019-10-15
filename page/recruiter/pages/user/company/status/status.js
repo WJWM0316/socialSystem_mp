@@ -17,7 +17,6 @@ Page({
       showBack: true
     },
     hasReFresh: false,
-    applyJoin: false,
     cdnImagePath: app.globalData.cdnImagePath,
     telePhone: app.globalData.telePhone,
     showHome: false
@@ -34,29 +33,10 @@ Page({
     let companyInfos = this.data.companyInfos
     let options = this.data.options
     let identityInfos = this.data.identityInfos
-    let applyJoin = this.data.applyJoin
-    let from = applyJoin ? 'join' : 'company'
-    
+
   	switch(params.action) {
-  		case 'identity':
-        // 没有填写身份信息或者身份信息审核失败
-        if(!identityInfos.haveIdentity) {
-          wx.navigateTo({url: `${RECRUITER}user/company/identity/identity?from=${options.from}`})
-        } else {
-          if((identityInfos.status === 2 || identityInfos.status === 0) && options.from === 'identity') {
-            wx.navigateTo({url: `${RECRUITER}user/company/identity/identity?from=${options.from}`})
-          } else {
-            wx.navigateTo({url: `${RECRUITER}user/company/status/status?from=identity`})
-          }
-        }
-  			break
   		case 'modifyCompany':
-        // 审核失败后  应该重新加一条数据
-        if(companyInfos.status === 2) {
-          wx.reLaunch({url: `${RECRUITER}user/company/apply/apply`})
-        } else {
-          wx.reLaunch({url: `${RECRUITER}user/company/apply/apply?action=edit`})
-        }
+        wx.reLaunch({url: `${RECRUITER}user/company/apply/apply`})
   			break
       case 'email':
         wx.navigateTo({url: `${RECRUITER}user/company/email/email?id=${app.globalData.recruiterDetails.companyInfo.id}`})
@@ -68,29 +48,21 @@ Page({
         wx.navigateTo({url: `${COMMON}recruiterDetail/recruiterDetail?uid=${app.globalData.recruiterDetails.uid}`})
         break
       case 'applyModify':
-        if(companyInfos.status === 2) {
-          wx.reLaunch({url: `${RECRUITER}user/company/apply/apply`})
-        } else {
-          wx.reLaunch({url: `${RECRUITER}user/company/apply/apply?action=edit`})
-        }
+        wx.navigateTo({url: `${RECRUITER}user/company/apply/apply?type=join`})
+        break
+      case 'createOrgModify':
+        wx.navigateTo({url: `${RECRUITER}user/company/apply/apply?type=create_org`})
         break
       case 'recruitment':        
         if(companyInfos.status === 1) {
           wx.reLaunch({url: `${RECRUITER}index/index`})
-          return;
-        }
-
-        if(options.from === 'identity' && companyInfos.status !== 1) {
-          wx.reLaunch({url: `${RECRUITER}user/company/status/status?from=${from}`})
-          return;
         }
         break
       case 'call':
         wx.makePhoneCall({phoneNumber: app.globalData.telePhone})
         break
       case 'notice':
-        notifyadminApi()
-        .then(() => {
+        notifyadminApi().then(() => {
           app.wxToast({title: '通知成功'})
         })
         .catch(err => {
@@ -124,47 +96,44 @@ Page({
         let options = this.data.options
         // 个人身份信息
         let identityInfos = res.data
-        // 是否加入
-        let applyJoin = res.data.applyJoin
         // 是否返回上一页
         let isReturnBack = false
-        // 是否已经填写个人信息
-        let hasOwerInfos = false
         // 是否返回上一页
         let showHome = this.data.showHome
 
-        if(applyJoin) {
-          pageTitle = '申请加入公司'
-        } else {
-          pageTitle = '公司认证'
+        switch(res.data.joinType) {
+          case 1:
+            pageTitle = '创建公司审核'
+            break
+          case 2:
+            pageTitle = '创建机构审核'
+            break
+          case 3:
+            pageTitle = '加入机构审核'
+            break
+          default:
+            break
         }
 
         if(companyInfos.status === 1) {
           options.showBack = false
         }
 
-        if(options.from === 'identity' || (companyInfos.status === 1 && identityInfos.status === 2)) {
-          pageTitle = '身份认证'
-          options.showBack = true
-        }
-
         if(identityInfos.status === 1 && companyInfos.status === 1) {
           showHome = true
         }
-
-        this.setData({identityInfos, companyInfos, pageTitle, applyJoin, options, showHome}, () => resolve(res))
+        this.setData({identityInfos, companyInfos, pageTitle, options, showHome}, () => resolve(res))
       })
     })
   },
   // 下拉刷新
   onPullDownRefresh() {
-    this.setData({hasReFresh: true})
-    this.getCompanyIdentityInfos(false).then(res => {
+    let callback = () => {
       this.setData({hasReFresh: false})
       wx.stopPullDownRefresh()
-    }).catch(e => {
-      wx.stopPullDownRefresh()
-    })
+    }
+    this.setData({hasReFresh: true})
+    this.getCompanyIdentityInfos(false).then(res => callback()).catch(e => callback())
   },
   /**
    * @Author   小书包
@@ -193,13 +162,5 @@ Page({
   },
   backEvent() {
     wx.navigateBack({delta: 1})
-    // let options = this.data.options
-    // let applyJoin = this.data.applyJoin
-    // let from = applyJoin ? 'join' : 'company'
-    // if(options.reBack == 2) {
-    //   wx.reLaunch({url: `${RECRUITER}user/company/status/status?from=${from}`})
-    // } else {
-    //   wx.navigateBack({delta: 1})
-    // }
   }
 })

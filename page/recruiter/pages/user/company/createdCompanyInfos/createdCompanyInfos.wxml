@@ -1,9 +1,11 @@
 <view class="createdCompanyInfos">
 	<navbar title="公司认证" background="#fff" color="#22292C" customBack bindbackEvent="backEvent"></navbar>
+
 	<view hidden="{{!hasReFresh}}">
 	  <refreshStatus></refreshStatus>
 	</view>
-	<view class="header">
+
+	<view class="header" wx:if="{{options.type === 'company'}}">
 		<view class="icon-box">
 			<i class="icon iconfont icon-tijiaoshenqing"></i>
 		</view>
@@ -12,8 +14,18 @@
 			<view class="h2">我们将在1个工作日内，协助你开通招聘服务</view>
 		</view>
 	</view>
+	
+	<view class="header" wx:if="{{options.type === 'create_org'}}">
+		<view class="icon-box">
+			<i class="icon iconfont icon-tijiaoshenqing"></i>
+		</view>
+		<view class="content">
+			<view class="h1">创建机构申请已提交</view>
+			<view class="h2">该申请将由公司管理员进行审核，通过后您将成为该机构管理员</view>
+		</view>
+	</view>
 
-	<view class="div">
+	<view class="div" wx:if="{{options.type === 'company'}}">
 		<view class="p">根据人力资源相关法规要求，我们将联系你完成以下认证：</view>
 		<view class="ul">
 			<view class="li">

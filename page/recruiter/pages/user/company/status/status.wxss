@@ -326,12 +326,22 @@
 	font-weight:600;
 	color:rgba(11,9,26,1);
 	margin-right: 5rpx;
+	max-width: 300rpx;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	display: inline-block;
+	line-height: 65rpx;
+	vertical-align: middle;
 }
 
 .item .degress {
 	font-size:28rpx;
 	font-weight:400;
 	color:rgba(146,146,146,1);
+	display: inline-block;
+	line-height: 65rpx;
+	vertical-align: middle;
 }
 
 .item .button-box {

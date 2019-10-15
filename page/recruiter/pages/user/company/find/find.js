@@ -3,7 +3,8 @@ import {
   getCompanyNameListApi,
   justifyCompanyExistApi,
   editApplyCompanyApi,
-  getCompanyIdentityInfosApi
+  getCompanyIdentityInfosApi,
+  getCompanyNameList1Api
 } from '../../../../../../api/pages/company.js'
 
 import {companyNameReg} from '../../../../../../utils/fieldRegular.js'
@@ -81,7 +82,7 @@ Page({
     if(this.data.options.type === 'company') {
       params = Object.assign(params, {is_org: 0})
     }
-    getCompanyNameListApi(params).then(res => {
+    getCompanyNameList1Api(params).then(res => {
       let nameList = res.data
       nameList.map(field => {
         field.html = field.companyName.replace(new RegExp(name,'g'),`<span style="color: #652791;">${name}</span>`)
@@ -99,8 +100,14 @@ Page({
   selectCompany(e) {
     let params = e.currentTarget.dataset
     let formData = this.data.formData
+    let nameList = this.data.nameList
     formData.company_name = params.name
-    this.setData({canClick: true, formData, nameList: []})
+    nameList.map(field => {
+      field.html = field.companyName
+      field.html = field.companyName.replace(new RegExp(formData.company_name,'g'),`<span style="color: #652791;">${formData.company_name}</span>`)
+      field.html = `<div>${field.html}</div>`
+    })
+    this.setData({canClick: true, formData, nameList})
   },
   submit() {
     if(!this.data.canClick) return;
@@ -108,13 +115,17 @@ Page({
     let storage = wx.getStorageSync('createdCompany')
     let nameList = this.data.nameList
     let item = nameList.find(field => field.companyName == company_name)
+    let cacheData = wx.getStorageSync('createdCompany')
+    cacheData = Object.assign(cacheData, {company_name: company_name})
     if(item) {
+      wx.setStorageSync('createdCompany', cacheData)
       wx.navigateTo({url: `${RECRUITER}organization/choose/choose?type=org&companyId=${item.id}`})
     } else {
       company_name = company_name.trim()
       storage.company_name = company_name
       wx.setStorageSync('createdCompany', storage)
-      wx.navigateBack({delta: 1 })
+      // wx.navigateBack({delta: 1 })
+      wx.reLaunch({url: `${RECRUITER}user/company/apply/apply`})
     }
   }
 })

@@ -11,8 +11,8 @@
 .model .box {
   position: fixed;
   top: 50%;
-  left: 90rpx;
-  right: 90rpx;
+  left: 50rpx;
+  right: 50rpx;
   z-index: 21;
   background: #fff;
   transform: translateY(-50%);
@@ -40,9 +40,7 @@
 }
 
 .model .footer {
-  height: 42rpx;
   display: flex;
-  line-height: 42rpx;
   text-align: center;
   font-size:34rpx;
   color:rgba(188,188,188,1);
@@ -51,10 +49,23 @@
 .button-cancle {
   color: #BCBCBC;
   flex: 1;
+  border-right: 1rpx solid #e5e5e6;
+  height: 42rpx;
+  line-height: 42rpx;
 }
- 
+
 .button-confirm {
   color: #652791;
-  border-left: 1rpx solid #e5e5e6;
   flex: 1;
+  height: 42rpx;
+  line-height: 42rpx;
+}
+
+.button-active {
+  height:98rpx;
+  background:rgba(110,34,150,1);
+  border-radius:49rpx;
+  font-size:32rpx;
+  color:rgba(255,255,255,1);
+  line-height: 98rpx;
 }

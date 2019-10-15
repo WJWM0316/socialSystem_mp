@@ -115,7 +115,7 @@
 				</view>
 				<view class="button-box">
 					<view class="reject" data-action="recruiter-reject" bindtap="todoAction">不合适</view>
-					<view class="accept" data-action="recruiter-accept" bindtap="todoAction" data-status="{{'f'}}">确认约面</view>
+					<view class="accept" data-action="recruiter-accept" bindtap="todoAction" data-status="{{'f'}}">查看联系</view>
 				</view>
 			</block>
 			<!-- 求职端已开启撩 招聘端可接受可拒绝 end-->

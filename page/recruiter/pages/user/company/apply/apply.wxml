@@ -26,10 +26,10 @@
 	    </view>
 	  </view>
 		
-		<view class="input-li" bindtap="getCompanyName" wx:if="{{options.from === 'join'}}">
+		<view class="input-li" bindtap="getOrgName" wx:if="{{options.type}}">
 	    <view class="key">所属机构</view>
 	    <view class="value">
-	    	<view class="text {{formData.company_name ? 'active' : 'default'}}">{{formData.company_name ? formData.company_name : '请输入公司全称'}}</view>
+	    	<view class="text {{formData.organization_name ? 'active' : 'default'}}">{{formData.organization_name ? formData.organization_name : '请输入机构全称'}}</view>
 	    </view>
 	  </view>
 

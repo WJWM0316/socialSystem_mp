@@ -4,8 +4,13 @@
 	    <view class="title">{{title}}</view>
 	    <body><slot></slot></body>
 	    <view class="footer">
-	    	<view class="button-cancle" bindtap="cancel">取消</view>
-	      <view class="button-confirm" bindtap="confirm">确定</view>
+	    	<block wx:if="{{showCancel}}">
+	    		<view class="button-cancle" bindtap="cancel">{{btnCancel}}</view>
+	      	<view class="button-confirm" bindtap="confirm">{{btnConfirm}}</view>
+	    	</block>
+	    	<block wx:else>
+	    		<view class="button-confirm button-active" bindtap="confirm">{{btnConfirm}}</view>
+	    	</block>
 	    </view>
 	  </view>
 	</view>

@@ -18,8 +18,8 @@ let toAuth = false,
 let recruiterJump = (msg) => {
   let companyInfo = msg.data.companyInfo
   let identityInfo = msg.data
-  // let applyJoin = msg.data.applyJoin
-  if(Reflect.has(msg.data, 'applyJoin') && msg.data.applyJoin) {
+
+  if(msg.data.joinType === 3) {
     // 加入公司
     wx.reLaunch({url: `${RECRUITER}user/company/status/status?from=join`})
   } else {
@@ -28,12 +28,12 @@ let recruiterJump = (msg) => {
       wx.reLaunch({url: `${RECRUITER}user/company/apply/apply`})
     } else {
       if(companyInfo.status === 1) {
-        wx.reLaunch({url: `${RECRUITER}index/index`})
+        wx.reLaunch({url: `${RECRUITER}index/index?type=${msg.data.joinType === 1 ? 'company' : 'create_org'}`})
       } else {
         if(companyInfo.status === 3) {
-          wx.reLaunch({url: `${RECRUITER}user/company/createdCompanyInfos/createdCompanyInfos`})
+          wx.reLaunch({url: `${RECRUITER}user/company/createdCompanyInfos/createdCompanyInfos?type=${msg.data.joinType === 1 ? 'company' : 'create_org'}`})
         } else {
-          wx.reLaunch({url: `${RECRUITER}user/company/status/status?from=company`})
+          wx.reLaunch({url: `${RECRUITER}user/company/status/status?from=${msg.data.joinType === 1 ? 'company' : 'create_org'}`})
         }
       }
     }

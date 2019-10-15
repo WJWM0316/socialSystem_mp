@@ -1,74 +1,109 @@
 <view class="company-post">
-	<navbar title="完善公司信息" background="#FFFFFF" color="#22292C" showBackBtn="{{true}}"></navbar>
+	<navbar
+		title="完善{{options.type === 'company' ? '公司' : '机构'}}信息"
+		background="#FFFFFF"
+		color="#22292C"
+		showBackBtn="{{true}}">
+	</navbar>
 	<view class="warning"><i class="icon iconfont icon-tixing"></i>请确保上传的公司信息真实有效，有助审核通过</view>
 
 	<view bindsubmit="submit" class="entry-list">
+		
+		<block wx:if="{{options.type === 'company'}}">
 
-		<view class="li">
-			<view class="key"><text>*</text>公司全称</view>
-			<view class="value">{{formData.company_name}}</view>
-		</view>
+			<view class="li">
+				<view class="key"><text>*</text>公司全称</view>
+				<view class="value">{{formData.company_name}}</view>
+			</view>
 
-		<view class="li upload">
-			<view class="key">公司logo</view>
-			<view class="logo-box">
-				<view class="logo" bindtap="savaBeforeUpload">
-					<unloadFile bindresultEvent="upload" unloadType="img" number="{{number}}">
-						<image wx:if="{{!formData.logo.smallUrl}}" src="{{cdnPath}}pic_dafult_company.png" class="placeholder-image" mode="aspectFit"></image>
-						<image src="{{formData.logo.smallUrl}}" wx:if="{{formData.logo.smallUrl}}" mode="aspectFit" class="upload-image"></image>
-					</unloadFile>
+			<view class="li upload">
+				<view class="key">公司logo</view>
+				<view class="logo-box">
+					<view class="logo" bindtap="savaBeforeUpload">
+						<unloadFile bindresultEvent="upload" unloadType="img" number="{{number}}">
+							<image wx:if="{{!formData.logo.smallUrl}}" src="{{cdnPath}}pic_dafult_company.png" class="placeholder-image" mode="aspectFit"></image>
+							<image src="{{formData.logo.smallUrl}}" wx:if="{{formData.logo.smallUrl}}" mode="aspectFit" class="upload-image"></image>
+						</unloadFile>
+					</view>
+				</view>
+				<i class="icon iconfont icon-xiangyou"></i>
+			</view>
+
+		<!-- 	<view class="li link {{formData.company_shortname ? 'clear-bottom' : ''}}">
+				<view class="key"><text>*</text>公司简称</view>
+				<input type="text" class="companyShortName {{formData.company_shortname ? 'color' : ''}}" placeholder="示例：多多社交招聘系统" placeholder-class="defaultColor" value="{{formData.company_shortname}}" bindinput="bindInput" maxlength="10" bindfocus="setFocusByFocus" bindblur="setFocusByBlur"></input>
+			</view> -->
+
+			<view class="exemple" wx:if="{{formData.company_shortname || isFocus}}">注： 公司简称能让候选人记住你的公司，可以是品牌名/产品名/关键字等，创建后不可修改</view>
+
+			<view class="li">
+				<i class="icon iconfont icon-xiangyou"></i>
+				<view class="key"><text>*</text>所属行业</view>
+				<view class="value self {{formData.industry_id ? 'color' : ''}}">{{ formData.industry_id ? formData.industry_id_name : '请选择'}}</view>
+				<view class="picker-box">
+					<picker
+						range="{{ companyLabelField }}" 
+						mode="selector" 
+						value="{{ companyLabelField[formData.industry_id] }}" 
+						range-key="{{ 'name' }}"
+						bindchange="bindChange"
+						data-key="industry_id">
+				    <view class="value" wx:if="{{!industry_id}}">请选择</view>
+				    <view class="value" wx:else>{{ formData.industry_id_name }}</view>
+				  </picker>
 				</view>
 			</view>
-			<i class="icon iconfont icon-xiangyou"></i>
-		</view>
 
-	<!-- 	<view class="li link {{formData.company_shortname ? 'clear-bottom' : ''}}">
-			<view class="key"><text>*</text>公司简称</view>
-			<input type="text" class="companyShortName {{formData.company_shortname ? 'color' : ''}}" placeholder="示例：多多社交招聘系统" placeholder-class="defaultColor" value="{{formData.company_shortname}}" bindinput="bindInput" maxlength="10" bindfocus="setFocusByFocus" bindblur="setFocusByBlur"></input>
-		</view> -->
-
-		<view class="exemple" wx:if="{{formData.company_shortname || isFocus}}">注： 公司简称能让候选人记住你的公司，可以是品牌名/产品名/关键字等，创建后不可修改</view>
-
-		<view class="li">
-			<i class="icon iconfont icon-xiangyou"></i>
-			<view class="key"><text>*</text>所属行业</view>
-			<view class="value self {{formData.industry_id ? 'color' : ''}}">{{ formData.industry_id ? formData.industry_id_name : '请选择'}}</view>
-			<view class="picker-box">
-				<picker
-					range="{{ companyLabelField }}" 
-					mode="selector" 
-					value="{{ companyLabelField[formData.industry_id] }}" 
-					range-key="{{ 'name' }}"
-					bindchange="bindChange"
-					data-key="industry_id">
-			    <view class="value" wx:if="{{!industry_id}}">请选择</view>
-			    <view class="value" wx:else>{{ formData.industry_id_name }}</view>
-			  </picker>
+			<view class="li">
+				<view class="key"><text>*</text>融资阶段</view>
+				<i class="icon iconfont icon-xiangyou"></i>
+			  <view class="value wid">
+			  	<myPicker pickerType="financing" setResult="{{formData.financingName}}" rangeKey="text" bindresultevent="getFinancing" data-type="financing"></myPicker>
+			  </view>
 			</view>
-		</view>
 
-		<view class="li">
-			<view class="key"><text>*</text>融资阶段</view>
-			<i class="icon iconfont icon-xiangyou"></i>
-		  <view class="value wid">
-		  	<myPicker pickerType="financing" setResult="{{formData.financingName}}" rangeKey="text" bindresultevent="getFinancing" data-type="financing"></myPicker>
-		  </view>
-		</view>
+			<view class="li">
+				<i class="icon iconfont icon-xiangyou"></i>
+				<view class="key"><text>*</text>人员规模</view>
+			  <view class="value wid">
+			  	<myPicker pickerType="staffMembers" setResult="{{formData.employeesName}}" rangeKey="text" bindresultevent="getStaffMembers" data-type="staffMembers"></myPicker>
+			  </view>
+			</view>
 
-		<view class="li">
-			<i class="icon iconfont icon-xiangyou"></i>
-			<view class="key"><text>*</text>人员规模</view>
-		  <view class="value wid">
-		  	<myPicker pickerType="staffMembers" setResult="{{formData.employeesName}}" rangeKey="text" bindresultevent="getStaffMembers" data-type="staffMembers"></myPicker>
-		  </view>
-		</view>
-
-		<view class="li clear-bottom" bindtap="routeJump">
-			<view class="key">公司介绍</view>
-			<i class="icon iconfont icon-xiangyou"></i>
-			<view class="value self {{formData.intro ? 'color' : ''}}">{{!formData.intro ? '填写公司介绍' : formData.intro}}</view>
-		</view>
-
+			<view class="li clear-bottom" bindtap="routeJump">
+				<view class="key">公司介绍</view>
+				<i class="icon iconfont icon-xiangyou"></i>
+				<view class="value self {{formData.intro ? 'color' : ''}}">{{!formData.intro ? '填写公司介绍' : formData.intro}}</view>
+			</view>
+		</block>
+		<block wx:if="{{options.type === 'create_org'}}">
+			<view class="li">
+				<view class="key"><text>*</text>机构全称</view>
+				<view class="value">{{formData.organization_name}}</view>
+			</view>
+			<view class="li upload">
+				<view class="key"><text>*</text>机构logo</view>
+				<view class="logo-box">
+					<view class="logo" bindtap="savaBeforeUpload">
+						<unloadFile bindresultEvent="upload" unloadType="img" number="{{number}}">
+							<image wx:if="{{!formData.logo.smallUrl}}" src="{{cdnPath}}pic_dafult_company.png" class="placeholder-image" mode="aspectFit"></image>
+							<image src="{{formData.logo.smallUrl}}" wx:if="{{formData.logo.smallUrl}}" mode="aspectFit" class="upload-image"></image>
+						</unloadFile>
+					</view>
+				</view>
+				<i class="icon iconfont icon-xiangyou"></i>
+			</view>
+			<view class="li clear-bottom" bindtap="routeJump">
+				<view class="key">公司介绍</view>
+				<i class="icon iconfont icon-xiangyou"></i>
+				<view class="value self {{formData.intro ? 'color' : ''}}">{{!formData.intro ? '填写公司介绍' : formData.intro}}</view>
+			</view>
+			<view class="li clear-bottom" bindtap="routeAddress">
+				<view class="key"><text>*</text>机构地址</view>
+				<i class="icon iconfont icon-xiangyou"></i>
+				<view class="value self {{formData.address ? 'color' : ''}}">{{!formData.address ? '请选择机构地址' : formData.address}}</view>
+			</view>
+		</block>
 	  <view class="btn-area">
 	    <view bindtap="checkInput" class="button-submit button-enable">下一步</view>
 	  </view>

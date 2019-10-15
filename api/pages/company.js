@@ -410,11 +410,21 @@ export const deleteCompanyIdentityInfosApi = (data, hasLoading) => {
   })
 }
 
-// 搜索公司
+// 搜索机构
 export const getCompanyNameListApi = (data, hasLoading) => {
   return request({
     method: 'get',
     url: `/search/company_name`,
+    data,
+    hasLoading: true
+  })
+}
+
+// 搜索公司
+export const getCompanyNameList1Api = (data, hasLoading) => {
+  return request({
+    method: 'get',
+    url: `/company/namelist`,
     data,
     hasLoading: true
   })

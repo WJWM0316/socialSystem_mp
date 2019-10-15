@@ -384,6 +384,15 @@ Page({
         model.show = true
         this.setData({model})
         break
+      case 'intruduction':
+        wx.navigateTo({
+          url: `${RECRUITER}toolManual/toolManual`,
+          success: () => {
+            model.show = false
+            setTimeout(() => this.setData({model}), 600)
+          }
+        })
+        break
       default:
         break
     }

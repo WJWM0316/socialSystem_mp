@@ -7,6 +7,18 @@ Component({
     title: {
       type: String,
       value: '提示'
+    },
+    btnCancel: {
+      type: String,
+      value: '取消'
+    },
+    btnConfirm: {
+      type: String,
+      value: '确定'
+    },
+    showCancel: {
+      type: Boolean,
+      value: true
     }
   },
   methods: {

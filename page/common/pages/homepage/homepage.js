@@ -164,7 +164,6 @@ Page({
   swiperChange(e) {
     this.setData({swiperIndex: e.detail.current})
   },
-
   copyLink() {
     wx.setClipboardData({data: this.data.companyInfos.website })
   },

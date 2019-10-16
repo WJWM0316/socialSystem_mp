@@ -42,9 +42,7 @@ Page({
   onLoad(options) {
     recruiterCard = ''
     if (options.scene) options = app.getSceneParams(options.scene)
-    if (identity !== 'RECRUITER') {
-      this.setData({isApplicant: true})
-    }
+    if (identity !== 'RECRUITER') this.setData({isApplicant: true})
     identity = app.identification(options)
     this.setData({options})
   },

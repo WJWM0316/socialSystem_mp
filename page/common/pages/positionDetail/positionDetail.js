@@ -155,6 +155,7 @@ Page({
           identity: wx.getStorageSync('choseType')
         })
         if(this.selectComponent('#interviewBar')) this.selectComponent('#interviewBar').init()
+        if (this.data.query.pick) this.selectComponent('#shareBtn').oper()
     })
   },
 

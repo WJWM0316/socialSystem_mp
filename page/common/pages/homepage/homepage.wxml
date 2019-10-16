@@ -68,7 +68,7 @@
 					data-index="{{ swiperIndex }}"
 					autoplay="{{autoplay}}">
 					<swiper-item class="swiper-item {{swiperIndex == index ? 'div-active' : ''}}" wx:for="{{companyInfos.albumInfo}}" wx:key="{{index}}" wx:for-item="item">
-						<image mode="aspectFill" class="slide-image {{swiperIndex == index ? 'active' : ''}}" src="{{item.url}}" bindtap="previewImage" />
+						<image lazy-load mode="aspectFill" class="slide-image {{swiperIndex == index ? 'active' : ''}}" src="{{item.middleUrl}}" bindtap="previewImage" />
 					</swiper-item>
 				</swiper>
 			</view>

@@ -1,6 +1,7 @@
 import {
   getCompanyIdentityInfosApi,
-  perfectCompanyApi
+  perfectCompanyApi,
+  addOrgAdressApi
 } from '../../../../../../api/pages/company.js'
 
 import {
@@ -41,24 +42,26 @@ Page({
     getCompanyIdentityInfosApi({hasLoading: false}).then(res => {
       let infos = res.data.companyInfo
       let formData = this.data.formData
-      formData.company_name = infos.companyName
-      formData.company_shortname = storage.company_shortname || infos.companyName
-      formData.industry_id = storage.industry_id || infos.industryId
-      formData.industry_id_name = storage.industry_id_name || infos.industry
-      formData.financing = storage.financing || infos.financing
-      formData.financingName = storage.financingName || infos.financingInfo
-      formData.employees = storage.employees || infos.employees
-      formData.employeesName = storage.employeesName || infos.employeesInfo
-      formData.intro = storage.intro || infos.intro
-      formData.logo = storage.logo || infos.logoInfo
-      formData.id = infos.id
-      formData.organization_name = infos.organization_name
-      // formData.business_license = storage.business_license || infos.businessLicenseInfo,
-      // formData.on_job = storage.on_job || infos.onJobInfo,
-      formData.organization_name = storage.organization_name || infos.organizationName
+      formData = Object.assign(formData, {
+        company_name: infos.companyName,
+        company_shortname: storage.company_shortname || infos.companyName,
+        industry_id: storage.industry_id || infos.industryId,
+        industry_id_name: storage.industry_id_name || infos.industry,
+        financing: storage.financing || infos.financing,
+        financingName: storage.financingName || infos.financingInfo,
+        employees: storage.employees || infos.employees,
+        employeesName: storage.employeesName || infos.employeesInfo,
+        intro: storage.intro || infos.intro,
+        logo: storage.logo || infos.logoInfo,
+        id: infos.id,
+        topId: infos.topId || 0,
+        organization_name: infos.organization_name,
+        business_license: storage.business_license || infos.businessLicenseInfo,
+        on_job: storage.on_job || infos.onJobInfo,
+        organization_name: storage.organization_name || infos.organizationName
+      })
       if(addressInfos) {
         formData.address = addressInfos.address + addressInfos.doorplate
-        wx.removeStorageSync('addAddress')
       }
       this.setData({formData})
     })
@@ -134,7 +137,10 @@ Page({
     }
 
     Promise.all(checkLists)
-    .then(res => this.submit(formData)).catch(err => app.wxToast({title: err}))
+    .then(res => this.submit(formData)).catch(err => {
+      console.log(err)
+      app.wxToast({title: err})
+    })
   },
   /**
    * @Author   小书包
@@ -218,6 +224,20 @@ Page({
     let storage = wx.getStorageSync('createdCompany') || {}
     wx.setStorageSync('createdCompany', Object.assign(storage, this.data.formData))
   },
+  addOrgAddress() {
+    let addressInfos = wx.getStorageSync('addAddress')
+    return addOrgAdressApi({
+      areaId: addressInfos.area_id,
+      address: addressInfos.address,
+      doorplate: addressInfos.doorplate,
+      lng: addressInfos.lng,
+      lat: addressInfos.lat,
+      is_temp: 1,
+      id: this.data.formData.id
+    }).then(() => {
+      wx.removeStorageSync('addAddress')
+    })
+  },
   submit(formData) {
     let options = this.data.options
     let params = {}
@@ -242,6 +262,7 @@ Page({
         address: formData.address,
         company_name: formData.organization_name
       })
+      this.addOrgAddress()
     }
     perfectCompanyApi(params).then(res => {
       wx.removeStorageSync('createdCompany')

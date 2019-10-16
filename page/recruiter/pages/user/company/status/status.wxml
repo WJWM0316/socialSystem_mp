@@ -1,291 +1,292 @@
-<navbar title="{{pageTitle}}" background="#FFFFFF" color="#22292C" showHome="{{showHome}}"></navbar>
+<block wx:if="{{companyInfos.id}}">
+	<navbar title="{{pageTitle}}" background="#FFFFFF" color="#22292C" showHome="{{showHome}}"></navbar>
 
-<view class="company-identity-status">
-	
-	<view hidden="{{!hasReFresh}}">
-	  <refreshStatus></refreshStatus>
-	</view>
-
-	<!-- 创建公司 start -->
-	<view class="header" wx:if="{{options.from === 'company'}}">
-		<image
-			src="{{cdnImagePath}}pic_await001.png"
-			mode="scaleToFill"
-			class="default-status"
-			wx:if="{{companyInfos.status === 0}}"></image>
-		<image
-			src="{{cdnImagePath}}pic_defeated001.png"
-			mode="scaleToFill"
-			class="default-status"
-			wx:if="{{companyInfos.status === 2}}"></image>
-		<image
-		src="{{cdnImagePath}}pic_succeed001.png" 
-		mode="scaleToFill" 
-		class="default-status"
-		wx:if="{{companyInfos.status === 1}}"></image>
-
-		<block wx:if="{{companyInfos.status === 0}}">
-			<view class="h1">公司认证审核中</view>
-			<view class="p">该申请将在1个工作日内审核，通过后即可开始招聘</view>
-		</block>
-		<block wx:elif="{{companyInfos.status === 2}}">
-			<view class="h3">公司认证审核未通过</view>
-			<view class="p2">请重新提交资料，完成公司创建</view>
-			<view class="h2">公司认证审核未通过的原因如下</view>
-			<view class="reation" wx:if="{{companyInfos.reviewNote}}">
-				<text wx:if="{{companyInfos.reviewNote}}">{{companyInfos.reviewNote}}</text>
-				<!-- <text wx:if="{{identityInfos.reviewNote}}">{{identityInfos.reviewNote}}</text> -->
-				<view bindtap="todoAction" data-action="modifyCompany" class="p5">重新提交认证信息>></view>
-			</view>
-		</block>
-		<block wx:else>
-			<view class="h1">公司认证审核已通过</view>
-			<view class="p3">{{companyInfos.companyName}}</view>
-			<view class="line-box"> <view class="line-left"></view> 获得权益 <view class="line-right"></view> </view>
-			<view class="button-box">
-				<view class="button">
-					<image src="{{cdnImagePath}}equities_01.png" mode="scaleToFill" class="button-image"></image>
-					<text bindtap="todoAction" data-action="position">免费发布职位</text>
-				</view>
-				<view class="button">
-					<image src="{{cdnImagePath}}equities_02.png" mode="scaleToFill" class="button-image"></image>
-					<text>免费查看简历</text>
-				</view>
-			</view>
-		</block>
-	</view>
-	<!-- 创建公司 end -->
-	
-	<!-- 创建机构 start -->
-	<view class="header" wx:if="{{options.from === 'create_org'}}">
-		<image
-			src="{{cdnImagePath}}pic_await001.png"
-			mode="scaleToFill"
-			class="default-status"
-			wx:if="{{companyInfos.status === 0}}"></image>
-		<image
-			src="{{cdnImagePath}}pic_defeated001.png"
-			mode="scaleToFill"
-			class="default-status"
-			wx:if="{{companyInfos.status === 2}}"></image>
-		<image
-		src="{{cdnImagePath}}pic_succeed001.png" 
-		mode="scaleToFill" 
-		class="default-status"
-		wx:if="{{companyInfos.status === 1}}"></image>
-
-		<block wx:if="{{companyInfos.status === 0}}">
-			<view class="h1">创建机构审核中</view>
-			<view class="p">该申请将由公司管理员进行审核，通过后您将成为该机构管理员</view>
-		</block>
-		<block wx:elif="{{companyInfos.status === 2}}">
-			<view class="h3">创建机构审核未通过</view>
-			<view class="p2">请重新提交信息，申请创建机构</view>
-			<view class="h2">审核未通过原因如下</view>
-			<view class="reation" wx:if="{{companyInfos.reviewNote}}">
-				<text wx:if="{{companyInfos.reviewNote}}">{{companyInfos.reviewNote}}</text>
-				<!-- <text wx:if="{{identityInfos.reviewNote}}">{{identityInfos.reviewNote}}</text> -->
-				<view bindtap="todoAction" data-action="modifyCompany" class="p5">重新提交认证信息>></view>
-			</view>
-		</block>
-		<block wx:else>
-			<view class="h1">创建机构审核已通过</view>
-			<view class="p3">{{companyInfos.companyName}}</view>
-			<view class="line-box"> <view class="line-left"></view> 获得权益 <view class="line-right"></view> </view>
-			<view class="button-box">
-				<view class="button">
-					<image src="{{cdnImagePath}}equities_01.png" mode="scaleToFill" class="button-image"></image>
-					<text bindtap="todoAction" data-action="position">免费发布职位</text>
-				</view>
-				<view class="button">
-					<image src="{{cdnImagePath}}equities_02.png" mode="scaleToFill" class="button-image"></image>
-					<text>免费查看简历</text>
-				</view>
-			</view>
-		</block>
-	</view>
-	<!-- 创建机构 end -->
-
-	<!-- 申请加入 start -->
-	<view class="header" wx:if="{{options.from === 'join'}}">
-		<image
-			src="{{cdnImagePath}}pic_await001.png"
-			mode="scaleToFill"
-			class="default-status"
-			wx:if="{{companyInfos.status === 0}}"></image>
-		<image
-			src="{{cdnImagePath}}pic_defeated001.png"
-			mode="scaleToFill"
-			class="default-status"
-			wx:if="{{companyInfos.status === 2}}"></image>
+	<view class="company-identity-status">
 		
-		<image
-		src="{{cdnImagePath}}pic_succeed001.png" 
-		mode="scaleToFill" 
-		class="default-status"
-		wx:if="{{companyInfos.status === 1}}"></image>
+		<view hidden="{{!hasReFresh}}">
+		  <refreshStatus></refreshStatus>
+		</view>
 
-		<block wx:if="{{companyInfos.status === 0}}">
-			<view class="h1">加入机构审核中</view>
-			<view class="p">该申请将由机构管理员进行审核，审核通过后即可成为招聘官</view>
-		</block>
+		<!-- 创建公司 start -->
+		<view class="header" wx:if="{{options.from === 'company'}}">
+			<image
+				src="{{cdnImagePath}}pic_await001.png"
+				mode="scaleToFill"
+				class="default-status"
+				wx:if="{{companyInfos.status === 0}}"></image>
+			<image
+				src="{{cdnImagePath}}pic_defeated001.png"
+				mode="scaleToFill"
+				class="default-status"
+				wx:if="{{companyInfos.status === 2}}"></image>
+			<image
+			src="{{cdnImagePath}}pic_succeed001.png" 
+			mode="scaleToFill" 
+			class="default-status"
+			wx:if="{{companyInfos.status === 1}}"></image>
 
-		<block wx:elif="{{companyInfos.status === 2}}">
-			<view class="h3">加入机构审核未通过</view>
-			<view class="p10">请重新提交信息，申请加入机构</view>
-		</block>
-
-		<block wx:else>
-			<view class="h1">加入机构审核已通过</view>
-			<view class="p3">{{companyInfos.companyName}}</view>
-			<view class="line-box"> <view class="line-left"></view> 获得权益 <view class="line-right"></view> </view>
-			<view class="button-box">
-				<view class="button">
-					<image src="{{cdnImagePath}}equities_01.png" mode="scaleToFill" class="button-image"></image>
-					<text bindtap="todoAction" data-action="position">免费发布职位</text>
+			<block wx:if="{{companyInfos.status === 0}}">
+				<view class="h1">公司认证审核中</view>
+				<view class="p">该申请将在1个工作日内审核，通过后即可开始招聘</view>
+			</block>
+			<block wx:elif="{{companyInfos.status === 2}}">
+				<view class="h3">公司认证审核未通过</view>
+				<view class="p2">请重新提交资料，完成公司创建</view>
+				<view class="h2">公司认证审核未通过的原因如下</view>
+				<view class="reation" wx:if="{{companyInfos.reviewNote}}">
+					<text wx:if="{{companyInfos.reviewNote}}">{{companyInfos.reviewNote}}</text>
+					<!-- <text wx:if="{{identityInfos.reviewNote}}">{{identityInfos.reviewNote}}</text> -->
+					<view bindtap="todoAction" data-action="modifyCompany" class="p5">重新提交认证信息>></view>
 				</view>
-				<view class="button">
-					<image src="{{cdnImagePath}}equities_02.png" mode="scaleToFill" class="button-image"></image>
-					<text>免费查看简历</text>
+			</block>
+			<block wx:else>
+				<view class="h1">公司认证审核已通过</view>
+				<view class="p3">{{companyInfos.companyName}}</view>
+				<view class="line-box"> <view class="line-left"></view> 获得权益 <view class="line-right"></view> </view>
+				<view class="button-box">
+					<view class="button">
+						<image src="{{cdnImagePath}}equities_01.png" mode="scaleToFill" class="button-image"></image>
+						<text bindtap="todoAction" data-action="position">免费发布职位</text>
+					</view>
+					<view class="button">
+						<image src="{{cdnImagePath}}equities_02.png" mode="scaleToFill" class="button-image"></image>
+						<text>免费查看简历</text>
+					</view>
+				</view>
+			</block>
+		</view>
+		<!-- 创建公司 end -->
+		
+		<!-- 创建机构 start -->
+		<view class="header" wx:if="{{options.from === 'create_org'}}">
+			<image
+				src="{{cdnImagePath}}pic_await001.png"
+				mode="scaleToFill"
+				class="default-status"
+				wx:if="{{companyInfos.status === 0}}"></image>
+			<image
+				src="{{cdnImagePath}}pic_defeated001.png"
+				mode="scaleToFill"
+				class="default-status"
+				wx:if="{{companyInfos.status === 2}}"></image>
+			<image
+			src="{{cdnImagePath}}pic_succeed001.png" 
+			mode="scaleToFill" 
+			class="default-status"
+			wx:if="{{companyInfos.status === 1}}"></image>
+
+			<block wx:if="{{companyInfos.status === 0}}">
+				<view class="h1">创建机构审核中</view>
+				<view class="p">该申请将由公司管理员进行审核，通过后您将成为该机构管理员</view>
+			</block>
+			<block wx:elif="{{companyInfos.status === 2}}">
+				<view class="h3">创建机构审核未通过</view>
+				<view class="p2">请重新提交信息，申请创建机构</view>
+				<view class="h2">审核未通过原因如下</view>
+				<view class="reation" wx:if="{{companyInfos.reviewNote}}">
+					<text wx:if="{{companyInfos.reviewNote}}">{{companyInfos.reviewNote}}</text>
+					<!-- <text wx:if="{{identityInfos.reviewNote}}">{{identityInfos.reviewNote}}</text> -->
+					<view bindtap="todoAction" data-action="modifyCompany" class="p5">重新提交认证信息>></view>
+				</view>
+			</block>
+			<block wx:else>
+				<view class="h1">创建机构审核已通过</view>
+				<view class="p3">{{companyInfos.companyName}}</view>
+				<view class="line-box"> <view class="line-left"></view> 获得权益 <view class="line-right"></view> </view>
+				<view class="button-box">
+					<view class="button">
+						<image src="{{cdnImagePath}}equities_01.png" mode="scaleToFill" class="button-image"></image>
+						<text bindtap="todoAction" data-action="position">免费发布职位</text>
+					</view>
+					<view class="button">
+						<image src="{{cdnImagePath}}equities_02.png" mode="scaleToFill" class="button-image"></image>
+						<text>免费查看简历</text>
+					</view>
+				</view>
+			</block>
+		</view>
+		<!-- 创建机构 end -->
+
+		<!-- 申请加入 start -->
+		<view class="header" wx:if="{{options.from === 'join'}}">
+			<image
+				src="{{cdnImagePath}}pic_await001.png"
+				mode="scaleToFill"
+				class="default-status"
+				wx:if="{{companyInfos.status === 0}}"></image>
+			<image
+				src="{{cdnImagePath}}pic_defeated001.png"
+				mode="scaleToFill"
+				class="default-status"
+				wx:if="{{companyInfos.status === 2}}"></image>
+			
+			<image
+			src="{{cdnImagePath}}pic_succeed001.png" 
+			mode="scaleToFill" 
+			class="default-status"
+			wx:if="{{companyInfos.status === 1}}"></image>
+
+			<block wx:if="{{companyInfos.status === 0}}">
+				<view class="h1">加入机构审核中</view>
+				<view class="p">该申请将由机构管理员进行审核，审核通过后即可成为招聘官</view>
+			</block>
+
+			<block wx:elif="{{companyInfos.status === 2}}">
+				<view class="h3">加入机构审核未通过</view>
+				<view class="p10">请重新提交信息，申请加入机构</view>
+			</block>
+
+			<block wx:else>
+				<view class="h1">加入机构审核已通过</view>
+				<view class="p3">{{companyInfos.companyName}}</view>
+				<view class="line-box"> <view class="line-left"></view> 获得权益 <view class="line-right"></view> </view>
+				<view class="button-box">
+					<view class="button">
+						<image src="{{cdnImagePath}}equities_01.png" mode="scaleToFill" class="button-image"></image>
+						<text bindtap="todoAction" data-action="position">免费发布职位</text>
+					</view>
+					<view class="button">
+						<image src="{{cdnImagePath}}equities_02.png" mode="scaleToFill" class="button-image"></image>
+						<text>免费查看简历</text>
+					</view>
+				</view>
+			</block>
+		</view>
+		<!-- 申请加入 end -->
+		
+		<!-- 创建公司信息 start -->
+		<view class="section" wx:if="{{options.from === 'company' && companyInfos.status !== 1}}">
+			<view class="title">
+				<view class="label">您的公司信息</view>
+				<view class="jump" bindtap="todoAction" data-action="modifyCompany">申请信息有误？去更改</view>
+			</view>
+			<view class="ul">
+				<view class="li">
+					<view class="key">公司全称</view>
+					<view class="value">{{companyInfos.companyName}}</view>
+				</view>
+				<view class="li">
+					<view class="key">所属行业</view>
+					<view class="value">{{companyInfos.industry}}</view>
+				</view>
+				<view class="li">
+					<view class="key">融资阶段</view>
+					<view class="value">{{companyInfos.financingInfo}}</view>
+				</view>
+				<view class="li">
+					<view class="key">人员规模</view>
+					<view class="value">{{companyInfos.employeesInfo}}</view>
 				</view>
 			</view>
-		</block>
+		</view>
+		<!-- 创建公司信息 end -->
+		
+		<!-- 申请加入公司信息 start -->
+		<view class="section" wx:if="{{options.from === 'join' && companyInfos.status !== 1}}">
+			<view class="title">
+				<view class="label">您的申请</view>
+				<view class="jump" bindtap="todoAction" data-action="applyModify">申请信息有误？去更改</view>
+			</view>
+			<view class="ul">
+				<view class="li">
+					<view class="key">公司全称</view>
+					<view class="value">{{companyInfos.companyName}}</view>
+				</view>
+				<view class="li">
+					<view class="key">所属机构</view>
+					<view class="value">{{companyInfos.organizationName}}</view>
+				</view>
+				<view class="li">
+					<view class="key">姓名</view>
+					<view class="value">{{companyInfos.realName}}</view>
+				</view>
+				<view class="li">
+					<view class="key">担任职务</view>
+					<view class="value">{{companyInfos.userPosition}}</view>
+				</view>
+				<!-- <view class="li">
+					<view class="key">接收简历邮箱</view>
+					<view class="value">{{companyInfos.userEmail}}</view>
+				</view> -->
+			<!-- 	<view class="li item">
+					<view class="img-box">
+						<image src="{{companyInfos.adminInfo.avatar.smallUrl}}" mode="scaleToFill" ></image>
+					</view>
+					<view class="infos">
+						<view class="realname">{{companyInfos.adminInfo.name}} </view>
+						<view class="degress"> {{companyInfos.adminInfo.position}}</view>
+					</view>
+					<view class="button-box" data-action="notice" bindtap="todoAction" wx:if="{{companyInfos.status === 0}}">
+						<i class="icon iconfont icon-tongzhi notice"></i>通知管理员
+					</view>
+				</view> -->
+			</view>
+		</view>
+		<!-- 申请加入公司信息 end -->
+		
+		<!-- 创建机构信息 start -->
+		<view class="section" wx:if="{{options.from === 'create_org' && companyInfos.status !== 1}}">
+			<view class="title">
+				<view class="label">您的申请</view>
+				<view class="jump" bindtap="todoAction" data-action="createOrgModify">申请信息有误？去更改</view>
+			</view>
+			<view class="ul">
+				<view class="li">
+					<view class="key">公司全称</view>
+					<view class="value">{{companyInfos.companyName}}</view>
+				</view>
+				<view class="li">
+					<view class="key">所属机构</view>
+					<view class="value">{{companyInfos.organizationName}}</view>
+				</view>
+				<view class="li">
+					<view class="key">姓名</view>
+					<view class="value">{{companyInfos.realName}}</view>
+				</view>
+				<view class="li">
+					<view class="key">担任职务</view>
+					<view class="value">{{companyInfos.userPosition}}</view>
+				</view>
+				<!-- <view class="li">
+					<view class="key">接收简历邮箱</view>
+					<view class="value">{{companyInfos.userEmail}}</view>
+				</view> -->
+		<!-- 		<view class="li item">
+					<view class="img-box">
+						<image src="{{companyInfos.adminInfo.avatar.smallUrl}}" mode="scaleToFill" ></image>
+					</view>
+					<view class="infos">
+						<view class="realname">{{companyInfos.adminInfo.name}} </view>
+						<view class="degress"> {{companyInfos.adminInfo.position}}</view>
+					</view>
+					<view class="button-box" data-action="notice" bindtap="todoAction" wx:if="{{companyInfos.status === 0}}">
+						<i class="icon iconfont icon-tongzhi notice"></i>通知管理员
+					</view>
+				</view> -->
+			</view>
+		</view>
+		<!-- 创建机构信息 end -->
+
+		<view class="quickly-entry" wx:if="{{options.from === 'company' && companyInfos.status !== 1}}">
+			<view class="content">
+				<view class="h6">快速通道权益</view>
+				<view class="h7">助您创建公司更快捷，欢迎体验~</view>
+			</view>
+			<view class="button" data-action="call" bindtap="todoAction">联系体验</view>
+			<image class="bgImg" src="{{cdnImagePath}}verify_bg.png" mode="aspectFill"></image>
+		</view>
+
+		<view
+			class="go identity222"
+			bindtap="toggle"
+			wx:if="{{companyInfos.status !== 1 && (options.from === 'company' || options.from === 'join')}}">
+			<text>前往求职端</text>
+		</view>
+
+		<view
+			class="button4"
+			wx:if="{{companyInfos.status === 1}}"
+			bindtap="todoAction"
+			data-action="recruitment">开始招聘</view>
 	</view>
-	<!-- 申请加入 end -->
-	
-	<!-- 创建公司信息 start -->
-	<view class="section" wx:if="{{options.from === 'company' && companyInfos.status !== 1}}">
-		<view class="title">
-			<view class="label">您的公司信息</view>
-			<view class="jump" bindtap="todoAction" data-action="modifyCompany">申请信息有误？去更改</view>
-		</view>
-		<view class="ul">
-			<view class="li">
-				<view class="key">公司全称</view>
-				<view class="value">{{companyInfos.companyName}}</view>
-			</view>
-			<view class="li">
-				<view class="key">所属行业</view>
-				<view class="value">{{companyInfos.industry}}</view>
-			</view>
-			<view class="li">
-				<view class="key">融资阶段</view>
-				<view class="value">{{companyInfos.financingInfo}}</view>
-			</view>
-			<view class="li">
-				<view class="key">人员规模</view>
-				<view class="value">{{companyInfos.employeesInfo}}</view>
-			</view>
-		</view>
-	</view>
-	<!-- 创建公司信息 end -->
-	
-	<!-- 申请加入公司信息 start -->
-	<view class="section" wx:if="{{options.from === 'join' && companyInfos.status !== 1}}">
-		<view class="title">
-			<view class="label">您的申请</view>
-			<view class="jump" bindtap="todoAction" data-action="applyModify">申请信息有误？去更改</view>
-		</view>
-		<view class="ul">
-			<view class="li">
-				<view class="key">公司全称</view>
-				<view class="value">{{companyInfos.companyName}}</view>
-			</view>
-			<view class="li">
-				<view class="key">所属机构</view>
-				<view class="value">{{companyInfos.organizationName}}</view>
-			</view>
-			<view class="li">
-				<view class="key">姓名</view>
-				<view class="value">{{companyInfos.realName}}</view>
-			</view>
-			<view class="li">
-				<view class="key">担任职务</view>
-				<view class="value">{{companyInfos.userPosition}}</view>
-			</view>
-			<!-- <view class="li">
-				<view class="key">接收简历邮箱</view>
-				<view class="value">{{companyInfos.userEmail}}</view>
-			</view> -->
-			<view class="li item">
-				<view class="img-box">
-					<image src="{{companyInfos.adminInfo.avatar.smallUrl}}" mode="scaleToFill" ></image>
-				</view>
-				<view class="infos">
-					<view class="realname">{{companyInfos.adminInfo.name}} </view>
-					<view class="degress"> {{companyInfos.adminInfo.position}}</view>
-				</view>
-				<view class="button-box" data-action="notice" bindtap="todoAction" wx:if="{{companyInfos.status === 0}}">
-					<i class="icon iconfont icon-tongzhi notice"></i>通知管理员
-				</view>
-			</view>
-		</view>
-	</view>
-	<!-- 申请加入公司信息 end -->
-	
-	<!-- 创建机构信息 start -->
-	<view class="section" wx:if="{{options.from === 'create_org' && companyInfos.status !== 1}}">
-		<view class="title">
-			<view class="label">您的申请</view>
-			<view class="jump" bindtap="todoAction" data-action="createOrgModify">申请信息有误？去更改</view>
-		</view>
-		<view class="ul">
-			<view class="li">
-				<view class="key">公司全称</view>
-				<view class="value">{{companyInfos.companyName}}</view>
-			</view>
-			<view class="li">
-				<view class="key">所属机构</view>
-				<view class="value">{{companyInfos.organizationName}}</view>
-			</view>
-			<view class="li">
-				<view class="key">姓名</view>
-				<view class="value">{{companyInfos.realName}}</view>
-			</view>
-			<view class="li">
-				<view class="key">担任职务</view>
-				<view class="value">{{companyInfos.userPosition}}</view>
-			</view>
-			<!-- <view class="li">
-				<view class="key">接收简历邮箱</view>
-				<view class="value">{{companyInfos.userEmail}}</view>
-			</view> -->
-			<view class="li item">
-				<view class="img-box">
-					<image src="{{companyInfos.adminInfo.avatar.smallUrl}}" mode="scaleToFill" ></image>
-				</view>
-				<view class="infos">
-					<view class="realname">{{companyInfos.adminInfo.name}} </view>
-					<view class="degress"> {{companyInfos.adminInfo.position}}</view>
-				</view>
-				<view class="button-box" data-action="notice" bindtap="todoAction" wx:if="{{companyInfos.status === 0}}">
-					<i class="icon iconfont icon-tongzhi notice"></i>通知管理员
-				</view>
-			</view>
-		</view>
-	</view>
-	<!-- 创建机构信息 end -->
-
-	<view class="quickly-entry" wx:if="{{options.from === 'company' && companyInfos.status !== 1}}">
-		<view class="content">
-			<view class="h6">快速通道权益</view>
-			<view class="h7">助您创建公司更快捷，欢迎体验~</view>
-		</view>
-		<view class="button" data-action="call" bindtap="todoAction">联系体验</view>
-		<image class="bgImg" src="{{cdnImagePath}}verify_bg.png" mode="aspectFill"></image>
-	</view>
-
-	<view
-		class="go identity222"
-		bindtap="toggle"
-		wx:if="{{companyInfos.status !== 1 && (options.from === 'company' || options.from === 'join')}}">
-		<text>前往求职端</text>
-	</view>
-
-	<view
-		class="button4"
-		wx:if="{{companyInfos.status === 1}}"
-		bindtap="todoAction"
-		data-action="recruitment">开始招聘</view>
-</view>
-
+</block>

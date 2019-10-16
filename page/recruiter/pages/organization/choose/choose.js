@@ -14,7 +14,8 @@ Page({
     keyword2: '',
     activeItem: true,
     canClick: false,
-    organization_name: ''
+    organization_name: '',
+    onBottomStatus: 0
   },
   /**
    * 生命周期函数--监听页面加载
@@ -49,13 +50,14 @@ Page({
         }
     let chooseItem = wx.getStorageSync('orgData')
     getCompanyOrglistApi(parmas).then(res => {
+      let onBottomStatus = res.meta && res.meta.nextPageUrl ? 0 : 2
       orgList = res.data
       if (chooseItem && !this.data.options.type) {
         orgList.filter(item => {
           if (item.id === chooseItem.id) item.active = true
         })
       }
-      this.setData({orgList})
+      this.setData({orgList, onBottomStatus})
     })
   },
   choose (e) {

@@ -366,9 +366,20 @@ Page({
           wx.navigateTo({url: `${RECRUITER}organization/list/list?type=path-mechanism&companyId=${app.globalData.recruiterDetails.companyTopId}`})
           return
         }
-        model.link = homepageUrl
-        model.show = true
-        this.setData({model})
+        app.wxConfirm({
+          title: '成功生成链接',
+          content: `链接为：${homepageUrl}`,
+          confirmText: '复制链接',
+          showCancel: true,
+          cancelText: '取消',
+          confirmBack: () => {
+            wx.setClipboardData({data: homepageUrl })
+          },
+          cancelBack: () => {}
+        })
+        // model.link = homepageUrl
+        // model.show = true
+        // this.setData({model})
         break
       case 'path-position':
         // 已经有在线职位
@@ -380,9 +391,25 @@ Page({
         break
       case 'path-recruiter':
         let recruiterUrl = `${COMMON}recruiterDetail/recruiterDetail?uid=${app.globalData.recruiterDetails.uid}`.slice(1)
-        model.link = recruiterUrl
-        model.show = true
-        this.setData({model})
+        app.wxConfirm({
+          title: '成功生成链接',
+          content: `链接为：${recruiterUrl}`,
+          confirmText: '复制链接',
+          showCancel: true,
+          cancelText: '取消',
+          cancelBack: () => {},
+          confirmBack: () => {
+            wx.setClipboardData({
+              data: recruiterUrl,
+              success: () => {
+                app.wxToast({title: '成功复制链接'})
+              }
+            })
+          }
+        })
+        // model.link = recruiterUrl
+        // model.show = true
+        // this.setData({model})
         break
       case 'intruduction':
         wx.navigateTo({

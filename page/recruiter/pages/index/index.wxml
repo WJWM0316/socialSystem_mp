@@ -222,7 +222,7 @@
 		</view>
 	</view>
 
-	<appModel
+<!-- 	<appModel
 		title="{{model.title}}"
 		show="{{model.show}}"
 		btnCancel="取消"
@@ -230,7 +230,7 @@
 		bindconfirm="confirmBtn">
 		<view class="link11">链接为：{{model.link}}</view>
 		<view class="tips11" bindtap="routeJump" data-route="intruduction"><i class="icon iconfont icon-zhushi"></i>链接使用说明</view>
-	</appModel>
+	</appModel> -->
 
   <tabBar id="bottomRedDotBar" tabType="{{showPublicPositionTips ? '' : '1'}}"></tabBar>
   <!-- <shareBtn></shareBtn> -->

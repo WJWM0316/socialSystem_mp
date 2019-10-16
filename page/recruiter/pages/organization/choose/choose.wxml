@@ -18,7 +18,7 @@
         <i class="icon iconfont icon-wancheng" wx:if="{{activeItem}}"></i>
       </view>
 		</view>
-		<view class="h111" wx:if="{{organization_name}}">以下机构为该公司所属机构</view>
+		<view class="h111" wx:if="{{organization_name && orgList.length}}">以下机构为该公司所属机构</view>
 	</block>
 	<view class="organizationList {{options.type === 'org' ? 'orgul' : ''}}">
 		<view class="list">
@@ -30,6 +30,7 @@
 			</view>
 		</view>
 	</view>
+	<bottomStatus status="{{onBottomStatus}}" listData="{{orgList}}" desc="该公司暂无所属机构～" marginTop="{{200}}"></bottomStatus>
 	<model
 		title="添加机构"
 		show="{{showModel}}"

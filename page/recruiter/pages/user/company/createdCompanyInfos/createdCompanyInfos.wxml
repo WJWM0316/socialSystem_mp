@@ -1,41 +1,54 @@
 <view class="createdCompanyInfos">
-	<navbar title="公司认证" background="#fff" color="#22292C" customBack bindbackEvent="backEvent"></navbar>
-
-	<view hidden="{{!hasReFresh}}">
-	  <refreshStatus></refreshStatus>
-	</view>
-
-	<view class="header" wx:if="{{options.type === 'company'}}">
-		<view class="icon-box">
-			<i class="icon iconfont icon-tijiaoshenqing"></i>
-		</view>
-		<view class="content">
-			<view class="h1">创建公司申请已提交</view>
-			<view class="h2">我们将在1个工作日内，协助你开通招聘服务</view>
-		</view>
-	</view>
 	
-	<view class="header" wx:if="{{options.type === 'create_org'}}">
-		<view class="icon-box">
-			<i class="icon iconfont icon-tijiaoshenqing"></i>
+	<navbar
+		title="{{options.type === 'company' ? '公司认证' : '创建机构审核'}}"
+		background="#fff"
+		color="#22292C"
+		customBack
+		bindbackEvent="backEvent">
+	</navbar>
+	
+	<block wx:if="{{options.type === 'company'}}">
+		<view hidden="{{!hasReFresh}}">
+		  <refreshStatus></refreshStatus>
 		</view>
-		<view class="content">
-			<view class="h1">创建机构申请已提交</view>
-			<view class="h2">该申请将由公司管理员进行审核，通过后您将成为该机构管理员</view>
+		<view class="header">
+			<view class="icon-box">
+				<i class="icon iconfont icon-tijiaoshenqing"></i>
+			</view>
+			<view class="content">
+				<view class="h1">创建公司申请已提交</view>
+				<view class="h2">我们将在1个工作日内，协助你开通招聘服务</view>
+			</view>
 		</view>
-	</view>
 
-	<view class="div" wx:if="{{options.type === 'company'}}">
-		<view class="p">根据人力资源相关法规要求，我们将联系你完成以下认证：</view>
-		<view class="ul">
-			<view class="li">
-				<view class="icon-box"><i class="icon iconfont icon-tijiaoshenqing"></i></view>
-				<view class="content">公司资质认证；</view>
+		<view class="div">
+			<view class="p">根据人力资源相关法规要求，我们将联系你完成以下认证：</view>
+			<view class="ul">
+				<view class="li">
+					<view class="icon-box"><i class="icon iconfont icon-tijiaoshenqing"></i></view>
+					<view class="content">公司资质认证；</view>
+				</view>
+				<view class="li">
+					<view class="icon-box"><i class="icon iconfont icon-shenfenrenzheng"></i></view>
+					<view class="content">身份信息认证；</view>
+				</view>
 			</view>
-			<view class="li">
-				<view class="icon-box"><i class="icon iconfont icon-shenfenrenzheng"></i></view>
-				<view class="content">身份信息认证；</view>
-			</view>
+		</view>
+	</block>
+
+	<view class="create_org" wx:if="{{options.type === 'create_org'}}" style="top: {{navH}}px">
+		<view hidden="{{!hasReFresh}}">
+		  <refreshStatus></refreshStatus>
+		</view>
+		<image
+			src="{{cdnImagePath}}pic_succeed001.png" 
+			mode="scaleToFill" 
+			class="default-status"></image>
+		<view class="content">
+			<view class="h11">创建机构申请已提交</view>
+			<view class="h22">该申请将由公司管理员进行审核，通过后您将成</view>
+			<view class="h22">为该机构管理员</view>
 		</view>
 	</view>
 
@@ -44,7 +57,7 @@
 			<text>等不及了，在线自助完成认证 </text>
 			<i class="icon iconfont icon-zizhurenzheng"></i>
 		</view>
-		<view class="enter">
+		<view class="enter" wx:if="{{options.type === 'company'}}">
 			<view class="toggle text2" bindtap="toggle">前往求职端</view>
   		 |
   		<view class="changePhone text2" bindtap="changePhone">换个账号</view>

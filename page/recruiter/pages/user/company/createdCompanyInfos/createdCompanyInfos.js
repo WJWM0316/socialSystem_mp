@@ -10,13 +10,14 @@ Page({
   data: {
     cdnImagePath: app.globalData.cdnImagePath,
     hasReFresh: false,
-    options: {}
+    options: {},
+    navH: app.globalData.navHeight
   },
   onLoad(options) {
     this.setData({options})
   },
   backEvent() {
-    wx.navigateTo({url: `${RECRUITER}user/company/apply/apply?action=edit`})
+    wx.navigateTo({url: `${RECRUITER}user/company/apply/apply`})
   },
   /**
    * @Author   小书包

@@ -35,17 +35,26 @@ Component({
   methods: {
     getCompanyApplyInfo() {
       getCompanyApplyInfoApi({company_id: this.data.companyId}).then(res => {
+        const companyInfo = res.data.companyInfo
+        const joinType = res.data.joinType
         wx.setStorageSync('choseType', 'RECRUITER')
-        switch(res.data.step) {
-          case 1:
+        if(joinType === 3) {
+          wx.reLaunch({url: `${RECRUITER}user/company/status/status?from=join`})
+        } else {
+          // 还没有创建公司信息
+          if(!Reflect.has(companyInfo, 'id')) {
             wx.reLaunch({url: `${RECRUITER}user/company/apply/apply`})
-            break
-          case 2:
-            wx.reLaunch({url: `${RECRUITER}user/company/createdCompanyInfos/createdCompanyInfos`})
-            break
-          default:
-            wx.reLaunch({url: `${RECRUITER}user/company/status/status?from=${res.data.status === 1 ?'company' : 'join'}`})
-            break
+          } else {
+            if(companyInfo.status === 1) {
+              wx.reLaunch({url: `${RECRUITER}index/index?type=${joinType === 1 ? 'company' : 'create_org'}`})
+            } else {
+              if(companyInfo.status === 3) {
+                wx.reLaunch({url: `${RECRUITER}user/company/createdCompanyInfos/createdCompanyInfos?type=${joinType === 1 ? 'company' : 'create_org'}`})
+              } else {
+                wx.reLaunch({url: `${RECRUITER}user/company/status/status?from=${joinType === 1 ? 'company' : 'create_org'}`})
+              }
+            }
+          }
         }
       }).catch(e => {
         switch(e.code) {

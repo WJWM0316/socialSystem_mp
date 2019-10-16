@@ -210,6 +210,16 @@ export const addCompanyAddressApi = (data, hasLoading) => {
   })
 }
 
+// 添加机构地址
+export const addOrgAdressApi = (data, hasLoading) => {
+  return request({
+    method: 'put',
+    url: `/company/tempaddress/${data.id}`,
+    data,
+    hasLoading: true
+  })
+}
+
 // 添加职位地址
 export const addPositionAddressApi = (data, hasLoading) => {
   return request({

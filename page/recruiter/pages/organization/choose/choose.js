@@ -23,7 +23,6 @@ Page({
     let cacheData = wx.getStorageSync('createdCompany')
     let organization_name = this.data.organization_name
     let canClick = this.data.canClick
-    wx.setStorageSync('choseType', 'RECRUITER')
     if(cacheData.isUserDefined) {
       organization_name = cacheData.organization_name
       canClick = true

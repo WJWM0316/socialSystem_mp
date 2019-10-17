@@ -228,7 +228,6 @@ Page({
             }
             wx.navigateTo({url})
           })
-          // wx.navigateTo({url: `${APPLICANT}createUser/createUser?directChat=${encodeURIComponent(path)}&todoAction=collect&from=6`})
           return
         }
         getMycollectPositionApi({id: this.data.query.positionId}).then(res => {

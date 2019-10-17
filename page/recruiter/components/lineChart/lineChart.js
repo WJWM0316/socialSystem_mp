@@ -25,7 +25,7 @@ Component({
       onInit(canvas, width, height) {
         chartLine = echarts.init(canvas, null, {width: width, height: height})
         canvas.setChart(chartLine)
-        return chartLine
+        // return chartLine
       }
     },
     options: {
@@ -51,10 +51,6 @@ Component({
         top: '4%'
       },
       tooltip: {
-        show: true,
-        trigger: 'axis'
-      },
-      tooltip: {
         trigger: 'axis',
         // backgroundColor:'white',
         color:'black',
@@ -68,13 +64,27 @@ Component({
             Number(params[0].name.slice(0,2)) + '月' + Number(params[0].name.slice(-2)) + '日' + '\n',
             params[0].seriesName + ': ' + params[0].data + '人' + '\n',
             params[1].seriesName + ': ' + params[1].data + '次'
-          ].join('')
+            // params[0].marker + params[0].seriesName + ': ' + params[0].data + '人' + '\n',
+            // params[1].marker + params[1].seriesName + ': ' + params[1].data + '次'
+          ].join(' ')
         },
         axisPointer: {
           show: false,
           lineStyle: {
             color: '#dcdcdc'
           }
+        }
+      },
+      toolbox: {
+        show: true,
+        feature: {
+          dataZoom: {
+            yAxisIndex: 'none'
+          },
+          dataView: {readOnly: false},
+          magicType: {type: ['line', 'bar']},
+          restore: {},
+          saveAsImage: {}
         }
       },
       xAxis: {
@@ -153,7 +163,6 @@ Component({
       this.data.options.series = []
       this.data.options.legend.data = ['访问次数', '访问人数']
       this.data.options.xAxis.data = key
-      console.log(value)
       value.map((field, index) => {
         this.data.options.series.push({
           name: this.data.options.legend.data[index],

@@ -79,9 +79,9 @@ Page({
         day = start.getDate()
         month = start.getMonth() + 1 < 10 ? `0${start.getMonth() + 1}` : start.getMonth() + 1
         day1 = start.getDate() < 10 ? `0${start.getDate()}` : start.getDate()
-        console.log(`${month}-${day1}`)
         if(i === item3.id || i === 1) day = start.getMonth() + 1 + '月' + start.getDate() + '日'
         key.push(day)
+        // key.push(`${month}-${day1}`)
       }
 
       for(let i = item3.id; i > 0; i--) {
@@ -113,9 +113,10 @@ Page({
       // 机构主页
       if(company.data.length) {
         company.data.reverse().map((v,i,arr) => {
+          // let item2 = v.date.slice(5)
+          // tem[0].key.push(item2)
           let date = new Date(v.date)
           let item = i === 0 || i === arr.length - 1 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
-          let item2 = v.date.slice(5)
           tem[0].key.push(item)
           tem[0].value[0].push(v.companyVisitPv)
           tem[0].value[1].push(v.companyVisitUv)
@@ -132,9 +133,10 @@ Page({
       // 职位详情
       if(position.data.length) {
         position.data.reverse().map((v,i,arr) => {
+          // let item2 = v.date.slice(5)
+          // tem[1].key.push(item2)
           let date = new Date(v.date)
           let item = i === 0 || i === arr.length - 1 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
-          let item2 = v.date.slice(5)
           tem[1].key.push(item)
           tem[1].value[0].push(v.positionVisitPv)
           tem[1].value[1].push(v.positionVisitUv)
@@ -151,9 +153,10 @@ Page({
       // 招聘管主页
       if(recruiter.data.length) {
         recruiter.data.reverse().map((v,i,arr) => {
+          // let item2 = v.date.slice(5)
+          // tem[2].key.push(item2)
           let date = new Date(v.date)
           let item = i === 0 || i === arr.length - 1 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
-          let item2 = v.date.slice(5)
           tem[2].key.push(item)
           tem[2].value[0].push(v.recruiterVisitPv)
           tem[2].value[1].push(v.recruiterVisitUv)

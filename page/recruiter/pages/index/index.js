@@ -540,9 +540,9 @@ Page({
           day = start.getDate()
           month = start.getMonth() + 1 < 10 ? `0${start.getMonth() + 1}` : start.getMonth() + 1
           day1 = start.getDate() < 10 ? `0${start.getDate()}` : start.getDate()
-          console.log(`${month}-${day1}`)
           if(i === 7 || i === 1) day = start.getMonth() + 1 + '月' + start.getDate() + '日'
           key.push(day)
+          // key.push(`${month}-${day1}`)
         }
         return {
           key,
@@ -556,10 +556,10 @@ Page({
       
       if(res.data.data.company.data.length) {
         res.data.data.company.data.reverse().map((v, i, arr) => {
+          // let item2 = v.date.slice(5)
+          // tem[0].key.push(item2)
           let date = new Date(v.date)
           let item = i === 0 || i === arr.length - 1 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
-          let item2 = v.date.slice(5)
-          // console.log(item2)
           tem[0].key.push(item)
           tem[0].value[0].push(v.companyVisitPv)
           tem[0].value[1].push(v.companyVisitUv)
@@ -570,10 +570,10 @@ Page({
       }
       if(res.data.data.position.data.length) {
         res.data.data.position.data.reverse().map((v, i, arr) => {
+          // let item2 = v.date.slice(5)
+          // tem[1].key.push(item2)
           let date = new Date(v.date)
           let item = i === 0 || i === arr.length - 1 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
-          let item2 = v.date.slice(5)
-          // console.log(item2)
           tem[1].key.push(item)
           tem[1].value[0].push(v.positionVisitPv)
           tem[1].value[1].push(v.positionVisitUv)
@@ -585,10 +585,10 @@ Page({
 
       if(res.data.data.recruiter.data.length) {
         res.data.data.recruiter.data.reverse().map((v, i, arr) => {
+          // let item2 = v.date.slice(5)
+          // tem[2].key.push(item2)
           let date = new Date(v.date)
           let item = i === 0 || i === arr.length - 1 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
-          let item2 = v.date.slice(5)
-          // console.log(item2)
           tem[2].key.push(item)
           tem[2].value[0].push(v.recruiterVisitPv)
           tem[2].value[1].push(v.recruiterVisitUv)
@@ -599,7 +599,7 @@ Page({
       }
       
       dataBox.list.map((v,i,arr) => {
-        v.data.key = tem[i].key
+        v.data.key = tem[i].key,
         v.data.value = tem[i].value
       })
       dataBox.activeIndex = index

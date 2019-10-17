@@ -1,10 +1,10 @@
-let app = getApp()
-
 import {RECRUITER} from '../../../../../../config.js'
 
 import {
   getCompanyIdentityInfosApi
 } from '../../../../../../api/pages/company.js'
+
+let app = getApp()
 
 Page({
   data: {
@@ -17,7 +17,10 @@ Page({
     this.setData({options})
   },
   backEvent() {
-    wx.navigateTo({url: `${RECRUITER}user/company/apply/apply`})
+    if(this.data.options.identity === 'APPLICANT') {
+      wx.setStorageSync('choseType', 'APPLICANT')
+    }
+    wx.navigateBack({delta: 1})
   },
   /**
    * @Author   小书包

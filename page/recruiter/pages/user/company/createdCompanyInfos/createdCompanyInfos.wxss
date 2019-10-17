@@ -114,6 +114,10 @@
 	right: 0;
 }
 
+.create-org-footer {
+	bottom: 180rpx;
+}
+
 .footer .p2{
 	font-size:28rpx;
 	font-weight:400;

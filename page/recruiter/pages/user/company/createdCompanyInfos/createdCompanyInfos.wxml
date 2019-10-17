@@ -3,9 +3,9 @@
 	<navbar
 		title="{{options.type === 'company' ? '公司认证' : '创建机构审核'}}"
 		background="#fff"
-		color="#22292C"
 		customBack
-		bindbackEvent="backEvent">
+		bindbackEvent="backEvent"
+		color="#22292C">
 	</navbar>
 	
 	<block wx:if="{{options.type === 'company'}}">
@@ -52,7 +52,7 @@
 		</view>
 	</view>
 
-	<view class="footer">
+	<view class="footer {{ options.type !== 'company' ? 'create-org-footer' : ''}}">
 		<view class="p2" bindtap="changeIndentifyMethods">
 			<text>等不及了，在线自助完成认证 </text>
 			<i class="icon iconfont icon-zizhurenzheng"></i>

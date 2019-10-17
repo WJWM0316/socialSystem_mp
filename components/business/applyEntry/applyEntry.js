@@ -39,19 +39,19 @@ Component({
         const joinType = res.data.joinType
         wx.setStorageSync('choseType', 'RECRUITER')
         if(joinType === 3) {
-          wx.reLaunch({url: `${RECRUITER}user/company/status/status?from=join`})
+          wx.navigateTo({url: `${RECRUITER}user/company/status/status?from=join&identity=APPLICANT`})
         } else {
           // 还没有创建公司信息
           if(!Reflect.has(companyInfo, 'id')) {
-            wx.reLaunch({url: `${RECRUITER}user/company/apply/apply`})
+            wx.navigateTo({url: `${RECRUITER}user/company/apply/apply`})
           } else {
             if(companyInfo.status === 1) {
-              wx.reLaunch({url: `${RECRUITER}index/index?type=${joinType === 1 ? 'company' : 'create_org'}`})
+              wx.navigateTo({url: `${RECRUITER}index/index?identity=APPLICANT&type=${joinType === 1 ? 'company' : 'create_org'}`})
             } else {
               if(companyInfo.status === 3) {
-                wx.reLaunch({url: `${RECRUITER}user/company/createdCompanyInfos/createdCompanyInfos?type=${joinType === 1 ? 'company' : 'create_org'}`})
+                wx.navigateTo({url: `${RECRUITER}user/company/createdCompanyInfos/createdCompanyInfos?identity=APPLICANT&type=${joinType === 1 ? 'company' : 'create_org'}`})
               } else {
-                wx.reLaunch({url: `${RECRUITER}user/company/status/status?from=${joinType === 1 ? 'company' : 'create_org'}`})
+                wx.navigateTo({url: `${RECRUITER}user/company/status/status?identity=APPLICANT&from=${joinType === 1 ? 'company' : 'create_org'}`})
               }
             }
           }

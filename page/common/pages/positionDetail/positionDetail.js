@@ -126,6 +126,7 @@ Page({
           isOwner: res.data.isOwner && identity === 'RECRUITER' ? true : false,
           identity: wx.getStorageSync('choseType')
         })
+        console.log(identity !== 'RECRUITER' && !res.data.companyInfo.hideDdPromote, 'bbbb')
         if(this.selectComponent('#interviewBar')) this.selectComponent('#interviewBar').init()
       })
     }
@@ -154,6 +155,7 @@ Page({
           isOwner: res.data.isOwner && identity === 'RECRUITER' ? true : false,
           identity: wx.getStorageSync('choseType')
         })
+        console.log(identity !== 'RECRUITER' && !res.data.companyInfo.hideDdPromote, 'kkkk')
         if(this.selectComponent('#interviewBar')) this.selectComponent('#interviewBar').init()
     })
   },

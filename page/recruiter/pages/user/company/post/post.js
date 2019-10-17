@@ -227,7 +227,7 @@ Page({
   addOrgAddress() {
     let addressInfos = wx.getStorageSync('addAddress')
     return addOrgAdressApi({
-      areaId: addressInfos.area_id,
+      areaId: addressInfos.areaId,
       address: addressInfos.address,
       doorplate: addressInfos.doorplate,
       lng: addressInfos.lng,

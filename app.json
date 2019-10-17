@@ -117,8 +117,7 @@
         "pages/createQr/createQr",
         "pages/candidate/candidate",
         "pages/organization/position/position",
-        "pages/organization/setOrg/setOrg",
-        "pages/toolManual/toolManual"
+        "pages/organization/setOrg/setOrg"
       ]
     }
   ],

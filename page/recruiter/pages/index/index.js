@@ -411,14 +411,9 @@ Page({
         // model.show = true
         // this.setData({model})
         break
-      case 'intruduction':
-        wx.navigateTo({
-          url: `${RECRUITER}toolManual/toolManual`,
-          success: () => {
-            model.show = false
-            setTimeout(() => this.setData({model}), 600)
-          }
-        })
+      case 'toolUse':
+        let path = encodeURIComponent(`${WEBVIEW}instructions?page=instructions`)
+        wx.navigateTo({url: `${COMMON}webView/webView?type=optimal&p=${path}`})
         break
       default:
         break

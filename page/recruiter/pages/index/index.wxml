@@ -172,7 +172,7 @@
 		</view>
 		<view class="title">
 			<view class="icon111"></view>生成页面路径
-			<view class="action2" bindtap="routeJump" data-route="echart1">
+			<view class="action2" bindtap="routeJump" data-route="toolUse">
 				工具说明<i class="icon iconfont icon-xiangyou"></i>
 			</view>
 		</view>

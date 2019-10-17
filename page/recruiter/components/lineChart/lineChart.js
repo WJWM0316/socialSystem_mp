@@ -25,7 +25,7 @@ Component({
       onInit(canvas, width, height) {
         chartLine = echarts.init(canvas, null, {width: width, height: height})
         canvas.setChart(chartLine)
-        // return chartLine
+        return chartLine
       }
     },
     options: {
@@ -65,7 +65,7 @@ Component({
         },
         formatter(params) {
           return [
-            params[0].name + '\n',
+            Number(params[0].name.slice(0,2)) + '月' + Number(params[0].name.slice(-2)) + '日' + '\n',
             params[0].seriesName + ': ' + params[0].data + '人' + '\n',
             params[1].seriesName + ': ' + params[1].data + '次'
           ].join('')

@@ -14,7 +14,6 @@
 
     <view class="header" wx:if="{{!isOwner || !showEdit}}">
       <image class="bgImg" src="{{cdnImagePath}}bg_detail.png" mode="widthFix"></image>
-      <shareBtn wx:if="{{!isOwner}}"></shareBtn>
       <div class="content">
         <button form-type="submit" class="clear-style avatar" bindtap="readAvatar">
           <image src="{{info.avatar.smallUrl}}" mode="aspectFill" class="avatar"></image>
@@ -35,6 +34,8 @@
       <view class="line"></view>
     </view>
     
+    <shareBtn posterType="recruiter" id="shareBtn" shareBtn="{{false}}" wx:if="{{!showEdit}}" posterData="{{info}}"></shareBtn>
+
     <view class="mainContent">
       <view class="contentBox">
         <view class="labelEdit {{info.personalizedLabels.length > 0 ? 'hasLabelEdit': ''}}" wx:if="{{isOwner && showEdit}}">
@@ -43,7 +44,7 @@
               <view class="fan"></view>
             </view>
             <text class="txt">个人标签</text>
-            <block wx:if="{{info.personalizedLabels.length > 0}}"><!-- <i class="shareBtn iconfont icon-fenxiang"></i> --><i class="editBtn iconfont icon-bianji1" bindtap="editJump" data-type="labels"></i></block>
+            <block wx:if="{{info.personalizedLabels.length > 0}}"><i class="editBtn iconfont icon-bianji1" bindtap="editJump" data-type="labels"></i></block>
           </view>
           <view class="labelBox" wx:if="{{info.personalizedLabels.length > 0}}">
             <text class="item" wx:for="{{info.personalizedLabels}}" wx:key="{{index}}">{{item.labelName || item.name}} <text wx:if="{{item.favorCount > 0}}">x{{item.favorCount}}</text></text>
@@ -132,7 +133,6 @@
         wx:if="{{info.vkey && !isOwner}}">
     </interviewBar>
 
-    <shareBtn posterType="recruiter" id="shareBtn" shareBtn="{{false}}" wx:if="{{isOwner && !showEdit}}" posterData="{{info}}"></shareBtn>
     <view class="foot-bar" wx:if="{{isOwner && !showEdit}}">
       <view class="button button-edit" bindtap="edit">编辑主页</view>
       <view class="button button-share" bindtap="share">转发我的主页</view>

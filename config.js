@@ -17,14 +17,14 @@ if (environment === 0) {
 	RECRUITERHOST = 'https://zhaopin-api.dd.lieduoduo.ziwork.com'
 	PUBAPIHOST = 'https://pub-api.dd.lieduoduo.ziwork.com'
 	NODEHOST = 'https://node.dd.lieduoduo.ziwork.com/frontEnd'  // 'http://localhost:3001/frontEnd' // 
-	WEBVIEW = `https://h5.lieduoduo.ziwork.com/`
+	WEBVIEW = `https://m.duoduohr.ziwork.com/`
 } else {
 	// 正式服环境
 	APPLICANTHOST = 'https://qiuzhi-api.dd.lieduoduo.com'
 	RECRUITERHOST = 'https://zhaopin-api.dd.lieduoduo.com'
 	NODEHOST =  'https://node.dd.lieduoduo.com/frontEnd'
 	PUBAPIHOST = 'https://pub-api.dd.lieduoduo.com'
-	WEBVIEW = `https://h5.lieduoduo.com/`
+	WEBVIEW = `https://m.duoduohr.cn/`
 }
 
 // 招聘端page

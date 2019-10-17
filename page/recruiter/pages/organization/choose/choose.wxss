@@ -169,7 +169,7 @@
 	font-weight:300;
 	color:#282828;
 	margin: 36rpx 0rpx 32rpx 0rpx;
-	background: #E8E9EB;
+	background: rgba(248,248,248,1);
 }
 .orgul{
 	padding-top: 0;

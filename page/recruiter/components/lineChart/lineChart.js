@@ -1,7 +1,7 @@
 import * as echarts from '../ec-canvas/echarts.min.js'
 
 let app = getApp()
-
+let a="今日"
 let chartLine = null
 Component({
   /**
@@ -25,6 +25,7 @@ Component({
       onInit(canvas, width, height) {
         chartLine = echarts.init(canvas, null, {width: width, height: height})
         canvas.setChart(chartLine)
+        return chartLine
       }
     },
     options: {
@@ -37,10 +38,6 @@ Component({
         '#FF7F4C'
       ],
       legend: {
-        data: [
-          'A',
-          'B'
-        ],
         top: 15,
         left: 'left',
         backgroundColor: 'yellow',
@@ -57,6 +54,29 @@ Component({
         show: true,
         trigger: 'axis'
       },
+      tooltip: {
+        trigger: 'axis',
+        // backgroundColor:'white',
+        color:'black',
+        borderWidth:1,
+        borderColor:'#dcdcdc',
+        textStyle:{
+          color:'white',
+        },
+        formatter(params) {
+          return [
+            Number(params[0].name.slice(0,2)) + '月' + Number(params[0].name.slice(-2)) + '日' + '\n',
+            params[0].seriesName + ': ' + params[0].data + '人' + '\n',
+            params[1].seriesName + ': ' + params[1].data + '次'
+          ].join('')
+        },
+        axisPointer: {
+          show: false,
+          lineStyle: {
+            color: '#dcdcdc'
+          }
+        }
+      },
       xAxis: {
         type: 'category',
         boundaryGap: false,
@@ -68,7 +88,6 @@ Component({
           }
         },
         data: [],
-        // data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
         show: true,
         nameLocation: 'start',
         // 坐标轴的颜色
@@ -132,8 +151,9 @@ Component({
     },
     setOptions(key, value) {
       this.data.options.series = []
-      this.data.options.legend.data = ['A', 'B']
+      this.data.options.legend.data = ['访问次数', '访问人数']
       this.data.options.xAxis.data = key
+      console.log(value)
       value.map((field, index) => {
         this.data.options.series.push({
           name: this.data.options.legend.data[index],

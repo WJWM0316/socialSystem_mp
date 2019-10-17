@@ -170,7 +170,7 @@
 			</view>
 		</view>
 		
-		<applyEntry  companyId="{{companyInfos.id}}"></applyEntry>
+		<applyEntry  companyId="{{companyInfos.id}}" wx:if="{{!companyInfos.hideDdPromote && choseType === 'APPLICANT'}}"></applyEntry>
 
 	<!-- 	<view class="toggle" bindtap="toggle" wx:if="{{choseType !== 'RECRUITER'}}">
 			<image class="icon" src="{{cdnImagePath}}{{isRecruiter ? 'btn_b_hp_zhoapin.png' : 'btn_b_hp_zhaoren.png'}}"></image>

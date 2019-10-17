@@ -1,6 +1,7 @@
 <view class="model" wx:if="{{ show }}">
 	  <view class="mask"></view>
 	  <view class="box">
+	  	<i class="icon iconfont icon-close" bindtap="cancel" wx:if="{{!showCancel}}"></i>
 	    <view class="title">{{title}}</view>
 	    <body><slot></slot></body>
 	    <view class="footer">

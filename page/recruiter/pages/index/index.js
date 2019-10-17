@@ -366,9 +366,20 @@ Page({
           wx.navigateTo({url: `${RECRUITER}organization/list/list?type=path-mechanism&companyId=${app.globalData.recruiterDetails.companyTopId}`})
           return
         }
-        model.link = homepageUrl
-        model.show = true
-        this.setData({model})
+        app.wxConfirm({
+          title: '成功生成链接',
+          content: `链接为：${homepageUrl}`,
+          confirmText: '复制链接',
+          showCancel: true,
+          cancelText: '取消',
+          confirmBack: () => {
+            wx.setClipboardData({data: homepageUrl })
+          },
+          cancelBack: () => {}
+        })
+        // model.link = homepageUrl
+        // model.show = true
+        // this.setData({model})
         break
       case 'path-position':
         // 已经有在线职位
@@ -380,18 +391,29 @@ Page({
         break
       case 'path-recruiter':
         let recruiterUrl = `${COMMON}recruiterDetail/recruiterDetail?uid=${app.globalData.recruiterDetails.uid}`.slice(1)
-        model.link = recruiterUrl
-        model.show = true
-        this.setData({model})
-        break
-      case 'intruduction':
-        wx.navigateTo({
-          url: `${RECRUITER}toolManual/toolManual`,
-          success: () => {
-            model.show = false
-            setTimeout(() => this.setData({model}), 600)
+        app.wxConfirm({
+          title: '成功生成链接',
+          content: `链接为：${recruiterUrl}`,
+          confirmText: '复制链接',
+          showCancel: true,
+          cancelText: '取消',
+          cancelBack: () => {},
+          confirmBack: () => {
+            wx.setClipboardData({
+              data: recruiterUrl,
+              success: () => {
+                app.wxToast({title: '成功复制链接'})
+              }
+            })
           }
         })
+        // model.link = recruiterUrl
+        // model.show = true
+        // this.setData({model})
+        break
+      case 'toolUse':
+        let path = encodeURIComponent(`${WEBVIEW}instructions?page=instructions`)
+        wx.navigateTo({url: `${COMMON}webView/webView?type=optimal&p=${path}`})
         break
       default:
         break
@@ -513,9 +535,12 @@ Page({
         let tem = {}
         let key = []
         for(let i = 7; i > 0; i--) {
-          let start = new Date(), day
+          let start = new Date(), day, month, day1
           start.setTime(start.getTime() - 24 * i * 60 * 60 * 1000)
           day = start.getDate()
+          month = start.getMonth() + 1 < 10 ? `0${start.getMonth() + 1}` : start.getMonth() + 1
+          day1 = start.getDate() < 10 ? `0${start.getDate()}` : start.getDate()
+          console.log(`${month}-${day1}`)
           if(i === 7 || i === 1) day = start.getMonth() + 1 + '月' + start.getDate() + '日'
           key.push(day)
         }
@@ -533,6 +558,8 @@ Page({
         res.data.data.company.data.reverse().map((v, i, arr) => {
           let date = new Date(v.date)
           let item = i === 0 || i === arr.length - 1 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
+          let item2 = v.date.slice(5)
+          // console.log(item2)
           tem[0].key.push(item)
           tem[0].value[0].push(v.companyVisitPv)
           tem[0].value[1].push(v.companyVisitUv)
@@ -545,6 +572,8 @@ Page({
         res.data.data.position.data.reverse().map((v, i, arr) => {
           let date = new Date(v.date)
           let item = i === 0 || i === arr.length - 1 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
+          let item2 = v.date.slice(5)
+          // console.log(item2)
           tem[1].key.push(item)
           tem[1].value[0].push(v.positionVisitPv)
           tem[1].value[1].push(v.positionVisitUv)
@@ -558,6 +587,8 @@ Page({
         res.data.data.recruiter.data.reverse().map((v, i, arr) => {
           let date = new Date(v.date)
           let item = i === 0 || i === arr.length - 1 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
+          let item2 = v.date.slice(5)
+          // console.log(item2)
           tem[2].key.push(item)
           tem[2].value[0].push(v.recruiterVisitPv)
           tem[2].value[1].push(v.recruiterVisitUv)

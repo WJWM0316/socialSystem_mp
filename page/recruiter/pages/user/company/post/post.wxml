@@ -94,7 +94,7 @@
 				<i class="icon iconfont icon-xiangyou"></i>
 			</view>
 			<view class="li clear-bottom" bindtap="routeJump">
-				<view class="key">公司介绍</view>
+				<view class="key">机构介绍</view>
 				<i class="icon iconfont icon-xiangyou"></i>
 				<view class="value self {{formData.intro ? 'color' : ''}}">{{!formData.intro ? '填写公司介绍' : formData.intro}}</view>
 			</view>

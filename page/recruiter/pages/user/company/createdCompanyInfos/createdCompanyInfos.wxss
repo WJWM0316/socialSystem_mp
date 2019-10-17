@@ -143,3 +143,35 @@
 	display: inline;
 	font-size:28rpx !important;
 }
+
+.create_org{
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background: white;
+}
+
+.create_org .default-status{
+	width: 180rpx;
+	height: 135rpx;
+	display: block;
+	margin: 120rpx auto 45rpx auto;
+}
+
+.create_org .h11{
+	height:38rpx;
+	font-size:40rpx;
+	font-weight:700;
+	color:rgba(101,39,145,1);
+	line-height:38rpx;
+	text-align: center;
+	margin-bottom: 16rpx;
+}
+
+.create_org .h22{
+	font-size:28rpx;
+	color:rgba(98,98,98,1);
+	line-height:40rpx;
+	text-align: center;
+}

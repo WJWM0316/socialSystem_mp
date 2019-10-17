@@ -1,9 +1,0 @@
-<view class="toolManual">
-	<navbar title="使用说明" background="#fff" color="#22292C"></navbar>
-	<view class="fixed-dom">
-		<view class="item {{item.active ? 'active' : ''}}" wx:for="{{lists}}" wx:key="{{index}}" data-index="{{index}}" bindtap="onClick">{{item.msg}}</view>
-	</view>
-	<view class="pages">
-		<view class="title"><view class="strong">【生成页面路径】</view>的用途</view>
-	</view>
-</view>

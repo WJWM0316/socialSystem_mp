@@ -15,6 +15,8 @@
 	    <refreshStatus></refreshStatus>
 	  </view>
 
+		<shareBtn posterType="company" id="shareBtn" wx:if="{{companyInfos.id}}" posterData="{{companyInfos}}"></shareBtn>
+
 		<view class="banner" style="margin-top: -{{navH}}px">
 			<view class="filterBg" style="height: {{!isBangs ? '225rpx' : '272rpx'}}">
 				<view class="bgImg" style="background: url({{companyInfos.logoInfo.smallUrl}}) center left no-repeat; background-size: 100% auto; filter: blur(10rpx);"></view>
@@ -30,7 +32,6 @@
 				<view class="company-name">{{companyInfos.companyName}}</view>
 				<view class="infos">{{companyInfos.industry}} · {{companyInfos.financingInfo}} · {{companyInfos.employeesInfo}}</view>
 			</view>
-			<shareBtn></shareBtn>
 		</view>
 		<view class="company-team" wx:if="{{companyInfos.recruiterLists.length}}">
 			<view class="title">

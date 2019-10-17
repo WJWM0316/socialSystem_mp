@@ -83,11 +83,10 @@ Component({
           })
           break
         case 'recruiter':
-          if(app.globalData.recruiterDetails.isCompanyTopAdmin) {
-            wx.navigateTo({url: `${COMMON}poster/createPost/createPost?type=recruiter&uid=${this.data.posterData.uid}&companyId=${orgData.id}`})
-          } else {
-            wx.navigateTo({url: `${COMMON}poster/createPost/createPost?type=recruiter&uid=${this.data.posterData.uid}&companyId=${app.globalData.recruiterDetails.companyInfo.id}`})
-          }
+          wx.navigateTo({url: `${COMMON}poster/createPost/createPost?type=recruiter&uid=${this.data.posterData.uid}&companyId=${this.data.posterData.currentCompanyId}`})
+          break
+        case 'company':
+          wx.navigateTo({url: `${COMMON}poster/createPost/createPost?type=company&companyId=${this.data.posterData.id}`})
           break
         case 'specialJob':
           wx.navigateTo({url: `${COMMON}poster/createPost/createPost?type=rapidlyViwe`})

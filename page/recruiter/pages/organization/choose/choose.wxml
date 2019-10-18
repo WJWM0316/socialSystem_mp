@@ -7,10 +7,10 @@
 	<block wx:if="{{options.type === 'org'}}">
 		<view class="list-item1" wx:if="{{!organization_name}}">
 			<view class="h11">以下机构为该公司所属机构</view>
-			<view class="h22">没找到对应的机构名称？ <view class="strong" bindtap="open">去添加>></view></view>
+			<view class="h22">没找到对应的机构名称？ <view class="strong" bindtap="open">去添加<i class="icon iconfont icon-houyige jiantou123"></i></view></view>
 		</view>
 		<view class="list-item2" wx:if="{{organization_name}}">
-			<view class="h1111">我添加的 <view class="strong" bindtap="open">去修改>></view></view>
+			<view class="h1111">我添加的 <view class="strong" bindtap="open">去修改<i class="icon iconfont icon-houyige jiantou123"></i></view></view>
 		</view>
 		<view class="list-item3" bindtap="setActive" wx:if="{{organization_name}}">
 			<view class="h222">{{organization_name}}</view>

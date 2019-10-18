@@ -1,3 +1,4 @@
+@import '../../../iconfont.wxss'
 .technical-support{
   height:24rpx;
   font-size:24rpx;

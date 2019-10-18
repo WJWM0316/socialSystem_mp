@@ -136,9 +136,9 @@ Page({
           }
         })
         this.setData({companyInfos, map, requireOAuth, callBackNum}, () => {
+          resolve(res)
           this.getDomNodePosition()
           if (this.data.options.pick) this.selectComponent('#shareBtn').oper()
-          resolve(res)
         })
       }).catch(() => {
         let companyInfos = this.data.companyInfos
@@ -237,7 +237,9 @@ Page({
   onPullDownRefresh() {
     this.setData({hasReFresh: true})
     this.getCompanyDetail(false, false).then(() => {
+      console.log(11111111)
       this.setData({isRecruiter: app.globalData.isRecruiter, hasReFresh: false})
+      console.log(this.data)
       wx.stopPullDownRefresh()
     })
   },

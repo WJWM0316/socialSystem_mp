@@ -56,14 +56,14 @@ Page({
         return
       }
     })
-    if (choseData.select) {
+    if (choseData.isSel) {
       choseList.map((item, index) => {
         if (item.id === choseData.id) {
           choseList.splice(index, 1)
           return
         }
       })
-      teamList[choseData.index].select = false
+      teamList[choseData.index].isSel = false
     // 要选中的
     } else {
       if (choseList.length === this.data.limitNum) { // 超过8个不给选择了
@@ -72,9 +72,9 @@ Page({
         })
         return
       } else {
-        choseData.select = true
+        choseData.isSel = true
         choseList.push(choseData) // 不超过五个的，且没被选择的添加进去
-        teamList[choseData.index].select = true
+        teamList[choseData.index].isSel = true
       }
     }
     this.setData({choseList, teamList})

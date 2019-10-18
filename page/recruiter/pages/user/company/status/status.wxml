@@ -1,5 +1,12 @@
 <block wx:if="{{companyInfos.id}}">
-	<navbar title="{{pageTitle}}" background="#FFFFFF" color="#22292C" showHome="{{showHome}}"></navbar>
+	<navbar
+		title="{{pageTitle}}"
+		background="#FFFFFF"
+		color="#22292C"
+		customBack
+		bindbackEvent="backEvent"
+		showHome="{{showHome}}">
+	</navbar>
 
 	<view class="company-identity-status">
 		

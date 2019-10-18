@@ -52,7 +52,7 @@ Component({
               if(companyInfo.status === 3) {
                 wx.navigateTo({url: `${RECRUITER}user/company/createdCompanyInfos/createdCompanyInfos?identity=APPLICANT&type=${joinType === 1 ? 'company' : 'create_org'}`})
               } else {
-                wx.reLaunch({url: `${RECRUITER}user/company/status/status?identity=APPLICANT&from=${joinType === 1 ? 'company' : 'create_org'}`})
+                wx.navigateTo({url: `${RECRUITER}user/company/status/status?identity=APPLICANT&from=${joinType === 1 ? 'company' : 'create_org'}`})
               }
             }
           }

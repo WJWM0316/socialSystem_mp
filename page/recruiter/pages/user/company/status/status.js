@@ -25,6 +25,12 @@ Page({
     wx.setStorageSync('choseType', 'RECRUITER')
     this.setData({options})
   },
+  backEvent() {
+    if(this.data.options.identity === 'APPLICANT') {
+      wx.setStorageSync('choseType', 'APPLICANT')
+    }
+    wx.navigateBack({delta: 1})
+  },
   onShow() {
     this.getCompanyIdentityInfos()
   },
@@ -157,8 +163,5 @@ Page({
    */
   callPhone() {
     wx.makePhoneCall({phoneNumber: app.globalData.telePhone})
-  },
-  backEvent() {
-    wx.navigateBack({delta: 1})
   }
 })

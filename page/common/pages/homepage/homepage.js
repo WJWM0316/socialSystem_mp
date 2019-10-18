@@ -137,7 +137,7 @@ Page({
         })
         this.setData({companyInfos, map, requireOAuth, callBackNum}, () => {
           this.getDomNodePosition()
-          if (this.data.options.pick) this.selectComponent('#shareBtn').oper()
+          if (this.data.options && this.data.options.pick) this.selectComponent('#shareBtn').oper()
           resolve(res)
         })
       }).catch(() => {

@@ -90,7 +90,7 @@ Page({
             app.globalData.recruiterDetails = res.data
           }
           this.getPositionLists(false)
-          if (this.data.options.pick) this.selectComponent('#shareBtn').oper()
+          if (this.data.options && this.data.options.pick) this.selectComponent('#shareBtn').oper()
           resolve(res)
         })
       })

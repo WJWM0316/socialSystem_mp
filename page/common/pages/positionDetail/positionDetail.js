@@ -157,7 +157,7 @@ Page({
         })
         console.log(identity !== 'RECRUITER' && !res.data.companyInfo.hideDdPromote, 'kkkk')
         if(this.selectComponent('#interviewBar')) this.selectComponent('#interviewBar').init()
-        if (this.data.query.pick) this.selectComponent('#shareBtn').oper()
+        if (this.data.query && this.data.query.pick) this.selectComponent('#shareBtn').oper()
     })
   },
 

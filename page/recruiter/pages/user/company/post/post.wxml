@@ -17,7 +17,7 @@
 			</view>
 
 			<view class="li upload">
-				<view class="key">公司logo</view>
+				<view class="key"><text style="opacity: 0">*</text>公司logo</view>
 				<view class="logo-box">
 					<view class="logo" bindtap="savaBeforeUpload">
 						<unloadFile bindresultEvent="upload" unloadType="img" number="{{number}}">
@@ -71,7 +71,7 @@
 			</view>
 
 			<view class="li clear-bottom" bindtap="routeJump">
-				<view class="key">公司介绍</view>
+				<view class="key"><text style="opacity: 0">*</text>公司介绍</view>
 				<i class="icon iconfont icon-xiangyou"></i>
 				<view class="value self {{formData.intro ? 'color' : ''}}">{{!formData.intro ? '填写公司介绍' : formData.intro}}</view>
 			</view>
@@ -94,7 +94,7 @@
 				<i class="icon iconfont icon-xiangyou"></i>
 			</view>
 			<view class="li clear-bottom" bindtap="routeJump">
-				<view class="key">机构介绍</view>
+				<view class="key"><text style="opacity: 0">*</text>机构介绍</view>
 				<i class="icon iconfont icon-xiangyou"></i>
 				<view class="value self {{formData.intro ? 'color' : ''}}">{{!formData.intro ? '填写公司介绍' : formData.intro}}</view>
 			</view>

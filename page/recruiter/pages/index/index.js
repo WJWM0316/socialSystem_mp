@@ -203,12 +203,6 @@ Page({
       btnPath
     })
   },
-  /**
-   * @Author   小书包
-   * @DateTime 2019-01-23
-   * @detail   就算页面的滚动
-   * @return   {[type]}     [description]
-   */
   onPageScroll(e) {
     if(e.scrollTop > 10) {
       if (this.data.background !== '#652791') this.setData({isFixed: true, background: '#652791'})

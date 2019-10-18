@@ -86,13 +86,13 @@
 				<view class="reation" wx:if="{{companyInfos.reviewNote}}">
 					<text wx:if="{{companyInfos.reviewNote}}">{{companyInfos.reviewNote}}</text>
 					<!-- <text wx:if="{{identityInfos.reviewNote}}">{{identityInfos.reviewNote}}</text> -->
-					<view bindtap="todoAction" data-action="modifyCompany" class="p5">重新提交认证信息>></view>
+					<view bindtap="todoAction" data-action="modifyOrg" class="p5">重新提交认证信息>></view>
 				</view>
 			</block>
 			<block wx:else>
 				<view class="h1">创建机构审核已通过</view>
 				<view class="p3">{{companyInfos.companyName}}</view>
-				<view class="line-box"> <view class="line-left"></view> 获得权益 <view class="line-right"></view> </view>
+	<!-- 			<view class="line-box"> <view class="line-left"></view> 获得权益 <view class="line-right"></view> </view>
 				<view class="button-box">
 					<view class="button">
 						<image src="{{cdnImagePath}}equities_01.png" mode="scaleToFill" class="button-image"></image>
@@ -102,7 +102,7 @@
 						<image src="{{cdnImagePath}}equities_02.png" mode="scaleToFill" class="button-image"></image>
 						<text>免费查看简历</text>
 					</view>
-				</view>
+				</view> -->
 			</block>
 		</view>
 		<!-- 创建机构 end -->
@@ -139,7 +139,7 @@
 			<block wx:else>
 				<view class="h1">加入机构审核已通过</view>
 				<view class="p3">{{companyInfos.companyName}}</view>
-				<view class="line-box"> <view class="line-left"></view> 获得权益 <view class="line-right"></view> </view>
+			<!-- 	<view class="line-box"> <view class="line-left"></view> 获得权益 <view class="line-right"></view> </view>
 				<view class="button-box">
 					<view class="button">
 						<image src="{{cdnImagePath}}equities_01.png" mode="scaleToFill" class="button-image"></image>
@@ -149,7 +149,7 @@
 						<image src="{{cdnImagePath}}equities_02.png" mode="scaleToFill" class="button-image"></image>
 						<text>免费查看简历</text>
 					</view>
-				</view>
+				</view> -->
 			</block>
 		</view>
 		<!-- 申请加入 end -->

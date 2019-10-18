@@ -38,8 +38,8 @@ Page({
   		case 'modifyCompany':
         wx.reLaunch({url: `${RECRUITER}user/company/apply/apply`})
   			break
-      case 'email':
-        wx.navigateTo({url: `${RECRUITER}user/company/email/email?id=${app.globalData.recruiterDetails.companyInfo.id}`})
+      case 'modifyOrg':
+        wx.navigateTo({url: `${RECRUITER}user/company/apply/apply?type=create_org`})
         break
       case 'position':
         wx.redirectTo({url: `${RECRUITER}position/post/post`})
@@ -54,9 +54,7 @@ Page({
         wx.navigateTo({url: `${RECRUITER}user/company/apply/apply?type=create_org`})
         break
       case 'recruitment':        
-        if(companyInfos.status === 1) {
-          wx.reLaunch({url: `${RECRUITER}index/index`})
-        }
+        wx.reLaunch({url: `${RECRUITER}index/index`})
         break
       case 'call':
         wx.makePhoneCall({phoneNumber: app.globalData.telePhone})

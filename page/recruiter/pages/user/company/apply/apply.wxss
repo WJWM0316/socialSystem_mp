@@ -87,9 +87,9 @@
 	color: #BCBCBC;
 }
 
-.input-li .text.active {
+/*.input-li .text.active {
 	color: rgba(98,98,98,1);
-}
+}*/
 
 .ul {
 	display: table;

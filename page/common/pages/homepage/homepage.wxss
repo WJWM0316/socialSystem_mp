@@ -79,12 +79,13 @@
 
 .position-box .infos1 {
   overflow: hidden;
-  padding: 58rpx 40rpx 48rpx;
+  padding: 45rpx 40rpx;
   text-align: left;
   color: rgba(98,98,98,1);
   font-size: 26rpx;
   border-bottom: 1rpx solid #E8E9EB;
   position: relative;
+  box-sizing: border-box;
 }
 .position-box .infos1::after, .phone-box::after {
   content: '\e6c4';
@@ -94,7 +95,7 @@
   color: #BCBCBC;
   top: 50%;
   right: 0;
-  transform: translate3d(0, -40%, 0);
+  transform: translate3d(0, -57%, 0);
 }
 .phone-box::after {
   right: 40rpx;
@@ -104,13 +105,11 @@
   top: 54%;
   left: 40rpx;
   font-size: 30rpx;
-  font-weight: 400;
-  transform: translateY(-50%);
-  color: #000000;
-  display: inline-block;
-  width: 36rpx;
-  height: 36rpx;
-  line-height: 36rpx;
+  font-weight: 300;
+  transform: translateY(-70%);
+  color: #5C565D;
+  display: block;
+  line-height: 1;
   text-align: left;
 }
 
@@ -128,13 +127,13 @@
   padding: 45rpx 40rpx;
   text-align: left;
   font-size: 26rpx;
-  color: rgba(40,40,40,1);
+  color: rgba(98,98,98,1);
   position: relative;
 }
 
 .phone-box .icon-shoujihaoma{
   font-size: 26rpx;
-  font-weight: 400;
+  font-weight: 300;
   color: #5C565D;
   display: inline-block;
   margin-right: 10rpx;
@@ -142,8 +141,8 @@
 
 .phone-box .icon-dianhua{
   font-size: 28rpx;
-  font-weight: 400;
-  color: #000000;
+  font-weight: 300;
+  color: #5C565D;
   display: inline-block;
   margin-right: 5rpx;
 }
@@ -602,15 +601,14 @@
 }
 
 .company-team .ul{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40rpx 0;
+  overflow: hidden;
+  padding: 40rpx;
 }
 
 .company-team .ul .li{
-  flex: 1;
+  width: 33.3333%;
   text-align: center;
+  float: left;
 }
 
 .company-team .ul .img-box{

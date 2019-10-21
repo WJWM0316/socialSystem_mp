@@ -28,7 +28,7 @@ Page({
   },
   onLoad(options) {
     this.setData({options})
-    if(options.id) this.read(options)
+    if(Reflect.has(options, 'id')) this.read(options)
   },
   onShow() {
     this.setData({detail: app.globalData.recruiterDetails})
@@ -98,22 +98,15 @@ Page({
    * @return   {[type]}       [description]
    */
   reverseGeocoder(res) {
-    let storage = wx.getStorageSync('createPosition')
-    let formData = {}
-    formData.address = `${res.address} ${res.name}`
-    formData.lat = res.latitude
-    formData.lng = res.longitude
-    Object.keys(formData).map(field => this.setData({[field]: formData[field]}))
-    reverseGeocoder(res)
-      .then(rtn => {
-        let formData = {}
-        formData.address = `${rtn.result.address} ${rtn.result.address_reference.landmark_l2.title}`
-        formData.area_id = rtn.result.ad_info.adcode
-        formData.lat = rtn.result.ad_info.location.lat
-        formData.lng = rtn.result.ad_info.location.lng
-        formData.title = rtn.result.ad_info.location.lng
-        Object.keys(formData).map(field => this.setData({[field]: formData[field]}))
-      })
+    reverseGeocoder(res).then(rtn => {
+      let formData = {}
+      formData.address = `${rtn.result.address} ${rtn.result.address_reference.landmark_l2.title}`
+      formData.area_id = rtn.result.ad_info.adcode
+      formData.lat = rtn.result.ad_info.location.lat
+      formData.lng = rtn.result.ad_info.location.lng
+      formData.title = rtn.result.ad_info.location.lng
+      Object.keys(formData).map(field => this.setData({[field]: formData[field]}))
+    })
   },
   /**
    * @Author   小书包
@@ -211,7 +204,6 @@ Page({
     }
     let id = this.data.options.id
     getCompanyAddressDetailApi({id}).then(res => {
-      
       Object.keys(formData).map(field => this.setData({[field]: formData[field]}))
     })
   },
@@ -249,9 +241,7 @@ Page({
    * @return   {[type]}   [description]
    */
   deleteCompanyAddress() {
-    deleteCompanyAddressApi({id: this.data.options.id}).then(() => {
-      wx.navigateBack({delta: 1})
-    })
+    deleteCompanyAddressApi({id: this.data.options.id}).then(() => wx.navigateBack({delta: 1}))
   },
   /**
    * @Author   小书包
@@ -260,9 +250,7 @@ Page({
    * @return   {[type]}   [description]
    */
   deletePositionAddress() {
-    deletePositionAddressApi({id: this.data.options.id}).then(() => {
-      wx.navigateBack({delta: 1})
-    })
+    deletePositionAddressApi({id: this.data.options.id}).then(() => wx.navigateBack({delta: 1}))
   },
   /**
    * @Author   小书包
@@ -293,9 +281,7 @@ Page({
     if(this.data.detail.isCompanyTopAdmin) {
       if(orgData) formData = Object.assign(formData, {company_id: orgData.id})
     }
-    addPositionAddressApi(formData).then(res => {
-      wx.navigateBack({delta: 1})
-    })
+    addPositionAddressApi(formData).then(res => wx.navigateBack({delta: 1}))
   },
   /**
    * @Author   小书包
@@ -317,9 +303,7 @@ Page({
       app.wxToast({title: '请选择公司地址'})
       return
     }
-    addCompanyAddressApi(formData).then(res => {
-      wx.navigateBack({delta: 1})
-    })
+    addCompanyAddressApi(formData).then(res => wx.navigateBack({delta: 1}))
   },
   /**
    * @Author   小书包
@@ -362,9 +346,6 @@ Page({
       lat: infos.lat,
       doorplate: infos.doorplate
     }
-    editCompanyAddressApi(formData).then(() => {
-      wx.navigateBack({delta: 1})
-      // wx.redirectTo({url: `${RECRUITER}position/addressList/addressList?type=company&selected=${this.data.options.selected}`})
-    })
+    editCompanyAddressApi(formData).then(() => wx.navigateBack({delta: 1}))
   }
 })

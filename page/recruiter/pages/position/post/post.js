@@ -85,6 +85,10 @@ Page({
    * @return   {[type]}           [description]
    */
   getUpdateInfos() {
+    let callback = () => {
+      this.bindButtonStatus()
+      wx.removeStorageSync('createPosition')
+    }
     let options = this.data.query
     let formData = this.data.formData
     let storage = Object.assign(wx.getStorageSync('createPosition'))
@@ -125,7 +129,7 @@ Page({
       formData.parentType = storage.parentType
       formData.company_id = storage.company_id
       formData.skills = storage.skills
-      this.setData({ formData }, () => this.bindButtonStatus())
+      this.setData({ formData }, () => callback())
       return
     }
     if(!Reflect.has(options, 'positionId')) return
@@ -152,7 +156,7 @@ Page({
       formData.parentType = storage.parentType || infos.topPid
       formData.skills = storage.skills || infos.skillsLabel
       if(orgData) formData.company_id = orgData.id
-      this.setData({ formData }, () => this.bindButtonStatus())
+      this.setData({ formData }, () => callback())
     })
   },
   /**

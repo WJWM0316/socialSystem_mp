@@ -85,7 +85,7 @@
 				<view class="key"><text>*</text>机构logo</view>
 				<view class="logo-box">
 					<view class="logo" bindtap="savaBeforeUpload">
-						<unloadFile bindresultEvent="upload" unloadType="img" number="{{number}}">
+						<unloadFile bindresultEvent="upload" unloadType="img" number="1">
 							<image wx:if="{{!formData.logo.smallUrl}}" src="{{cdnPath}}pic_dafult_company.png" class="placeholder-image" mode="aspectFit"></image>
 							<image src="{{formData.logo.smallUrl}}" wx:if="{{formData.logo.smallUrl}}" mode="aspectFit" class="upload-image"></image>
 						</unloadFile>

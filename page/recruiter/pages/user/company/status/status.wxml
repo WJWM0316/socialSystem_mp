@@ -287,7 +287,7 @@
 			class="go identity222"
 			bindtap="toggle"
 			wx:if="{{companyInfos.status !== 1 && (options.from === 'company' || options.from === 'join')}}">
-			<text>前往求职端</text>
+			<text>返回主页</text>
 		</view>
 
 		<view

@@ -146,14 +146,7 @@ Page({
    * @return   {[type]}   [description]
    */
   toggle() {
-    app.wxConfirm({
-      title: '切换身份',
-      content: '是否继续前往求职端？',
-      confirmBack() {
-        app.toggleIdentity()
-      },
-      cancelBack: () => {}
-    })
+    app.toggleIdentity()
   },
   /**
    * @Author   小书包

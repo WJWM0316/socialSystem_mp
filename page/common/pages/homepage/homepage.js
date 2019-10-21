@@ -237,9 +237,7 @@ Page({
   onPullDownRefresh() {
     this.setData({hasReFresh: true})
     this.getCompanyDetail(false, false).then(() => {
-      console.log(11111111)
       this.setData({isRecruiter: app.globalData.isRecruiter, hasReFresh: false})
-      console.log(this.data)
       wx.stopPullDownRefresh()
     })
   },

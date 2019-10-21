@@ -98,7 +98,7 @@
   transform: translate3d(0, -57%, 0);
 }
 .phone-box::after {
-  right: 40rpx;
+  right: 0;
 }
 .position-box .icon-dizhi{
   position: absolute;
@@ -121,7 +121,9 @@
   color: rgba(40,40,40,1);
   border-bottom: 1rpx solid rgba(232,233,235,1);
 }
-
+.mobile-box {
+  padding: 0 40rpx;
+}
 .phone-box{
   overflow: hidden;
   padding: 45rpx 40rpx;
@@ -144,7 +146,10 @@
   font-weight: 300;
   color: #5C565D;
   display: inline-block;
-  margin-right: 5rpx;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .phone-box .desc {
@@ -154,7 +159,6 @@
   padding: 5rpx 20rpx;
   background: #EFE9F4;
   border-radius: 18rpx;
-  margin-right: 38rpx;
   float: right;
 }
 .banner .company-logo image {

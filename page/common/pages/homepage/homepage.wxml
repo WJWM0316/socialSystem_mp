@@ -164,11 +164,14 @@
 					{{companyInfos.address[0].address}}
 				</view>
 			</view>
-			<view class="phone-box" bindtap="callPhone" wx:if="{{companyInfos.mobile}}">
-				<i class="icon iconfont icon-dianhua"></i>
-				{{companyInfos.mobile}}
-				<text class="desc">直接拨打，更快面试</text>
-			</view>
+      <view class="mobile-box">
+        <view class="phone-box" bindtap="callPhone" wx:if="{{companyInfos.mobile}}">
+          <i class="icon iconfont icon-dianhua"></i>
+          {{companyInfos.mobile}}
+          <text class="desc">直接拨打，更快面试</text>
+        </view>
+      </view>
+			
 		</view>
 		
 		<applyEntry  companyId="{{companyInfos.id}}" wx:if="{{!companyInfos.hideDdPromote && choseType === 'APPLICANT'}}"></applyEntry>

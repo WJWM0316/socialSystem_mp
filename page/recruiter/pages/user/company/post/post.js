@@ -210,10 +210,11 @@ Page({
    * @detail   离开当前页面
    * @return   {[type]}   [description]
    */
-  routeJump() {
+  routeJump(e) {
+    let type = e.currentTarget.dataset.type
     let storage = wx.getStorageSync('createdCompany') || {}
     wx.setStorageSync('createdCompany', Object.assign(storage, this.data.formData))
-    wx.navigateTo({url: `${RECRUITER}company/introducingEdit/introducingEdit`})
+    wx.navigateTo({url: `${RECRUITER}company/introducingEdit/introducingEdit?type=${type}`})
   },
   routeAddress() {
     let storage = wx.getStorageSync('createdCompany') || {}

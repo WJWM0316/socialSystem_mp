@@ -25,7 +25,7 @@ Component({
       onInit(canvas, width, height) {
         chartLine = echarts.init(canvas, null, {width: width, height: height})
         canvas.setChart(chartLine)
-        // return chartLine
+        return chartLine
       }
     },
     options: {

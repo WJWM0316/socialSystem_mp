@@ -153,3 +153,17 @@
   border-radius: 50%;
   transform: translateY(-50%);
 }
+
+.label {
+  width:132rpx;
+  height:46rpx;
+  background:rgba(239,233,244,1);
+  border-radius:100rpx;
+  font-size:24rpx;
+  color:rgba(101,39,145,1);
+  line-height: 46rpx;
+  text-align: center;
+  position: absolute;
+  top: 40rpx;
+  right: 40rpx;
+}

@@ -39,17 +39,23 @@
     </view>
   </view>
   <view class="item">
+    <view class="txt">担任职务类别</view>
+    <view class="edit">
+      <input type="text" data-type="positionType" disabled bindtap="routeJump" value="{{positionType}}" placeholder="请选择担任职务类别" placeholder-style="color: #B2B6C2"/>
+    </view>
+  </view>
+  <view class="item">
     <view class="txt">担任职务</view>
     <view class="edit">
       <input type="text" value="{{position}}" data-type="position" bindblur="getInputValue" placeholder="请填写担任职务" placeholder-style="color: #B2B6C2"/>
     </view>
   </view>
-  <!-- <view class="item">
+  <view class="item">
     <view class="txt">公司邮箱</view>
     <view class="edit">
       <input type="text" value="{{email}}" data-type="email" bindblur="getInputValue" placeholder="请填写公司邮箱" placeholder-style="color: #B2B6C2"/>
     </view>
-  </view> -->
+  </view>
   <view class="title">联系方式</view>
   <view class="item">
     <view class="txt noRed">微信</view>

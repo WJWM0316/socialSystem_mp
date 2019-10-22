@@ -127,6 +127,12 @@ Page({
       if(!this.data.city) {
         delete params.city
       }
+      let orgData = wx.getStorageSync('orgData')
+      if(orgData) {
+        params = Object.assign(params, {company_id: orgData.id})
+      } else {
+        if (app.globalData.currentCompanyId) params = Object.assign(params, {company_id: app.globalData.currentCompanyId})
+      }
       getPositionListApi(params).then(res => {
         const positionList = this.data.positionList
         const onBottomStatus = res.meta && res.meta.nextPageUrl ? 0 : 2

@@ -22,11 +22,6 @@ Component({
    */
   
   attached: function () {
-    wx.login({
-      success: function (res0) {
-        wx.setStorageSync('code', res0.code)
-      }
-    })
   }, 
   methods: {
     formSubmit(e) {

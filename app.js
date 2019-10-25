@@ -314,7 +314,6 @@ App({
     if (e.detail.errMsg === 'getPhoneNumber:ok') {
       let data = {
         iv_key: e.detail.iv,
-        code: wx.getStorageSync('code'),
         data: e.detail.encryptedData
       }
       return new Promise((resolve, reject) => {

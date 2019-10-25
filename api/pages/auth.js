@@ -29,6 +29,7 @@ export const loginApi = (data, hasLoading) => {
   	method: 'post',
     url: '/wechat/login/mini',
     data,
+    name: 'login',
     hasLoading: false
   })
 }

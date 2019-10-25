@@ -118,6 +118,11 @@ Page({
         this.getStep()
       }
     }
+    wx.login({
+      success: function (res0) {
+        wx.setStorageSync('code', res0.code)
+      }
+    })
     if (options.directChat) {
       directChat = options.directChat
     }

@@ -143,6 +143,16 @@ Page({
   getPhoneNumber(e) {
     app.quickLogin(e, backType)
   },
+  changeNewCaptcha () {
+    changeNewCaptchaApi().then(res0 => {
+      captchaKey = res0.data.key
+      let imgUrl = res0.data.img
+      this.setData({imgUrl})
+    })
+  },
+  getPhoneNumber(e) {
+    app.quickLogin(e, backType)
+  },
   formSubmit(e) {
     app.postFormId(e.detail.formId)
   },

@@ -17,6 +17,8 @@ let formIdList = [],
     sendNum = 0 // formId 发送次数
 App({
   onLaunch: function (e) {
+    let extConfig = wx.getExtConfigSync? wx.getExtConfigSync(): {}
+    console.log(extConfig, '提测清单')
     this.globalData.appId = wx.getAccountInfoSync().miniProgram.appId
     // 获取导航栏高度
     this.checkUpdateVersion()

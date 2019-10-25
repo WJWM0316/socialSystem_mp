@@ -105,18 +105,22 @@ Page({
       if(isOwner) {
         params = Object.assign(params, {is_online: 1})
       }
-
-      if(wx.getStorageSync('choseType') !== 'RECRUITER') {
-        funcApi = getPositionListApi
+      if(orgData) {
+        params = Object.assign(params, {company_id: orgData.id})
       } else {
-        if(app.globalData.recruiterDetails.isCompanyTopAdmin) {
-          funcApi = getPositionCompanyTopListApi
-        } else {
-          funcApi = getPositionListApi
-        }
+        if (app.globalData.currentCompanyId) params = Object.assign(params, {company_id: app.globalData.currentCompanyId})
       }
+      // if(wx.getStorageSync('choseType') !== 'RECRUITER') {
+      //   funcApi = getPositionListApi
+      // } else {
+      //   if(app.globalData.recruiterDetails.isCompanyTopAdmin) {
+      //     funcApi = getPositionCompanyTopListApi
+      //   } else {
+      //     funcApi = getPositionListApi
+      //   }
+      // }
 
-      funcApi(params).then(res => {
+      getPositionListApi(params).then(res => {
         let positionList = this.data.positionList
         positionList.onBottomStatus = res.data.length === 20 ? 0 : 2
         positionList.list = positionList.list.concat(res.data)

@@ -259,6 +259,12 @@ Page({
     if(!emolument) {
       delete params.emolument_id
     }
+    let orgData = wx.getStorageSync('orgData')
+    if(orgData) {
+      params = Object.assign(params, {company_id: orgData.id})
+    } else {
+      if (app.globalData.currentCompanyId) params = Object.assign(params, {company_id: app.globalData.currentCompanyId})
+    }
     return getPositionListApi(params, hasLoading).then(res => {
       let positionList = this.data.positionList
       let onBottomStatus = res.meta && res.meta.nextPageUrl ? 0 : 2

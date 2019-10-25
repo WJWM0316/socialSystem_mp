@@ -18,9 +18,11 @@ Component({
     cdnImagePath: getApp().globalData.cdnImagePath
   },
   attached: function () {
-    wx.login({
-      success: function (res0) {
-        wx.setStorageSync('code', res0.code)
+    wx.checkSession({
+      success () {
+      },
+      fail () {
+        app.login()
       }
     })
     let choseType = wx.getStorageSync('choseType') || null

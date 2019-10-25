@@ -194,14 +194,13 @@ export const request = ({name = '', method = 'post', url, host, data = {}, needK
                 setTimeout(() => {
                   getApp().wxToast({title: msg.msg})
                 }, 300)
-                wx.login({
-                  success: function (res0) {
-                    wx.setStorageSync('code', res0.code)
+                wx.checkSession({
+                  success () {
                   },
-                  fail: function (e) {
-                    console.log('wxLogin登录失败', e)
+                  fail () {
+                    getApp().login()
                   }
-                })
+                }
               }
               break
             case 400:

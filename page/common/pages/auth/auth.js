@@ -13,9 +13,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onShow: function (options) {
-    wx.login({
-      success: function (res0) {
-        wx.setStorageSync('code', res0.code)
+    wx.checkSession({
+      success () {
+      },
+      fail () {
+        app.login()
       }
     })
   },

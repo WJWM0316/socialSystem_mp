@@ -30,6 +30,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.checkSession({
+      success () {
+      },
+      fail () {
+        app.login()
+      }
+    })
     captchaKey = ''
     captchaValue = ''
     backType = 'backPrev'
@@ -132,16 +139,6 @@ Page({
         }, 1500)
       }
     })
-  },
-  changeNewCaptcha () {
-    changeNewCaptchaApi().then(res0 => {
-      captchaKey = res0.data.key
-      let imgUrl = res0.data.img
-      this.setData({imgUrl})
-    })
-  },
-  getPhoneNumber(e) {
-    app.quickLogin(e, backType)
   },
   changeNewCaptcha () {
     changeNewCaptchaApi().then(res0 => {

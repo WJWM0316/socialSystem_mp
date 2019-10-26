@@ -62,8 +62,8 @@ Component({
         formatter(params) {
           return [
             Number(params[0].name.slice(0,2)) + '月' + Number(params[0].name.slice(-2)) + '日' + '\n',
-            params[0].seriesName + ': ' + params[0].data + '人' + '\n',
-            params[1].seriesName + ': ' + params[1].data + '次'
+            params[0].seriesName + ': ' + params[0].data + '次' + '\n',
+            params[1].seriesName + ': ' + params[1].data + '人'
             // params[0].marker + params[0].seriesName + ': ' + params[0].data + '人' + '\n',
             // params[1].marker + params[1].seriesName + ': ' + params[1].data + '次'
           ].join(' ')

@@ -189,7 +189,7 @@
 		msg="{{'oops！找不到这个机构了~'}}"
 		showHomeBtn="{{showHomeBtn}}"
 		title="{{'机构详情'}}"
-		wx:if="{{companyInfos.status === 0 || companyInfos.noComany}}">
+		wx:if="{{companyInfos.status === 0}}">
 	</notFound>
 
 	<tabBar id="bottomRedDotBar" wx:if="{{choseType !== 'RECRUITER'}}"></tabBar>

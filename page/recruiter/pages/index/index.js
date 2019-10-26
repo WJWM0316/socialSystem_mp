@@ -536,7 +536,7 @@ Page({
           day1 = start.getDate() < 10 ? `0${start.getDate()}` : start.getDate()
           // if(i === 7 || i === 1) day = start.getMonth() + 1 + '月' + start.getDate() + '日'
           // key.push(day)
-          key.push(`${month}-${day1}`)
+          key.push(`${month}.${day1}`)
         }
         return {
           key,
@@ -550,7 +550,7 @@ Page({
       
       if(res.data.data.company.data.length) {
         res.data.data.company.data.reverse().map((v, i, arr) => {
-          let item2 = v.date.slice(5)
+          let item2 = v.date.slice(5).replace('-', '.')
           tem[0].key.push(item2)
           // let date = new Date(v.date)
           // let item = i === 0 || i === arr.length - 1 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
@@ -564,7 +564,7 @@ Page({
       }
       if(res.data.data.position.data.length) {
         res.data.data.position.data.reverse().map((v, i, arr) => {
-          let item2 = v.date.slice(5)
+          let item2 = v.date.slice(5).replace('-', '.')
           tem[1].key.push(item2)
           // let date = new Date(v.date)
           // let item = i === 0 || i === arr.length - 1 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
@@ -579,7 +579,7 @@ Page({
 
       if(res.data.data.recruiter.data.length) {
         res.data.data.recruiter.data.reverse().map((v, i, arr) => {
-          let item2 = v.date.slice(5)
+          let item2 = v.date.slice(5).replace('-', '.')
           tem[2].key.push(item2)
           // let date = new Date(v.date)
           // let item = i === 0 || i === arr.length - 1 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()

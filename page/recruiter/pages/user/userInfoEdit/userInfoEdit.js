@@ -62,6 +62,9 @@ Page({
       case 'position':
         type = 'position'
         break
+      case 'email':
+        type = 'email'
+        break
       case 'wechat':
         type = 'wechat'
         break
@@ -116,9 +119,13 @@ Page({
       position: info.position,
       wechat: info.wechat,
       signature: info.signature,
-      email: info.email,
-      positionTypeId: info.positionTypeId,
       ...app.getSource()
+    }
+    if(info.positionTypeId) {
+      data = Object.assign(data, {positionTypeId: info.positionTypeId})
+    }
+    if(info.email) {
+      data = Object.assign(data, {email: info.email})
     }
     saveRecruiterInfoApi(data).then(res => {
       app.wxToast({

@@ -100,7 +100,7 @@ Page({
   reverseGeocoder(res) {
     reverseGeocoder(res).then(rtn => {
       let formData = {}
-      formData.address = `${rtn.result.address} ${rtn.result.address_reference.landmark_l2.title}`
+      formData.address = `${res.address} ${res.name}`
       formData.area_id = rtn.result.ad_info.adcode
       formData.lat = rtn.result.ad_info.location.lat
       formData.lng = rtn.result.ad_info.location.lng

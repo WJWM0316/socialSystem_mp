@@ -1,5 +1,4 @@
 <view>
-  <navbar title="" background="transparent" color="#fff"></navbar>
   <form bindsubmit="formSubmit" report-submit='{{true}}'>
     <view class="bindPhone">
       <view class="head">
@@ -16,28 +15,27 @@
             <input
               class="phoneInput"
               type="number"
-              value="{{phone}}"
+              value="{{ mobile }}"
               placeholder="请输入手机号码"
               placeholder-style="color: #BCBCBC"
-              bindconfirm="getPhone"
-              bindinput="getPhone"
+              bindinput="bindInput"
+              data-key="mobile"
               maxlength="11">
             </input>
           </view>
 
-<!--           <view class="li code"  wx:if="{{false}}">
+          <view class="li code"  wx:if="{{false}}">
             <input
               class="phoneInput"
               type="number"
               value="{{password}}"
               placeholder="请输入密码123456"
               placeholder-style="color: #BCBCBC"
-              bindconfirm="getPhone"
               data-key="code"
-              bindinput="getNumber"
+              bindinput="bindInput"
               maxlength="11">
             </input>
-          </view> -->
+          </view>
 
           <view class="li code">
             <view class="inputBox">
@@ -46,7 +44,8 @@
                 type="number"
                 value="{{code}}"
                 placeholder="请输入短信验证码"
-                bindinput="getCode"
+                bindinput="bindInput"
+                data-key="code"
                 placeholder-style="color: #BCBCBC">
               </input>
             </view>
@@ -65,7 +64,9 @@
               <input
                 class="codeInput"
                 placeholder="请输入图片验证码"
-                bindinput="getImgCode"
+                bindinput="bindInput"
+                data-key="captchaValue"
+                maxlength="4"
                 placeholder-style="color: #BCBCBC">
               </input>
             </view>
@@ -83,32 +84,42 @@
             <input
               class="phoneInput"
               type="number"
-              value="{{ phone }}"
-              placeholder="{{loginType === 2 ? '用户名/手机号' : '请输入手机号码'}}"
+              value="{{ mobile }}"
+              placeholder="{{loginType === 2 ? '请输入用户名或手机号' : '请输入手机号码'}}"
               placeholder-style="color: #BCBCBC"
               bindinput="bindInput"
-              data-key="phone"
+              data-key="mobile"
               maxlength="{{loginType === 2 ? 18 : 11}}">
             </input>
-            <i class="icon1 iconfont icon-close"></i>
+            <i
+              class="icon1 iconfont icon-close"
+              wx:if="{{ mobile }}"
+              bindtap="todoAction"
+              data-action="clear">
+            </i>
           </view>
           
           <!-- 账号密码登录 start-->
           <view class="li code" wx:if="{{loginType === 2}}">
             <view class="inputBox">
               <input
-                class="codeInput"
+                class="phoneInput"
                 type="number"
                 value="{{password}}"
                 password="{{codeType === 1}}"
-                placeholder="请输入密码"
+                placeholder="请输入密码（6-20位数字和字母组合）"
                 bindinput="bindInput"
                 placeholder-style="color: #BCBCBC"
                 data-key="password"
                 maxlength="20">
               </input>
             </view>
-            <i class="icon1 iconfont icon-chakan" bindtap="changeCodeType"></i>
+            <i
+              class="icon1 iconfont icon-chakan"
+              bindtap="todoAction"
+              wx:if="{{password}}"
+              data-action="changeCodeType">
+            </i>
           </view>
           <!-- 账号密码登录 end-->
 
@@ -144,6 +155,7 @@
                 placeholder="请输入图片验证码"
                 bindinput="bindInput"
                 data-key="captchaValue"
+                maxlength="4"
                 placeholder-style="color: #BCBCBC">
               </input>
             </view>
@@ -158,11 +170,18 @@
 
         <view class="bindBtn">
           <button class="login" catchtap="bindPhone" form-type="submit">登 录</button>
-          <view class="forget" wx:if="{{choseType === 'RECRUITER'}}" bindtap="forget">忘记密码？</view>
+          <view
+            class="forget"
+            wx:if="{{choseType === 'RECRUITER'}}"
+            bindtap="todoAction"
+            data-action="forget">
+            忘记密码？
+          </view>
           <view
             class="sms-login"
             wx:if="{{choseType === 'RECRUITER'}}"
-            bindtap="changeLoginType">
+            data-action="changeLoginType"
+            bindtap="todoAction">
             {{loginType === 2 ? '短信登录' : '账号登录'}}
           </view>
         </view>
@@ -175,7 +194,7 @@
           </view>
         </button>
       </view>
-  <!--     <view class="userAgreement" bindtap="toJump">登录多多社交招聘系统代表你已同意<text class="btn">《多多社交招聘系统用户协议》</text></view>
+  <!--     <view class="userAgreement" bindtap="todoAction" data-action="userAgreement" data-action="userAgreement">登录多多社交招聘系统代表你已同意<text class="btn">《多多社交招聘系统用户协议》</text></view>
    -->  </view>
   </form>
 </view>

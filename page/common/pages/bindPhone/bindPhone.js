@@ -11,13 +11,9 @@ let timerInt = null
 let backType = 'backPrev'
 let captchaKey = ''
 let captchaValue = ''
-Page({
 
-  /**
-   * 页面的初始数据
-   */
+Page({
   data: {
-    phone: '',
     code: '',
     password: '',
     imgUrl: '',
@@ -29,12 +25,8 @@ Page({
     captchaValue: '',
     codeType: 1
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad(options) {
-    wx.setStorageSync('choseType', 'RECRUITER')
+    // wx.setStorageSync('choseType', 'RECRUITER')
     captchaKey = ''
     captchaValue = ''
     backType = 'backPrev'
@@ -42,49 +34,6 @@ Page({
   },
   onShow() {
     this.setData({choseType: wx.getStorageSync('choseType')})
-  },
-  toJump () {
-    wx.navigateTo({
-      url: `${COMMON}webView/webView?type=userAgreement`
-    })
-  },
-  getPhone(e) {
-    mobileNumber = e.detail.value
-    clearTimeout(timer)
-    timer = setTimeout(() => {
-      this.setData({
-        phone: e.detail.value
-      })
-      this.setData({canClick: this.data.password && this.data.phone ? true : false})
-    }, 100)
-  },
-  getNumber (e) {
-    password = e.detail.value
-    clearTimeout(timer)
-    timer = setTimeout(() => {
-      this.setData({
-        password: e.detail.value
-      })
-      this.setData({canClick: this.data.password && this.data.phone ? true : false})
-    }, 100)
-  },
-  getCode(e) {
-    clearTimeout(timer)
-    timer = setTimeout(() => {
-      this.setData({
-        code: e.detail.value
-      })
-      this.setData({canClick: this.data.code && this.data.phone ? true : false})
-      clearTimeout(timer)
-    }, 100)
-  },
-  getImgCode(e) {
-    clearTimeout(timer)
-    timer = setTimeout(() => {
-      captchaValue = e.detail.value.trim()
-      this.setData({canClick: this.data.code && this.data.phone && captchaValue ? true : false})
-      clearTimeout(timer)
-    }, 100)
   },
   setTime (second) {
     timerInt = setInterval(() => {
@@ -97,14 +46,14 @@ Page({
     }, 1000)
   },
   sendCode() {
-    if (!this.data.phone) {
+    if (!this.data.mobile) {
       app.wxToast({
         title: '请填写手机号'
       })
       return
     }
     let data = {
-      mobile: this.data.phone
+      mobile: this.data.mobile
     }
     sendCodeApi(data).then(res => {
       this.isBlured = false
@@ -128,11 +77,12 @@ Page({
     let formData = this.data
     formData[key] = value
     this.setData(formData)
+    console.log(this.data)
   },
   // 手机号登录
   phoneLogin() {
     let data = {
-      mobile: this.data.phone,
+      mobile: this.data.mobile,
       password: this.data.password,
       code: this.data.code,
       captchaKey,
@@ -155,7 +105,7 @@ Page({
   },
   // 账号密码登录
   pswLogin() {
-    let params = {mobile: this.data.phone, password: this.data.password}
+    let params = {mobile: this.data.mobile, password: this.data.password}
     app.pswLogin(params).catch(res => {
       if (res.code === 419) {
         captchaKey = res.data.key
@@ -171,7 +121,7 @@ Page({
       }
     })
   },
-  changeNewCaptcha () {
+  changeNewCaptcha() {
     changeNewCaptchaApi().then(res0 => {
       captchaKey = res0.data.key
       let imgUrl = res0.data.img
@@ -194,24 +144,32 @@ Page({
   formSubmit(e) {
     app.postFormId(e.detail.formId)
   },
-  forget() {
-    wx.navigateTo({url: `${COMMON}forgetPwd/forgetPwd`})
-  },
-  changeLoginType() {
-    let loginType = this.data.loginType
-    loginType = loginType === 1 ? 2 : 1
-    this.setData({loginType})
-  },
-  changeCodeType() {
-    let codeType = this.data.codeType
-    codeType = codeType === 1 ? 2 : 1
-    this.setData({codeType})
-    console.log(this.data)
+  todoAction(e) {
+    let action = e.currentTarget.dataset.action
+    switch(action) {
+      case 'forget':
+        wx.navigateTo({url: `${COMMON}forgetPwd/forgetPwd`})
+        break
+      case 'clear':
+        this.setData({mobile: ''})
+        break
+      case 'changeCodeType':
+        this.setData({codeType: this.data.codeType === 1 ? 2 : 1})
+        break
+      case 'changeLoginType':
+        this.setData({loginType: this.data.loginType === 1 ? 2 : 1, mobile: ''})
+        break
+      case 'userAgreement':
+        wx.navigateTo({url: `${COMMON}webView/webView?type=userAgreement`})
+        break
+      default:
+        break
+    }
   },
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload() {
     clearInterval(timerInt)
   }
 })

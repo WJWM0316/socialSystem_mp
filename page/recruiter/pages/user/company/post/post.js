@@ -266,8 +266,8 @@ Page({
         intro: formData.intro,
         id: formData.id,
         address: formData.address,
-        company_name: formData.organization_name
-        // mobile: formData.mobile
+        company_name: formData.organization_name,
+        mobile: formData.mobile
       })
       this.addOrgAddress()
     }

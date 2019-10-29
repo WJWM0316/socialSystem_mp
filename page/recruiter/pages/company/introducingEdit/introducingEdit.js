@@ -14,10 +14,11 @@ Page({
   },
   onLoad(options) {
     this.setData({options})
-    if(options.companyId) this.getCompanyDetail()
+    if(options.companyId && !options.topId) this.getCompanyDetail()
+    if(options.companyId && options.topId) this.getTopCompanyDetail()
   },
   onShow() {
-    const storage = wx.getStorageSync('createdCompany')
+    let storage = wx.getStorageSync('createdCompany')
     this.setData({intro: storage.intro })
   },
   /**
@@ -37,9 +38,22 @@ Page({
    * @return   {[type]}   [description]
    */
   getCompanyDetail() {
-    const options = this.data.options
+    let options = this.data.options
     getCompanyInfosApi({id: options.companyId}).then(res => {
-      const intro = res.data.intro.replace(/\\n/g, '\n')
+      let intro = res.data.intro.replace(/\\n/g, '\n')
+      this.setData({intro, options})
+    })
+  },
+  /**
+   * @Author   小书包
+   * @DateTime 2019-01-02
+   * @detail   获取公司详情
+   * @return   {[type]}   [description]
+   */
+  getTopCompanyDetail() {
+    let options = this.data.options
+    getCompanyInfosApi({id: options.topId}).then(res => {
+      let intro = res.data.intro.replace(/\\n/g, '\n')
       this.setData({intro, options})
     })
   },
@@ -50,7 +64,7 @@ Page({
    * @return   {[type]}     [description]
    */
   bindInput(e) {
-    const name = e.detail.value
+    let name = e.detail.value
     this.debounce(this.bindChange, null, 500, name)
   },
   /**
@@ -72,8 +86,8 @@ Page({
   },
 
   submit() {
-    const infos = this.data
-    const storage = wx.getStorageSync('createdCompany')
+    let infos = this.data
+    let storage = wx.getStorageSync('createdCompany')
     if(infos.options.companyId) {
       this.save()
     } else {

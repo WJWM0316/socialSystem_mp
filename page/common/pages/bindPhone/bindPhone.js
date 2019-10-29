@@ -1,5 +1,5 @@
 import {COMMON,RECRUITER} from '../../../../config.js'
-import {sendCodeApi, changeNewCaptchaApi} from "../../../../api/pages/auth.js"
+import {sendCodeApi, changeNewCaptchaApi, pswLoginApi} from "../../../../api/pages/auth.js"
 import {quickLoginApi} from '../../../../api/pages/auth.js'
 
 let mobileNumber = 0
@@ -23,17 +23,25 @@ Page({
     imgUrl: '',
     cdnImagePath: app.globalData.cdnImagePath,
     second: 60,
-    canClick: false
+    canClick: false,
+    choseType: '',
+    loginType: 2,
+    captchaValue: '',
+    codeType: 1
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad(options) {
+    wx.setStorageSync('choseType', 'RECRUITER')
     captchaKey = ''
     captchaValue = ''
     backType = 'backPrev'
     if (options.backType) backType = options.backType
+  },
+  onShow() {
+    this.setData({choseType: wx.getStorageSync('choseType')})
   },
   toJump () {
     wx.navigateTo({
@@ -110,7 +118,19 @@ Page({
     })
   },
   bindPhone() {
-    if (!this.data.canClick) return
+    let apiFunc = this.data.choseType === 'APPLICANT' || this.data.loginType === 1 ? 'phoneLogin' : 'pswLogin'
+    // if (!this.data.canClick) return
+    this[apiFunc]()
+  },
+  bindInput(e) {
+    let key = e.currentTarget.dataset.key
+    let value = e.detail.value
+    let formData = this.data
+    formData[key] = value
+    this.setData(formData)
+  },
+  // 手机号登录
+  phoneLogin() {
     let data = {
       mobile: this.data.phone,
       password: this.data.password,
@@ -119,6 +139,24 @@ Page({
       captchaValue
     }
     app.phoneLogin(data, backType).catch(res => {
+      if (res.code === 419) {
+        captchaKey = res.data.key
+        let imgUrl = res.data.img
+        this.setData({imgUrl})
+      } else if (res.code === 440){
+        captchaKey = ''
+        captchaValue = ''
+        clearTimeout(timer)
+        timer = setTimeout(() => {
+          this.changeNewCaptcha()
+        }, 1500)
+      }
+    })
+  },
+  // 账号密码登录
+  pswLogin() {
+    let params = {mobile: this.data.phone, password: this.data.password}
+    app.pswLogin(params).catch(res => {
       if (res.code === 419) {
         captchaKey = res.data.key
         let imgUrl = res.data.img
@@ -156,24 +194,20 @@ Page({
   formSubmit(e) {
     app.postFormId(e.detail.formId)
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
+  forget() {
+    wx.navigateTo({url: `${COMMON}forgetPwd/forgetPwd`})
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
+  changeLoginType() {
+    let loginType = this.data.loginType
+    loginType = loginType === 1 ? 2 : 1
+    this.setData({loginType})
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
+  changeCodeType() {
+    let codeType = this.data.codeType
+    codeType = codeType === 1 ? 2 : 1
+    this.setData({codeType})
+    console.log(this.data)
   },
-
   /**
    * 生命周期函数--监听页面卸载
    */

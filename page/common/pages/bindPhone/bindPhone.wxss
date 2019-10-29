@@ -12,7 +12,7 @@
 .bindPhone .msg {
   width: 100%;
   position: absolute;
-  top: 230rpx;
+  top: 236rpx;
   text-align: center;
 }
 .bindPhone .msg .title {
@@ -23,23 +23,21 @@
 }
 
 .bindPhone .msg .h11 {
-  font-size: 64rpx;
-  font-weight: 700;
   color: #fff;
-  line-height: 56rpx;
-  font-weight:800;
   color:rgba(255,255,255,1);
   letter-spacing: 4rpx;
+  font-size:72rpx;
+  font-weight:700;
+  color:rgba(0,196,205,1);
+  line-height: 1;
 }
 
 .bindPhone .msg .h44 {
-  height:36rpx;
-  font-size:36rpx;
-  /*font-weight:700;*/
-  color:rgba(255,255,255,1);
-  line-height:36rpx;
-  margin-top: 22rpx;
+  margin-top: 34rpx;
   letter-spacing: 2rpx;
+  font-size:36rpx;
+  color:rgba(86,93,93,1);
+  line-height:1;
 }
 
 .bindPhone .msg .txt {
@@ -52,11 +50,8 @@
 .bindPhone .phoneInput, .inputBox {
   width: 100%;
   height: 98rpx;
-  border: 1rpx solid #E8E9EB;
-  background: #FBFBFF;
+  background: #fff;
   box-sizing: border-box;
-  padding: 0 0 0 40rpx;
-  border-radius: 50rpx;
   font-size: 28rpx;
   color: #282828;
 }
@@ -75,9 +70,9 @@
   text-align: center;
   line-height: 98rpx;
   border-radius: 30rpx;
-  font-size: 26rpx;
-  font-weight: 500;
-  color: #652791;
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #00C4CD;
   right: 40rpx;
   top: 0;
   position: absolute;
@@ -87,7 +82,7 @@
   color: 652791;
 }
 .form {
-  padding: 26rpx 100rpx 0;
+  padding: 26rpx 85rpx 0;
 }
 .tip {
   width: 100%;
@@ -100,21 +95,21 @@
 }
 .wxBtn {
   position:absolute;
-  bottom:144rpx;
+  bottom:56rpx;
   left:0;
   width:100%;
   text-align:center;
 }
 .btnInner {
   display: flex;
-  height: 56rpx;
-  line-height: 56rpx;
+  height: 46rpx;
+  line-height: 46rpx;
   font-size:28rpx;
-  color:rgba(92,86,93,1);
+  color:#565D5D
 }
 .wxBtn .icon {
-  width: 56rpx;
-  height: 56rpx;
+  width: 46rpx;
+  height: 46rpx;
   border-radius: 50%;
   background:rgba(0,194,95,0.08);
   display: flex;
@@ -127,35 +122,62 @@
   margin-left: 4rpx;
   color: #CDCBCF;
 }
+.btnInner .icon-xiangyou{
+  font-size: 30rpx;
+  position: relative;
+  top: 1rpx;
+  color:#565D5D
+}
 .wxBtn .icon .iconfont {
   font-size: 26rpx;
   color:rgba(0,194,95,0.7);
 }
 .wxLogin {
-  font-size: 28rpx;
-  font-weight: 500;
-  color: #652791;
-  line-height: 28rpx;
   text-align: center;
   display: inline-block;
   background: none;
+  line-height: 46rpx;
+  vertical-align: middle;
 }
 .wxLogin::after{border:none}
+
 .bindBtn {
-  width: 550rpx;
   height: 88rpx;
-  background: #652791;
+  color: #fff;
+  line-height: 88rpx;
+  margin-top: 84rpx;
+  position: relative;
+}
+
+.login {
+  height: 88rpx;
+  background: #00C4CD;
   border-radius: 48rpx;
   font-size: 32rpx;
   font-weight: 400;
   color: #fff;
   line-height: 88rpx;
-  position: absolute;
-  bottom: 240rpx;
-  left: 50%;
-  margin-left: -275rpx;
 }
 
+.forget{
+  font-size:24rpx;
+  color:rgba(146,146,146,1);
+  position: absolute;
+  right: 23rpx;
+  line-height: 1;
+  top: -62rpx;
+  line-height: 32rpx;
+}
+.sms-login{
+  height:28rpx;
+  font-size:26rpx;
+  color:rgba(0,196,205,1);
+  line-height:28rpx;
+  bottom: -62rpx;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
 .bindBtn.noClick {
   background: #F5F4F7;
   color: #CDCBCF;
@@ -184,4 +206,36 @@
   top: 50%;
   margin-top: -32rpx;
   right: 22rpx;
+}
+
+.li {
+  width: 100%;
+  height: 98rpx;
+  border: 1rpx solid #E8E9EB;
+  background: #fff;
+  box-sizing: border-box;
+  padding: 0 0 0 40rpx;
+  border-radius: 50rpx;
+  overflow: hidden;
+  position: relative;
+}
+
+.li .icon-close{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  right: 46rpx;
+  color: #BCBCBC;
+  font-size: 30rpx;
+}
+
+.li .icon-chakan{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  right: 46rpx;
+  color: #BCBCBC;
+  font-size: 30rpx;
 }

@@ -1,0 +1,104 @@
+.ul {
+	margin-top: 24rpx;
+}
+
+.ul .li {
+	background: white;
+	line-height: 120rpx;
+	overflow: hidden;
+	font-size:28rpx;
+	position: relative;
+}
+
+.ul .li:after {
+	content: '';
+	display: block;
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 1rpx;
+	background: #E8E9EB;
+}
+
+.ul .clear-bottom:after {
+	display: none;
+}
+
+.ul .key {
+	display: inline-block;
+	font-size:30rpx;
+	color:#282828;
+	width: 192rpx;
+	float: left;
+	box-sizing: border-box;
+	padding-left: 40rpx;
+}
+
+.ul .value {
+	display: inline-block;
+	height: 120rpx;
+	line-height: 120rpx;
+	width: calc(100% - 192rpx);
+	float: left;
+	text-align: left;
+	box-sizing: border-box;
+	position: relative;
+	font-size:28rpx;
+	font-weight:700;
+	color:rgba(41,41,41,1);
+}
+
+
+.defaultColor{
+	font-size:28rpx;
+	color:rgba(188,188,188,1);
+}
+
+.ul .link .defaultColor{
+  color: #BCBCBC;
+}
+
+.button-submit {
+	color:#CDCBCF;
+	text-align: center;
+	line-height: 98rpx;
+	height:98rpx;
+	background:rgba(0,196,205,1);
+	border-radius:49rpx;
+	font-size:32rpx;
+	color:rgba(255,255,255,1);
+}
+
+.footer {
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	box-sizing: border-box;
+	padding: 30rpx 84rpx 120rpx 84rpx;
+}
+
+.ul .limit-width {
+	width: calc(100% - 360rpx);
+}
+
+.get-code{
+	font-size:28rpx;
+	color:rgba(0,196,205,1);
+	position: absolute;
+	right: 0;
+	top: 50%;
+	padding-right: 36rpx;
+	transform: translateY(-50%);
+}
+
+.codePic {
+  width:162rpx;
+  height:64rpx;
+  border:1rpx solid rgba(232,233,235,1);
+  position: absolute;
+  top: 50%;
+  margin-top: -32rpx;
+  right: 32rpx;
+}

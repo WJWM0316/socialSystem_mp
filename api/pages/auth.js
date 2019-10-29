@@ -86,4 +86,52 @@ export const changeNewCaptchaApi = data => {
     data
   })
 }
+export const checkSmsCodeApi = data => {
+  return request({
+    method: 'post',
+    url: '/auth/check/sms/code',
+    data
+  })
+}
+export const getAuthCaptchaApi = data => {
+  return request({
+    method: 'get',
+    url: '/auth/captcha',
+    data
+  })
+}
 
+export const checkImgCodeApi = data => {
+  return request({
+    method: 'post',
+    url: '/auth/check/captcha',
+    data
+  })
+}
+
+export const sendWapCodeApi = data => {
+  return request({
+    method: 'post',
+    url: '/auth/wap/message',
+    data,
+    hasLoading: false
+  })
+}
+
+export const resetPswApi = data => {
+  return request({
+    method: 'post',
+    url: `/auth/reset/password/${data.certificate}`,
+    data,
+    hasLoading: false
+  })
+}
+
+export const pswLoginApi = data => {
+  return request({
+    method: 'post',
+    url: '/auth/with/password/login',
+    data,
+    hasLoading: false
+  })
+}

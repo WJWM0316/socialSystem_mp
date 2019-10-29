@@ -17,7 +17,8 @@ Page({
     recruitersList: [],
     detail: app.globalData.recruiterDetails,
     companyList: [],
-    jobList: []
+    jobList: [],
+    posterData: {}
   },
   onLoad(options) {
     wx.setStorageSync('choseType', 'RECRUITER')
@@ -61,7 +62,11 @@ Page({
         wx.navigateTo({url: `${RECRUITER}company/postImages/postImages?companyId=${app.globalData.recruiterDetails.companyInfo.id}`})
         break
       case 'introduction':
-        wx.navigateTo({url: `${RECRUITER}company/introducingEdit/introducingEdit?companyId=${app.globalData.recruiterDetails.companyInfo.id}&type=${this.data.query.type}`})
+        this.getTopCompanyDetail(this.data.companyInfos.topId).then(res => {
+          this.selectComponent('#shareBtn').oper()
+          this.setData({posterData: res })
+        })
+        //wx.navigateTo({url: `${RECRUITER}company/introducingEdit/introducingEdit?companyId=${app.globalData.recruiterDetails.companyInfo.id}&type=${this.data.query.type}`})
         break
       case 'editCompanyAddress':
         // console.log(params)
@@ -83,5 +88,14 @@ Page({
       if(companyInfos.intro) companyInfos.intro = companyInfos.intro.replace(/\\n/g, '\n')
       this.setData({companyInfos})
     })
+  },
+  /**
+   * @Author   小书包
+   * @DateTime 2019-01-02
+   * @detail   获取公司详情
+   * @return   {[type]}   [description]
+   */
+  getTopCompanyDetail(id) {
+    return getCompanyInfosApi({id}, true).then(res => res.data)
   }
 })

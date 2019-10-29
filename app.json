@@ -23,7 +23,8 @@
     "page/common/pages/webView/webView",
     "page/common/pages/interviewMark/interviewMark",
     "page/common/pages/homepageMore/homepageMore",
-    "page/common/pages/privacySetting/privacySetting"
+    "page/common/pages/privacySetting/privacySetting",
+    "page/common/pages/forgetPwd/forgetPwd"
   ],
   "window": {
     "navigationBarTextStyle": "black",

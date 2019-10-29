@@ -25,24 +25,23 @@ Page({
   },
   getLists() {
     const options = this.data.query
-    if (options.hot) {
-      getHotLabelListsApi().then(res => {
-        let hotArea = res.data
-        let positionType = wx.getStorageSync('positionType')
-        if (positionType) {
-          hotArea.forEach(field => {
-            if (field.labelId === positionType) {
-              field.active = true
-            }
-          })
-        }
-        this.setData({hotArea}, () => {
-          wx.removeStorageSync('positionType')
-        })
-      })
-    }
-    getLabelPositionApi()
-      .then(res => {
+    // if (options.hot) {
+    //   getHotLabelListsApi().then(res => {
+    //     let hotArea = res.data
+    //     let positionType = wx.getStorageSync('positionType')
+    //     if (positionType) {
+    //       hotArea.forEach(field => {
+    //         if (field.labelId === positionType) {
+    //           field.active = true
+    //         }
+    //       })
+    //     }
+    //     this.setData({hotArea}, () => {
+    //       wx.removeStorageSync('positionType')
+    //     })
+    //   })
+    // }
+    getLabelPositionApi().then(res => {
         const positionTypeList = res.data
         this.setData({positionTypeList: res.data})
       })
@@ -144,16 +143,15 @@ Page({
       this.setData({searing: false}, () => this.getLists())
       return;
     }
-    getLabelLIstsApi({name})
-      .then(res => {
-        const positionTypeList = res.data
-        const regExp = new RegExp(name, 'g')
-        positionTypeList.map(field => {
-          field.html = field.name.replace(regExp, `<span style="color: #652791;">${name}</span>`)
-          field.html = `<div>${field.html}</div>`
-        })
-        this.setData({positionTypeList, searing: true})
+    getLabelLIstsApi({name}).then(res => {
+      const positionTypeList = res.data
+      const regExp = new RegExp(name, 'g')
+      positionTypeList.map(field => {
+        field.html = field.name.replace(regExp, `<span style="color: #652791;">${name}</span>`)
+        field.html = `<div>${field.html}</div>`
       })
+      this.setData({positionTypeList, searing: true})
+    })
   },
   closeMask(e) {
     this.setData({showMask: false, index1: 0, index2: 0})

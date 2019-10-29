@@ -17,12 +17,12 @@
 			<view class="example">
 				<view class="infos">
 					<image class="img-box" src="{{randomCopy.icon}}" mode="aspectFill"></image>
-					<view class="degress">{{randomCopy.name}}</view>
+					<view class="degress">{{randomCopy.title}}</view>
 				</view>
 				<view class="change" bindtap="next"><i class="icon iconfont icon-huanyihuan"></i>换一个</view>
 			</view>
 			<view class="floating-box">
-				<text bindtap="copyText">{{randomCopy.txt}}</text>
+				<text bindtap="copyText">{{randomCopy.intro}}</text>
 			</view>
 		</block>
 		<view class="btn-area">

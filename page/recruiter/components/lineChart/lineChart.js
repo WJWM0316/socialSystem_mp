@@ -52,13 +52,14 @@ Component({
       },
       tooltip: {
         trigger: 'axis',
-        // backgroundColor:'white',
+        backgroundColor:'#FBFBFF',
         color:'black',
-        borderWidth:1,
+        borderWidth:10,
         borderColor:'#dcdcdc',
         textStyle:{
-          color:'white',
+          color:'#282828'
         },
+        padding: 8,
         formatter(params) {
           return [
             Number(params[0].name.slice(0,2)) + '月' + Number(params[0].name.slice(-2)) + '日' + '\n',

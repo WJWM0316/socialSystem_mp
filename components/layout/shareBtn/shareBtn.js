@@ -99,6 +99,19 @@ Component({
             wx.navigateTo({url: `${RECRUITER}company/postProduct/postProduct`})
           }
           break
+        case 'companyDesc':
+          if(e.currentTarget.dataset.type === 'useCompanyDesc') {
+            if(this.data.posterData.intro) {
+              wx.navigateTo({url: `${RECRUITER}company/introducingEdit/introducingEdit?companyId=${app.globalData.recruiterDetails.companyInfo.id}&type=org&topId=${this.data.posterData.id}`})
+            } else {
+              app.wxToast({title: '公司尚未完善公司介绍信息'})
+            }
+          } else {
+            wx.navigateTo({url: `${RECRUITER}company/introducingEdit/introducingEdit?companyId=${app.globalData.recruiterDetails.companyInfo.id}&type=org`})
+          }
+          break
+        default:
+          break
       }
       wx.setStorageSync('posterData', this.data.posterData)
       this.setData({showChoose: false})

@@ -1,5 +1,5 @@
 //app.js
-import {loginApi, checkSessionKeyApi, bindPhoneApi, uploginApi, authLoginApi} from 'api/pages/auth.js'
+import {loginApi, checkSessionKeyApi, bindPhoneApi, uploginApi, authLoginApi, pswLoginApi} from 'api/pages/auth.js'
 import {formIdApi, shareStatistics, readyStatistics, getVersionListApi} from 'api/pages/common.js'
 import{getCompanyOrglistApi} from 'api/pages/company.js'
 import {getPositionQrcodeApi, getRecruiterQrcodeApi, getResumerCodeApi, getCompanyQrcodeApi} from 'api/pages/qrcode.js'
@@ -380,6 +380,62 @@ App({
     let _this = this
     return new Promise((resolve, reject) => {
       bindPhoneApi(data).then(res => {
+        if (res.data.token) wx.setStorageSync('token', res.data.token)
+        if (res.data.sessionToken) wx.setStorageSync('sessionToken', res.data.sessionToken)
+        this.globalData.hasLogin = 1
+        this.globalData.userInfo = res.data
+        this.getRoleInfo().then((res0) => {
+          this.wxToast({
+            title: '登录成功',
+            icon: 'success',
+            callback() {
+              if (!res0.data.hasCard && operType === 'cIndex' && wx.getStorageSync('choseType') !== 'RECRUITER') {
+                wx.reLaunch({
+                  url: `${APPLICANT}createUser/createUser?micro=true`
+                })
+              } else {
+                if (operType === 'cIndex') {
+                  wx.reLaunch({
+                    url: `${APPLICANT}index/index`
+                  })
+                } else {
+                  if (getCurrentPages().length > 1) {
+                    if(wx.getStorageSync('choseType') !== 'RECRUITER') {
+                      wx.navigateBack({
+                        delta: 1
+                      })
+                    } else {
+                      _this.getCompanyIdentity()
+                    }
+                  } else {
+                    if (wx.getStorageSync('choseType') !== 'RECRUITER') {
+                      wx.reLaunch({
+                        url: `${APPLICANT}index/index`
+                      })
+                    } else {
+                      _this.getCompanyIdentity()
+                    }
+                  }
+                }
+              }
+            }
+          })
+        })
+        resolve(res)
+      }).catch(e => {
+        reject(e)
+        this.globalData.hasLogin = 0
+        if (e.code === 401) {
+          this.checkLogin()
+        }
+      })
+    })
+  },
+  // 账号登陆
+  pswLogin(data, operType) {
+    let _this = this
+    return new Promise((resolve, reject) => {
+      pswLoginApi(data).then(res => {
         if (res.data.token) wx.setStorageSync('token', res.data.token)
         if (res.data.sessionToken) wx.setStorageSync('sessionToken', res.data.sessionToken)
         this.globalData.hasLogin = 1

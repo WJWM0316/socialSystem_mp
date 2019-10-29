@@ -169,3 +169,7 @@ button.close .icon {
 .choseBox .button5 .btnCon{
   border-bottom: unset;
 }
+
+.choseBox .btnCon.no-border{
+   border-bottom:0 solid white;
+}

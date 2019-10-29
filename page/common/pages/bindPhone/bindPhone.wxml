@@ -1,44 +1,181 @@
-<!--page/common/pages/bindPhone/bindPhone.wxml-->
-<navbar title="" background="transparent" color="#fff"></navbar>
-<form bindsubmit="formSubmit" report-submit='{{true}}'>
-  <view class="bindPhone">
-    <view class="head">
-      <image class="img" mode="widthFix" src="{{cdnImagePath}}authBg.png"></image>
-      <view class="msg">
-        <view class="h11">欢迎使用</view>
-        <view class="h44">多多社交招聘系统</view>
-        <!-- <text class="title">欢迎使用\n多多社交招聘系统</text> -->
-      </view>
-    </view>
-    <view class="form">
-      <view class="phone">
-        <input class="phoneInput" type="number" value="{{phone}}" placeholder="请输入手机号码" placeholder-style="color: #A59CB6" bindconfirm="getPhone" bindinput="getPhone" maxlength="11"></input>
-      </view>
-      <view class="code"  wx:if="{{false}}">
-        <input class="phoneInput" type="number" value="{{password}}" placeholder="请输入密码123456" placeholder-style="color: #A59CB6" bindconfirm="getPhone" bindinput="getNumber" maxlength="11"></input>
-      </view>
-      <view class="code">
-        <view class="inputBox">
-          <input class="codeInput" type="number" value="{{code}}" placeholder="请输入短信验证码" bindinput="getCode" placeholder-style="color: #A59CB6"></input>
+<view>
+  <navbar title="" background="transparent" color="#fff"></navbar>
+  <form bindsubmit="formSubmit" report-submit='{{true}}'>
+    <view class="bindPhone">
+      <view class="head">
+        <image class="img" mode="widthFix" src="{{cdnImagePath}}authBg.png"></image>
+        <view class="msg">
+          <view class="h11">欢迎使用</view>
+          <view class="h44">老虎科技招聘</view>
+          <!-- <text class="title">欢迎使用\n多多社交招聘系统</text> -->
         </view>
-        <button bindtap="sendCode" class="clear-style sendBtn" hidden="{{second < 60}}" form-type="submit">获取验证码</button>
-        <view class="sendBtn wait" hidden="{{second === 60}}">{{second}}s</view>
       </view>
-      <view class="code imgCode" wx:if="{{imgUrl}}">
-        <view class="inputBox">
-          <input class="codeInput" placeholder="请输入图片验证码" bindinput="getImgCode" placeholder-style="color: #A59CB6"></input>
+      <view class="form">
+        <block wx:if="{{choseType === 'APPLICANT'}}">
+          <view class="li phone">
+            <input
+              class="phoneInput"
+              type="number"
+              value="{{phone}}"
+              placeholder="请输入手机号码"
+              placeholder-style="color: #BCBCBC"
+              bindconfirm="getPhone"
+              bindinput="getPhone"
+              maxlength="11">
+            </input>
+          </view>
+
+<!--           <view class="li code"  wx:if="{{false}}">
+            <input
+              class="phoneInput"
+              type="number"
+              value="{{password}}"
+              placeholder="请输入密码123456"
+              placeholder-style="color: #BCBCBC"
+              bindconfirm="getPhone"
+              data-key="code"
+              bindinput="getNumber"
+              maxlength="11">
+            </input>
+          </view> -->
+
+          <view class="li code">
+            <view class="inputBox">
+              <input
+                class="codeInput"
+                type="number"
+                value="{{code}}"
+                placeholder="请输入短信验证码"
+                bindinput="getCode"
+                placeholder-style="color: #BCBCBC">
+              </input>
+            </view>
+            <button
+              bindtap="sendCode"
+              class="clear-style sendBtn"
+              hidden="{{second < 60}}"
+              form-type="submit">
+              获取验证码
+            </button>
+            <view class="sendBtn wait" hidden="{{second === 60}}">{{second}}s</view>
+          </view>
+
+          <view class="li code imgCode" wx:if="{{imgUrl}}">
+            <view class="inputBox">
+              <input
+                class="codeInput"
+                placeholder="请输入图片验证码"
+                bindinput="getImgCode"
+                placeholder-style="color: #BCBCBC">
+              </input>
+            </view>
+            <image
+              class="codePic"
+              src="{{imgUrl}}"
+              bindtap="changeNewCaptcha"
+              mode="widthFix">
+            </image>
+          </view>
+        </block>
+        <block wx:if="{{choseType === 'RECRUITER'}}">
+
+          <view class="li phone">
+            <input
+              class="phoneInput"
+              type="number"
+              value="{{ phone }}"
+              placeholder="{{loginType === 2 ? '用户名/手机号' : '请输入手机号码'}}"
+              placeholder-style="color: #BCBCBC"
+              bindinput="bindInput"
+              data-key="phone"
+              maxlength="{{loginType === 2 ? 18 : 11}}">
+            </input>
+            <i class="icon1 iconfont icon-close"></i>
+          </view>
+          
+          <!-- 账号密码登录 start-->
+          <view class="li code" wx:if="{{loginType === 2}}">
+            <view class="inputBox">
+              <input
+                class="codeInput"
+                type="number"
+                value="{{password}}"
+                password="{{codeType === 1}}"
+                placeholder="请输入密码"
+                bindinput="bindInput"
+                placeholder-style="color: #BCBCBC"
+                data-key="password"
+                maxlength="20">
+              </input>
+            </view>
+            <i class="icon1 iconfont icon-chakan" bindtap="changeCodeType"></i>
+          </view>
+          <!-- 账号密码登录 end-->
+
+          <!-- 短信登录 start-->
+          <view class="li code" wx:if="{{loginType === 1}}">
+            <view class="inputBox">
+              <input
+                class="codeInput"
+                type="number"
+                value="{{code}}"
+                placeholder="请输入短信验证码"
+                bindinput="bindInput"
+                placeholder-style="color: #BCBCBC"
+                data-key="code"
+                maxlength="4">
+              </input>
+            </view>
+            <button
+              bindtap="sendCode"
+              class="clear-style sendBtn"
+              hidden="{{second < 60}}"
+              form-type="submit">
+              获取验证码
+            </button>
+            <view class="sendBtn wait" hidden="{{second === 60}}">{{second}}s</view>
+          </view>
+          <!-- 短信登录 end-->
+
+          <view class="li code imgCode" wx:if="{{imgUrl}}">
+            <view class="inputBox">
+              <input
+                class="codeInput"
+                placeholder="请输入图片验证码"
+                bindinput="bindInput"
+                data-key="captchaValue"
+                placeholder-style="color: #BCBCBC">
+              </input>
+            </view>
+            <image
+              class="codePic"
+              src="{{imgUrl}}"
+              bindtap="changeNewCaptcha"
+              mode="widthFix">
+            </image>
+          </view>
+        </block>
+
+        <view class="bindBtn">
+          <button class="login" catchtap="bindPhone" form-type="submit">登 录</button>
+          <view class="forget" wx:if="{{choseType === 'RECRUITER'}}" bindtap="forget">忘记密码？</view>
+          <view
+            class="sms-login"
+            wx:if="{{choseType === 'RECRUITER'}}"
+            bindtap="changeLoginType">
+            {{loginType === 2 ? '短信登录' : '账号登录'}}
+          </view>
         </view>
-        <image class="codePic" src="{{imgUrl}}" bindtap="changeNewCaptcha" mode="widthFix"></image>
+
       </view>
-    </view>
-    <button class="bindBtn {{!canClick ? 'noClick' : ''}}" catchtap="bindPhone" form-type="submit">登录</button>
-    <view class="wxBtn">
-      <button class="wxLogin" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" form-type="submit">
-        <view class="btnInner">
-          <view class="icon"><i class="iconfont icon-weixin"></i></view>微信快捷登录<i class="icon1 iconfont icon-xiangyou"></i>
-        </view>
-      </button>
-    </view>
-<!--     <view class="userAgreement" bindtap="toJump">登录多多社交招聘系统代表你已同意<text class="btn">《多多社交招聘系统用户协议》</text></view>
- -->  </view>
-</form>
+      <view class="wxBtn">
+        <button class="wxLogin" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" form-type="submit">
+          <view class="btnInner">
+            <view class="icon"><i class="iconfont icon-weixin"></i></view>微信快捷登录<i class="icon1 iconfont icon-xiangyou"></i>
+          </view>
+        </button>
+      </view>
+  <!--     <view class="userAgreement" bindtap="toJump">登录多多社交招聘系统代表你已同意<text class="btn">《多多社交招聘系统用户协议》</text></view>
+   -->  </view>
+  </form>
+</view>

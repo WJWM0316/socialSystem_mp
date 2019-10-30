@@ -2,8 +2,8 @@
 import {RECRUITER, APPLICANT, COMMON} from '../../../config.js'
 import { getBottomRedDotApi } from '../../../api/pages/interview.js'
 
-const app = getApp()
-const cdnImagePath = app.globalData.cdnImagePath
+let app = getApp()
+let cdnImagePath = app.globalData.cdnImagePath
 Component({
   /**
    * 组件的属性列表
@@ -96,12 +96,13 @@ Component({
         path: `${APPLICANT}center/mine/mine`
       }
     ],
-    isIphoneX: app.globalData.isIphoneX
+    isIphoneX: app.globalData.isIphoneX,
+    userInfo: {}
   },
   attached() {
-    const list = !this.data.tabType  ? this.data.applicantList : this.data.recruiterList
-    const currentRoute = '/' + getCurrentPages()[getCurrentPages().length - 1].route
-    const identity = wx.getStorageSync('choseType')
+    let list = !this.data.tabType  ? this.data.applicantList : this.data.recruiterList
+    let currentRoute = '/' + getCurrentPages()[getCurrentPages().length - 1].route
+    let identity = wx.getStorageSync('choseType')
     list.map(field => field.active = field.path === currentRoute ? true : false)
     this.setData({ list, identity })
   },
@@ -112,8 +113,17 @@ Component({
     // 获取底部栏红点情况
     init() {
       app.getBottomRedDot().then(res => {
-        app.globalData.redDotInfos = res.data
-        this.setData({redDot: res.data})
+        let redDot = res.data
+        app.globalData.redDotInfos = redDot
+        // if(wx.getStorageSync('choseType') === 'RECRUITER') {
+        //   if(wx.getStorageSync('notShowAccountSecurityTips')) {
+        //     redDot.applyAuditBar = 0
+        //   }
+        //   if(res.data.applyAuditBar || (app.globalData.userInfo && app.globalData.userInfo.isCancelSetPassword === 0)) {
+        //     redDot.applyAuditBar = 1
+        //   }
+        // }
+        this.setData({redDot})
         this.triggerEvent('resultevent', res.data)
       })
     },

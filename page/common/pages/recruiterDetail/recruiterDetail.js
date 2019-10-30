@@ -16,6 +16,7 @@ Page({
     showPage: false,
     info: {},
     isOwner: false,
+    isUser: false,
     realIsOwner: false,
     isRecruiter: false,
     positionList: {
@@ -77,13 +78,14 @@ Page({
     return new Promise((resolve, reject) => {
       getOthersRecruiterDetailApi({uid: this.data.options.uid, hasLoading, isReload, ...app.getSource()}).then(res => {
         let isOwner = res.data.isOwner && identity === 'RECRUITER' ? true : false
+        let isUser = res.data.isOwner ? true : false
         let info = res.data
         if(info.isBlockRecruiter === 1 || info.currentCompanyId === 0) {
           info.hasDeleted = 1
         } else {
           info.hasDeleted = 0
         }
-        this.setData({isOwner, info, realIsOwner: res.data.isOwner, identity: wx.getStorageSync('choseType')}, function() {
+        this.setData({isOwner, isUser, info, realIsOwner: res.data.isOwner, identity: wx.getStorageSync('choseType')}, function() {
           if(this.selectComponent('#interviewBar')) this.selectComponent('#interviewBar').init()
           this.getDomNodePosition()
           if (this.data.isOwner) {

@@ -100,7 +100,7 @@
 			</view>
 			<view class="li">
 				<view class="key"><text style="opacity: 0">*</text>联系方式</view>
-				<input type="text" class="companyShortName {{formData.mobile ? 'color' : ''}}" value="{{formData.mobile}}" bindinput="changeMobile" maxlength="11" placeholder="请输入机构联系方式" placeholder-class="defaultColor"></input>
+				<input type="number" class="companyShortName {{formData.mobile ? 'color' : ''}}" value="{{formData.mobile}}" bindinput="changeMobile" maxlength="11" placeholder="请输入机构联系方式" placeholder-class="defaultColor"></input>
 			</view>
 			<view class="li clear-bottom" bindtap="routeAddress">
 				<view class="key"><text>*</text>机构地址</view>

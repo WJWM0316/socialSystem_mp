@@ -15,7 +15,7 @@
 	    <refreshStatus></refreshStatus>
 	  </view>
 
-		<shareBtn posterType="company" id="shareBtn" wx:if="{{companyInfos.id}}" posterData="{{companyInfos}}"></shareBtn>
+		<shareBtn posterType="company" id="shareBtn" wx:if="{{companyInfos.id}}" posterData="{{companyInfos}}" isOwner="{{isOwner}}"></shareBtn>
 
 		<view class="banner" style="margin-top: -{{navH}}px">
 			<view class="filterBg" style="height: {{!isBangs ? '225rpx' : '272rpx'}}">

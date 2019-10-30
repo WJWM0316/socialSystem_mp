@@ -8,7 +8,7 @@ import {
   getLabelFieldApi
 } from '../../../../../../api/pages/common.js'
 
-import {realNameReg, emailReg, positionReg} from '../../../../../../utils/fieldRegular.js'
+import {realNameReg, emailReg, positionReg, mobileReg} from '../../../../../../utils/fieldRegular.js'
 
 import {RECRUITER} from '../../../../../../config.js'
 
@@ -266,9 +266,15 @@ Page({
         intro: formData.intro,
         id: formData.id,
         address: formData.address,
-        company_name: formData.organization_name,
-        mobile: formData.mobile
+        company_name: formData.organization_name
       })
+      if(formData.mobile) {
+        params = Object.assign(params, {mobile: formData.mobile})
+        if(!mobileReg.test(params.mobile)) {
+          app.wxToast({title: '请输入手机号码'})
+          return
+        }
+      }
       this.addOrgAddress()
     }
     perfectCompanyApi(params).then(res => {

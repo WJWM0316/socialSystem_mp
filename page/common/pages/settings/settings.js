@@ -19,10 +19,11 @@ Page({
   //   }
   // },
   onShow() {
+    let identity = wx.getStorageSync('choseType')
     if(wx.getStorageSync('choseType') === 'RECRUITER') {
-      this.setData({identityDesc: "求职者", identity: wx.getStorageSync('choseType'), detail: app.globalData.recruiterDetails})
+      this.setData({identityDesc: "求职者", identity, detail: app.globalData.recruiterDetails})
     } else {
-      this.setData({identityDesc: "面试官", identity: wx.getStorageSync('choseType'), detail: app.globalData.recruiterDetails})
+      this.setData({identityDesc: "面试官", identity, detail: app.globalData.recruiterDetails})
     }
   },
   upLogin() {
@@ -56,6 +57,11 @@ Page({
   setOrganization() {
     wx.navigateTo({
       url: `${RECRUITER}organization/setOrg/setOrg`
+    })
+  },
+  bindAccount() {
+    wx.navigateTo({
+      url: `${COMMON}bindAccount/bindAccount`
     })
   }
 })

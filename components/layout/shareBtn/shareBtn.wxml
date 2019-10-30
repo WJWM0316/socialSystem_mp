@@ -66,7 +66,7 @@
 					</button>
 					<button form-type="submit" class="poster clear-style" bindtap="jump" data-type="exPosition">
 						<view class="btnCon btn2">
-							<view class="title">生成精美海报<text class="icon">抓眼球</text></view>
+							<view class="title">{{isOwner ? '生成精美海报' : '生成推荐海报'}}<text class="icon">抓眼球</text></view>
 							<view class="desc">提炼职位核心信息，发圈更抓人眼球</view>
 						</view>
 					</button>
@@ -103,7 +103,7 @@
 					</button>
 					<button form-type="submit" class="poster button5 clear-style" bindtap="jump" data-type="resume">
 						<view class="btnCon btn2">
-							<view class="title">生成精美海报<text class="icon">抓眼球</text></view>
+							<view class="title">{{isOwner ? '生成精美海报' : '生成推荐海报'}}<text class="icon">抓眼球</text></view>
 							<view class="desc">{{posterType === 'recruiter' ? '提炼面试官核心信息，分享更抓人眼球' : ''}}{{posterType === 'applicant' ? '提炼简历核心信息，分享更抓人眼球' : ''}}{{posterType === 'company' ? '提炼机构核心信息，分享更抓人眼球' : ''}}</view>
 						</view>
 					</button>

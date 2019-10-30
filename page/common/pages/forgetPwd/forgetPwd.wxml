@@ -1,7 +1,7 @@
 <view>
-	<navbar title="找回密码" background="#FFFFFF" color="#22292C"></navbar>
+	<navbar title="{{ options.title ? options.title : '找回密码' }}" background="#FFFFFF" color="#22292C"></navbar>
 	<view class="ul">
-		<block wx:if="{{step === 1}}">
+		<block wx:if="{{step === 1 && !options.step}}">
 			<view class="li">
 				<view class="key">手机号</view>
 				<input
@@ -45,7 +45,7 @@
         <view class="get-code" hidden="{{second === 60}}">{{second}}s</view>
 			</view>
 		</block>
-		<block wx:else>
+		<block wx:if="{{step === 2 || options.step == 3}}">
 			<view class="li">
 				<view class="key">新密码</view>
 				<input
@@ -75,7 +75,9 @@
 		</block>
 	</view>
 	<view class="footer">
-    <view bindtap="next" class="button-submit" wx:if="{{step === 1}}">下一步</view>
-    <view bindtap="resetPsw" class="button-submit" wx:if="{{step === 2}}">确认</view>
+    <view bindtap="next" class="button-submit" wx:if="{{step === 1 && !options.step}}">下一步</view>
+    <view bindtap="resetPsw" class="button-submit" wx:if="{{step === 2 && !options.step}}">确认</view>
+    <view bindtap="setPassword" class="button-submit" wx:if="{{options.step == 3 && options.type === 'set'}}">保存</view>
+    <view bindtap="modifyPassword" class="button-submit" wx:if="{{options.step == 3 && options.type === 'modify'}}">保存</view>
   </view>
 </view>

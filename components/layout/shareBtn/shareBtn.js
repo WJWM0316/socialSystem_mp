@@ -22,6 +22,10 @@ Component({
     },
     params: {
       type: String
+    },
+    isOwner: {
+      type: Boolean,
+      value: false
     }
   },
 
@@ -107,7 +111,7 @@ Component({
               app.wxToast({title: '公司尚未完善公司介绍信息'})
             }
           } else {
-            wx.navigateTo({url: `${RECRUITER}company/introducingEdit/introducingEdit?companyId=${app.globalData.recruiterDetails.companyInfo.id}&type=org`})
+            wx.navigateTo({url: `${RECRUITER}company/introducingEdit/introducingEdit?companyId=${this.data.params}&type=org`})
           }
           break
         default:

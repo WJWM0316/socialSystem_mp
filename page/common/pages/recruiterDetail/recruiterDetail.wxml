@@ -34,7 +34,7 @@
       <view class="line"></view>
     </view>
 
-    <shareBtn id="shareBtn" posterType="recruiter" wx:if="{{info.uid && !showEdit}}" posterData="{{info}}"></shareBtn>
+    <shareBtn id="shareBtn" posterType="recruiter" wx:if="{{info.uid && !showEdit}}" posterData="{{info}}" isOwner="{{isUser}}"></shareBtn>
   
     <view class="mainContent">
       <view class="contentBox">

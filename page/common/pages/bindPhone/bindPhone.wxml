@@ -2,7 +2,7 @@
   <form bindsubmit="formSubmit" report-submit='{{true}}'>
     <view class="bindPhone">
       <view class="head">
-        <image class="img" mode="widthFix" src="{{cdnImagePath}}authBg.png"></image>
+        <image class="img" mode="widthFix" src="{{cdnImagePath}}login_bg_new.png"></image>
         <view class="msg">
           <view class="h11">欢迎使用</view>
           <view class="h44">老虎科技招聘</view>
@@ -46,6 +46,7 @@
                 placeholder="请输入短信验证码"
                 bindinput="bindInput"
                 data-key="code"
+                maxlength="4"
                 placeholder-style="color: #BCBCBC">
               </input>
             </view>
@@ -83,7 +84,6 @@
           <view class="li phone">
             <input
               class="phoneInput"
-              type="number"
               value="{{ mobile }}"
               placeholder="{{loginType === 2 ? '请输入用户名或手机号' : '请输入手机号码'}}"
               placeholder-style="color: #BCBCBC"
@@ -104,7 +104,6 @@
             <view class="inputBox">
               <input
                 class="phoneInput"
-                type="number"
                 value="{{password}}"
                 password="{{codeType === 1}}"
                 placeholder="请输入密码（6-20位数字和字母组合）"
@@ -115,9 +114,15 @@
               </input>
             </view>
             <i
-              class="icon1 iconfont icon-chakan"
+              class="icon1 iconfont icon-zhengyan myeyes"
               bindtap="todoAction"
-              wx:if="{{password}}"
+              wx:if="{{password && codeType === 1}}"
+              data-action="changeCodeType">
+            </i>
+            <i
+              class="icon1 iconfont icon-biyan myeyes"
+              bindtap="todoAction"
+              wx:if="{{password && codeType === 2}}"
               data-action="changeCodeType">
             </i>
           </view>
@@ -169,7 +174,7 @@
         </block>
 
         <view class="bindBtn">
-          <button class="login" catchtap="bindPhone" form-type="submit">登 录</button>
+          <button class="login {{canClick ? 'active' : ''}}" catchtap="bindPhone" form-type="submit">登 录</button>
           <view
             class="forget"
             wx:if="{{choseType === 'RECRUITER'}}"

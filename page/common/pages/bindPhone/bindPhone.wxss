@@ -82,7 +82,7 @@
   color: 652791;
 }
 .form {
-  padding: 26rpx 85rpx 0;
+  padding: 40rpx 85rpx 0;
 }
 .tip {
   width: 100%;
@@ -145,18 +145,23 @@
   height: 88rpx;
   color: #fff;
   line-height: 88rpx;
-  margin-top: 84rpx;
+  margin-top: 94rpx;
   position: relative;
 }
 
 .login {
   height: 88rpx;
-  background: #00C4CD;
+  background: rgba(0,196,205,0.6);
   border-radius: 48rpx;
   font-size: 32rpx;
   font-weight: 400;
   color: #fff;
   line-height: 88rpx;
+}
+
+.login.active {
+  background:rgba(0,196,205,1);
+  box-shadow:0rpx 20rpx 30rpx 0rpx rgba(27,194,202,0.35);
 }
 
 .forget{
@@ -165,7 +170,7 @@
   position: absolute;
   right: 23rpx;
   line-height: 1;
-  top: -62rpx;
+  top: -72rpx;
   line-height: 32rpx;
 }
 .sms-login{
@@ -211,7 +216,7 @@
 .li {
   width: 100%;
   height: 98rpx;
-  border: 1rpx solid #E8E9EB;
+  border: 1rpx solid #DADFE0;
   background: #fff;
   box-sizing: border-box;
   padding: 0 0 0 40rpx;
@@ -232,7 +237,7 @@
   padding-right: 46rpx;
 }
 
-.li .icon-chakan{
+.li .myeyes{
   position: absolute;
   top: 50%;
   transform: translateY(-50%);

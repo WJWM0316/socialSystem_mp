@@ -22,18 +22,21 @@ Page({
     navbarBg: 'transparent',
     telePhone: app.globalData.telePhone,
     showScanIcon: true,
-    redDotInfos: {}
+    redDotInfos: {},
+    userInfo: {}
   },
   onLoad() {
     wx.setStorageSync('choseType', 'RECRUITER')
     recruiterCard = ''
     let recruiterInfo = app.globalData.recruiterDetails
+    let userInfo = app.globalData.userInfo
     if (recruiterInfo.uid) {
-      this.setData({recruiterInfo})
+      this.setData({recruiterInfo, userInfo})
     } else {
       app.getAllInfo().then(res => {
         recruiterInfo = app.globalData.recruiterDetails
-        this.setData({recruiterInfo})
+        userInfo = app.globalData.userInfo
+        this.setData({recruiterInfo, userInfo})
       })
     }
   },
@@ -44,9 +47,7 @@ Page({
    * @return   {[type]}   [description]
    */
   getRecruiterOtherInfos() {
-    getRecruiterOtherInfosApi({...app.getSource()}).then(res => {
-      this.setData({pageInfos: res.data})
-    })
+    getRecruiterOtherInfosApi({...app.getSource()}).then(res => this.setData({pageInfos: res.data}))
   },
   onShow() {
     this.selectComponent('#bottomRedDotBar').init()

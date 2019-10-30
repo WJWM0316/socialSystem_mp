@@ -135,3 +135,38 @@ export const pswLoginApi = data => {
     hasLoading: false
   })
 }
+
+export const setUserNameApi = (data, hasLoading) => {
+  return request({
+    method: 'put',
+    url: `/cur/set/username/${data.username}`,
+    hasLoading: true
+  })
+}
+
+export const setPasswordApi = (data, hasLoading) => {
+  return request({
+    method: 'post',
+    url: '/cur/set/password',
+    data,
+    hasLoading: true
+  })
+}
+
+export const modifyPasswordApi = (data, hasLoading) => {
+  return request({
+    method: 'post',
+    url: '/cur/modify/password',
+    data,
+    hasLoading: true
+  })
+}
+
+export const checkSetPasswordApi = (data, hasLoading) => {
+  return request({
+    method: 'get',
+    url: '/cur/check/has/password',
+    data,
+    hasLoading: true
+  })
+}

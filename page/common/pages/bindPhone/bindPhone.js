@@ -1,6 +1,7 @@
 import {COMMON,RECRUITER} from '../../../../config.js'
 import {sendCodeApi, changeNewCaptchaApi, pswLoginApi} from "../../../../api/pages/auth.js"
 import {quickLoginApi} from '../../../../api/pages/auth.js'
+import {mobileReg} from '../../../../utils/fieldRegular.js'
 
 let mobileNumber = 0
 let password = 0
@@ -10,7 +11,6 @@ let timer = null
 let timerInt = null
 let backType = 'backPrev'
 let captchaKey = ''
-let captchaValue = ''
 
 Page({
   data: {
@@ -28,7 +28,6 @@ Page({
   onLoad(options) {
     // wx.setStorageSync('choseType', 'RECRUITER')
     captchaKey = ''
-    captchaValue = ''
     backType = 'backPrev'
     if (options.backType) backType = options.backType
   },
@@ -48,7 +47,7 @@ Page({
   sendCode() {
     if (!this.data.mobile) {
       app.wxToast({
-        title: '请填写手机号'
+        title: '请输入手机号'
       })
       return
     }
@@ -67,9 +66,8 @@ Page({
     })
   },
   bindPhone() {
-    let apiFunc = this.data.choseType === 'APPLICANT' || this.data.loginType === 1 ? 'phoneLogin' : 'pswLogin'
-    // if (!this.data.canClick) return
-    this[apiFunc]()
+    let funcApi = this.data.choseType === 'APPLICANT' || this.data.loginType === 1 ? 'phoneLogin' : 'pswLogin'
+    this[funcApi]()
   },
   bindInput(e) {
     let key = e.currentTarget.dataset.key
@@ -77,16 +75,39 @@ Page({
     let formData = this.data
     formData[key] = value
     this.setData(formData)
-    console.log(this.data)
   },
   // 手机号登录
   phoneLogin() {
+
+    if (!mobileReg.test(this.data.mobile)) {
+      app.wxToast({
+        title: '请输入手机号'
+      })
+      return
+    }
+
+    if (!this.data.code) {
+      app.wxToast({
+        title: '请输入短信验证码'
+      })
+      return
+    }
+
+    if(this.data.imgUrl) {
+      if(!this.data.captchaValue) {
+        app.wxToast({
+          title: '请输入图形验证码'
+        })
+        return
+      }
+    }
+
     let data = {
       mobile: this.data.mobile,
       password: this.data.password,
       code: this.data.code,
       captchaKey,
-      captchaValue
+      captchaValue: this.data.captchaValue
     }
     app.phoneLogin(data, backType).catch(res => {
       if (res.code === 419) {
@@ -95,16 +116,26 @@ Page({
         this.setData({imgUrl})
       } else if (res.code === 440){
         captchaKey = ''
-        captchaValue = ''
-        clearTimeout(timer)
-        timer = setTimeout(() => {
-          this.changeNewCaptcha()
-        }, 1500)
+        this.changeNewCaptcha()
       }
     })
   },
   // 账号密码登录
   pswLogin() {
+    if (!this.data.mobile) {
+      app.wxToast({
+        title: '请输入用户名或手机号'
+      })
+      return
+    }
+
+    if (!this.data.password) {
+      app.wxToast({
+        title: '请输入密码'
+      })
+      return
+    }
+
     let params = {mobile: this.data.mobile, password: this.data.password}
     app.pswLogin(params).catch(res => {
       if (res.code === 419) {
@@ -114,18 +145,8 @@ Page({
       } else if (res.code === 440){
         captchaKey = ''
         captchaValue = ''
-        clearTimeout(timer)
-        timer = setTimeout(() => {
-          this.changeNewCaptcha()
-        }, 1500)
+        this.changeNewCaptcha()
       }
-    })
-  },
-  changeNewCaptcha() {
-    changeNewCaptchaApi().then(res0 => {
-      captchaKey = res0.data.key
-      let imgUrl = res0.data.img
-      this.setData({imgUrl})
     })
   },
   getPhoneNumber(e) {

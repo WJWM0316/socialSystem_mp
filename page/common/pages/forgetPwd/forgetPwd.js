@@ -4,8 +4,13 @@ import {
   checkSmsCodeApi,
   getAuthCaptchaApi,
   checkImgCodeApi,
-  resetPswApi
+  resetPswApi,
+  setPasswordApi,
+  modifyPasswordApi
 } from "../../../../api/pages/auth.js"
+import {mobileReg, pswReg} from '../../../../utils/fieldRegular.js'
+import {COMMON,RECRUITER} from '../../../../config.js'
+
 let app = getApp()
 let timer = null
 let second = 60
@@ -23,9 +28,14 @@ Page({
       captchaCode: '',
       repeat_password: '',
       password: ''
+    },
+    options: {
+      title: '找回密码'
     }
   },
-  onLoad() {
+  onLoad(options) {
+    this.setData({options: Object.assign(this.data.options, options)})
+    console.log(this.data)
     wx.setStorageSync('choseType', 'RECRUITER')
   },
   bindInput(e) {
@@ -35,7 +45,7 @@ Page({
     this.setData({formData})
   },
   sendCode() {
-    if (!this.data.formData.mobile) {
+    if (!mobileReg.test(this.data.formData.mobile)) {
       app.wxToast({title: '请填写手机号'})
       return
     }
@@ -73,7 +83,7 @@ Page({
     let params = {}
 
     let checkMobile = new Promise((resolve, reject) => {
-      if (!formData.mobile) {
+      if (!mobileReg.test(formData.mobile)) {
         reject('请填写手机号')
       } else {
         params = Object.assign(params, {mobile: formData.mobile})
@@ -149,6 +159,14 @@ Page({
   },
   resetPsw() {
     let formData = this.data.formData
+    if(!pswReg.test(formData.password)) {
+      app.wxToast({title: '请输入是有效密码'})
+      return
+    }
+    if(formData.password !== formData.repeat_password) {
+      app.wxToast({title: '两次输入的新密码不一致，请重新输入'})
+      return
+    }
     let params = {
       certificate,
       password: formData.password,
@@ -159,13 +177,52 @@ Page({
         title: '密码已修改成功',
         icon: 'success',
         callback() {
-          // wx.reLaunch({url: `${RECRUITER}interview/index/index`})
+          wx.reLaunch({url: `${COMMON}bindPhone/bindPhone`})
         }
       })
     })
     .catch(err => {
       // app.wxToast({title: '密码已修改成功'})
       console.log(err)
+      app.wxToast({title: err.msg})
+    })
+  },
+  setPassword() {
+    if(!pswReg.test(this.data.formData.password)) {
+      app.wxToast({title: '请输入是有效密码'})
+      return
+    }
+    if(this.data.formData.password !== this.data.formData.repeat_password) {
+      app.wxToast({title: '两次输入的新密码不一致，请重新输入'})
+      return
+    }
+    let data = {
+      password: this.data.formData.password,
+      repeat_password: this.data.formData.repeat_password
+    }
+    setPasswordApi(data).then(res => {
+      wx.navigateBack({delta: 1 })
+    }).catch(err => {
+      app.wxToast({title: err.msg})
+    })
+  },
+  modifyPassword() {
+    if(!pswReg.test(this.data.formData.password)) {
+      app.wxToast({title: '请输入是有效密码'})
+      return
+    }
+    if(this.data.formData.password !== this.data.formData.repeat_password) {
+      app.wxToast({title: '两次输入的新密码不一致，请重新输入'})
+      return
+    }
+    let data = {
+      password: this.data.formData.password,
+      password_repeat: this.data.formData.repeat_password
+    }
+    modifyPasswordApi(data).then(res => {
+      wx.navigateBack({delta: 1 })
+    }).catch(err => {
+      app.wxToast({title: err.msg})
     })
   }
 })

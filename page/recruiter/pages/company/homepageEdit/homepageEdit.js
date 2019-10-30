@@ -62,11 +62,14 @@ Page({
         wx.navigateTo({url: `${RECRUITER}company/postImages/postImages?companyId=${app.globalData.recruiterDetails.companyInfo.id}`})
         break
       case 'introduction':
-        this.getTopCompanyDetail(this.data.companyInfos.topId).then(res => {
-          this.selectComponent('#shareBtn').oper()
-          this.setData({posterData: res })
-        })
-        //wx.navigateTo({url: `${RECRUITER}company/introducingEdit/introducingEdit?companyId=${app.globalData.recruiterDetails.companyInfo.id}&type=${this.data.query.type}`})
+        if (!this.data.query.type) {
+          wx.navigateTo({url: `${RECRUITER}company/introducingEdit/introducingEdit?companyId=${app.globalData.recruiterDetails.companyInfo.id}&type=${this.data.query.type}`})
+        } else {
+          this.getTopCompanyDetail(this.data.companyInfos.topId).then(res => {
+            this.selectComponent('#shareBtn').oper()
+            this.setData({posterData: res })
+          })
+        }
         break
       case 'editCompanyAddress':
         // console.log(params)

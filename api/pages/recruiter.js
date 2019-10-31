@@ -19,6 +19,16 @@ export const getRecruiterMyInfoApi = (data) => {
 }
 
 // 招聘官-我的信息(“我的”页面)
+export const getRecruiterMyInfo2Api = (data) => {
+  return request({
+    url: '/recruiter/myInfo',
+    method: 'get',
+    data,
+    host: 'RECRUITERHOST2',
+  })
+}
+
+// 招聘官-我的信息(“我的”页面)
 export const saveRecruiterInfoApi = (data) => {
   return request({
     url: '/recruiter/baseInfo',

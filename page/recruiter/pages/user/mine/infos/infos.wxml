@@ -93,7 +93,7 @@
 
 		<view class="li" bindtap="routeJump" data-route="settings">
 			<i class="icon iconfont icon-shezhi label-icon"></i>
-			<view class="text">设置</view>
+			<view class="text {{userInfo.showMineRedDot ? 'reddot' : ''}}">设置</view>
 			<i class="icon iconfont icon-xiangyou"></i>
 		</view>		
 	</view>

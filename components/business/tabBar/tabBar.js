@@ -115,14 +115,11 @@ Component({
       app.getBottomRedDot().then(res => {
         let redDot = res.data
         app.globalData.redDotInfos = redDot
-        // if(wx.getStorageSync('choseType') === 'RECRUITER') {
-        //   if(wx.getStorageSync('notShowAccountSecurityTips')) {
-        //     redDot.applyAuditBar = 0
-        //   }
-        //   if(res.data.applyAuditBar || (app.globalData.userInfo && app.globalData.userInfo.isCancelSetPassword === 0)) {
-        //     redDot.applyAuditBar = 1
-        //   }
-        // }
+        if(wx.getStorageSync('choseType') === 'RECRUITER') {
+          if(res.data.applyAuditBar || (app.globalData.userInfo && app.globalData.userInfo.showMineTabRedDot)) {
+            redDot.applyAuditBar = 1
+          }
+        }
         this.setData({redDot})
         this.triggerEvent('resultevent', res.data)
       })

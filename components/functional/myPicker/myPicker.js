@@ -264,7 +264,7 @@ Component({
           result = []
           result[0] = startNumB.indexOf(parseInt(this.data.setResult.split('~')[0]))
           if (result[0] === -1) result[0] = 0
-          for (let i = parseInt(startNumB[result[0]]) + 1000; i <= parseInt(startNumB[result[0]]) + 5000; i+=1000) {
+          for (let i = parseInt(startNumB[result[0]]) + 1000; i <= 500000; i+=1000) {
             if (i <= 260 * 1000) {
               endNumB.push(i)
             }
@@ -273,6 +273,7 @@ Component({
           if (result[1] === -1) result = 0
           list = [startNumB, endNumB]
           this.setData({list, result, mode: 'multiSelector', placeholder: this.data.placeholderTxt || '请选择期望薪资'})
+          // console.log({list, result, mode: 'multiSelector', placeholder: this.data.placeholderTxt || '请选择期望薪资'})
           break
         case 'occupation':
           getJobLabelApi({type: 'skills'}).then(res => {

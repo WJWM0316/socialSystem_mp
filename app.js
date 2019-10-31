@@ -322,9 +322,17 @@ App({
       return new Promise((resolve, reject) => {
         quickLoginApi(data).then(res => {
           if (res.data.token) {
+            let userInfo = res.data
             wx.setStorageSync('token', res.data.token)
             this.globalData.hasLogin = 1
-            this.globalData.userInfo = res.data
+            if(!userInfo.isCancelSetPassword) {
+              userInfo = Object.assign(userInfo, {
+                showAccountSecurityTips: 1,
+                showMineRedDot: 1,
+                showMineTabRedDot: 1
+              })
+            }
+            this.globalData.userInfo = userInfo
             let pageUrl = this.getCurrentPagePath(0)
             this.getRoleInfo().then(res0 => {
               this.wxToast({
@@ -380,10 +388,18 @@ App({
     let _this = this
     return new Promise((resolve, reject) => {
       bindPhoneApi(data).then(res => {
+        let userInfo = res.data
         if (res.data.token) wx.setStorageSync('token', res.data.token)
         if (res.data.sessionToken) wx.setStorageSync('sessionToken', res.data.sessionToken)
         this.globalData.hasLogin = 1
-        this.globalData.userInfo = res.data
+        if(!userInfo.isCancelSetPassword) {
+          userInfo = Object.assign(userInfo, {
+            showAccountSecurityTips: 1,
+            showMineRedDot: 1,
+            showMineTabRedDot: 1
+          })
+        }
+        this.globalData.userInfo = userInfo
         this.getRoleInfo().then((res0) => {
           this.wxToast({
             title: '登录成功',
@@ -436,10 +452,18 @@ App({
     let _this = this
     return new Promise((resolve, reject) => {
       pswLoginApi(data).then(res => {
+        let userInfo = res.data
         if (res.data.token) wx.setStorageSync('token', res.data.token)
         if (res.data.sessionToken) wx.setStorageSync('sessionToken', res.data.sessionToken)
         this.globalData.hasLogin = 1
-        this.globalData.userInfo = res.data
+        if(!userInfo.isCancelSetPassword) {
+          userInfo = Object.assign(userInfo, {
+            showAccountSecurityTips: 1,
+            showMineRedDot: 1,
+            showMineTabRedDot: 1
+          })
+        }
+        this.globalData.userInfo = userInfo
         this.getRoleInfo().then((res0) => {
           this.wxToast({
             title: '登录成功',

@@ -1,4 +1,4 @@
-import {APPLICANTHOST, RECRUITERHOST, PUBAPIHOST, COMMON, RECRUITER, APPLICANT, VERSION, NODEHOST} from '../config.js'
+import {APPLICANTHOST, RECRUITERHOST, PUBAPIHOST, COMMON, RECRUITER, APPLICANT, VERSION, NODEHOST, RECRUITERHOST2} from '../config.js'
 const app = getApp()
 let loadNum = 0
 let BASEHOST = ''
@@ -50,6 +50,8 @@ export const request = ({name = '', method = 'post', url, host, data = {}, needK
     case 'NODEHOST':
       BASEHOST = NODEHOST
       break
+    case 'RECRUITERHOST2':
+      BASEHOST = RECRUITERHOST2
     default:
       BASEHOST = wx.getStorageSync('choseType') !== "RECRUITER" ? APPLICANTHOST : RECRUITERHOST 
   }

@@ -2,7 +2,7 @@
   <form bindsubmit="formSubmit" report-submit='{{true}}'>
     <view class="bindPhone">
       <view class="head">
-        <image class="img" mode="widthFix" src="{{cdnImagePath}}login_bg_new.png"></image>
+        <image class="img" src="{{cdnImagePath}}login_bg_new.png"></image>
         <view class="msg">
           <view class="h11">欢迎使用</view>
           <view class="h44">老虎科技招聘</view>

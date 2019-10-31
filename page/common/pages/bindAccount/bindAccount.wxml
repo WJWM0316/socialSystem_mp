@@ -4,12 +4,12 @@
 	<view class="li" bindtap="changeName">
 		<view class="key">设置用户名</view>
 		<view class="value {{userInfo.username ? 'active' : ''}}">{{userInfo.username ? userInfo.username : '请设置用户名，便于账号登录'}}</view>
-		<view class="red"></view>
+		<view class="red" wx:if="{{!userInfo.username}}"></view>
 		<i class="icon iconfont icon-xiangyou"></i>
 	</view>
 	<view class="li" bindtap="changeMobile">
 		<view class="key">修改手机号</view>
-		<view class="value active">{{filters.mobileFormat(userInfo.mobile, 'hide')}}</view>
+		<view class="value active">{{filters.mobileFormat(userInfo.mobile || '00000000000', 'hide')}}</view>
 		<i class="icon iconfont icon-xiangyou"></i>
 	</view>
 	<view class="li" bindtap="changePassword">

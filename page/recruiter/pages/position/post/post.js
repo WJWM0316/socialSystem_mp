@@ -46,6 +46,7 @@ Page({
     detail: {}
   },
   onLoad(options) {
+    wx.setStorageSync('choseType', 'RECRUITER')
     this.setData({pageTitle: options.positionId ? '编辑职位' : '发布职位', query: options})
   },
   onShow() {

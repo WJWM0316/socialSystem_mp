@@ -28,8 +28,7 @@ let fixedDomPosition = 0,
     positionCard = null,
     recruiterCard = null
 function showTips() {
-  if(wx.getStorageSync('notShowAccountSecurityTips')) return
-  if(!app.globalData.userInfo.isCancelSetPassword) { //0显示 1不显示
+  if(app.globalData.userInfo.showAccountSecurityTips) { //0显示 1不显示
       app.wxConfirm({
         title: '提示',
         content: '您的账号尚未设置密码，为了账户安全，请先创建登录密码。',
@@ -37,10 +36,10 @@ function showTips() {
         showCancel: true,
         cancelText: '取消',
         cancelBack: () => {
-          wx.setStorageSync('notShowAccountSecurityTips', 1)
+          app.globalData.userInfo.showAccountSecurityTips = 0
         },
         confirmBack: () => {
-          wx.setStorageSync('notShowAccountSecurityTips', 1)
+          app.globalData.userInfo.showAccountSecurityTips = 0
           wx.navigateTo({url: `${COMMON}forgetPwd/forgetPwd?step=3&title=设置密码&type=set`})
         }
       })

@@ -31,11 +31,17 @@ Page({
     let recruiterInfo = app.globalData.recruiterDetails
     let userInfo = app.globalData.userInfo
     if (recruiterInfo.uid) {
+      userInfo = Object.assign(userInfo || {}, {
+        showMineRedDot: 0
+      })
       this.setData({recruiterInfo, userInfo})
     } else {
       app.getAllInfo().then(res => {
         recruiterInfo = app.globalData.recruiterDetails
         userInfo = app.globalData.userInfo
+        userInfo = Object.assign(userInfo || {}, {
+          showMineRedDot: 0
+        })
         this.setData({recruiterInfo, userInfo})
       })
     }
@@ -88,6 +94,8 @@ Page({
         this.viewIdentity()
         break
       case 'settings':
+        app.globalData.userInfo = Object.assign(app.globalData.userInfo || {}, { showMineRedDot: 0 })
+        this.setData({userInfo: app.globalData.userInfo})
         wx.navigateTo({url: `${COMMON}settings/settings`})
         break
       case 'poster':

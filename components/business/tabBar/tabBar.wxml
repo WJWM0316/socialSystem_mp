@@ -1,4 +1,4 @@
-<block wx:if="{{tabType == '1'}}">
+<view hidden="{{tabType != '1'}}">
 	<cover-view class="tabBar {{isIphoneX ? 'iphoneX' : ''}}">
 		<cover-view class="tabList">
 		  <cover-view
@@ -34,9 +34,9 @@
 		<cover-view class="viewBlock" wx:if="{{isIphoneX}}"></cover-view>
 	</cover-view>
 	<cover-view class="extraBlock {{isIphoneX ? 'extraIphoneX' : ''}}"></cover-view>
-</block>
+</view>
 
-<block wx:else>
+<view hidden="{{tabType == '1'}}">
 	<view class="tabBar {{isIphoneX ? 'iphoneX' : ''}}">
 		<view class="tabList">
 		  <view
@@ -69,4 +69,4 @@
 		<view class="viewBlock" wx:if="{{isIphoneX}}"></view>
 	</view>
 	<view class="extraBlock {{isIphoneX ? 'extraIphoneX' : ''}}"></view>
-</block>
+</view>

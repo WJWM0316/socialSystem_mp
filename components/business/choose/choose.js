@@ -18,13 +18,24 @@ Component({
     cdnImagePath: getApp().globalData.cdnImagePath
   },
   attached: function () {
-    wx.checkSession({
-      success () {
-      },
-      fail () {
-        app.login()
+    let check = () => {
+      wx.checkSession({
+        success () {
+          console.log('sessionToken: ', wx.getStorageSync('sessionToken'),  '未过期')
+        },
+        fail () {
+          app.login()
+        }
+      })
+    }
+    if (app.loginInit) {
+      check()
+    } else {
+      app.loginInit = () => {
+        check()
       }
-    })
+    }
+    
     let choseType = wx.getStorageSync('choseType') || null
     if (choseType) {
       this.setData({

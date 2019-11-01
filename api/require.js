@@ -200,7 +200,7 @@ export const request = ({name = '', method = 'post', url, host, data = {}, needK
                   fail () {
                     getApp().login()
                   }
-                }
+                })
               }
               break
             case 400:

@@ -111,7 +111,6 @@ App({
               sourcePath: `/${that.globalData.startRoute.path}?${that.splicingParams(startRouteParams)}`
             }
           }
-          wx.setStorageSync('code', res0.code)
           loginApi({code: res0.code, ...params}).then(res => {
             // 有token说明已经绑定过用户了
             if (res.data.token) {
@@ -261,12 +260,10 @@ App({
         let wxLogin = function () {
           // 请求接口获取服务器session_key
           let pageUrl = that.getCurrentPagePath(0)
-          data.code = wx.getStorageSync('code')
           if (wx.getStorageSync('sessionToken')) {
             data.session_token = wx.getStorageSync('sessionToken')
           }
           loginApi(data).then(res => {
-            wx.removeStorageSync('code')
             // 有token说明已经绑定过用户了
             if (res.data.token) {
               wx.setStorageSync('token', res.data.token)
@@ -296,11 +293,6 @@ App({
               }              
             }
           }).catch(e => {
-            wx.login({
-              success: function (res0) {
-                wx.setStorageSync('code', res0.code)
-              }
-            })
             reject(e)
           })
         }
@@ -316,7 +308,6 @@ App({
     if (e.detail.errMsg === 'getPhoneNumber:ok') {
       let data = {
         iv_key: e.detail.iv,
-        code: wx.getStorageSync('code'),
         data: e.detail.encryptedData
       }
       return new Promise((resolve, reject) => {

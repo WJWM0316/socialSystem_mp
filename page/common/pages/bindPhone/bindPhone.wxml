@@ -5,7 +5,7 @@
         <image class="img" src="{{cdnImagePath}}login_bg_new.png"></image>
         <view class="msg">
           <view class="h11">欢迎使用</view>
-          <view class="h44">老虎科技招聘</view>
+          <view class="h44">{{bindInfo.companyName || ''}}</view>
           <!-- <text class="title">欢迎使用\n多多社交招聘系统</text> -->
         </view>
       </view>
@@ -177,7 +177,7 @@
           <button class="login {{canClick ? 'active' : ''}}" catchtap="bindPhone" form-type="submit">登 录</button>
           <view
             class="forget"
-            wx:if="{{choseType === 'RECRUITER'}}"
+            wx:if="{{choseType === 'RECRUITER' && loginType === 2}}"
             bindtap="todoAction"
             data-action="forget">
             忘记密码？

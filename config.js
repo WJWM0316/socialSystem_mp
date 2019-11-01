@@ -10,7 +10,8 @@ export let APPLICANTHOST = '',
 					 RECRUITERHOST = '',
 					 PUBAPIHOST = '',
 					 WEBVIEW = '',
-					 NODEHOST = ''
+					 NODEHOST = '',
+					 RECRUITERHOST2 = ''
 if (environment === 0) {
 	// 测试服接口
 	APPLICANTHOST = 'https://qiuzhi-api.dd.lieduoduo.ziwork.com'

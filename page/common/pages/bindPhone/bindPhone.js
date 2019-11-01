@@ -1,5 +1,5 @@
 import {COMMON,RECRUITER} from '../../../../config.js'
-import {sendCodeApi, changeNewCaptchaApi, pswLoginApi} from "../../../../api/pages/auth.js"
+import {sendCodeApi, changeNewCaptchaApi, pswLoginApi,getMinAppBindCompanyApi} from "../../../../api/pages/auth.js"
 import {quickLoginApi} from '../../../../api/pages/auth.js'
 import {mobileReg} from '../../../../utils/fieldRegular.js'
 
@@ -23,7 +23,9 @@ Page({
     choseType: '',
     loginType: 2,
     captchaValue: '',
-    codeType: 1
+    codeType: 1,
+    companyName: '',
+    bindInfo: {}
   },
   onLoad(options) {
     // wx.setStorageSync('choseType', 'RECRUITER')
@@ -32,6 +34,7 @@ Page({
     if (options.backType) backType = options.backType
   },
   onShow() {
+    getMinAppBindCompanyApi().then(res => this.setData({bindInfo: res.data}))
     this.setData({choseType: wx.getStorageSync('choseType')})
   },
   setTime (second) {

@@ -97,7 +97,7 @@
 }
 .wxBtn {
   position:absolute;
-  bottom:56rpx;
+  bottom:96rpx;
   left:0;
   width:100%;
   text-align:center;
@@ -127,7 +127,7 @@
 .btnInner .icon-xiangyou{
   font-size: 30rpx;
   position: relative;
-  top: 1rpx;
+  top: 0rpx;
   color:#565D5D
 }
 .wxBtn .icon .iconfont {

@@ -1,152 +1,166 @@
 <!--components/layout/shareBtn/shareBtn.wxml-->
 
 <form bindsubmit="formSubmit" report-submit='{{true}}'>
-	<block wx:if="{{posterType === 'companyDesc'}}">
+	<block wx:if="{{!userInfo.isNew}}">
+		<block wx:if="{{posterType === 'companyDesc'}}">
 
-		<view class="shareBox" hidden="{{!showChoose}}" catchtouchmove>
-			<view class="shareBg" bindtap="close">
-			</view>
-			<view class="posChoseBox" animation="{{animationData}}">
-				<view class="choseBox choseBoxBg"></view>
-				<view class="choseBox">
-					<button form-type="submit" class="share clear-style" bindtap="jump" data-type="useCompanyDesc">
-						<view class="btnCon btn1">
-							<view class="title">使用公司介绍</view>
-						</view>
-					</button>
-					<button form-type="submit" class="poster clear-style" bindtap="jump" data-type="createNewDesc">
-						<view class="btnCon btn2 no-border">
-							<view class="title">新增机构介绍</view>
-						</view>
-					</button>
+			<view class="shareBox" hidden="{{!showChoose}}" catchtouchmove>
+				<view class="shareBg" bindtap="close">
+				</view>
+				<view class="posChoseBox" animation="{{animationData}}">
+					<view class="choseBox choseBoxBg"></view>
+					<view class="choseBox">
+						<button form-type="submit" class="share clear-style" bindtap="jump" data-type="useCompanyDesc">
+							<view class="btnCon btn4">
+								<view class="title">使用公司介绍</view>
+							</view>
+						</button>
+						<button form-type="submit" class="poster clear-style" bindtap="jump" data-type="createNewDesc">
+							<view class="btnCon btn5 no-border">
+								<view class="title">{{posterData.orgIntro ? '编辑机构介绍' : '新增机构介绍'}}</view>
+							</view>
+						</button>
+						<button form-type="submit" class="close clear-style" bindtap="close"  hidden="{{!showChoose}}"><i class="icon iconfont icon-cha-cu"></i></button>
+					</view>
 				</view>
 			</view>
-		</view>
-	</block>
-	<block wx:if="{{posterType === 'production'}}">
+		</block>
+		<block wx:if="{{posterType === 'production'}}">
 
-		<view class="shareBox" hidden="{{!showChoose}}" catchtouchmove>
-			<view class="shareBg" bindtap="close">
-			</view>
-			<view class="posChoseBox" animation="{{animationData}}">
-				<view class="choseBox choseBoxBg"></view>
-				<view class="choseBox">
-					<button form-type="submit" class="share clear-style" bindtap="jump" data-type="chooseProduction">
-						<view class="btnCon btn1">
-							<view class="title">从公司产品中选择</view>
-						</view>
-					</button>
-					<button form-type="submit" class="poster clear-style" bindtap="jump" data-type="addProduction">
-						<view class="btnCon btn2">
-							<view class="title">新建机构产品</view>
-						</view>
-					</button>
-					<button form-type="submit" class="close clear-style" bindtap="close"  hidden="{{!showChoose}}"><i class="icon iconfont icon-cha-cu"></i></button>
+			<view class="shareBox" hidden="{{!showChoose}}" catchtouchmove>
+				<view class="shareBg" bindtap="close">
+				</view>
+				<view class="posChoseBox" animation="{{animationData}}">
+					<view class="choseBox choseBoxBg"></view>
+					<view class="choseBox">
+						<button form-type="submit" class="share clear-style" bindtap="jump" data-type="chooseProduction">
+							<view class="btnCon btn4">
+								<view class="title">从公司产品中选择</view>
+							</view>
+						</button>
+						<button form-type="submit" class="poster clear-style" bindtap="jump" data-type="addProduction">
+							<view class="btnCon btn5">
+								<view class="title">新建机构产品</view>
+							</view>
+						</button>
+						<button form-type="submit" class="close clear-style" bindtap="close"  hidden="{{!showChoose}}"><i class="icon iconfont icon-cha-cu"></i></button>
+					</view>
 				</view>
 			</view>
-		</view>
-	</block>
-	<block wx:if="{{posterType === 'position'}}">
-		<view class="shareBtn shareBtnBg"></view>
-		<button form-type="submit" class="formIdBtn clear-style shareBtn" bindtap="oper">
-		  <view><i class="shareIcon iconfont icon-fenxiang"></i></view>
-		  <text>转发</text>
-		</button>
-		<view class="shareBox" hidden="{{!showChoose}}" catchtouchmove>
-			<view class="shareBg" bindtap="close">
-			</view>
-			<view class="posChoseBox" animation="{{animationData}}">
-				<view class="choseBox choseBoxBg"></view>
-				<view class="choseBox">
-					<button form-type="submit" class="share clear-style" open-type="share" bindtap="close">
-						<view class="btnCon btn1">
-							<view class="title">分享好友或群聊<text class="icon">转化好</text></view>
-							<view class="desc">好友或群成员点开直接访问小程序</view>
-						</view>
-					</button>
-					<button form-type="submit" class="poster clear-style" bindtap="jump" data-type="exPosition">
-						<view class="btnCon btn2">
-							<view class="title">{{isOwner ? '生成精美海报' : '生成推荐海报'}}<text class="icon">抓眼球</text></view>
-							<view class="desc">提炼职位核心信息，发圈更抓人眼球</view>
-						</view>
-					</button>
-					<button form-type="submit" class="poster button5 clear-style" bindtap="jump" data-type="position">
-						<view class="btnCon btn3">
-							<view class="title">生成职位长图<text class="icon">最详细</text></view>
-							<view class="desc">呈现所有职位信息，细节一目了然</view>
-						</view>
-					</button>
-					<button form-type="submit" class="close clear-style" bindtap="close"  hidden="{{!showChoose}}"><i class="icon iconfont icon-cha-cu"></i></button>
-				</view>
-			</view>
-		</view>
-	</block>
-	<block wx:elif="{{posterType === 'applicant' || posterType === 'recruiter' || posterType === 'company'}}">
-		<block wx:if="{{shareBtn}}">
+		</block>
+		<block wx:if="{{posterType === 'position'}}">
 			<view class="shareBtn shareBtnBg"></view>
 			<button form-type="submit" class="formIdBtn clear-style shareBtn" bindtap="oper">
 			  <view><i class="shareIcon iconfont icon-fenxiang"></i></view>
 			  <text>转发</text>
 			</button>
+			<view class="shareBox" hidden="{{!showChoose}}" catchtouchmove>
+				<view class="shareBg" bindtap="close">
+				</view>
+				<view class="posChoseBox" animation="{{animationData}}">
+					<view class="choseBox choseBoxBg"></view>
+					<view class="choseBox">
+						<button form-type="submit" class="share clear-style" open-type="share" bindtap="close">
+							<view class="btnCon btn1">
+								<view class="title">分享好友或群聊<text class="icon">转化好</text></view>
+								<view class="desc">好友或群成员点开直接访问小程序</view>
+							</view>
+						</button>
+						<button form-type="submit" class="poster clear-style" bindtap="jump" data-type="exPosition">
+							<view class="btnCon btn2">
+								<view class="title">{{isOwner ? '生成精美海报' : '生成推荐海报'}}<text class="icon">抓眼球</text></view>
+								<view class="desc">提炼职位核心信息，发圈更抓人眼球</view>
+							</view>
+						</button>
+						<button form-type="submit" class="poster button5 clear-style" bindtap="jump" data-type="position">
+							<view class="btnCon btn3">
+								<view class="title">生成职位长图<text class="icon">最详细</text></view>
+								<view class="desc">呈现所有职位信息，细节一目了然</view>
+							</view>
+						</button>
+						<button form-type="submit" class="close clear-style" bindtap="close"  hidden="{{!showChoose}}"><i class="icon iconfont icon-cha-cu"></i></button>
+					</view>
+				</view>
+			</view>
 		</block>
-		<view class="shareBox" hidden="{{!showChoose}}" catchtouchmove>
-			<view class="shareBg" bindtap="close">
-			</view>
-			<view class="posChoseBox" animation="{{animationData}}">
-				<view class="choseBox choseBoxBg"></view>
-				<view class="choseBox">
-					<button form-type="submit" class="share clear-style" open-type="share" bindtap="close">
-						<view class="btnCon btn1">
-							<view class="title">分享好友或群聊<text class="icon">转化好</text></view>
-							<view class="desc">好友或群成员点开直接访问小程序</view>
-						</view>
-					</button>
-					<button form-type="submit" class="poster button5 clear-style" bindtap="jump" data-type="resume">
-						<view class="btnCon btn2">
-							<view class="title">{{isOwner ? '生成精美海报' : '生成推荐海报'}}<text class="icon">抓眼球</text></view>
-							<view class="desc">{{posterType === 'recruiter' ? '提炼面试官核心信息，分享更抓人眼球' : ''}}{{posterType === 'applicant' ? '提炼简历核心信息，分享更抓人眼球' : ''}}{{posterType === 'company' ? '提炼机构核心信息，分享更抓人眼球' : ''}}</view>
-						</view>
-					</button>
-					<button form-type="submit" class="close clear-style" bindtap="close"  hidden="{{!showChoose}}"><i class="icon iconfont icon-cha-cu"></i></button>
+		<block wx:elif="{{posterType === 'applicant' || posterType === 'recruiter' || posterType === 'company'}}">
+			<block wx:if="{{shareBtn}}">
+				<view class="shareBtn shareBtnBg"></view>
+				<button form-type="submit" class="formIdBtn clear-style shareBtn" bindtap="oper">
+				  <view><i class="shareIcon iconfont icon-fenxiang"></i></view>
+				  <text>转发</text>
+				</button>
+			</block>
+			<view class="shareBox" hidden="{{!showChoose}}" catchtouchmove>
+				<view class="shareBg" bindtap="close">
+				</view>
+				<view class="posChoseBox" animation="{{animationData}}">
+					<view class="choseBox choseBoxBg"></view>
+					<view class="choseBox">
+						<button form-type="submit" class="share clear-style" open-type="share" bindtap="close">
+							<view class="btnCon btn1">
+								<view class="title">分享好友或群聊<text class="icon">转化好</text></view>
+								<view class="desc">好友或群成员点开直接访问小程序</view>
+							</view>
+						</button>
+						<button form-type="submit" class="poster button5 clear-style" bindtap="jump" data-type="resume">
+							<view class="btnCon btn2">
+								<view class="title">{{isOwner ? '生成精美海报' : '生成推荐海报'}}<text class="icon">抓眼球</text></view>
+								<view class="desc">{{posterType === 'recruiter' ? '提炼面试官核心信息，分享更抓人眼球' : ''}}{{posterType === 'applicant' ? '提炼简历核心信息，分享更抓人眼球' : ''}}{{posterType === 'company' ? '提炼机构核心信息，分享更抓人眼球' : ''}}</view>
+							</view>
+						</button>
+						<button form-type="submit" class="close clear-style" bindtap="close"  hidden="{{!showChoose}}"><i class="icon iconfont icon-cha-cu"></i></button>
+					</view>
 				</view>
 			</view>
-		</view>
-	</block>
-	<block wx:elif="{{posterType === 'specialJob'}}">
-		<button class="shareBtn clear-style shareBtn1" bindtap="oper" style="top: {{navHeight + 12}}px">
-			<i class="shareIcon iconfont icon-fenxiang"></i>
-		</button>
-		<view class="shareBtn shareBtnBg1" style="top: {{navHeight + 14}}px"></view>
-		<view class="shareBox" hidden="{{!showChoose}}">
-			<view class="shareBg" bindtap="close">
-			</view>
-			<view class="posChoseBox" animation="{{animationData}}">
-				<view class="choseBox choseBoxBg"></view>
-				<view class="choseBox">
-					<button form-type="submit" class="share clear-style" open-type="share" bindtap="close">
-						<view class="btnCon btn1">
-							<view class="title">分享好友或群聊<text class="icon">转化好</text></view>
-							<view class="desc">好友或群成员点开直接访问小程序</view>
-						</view>
-					</button>
-					<button form-type="submit" class="poster button5 clear-style" bindtap="jump" data-type="recruiter">
-						<view class="btnCon btn2">
-							<view class="title">生成精美海报<text class="icon">抓眼球</text></view>
-							<view class="desc">提炼活动核心信息，分享更抓人眼球</view>
-						</view>
-					</button>
-					<button form-type="submit" class="close clear-style" bindtap="close"  hidden="{{!showChoose}}"><i class="icon iconfont icon-cha-cu"></i></button>
-				</view>
-			</view>
-		</view>
-	</block>
-	<block wx:else>
-		<block wx:if="{{shareBtn}}">
-			<view class="shareBtn shareBtnBg"></view>
-			<button open-type="share" class="shareBtn clear-style" form-type="submit">
-				<view><i class="shareIcon iconfont icon-fenxiang"></i></view>
-			  <text>转发</text>
+		</block>
+		<block wx:elif="{{posterType === 'specialJob'}}">
+			<button class="shareBtn clear-style shareBtn1" bindtap="oper" style="top: {{navHeight + 12}}px">
+				<i class="shareIcon iconfont icon-fenxiang"></i>
 			</button>
+			<view class="shareBtn shareBtnBg1" style="top: {{navHeight + 14}}px"></view>
+			<view class="shareBox" hidden="{{!showChoose}}">
+				<view class="shareBg" bindtap="close">
+				</view>
+				<view class="posChoseBox" animation="{{animationData}}">
+					<view class="choseBox choseBoxBg"></view>
+					<view class="choseBox">
+						<button form-type="submit" class="share clear-style" open-type="share" bindtap="close">
+							<view class="btnCon btn1">
+								<view class="title">分享好友或群聊<text class="icon">转化好</text></view>
+								<view class="desc">好友或群成员点开直接访问小程序</view>
+							</view>
+						</button>
+						<button form-type="submit" class="poster button5 clear-style" bindtap="jump" data-type="recruiter">
+							<view class="btnCon btn2">
+								<view class="title">生成精美海报<text class="icon">抓眼球</text></view>
+								<view class="desc">提炼活动核心信息，分享更抓人眼球</view>
+							</view>
+						</button>
+						<button form-type="submit" class="close clear-style" bindtap="close"  hidden="{{!showChoose}}"><i class="icon iconfont icon-cha-cu"></i></button>
+					</view>
+				</view>
+			</view>
 		</block>
+		<block wx:else>
+			<block wx:if="{{shareBtn}}">
+				<view class="shareBtn shareBtnBg"></view>
+				<button open-type="share" class="shareBtn clear-style" form-type="submit">
+					<view><i class="shareIcon iconfont icon-fenxiang"></i></view>
+				  <text>转发</text>
+				</button>
+			</block>
+		</block>
+	</block>
+	<block wx:if="{{userInfo.isNew}}">
+		<button
+			open-type="getUserInfo"
+			class="shareBtn clear-style"
+			form-type="submit"
+			bindgetuserinfo="onGotUserInfo"
+			lang="zh_CN">
+			<view><i class="shareIcon iconfont icon-fenxiang"></i></view>
+		  <text>转发</text>
+		</button>
 	</block>
 </form>

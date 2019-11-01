@@ -111,6 +111,14 @@
   border-bottom: 0;
   background-image: url('https://lieduoduo-uploads-test.oss-cn-shenzhen.aliyuncs.com/front-assets/images/btn_share_pic.png');
 }
+.choseBox .btnCon.btn4 {
+  border-bottom: 0;
+  background-image: url('https://lieduoduo-uploads-test.oss-cn-shenzhen.aliyuncs.com/front-assets/images/file_new_001.png');
+}
+.choseBox .btnCon.btn5 {
+  border-bottom: 0;
+  background-image: url('https://lieduoduo-uploads-test.oss-cn-shenzhen.aliyuncs.com/front-assets/images/add_new_001.png');
+}
 .choseBox .btnCon .title {
   line-height: 40rpx;
   font-size:34rpx;

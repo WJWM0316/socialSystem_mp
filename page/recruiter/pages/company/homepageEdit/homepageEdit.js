@@ -67,7 +67,7 @@ Page({
         } else {
           this.getTopCompanyDetail(this.data.companyInfos.topId).then(res => {
             this.selectComponent('#shareBtn').oper()
-            this.setData({posterData: res })
+            this.setData({posterData: Object.assign(res, {orgIntro: this.data.companyInfos.intro ? this.data.companyInfos.intro : ''}) })
           })
         }
         break

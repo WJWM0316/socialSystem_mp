@@ -170,3 +170,13 @@ export const checkSetPasswordApi = (data, hasLoading) => {
     hasLoading: true
   })
 }
+
+// 小程序获取绑定的公司信息
+export const getMinAppBindCompanyApi = (data, hasLoading) => {
+  return request({
+    url: '/wechat/company',
+    method: 'get',
+    hasLoading: false,
+    host: 'PUBAPIHOST',
+  })
+}

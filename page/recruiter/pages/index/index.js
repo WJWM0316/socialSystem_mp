@@ -1,5 +1,6 @@
 import {
-  getIndexShowCountApi
+  getIndexShowCountApi,
+  getRecruiterMyInfo2Api
 } from '../../../../api/pages/recruiter.js'
 
 import {
@@ -105,21 +106,6 @@ Page({
   onLoad() {
     let choseType = wx.getStorageSync('choseType') || ''
     this.setData({choseType})
-    let that = this
-    if (choseType === 'APPLICANT') {
-      let that = this
-      app.wxConfirm({
-        title: '提示',
-        content: '检测到你是求职者，是否切换求职者',
-        confirmBack() {
-          wx.reLaunch({url: `${COMMON}homepage/homepage`})
-        },
-        cancelBack() {
-          wx.setStorageSync('choseType', 'RECRUITER')
-          app.getAllInfo().then(res => that.init())
-        }
-      })
-    }
   },
   onShow() {
     this.setData({pageShow: true})
@@ -141,9 +127,41 @@ Page({
   },
   init () {
     if (wx.getStorageSync('choseType') === 'APPLICANT') return
+    let toast = (fn) => {
+      if(app.globalData.isRecruiter) {
+        getRecruiterMyInfo2Api().catch(msg => {
+          // 820 不是该公司下的B身份
+          if (msg.code === 820) {
+            wx.setStorageSync('choseType', 'APPLICANT')
+            wx.reLaunch({url: `${COMMON}homepage/homepage`})
+          }
+        }).then(() => {
+          let that = this
+          app.wxConfirm({
+            title: '提示',
+            content: '检测到你是求职者，是否切换求职者',
+            confirmBack() {
+              wx.reLaunch({url: `${COMMON}homepage/homepage`})
+            },
+            cancelBack() {
+              wx.setStorageSync('choseType', 'RECRUITER')
+              app.getAllInfo().then(res => {
+                fn && fn()
+              })
+            }
+          })
+        })
+      } else {
+        wx.setStorageSync('choseType', 'APPLICANT')
+        wx.reLaunch({url: `${COMMON}homepage/homepage`})
+      }
+    }
     let callback = () => {
       // 处理海报生成问题
       this.setData({userInfo: {}})
+      if(wx.getStorageSync('choseType') === 'APPLICANT') {
+        toast(this.init)
+      }
       app.getAllInfo().then(res => {
         let companyInfos = res.companyInfo
         let isCompanyTopAdmin = res.isCompanyTopAdmin

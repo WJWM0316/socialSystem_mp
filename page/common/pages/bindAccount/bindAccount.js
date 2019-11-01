@@ -1,4 +1,6 @@
 import {uploginApi, checkSetPasswordApi} from "../../../../api/pages/auth.js"
+import {getUserInfoApi} from "../../../../api/pages/user.js"
+
 import {
   COMMON,
   RECRUITER,
@@ -10,9 +12,9 @@ Page({
     userInfo: {}
   },
   onShow() {
-    console.log(app.globalData)
-    // wx.setStorageSync('choseType', 'RECRUITER')
-    this.setData({userInfo: app.globalData.userInfo})
+    getUserInfoApi().then(res => {
+      this.setData({userInfo: res.data})
+    })
   },
   changeMobile() {
     wx.navigateTo({url: `${COMMON}changeMobile/changeMobile`})

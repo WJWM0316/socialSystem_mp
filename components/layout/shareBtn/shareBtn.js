@@ -35,14 +35,22 @@ Component({
   data: {
     showChoose: false,
     navHeight: app.globalData.navHeight,
-    animationData: {}
+    animationData: {},
+    userInfo: app.globalData.userInfo
   },
   attached () {
+    setTimeout(() => {
+      this.setData({userInfo: app.globalData.userInfo})
+      console.log(this.data.userInfo)
+    })
   },
   /**
    * 组件的方法列表
    */
   methods: {
+    onGotUserInfo(e) {
+      app.onGotUserInfo(e, true)
+    },
     oper() {
       this.setData({showChoose: true}, () => {
         let timer = setTimeout(() => {

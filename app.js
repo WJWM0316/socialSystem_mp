@@ -121,7 +121,7 @@ App({
               that.getRoleInfo()
               console.log('用户已认证')
             } else {
-              if (res.data.nickname) that.globalData.userInfo = res.data.userInfo
+              if (res.data.nickname) that.globalData.userInfo = res.data
               that.globalData.hasLogin = 0
               console.log('用户未绑定手机号', 'sessionToken', res.data.authToken)
               wx.setStorageSync('sessionToken', res.data.authToken)

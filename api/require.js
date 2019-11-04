@@ -52,6 +52,7 @@ export const request = ({name = '', method = 'post', url, host, data = {}, needK
       break
     case 'RECRUITERHOST2':
       BASEHOST = RECRUITERHOST2
+      break
     default:
       BASEHOST = wx.getStorageSync('choseType') !== "RECRUITER" ? APPLICANTHOST : RECRUITERHOST 
   }

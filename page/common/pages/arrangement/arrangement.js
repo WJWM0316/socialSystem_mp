@@ -343,6 +343,7 @@ Page({
           }
         }
         this.setData({info})
+        console.log(info, 'kkkk')
       })
     } else {
       let recruiter_chat_infos = wx.getStorageSync('recruiter_chat_infos')

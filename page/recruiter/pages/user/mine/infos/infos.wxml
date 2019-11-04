@@ -113,7 +113,7 @@
 </view>
 <block wx:if="{{recruiterInfo.uid}}"><canvasCard cardData="{{recruiterInfo}}" type="recruiter" bindgetCreatedImg="getCreatedImg"></canvasCard>
 </block>
-<tab-bar tabType="1" id="bottomRedDotBar" bindresultevent="getResult"></tab-bar>
+<tab-bar id="bottomRedDotBar" bindresultevent="getResult"></tab-bar>
 </view>
 
 <bindPhone hide="{{true}}"></bindPhone>

@@ -30,7 +30,7 @@ Page({
     let funcApi = Reflect.has(options, '_from') ? getLabelPositionNewApi : getLabelPositionApi
     if(Reflect.has(options, '_from') && wx.getStorageSync('choseType') === 'RECRUITER') {
       params = Object.assign(params, {
-        company_id: app.globalData.recruiterDetails.companyInfo.id
+        company_id: app.globalData.recruiterDetails.companyTopId
       })
     }
     // if (options.hot) {

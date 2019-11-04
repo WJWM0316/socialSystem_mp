@@ -32,7 +32,7 @@ Page({
     let userInfo = app.globalData.userInfo
     if (recruiterInfo.uid) {
       userInfo = Object.assign(userInfo || {}, {
-        showMineRedDot: 0
+        showMineTabRedDot: 0
       })
       this.setData({recruiterInfo, userInfo})
     } else {
@@ -40,7 +40,7 @@ Page({
         recruiterInfo = app.globalData.recruiterDetails
         userInfo = app.globalData.userInfo
         userInfo = Object.assign(userInfo || {}, {
-          showMineRedDot: 0
+          showMineTabRedDot: 0
         })
         this.setData({recruiterInfo, userInfo})
       })

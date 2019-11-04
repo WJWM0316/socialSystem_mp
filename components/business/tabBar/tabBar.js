@@ -126,6 +126,7 @@ Component({
     },
     toggle(e) {
       if (app.getCurrentPagePath().indexOf(e.target.dataset.path) !== -1) return
+      console.log(1)
       wx.reLaunch({
         url: e.target.dataset.path,
         success: () => wx.removeStorageSync('companyInfos')

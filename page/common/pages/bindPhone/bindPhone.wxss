@@ -237,6 +237,7 @@
   font-size: 28rpx;
   line-height: 98rpx;
   padding-right: 46rpx;
+  z-index: 2;
 }
 
 .li .myeyes{
@@ -249,4 +250,5 @@
   font-size: 24rpx;
   line-height: 98rpx;
   padding-right: 46rpx;
+  z-index: 2;
 }

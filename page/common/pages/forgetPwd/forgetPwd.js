@@ -114,7 +114,6 @@ Page({
       promiseList = [checkMobile, checkCode, checkImgCode]
     }
     Promise.all(promiseList).then(() => {
-      console.log(params, 'params')
       if(loginFalseTimes >= 3) {
         this.checkImgCode().then(res => {
           this.checkSmsCode(params)
@@ -125,7 +124,6 @@ Page({
         this.checkSmsCode(params)
       }
     }).catch(err => {
-      console.log(params, 'jjj')
       app.wxToast({title: err})
     })
   },
@@ -177,7 +175,7 @@ Page({
         title: '密码已修改成功',
         icon: 'success',
         callback() {
-          wx.reLaunch({url: `${COMMON}bindPhone/bindPhone`})
+          wx.navigateBack({delta: 1 })
         }
       })
     })

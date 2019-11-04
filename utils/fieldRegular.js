@@ -59,7 +59,7 @@ export const companyIntroReg = /^[\u0391-\uFFE5A-Za-z\s]{20,5000}$/
 
 
 // 密码
-export const pswReg = /^[a-zA-Z0-9]{6,18}$/
+export const pswReg = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,20}$/
 
 // 用户名
 export const userNameNewReg = /^[a-zA-Z0-9_]{6,18}$/

@@ -41,7 +41,6 @@ Component({
   attached () {
     setTimeout(() => {
       this.setData({userInfo: app.globalData.userInfo})
-      console.log(this.data.userInfo)
     })
   },
   /**

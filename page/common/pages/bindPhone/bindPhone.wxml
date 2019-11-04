@@ -116,13 +116,13 @@
             <i
               class="icon1 iconfont icon-zhengyan myeyes"
               bindtap="todoAction"
-              wx:if="{{password && codeType === 1}}"
+              wx:if="{{password && codeType === 2}}"
               data-action="changeCodeType">
             </i>
             <i
               class="icon1 iconfont icon-biyan myeyes"
               bindtap="todoAction"
-              wx:if="{{password && codeType === 2}}"
+              wx:if="{{password && codeType === 1}}"
               data-action="changeCodeType">
             </i>
           </view>

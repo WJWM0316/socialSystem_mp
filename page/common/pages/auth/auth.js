@@ -13,13 +13,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onShow: function (options) {
-    wx.checkSession({
-      success () {
-      },
-      fail () {
-        app.login()
-      }
-    })
+    
   },
   onGotUserInfo(e) {
     getApp().onGotUserInfo(e)
@@ -28,7 +22,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    app.login()
   },
 
   /**

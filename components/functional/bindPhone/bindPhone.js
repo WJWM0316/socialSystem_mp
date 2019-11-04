@@ -23,14 +23,7 @@ Component({
     
   },
   attached: function () {
-    wx.checkSession({
-      success () {
-        console.log('还在有效期内')
-      },
-      fail () {
-        app.login()
-      }
-    })
+    app.login()
   },
   /**
    * 组件的方法列表

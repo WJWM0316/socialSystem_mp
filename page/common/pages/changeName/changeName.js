@@ -3,6 +3,7 @@ import {
 } from "../../../../api/pages/auth.js"
 import { userNameNewReg } from '../../../../utils/fieldRegular.js'
 import {COMMON,RECRUITER} from '../../../../config.js'
+import {getUserInfoApi} from "../../../../api/pages/user.js"
 
 let app = getApp()
 Page({
@@ -10,7 +11,7 @@ Page({
     username: ''
   },
   onShow() {
-    this.setData({username: app.globalData.userInfo.username})
+    getUserInfoApi().then(res => { this.setData({username: res.data.username}) })
   },
   bindInput(e) {
     let username = this.data.username
@@ -18,8 +19,12 @@ Page({
     this.setData({username})
   },
   next() {
-    if (!userNameNewReg.test(this.data.mobile)) {
-      app.wxToast({title: '请输入有效的用户名'})
+    if (!this.data.username) {
+      app.wxToast({title: '用户名格式不正确，请重新输入'})
+      return
+    }
+    if (!userNameNewReg.test(this.data.username)) {
+      app.wxToast({title: '用户名格式不正确，请重新输入'})
       return
     }
     setUserNameApi({username: this.data.username}).then(res => {

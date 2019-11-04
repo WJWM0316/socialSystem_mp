@@ -237,6 +237,7 @@
   font-size: 28rpx;
   line-height: 98rpx;
   padding-right: 46rpx;
+  padding-left: 46rpx;
   z-index: 2;
 }
 
@@ -251,4 +252,5 @@
   line-height: 98rpx;
   padding-right: 46rpx;
   z-index: 2;
+  padding-left: 46rpx;
 }

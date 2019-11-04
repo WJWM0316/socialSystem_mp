@@ -103,7 +103,7 @@ Page({
       } else {
         if (wx.getStorageSync('choseType') === 'RECRUITER') {
           wx.setStorageSync('choseType', 'APPLICANT')
-          // wx.reLaunch({url: app.getCurrentPagePath()})
+          wx.reLaunch({url: app.getCurrentPagePath()})
         }
         getCompanyInfos = getCurCompanyInfosApi
       }

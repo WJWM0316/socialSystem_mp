@@ -158,7 +158,7 @@ Page({
   resetPsw() {
     let formData = this.data.formData
     if(!pswReg.test(formData.password)) {
-      app.wxToast({title: '请输入是有效密码'})
+      app.wxToast({title: '密码格式不正确，请重新输入'})
       return
     }
     if(formData.password !== formData.repeat_password) {
@@ -187,7 +187,7 @@ Page({
   },
   setPassword() {
     if(!pswReg.test(this.data.formData.password)) {
-      app.wxToast({title: '请输入是有效密码'})
+      app.wxToast({title: '密码格式不正确，请重新输入'})
       return
     }
     if(this.data.formData.password !== this.data.formData.repeat_password) {
@@ -206,7 +206,7 @@ Page({
   },
   modifyPassword() {
     if(!pswReg.test(this.data.formData.password)) {
-      app.wxToast({title: '请输入是有效密码'})
+      app.wxToast({title: '密码格式不正确，请重新输入'})
       return
     }
     if(this.data.formData.password !== this.data.formData.repeat_password) {

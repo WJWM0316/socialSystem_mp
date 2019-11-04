@@ -4,7 +4,6 @@
 		<view class="li">
 			<view class="key">用户名</view>
 			<input
-				type="text"
 				class="value"
 				bindinput="bindInput"
 				maxlength="18"

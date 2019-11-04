@@ -108,25 +108,6 @@ Page({
     this.setData({choseType})
   },
   onShow() {
-    this.setData({pageShow: true})
-    if(app.loginInit) {
-      if(!app.globalData.hasLogin) {
-        wx.navigateTo({url: `${COMMON}bindPhone/bindPhone`})
-        return
-      }
-      this.init()
-    } else {
-      app.loginInit = () => {
-        if(!app.globalData.hasLogin) {
-          wx.navigateTo({url: `${COMMON}bindPhone/bindPhone`})
-          return
-        }
-        this.init()
-      }
-    }
-  },
-  init () {
-    if (wx.getStorageSync('choseType') === 'APPLICANT') return
     let toast = (fn) => {
       if(app.globalData.isRecruiter) {
         getRecruiterMyInfo2Api().catch(msg => {
@@ -137,6 +118,7 @@ Page({
           }
         }).then(() => {
           let that = this
+          fn()
           app.wxConfirm({
             title: '提示',
             content: '检测到你是求职者，是否切换求职者',
@@ -145,9 +127,7 @@ Page({
             },
             cancelBack() {
               wx.setStorageSync('choseType', 'RECRUITER')
-              app.getAllInfo().then(res => {
-                fn && fn()
-              })
+              app.getAllInfo().then(res => fn())
             }
           })
         })
@@ -156,12 +136,35 @@ Page({
         wx.reLaunch({url: `${COMMON}homepage/homepage`})
       }
     }
+    let todo = (fn) => {
+      if(wx.getStorageSync('choseType') === 'APPLICANT') {
+        toast(fn)
+      } else {
+        fn()
+      }
+    }
+    this.setData({pageShow: true})
+    if(app.loginInit) {
+      if(!app.globalData.hasLogin) {
+        wx.navigateTo({url: `${COMMON}bindPhone/bindPhone`})
+        return
+      }
+      todo(this.init)
+    } else {
+      app.loginInit = () => {
+        if(!app.globalData.hasLogin) {
+          wx.navigateTo({url: `${COMMON}bindPhone/bindPhone`})
+          return
+        }
+        todo(this.init)
+      }
+    }
+  },
+  init () {
+    if (wx.getStorageSync('choseType') === 'APPLICANT') return
     let callback = () => {
       // 处理海报生成问题
       this.setData({userInfo: {}})
-      if(wx.getStorageSync('choseType') === 'APPLICANT') {
-        toast(this.init)
-      }
       app.getAllInfo().then(res => {
         let companyInfos = res.companyInfo
         let isCompanyTopAdmin = res.isCompanyTopAdmin

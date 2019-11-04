@@ -77,7 +77,7 @@ Page({
     let value = e.detail.value
     let formData = this.data
     formData[key] = value
-    this.setData(formData)
+    this.setData(formData, () => this.bindButtonStatus())
   },
   // 手机号登录
   phoneLogin() {
@@ -189,6 +189,12 @@ Page({
       default:
         break
     }
+  },
+  bindButtonStatus() {
+    let canClick = this.data.canClick
+    let formData = this.data
+    canClick = formData.mobile && (formData.code || formData.password) && (!formData.img || formData.captchaValue) ? true : false
+    this.setData({canClick})
   },
   /**
    * 生命周期函数--监听页面卸载

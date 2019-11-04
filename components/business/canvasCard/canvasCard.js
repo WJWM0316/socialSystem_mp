@@ -1,5 +1,12 @@
 import {ellipsis} from '../../../utils/canvas.js'
 import {replace} from '../../../config.js'
+import {
+  getPositionCardApi, 
+  getPositionMinCardApi, 
+  getResumeCardApi, 
+  getRecruiterCardApi, 
+  getCompanyCardApi
+} from '../../../api/pages/card.js'
 
 let avatarUrl = ''
 const app = getApp()
@@ -57,6 +64,9 @@ Component({
    */
   methods: {
     drawing (avatarUrl) {
+      // getCompanyCardApi({id: 1, type: 'company'}).then(res => {
+      //   console.log(res.data.url)
+      // })
       let that = this
       let info = this.data.cardData
       const ctx = wx.createCanvasContext('cardCanvas', this)

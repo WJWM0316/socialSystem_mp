@@ -323,7 +323,7 @@ Page({
         let addressData = wx.getStorageSync('createPosition')
         let positionData = wx.getStorageSync('interviewData')
         let info = res.data
-        if(wx.getStorageSync('choseType') === 'APPLICANT' && [41, 58].includse(info.status) && this.data.options.stips) {
+        if(wx.getStorageSync('choseType') === 'APPLICANT' && [41, 58].includes(info.status) && this.data.options.stips) {
           toast(this.pageInit)
         }
         info.jobhunterInfo = Object.assign(info.jobhunterInfo, {lastInterviewStatus: info.status})

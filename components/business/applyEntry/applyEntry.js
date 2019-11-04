@@ -40,11 +40,11 @@ Component({
         wx.setStorageSync('choseType', 'RECRUITER')
         console.log(companyInfo,'companyInfo')
         if(joinType === 3) {
-          wx.reLaunch({url: `${RECRUITER}user/company/status/status?from=join&identity=APPLICANT`})
+          wx.navigateTo({url: `${RECRUITER}user/company/status/status?from=join&identity=APPLICANT`})
         } else {
           // 还没有创建公司信息
           if(!Reflect.has(companyInfo, 'id')) {
-            wx.reLaunch({url: `${RECRUITER}user/company/apply/apply`})
+            wx.navigateTo({url: `${RECRUITER}user/company/apply/apply?identity=APPLICANT`})
           } else {
             if(companyInfo.status === 1) {
               wx.navigateTo({url: `${RECRUITER}index/index?identity=APPLICANT&type=${joinType === 1 ? 'company' : 'create_org'}`})

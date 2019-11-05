@@ -49,7 +49,6 @@ Component({
    */
   methods: {
     onGotUserInfo(e) {
-      console.log(e)
       app.onGotUserInfo(e, true)
     },
     oper() {

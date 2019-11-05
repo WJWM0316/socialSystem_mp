@@ -27,14 +27,8 @@ Page({
     companyName: '',
     bindInfo: {}
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    app.login()    
-  },
   onLoad(options) {
+    app.login()
     captchaKey = ''
     backType = 'backPrev'
     if (options.backType) backType = options.backType

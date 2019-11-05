@@ -10,6 +10,31 @@ import {
 
 let avatarUrl = ''
 const app = getApp()
+
+
+// const fsm = wx.getFileSystemManager();
+// const FILE_BASE_NAME = 'tmp_base64src'; //自定义文件名
+ 
+// function base64src(base64data, cb) {
+//   const [, format, bodyData] = /data:image\/(\w+);base64,(.*)/.exec(base64data) || [];
+//   if (!format) {
+//     return (new Error('ERROR_BASE64SRC_PARSE'));
+//   }
+//   const filePath = `${wx.env.USER_DATA_PATH}/${FILE_BASE_NAME}.${format}`;
+//   const buffer = wx.base64ToArrayBuffer(bodyData);
+//   fsm.writeFile({
+//     filePath,
+//     data: buffer,
+//     encoding: 'binary',
+//     success() {
+//       cb(filePath);
+//     },
+//     fail() {
+//       return (new Error('ERROR_BASE64SRC_WRITE'));
+//     },
+//   });
+// };
+ 
 Component({
   /**
    * 组件的属性列表
@@ -64,8 +89,11 @@ Component({
    */
   methods: {
     drawing (avatarUrl) {
-      // getCompanyCardApi({id: 1, type: 'company'}).then(res => {
-      //   console.log(res.data.url)
+      // getCompanyCardApi({id: 2, type: 'company'}).then(res => {
+      //   // console.log(res.data.url)
+      //   base64src(res.data.url, res => {
+      //     console.log(res, 'lll') // 返回图片地址，直接赋值到image标签即可
+      //   })
       // })
       let that = this
       let info = this.data.cardData

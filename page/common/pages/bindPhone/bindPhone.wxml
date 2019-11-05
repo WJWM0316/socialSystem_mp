@@ -91,12 +91,12 @@
               data-key="mobile"
               maxlength="{{loginType === 2 ? 18 : 11}}">
             </input>
-            <i
+<!--             <i
               class="icon1 iconfont icon-close"
               wx:if="{{ mobile }}"
               bindtap="todoAction"
               data-action="clear">
-            </i>
+            </i> -->
           </view>
           
           <!-- 账号密码登录 start-->
@@ -113,7 +113,7 @@
                 maxlength="20">
               </input>
             </view>
-            <i
+<!--             <i
               class="icon1 iconfont icon-zhengyan myeyes"
               bindtap="todoAction"
               wx:if="{{password && codeType === 2}}"
@@ -124,7 +124,7 @@
               bindtap="todoAction"
               wx:if="{{password && codeType === 1}}"
               data-action="changeCodeType">
-            </i>
+            </i> -->
           </view>
           <!-- 账号密码登录 end-->
 

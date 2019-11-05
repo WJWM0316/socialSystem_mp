@@ -807,7 +807,7 @@
   color:rgba(40,40,40,1);
   line-height: 1;
   position: relative;
-  padding-bottom: 80rpx;
+  padding-bottom: 40rpx;
 }
 
 /*.data-box .number-box:after{
@@ -889,7 +889,7 @@
   transform: translateX(-50%);
 }
 .data-box .index-echart {
-  padding: 27rpx 10rpx 40rpx 20rpx;
+  padding: 57rpx 10rpx 40rpx 20rpx;
   min-height: 375rpx;
 }
 .overlay {

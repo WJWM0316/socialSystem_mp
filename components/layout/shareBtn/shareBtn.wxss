@@ -112,7 +112,6 @@
   background-image: url('https://lieduoduo-uploads-test.oss-cn-shenzhen.aliyuncs.com/front-assets/images/btn_share_pic.png');
 }
 .choseBox .btnCon.btn4 {
-  border-bottom: 0;
   background-image: url('https://lieduoduo-uploads-test.oss-cn-shenzhen.aliyuncs.com/front-assets/images/file_new_001.png');
 }
 .choseBox .btnCon.btn5 {

@@ -271,10 +271,15 @@ top-banner.center {
 	height: 0;
 }
 
-.entry-list .label-icon , .toggleIdentity .label-icon{
+.entry-list .label-icon ,
+.toggleIdentity .label-icon{
 	margin-right: 24rpx;
 	color: #CED7DC;
 	font-size: 34rpx;
+}
+
+.entry-list .icon-ganxingqu{
+	font-size: 30rpx;
 }
 
 .entry-list .text, .toggleIdentity .text {

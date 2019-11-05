@@ -190,6 +190,15 @@
 .mine .entry-list .iconfont, .toggleIdentity .iconfont {
 	margin-right: 24rpx;
 	color: #CED7DC;
+  font-size: 34rpx;
+}
+
+.mine .entry-list .icon-ganxingqu {
+  font-size: 30rpx;
+}
+
+.mine .entry-list .icon-wodeguanzhux {
+  font-size: 32rpx;
 }
 
 .mine .entry-list .text, .toggleIdentity .text {

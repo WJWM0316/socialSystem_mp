@@ -9,6 +9,15 @@ export const getLabelPositionApi = (data, hasLoading) => {
   })
 }
 
+export const getLabelPositionNewApi = (data, hasLoading) => {
+  return request({
+    method: 'get',
+    url: '/label/newPosition',
+    data,
+    hasLoading: true
+  })
+}
+
 // 技能标签
 export const getLabelProfessionalSkillsApi = (data, hasLoading) => {
   return request({

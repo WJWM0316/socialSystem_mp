@@ -264,15 +264,14 @@ Component({
           result = []
           result[0] = startNumB.indexOf(parseInt(this.data.setResult.split('~')[0]))
           if (result[0] === -1) result[0] = 0
-          for (let i = parseInt(startNumB[result[0]]) + 1000; i <= parseInt(startNumB[result[0]]) + 5000; i+=1000) {
-            if (i <= 260 * 1000) {
-              endNumB.push(i)
-            }
+          for(let i = parseInt(startNumB[result[0]]) + 1000; i <= 500000; i+=1000) {
+            endNumB.push(i)
           }
           result[1] = endNumB.indexOf(parseInt(this.data.setResult.split('~')[1]))
           if (result[1] === -1) result = 0
           list = [startNumB, endNumB]
           this.setData({list, result, mode: 'multiSelector', placeholder: this.data.placeholderTxt || '请选择期望薪资'})
+          // console.log({list, result, mode: 'multiSelector', placeholder: this.data.placeholderTxt || '请选择期望薪资'})
           break
         case 'occupation':
           getJobLabelApi({type: 'skills'}).then(res => {
@@ -419,27 +418,33 @@ Component({
             list = this.data.list
             let startNum = parseInt(list[0][e.detail.value])
             let endNum = []
-            if (startNum >= 1 * 1000 && startNum <= 10 * 1000) {
-              for (let i = startNum + 1 * 1000; i <= startNum + 5 * 1000; i+=1000) {
-                endNum.push(i)
-              }
-            } else if (startNum >= 11 * 1000 && startNum <= 30 * 1000) {
-              for (let i = startNum + 1 * 1000; i <= 2*startNum; i+=1000) {
-                endNum.push(i)
-              }
-            } else if (startNum >= 35 * 1000 && startNum <= 70 * 1000) {
-              for (let i = startNum + 1 * 1000; i <= startNum + 30 * 1000; i+=1000) {
-                endNum.push(i)
-              }
-            } else if (startNum >= 75 * 1000 && startNum <= 95 * 1000) {
-              for (let i = startNum + 1 * 1000; i <= startNum + 30 * 1000; i+=1000) {
-                endNum.push(i)
-              }
-            } else if (startNum >= 100 * 1000 && startNum <= 250 * 1000) {
-              for (let i = startNum + 1 * 1000; i <= 2*startNum; i+=1000) {
-                endNum.push(i)
-              }
+            // for (let i = startNum + 1 * 1000; i <= 500000; i+=1000) {
+            //   endNum.push(i)
+            // }
+            for(let i = startNum + 1000; i <= 500000; i+=1000) {
+              endNum.push(i)
             }
+            // if (startNum >= 1 * 1000 && startNum <= 10 * 1000) {
+            //   for (let i = startNum + 1 * 1000; i <= startNum + 5 * 1000; i+=1000) {
+            //     endNum.push(i)
+            //   }
+            // } else if (startNum >= 11 * 1000 && startNum <= 30 * 1000) {
+            //   for (let i = startNum + 1 * 1000; i <= 2*startNum; i+=1000) {
+            //     endNum.push(i)
+            //   }
+            // } else if (startNum >= 35 * 1000 && startNum <= 70 * 1000) {
+            //   for (let i = startNum + 1 * 1000; i <= startNum + 30 * 1000; i+=1000) {
+            //     endNum.push(i)
+            //   }
+            // } else if (startNum >= 75 * 1000 && startNum <= 95 * 1000) {
+            //   for (let i = startNum + 1 * 1000; i <= startNum + 30 * 1000; i+=1000) {
+            //     endNum.push(i)
+            //   }
+            // } else if (startNum >= 100 * 1000 && startNum <= 250 * 1000) {
+            //   for (let i = startNum + 1 * 1000; i <= 2*startNum; i+=1000) {
+            //     endNum.push(i)
+            //   }
+            // }
             list[1] = endNum
             this.setData({list})
           }

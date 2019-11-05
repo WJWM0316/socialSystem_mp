@@ -13,18 +13,18 @@
 				<view class="sum"><text class="{{describe.length > 5000 ? 'red' : ''}}">{{ describe.length }}</text>/5000</view>
 			</view>
 		</view>
-		<block wx:if="{{show}}">
+		<view hidden="{{!show}}">
 			<view class="example">
 				<view class="infos">
 					<image class="img-box" src="{{randomCopy.icon}}" mode="aspectFill"></image>
-					<view class="degress">{{randomCopy.name}}</view>
+					<view class="degress">{{randomCopy.title}}</view>
 				</view>
 				<view class="change" bindtap="next"><i class="icon iconfont icon-huanyihuan"></i>换一个</view>
 			</view>
 			<view class="floating-box">
-				<text bindtap="copyText">{{randomCopy.txt}}</text>
+				<text bindtap="copyText">{{randomCopy.intro}}</text>
 			</view>
-		</block>
+		</view>
 		<view class="btn-area">
 	    <view bindtap="submit" class="button-submit {{canClick ? 'button-enable' : ''}}">保存</view>
 	  </view>

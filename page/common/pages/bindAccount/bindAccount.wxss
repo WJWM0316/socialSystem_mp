@@ -1,0 +1,55 @@
+.settings {
+	background: #FAFCFF;
+}
+
+.li {
+	height:120rpx;
+	background:rgba(255,255,255,1);
+	line-height: 120rpx;
+	position: relative;
+	margin-top: 20rpx;
+}
+
+.li .key{
+	width: 200rpx;
+	float: left;
+	padding-left: 40rpx;
+	box-sizing: border-box;
+	font-size:28rpx;
+	color:rgba(52,57,68,1);
+}
+
+.li .value{
+	width: calc(100% - 200rpx);
+	float: left;
+	box-sizing: border-box;
+	padding-right: 120rpx;
+	font-size:24rpx;
+	color:rgba(188,188,188,1);
+	text-align: right;
+}
+
+.li .value.active{
+	font-weight:700;
+	color:rgba(40,40,40,1);
+}
+
+.li .icon-xiangyou{
+	position: absolute;
+	font-size: 32rpx;
+	right: 40rpx;
+	top: 50%;
+	transform: translateY(-50%);
+	color: #E8E9EB;
+}
+
+.li .red{
+	width:12rpx;
+	height:12rpx;
+	background:rgba(255,78,86,1);
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	right: 82rpx;
+	border-radius: 50%;
+}

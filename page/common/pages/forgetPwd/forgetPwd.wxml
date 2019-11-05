@@ -1,0 +1,83 @@
+<view>
+	<navbar title="{{ options.title ? options.title : '找回密码' }}" background="#FFFFFF" color="#22292C"></navbar>
+	<view class="ul">
+		<block wx:if="{{step === 1 && !options.step}}">
+			<view class="li">
+				<view class="key">手机号</view>
+				<input
+					type="text"
+					class="value"
+					bindinput="bindInput"
+					maxlength="11"
+					placeholder="请输入手机号"
+					data-key="mobile"
+					value="{{formData.mobile}}"
+					placeholder-class="defaultColor">
+				</input>
+			</view>
+			<view class="li" wx:if="{{imgUrl}}">
+				<view class="key">图形验证</view>
+				<input
+					type="text"
+					class="value limit-width"
+					bindinput="bindInput"
+					maxlength="4"
+					placeholder="请输入图片验证"
+					data-key="captchaCode"
+					value="{{formData.captchaCode}}"
+					placeholder-class="defaultColor">
+				</input>
+        <image class="codePic" src="{{imgUrl}}" bindtap="changeNewCaptcha" mode="widthFix"></image>
+			</view>
+			<view class="li clear-bottom">
+				<view class="key">验证码</view>
+				<input
+					type="text"
+					class="value limit-width"
+					bindinput="bindInput"
+					maxlength="4"
+					placeholder="请输入验证码"
+					data-key="code"
+					value="{{formData.code}}"
+					placeholder-class="defaultColor">
+				</input>
+        <view class="get-code" bindtap="sendCode" hidden="{{second < 60}}">获取验证码</view>
+        <view class="get-code" hidden="{{second === 60}}">{{second}}s</view>
+			</view>
+		</block>
+		<block wx:if="{{step === 2 || options.step == 3}}">
+			<view class="li">
+				<view class="key">新密码</view>
+				<input
+					type="text"
+					class="value"
+					maxlength="20"
+					bindinput="bindInput"
+					placeholder="请输入新密码（6-20位数字和字母组合）"
+					data-key="password"
+					value="{{formData.password}}"
+					placeholder-class="defaultColor">
+				</input>
+			</view>
+			<view class="li clear-bottom">
+				<view class="key">确认密码</view>
+				<input
+					type="text"
+					class="value"
+					maxlength="20"
+					bindinput="bindInput"
+					placeholder="请再次输入新密码"
+					data-key="repeat_password"
+					value="{{formData.repeat_password}}"
+					placeholder-class="defaultColor">
+				</input>
+			</view>
+		</block>
+	</view>
+	<view class="footer">
+    <view bindtap="next" class="button-submit" wx:if="{{step === 1 && !options.step}}">下一步</view>
+    <view bindtap="resetPsw" class="button-submit" wx:if="{{step === 2 && !options.step}}">确认</view>
+    <view bindtap="setPassword" class="button-submit" wx:if="{{options.step == 3 && options.type === 'set'}}">保存</view>
+    <view bindtap="modifyPassword" class="button-submit" wx:if="{{options.step == 3 && options.type === 'modify'}}">保存</view>
+  </view>
+</view>

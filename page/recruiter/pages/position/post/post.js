@@ -46,6 +46,7 @@ Page({
     detail: {}
   },
   onLoad(options) {
+    wx.setStorageSync('choseType', 'RECRUITER')
     this.setData({pageTitle: options.positionId ? '编辑职位' : '发布职位', query: options})
   },
   onShow() {
@@ -214,8 +215,8 @@ Page({
    */
   getCategory() {
     let url = this.data.query.positionId
-      ? `${COMMON}category/category?positionId=${this.data.query.positionId}`
-      : `${COMMON}category/category`
+      ? `${COMMON}category/category?positionId=${this.data.query.positionId}&_from=p_public`
+      : `${COMMON}category/category?_from=p_public`
       
     wx.navigateTo({ url })
     wx.setStorageSync('createPosition', this.data.formData)

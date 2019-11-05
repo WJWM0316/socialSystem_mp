@@ -805,12 +805,9 @@
   text-align: center;
   font-size:24rpx;
   color:rgba(40,40,40,1);
-  padding: 32rpx 40rpx 0 50rpx;
-  height: 90rpx;
-  line-height: 90rpx;
+  line-height: 1;
   position: relative;
-  background: #FCFBFD;
-  /*background: red;*/
+  padding-bottom: 80rpx;
 }
 
 /*.data-box .number-box:after{
@@ -892,7 +889,7 @@
   transform: translateX(-50%);
 }
 .data-box .index-echart {
-  padding: 27rpx 10rpx 42rpx 20rpx;
+  padding: 27rpx 10rpx 40rpx 20rpx;
   min-height: 375rpx;
 }
 .overlay {

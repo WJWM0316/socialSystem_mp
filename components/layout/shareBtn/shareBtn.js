@@ -22,6 +22,10 @@ Component({
     },
     params: {
       type: String
+    },
+    isOwner: {
+      type: Boolean,
+      value: false
     }
   },
 
@@ -31,14 +35,23 @@ Component({
   data: {
     showChoose: false,
     navHeight: app.globalData.navHeight,
-    animationData: {}
+    animationData: {},
+    userInfo: app.globalData.userInfo
   },
   attached () {
+    app.login()
+    setTimeout(() => {
+      this.setData({userInfo: app.globalData.userInfo})
+    }, 1000)
   },
   /**
    * 组件的方法列表
    */
   methods: {
+    onGotUserInfo(e) {
+      console.log(e)
+      app.onGotUserInfo(e, true)
+    },
     oper() {
       this.setData({showChoose: true}, () => {
         let timer = setTimeout(() => {
@@ -98,6 +111,19 @@ Component({
           else {
             wx.navigateTo({url: `${RECRUITER}company/postProduct/postProduct`})
           }
+          break
+        case 'companyDesc':
+          if(e.currentTarget.dataset.type === 'useCompanyDesc') {
+            if(this.data.posterData.intro) {
+              wx.navigateTo({url: `${RECRUITER}company/introducingEdit/introducingEdit?companyId=${app.globalData.recruiterDetails.companyInfo.id}&type=org&topId=${this.data.posterData.id}`})
+            } else {
+              app.wxToast({title: '公司尚未完善公司介绍信息'})
+            }
+          } else {
+            wx.navigateTo({url: `${RECRUITER}company/introducingEdit/introducingEdit?companyId=${this.data.params}&type=org`})
+          }
+          break
+        default:
           break
       }
       wx.setStorageSync('posterData', this.data.posterData)

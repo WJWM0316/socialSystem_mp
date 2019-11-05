@@ -6,6 +6,8 @@ import {
   setInterviewCommentApi,
   interviewRetractApi
 } from "../../../../api/pages/interview.js"
+import { getRecruiterMyInfo2Api } from '../../../../api/pages/recruiter.js'
+
 import {COMMON,APPLICANT,RECRUITER} from "../../../../config.js"
 import {mobileReg} from "../../../../utils/fieldRegular.js"
 import {shareInterviewr} from '../../../../utils/shareWord.js'
@@ -244,11 +246,12 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad(options) {
+    console.log(options, 'kkkk')
     let identity = app.identification(options)
     this.setData({options, identity})
     positionCard = ''
-    if (options.adviser) {
+    if(options.adviser) {
       app.wxConfirm({
         title: '邀约已发送',
         content: '已邀约的简历，可以在【面试】-【我的邀请】统一处理',
@@ -268,9 +271,61 @@ Page({
       let params = {interviewId: this.data.options.id, ...app.getSource()}
       // if(notClearRedDot) params.isReload = 1
       return interviewDetailApi(params).then(res => {
+        let toast = (fn) => {
+          let identifyChange = () => {
+            app.wxConfirm({
+              title: '提示',
+              content: '检测到你是招聘官，是否切换招聘官',
+              cancelText: '取消',
+              confirmText: '确认切换',
+              confirmBack: () => {
+                wx.setStorageSync('choseType', 'RECRUITER')
+                this.setData({identity: 'RECRUITER'})
+                app.getAllInfo()
+                fn && fn()
+              },
+              cancelBack: () => {
+                wx.reLaunch({url: `${COMMON}homepage/homepage`})
+              }
+            })
+          }
+          let hunterForRecruiter = () => {
+            app.wxConfirm({
+              title: '提示',
+              content: '成为当前机构招聘官，即可查看面试详情，是否申请成为机构招聘官？',
+              cancelText: '否',
+              confirmText: '是',
+              confirmBack: () => {
+                wx.setStorageSync('choseType', 'RECRUITER')
+                this.setData({identity: 'RECRUITER'})
+                app.getAllInfo()
+                fn && fn()
+              },
+              cancelBack: () => {
+                wx.reLaunch({url: `${COMMON}homepage/homepage`})
+              }
+            })
+          }
+
+          if(app.globalData.isRecruiter) {
+            getRecruiterMyInfo2Api().catch(msg => {
+              // 820 不是该公司下的B身份
+              if (msg.code === 820) {
+                hunterForRecruiter()
+              }
+            }).then(() => {
+              identifyChange()
+            })
+          } else {
+            hunterForRecruiter()
+          }
+        }
         let addressData = wx.getStorageSync('createPosition')
         let positionData = wx.getStorageSync('interviewData')
         let info = res.data
+        if(wx.getStorageSync('choseType') === 'APPLICANT' && [41, 58].includes(info.status) && this.data.options.stips) {
+          toast(this.pageInit)
+        }
         info.jobhunterInfo = Object.assign(info.jobhunterInfo, {lastInterviewStatus: info.status})
         info.recruiterInfo = Object.assign(info.recruiterInfo, {lastInterviewStatus: info.status})
         // 转发面试安排 所有人看的的面试安排都是一样
@@ -287,8 +342,8 @@ Page({
             info.positionId = positionData.positionId
           }
         }
-        console.log(info)
         this.setData({info})
+        console.log(info, 'kkkk')
       })
     } else {
       let recruiter_chat_infos = wx.getStorageSync('recruiter_chat_infos')
@@ -337,14 +392,6 @@ Page({
       }
     }
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
   /**
    * 生命周期函数--监听页面卸载
    */
@@ -365,14 +412,6 @@ Page({
       wx.stopPullDownRefresh()
     })
   },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
   getCreatedImg(e) {
     positionCard = e.detail
   },
@@ -380,7 +419,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function (options) {
+  onShareAppMessage(options) {
     let that = this
     let btnImageUrl = `${this.data.cdnImagePath}shareB.png`
     if(positionCard){
@@ -390,7 +429,7 @@ Page({
       options,
       btnTitle: `【${that.data.info.recruiterInfo.realname}】邀请你面试一个优秀候选人，快去看看吧~`,
       btnImageUrl: btnImageUrl,
-      btnPath: `${COMMON}arrangement/arrangement?id=${this.options.id}`
+      btnPath: `${COMMON}arrangement/arrangement?id=${this.options.id}&stips=1`
     })
   },
   todoAction(e) {

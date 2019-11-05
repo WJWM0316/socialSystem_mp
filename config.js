@@ -10,7 +10,8 @@ export let APPLICANTHOST = '',
 					 RECRUITERHOST = '',
 					 PUBAPIHOST = '',
 					 WEBVIEW = '',
-					 NODEHOST = ''
+					 NODEHOST = '',
+					 RECRUITERHOST2 = ''
 if (environment === 0) {
 	// 测试服接口
 	APPLICANTHOST = 'https://qiuzhi-api.dd.lieduoduo.ziwork.com'
@@ -18,6 +19,8 @@ if (environment === 0) {
 	PUBAPIHOST = 'https://pub-api.dd.lieduoduo.ziwork.com'
 	NODEHOST = 'https://node.dd.lieduoduo.ziwork.com/frontEnd'  // 'http://localhost:3001/frontEnd' // 
 	WEBVIEW = `https://m.duoduohr.ziwork.com/`
+	RECRUITERHOST2 = 'https://zhaopin-api.dd.lieduoduo.ziwork.com'
+	// NODEHOST = 'http://localhost:3001/frontEnd'
 } else {
 	// 正式服环境
 	APPLICANTHOST = 'https://qiuzhi-api.dd.lieduoduo.com'
@@ -25,6 +28,7 @@ if (environment === 0) {
 	NODEHOST =  'https://node.dd.lieduoduo.com/frontEnd'
 	PUBAPIHOST = 'https://pub-api.dd.lieduoduo.com'
 	WEBVIEW = `https://m.duoduohr.cn/`
+	RECRUITERHOST2 = 'https://zhaopin-api.dd.lieduoduo.com'
 }
 
 // 招聘端page

@@ -49,7 +49,7 @@ Page({
       }
       let data = {
         mobile: mobileNumber,
-        type: 'change'
+        type: 'modify'
       }
       sendCodeApi(data).then(res => {
         this.isBlured = false

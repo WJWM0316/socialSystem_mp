@@ -42,12 +42,12 @@ Page({
       latitude: 0,
       markers: []
     },
-
     hasReFresh: false,
     onBottomStatus: 0,
     swiperIndex: 0,
     choseType: '',
-    showNav: false
+    showNav: false,
+    isOwner: false
   },
   onLoad(options) {
     if (options.scene) options = app.getSceneParams(options.scene)
@@ -111,13 +111,14 @@ Page({
         if (wx.getStorageSync('choseType') !== 'RECRUITER') this.getCompanyOrglist(res.data.topId)
         callBackNum++
         let requireOAuth = res.meta && res.meta.requireOAuth ? res.meta.requireOAuth : false
-        const companyInfos = res.data
+        let identity = wx.getStorageSync('choseType')
+        let companyInfos = res.data
         app.globalData.companyInfo = companyInfos
-        const longitude = companyInfos.address.length ? companyInfos.address[0].lng : 0
-        const latitude = companyInfos.address.length ? companyInfos.address[0].lat : 0
-        const address = companyInfos.address.length ? companyInfos.address[0].address : ''
-        const doorplate = companyInfos.address.length ? companyInfos.address[0].doorplate : ''
-        const map = this.data.map
+        let longitude = companyInfos.address.length ? companyInfos.address[0].lng : 0
+        let latitude = companyInfos.address.length ? companyInfos.address[0].lat : 0
+        let address = companyInfos.address.length ? companyInfos.address[0].address : ''
+        let doorplate = companyInfos.address.length ? companyInfos.address[0].doorplate : ''
+        let map = this.data.map
         map.longitude = longitude
         map.latitude = latitude
         map.address = address
@@ -135,7 +136,7 @@ Page({
             anchorY: '-60rpx'
           }
         })
-        this.setData({companyInfos, map, requireOAuth, callBackNum}, () => {
+        this.setData({companyInfos, map, requireOAuth, callBackNum, isOwner: companyInfos.isOwner && identity === 'RECRUITER' ? true : false}, () => {
           resolve(res)
           this.getDomNodePosition()
           if (this.data.options && this.data.options.pick) this.selectComponent('#shareBtn').oper()
@@ -170,7 +171,7 @@ Page({
   },
 
   routeJump(e) {
-    const route = e.currentTarget.dataset.route,
+    let route = e.currentTarget.dataset.route,
           item = e.currentTarget.dataset
     switch(route) {
       case 'map':
@@ -199,7 +200,7 @@ Page({
   },
 
   viewMap(e) {
-    const params = e.currentTarget.dataset
+    let params = e.currentTarget.dataset
     wx.openLocation({
       latitude: Number(params.latitude),
       longitude: Number(params.longitude),

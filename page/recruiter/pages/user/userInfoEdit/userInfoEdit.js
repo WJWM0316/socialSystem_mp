@@ -1,6 +1,8 @@
 import {saveRecruiterInfoApi} from '../../../../../api/pages/recruiter.js'
 import {removeFileApi} from '../../../../../api/pages/common.js'
 import {realNameReg,positionReg,wechatReg,mobileReg} from '../../../../../utils/fieldRegular.js'
+import {COMMON} from "../../../../../config.js"
+
 let userInfo = null
 let app = getApp()
 Page({
@@ -28,9 +30,12 @@ Page({
       userName: userInfo.name,
       gender: userInfo.gender,
       position: userInfo.position,
+      email: userInfo.email,
       wechat: userInfo.wechat,
       signature: userInfo.signature,
-      picList: userInfo.avatars
+      picList: userInfo.avatars,
+      positionTypeId: userInfo.positionTypeId,
+      positionType: userInfo.positionType
     })
   },
   jumpLabel() {
@@ -56,6 +61,9 @@ Page({
         break
       case 'position':
         type = 'position'
+        break
+      case 'email':
+        type = 'email'
         break
       case 'wechat':
         type = 'wechat'
@@ -110,8 +118,14 @@ Page({
       name: info.userName,
       position: info.position,
       wechat: info.wechat,
-      signature: info.signature, 
+      signature: info.signature,
       ...app.getSource()
+    }
+    if(info.positionTypeId) {
+      data = Object.assign(data, {positionTypeId: info.positionTypeId})
+    }
+    if(info.email) {
+      data = Object.assign(data, {email: info.email})
     }
     saveRecruiterInfoApi(data).then(res => {
       app.wxToast({
@@ -123,8 +137,11 @@ Page({
           app.globalData.recruiterDetails.gender = info.gender
           app.globalData.recruiterDetails.name = info.userName
           app.globalData.recruiterDetails.position = info.position
+          app.globalData.recruiterDetails.email = info.email
           app.globalData.recruiterDetails.wechat = info.wechat
           app.globalData.recruiterDetails.signature = info.signature
+          app.globalData.recruiterDetails.positionTypeId = info.positionTypeId
+          app.globalData.recruiterDetails.positionType = info.positionType
           wx.navigateBack({
             delta: 1
           })
@@ -138,11 +155,25 @@ Page({
   onReady: function () {
 
   },
-
+  routeJump (e) {
+    switch (e.target.dataset.type) {
+      case 'positionType':
+        wx.navigateTo({url: `${COMMON}category/category`})
+        break
+    }
+  },
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    let createPosition = wx.getStorageSync('createPosition'),
+        setData = {}
+    if (createPosition) {
+      setData.positionTypeId = createPosition.type
+      setData.positionType = createPosition.typeName
+      this.setData(setData)
+      wx.removeStorageSync('createPosition')
+    }
     let avatar = wx.getStorageSync('avatar')
     if (avatar) {
       let picList = this.data.picList

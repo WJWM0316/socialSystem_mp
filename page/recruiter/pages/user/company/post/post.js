@@ -8,7 +8,7 @@ import {
   getLabelFieldApi
 } from '../../../../../../api/pages/common.js'
 
-import {realNameReg, emailReg, positionReg} from '../../../../../../utils/fieldRegular.js'
+import {realNameReg, emailReg, positionReg, mobileReg} from '../../../../../../utils/fieldRegular.js'
 
 import {RECRUITER} from '../../../../../../config.js'
 
@@ -25,7 +25,8 @@ Page({
       company_shortname: '',
       logo: {},
       intro: '',
-      address: ''
+      address: '',
+      mobile: ''
     },
     companyLabelField: [],
     options: {},
@@ -63,12 +64,14 @@ Page({
       if(addressInfos) {
         formData.address = addressInfos.address + addressInfos.doorplate
       }
-      this.setData({formData})
+      this.setData({formData}, () => {
+        wx.removeStorageSync('createdCompany')
+        wx.removeStorageSync('addAddress')
+      })
     })
   },
   onHide() {
-    let storage = wx.getStorageSync('createdCompany') || {}
-    wx.setStorageSync('createdCompany', Object.assign(storage, this.data.formData))
+    wx.setStorageSync('createdCompany', this.data.formData)
   },
   /**
    * @Author   小书包
@@ -212,18 +215,15 @@ Page({
    */
   routeJump(e) {
     let type = e.currentTarget.dataset.type
-    let storage = wx.getStorageSync('createdCompany') || {}
-    wx.setStorageSync('createdCompany', Object.assign(storage, this.data.formData))
+    wx.setStorageSync('createdCompany', this.data.formData)
     wx.navigateTo({url: `${RECRUITER}company/introducingEdit/introducingEdit?type=${type}`})
   },
   routeAddress() {
-    let storage = wx.getStorageSync('createdCompany') || {}
-    wx.setStorageSync('createdCompany', Object.assign(storage, this.data.formData))
+    wx.setStorageSync('createdCompany', this.data.formData)
     wx.navigateTo({url: `${RECRUITER}position/address/address?type=addOrganization`})
   },
   savaBeforeUpload() {
-    let storage = wx.getStorageSync('createdCompany') || {}
-    wx.setStorageSync('createdCompany', Object.assign(storage, this.data.formData))
+    wx.setStorageSync('createdCompany', this.data.formData)
   },
   addOrgAddress() {
     let addressInfos = wx.getStorageSync('addAddress')
@@ -238,6 +238,11 @@ Page({
     }).then(() => {
       wx.removeStorageSync('addAddress')
     })
+  },
+  changeMobile(e) {
+    let formData = this.data.formData
+    formData.mobile = e.detail.value
+    this.setData({formData})
   },
   submit(formData) {
     let options = this.data.options
@@ -263,6 +268,13 @@ Page({
         address: formData.address,
         company_name: formData.organization_name
       })
+      if(formData.mobile) {
+        params = Object.assign(params, {mobile: formData.mobile})
+        if(!mobileReg.test(params.mobile)) {
+          app.wxToast({title: '请输入手机号码'})
+          return
+        }
+      }
       this.addOrgAddress()
     }
     perfectCompanyApi(params).then(res => {

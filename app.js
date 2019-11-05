@@ -1,5 +1,5 @@
 //app.js
-import {loginApi, checkSessionKeyApi, bindPhoneApi, uploginApi, authLoginApi} from 'api/pages/auth.js'
+import {loginApi, checkSessionKeyApi, bindPhoneApi, uploginApi, authLoginApi, pswLoginApi} from 'api/pages/auth.js'
 import {formIdApi, shareStatistics, readyStatistics, getVersionListApi} from 'api/pages/common.js'
 import{getCompanyOrglistApi} from 'api/pages/company.js'
 import {getPositionQrcodeApi, getRecruiterQrcodeApi, getResumerCodeApi, getCompanyQrcodeApi} from 'api/pages/qrcode.js'
@@ -16,7 +16,7 @@ let that = null
 let formIdList = [],
     sendNum = 0 // formId 发送次数
 App({
-  onLaunch: function (e) {
+  onLaunch(e) {
     let extConfig = wx.getExtConfigSync? wx.getExtConfigSync(): {}
     console.log(extConfig, '提测清单')
     this.globalData.appId = wx.getAccountInfoSync().miniProgram.appId
@@ -48,7 +48,7 @@ App({
     this.getRoleInit = null
     this.login()
   },
-  onHide: function (e) {
+  onHide(e) {
     // 切换后台 发送全部formId
     if (formIdList.length > 0) {
       formIdApi({form_id: formIdList}).then(res => {
@@ -57,7 +57,7 @@ App({
       })
     }
   },
-  onError: function (e) {
+  onError(e) {
     console.log('onError检测', e)
   },
   globalData: {
@@ -120,7 +120,8 @@ App({
               that.getRoleInfo()
               console.log('用户已认证')
             } else {
-              if (res.data.nickname) that.globalData.userInfo = res.data.userInfo
+              // if (res.data.nickname) that.globalData.userInfo = res.data
+              that.globalData.userInfo = res.data
               that.globalData.hasLogin = 0
               console.log('用户未绑定手机号', 'sessionToken', res.data.authToken)
               wx.setStorageSync('sessionToken', res.data.authToken)
@@ -269,6 +270,7 @@ App({
               wx.setStorageSync('token', res.data.token)
               wx.setStorageSync('sessionToken', res.data.sessionToken)
               that.globalData.hasLogin = 1
+              that.globalData.userInfo['isNew'] = 1
               if (res.data.userWechatInfo && res.data.userWechatInfo.nickname) that.globalData.userInfo = res.data.userWechatInfo
               that.getRoleInfo()
               console.log('用户已认证')
@@ -278,6 +280,7 @@ App({
               if (res.data.userInfo && res.data.userInfo.nickname) that.globalData.userInfo = res.data.userInfo
               wx.setStorageSync('sessionToken', res.data.sessionToken)
             }
+
             resolve(res)
             if (!operType) {
               wx.reLaunch({
@@ -313,9 +316,17 @@ App({
       return new Promise((resolve, reject) => {
         quickLoginApi(data).then(res => {
           if (res.data.token) {
+            let userInfo = res.data
             wx.setStorageSync('token', res.data.token)
             this.globalData.hasLogin = 1
-            this.globalData.userInfo = res.data
+            if(!userInfo.isCancelSetPassword) {
+              userInfo = Object.assign(userInfo, {
+                showAccountSecurityTips: wx.getStorageSync('notShowAccountSecurityTips') ? 0 :  1,
+                showMineRedDot: 1,
+                showMineTabRedDot: 1
+              })
+            }
+            this.globalData.userInfo = userInfo
             let pageUrl = this.getCurrentPagePath(0)
             this.getRoleInfo().then(res0 => {
               this.wxToast({
@@ -371,10 +382,82 @@ App({
     let _this = this
     return new Promise((resolve, reject) => {
       bindPhoneApi(data).then(res => {
+        let userInfo = res.data
         if (res.data.token) wx.setStorageSync('token', res.data.token)
         if (res.data.sessionToken) wx.setStorageSync('sessionToken', res.data.sessionToken)
         this.globalData.hasLogin = 1
-        this.globalData.userInfo = res.data
+        if(!userInfo.isCancelSetPassword) {
+          userInfo = Object.assign(userInfo, {
+            showAccountSecurityTips: wx.getStorageSync('notShowAccountSecurityTips') ? 0 :  1,
+            showMineRedDot: 1,
+            showMineTabRedDot: 1
+          })
+        }
+        this.globalData.userInfo = userInfo
+        this.getRoleInfo().then((res0) => {
+          this.wxToast({
+            title: '登录成功',
+            icon: 'success',
+            callback() {
+              if (!res0.data.hasCard && operType === 'cIndex' && wx.getStorageSync('choseType') !== 'RECRUITER') {
+                wx.reLaunch({
+                  url: `${APPLICANT}createUser/createUser?micro=true`
+                })
+              } else {
+                if (operType === 'cIndex') {
+                  wx.reLaunch({
+                    url: `${APPLICANT}index/index`
+                  })
+                } else {
+                  if (getCurrentPages().length > 1) {
+                    if(wx.getStorageSync('choseType') !== 'RECRUITER') {
+                      wx.navigateBack({
+                        delta: 1
+                      })
+                    } else {
+                      _this.getCompanyIdentity()
+                    }
+                  } else {
+                    if (wx.getStorageSync('choseType') !== 'RECRUITER') {
+                      wx.reLaunch({
+                        url: `${APPLICANT}index/index`
+                      })
+                    } else {
+                      _this.getCompanyIdentity()
+                    }
+                  }
+                }
+              }
+            }
+          })
+        })
+        resolve(res)
+      }).catch(e => {
+        reject(e)
+        this.globalData.hasLogin = 0
+        if (e.code === 401) {
+          this.checkLogin()
+        }
+      })
+    })
+  },
+  // 账号登陆
+  pswLogin(data, operType) {
+    let _this = this
+    return new Promise((resolve, reject) => {
+      pswLoginApi(data).then(res => {
+        let userInfo = res.data
+        if (res.data.token) wx.setStorageSync('token', res.data.token)
+        if (res.data.sessionToken) wx.setStorageSync('sessionToken', res.data.sessionToken)
+        this.globalData.hasLogin = 1
+        if(!userInfo.isCancelSetPassword) {
+          userInfo = Object.assign(userInfo, {
+            showAccountSecurityTips: wx.getStorageSync('notShowAccountSecurityTips') ? 0 :  1,
+            showMineRedDot: 1,
+            showMineTabRedDot: 1
+          })
+        }
+        this.globalData.userInfo = userInfo
         this.getRoleInfo().then((res0) => {
           this.wxToast({
             title: '登录成功',

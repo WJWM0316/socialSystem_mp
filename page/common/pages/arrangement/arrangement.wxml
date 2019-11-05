@@ -1,15 +1,16 @@
 <!-- 加载过滤器 -->
 <wxs src="../../../../utils/filters.wxs" module="filters" />
 <view class="arrangement" wx:if="{{info.interviewId}}">
-  <navbar title="面试详情" background="#FFFFFF" color="#22292C"></navbar>
+  <navbar title="面试详情" background="#FFFFFF" color="#22292C" showHome="{{true}}"></navbar>
   <view hidden="{{!hasReFresh}}">
     <refreshStatus></refreshStatus>
   </view>
   <view class="tip" wx:if="{{identity === 'RECRUITER' && info.status === 32}}">备选时间不合适，请联系候选人重新确定时间</view>
   <view class="headInfo">
     <view class="roleDetail" wx:if="{{info.interviewId}}">
-      <roleInfoCard wx:if="{{identity === 'RECRUITER'}}" cardData="{{info.jobhunterInfo}}" roleType="applicant" glass="{{info.glass}}"></roleInfoCard>
-      <roleInfoCard wx:if="{{identity === 'APPLICANT'}}" cardData="{{info.recruiterInfo}}" roleType="recruiter"></roleInfoCard>
+      <roleInfoCard cardData="{{info.jobhunterInfo}}" roleType="applicant" glass="{{info.glass}}"></roleInfoCard>
+      <!-- <roleInfoCard wx:if="{{identity === 'RECRUITER'}}" cardData="{{info.jobhunterInfo}}" roleType="applicant" glass="{{info.glass}}"></roleInfoCard> -->
+      <!-- <roleInfoCard wx:if="{{identity === 'APPLICANT'}}" cardData="{{info.recruiterInfo}}" roleType="recruiter"></roleInfoCard> -->
     </view>
   </view>
   <block>

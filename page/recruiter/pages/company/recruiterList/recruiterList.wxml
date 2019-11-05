@@ -19,7 +19,13 @@
 			    <image src="{{cdnImagePath}}sign1.png" mode="aspectFill" class="vip" wx:if="{{item.identityAuth}}"></image>
 		    </view>
 		    <view class="recruiterMsg">
-		      <view class="name">{{item.name}}</view>
+		    	<view class="row">
+		    		<view class="name">{{item.name}}</view>
+		    		<view class="label" wx:if="{{item.isCompanyAdmin === 1}}">
+				    	<block wx:if="{{item.isCompanyTopAdmin && item.isCompanyAdmin}}">公司管理员</block>
+				    	<block wx:if="{{!item.isCompanyTopAdmin && item.isCompanyAdmin}}">机构管理员</block>
+				    </view>
+		    	</view>
 		      <view class="detail">{{item.position}}</view>
 		    </view>
 		  </view>

@@ -98,4 +98,5 @@
 		</block>
 		<view class="button-placehoder" data-route="address-post" bindtap="routeJump" wx:else>添加公司地址</view>
 	</view>
+	<shareBtn posterType="companyDesc" id="shareBtn" shareBtn="{{false}}" posterData="{{posterData}}" params="{{companyInfos.id}}"></shareBtn>
 </view>

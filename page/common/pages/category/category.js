@@ -1,12 +1,13 @@
 import {
   getLabelPositionApi,
   getLabelLIstsApi,
-  getHotLabelListsApi
+  getHotLabelListsApi,
+  getLabelPositionNewApi
 } from '../../../../api/pages/label.js'
 
 import {RECRUITER} from '../../../../config.js'
 
-const app = getApp()
+let app = getApp()
 
 Page({
   data: {
@@ -24,32 +25,38 @@ Page({
     this.getLists()
   },
   getLists() {
-    const options = this.data.query
-    if (options.hot) {
-      getHotLabelListsApi().then(res => {
-        let hotArea = res.data
-        let positionType = wx.getStorageSync('positionType')
-        if (positionType) {
-          hotArea.forEach(field => {
-            if (field.labelId === positionType) {
-              field.active = true
-            }
-          })
-        }
-        this.setData({hotArea}, () => {
-          wx.removeStorageSync('positionType')
-        })
+    let params = {}
+    let options = this.data.query
+    let funcApi = Reflect.has(options, '_from') ? getLabelPositionNewApi : getLabelPositionApi
+    if(Reflect.has(options, '_from') && wx.getStorageSync('choseType') === 'RECRUITER') {
+      params = Object.assign(params, {
+        company_id: app.globalData.recruiterDetails.companyTopId
       })
     }
-    getLabelPositionApi()
-      .then(res => {
-        const positionTypeList = res.data
+    // if (options.hot) {
+    //   getHotLabelListsApi().then(res => {
+    //     let hotArea = res.data
+    //     let positionType = wx.getStorageSync('positionType')
+    //     if (positionType) {
+    //       hotArea.forEach(field => {
+    //         if (field.labelId === positionType) {
+    //           field.active = true
+    //         }
+    //       })
+    //     }
+    //     this.setData({hotArea}, () => {
+    //       wx.removeStorageSync('positionType')
+    //     })
+    //   })
+    // }
+    funcApi(params).then(res => {
+        let positionTypeList = res.data
         this.setData({positionTypeList: res.data})
       })
   },
   onClick(e) {
-    const params = e.currentTarget.dataset
-    const storage = wx.getStorageSync('createPosition') || {}
+    let params = e.currentTarget.dataset
+    let storage = wx.getStorageSync('createPosition') || {}
     storage.type = params.labelId
     storage.typeName = params.name
     if(params.topid !== storage.parentType) storage.skills = []
@@ -65,8 +72,8 @@ Page({
    */
   onClick1(e) {
     // 只有一级标签
-    const params = e.currentTarget.dataset
-    const positionTypeList = this.data.positionTypeList
+    let params = e.currentTarget.dataset
+    let positionTypeList = this.data.positionTypeList
     if (!positionTypeList[params.index] || !positionTypeList[params.index].children) return
     positionTypeList.map((field, index) => field.active = index === params.index ? true : false)
     positionTypeList[params.index].children.map((field, index) => field.active = index === this.data.index1 ? true : false)
@@ -80,8 +87,8 @@ Page({
    * @return   {[type]}     [description]
    */
   onClick2(e) {
-    const params = e.currentTarget.dataset
-    const positionTypeList = this.data.positionTypeList
+    let params = e.currentTarget.dataset
+    let positionTypeList = this.data.positionTypeList
     if (!positionTypeList[params.index].children) return
     positionTypeList[this.data.index1].children.map((field, index) => field.active = index === params.index ? true : false)
     this.setData({index2: params.index, positionTypeList, showMask: true})
@@ -93,10 +100,10 @@ Page({
    * @return   {[type]}     [description]
    */
   onClick3(e) {
-    const params = e.currentTarget.dataset
-    const result = this.data.positionTypeList[this.data.index1].children[this.data.index2].children[params.index]
+    let params = e.currentTarget.dataset
+    let result = this.data.positionTypeList[this.data.index1].children[this.data.index2].children[params.index]
     this.setData({showMask: false})
-    const storage = wx.getStorageSync('createPosition') || {}
+    let storage = wx.getStorageSync('createPosition') || {}
     storage.type = result.labelId
     storage.typeName = result.name
     if(this.data.positionTypeList[this.data.index1].labelId !== storage.parentType) storage.skills = []
@@ -105,8 +112,8 @@ Page({
     wx.navigateBack({delta: 1})
   },
   tapHot (e) {
-    const params = e.currentTarget.dataset
-    const storage = {}
+    let params = e.currentTarget.dataset
+    let storage = {}
     storage.type = params.item.labelId
     storage.typeName = params.item.name
     wx.setStorageSync('createPosition', storage)
@@ -119,7 +126,7 @@ Page({
    * @return   {[type]}     [description]
    */
   bindInput(e) {
-    const name = e.detail.value
+    let name = e.detail.value
     this.debounce(this.getLabelLIsts, null, 500, name)
   },
   /**
@@ -144,16 +151,15 @@ Page({
       this.setData({searing: false}, () => this.getLists())
       return;
     }
-    getLabelLIstsApi({name})
-      .then(res => {
-        const positionTypeList = res.data
-        const regExp = new RegExp(name, 'g')
-        positionTypeList.map(field => {
-          field.html = field.name.replace(regExp, `<span style="color: #652791;">${name}</span>`)
-          field.html = `<div>${field.html}</div>`
-        })
-        this.setData({positionTypeList, searing: true})
+    getLabelLIstsApi({name}).then(res => {
+      let positionTypeList = res.data
+      let regExp = new RegExp(name, 'g')
+      positionTypeList.map(field => {
+        field.html = field.name.replace(regExp, `<span style="color: #652791;">${name}</span>`)
+        field.html = `<div>${field.html}</div>`
       })
+      this.setData({positionTypeList, searing: true})
+    })
   },
   closeMask(e) {
     this.setData({showMask: false, index1: 0, index2: 0})

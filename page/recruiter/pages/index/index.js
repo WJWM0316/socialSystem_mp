@@ -1,5 +1,6 @@
 import {
-  getIndexShowCountApi
+  getIndexShowCountApi,
+  getRecruiterMyInfo2Api
 } from '../../../../api/pages/recruiter.js'
 
 import {
@@ -27,6 +28,26 @@ let app = getApp()
 let fixedDomPosition = 0,
     positionCard = null,
     recruiterCard = null
+function showTips() {
+  if(app.globalData.userInfo.showAccountSecurityTips) { //0显示 1不显示
+      app.wxConfirm({
+        title: '提示',
+        content: '您的账号尚未设置密码，为了账户安全，请先创建登录密码。',
+        confirmText: '设置密码',
+        showCancel: true,
+        cancelText: '取消',
+        cancelBack: () => {
+          app.globalData.userInfo.showAccountSecurityTips = 0
+          wx.setStorageSync('notShowAccountSecurityTips', 1)
+        },
+        confirmBack: () => {
+          app.globalData.userInfo.showAccountSecurityTips = 0
+          wx.setStorageSync('notShowAccountSecurityTips', 1)
+          wx.navigateTo({url: `${COMMON}forgetPwd/forgetPwd?step=3&title=设置密码&type=set`})
+        }
+      })
+    }
+}
 
 Page({
   data: {
@@ -87,51 +108,70 @@ Page({
   onLoad() {
     let choseType = wx.getStorageSync('choseType') || ''
     this.setData({choseType})
-    let that = this
-    if (choseType === 'APPLICANT') {
-      let that = this
-      app.wxConfirm({
-        title: '提示',
-        content: '检测到你是求职者，是否切换求职者',
-        confirmBack() {
-          wx.reLaunch({url: `${COMMON}homepage/homepage`})
-        },
-        cancelBack() {
-          wx.setStorageSync('choseType', 'RECRUITER')
-          app.getAllInfo().then(res => that.init())
-        }
-      })
-    }
   },
   onShow() {
+    let toast = (fn) => {
+      if(app.globalData.isRecruiter) {
+        getRecruiterMyInfo2Api().catch(msg => {
+          // 820 不是该公司下的B身份
+          if (msg.code === 820) {
+            wx.setStorageSync('choseType', 'APPLICANT')
+            wx.reLaunch({url: `${COMMON}homepage/homepage`})
+          }
+        }).then(() => {
+          let that = this
+          fn()
+          app.wxConfirm({
+            title: '提示',
+            content: '检测到你是求职者，是否切换求职者',
+            confirmBack() {
+              wx.reLaunch({url: `${COMMON}homepage/homepage`})
+            },
+            cancelBack() {
+              wx.setStorageSync('choseType', 'RECRUITER')
+              app.getAllInfo().then(res => fn())
+            }
+          })
+        })
+      } else {
+        wx.setStorageSync('choseType', 'APPLICANT')
+        wx.reLaunch({url: `${COMMON}homepage/homepage`})
+      }
+    }
+    let todo = (fn) => {
+      if(wx.getStorageSync('choseType') === 'APPLICANT') {
+        toast(fn)
+      } else {
+        fn()
+      }
+    }
     this.setData({pageShow: true})
     if(app.loginInit) {
       if(!app.globalData.hasLogin) {
         wx.navigateTo({url: `${COMMON}bindPhone/bindPhone`})
         return
       }
-      this.init()
+      todo(this.init)
     } else {
       app.loginInit = () => {
         if(!app.globalData.hasLogin) {
           wx.navigateTo({url: `${COMMON}bindPhone/bindPhone`})
           return
         }
-        this.init()
+        todo(this.init)
       }
     }
   },
-  init () {
+  init() {
     if (wx.getStorageSync('choseType') === 'APPLICANT') return
     let callback = () => {
       // 处理海报生成问题
       this.setData({userInfo: {}})
       app.getAllInfo().then(res => {
-        let userInfo = res
         let companyInfos = res.companyInfo
         let isCompanyTopAdmin = res.isCompanyTopAdmin
         this.getMixdata()
-        this.setData({userInfo, companyInfos, isCompanyTopAdmin})
+        this.setData({userInfo: res, companyInfos, isCompanyTopAdmin}, () => showTips())
         this.selectComponent('#bottomRedDotBar').init()
       })
     }
@@ -531,12 +571,12 @@ Page({
         for(let i = 7; i > 0; i--) {
           let start = new Date(), day, month, day1
           start.setTime(start.getTime() - 24 * i * 60 * 60 * 1000)
-          day = start.getDate()
+          // day = start.getDate()
           month = start.getMonth() + 1 < 10 ? `0${start.getMonth() + 1}` : start.getMonth() + 1
           day1 = start.getDate() < 10 ? `0${start.getDate()}` : start.getDate()
-          if(i === 7 || i === 1) day = start.getMonth() + 1 + '月' + start.getDate() + '日'
-          key.push(day)
-          // key.push(`${month}-${day1}`)
+          // if(i === 7 || i === 1) day = start.getMonth() + 1 + '月' + start.getDate() + '日'
+          // key.push(day)
+          key.push(`${month}.${day1}`)
         }
         return {
           key,
@@ -550,11 +590,11 @@ Page({
       
       if(res.data.data.company.data.length) {
         res.data.data.company.data.reverse().map((v, i, arr) => {
-          // let item2 = v.date.slice(5)
-          // tem[0].key.push(item2)
-          let date = new Date(v.date)
-          let item = i === 0 || i === arr.length - 1 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
-          tem[0].key.push(item)
+          let item2 = v.date.slice(5).replace('-', '.')
+          tem[0].key.push(item2)
+          // let date = new Date(v.date)
+          // let item = i === 0 || i === arr.length - 1 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
+          // tem[0].key.push(item)
           tem[0].value[0].push(v.companyVisitPv)
           tem[0].value[1].push(v.companyVisitUv)
         })
@@ -564,11 +604,11 @@ Page({
       }
       if(res.data.data.position.data.length) {
         res.data.data.position.data.reverse().map((v, i, arr) => {
-          // let item2 = v.date.slice(5)
-          // tem[1].key.push(item2)
-          let date = new Date(v.date)
-          let item = i === 0 || i === arr.length - 1 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
-          tem[1].key.push(item)
+          let item2 = v.date.slice(5).replace('-', '.')
+          tem[1].key.push(item2)
+          // let date = new Date(v.date)
+          // let item = i === 0 || i === arr.length - 1 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
+          // tem[1].key.push(item)
           tem[1].value[0].push(v.positionVisitPv)
           tem[1].value[1].push(v.positionVisitUv)
         })
@@ -579,11 +619,11 @@ Page({
 
       if(res.data.data.recruiter.data.length) {
         res.data.data.recruiter.data.reverse().map((v, i, arr) => {
-          // let item2 = v.date.slice(5)
-          // tem[2].key.push(item2)
-          let date = new Date(v.date)
-          let item = i === 0 || i === arr.length - 1 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
-          tem[2].key.push(item)
+          let item2 = v.date.slice(5).replace('-', '.')
+          tem[2].key.push(item2)
+          // let date = new Date(v.date)
+          // let item = i === 0 || i === arr.length - 1 ? date.getMonth() + 1 + '月' + date.getDate() + '日' : date.getDate()
+          // tem[2].key.push(item)
           tem[2].value[0].push(v.recruiterVisitPv)
           tem[2].value[1].push(v.recruiterVisitUv)
         })

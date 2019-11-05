@@ -31,6 +31,8 @@ Page({
   },
   onLoad(options) {
     this.setData({options})
+  },
+  onShow() {
     let onLinePositionList = {
       list: [],
       pageNum: 1,
@@ -47,10 +49,6 @@ Page({
         this.setData({onLinePositionList, detail}, () => this.getOnlineLists(true))
       })
     }
-  },
-  onShow() {
-    
-    
   },
   getOnlineLists(hasLoading = true) {
     let Api = this.data.detail.isCompanyTopAdmin ? getPositionCompanyTopListApi : getRecruiterPositionListApi

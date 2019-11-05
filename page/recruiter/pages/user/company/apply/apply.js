@@ -56,6 +56,9 @@ Page({
     }
   },
   backEvent() {
+    if(this.data.options.identity === 'APPLICANT') {
+      wx.setStorageSync('choseType', 'APPLICANT')
+    }
     wx.removeStorageSync('createdCompany')
     wx.navigateBack({delta: 1})
   },

@@ -43,11 +43,40 @@
 	font-weight:500;
 	color:rgba(40,40,40,1);
 	line-height: 36rpx;
-	margin-bottom: 20rpx;
-  max-width: 410rpx;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  max-width:332rpx;
+  height:36rpx;
+  font-size:36rpx;
+  font-weight:700;
+  color:rgba(40,40,40,1);
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.recruiterList .li .row {
+  height:36rpx;
+  line-height: 36rpx;
+  margin-bottom: 18rpx;
+}
+
+.recruiterList .li .label {
+  background:rgba(255,220,41,1);
+  border-radius:18rpx;
+  line-height: 38rpx;
+  height: 36rpx;
+  font-size:20rpx;
+  font-weight:700;
+  color:rgba(40,40,40,1);
+  width:132rpx;
+  height:36rpx;
+  background:rgba(255,220,41,1);
+  border-radius:18rpx;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  margin-left: 16rpx;
 }
 
 .recruiterList .li .detail {

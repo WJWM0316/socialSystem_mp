@@ -1,6 +1,7 @@
 import {COMMON,RECRUITER} from '../../../../config.js'
-import {sendCodeApi, changeNewCaptchaApi} from "../../../../api/pages/auth.js"
+import {sendCodeApi, changeNewCaptchaApi, pswLoginApi,getMinAppBindCompanyApi} from "../../../../api/pages/auth.js"
 import {quickLoginApi} from '../../../../api/pages/auth.js'
+import {mobileReg} from '../../../../utils/fieldRegular.js'
 
 let mobileNumber = 0
 let password = 0
@@ -10,14 +11,9 @@ let timer = null
 let timerInt = null
 let backType = 'backPrev'
 let captchaKey = ''
-let captchaValue = ''
-Page({
 
-  /**
-   * 页面的初始数据
-   */
+Page({
   data: {
-    phone: '',
     code: '',
     password: '',
     imgUrl: '',
@@ -31,53 +27,23 @@ Page({
    */
   onLoad: function (options) {
     app.login()
+    canClick: false,
+    choseType: '',
+    loginType: 2,
+    captchaValue: '',
+    codeType: 1,
+    companyName: '',
+    bindInfo: {}
+  },
+  onLoad(options) {
+    // wx.setStorageSync('choseType', 'RECRUITER')
     captchaKey = ''
-    captchaValue = ''
     backType = 'backPrev'
     if (options.backType) backType = options.backType
   },
-  toJump () {
-    wx.navigateTo({
-      url: `${COMMON}webView/webView?type=userAgreement`
-    })
-  },
-  getPhone(e) {
-    mobileNumber = e.detail.value
-    clearTimeout(timer)
-    timer = setTimeout(() => {
-      this.setData({
-        phone: e.detail.value
-      })
-      this.setData({canClick: this.data.password && this.data.phone ? true : false})
-    }, 100)
-  },
-  getNumber (e) {
-    password = e.detail.value
-    clearTimeout(timer)
-    timer = setTimeout(() => {
-      this.setData({
-        password: e.detail.value
-      })
-      this.setData({canClick: this.data.password && this.data.phone ? true : false})
-    }, 100)
-  },
-  getCode(e) {
-    clearTimeout(timer)
-    timer = setTimeout(() => {
-      this.setData({
-        code: e.detail.value
-      })
-      this.setData({canClick: this.data.code && this.data.phone ? true : false})
-      clearTimeout(timer)
-    }, 100)
-  },
-  getImgCode(e) {
-    clearTimeout(timer)
-    timer = setTimeout(() => {
-      captchaValue = e.detail.value.trim()
-      this.setData({canClick: this.data.code && this.data.phone && captchaValue ? true : false})
-      clearTimeout(timer)
-    }, 100)
+  onShow() {
+    getMinAppBindCompanyApi().then(res => this.setData({bindInfo: res.data}))
+    this.setData({choseType: wx.getStorageSync('choseType')})
   },
   setTime (second) {
     timerInt = setInterval(() => {
@@ -90,14 +56,14 @@ Page({
     }, 1000)
   },
   sendCode() {
-    if (!this.data.phone) {
+    if (!this.data.mobile) {
       app.wxToast({
-        title: '请填写手机号'
+        title: '请输入手机号'
       })
       return
     }
     let data = {
-      mobile: this.data.phone
+      mobile: this.data.mobile
     }
     sendCodeApi(data).then(res => {
       this.isBlured = false
@@ -111,13 +77,48 @@ Page({
     })
   },
   bindPhone() {
-    if (!this.data.canClick) return
+    let funcApi = this.data.choseType === 'APPLICANT' || this.data.loginType === 1 ? 'phoneLogin' : 'pswLogin'
+    this[funcApi]()
+  },
+  bindInput(e) {
+    let key = e.currentTarget.dataset.key
+    let value = e.detail.value
+    let formData = this.data
+    formData[key] = value
+    this.setData(formData, () => this.bindButtonStatus())
+  },
+  // 手机号登录
+  phoneLogin() {
+
+    if (!mobileReg.test(this.data.mobile)) {
+      app.wxToast({
+        title: '请输入手机号'
+      })
+      return
+    }
+
+    if (!this.data.code) {
+      app.wxToast({
+        title: '请输入短信验证码'
+      })
+      return
+    }
+
+    if(this.data.imgUrl) {
+      if(!this.data.captchaValue) {
+        app.wxToast({
+          title: '请输入图形验证码'
+        })
+        return
+      }
+    }
+
     let data = {
-      mobile: this.data.phone,
+      mobile: this.data.mobile,
       password: this.data.password,
       code: this.data.code,
       captchaKey,
-      captchaValue
+      captchaValue: this.data.captchaValue
     }
     app.phoneLogin(data, backType).catch(res => {
       if (res.code === 419) {
@@ -126,19 +127,37 @@ Page({
         this.setData({imgUrl})
       } else if (res.code === 440){
         captchaKey = ''
-        captchaValue = ''
-        clearTimeout(timer)
-        timer = setTimeout(() => {
-          this.changeNewCaptcha()
-        }, 1500)
+        this.changeNewCaptcha()
       }
     })
   },
-  changeNewCaptcha () {
-    changeNewCaptchaApi().then(res0 => {
-      captchaKey = res0.data.key
-      let imgUrl = res0.data.img
-      this.setData({imgUrl})
+  // 账号密码登录
+  pswLogin() {
+    if (!this.data.mobile) {
+      app.wxToast({
+        title: '请输入用户名或手机号'
+      })
+      return
+    }
+
+    if (!this.data.password) {
+      app.wxToast({
+        title: '请输入密码'
+      })
+      return
+    }
+
+    let params = {mobile: this.data.mobile, password: this.data.password}
+    app.pswLogin(params).catch(res => {
+      if (res.code === 419) {
+        captchaKey = res.data.key
+        let imgUrl = res.data.img
+        this.setData({imgUrl})
+      } else if (res.code === 440){
+        captchaKey = ''
+        captchaValue = ''
+        this.changeNewCaptcha()
+      }
     })
   },
   getPhoneNumber(e) {
@@ -147,28 +166,38 @@ Page({
   formSubmit(e) {
     app.postFormId(e.detail.formId)
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
+  todoAction(e) {
+    let action = e.currentTarget.dataset.action
+    switch(action) {
+      case 'forget':
+        wx.navigateTo({url: `${COMMON}forgetPwd/forgetPwd`})
+        break
+      case 'clear':
+        this.setData({mobile: ''})
+        break
+      case 'changeCodeType':
+        this.setData({codeType: this.data.codeType === 1 ? 2 : 1})
+        break
+      case 'changeLoginType':
+        this.setData({loginType: this.data.loginType === 1 ? 2 : 1, mobile: ''})
+        break
+      case 'userAgreement':
+        wx.navigateTo({url: `${COMMON}webView/webView?type=userAgreement`})
+        break
+      default:
+        break
+    }
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
+  bindButtonStatus() {
+    let canClick = this.data.canClick
+    let formData = this.data
+    canClick = formData.mobile && (formData.code || formData.password) && (!formData.img || formData.captchaValue) ? true : false
+    this.setData({canClick})
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  },
-
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload() {
     clearInterval(timerInt)
   }
 })

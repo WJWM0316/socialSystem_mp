@@ -86,4 +86,97 @@ export const changeNewCaptchaApi = data => {
     data
   })
 }
+export const checkSmsCodeApi = data => {
+  return request({
+    method: 'post',
+    url: '/auth/check/sms/code',
+    data
+  })
+}
+export const getAuthCaptchaApi = data => {
+  return request({
+    method: 'get',
+    url: '/auth/captcha',
+    data
+  })
+}
 
+export const checkImgCodeApi = data => {
+  return request({
+    method: 'post',
+    url: '/auth/check/captcha',
+    data
+  })
+}
+
+export const sendWapCodeApi = data => {
+  return request({
+    method: 'post',
+    url: '/auth/wap/message',
+    data,
+    hasLoading: false
+  })
+}
+
+export const resetPswApi = data => {
+  return request({
+    method: 'post',
+    url: `/auth/reset/password/${data.certificate}`,
+    data,
+    hasLoading: false
+  })
+}
+
+export const pswLoginApi = data => {
+  return request({
+    method: 'post',
+    url: '/auth/with/password/login',
+    data,
+    hasLoading: false
+  })
+}
+
+export const setUserNameApi = (data, hasLoading) => {
+  return request({
+    method: 'put',
+    url: `/cur/set/username/${data.username}`,
+    hasLoading: true
+  })
+}
+
+export const setPasswordApi = (data, hasLoading) => {
+  return request({
+    method: 'post',
+    url: '/cur/set/password',
+    data,
+    hasLoading: true
+  })
+}
+
+export const modifyPasswordApi = (data, hasLoading) => {
+  return request({
+    method: 'post',
+    url: '/cur/modify/password',
+    data,
+    hasLoading: true
+  })
+}
+
+export const checkSetPasswordApi = (data, hasLoading) => {
+  return request({
+    method: 'get',
+    url: '/cur/check/has/password',
+    data,
+    hasLoading: true
+  })
+}
+
+// 小程序获取绑定的公司信息
+export const getMinAppBindCompanyApi = (data, hasLoading) => {
+  return request({
+    url: '/wechat/company',
+    method: 'get',
+    hasLoading: false,
+    host: 'PUBAPIHOST',
+  })
+}

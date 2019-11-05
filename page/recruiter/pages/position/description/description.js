@@ -1,19 +1,36 @@
 import {RECRUITER} from '../../../../../config.js'
 import {othersPositionTxtB} from '../../../../../utils/randomCopy.js'
-const app = getApp()
+import {
+  getPositionDescribeListsApi
+} from '../../../../../api/pages/position.js'
+let app = getApp()
 
 Page({
 	data: {
 		describe: '',
     canClick: false,
     randomCopy: {},
-    show: false
+    show: false,
+    positionDescribeLists: []
 	},
 	onLoad(options) {
-    const storage = wx.getStorageSync('createPosition')
+    let storage = wx.getStorageSync('createPosition')
     if(storage.describe) this.setData({ describe: storage.describe, canClick: true })
     this.setData({randomCopy: othersPositionTxtB()})
 	},
+  onShow() {
+    this.getPositionDescribeLists()
+  },
+  getRandomItem() {
+    let positionDescribeLists = this.data.positionDescribeLists
+    let item = positionDescribeLists[(Math.floor(Math.random() * (positionDescribeLists.length)))]
+    this.setData({randomCopy: item})
+  },
+  getPositionDescribeLists() {
+    getPositionDescribeListsApi({company_id: app.globalData.recruiterDetails.companyTopId}).then(res => {
+      this.setData({positionDescribeLists: res.data.positionDescribeList}, () => this.getRandomItem())
+    })
+  },
   /**
    * @Author   小书包
    * @DateTime 2019-01-11
@@ -31,7 +48,7 @@ Page({
    * @return   {[type]}     [description]
    */
   bindInput(e) {
-    const name = e.detail.value
+    let name = e.detail.value
     this.debounce(this.bindChange, null, 500, name)
   },
   /**
@@ -54,7 +71,7 @@ Page({
     this.setData({canClick: this.data.describe})
   },
   submit(e) {
-    const storage = wx.getStorageSync('createPosition')
+    let storage = wx.getStorageSync('createPosition')
     storage.describe = this.data.describe
     if(this.data.describe.length < 6) {
       app.wxToast({title: '职位描述最少6个字'})
@@ -64,7 +81,7 @@ Page({
     wx.navigateBack({delta: 1})
   },
   next() {
-    this.setData({randomCopy: othersPositionTxtB()})
+    this.getRandomItem()
   },
   view() {
     this.setData({show: !this.data.show})
@@ -76,6 +93,6 @@ Page({
    * @return   {[type]}   [description]
    */
   copyText() {
-    wx.setClipboardData({data: this.data.randomCopy.txt })
+    wx.setClipboardData({data: this.data.randomCopy.intro })
   }
 })

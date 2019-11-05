@@ -1,0 +1,20 @@
+<view>
+	<wxs src="../../../../utils/filters.wxs" module="filters" />
+	<navbar title="账号与绑定" background="#fff" color="#22292C"></navbar>
+	<view class="li" bindtap="changeName">
+		<view class="key">设置用户名</view>
+		<view class="value {{userInfo.username ? 'active' : ''}}">{{userInfo.username ? userInfo.username : '请设置用户名，便于账号登录'}}</view>
+		<view class="red" wx:if="{{!userInfo.username}}"></view>
+		<i class="icon iconfont icon-xiangyou"></i>
+	</view>
+	<view class="li" bindtap="changeMobile">
+		<view class="key">修改手机号</view>
+		<view class="value active">{{filters.mobileFormat(userInfo.mobile || '00000000000', 'hide')}}</view>
+		<i class="icon iconfont icon-xiangyou"></i>
+	</view>
+	<view class="li" bindtap="changePassword">
+		<view class="key">{{userInfo.isSetPassword ? '修改密码' : '设置密码'}}</view>
+		<view class="red" wx:if="{{!userInfo.isSetPassword}}"></view>
+		<i class="icon iconfont icon-xiangyou"></i>
+	</view>
+</view>

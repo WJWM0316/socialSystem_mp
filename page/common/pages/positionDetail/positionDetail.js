@@ -29,7 +29,9 @@ Page({
     findMore: {},
     hasReFresh: false,
     cdnPath: app.globalData.cdnImagePath,
-    identity: ''
+    identity: '',
+    isOwner: false,
+    isUser: false
   },
   onLoad(options) {
     positionCard = ''
@@ -124,9 +126,9 @@ Page({
           companyInfos: res.data.companyInfo, 
           recruiterInfo: res.data.recruiterInfo, 
           isOwner: res.data.isOwner && identity === 'RECRUITER' ? true : false,
+          isUser: res.data.isOwner ? true : false,
           identity: wx.getStorageSync('choseType')
         })
-        console.log(identity !== 'RECRUITER' && !res.data.companyInfo.hideDdPromote, 'bbbb')
         if(this.selectComponent('#interviewBar')) this.selectComponent('#interviewBar').init()
       })
     }
@@ -153,9 +155,9 @@ Page({
           companyInfos: res.data.companyInfo, 
           recruiterInfo: res.data.recruiterInfo, 
           isOwner: res.data.isOwner && identity === 'RECRUITER' ? true : false,
+          isUser: res.data.isOwner ? true : false,
           identity: wx.getStorageSync('choseType')
         })
-        console.log(identity !== 'RECRUITER' && !res.data.companyInfo.hideDdPromote, 'kkkk')
         if(this.selectComponent('#interviewBar')) this.selectComponent('#interviewBar').init()
         if (this.data.query && this.data.query.pick) this.selectComponent('#shareBtn').oper()
     })

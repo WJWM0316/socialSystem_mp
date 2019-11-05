@@ -93,7 +93,7 @@
 
 		<view class="li" bindtap="routeJump" data-route="settings">
 			<i class="icon iconfont icon-shezhi label-icon"></i>
-			<view class="text">设置</view>
+			<view class="text {{userInfo.showMineRedDot ? 'reddot' : ''}}">设置</view>
 			<i class="icon iconfont icon-xiangyou"></i>
 		</view>		
 	</view>
@@ -113,7 +113,7 @@
 </view>
 <block wx:if="{{recruiterInfo.uid}}"><canvasCard cardData="{{recruiterInfo}}" type="recruiter" bindgetCreatedImg="getCreatedImg"></canvasCard>
 </block>
-<tab-bar tabType="1" id="bottomRedDotBar" bindresultevent="getResult"></tab-bar>
+<tab-bar id="bottomRedDotBar" bindresultevent="getResult" tabType="1"></tab-bar>
 </view>
 
 <bindPhone hide="{{true}}"></bindPhone>

@@ -1,0 +1,26 @@
+<view>
+	<navbar title="用户名" background="#FFFFFF" color="#22292C"></navbar>
+	<view class="ul">
+		<view class="li">
+			<view class="key">用户名</view>
+			<input
+				class="value"
+				bindinput="bindInput"
+				maxlength="18"
+				placeholder="请输入用户名"
+				data-key="mobile"
+				value="{{username}}"
+				placeholder-class="defaultColor">
+			</input>
+			<i
+        class="icon1 iconfont icon-close"
+        wx:if="{{ userName }}"
+        bindtap="clear">
+      </i>
+		</view>
+		<view class="tips">*6-18个字符，只能包括英文字母、数字、下划线</view>
+	</view>
+	<view class="footer">
+    <view bindtap="next" class="button-submit">保存</view>
+  </view>
+</view>

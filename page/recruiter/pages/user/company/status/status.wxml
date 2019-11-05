@@ -215,7 +215,7 @@
 					<view class="key">接收简历邮箱</view>
 					<view class="value">{{companyInfos.userEmail}}</view>
 				</view> -->
-			<!-- 	<view class="li item">
+				<view class="li item">
 					<view class="img-box">
 						<image src="{{companyInfos.adminInfo.avatar.smallUrl}}" mode="scaleToFill" ></image>
 					</view>
@@ -226,7 +226,7 @@
 					<view class="button-box" data-action="notice" bindtap="todoAction" wx:if="{{companyInfos.status === 0}}">
 						<i class="icon iconfont icon-tongzhi notice"></i>通知管理员
 					</view>
-				</view> -->
+				</view>
 			</view>
 		</view>
 		<!-- 申请加入公司信息 end -->
@@ -258,7 +258,7 @@
 					<view class="key">接收简历邮箱</view>
 					<view class="value">{{companyInfos.userEmail}}</view>
 				</view> -->
-		<!-- 		<view class="li item">
+				<view class="li item">
 					<view class="img-box">
 						<image src="{{companyInfos.adminInfo.avatar.smallUrl}}" mode="scaleToFill" ></image>
 					</view>
@@ -269,7 +269,7 @@
 					<view class="button-box" data-action="notice" bindtap="todoAction" wx:if="{{companyInfos.status === 0}}">
 						<i class="icon iconfont icon-tongzhi notice"></i>通知管理员
 					</view>
-				</view> -->
+				</view>
 			</view>
 		</view>
 		<!-- 创建机构信息 end -->

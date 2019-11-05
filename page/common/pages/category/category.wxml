@@ -6,9 +6,9 @@
 		<input placeholder="搜索" bindinput="bindInput" />
 		<i class="icon iconfont icon-sousuo icon-search"></i>
 	</view>
-	<view class="hotArea" wx:if="{{hotArea.length > 0}}">
+<!-- 	<view class="hotArea" wx:if="{{hotArea.length > 0}}">
 		<text class="hotArea-item {{item.active ? 'cur' : ''}}" wx:for="{{hotArea}}" wx:key="{{index}}" bindtap="tapHot" data-item="{{item}}">{{item.name}}</text>
-	</view>
+	</view> -->
 	<view class="category-list" >
 		<block wx:if="{{!searing}}">
 			<view

@@ -185,3 +185,13 @@ export const getEmolumentApi = (data, hasLoading) => {
     hasLoading: false
   })
 }
+
+// 获取发布职位描述列表
+export const getPositionDescribeListsApi = (data, hasLoading) => {
+  return request({
+    method: 'get',
+    url: `/position/describe/list`,
+    data,
+    hasLoading: false
+  })
+}

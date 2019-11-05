@@ -22,18 +22,27 @@ Page({
     navbarBg: 'transparent',
     telePhone: app.globalData.telePhone,
     showScanIcon: true,
-    redDotInfos: {}
+    redDotInfos: {},
+    userInfo: {}
   },
   onLoad() {
     wx.setStorageSync('choseType', 'RECRUITER')
     recruiterCard = ''
     let recruiterInfo = app.globalData.recruiterDetails
+    let userInfo = app.globalData.userInfo
     if (recruiterInfo.uid) {
-      this.setData({recruiterInfo})
+      userInfo = Object.assign(userInfo || {}, {
+        showMineTabRedDot: 0
+      })
+      this.setData({recruiterInfo, userInfo})
     } else {
       app.getAllInfo().then(res => {
         recruiterInfo = app.globalData.recruiterDetails
-        this.setData({recruiterInfo})
+        userInfo = app.globalData.userInfo
+        userInfo = Object.assign(userInfo || {}, {
+          showMineTabRedDot: 0
+        })
+        this.setData({recruiterInfo, userInfo})
       })
     }
   },
@@ -44,9 +53,7 @@ Page({
    * @return   {[type]}   [description]
    */
   getRecruiterOtherInfos() {
-    getRecruiterOtherInfosApi({...app.getSource()}).then(res => {
-      this.setData({pageInfos: res.data})
-    })
+    getRecruiterOtherInfosApi({...app.getSource()}).then(res => this.setData({pageInfos: res.data}))
   },
   onShow() {
     this.selectComponent('#bottomRedDotBar').init()
@@ -87,6 +94,8 @@ Page({
         this.viewIdentity()
         break
       case 'settings':
+        app.globalData.userInfo = Object.assign(app.globalData.userInfo || {}, { showMineRedDot: 0 })
+        this.setData({userInfo: app.globalData.userInfo})
         wx.navigateTo({url: `${COMMON}settings/settings`})
         break
       case 'poster':

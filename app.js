@@ -273,6 +273,7 @@ App({
               wx.setStorageSync('token', res.data.token)
               wx.setStorageSync('sessionToken', res.data.sessionToken)
               that.globalData.hasLogin = 1
+              that.globalData.userInfo['isNew'] = 1
               if (res.data.userWechatInfo && res.data.userWechatInfo.nickname) that.globalData.userInfo = res.data.userWechatInfo
               that.getRoleInfo()
               console.log('用户已认证')
@@ -282,6 +283,7 @@ App({
               if (res.data.userInfo && res.data.userInfo.nickname) that.globalData.userInfo = res.data.userInfo
               wx.setStorageSync('sessionToken', res.data.sessionToken)
             }
+
             resolve(res)
             if (!operType) {
               wx.reLaunch({

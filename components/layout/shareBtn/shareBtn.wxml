@@ -3,7 +3,6 @@
 <form bindsubmit="formSubmit" report-submit='{{true}}'>
 	<block wx:if="{{!userInfo.isNew}}">
 		<block wx:if="{{posterType === 'companyDesc'}}">
-
 			<view class="shareBox" hidden="{{!showChoose}}" catchtouchmove>
 				<view class="shareBg" bindtap="close">
 				</view>

@@ -19,14 +19,6 @@ Page({
     imgUrl: '',
     cdnImagePath: app.globalData.cdnImagePath,
     second: 60,
-    canClick: false
-  },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    app.login()
     canClick: false,
     choseType: '',
     loginType: 2,
@@ -35,8 +27,14 @@ Page({
     companyName: '',
     bindInfo: {}
   },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    app.login()    
+  },
   onLoad(options) {
-    // wx.setStorageSync('choseType', 'RECRUITER')
     captchaKey = ''
     backType = 'backPrev'
     if (options.backType) backType = options.backType
@@ -89,7 +87,6 @@ Page({
   },
   // 手机号登录
   phoneLogin() {
-
     if (!mobileReg.test(this.data.mobile)) {
       app.wxToast({
         title: '请输入手机号'

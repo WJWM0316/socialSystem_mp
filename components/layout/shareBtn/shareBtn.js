@@ -39,8 +39,9 @@ Component({
     userInfo: app.globalData.userInfo
   },
   attached () {
+    app.login()
     setTimeout(() => {
-      this.setData({userInfo: app.globalData.userInfo},() => console.log(this.data, 'kkk'))
+      this.setData({userInfo: app.globalData.userInfo})
     }, 1000)
   },
   /**

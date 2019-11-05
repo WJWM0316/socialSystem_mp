@@ -38,9 +38,11 @@ function showTips() {
         cancelText: '取消',
         cancelBack: () => {
           app.globalData.userInfo.showAccountSecurityTips = 0
+          wx.setStorageSync('notShowAccountSecurityTips', 1)
         },
         confirmBack: () => {
           app.globalData.userInfo.showAccountSecurityTips = 0
+          wx.setStorageSync('notShowAccountSecurityTips', 1)
           wx.navigateTo({url: `${COMMON}forgetPwd/forgetPwd?step=3&title=设置密码&type=set`})
         }
       })
@@ -160,7 +162,7 @@ Page({
       }
     }
   },
-  init () {
+  init() {
     if (wx.getStorageSync('choseType') === 'APPLICANT') return
     let callback = () => {
       // 处理海报生成问题

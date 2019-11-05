@@ -40,14 +40,15 @@ Component({
   },
   attached () {
     setTimeout(() => {
-      this.setData({userInfo: app.globalData.userInfo})
-    })
+      this.setData({userInfo: app.globalData.userInfo},() => console.log(this.data, 'kkk'))
+    }, 1000)
   },
   /**
    * 组件的方法列表
    */
   methods: {
     onGotUserInfo(e) {
+      console.log(e)
       app.onGotUserInfo(e, true)
     },
     oper() {

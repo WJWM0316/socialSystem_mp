@@ -64,7 +64,8 @@
 .recruiterList .li .label {
   background:rgba(255,220,41,1);
   border-radius:18rpx;
-  line-height: 36rpx;
+  line-height: 38rpx;
+  height: 36rpx;
   font-size:20rpx;
   font-weight:700;
   color:rgba(40,40,40,1);

@@ -1,9 +1,16 @@
-<view class="productList">
-	<navbar title="{{options.type === 'choose' ? '从公司产品中选择' : '产品列表'}}" background="#fff" color="#22292C"></navbar>
+<view>
+
+	<navbar
+		title="{{options.type === 'choose' ? '从公司产品中选择' : '产品列表'}}"
+		background="#fff"
+		color="#22292C">		
+	</navbar>
+
 	<view hidden="{{!hasReFresh}}">
     <refreshStatus></refreshStatus>
   </view>
-	<view class="ul">
+
+	<view class="ul" wx:if="{{productList.list.length}}">
 		<view
 			class="li {{item.topId ? 'company-product' : ''}}"
 			wx:for="{{productList.list}}"
@@ -34,6 +41,14 @@
       </view>
 		</view>
 	</view>
-	<view class="footer"> <button class="button-save" bindtap="add">新增</button> </view>
+	
+	<view class="footer">
+		<button class="button-save" bindtap="add">新增</button>
+	</view>
+
+	<shareBtn
+		posterType="production"
+		id="shareBtn"
+		shareBtn="{{false}}">
+	</shareBtn>
 </view>
-<shareBtn posterType="production" id="shareBtn" shareBtn="{{false}}"></shareBtn>

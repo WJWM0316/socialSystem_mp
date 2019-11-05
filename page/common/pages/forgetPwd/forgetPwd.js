@@ -35,8 +35,6 @@ Page({
   },
   onLoad(options) {
     this.setData({options: Object.assign(this.data.options, options)})
-    console.log(this.data)
-    wx.setStorageSync('choseType', 'RECRUITER')
   },
   bindInput(e) {
     let formData = this.data.formData
@@ -179,11 +177,7 @@ Page({
         }
       })
     })
-    .catch(err => {
-      // app.wxToast({title: '密码已修改成功'})
-      console.log(err)
-      app.wxToast({title: err.msg})
-    })
+    .catch(err => app.wxToast({title: err.msg}))
   },
   setPassword() {
     if(!pswReg.test(this.data.formData.password)) {

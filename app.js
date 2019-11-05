@@ -16,7 +16,7 @@ let that = null
 let formIdList = [],
     sendNum = 0 // formId 发送次数
 App({
-  onLaunch: function (e) {
+  onLaunch(e) {
     let extConfig = wx.getExtConfigSync? wx.getExtConfigSync(): {}
     console.log(extConfig, '提测清单')
     this.globalData.appId = wx.getAccountInfoSync().miniProgram.appId
@@ -48,7 +48,7 @@ App({
     this.getRoleInit = null
     this.login()
   },
-  onHide: function (e) {
+  onHide(e) {
     // 切换后台 发送全部formId
     if (formIdList.length > 0) {
       formIdApi({form_id: formIdList}).then(res => {
@@ -57,7 +57,7 @@ App({
       })
     }
   },
-  onError: function (e) {
+  onError(e) {
     console.log('onError检测', e)
   },
   globalData: {
@@ -121,7 +121,8 @@ App({
               that.getRoleInfo()
               console.log('用户已认证')
             } else {
-              if (res.data.nickname) that.globalData.userInfo = res.data
+              // if (res.data.nickname) that.globalData.userInfo = res.data
+              that.globalData.userInfo = res.data
               that.globalData.hasLogin = 0
               console.log('用户未绑定手机号', 'sessionToken', res.data.authToken)
               wx.setStorageSync('sessionToken', res.data.authToken)
@@ -261,7 +262,7 @@ App({
         let wxLogin = function () {
           // 请求接口获取服务器session_key
           let pageUrl = that.getCurrentPagePath(0)
-          data.code = wx.getStorageSync('code')
+          if(wx.getStorageSync('code')) data.code = wx.getStorageSync('code')
           if (wx.getStorageSync('sessionToken')) {
             data.session_token = wx.getStorageSync('sessionToken')
           }
@@ -327,7 +328,7 @@ App({
             this.globalData.hasLogin = 1
             if(!userInfo.isCancelSetPassword) {
               userInfo = Object.assign(userInfo, {
-                showAccountSecurityTips: 1,
+                showAccountSecurityTips: wx.getStorageSync('notShowAccountSecurityTips') ? 0 :  1,
                 showMineRedDot: 1,
                 showMineTabRedDot: 1
               })
@@ -394,7 +395,7 @@ App({
         this.globalData.hasLogin = 1
         if(!userInfo.isCancelSetPassword) {
           userInfo = Object.assign(userInfo, {
-            showAccountSecurityTips: 1,
+            showAccountSecurityTips: wx.getStorageSync('notShowAccountSecurityTips') ? 0 :  1,
             showMineRedDot: 1,
             showMineTabRedDot: 1
           })
@@ -458,7 +459,7 @@ App({
         this.globalData.hasLogin = 1
         if(!userInfo.isCancelSetPassword) {
           userInfo = Object.assign(userInfo, {
-            showAccountSecurityTips: 1,
+            showAccountSecurityTips: wx.getStorageSync('notShowAccountSecurityTips') ? 0 :  1,
             showMineRedDot: 1,
             showMineTabRedDot: 1
           })

@@ -1,12 +1,5 @@
-import {
-  getJobLabelApi, 
-  getLifeLabelApi, 
-  addJobLabelApi, 
-  addLifeLabelApi, 
-  saveLabelApi, 
-  saveRecruiterLabelApi
-} from '../../../../api/pages/common.js'
-
+// page/common/pages/tabsPage/tabsPage.js
+import {getJobLabelApi, getLifeLabelApi, addJobLabelApi, addLifeLabelApi, saveLabelApi, saveRecruiterLabelApi} from '../../../../api/pages/common.js'
 let allSkills = []
 let choseFirstId = ''
 let choseFirstIndex = 0
@@ -14,6 +7,10 @@ let app = getApp()
 let jobChoseNum = 0, // 职业标签选择的数量
     lifeChoseNum = 0 // 生活标签选择的数量
 Page({
+
+  /**
+   * 页面的初始数据
+   */
   data: {
     title: '选择职业标签',
     choseFirstName: '',
@@ -26,18 +23,13 @@ Page({
     literacy: [], // 职业素养标签
     character: [], // 性格标签
     interest: [], // 兴趣标签
-    hidePop: true, // 打开自定pop
-    skillEditing: false,
-    literacyEditing: false,
-    characterEditing: false,
-    interestEditing: false,
-    allChooseLabels: [],
-    skillsChoose: [], // 对应的选中
-    literacyChoose: [], // 对应的选中
-    characterChoose: [], // 对应的选中
-    interestChoose: [] // 对应的选中
+    hidePop: true // 打开自定pop
   },
-  onShow(options) {
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onShow: function (options) {
     let character = []
     let interest = []
     let skills = []
@@ -135,7 +127,7 @@ Page({
   closePop() {
     this.setData({hidePop: true})
   },
-  openPop() {
+  openPop () {
     if (this.data.pageType === 'life') {
       if (this.data.choseLifeList.length < 3) {
         this.setData({hidePop: false})
@@ -174,13 +166,12 @@ Page({
       })
     }
   },
-  choseTab1(e) {
+  choseTab(e) {
     let list = []
     let labelList = []
     let skills = []
     let labelType = ''
     let type = ''
-    // allLabels
     if (this.data.pageType === 'life') {
       list = this.data.choseLifeList
       type = 'choseLifeList'
@@ -294,64 +285,6 @@ Page({
       }
     }
     this.setData({[type]: list, [labelType]: labelList})
-  },
-  choseTab(e) {
-
-    let params = e.currentTarget.dataset
-    let labelList = this.data[params.labeltype]
-    let list = this.data[`${params.labeltype}Choose`]
-    let choseData = params.tabdata
-    let labeltype = params.labeltype
-
-    labelList.map((item, index) => {
-      if (item.labelId === choseData.labelId) {
-        choseData.index = index
-      }
-    })
-
-    console.log({
-      params,
-      labelList,
-      list,
-      choseData,
-      labeltype
-    })
-
-    if(choseData.checked) {
-
-      switch(params.stype) {
-        case 'skills':
-          break
-        default:
-          break
-      }
-
-      labelList[choseData.index].checked = false
-
-      list.map((item, index) => {
-        if (item.labelId === choseData.labelId) list.splice(index, 1)
-      })
-
-    } else {
-      if(list.length === 3) {
-        app.wxToast({title: '选择标签已达上限'})
-      } else {
-        choseData.checked = true
-        choseData.sType = labeltype
-        list.push(choseData)
-        labelList[choseData.index].checked = true
-      }
-    }
-
-    this.setData({[labeltype]: labelList, [`${params.labeltype}Choose`]: list }, () => {
-      let allChooseLabels = [
-        ...this.data.skillsChoose,
-        ...this.data.literacyChoose,
-        ...this.data.characterChoose,
-        ...this.data.interestChoose
-      ]
-      this.setData({allChooseLabels})
-    })
   },
   addLabel() {
     if (this.data.customLabel === '') return
@@ -498,10 +431,37 @@ Page({
       })
     }
   },
-  switchSlide(e) {
-    let params = e.currentTarget.dataset
-    let key = `${params.key}Editing`
-    let value = this.data[key]
-    this.setData({[key]: !value})
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+
   }
 })

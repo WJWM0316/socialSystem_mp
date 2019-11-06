@@ -54,3 +54,15 @@ export const getCompanyCardApi = (data, hasLoading) => {
     hasLoading: hasLoading
   })
 }
+
+
+// 面试
+export const getInterviewCardApi = (data, hasLoading) => {
+  return request({
+    method: 'get',
+    url: '/sharecard',
+    data,
+    host: 'NODEHOST',
+    hasLoading: hasLoading
+  })
+}

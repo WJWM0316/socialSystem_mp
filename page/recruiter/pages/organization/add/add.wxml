@@ -33,6 +33,6 @@
 		</view>
 	</view>
 	<view class="footer">
-    <view class="button-save" bindtap="submit" bindtap="post">{{options.companyId ? '编辑机构' : '立即创建'}}</view>
+    <view class="button-save" bindtap="submit" bindtap="post">{{options.companyId ? '保存' : '立即创建'}}</view>
   </view>
 </view>

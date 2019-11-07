@@ -392,3 +392,11 @@
 .custom-api{
   padding-bottom:168rpx;
 }
+
+.icon-jiahao{
+  font-size: 24rpx;
+  color: #6E2296;
+  padding-right: 6rpx;
+  position: relative;
+  top: -2rpx;
+}

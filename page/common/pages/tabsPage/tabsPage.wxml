@@ -117,7 +117,7 @@
 
   <view class="custom-api">
     <view class="msg">找不到想要的标签？</view>
-    <view class="addLabel" bindtap="openPop">添加自定义标签</view>
+    <view class="addLabel" bindtap="openPop"><i bindtap="closePop" class="icon iconfont icon-jiahao"></i>添加自定义标签</view>
     <view class="btnBox"><bitton class="save {{ allChooseLabels.length ? 'active' : ''}}" bindtap="saveLabel">保存</bitton></view>
   </view>
 

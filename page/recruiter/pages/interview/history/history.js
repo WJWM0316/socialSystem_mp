@@ -80,11 +80,6 @@ Page({
           id: 'all',
           name: '全部',
           active: true
-        },
-        {
-          id: 'none',
-          name: '未选职位约面',
-          active: false
         }
       ]
       typeList = appendHeadder.concat(typeList)
@@ -145,7 +140,7 @@ Page({
     let typeList = this.data.typeList
     let item = typeList.find(field => params.id === field.id)
 
-    if(params.id === 'all' || params.id === 'none') {
+    if(params.id === 'all') {
       typeList.map(field => {
         field.active = false
         if(field.id === params.id) field.active = !field.active

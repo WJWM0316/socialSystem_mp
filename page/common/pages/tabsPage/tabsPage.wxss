@@ -68,7 +68,7 @@
   text-align: center;
   font-weight: 300;
   color: #353943;
-  margin-top: 55rpx;
+  margin-top: 60rpx;
 }
 .addLabel {
   width: 294rpx;
@@ -81,21 +81,25 @@
   font-weight: 500;
   text-align: center;
   margin-top: 26rpx;
-  margin: 26rpx auto 90rpx;
+  margin: 26rpx auto 0;
 }
+
 .nextStep, .save {
-  width: 580rpx;
-  height: 90rpx;
-  background: #652791;
-  border-radius: 49rpx;
-  line-height: 90rpx;
   text-align: center;
   color: #FFFFFF;
   font-size: 32rpx;
-  font-weight: 400;
   display: block;
-  margin: 0 auto;
+  height:98rpx;
+  line-height: 98rpx;
+  background:rgba(101,39,145,0.3);
+  border-radius:48rpx;
+  margin: 0 85rpx;
 }
+
+.nextStep, .save.active {
+  background:#652791;
+}
+
 .customPop {
   width: 100%;
   height: 100%;
@@ -174,7 +178,7 @@
 .btnBox {
   width: 100%;
   background: #fff;
-  padding: 36rpx 0;
+  padding: 25rpx 0;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -370,10 +374,21 @@
   margin: 0;
   padding: 0 30rpx;
   box-sizing: border-box;
-  min-width: 174rpx;
   line-height: 58rpx;
   background: rgba(248,248,248,1);
   font-size:28rpx;
   color:rgba(40,40,40,1);
   border: 1rxp solid rgba(232,233,235,1)
+}
+
+.icon-sanjiaoshaixuan {
+  font-size: 10rpx;
+  color: #282828;
+  padding-left: 44rpx;
+  position: relative;
+  top: -3rpx;
+}
+
+.custom-api{
+  padding-bottom:168rpx;
 }

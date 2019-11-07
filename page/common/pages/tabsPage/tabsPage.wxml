@@ -1,5 +1,5 @@
 <view class="tabsPage">
-  <navbar title="选择个人标签" customBack bindbackEvent="back" background="#FFFFFF" color="#22292C"></navbar>
+  <navbar title="选择个人标签" background="#FFFFFF" color="#22292C"></navbar>
   <view class="page-header">
     <view class="choose-labels">
       <text class="key">已选择标签</text>
@@ -12,7 +12,8 @@
         wx:for="{{allChooseLabels}}"
         wx:key="{{index}}"
         bindtap="choseTab"
-        data-labelType="{{item.sType}}"
+        data-index="{{index}}"
+        data-labelType="{{item.labeltype}}"
         data-tabData="{{item}}">
           {{item.name || item.labelName}}
       </view>
@@ -33,7 +34,10 @@
             setResult="{{choseFirstName}}"
             pickerType="occupation"
             rangeKey="name"
+            needSlot="{{true}}"
             bindresultevent="getresult">
+            {{choseFirstName}}
+            <i class="icon iconfont icon-sanjiaoshaixuan"></i>
           </myPicker>
         </view>
         <view class="tabs">
@@ -110,46 +114,13 @@
       </view>
     </view>
   </view>
-<!--   <block>
-    <view class="content"  hidden="{{pageType !== 'job'}}">
-      <view class="head">已选择标签<text class="number"><text class="num">{{choseJobList.length}}</text>/3</text></view>
-      <view class="tabs">
-        <text class="tab checked" wx:for="{{choseJobList}}" wx:key="{{index}}" bindtap="choseTab" data-labelType="choseJobList" data-tabData="{{item}}">{{item.name || item.labelName}}</text>
-      </view>
-      <view class="head head1">职业技能
-        <myPicker class="myPicker" isTriangle="{{true}}" setResult="{{choseFirstName}}" pickerType="occupation" rangeKey="name" bindresultevent="getresult"></myPicker>
-      </view>
-      <view class="tabs">
-        <text class="tab {{item.checked ? 'checked' : ''}}" wx:for="{{skills}}" wx:key="{{index}}" bindtap="choseTab" data-labelType="skills" data-tabData="{{item}}" >{{item.name}}</text>
-      </view>
-      <view class="head head2">职业素养</view>
-      <view class="tabs">
-        <text class="tab {{item.checked ? 'checked' : ''}}" wx:for="{{literacy}}" wx:key="{{index}}" data-labelType="literacy" bindtap="choseTab" data-tabData="{{item}}">{{item.name}}</text>
-      </view>
-      <view class="msg">找不到想要的标签？</view>
-      <view class="addLabel" bindtap="openPop">添加自定义标签</view>
-      <view class="btnBox"><bitton class="nextStep" bindtap="nextStep">下一步</bitton></view>
-    </view>
-  </block>
-  <block>
-    <view class="content"  hidden="{{pageType !== 'life'}}">
-      <view class="head">已选择标签<text class="number"><text class="num">{{choseLifeList.length}}</text>/3</text></view>
-      <view class="tabs">
-        <text class="tab checked" wx:for="{{choseLifeList}}" wx:key="{{index}}" bindtap="choseTab" data-labelType="choseLifeList" data-tabData="{{item}}">{{item.name || item.labelName}}</text>
-      </view>
-      <view class="head head2">性格</view>
-      <view class="tabs">
-        <text class="tab {{item.checked ? 'checked' : ''}}" wx:for="{{character}}" wx:key="{{index}}" data-labelType="character" bindtap="choseTab" data-tabData="{{item}}">{{item.name}}</text>
-      </view>
-      <view class="head head2">爱好</view>
-      <view class="tabs">
-        <text class="tab {{item.checked ? 'checked' : ''}}" wx:for="{{interest}}" wx:key="{{index}}" data-labelType="interest" bindtap="choseTab" data-tabData="{{item}}">{{item.name}}</text>
-      </view>
-      <view class="msg">找不到想要的标签？</view>
-      <view class="addLabel" bindtap="openPop">添加自定义标签</view>
-      <view class="btnBox"><bitton class="save" bindtap="saveLabel">保存</bitton></view>
-    </view>
-  </block> -->
+
+  <view class="custom-api">
+    <view class="msg">找不到想要的标签？</view>
+    <view class="addLabel" bindtap="openPop">添加自定义标签</view>
+    <view class="btnBox"><bitton class="save {{ allChooseLabels.length ? 'active' : ''}}" bindtap="saveLabel">保存</bitton></view>
+  </view>
+
   <view class="customPop" hidden="{{hidePop}}">
     <view class="inner">
       <view class="title">添加自定义标签</view>

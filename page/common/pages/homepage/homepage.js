@@ -47,7 +47,8 @@ Page({
     swiperIndex: 0,
     choseType: '',
     showNav: false,
-    isOwner: false
+    isOwner: false,
+    userInfo: {}
   },
   onLoad(options) {
     if (options.scene) options = app.getSceneParams(options.scene)

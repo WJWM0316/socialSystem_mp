@@ -116,7 +116,11 @@ App({
             if (res.data.token) {
               wx.setStorageSync('token', res.data.token)
               that.globalData.hasLogin = 1
-              if (res.data.nickname) that.globalData.userInfo = res.data.userWechatInfo
+              if (res.data.userWechatInfo) {
+                that.globalData.userInfo = res.data.userWechatInfo
+              } else {
+                that.globalData.userInfo = res.data
+              }
               that.getRoleInfo()
               console.log('用户已认证')
             } else {
@@ -256,6 +260,7 @@ App({
         let data = {
           iv_key: e.detail.iv,
           data: e.detail.encryptedData,
+          session_token: that.globalData.userInfo.authToken,
           ...that.getSource()
         }
         let wxLogin = function () {
@@ -272,6 +277,7 @@ App({
               that.globalData.hasLogin = 1
               that.globalData.userInfo['isNew'] = 1
               if (res.data.userWechatInfo && res.data.userWechatInfo.nickname) that.globalData.userInfo = res.data.userWechatInfo
+              console.log(res.data, '授权后123')
               that.getRoleInfo()
               console.log('用户已认证')
             } else {

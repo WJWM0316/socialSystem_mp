@@ -26,6 +26,11 @@ Component({
     type: {
       type: String,
       value: ''
+    },
+    // 分享的用户
+    shareUser: {
+      type: Object,
+      value: {}
     }
   },
 

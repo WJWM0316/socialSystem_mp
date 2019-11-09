@@ -100,6 +100,7 @@ Page({
   },
   getPositionLists(hasLoading = true) {
     return new Promise((resolve, reject) => {
+      let userInfo = {}
       let isOwner = this.data.isOwner
       let funcApi = null
       let orgData = wx.getStorageSync('orgData')
@@ -121,6 +122,13 @@ Page({
       //     funcApi = getPositionListApi
       //   }
       // }
+
+      if(wx.getStorageSync('choseType') === 'RECRUITER') {
+        userInfo = app.globalData.recruiterDetails
+        if(userInfo.isCompanyTopAdmin && userInfo.uid === this.data.info.uid) {
+          delete params.company_id
+        }
+      }
 
       getPositionListApi(params).then(res => {
         let positionList = this.data.positionList
@@ -378,6 +386,5 @@ Page({
       url: `${RECRUITER}position/post/post`
     })
   },
-  stopPageScroll() {return false },
-
+  stopPageScroll() {return false }
 })

@@ -181,7 +181,7 @@
 		</view> -->
 
 		<block wx:if="{{companyInfos.id}}">
-			<canvasCard cardData="{{companyInfos}}" type="company" bindgetCreatedImg="getCreatedImg"></canvasCard>
+			<canvasCard cardData="{{companyInfos}}" type="company" bindgetCreatedImg="getCreatedImg" shareUser="{{userInfo}}"></canvasCard>
 		</block>
 	</view>
 

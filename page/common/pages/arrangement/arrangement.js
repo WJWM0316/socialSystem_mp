@@ -271,6 +271,7 @@ Page({
       let params = {interviewId: this.data.options.id, ...app.getSource()}
       // if(notClearRedDot) params.isReload = 1
       return interviewDetailApi(params).then(res => {
+        let userInfo = app.globalData.resumeInfo
         let toast = (fn) => {
           let identifyChange = () => {
             app.wxConfirm({
@@ -299,7 +300,7 @@ Page({
                 wx.setStorageSync('choseType', 'RECRUITER')
                 this.setData({identity: 'RECRUITER'})
                 app.getAllInfo()
-                fn && fn()
+                fn()
               },
               cancelBack: () => {
                 wx.reLaunch({url: `${COMMON}homepage/homepage`})
@@ -323,7 +324,7 @@ Page({
         let addressData = wx.getStorageSync('createPosition')
         let positionData = wx.getStorageSync('interviewData')
         let info = res.data
-        if(wx.getStorageSync('choseType') === 'APPLICANT' && [41, 58].includes(info.status) && this.data.options.stips) {
+        if(wx.getStorageSync('choseType') === 'APPLICANT' && [41, 58].includes(info.status) && this.data.options.stips && userInfo.uid !== info.jobhunterInfo.uid) {
           toast(this.pageInit)
         }
         info.jobhunterInfo = Object.assign(info.jobhunterInfo, {lastInterviewStatus: info.status})
@@ -357,12 +358,6 @@ Page({
       }
     }
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  },
-
   /**
    * 生命周期函数--监听页面显示
    */

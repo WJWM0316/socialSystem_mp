@@ -6,9 +6,6 @@ const animation = wx.createAnimation({
   timingFunction: 'ease-in-out'
 })
 Component({
-  /**
-   * 组件的属性列表
-   */
   properties: {
     posterData: {
       type: Object
@@ -48,8 +45,13 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    init() {
+      setTimeout(() => {
+        this.setData({userInfo: app.globalData.userInfo})
+      }, 1000)
+    },
     onGotUserInfo(e) {
-      app.onGotUserInfo(e, true)
+      app.onGotUserInfo(e, true).then(() => this.init())
     },
     oper() {
       this.setData({showChoose: true}, () => {

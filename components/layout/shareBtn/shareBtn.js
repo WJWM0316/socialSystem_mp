@@ -36,19 +36,14 @@ Component({
     userInfo: app.globalData.userInfo
   },
   attached () {
-    app.login()
-    setTimeout(() => {
-      this.setData({userInfo: app.globalData.userInfo})
-    }, 1000)
+    this.init()
   },
   /**
    * 组件的方法列表
    */
   methods: {
-    init() {
-      setTimeout(() => {
-        this.setData({userInfo: app.globalData.userInfo})
-      }, 1000)
+    init(){
+      app.login().then(() => this.setData({userInfo: app.globalData.userInfo}))
     },
     onGotUserInfo(e) {
       app.onGotUserInfo(e, true).then(() => this.init())

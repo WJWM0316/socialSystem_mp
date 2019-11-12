@@ -17,7 +17,8 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad(options) {
+    let userInfo = app.globalData.userInfo
     let getImgFun = null,
         type = options.type,
         title = '',
@@ -55,6 +56,8 @@ Page({
         break
     }
     this.setData({title, options})
+    let shareUser = encodeURIComponent(`uid=${userInfo.uid}&avatar=${userInfo.avatarUrl}&nickname=${userInfo.nickname}`)
+    params = Object.assign(params, {shareUser})
     getImgFun(params).then(res => {
       if (res.data.posterData) wx.setStorageSync('posterData', res.data.posterData)
       this.setData({imgUrl: res.data.url})

@@ -71,16 +71,13 @@ Page({
    * @detail   获取在线的职位类型
    * @return   {[type]}   [description]
    */
-  getPositionTypeList() {
-    getPositionTypeListApi({level: 3}).then(res => {
+  getPositionTypeList(data = {}) {
+    let params = Object.assign({level: 3}, data)
+    getPositionTypeListApi(params).then(res => {
       let typeList = res.data
       typeList.map(field => field.active = false)
       let appendHeadder = [
-        {
-          id: 'all',
-          name: '全部',
-          active: true
-        }
+        {id: 'all', name: '全部', active: true }
       ]
       typeList = appendHeadder.concat(typeList)
       this.setData({typeList})
@@ -117,7 +114,14 @@ Page({
     let dateList = this.data.dateList
     let params = e.currentTarget.dataset
     let interviewList = this.data.interviewList
-    dateList.map(field => field.active = field.id === params.id ? true : false)
+    let date = {}
+    dateList.map(field => {
+      field.active = false
+      if(field.id === params.id) {
+        field.active = true
+        date = field
+      }
+    })
     this.setData({dateList}, () => {
       let startTime = this.data.startTime
       let endTime = this.data.endTime
@@ -127,7 +131,10 @@ Page({
       endTime.active = false
       interviewList.pageNum = 1
       interviewList.list = []
-      this.setData({startTime, endTime, interviewList}, () => this.getLists())
+      this.setData({startTime, endTime, interviewList}, () => {
+        this.getPositionTypeList({gap: date.id})
+        this.getLists()
+      })
     })
   },
   /**
@@ -225,7 +232,10 @@ Page({
         dateList.map(field => field.active = false)
         interviewList.pageNum = 1
         interviewList.list = []
-        this.setData({ dateList, interviewList }, () => this.getLists())
+        this.setData({ dateList, interviewList }, () => {
+          this.getPositionTypeList({startTime: this.data.startTime, endTime: this.data.endTime})
+          this.getLists()
+        })
       }
     })
   },
@@ -275,6 +285,7 @@ Page({
         dateList.map(field => field.active = false)
         interviewList.pageNum = 1
         interviewList.list = []
+        this.getPositionTypeList({startTime: this.data.startTime, endTime: this.data.endTime})
         this.setData({dateList, interviewList}, () => this.getLists())
       }
     })

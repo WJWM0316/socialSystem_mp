@@ -233,7 +233,9 @@ Page({
         interviewList.pageNum = 1
         interviewList.list = []
         this.setData({ dateList, interviewList }, () => {
-          this.getPositionTypeList({startTime: this.data.startTime, endTime: this.data.endTime})
+          let start = new Date(this.data.startTime.date).getTime() / 1000
+          let end = new Date(this.data.endTime.date).getTime() / 1000
+          this.getPositionTypeList({start, end})
           this.getLists()
         })
       }
@@ -285,8 +287,12 @@ Page({
         dateList.map(field => field.active = false)
         interviewList.pageNum = 1
         interviewList.list = []
-        this.getPositionTypeList({startTime: this.data.startTime, endTime: this.data.endTime})
-        this.setData({dateList, interviewList}, () => this.getLists())
+        this.setData({dateList, interviewList}, () => {
+          let start = new Date(this.data.startTime.date).getTime() / 1000
+          let end = new Date(this.data.endTime.date).getTime() / 1000
+          this.getPositionTypeList({start, end})
+          this.getLists()
+        })
       }
     })
   },

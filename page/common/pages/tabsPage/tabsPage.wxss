@@ -199,7 +199,6 @@
   font-weight:300;
   color:rgba(40,40,40,1);
   padding-left: 40rpx;
-  box-sizing: border-box;
   background: white;
   white-space: nowrap;
   position: relative;
@@ -208,6 +207,7 @@
   box-sizing: border-box;
   margin-bottom: 40rpx;
   line-height: 58rpx;
+  height: 64rpx;
 }
 
 ::-webkit-scrollbar {
@@ -222,42 +222,17 @@
   margin-right: 20rpx;
   text-overflow: ellipsis;
   white-space: nowrap;
-  line-height: 58rpx;
+  line-height: 60rpx;
   overflow: hidden;
   max-width: 180rpx;
   text-align: center;
   display: inline-block;
   vertical-align: middle;
-  padding: 0 40rpx;
+  padding: 0 42rpx 0 40rpx;
   border: 1rpx solid #652791;
   border-radius: 30rpx;
   font-size:28rpx;
   color:rgba(101,39,145,1);
-}
-
-.tab-bar .li:before {
-  width:30rpx;
-  height:6rpx;
-  background:rgba(255,220,41,1);
-  border-radius:3rpx;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 2rpx;
-  content: '';
-  display: block;
-  opacity: 0;
-  transition: all ease .4s;
-}
-
-.tab-bar .active {
-  color: #282828;
-  font-weight: 700;
-  pointer-events: none;
-}
-
-.tab-bar .active:before {
-  opacity: 1;
 }
 
 .lookMe {
@@ -374,11 +349,13 @@
   margin: 0;
   padding: 0 30rpx;
   box-sizing: border-box;
-  line-height: 58rpx;
+  line-height: 55rpx;
   background: rgba(248,248,248,1);
   font-size:28rpx;
   color:rgba(40,40,40,1);
-  border: 1rxp solid rgba(232,233,235,1)
+  border: 1rxp solid rgba(232,233,235,1);
+  font-weight: 400;
+  height: 58rpx;
 }
 
 .icon-sanjiaoshaixuan {
@@ -386,11 +363,11 @@
   color: #282828;
   padding-left: 44rpx;
   position: relative;
-  top: -3rpx;
+  top: -8rpx;
 }
 
 .custom-api{
-  padding-bottom:168rpx;
+  padding-bottom:188rpx;
 }
 
 .icon-jiahao{

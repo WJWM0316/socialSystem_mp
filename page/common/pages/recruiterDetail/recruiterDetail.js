@@ -16,7 +16,7 @@ Page({
     showPage: false,
     info: {},
     isOwner: false,
-    isUser: false,
+    isUser: true,
     realIsOwner: false,
     isRecruiter: false,
     positionList: {

@@ -411,6 +411,8 @@
   padding-top: 18rpx;
   overflow: hidden;
   padding-right: 10rpx;
+  position: relative;
+  left: -5rpx;
 }
 
 .todo_ul .strong {

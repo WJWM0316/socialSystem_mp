@@ -132,7 +132,7 @@ Page({
       interviewList.pageNum = 1
       interviewList.list = []
       this.setData({startTime, endTime, interviewList}, () => {
-        this.getPositionTypeList({gap: date.id})
+        if(date.id !== 1) this.getPositionTypeList({gap: date.id})
         this.getLists()
       })
     })

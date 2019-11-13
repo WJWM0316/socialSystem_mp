@@ -111,38 +111,36 @@ Page({
   },
   onShow() {
     let toast = (fn) => {
-      if(app.globalData.isRecruiter) {
-        getRecruiterMyInfo2Api().catch(msg => {
-          // 820 不是该公司下的B身份
-          if (msg.code === 820) {
-            wx.setStorageSync('choseType', 'APPLICANT')
+      getRecruiterMyInfo2Api().catch(msg => {
+        // 820 不是该公司下的B身份
+        if (msg.code === 820) {
+          wx.setStorageSync('choseType', 'APPLICANT')
+          wx.reLaunch({url: `${COMMON}homepage/homepage`})
+        }
+      }).then(() => {
+        app.wxConfirm({
+          title: '提示',
+          content: '检测到你是求职者，是否切换求职者',
+          confirmBack() {
             wx.reLaunch({url: `${COMMON}homepage/homepage`})
+          },
+          cancelBack() {
+            wx.setStorageSync('choseType', 'RECRUITER')
+            app.getAllInfo().then(res => fn())
           }
-        }).then(() => {
-          let that = this
-          fn()
-          app.wxConfirm({
-            title: '提示',
-            content: '检测到你是求职者，是否切换求职者',
-            confirmBack() {
-              wx.reLaunch({url: `${COMMON}homepage/homepage`})
-            },
-            cancelBack() {
-              wx.setStorageSync('choseType', 'RECRUITER')
-              app.getAllInfo().then(res => fn())
-            }
-          })
         })
+      })
+    }
+    let todo = (fn) => {
+      if(app.globalData.isRecruiter) {
+        if(wx.getStorageSync('choseType') === 'APPLICANT') {
+          toast(fn)
+        } else {
+          fn()
+        }
       } else {
         wx.setStorageSync('choseType', 'APPLICANT')
         wx.reLaunch({url: `${COMMON}homepage/homepage`})
-      }
-    }
-    let todo = (fn) => {
-      if(wx.getStorageSync('choseType') === 'APPLICANT') {
-        toast(fn)
-      } else {
-        fn()
       }
     }
     this.setData({pageShow: true})

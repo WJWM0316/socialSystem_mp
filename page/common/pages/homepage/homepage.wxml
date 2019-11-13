@@ -25,7 +25,7 @@
 				<image class="logoBg" src="{{cdnImagePath}}{{!isBangs ? 'headCom1.png?a=2' : 'headCom2.png?a=2'}}" mode="widthFix"></image>
 			</view>
 			
-			<view class="box">
+			<view class="box {{ choseType === 'RECRUITER' ? 'reset1' : ''}}">
 				<view class="company-logo">
 					<image class="logo" src="{{companyInfos.logoInfo.smallUrl}}" mode="aspectFit"></image>
 				</view>

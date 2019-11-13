@@ -59,6 +59,10 @@
   z-index: 3;
 }
 
+.banner .box.reset1 {
+  margin-top: -16rpx;
+}
+
 .banner .company-logo {
   width:140rpx;
   height:140rpx;

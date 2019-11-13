@@ -235,6 +235,7 @@ Page({
     })
 
     if(choseData.checked) {
+      // 当前选择的 可能不在同一个大类下  比如 技术类 或者产品类
       let item1 = labelList.find(v => v.labelId === choseData.labelId)
       let key = `${params.labeltype}Choose`
       let data = this.data[key]

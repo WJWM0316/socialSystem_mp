@@ -225,6 +225,7 @@ Page({
       this.setData({allChooseLabels})
       return
     }
+
     let labelList = this.data[params.labeltype]
     let list = this.data[`${params.labeltype}Choose`]
     let labeltype = params.labeltype
@@ -234,8 +235,17 @@ Page({
     })
 
     if(choseData.checked) {
-      labelList[choseData.index].checked = false
-      list.map((item, index) => item.labelId === choseData.labelId && list.splice(index, 1))
+      let item1 = labelList.find(v => v.labelId === choseData.labelId)
+      let key = `${params.labeltype}Choose`
+      let data = this.data[key]
+      if(item1) {
+        labelList[choseData.index].checked = false
+        list.map((item, index) => item.labelId === choseData.labelId && list.splice(index, 1))
+      } else {
+        allChooseLabels.splice(allChooseLabels.findIndex(v => v.labelId === choseData.labelId), 1)
+        data.splice(data.findIndex(v => v.labelId === choseData.labelId), 1)
+        this.setData({allChooseLabels, [key]: data})
+      }
     } else {
       if (this.data.allChooseLabels.length > 5) {
         app.wxToast({title: '选择标签已达上限'})

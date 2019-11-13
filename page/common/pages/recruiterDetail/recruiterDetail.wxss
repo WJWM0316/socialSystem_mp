@@ -27,6 +27,7 @@
   overflow: hidden;
   background: #fff;
   box-shadow:0rpx 4rpx 20rpx 0rpx rgba(101,39,145,0.1);
+  padding-top: 18rpx;
 }
 .content {
   position: relative;
@@ -789,4 +790,8 @@
 .no-position-tips .strong{
   color: rgba(101,39,145,1);
   display: inline;
+}
+
+.inner01 {
+  
 }

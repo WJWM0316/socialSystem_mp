@@ -161,7 +161,7 @@
   border-radius: 50%;
   position: absolute;
   top: 22rpx;
-  left: 28rpx;
+  left: 34rpx;
 }
 .roleInfoCard .applicant .img.filter {
   filter: blur(8rpx);

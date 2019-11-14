@@ -100,35 +100,22 @@ Page({
   },
   getPositionLists(hasLoading = true) {
     return new Promise((resolve, reject) => {
+      let info = this.data.info
       let userInfo = {}
       let isOwner = this.data.isOwner
       let funcApi = null
       let orgData = wx.getStorageSync('orgData')
-      let params = {recruiter: this.data.options.uid, count: this.data.pageCount, page: this.data.positionList.pageNum, hasLoading}
-      if(isOwner) {
-        params = Object.assign(params, {is_online: 1})
-      }
-      if(orgData) {
-        params = Object.assign(params, {company_id: orgData.id})
-      } else {
-        if (app.globalData.currentCompanyId) params = Object.assign(params, {company_id: app.globalData.currentCompanyId})
-      }
-      // if(wx.getStorageSync('choseType') !== 'RECRUITER') {
-      //   funcApi = getPositionListApi
+      let params = {is_online: 1, recruiter: this.data.options.uid, count: this.data.pageCount, page: this.data.positionList.pageNum, hasLoading}
+
+      params = Object.assign(params, {company_id: app.globalData.currentCompanyId})
+
+      // if(orgData) {
+      //   params = Object.assign(params, {company_id: orgData.id})
       // } else {
-      //   if(app.globalData.recruiterDetails.isCompanyTopAdmin) {
-      //     funcApi = getPositionCompanyTopListApi
-      //   } else {
-      //     funcApi = getPositionListApi
-      //   }
+      //   if (app.globalData.currentCompanyId) params = Object.assign(params, {company_id: app.globalData.currentCompanyId})
       // }
 
-      if(wx.getStorageSync('choseType') === 'RECRUITER') {
-        userInfo = app.globalData.recruiterDetails
-        if(userInfo.isCompanyTopAdmin && userInfo.uid === this.data.info.uid) {
-          delete params.company_id
-        }
-      }
+      if(info.isCompanyTopAdmin) delete params.company_id
 
       getPositionListApi(params).then(res => {
         let positionList = this.data.positionList

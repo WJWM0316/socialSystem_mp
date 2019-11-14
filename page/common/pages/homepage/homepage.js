@@ -182,7 +182,7 @@ Page({
         wx.navigateTo({url: `${RECRUITER}user/company/recruiterList/recruiterList?companyId=${this.data.companyInfos.id}`})
         break
       case 'otherOrgList':
-        wx.navigateTo({url: `${RECRUITER}organization/list/list?companyId=${this.data.companyInfos.topId}`})
+        wx.navigateTo({url: `${RECRUITER}organization/list/list?companyId=${this.data.companyInfos.topId}&type=preview`})
         break
       case 'introductionMore':
         wx.navigateTo({url: `${COMMON}homepageMore/homepageMore`})

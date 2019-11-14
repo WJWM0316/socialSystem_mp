@@ -48,10 +48,11 @@ Page({
   roouteJump (e) {
     let item = e.currentTarget.dataset.item,
         type = e.currentTarget.dataset.type
+        console.log(item)
     switch (type) {
       case 'preview':
+        wx.setStorageSync('orgData', item)
         if(app.globalData.recruiterDetails.isCompanyTopAdmin) {
-          wx.setStorageSync('orgData', item)
           wx.navigateTo({url: `${RECRUITER}company/indexEdit/indexEdit?type=org&from=organization&companyId=${item.id}`})
         } else {
           wx.navigateTo({url: `${COMMON}homepage/homepage?companyId=${item.id}`})

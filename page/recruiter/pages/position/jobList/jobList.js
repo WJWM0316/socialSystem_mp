@@ -396,7 +396,6 @@ Page({
 
       // 确认开撩
       case 'confirm_chat':
-        // console.log(params);return
         if(params.status === 0) {
           app.wxConfirm({
             title: '开放职位约面',

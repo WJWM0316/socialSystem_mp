@@ -271,7 +271,6 @@ Component({
           if (result[1] === -1) result = 0
           list = [startNumB, endNumB]
           this.setData({list, result, mode: 'multiSelector', placeholder: this.data.placeholderTxt || '请选择期望薪资'})
-          // console.log({list, result, mode: 'multiSelector', placeholder: this.data.placeholderTxt || '请选择期望薪资'})
           break
         case 'occupation':
           getJobLabelApi({type: 'skills'}).then(res => {

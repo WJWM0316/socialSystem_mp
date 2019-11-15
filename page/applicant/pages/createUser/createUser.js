@@ -924,7 +924,6 @@ Page({
   },
   backEvent () {
     let step = this.data.step
-    console.log(step)
     if (step === 0 || step === 1 || step === 3) {
       this.setData({showPop: true})
     } else {

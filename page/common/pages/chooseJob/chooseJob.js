@@ -52,8 +52,6 @@ Page({
     let api = ''
     if(wx.getStorageSync('choseType') === 'RECRUITER') {
       api = this.data.nowTab === 'online' ? 'getonLinePositionListB' : 'getoffLinePositionListB'
-      // 招聘端则判断个人身份是否已经认证 不然不能发布职位
-      // this.getCompanyIdentityInfos()
     } else {
       api = 'getonLinePositionListC'
     }
@@ -461,7 +459,6 @@ Page({
 
       // 确认开撩
       case 'confirm_chat':
-        // console.log(params);return
         if(params.status === 0) {
           app.wxConfirm({
             title: '开放职位约面',

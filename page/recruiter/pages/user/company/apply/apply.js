@@ -37,7 +37,6 @@ Page({
     applyJoin: false
   },
   onLoad(options) {
-    console.log(options)
     wx.setStorageSync('choseType', 'RECRUITER')
     this.setData({options})
   },

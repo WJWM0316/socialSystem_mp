@@ -127,7 +127,6 @@ Page({
     let title = this.data.title,
         background = this.data.background,
         navColor = this.data.navColor
-    console.log(e.scrollTop, 11)
     if(e.scrollTop > 10) {
       if (background !== '#fff') {
         title = '精选顾问'

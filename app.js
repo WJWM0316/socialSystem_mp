@@ -5,7 +5,7 @@ import{getCompanyOrglistApi} from 'api/pages/company.js'
 import {getPositionQrcodeApi, getRecruiterQrcodeApi, getResumerCodeApi, getCompanyQrcodeApi} from 'api/pages/qrcode.js'
 import {getPersonalResumeApi} from 'api/pages/center.js'
 import {getRecruiterDetailApi} from 'api/pages/recruiter.js'
-import {COMMON,RECRUITER,APPLICANT} from "config.js"
+import {COMMON,RECRUITER,APPLICANT, environment} from "config.js"
 import {getUserRoleApi} from "api/pages/user.js"
 import {quickLoginApi} from 'api/pages/auth.js'
 import {shareC, shareB} from 'utils/shareWord.js'
@@ -18,7 +18,7 @@ let formIdList = [],
 App({
   onLaunch(e) {
     let extConfig = wx.getExtConfigSync? wx.getExtConfigSync(): {}
-    console.log(extConfig, '提测清单')
+    if(environment) console.log(extConfig, '提测清单')
     this.globalData.appId = wx.getAccountInfoSync().miniProgram.appId
     // 获取导航栏高度
     this.checkUpdateVersion()
@@ -27,7 +27,6 @@ App({
     wx.getSystemInfo({
       success: res => {
         //导航高度
-        console.log(res, '系统信息')
         this.globalData.navHeight = res.statusBarHeight + 44
         if (res.model.indexOf('iPhone X') !== -1) {
           this.globalData.isIphoneX = true

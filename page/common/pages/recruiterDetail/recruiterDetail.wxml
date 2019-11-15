@@ -97,31 +97,52 @@
           <view wx:if="{{isOwner}}" class="addDeclaration" bindtap="editJump" data-type="addDeclaration">添加招聘宣言</view>
         </view> -->
       </view>
-
-      <view class="position" wx:if="{{!isOwner || !showEdit}}">
-        <view class="title" wx:if="{{info.isCompanyTopAdmin && positionList.list.length}}">
-          <view class="icon">
-            <view class="fan"></view>
-          </view>
-          <text class="txt">在招职位</text>
-        </view>
-        <company roleType="detailCompany" cardData="{{info.companyInfo}}" wx:if="{{!info.isCompanyTopAdmin}}"></company>
-
-        <view class="positionList" wx:if="{{positionList.list.length}}">
-          <button form-type="submit" class="clear-style positionItem" wx:for="{{positionList.list}}" wx:key="{{index}}" bindtap="jumpPage" data-id="{{item.id}}">
-            <view class="positionHead"><text class="positionTitle">{{item.positionName}}</text><text class="money">{{item.emolumentMin * 1000}}~{{item.emolumentMax * 1000}}<text class="moneyTxt">元/月</text></text></view>
-            <view class="positionDeatil">
-              <text wx:if="{{item.city && item.district}}">{{item.city}}-{{item.district}} · </text>
-              <text>{{item.workExperienceName}} · </text>
-              <text>{{item.educationName}}</text>
+      
+      <block wx:if="{{info.isCompanyTopAdmin}}">
+        <block wx:if="{{positionList.list.length}}">
+          <view class="position" wx:if="{{!isOwner || !showEdit}}">
+            <view class="title">
+              <view class="icon">
+                <view class="fan"></view>
+              </view>
+              <text class="txt">在招职位</text>
             </view>
-          </button>
+            <view class="positionList">
+              <button form-type="submit" class="clear-style positionItem" wx:for="{{positionList.list}}" wx:key="{{index}}" bindtap="jumpPage" data-id="{{item.id}}">
+                <view class="positionHead"><text class="positionTitle">{{item.positionName}}</text><text class="money">{{item.emolumentMin * 1000}}~{{item.emolumentMax * 1000}}<text class="moneyTxt">元/月</text></text></view>
+                <view class="positionDeatil">
+                  <text wx:if="{{item.city && item.district}}">{{item.city}}-{{item.district}} · </text>
+                  <text>{{item.workExperienceName}} · </text>
+                  <text>{{item.educationName}}</text>
+                </view>
+              </button>
+            </view>
+          </view>
+        </block>
+        <view class="position" wx:if="{{!positionList.list.length && isOwner && identity === 'RECRUITER'}}">
+          <view class="nopositionList">
+            <image class="pic" src="{{cdnImagePath}}emptyState.png"></image>
+            <view class="no-position-tips">还没有职位信息哦，赶紧去发布职位吧！<view class="strong" bindtap="publicPosition">发布职位>></view></view>
+          </view>
         </view>
-        <view class="nopositionList" wx:if="{{!positionList.list.length && isOwner && identity === 'RECRUITER'}}">
-          <image class="pic" src="{{cdnImagePath}}emptyState.png"></image>
-          <view class="no-position-tips">还没有职位信息哦，赶紧去发布职位吧！<view class="strong" bindtap="publicPosition">发布职位>></view></view>
+      </block>
+
+      <block wx:if="{{!info.isCompanyTopAdmin}}">
+        <view class="position" wx:if="{{!isOwner || !showEdit}}">
+          <company roleType="detailCompany" cardData="{{info.companyInfo}}"></company>
+          <view class="positionList" wx:if="{{positionList.list.length}}">
+            <button form-type="submit" class="clear-style positionItem" wx:for="{{positionList.list}}" wx:key="{{index}}" bindtap="jumpPage" data-id="{{item.id}}">
+              <view class="positionHead"><text class="positionTitle">{{item.positionName}}</text><text class="money">{{item.emolumentMin * 1000}}~{{item.emolumentMax * 1000}}<text class="moneyTxt">元/月</text></text></view>
+              <view class="positionDeatil">
+                <text wx:if="{{item.city && item.district}}">{{item.city}}-{{item.district}} · </text>
+                <text>{{item.workExperienceName}} · </text>
+                <text>{{item.educationName}}</text>
+              </view>
+            </button>
+          </view>
         </view>
-      </view>
+      </block>
+
       <applyEntry wx:if="{{identity !== 'RECRUITER' && !info.companyInfo.hideDdPromote}}" companyId="{{info.companyInfo.id}}" data-id="{{info.companyInfo.hideDdPromote}}"></applyEntry>
       <button form-type="submit" class="clear-style" wx:if="{{!realIsOwner}}">
         <view class="collection icon iconfont icon-ganxingqu" wx:if="{{!info.interested}}" bindtap="collect"></view>

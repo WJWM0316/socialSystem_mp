@@ -104,7 +104,6 @@ Page({
           if (this.selectComponent('#interviewBar')) {
             this.selectComponent('#interviewBar').init()
           }
-          console.log(this.data)
           resolve(res)
         })
       }).catch(e => {

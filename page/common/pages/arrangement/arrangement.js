@@ -247,7 +247,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    console.log(options, 'kkkk')
     let identity = app.identification(options)
     this.setData({options, identity})
     positionCard = ''
@@ -344,7 +343,6 @@ Page({
           }
         }
         this.setData({info})
-        console.log(info, 'kkkk')
       })
     } else {
       let recruiter_chat_infos = wx.getStorageSync('recruiter_chat_infos')

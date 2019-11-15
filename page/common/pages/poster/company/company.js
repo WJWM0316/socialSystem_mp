@@ -163,7 +163,6 @@ Page({
           quality: 1,
           canvasId: 'canvas',
           success(res) {
-            console.log(res.tempFilePath)
             that.setData({imgUrl: res.tempFilePath, imgH: curHeight})
             wx.hideLoading()
           }
@@ -309,7 +308,6 @@ Page({
           })
         },
         fail: function (e) {
-          console.log(e)
           app.wxToast({
             title: '保存失败'
           })

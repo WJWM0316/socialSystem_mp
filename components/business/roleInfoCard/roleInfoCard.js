@@ -70,7 +70,6 @@ Component({
       })
     },
     jumpEditBase() {
-      console.log(this.data.options)
       let url = `${RECRUITER}company/homepageEdit/homepageEdit?companyId=${this.data.cardData.id}`
       if(this.data.options.type) {
         url += `&type=${this.data.options.type}`

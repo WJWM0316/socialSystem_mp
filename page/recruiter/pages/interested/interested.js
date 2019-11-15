@@ -108,7 +108,6 @@ Page({
     let params = e.currentTarget.dataset
     // 可能会存在空对象
     if(!Object.keys(params).length) return;
-    // console.log(params)
     wx.navigateTo({url: `${COMMON}resumeDetail/resumeDetail?uid=${params.jobhunteruid}`})
   },
   formSubmit(e) {

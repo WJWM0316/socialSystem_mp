@@ -328,7 +328,6 @@ Component({
 
       // 判断用户是否登录
       if (app.loginInit) {
-        console.log(app.globalData.hasLogin, 1111111111111)
         if (!app.globalData.hasLogin) {
           this.setData({showLoginBox: true})
         } else {

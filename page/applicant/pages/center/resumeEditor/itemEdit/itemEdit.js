@@ -163,7 +163,6 @@ Page({
           endTime: item.endTime,
           info: item
         })
-        console.log(item)
         return
       }
     })

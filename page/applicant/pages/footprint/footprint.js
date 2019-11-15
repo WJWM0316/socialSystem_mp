@@ -167,7 +167,6 @@ Page({
   routeJump(e) {
     let params = e.currentTarget.dataset
     if(this.data.tab === 'companyList') {
-      console.log(params, 111)
       wx.navigateTo({url: `${COMMON}homepage/homepage?companyId=${params.id}`})
     } else {
       wx.navigateTo({url: `${COMMON}recruiterDetail/recruiterDetail?uid=${params.uid}`})

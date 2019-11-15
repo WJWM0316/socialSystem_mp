@@ -38,7 +38,6 @@ Component({
         const companyInfo = res.data.companyInfo
         const joinType = res.data.joinType
         wx.setStorageSync('choseType', 'RECRUITER')
-        console.log(companyInfo,'companyInfo')
         if(joinType === 3) {
           wx.navigateTo({url: `${RECRUITER}user/company/status/status?from=join&identity=APPLICANT`})
         } else {

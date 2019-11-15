@@ -140,10 +140,7 @@ Page({
     }
 
     Promise.all(checkLists)
-    .then(res => this.submit(formData)).catch(err => {
-      console.log(err)
-      app.wxToast({title: err})
-    })
+    .then(res => this.submit(formData)).catch(err => app.wxToast({title: err}))
   },
   /**
    * @Author   小书包

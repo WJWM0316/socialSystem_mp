@@ -1,16 +1,45 @@
-import {getSelectorQuery} from "../../../../utils/util.js"
-import {getOthersRecruiterDetailApi, getRecruiterDetailApi, giveMecallApi, putLabelFavorApi, removeLabelFavorApi} from "../../../../api/pages/recruiter.js"
-import {getPositionListApi, getPositionCompanyTopListApi} from "../../../../api/pages/position.js"
-import {getRecruiterQrcodeApi} from '../../../../api/pages/qrcode.js'
-import {getMyCollectUserApi, deleteMyCollectUserApi} from "../../../../api/pages/collect.js"
-import {COMMON,RECRUITER,APPLICANT} from "../../../../config.js"
-import {shareRecruiter} from '../../../../utils/shareWord.js'
+import {
+  getSelectorQuery
+} from "../../../../utils/util.js"
+
+import {
+  getOthersRecruiterDetailApi,
+  getRecruiterDetailApi,
+  giveMecallApi,
+  putLabelFavorApi,
+  removeLabelFavorApi
+} from "../../../../api/pages/recruiter.js"
+
+import {
+  getPositionListApi,
+  getPositionCompanyTopListApi
+} from "../../../../api/pages/position.js"
+
+import {
+  getRecruiterQrcodeApi
+} from '../../../../api/pages/qrcode.js'
+
+import {
+  getMyCollectUserApi,
+  deleteMyCollectUserApi
+} from "../../../../api/pages/collect.js"
+
+import {
+  COMMON,
+  RECRUITER,
+  APPLICANT
+} from "../../../../config.js"
+
+import {
+  shareRecruiter
+} from '../../../../utils/shareWord.js'
 
 let recruiterCard = ''
 let app = getApp()
 let positionTop = 0
 let identity = ''
 let isLock = 0
+
 Page({
   data: {
     showPage: false,
@@ -41,6 +70,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
+    console.log(options)
     recruiterCard = ''
     if (options.scene) options = app.getSceneParams(options.scene)
     if (identity !== 'RECRUITER') this.setData({isApplicant: true})
@@ -100,20 +130,17 @@ Page({
   },
   getPositionLists(hasLoading = true) {
     return new Promise((resolve, reject) => {
+
       let info = this.data.info
-      let userInfo = {}
-      let isOwner = this.data.isOwner
-      let funcApi = null
-      let orgData = wx.getStorageSync('orgData')
-      let params = {is_online: 1, recruiter: this.data.options.uid, count: this.data.pageCount, page: this.data.positionList.pageNum, hasLoading}
-
-      params = Object.assign(params, {company_id: app.globalData.currentCompanyId})
-
-      // if(orgData) {
-      //   params = Object.assign(params, {company_id: orgData.id})
-      // } else {
-      //   if (app.globalData.currentCompanyId) params = Object.assign(params, {company_id: app.globalData.currentCompanyId})
-      // }
+      if(!Reflect.has(info.companyInfo), 'id') return
+      let params = {
+        company_id: info.companyInfo.id,
+        is_online: 1,
+        recruiter: this.data.options.uid,
+        count: this.data.pageCount,
+        page: this.data.positionList.pageNum,
+        hasLoading
+      }
 
       if(info.isCompanyTopAdmin) delete params.company_id
 
@@ -124,7 +151,7 @@ Page({
         positionList.isLastPage = res.data.length === 20 ? false : true
         positionList.pageNum = positionList.pageNum + 1
         positionList.isRequire = true
-        // positionList.total = res.meta.total
+        positionList.total = res.meta.total
         isLock = 0
         this.setData({positionList}, () => resolve(res))
       })
@@ -353,9 +380,7 @@ Page({
       this.getPositionLists(false)
     }
   },
-  tips() {
-
-  },
+  tips() {},
   edit() {
     if(this.data.isOwner) this.setData({showEdit: true})
   },

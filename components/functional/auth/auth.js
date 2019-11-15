@@ -38,7 +38,6 @@ Component({
       getApp().onGotUserInfo(e, 'closePop').then(res => {
         this.triggerEvent('authSuccess', true)
       }).catch(err => {
-        console.log(err)
         this.setData({confirmPop: true})
       })
     }

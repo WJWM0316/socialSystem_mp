@@ -53,7 +53,6 @@ Component({
           index = this.data.activeIndex,
           pickerType = this.data.pickerType,
           pickerData = this.data.pickerData
-            console.log(this.data.pickerType, 444444444444444444444)
       switch (item.type) {
         case 'region':
           this.getRegionData().then(res => {

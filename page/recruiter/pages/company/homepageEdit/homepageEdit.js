@@ -72,7 +72,6 @@ Page({
         }
         break
       case 'editCompanyAddress':
-        // console.log(params)
         // wx.navigateTo({url: `${COMMON}recruiterDetail/recruiterDetail?uid=${app.globalData.recruiterDetails.uid}`})
         break
       default:

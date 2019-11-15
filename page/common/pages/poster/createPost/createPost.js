@@ -157,7 +157,6 @@ Page({
               })
             },
             fail: function (e) {
-              console.log(e)
               app.wxToast({
                 title: '保存失败'
               })

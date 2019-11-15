@@ -165,7 +165,6 @@ Page({
           info: item,
           // degreeDesc: '中专/中技'
         })
-        console.log(this.data)
         if (item.endTimeDesc === '至今') {
           toToday = true
         }

@@ -157,6 +157,5 @@ Page({
   
   jump () {
     wx.navigateTo({url: `${APPLICANT}officerActive/more/more`})
-//  console.log('page/applicant/pages/officerActive/more/more')
   }
 })

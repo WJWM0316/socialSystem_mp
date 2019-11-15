@@ -48,7 +48,6 @@ Page({
   roouteJump (e) {
     let item = e.currentTarget.dataset.item,
         type = e.currentTarget.dataset.type
-        console.log(item)
     switch (type) {
       case 'preview':
         wx.setStorageSync('orgData', item)

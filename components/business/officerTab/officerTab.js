@@ -62,7 +62,6 @@ Component({
           let list = this.data.list
           list = list.filter(field => field.uid !== params.uid)
           this.setData({list})
-          console.log(list, params)
           // this.triggerEvent('refreshevent', {uid})
           // deleteBrowseUserApi({uid}).then(res => {
           //   this.triggerEvent('refreshevent', {uid})

@@ -143,7 +143,7 @@ export const request = ({name = '', method = 'post', url, host, data = {}, needK
           wx.hideLoading()
           loadNum = 0
         }
-        console.log(url, res.data)
+        console.log(BASEHOST+url,data, res.data)
         if (typeof res.data === 'string') { // 转换返回json
           res.data = JSON.parse(res.data)
         }

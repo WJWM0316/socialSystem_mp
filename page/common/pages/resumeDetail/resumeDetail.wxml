@@ -54,7 +54,7 @@
           <block wx:if="{{info.signature}}">
             <image class="fgLine" src="{{cdnImagePath}}line.png"></image>
             <view class="personalTip">
-              <view class="text">{{info.signature || '你还未填写个性签名，说说你的想法吧~'}}</view>
+              <text class="text">{{info.signature || '你还未填写个性签名，说说你的想法吧~'}}</text>
               <view class="tipBox" wx:if="{{info.personalizedLabels.length > 0}}">
                 <text class="tip" wx:for="{{info.personalizedLabels}}" wx:key="{{index}}">{{item.labelName || item.name}}</text>
               </view>

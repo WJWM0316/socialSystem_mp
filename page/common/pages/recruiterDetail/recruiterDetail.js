@@ -70,7 +70,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    console.log(options)
     recruiterCard = ''
     if (options.scene) options = app.getSceneParams(options.scene)
     if (identity !== 'RECRUITER') this.setData({isApplicant: true})
@@ -115,13 +114,15 @@ Page({
         } else {
           info.hasDeleted = 0
         }
-        this.setData({isOwner, isUser, info, realIsOwner: res.data.isOwner, identity: wx.getStorageSync('choseType')}, function() {
+        this.setData({isOwner, isUser, info, realIsOwner: res.data.isOwner, identity: wx.getStorageSync('choseType')}, () => {
           if(this.selectComponent('#interviewBar')) this.selectComponent('#interviewBar').init()
           this.getDomNodePosition()
           if (this.data.isOwner) {
             app.globalData.recruiterDetails = res.data
           }
-          this.getPositionLists(false)
+          if(info.companyInfo.id) {
+            this.getPositionLists(false)
+          }
           if (this.data.options && this.data.options.pick) this.selectComponent('#shareBtn').oper()
           resolve(res)
         })
@@ -132,7 +133,6 @@ Page({
     return new Promise((resolve, reject) => {
 
       let info = this.data.info
-      if(!Reflect.has(info.companyInfo), 'id') return
       let params = {
         company_id: info.companyInfo.id,
         is_online: 1,
@@ -192,7 +192,7 @@ Page({
   },
   getDomNodePosition() {
     getSelectorQuery('.mainContent .position').then(res => {
-      positionTop = res.top
+      if(res) positionTop = res.top
     })
   },
   jump() {

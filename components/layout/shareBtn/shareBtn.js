@@ -46,7 +46,7 @@ Component({
       app.login().then(() => this.setData({userInfo: app.globalData.userInfo}))
     },
     onGotUserInfo(e) {
-      app.onGotUserInfo(e, true).then(() => this.init())
+      app.onGotUserInfo(e, 'closePop').then(() => this.init())
     },
     oper() {
       this.setData({showChoose: true}, () => {

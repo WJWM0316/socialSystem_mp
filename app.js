@@ -251,6 +251,7 @@ App({
   },
   // 授权button 回调
   onGotUserInfo(e, operType) {
+    console.log(e, operType, 'kkkk')
     let that = this
     return new Promise((resolve, reject) => {
       if (e.detail.errMsg === 'getUserInfo:ok') {
@@ -276,7 +277,6 @@ App({
               that.globalData.hasLogin = 1
               that.globalData.userInfo['isNew'] = 1
               if (res.data.userWechatInfo && res.data.userWechatInfo.nickname) that.globalData.userInfo = res.data.userWechatInfo
-              console.log(res.data, '授权后123')
               that.getRoleInfo()
               console.log('用户已认证')
             } else {

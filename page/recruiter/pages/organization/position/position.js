@@ -27,10 +27,12 @@ Page({
     },
     params: {},
     buttonClick: false,
-    detail: app.globalData.recruiterDetails
+    detail: app.globalData.recruiterDetails,
+    shareType: '',
+    todoAction: ''
   },
   onLoad(options) {
-    this.setData({options})
+    this.setData({ options })
   },
   onShow() {
     let onLinePositionList = {
@@ -40,6 +42,7 @@ Page({
       isLastPage: false,
       isRequire: false
     }
+    this.init()
     let detail = app.globalData.recruiterDetails
     if(app.setOrgInit) {
       this.setData({onLinePositionList, detail}, () => this.getOnlineLists(true))
@@ -49,6 +52,42 @@ Page({
         this.setData({onLinePositionList, detail}, () => this.getOnlineLists(true))
       })
     }
+  },
+  init(){
+    app.login().then(() => {
+      let userInfo = app.globalData.userInfo
+      let options = this.data.options
+      let shareType = this.data.shareType
+      let todoAction = this.data.todoAction
+      switch(options.type) {
+        case 'ps-position-min':
+          shareType = 'share'
+          todoAction = ''
+          break
+        case 'ps-position':
+          if(app.globalData.recruiterDetails.isCompanyTopAdmin) {
+            if(userInfo.nickname) {
+              shareType = ''
+              todoAction = 'onClick'
+            } else {
+              shareType = 'getUserInfo'
+              todoAction = ''
+            }
+          } else {
+            shareType = ''
+            todoAction = 'onClick'
+          }
+          break
+        default:
+          shareType = ''
+          todoAction = 'onClick'
+          break
+      }
+      this.setData({shareType, todoAction})
+    })
+  },
+  onGotUserInfo(e) {
+    app.onGotUserInfo(e, 'closePop').then(() => this.init())
   },
   getOnlineLists(hasLoading = true) {
     let Api = this.data.detail.isCompanyTopAdmin ? getPositionCompanyTopListApi : getRecruiterPositionListApi

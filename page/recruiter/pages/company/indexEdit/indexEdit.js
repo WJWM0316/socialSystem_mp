@@ -41,7 +41,8 @@ Page({
     switch(e.currentTarget.dataset.type) {
       case 'main':
         wx.navigateTo({
-          url: `${COMMON}homepage/homepage?companyId=${app.globalData.recruiterDetails.companyInfo.id}&type=${this.data.options.type}`
+          // url: `${COMMON}homepage/homepage?companyId=${app.globalData.recruiterDetails.companyInfo.id}&type=${this.data.options.type}`
+          url: `${COMMON}homepage/homepage?companyId=${this.data.options.companyId}`
         })
         // if (app.globalData.recruiterDetails.isCompanyAdmin) {
         //   wx.navigateTo({

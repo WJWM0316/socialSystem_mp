@@ -13,12 +13,14 @@
   
   <view class="radio-group">
     <button
-      open-type="{{options.type === 'ps-position-min' ? 'share' : ''}}"
+      open-type="{{ shareType }}"
       class="clear-style li"
       wx:for="{{onLinePositionList.list}}"
       wx:key="{{index}}"
       data-item="{{item}}"
-      bindtap="{{options.type === 'ps-position-min' ? '' : 'onClick'}}"
+      bindtap="{{ todoAction }}"
+      lang="zh_CN"
+      bindgetuserinfo="onGotUserInfo"
       data-index="{{index}}">
       <view class="content">
         <view class="title">

@@ -142,7 +142,7 @@ Page({
         break
       case 'resume':
         wx.navigateTo({
-          url: `${APPLICANT}center/demoupload/demoupload`
+          url: `${APPLICANT}center/uploadAttach/uploadAttach`
         })
         break
       default:

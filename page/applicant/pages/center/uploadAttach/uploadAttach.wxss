@@ -20,6 +20,13 @@
   border-radius: 50%;
   display: inline-block;
   vertical-align: middle;
+  line-height: 56rpx;
+  text-align: center;
+}
+
+.un-upload .icon-box .iconfont{
+  color: white;
+  font-size: 28rpx;
 }
 
 .un-upload .text {
@@ -81,7 +88,6 @@
 .uploading .img-box{
   width:146rpx;
   height:146rpx;
-  background:rgba(250,57,57,1);
   display: inline-block;
   position: relative;
   overflow: hidden;
@@ -167,15 +173,10 @@
 }
 
 .uploading .icon-err {
-  width:40rpx;
-  height:40rpx;
-  background:rgba(255,127,76,1);
-  border-radius: 50%;
   margin-right: 22rpx;
   display: inline-block;
   vertical-align: top;
-  position: relative;
-  top: 16rpx;
+  color: rgba(255,127,77,1);
 }
 
 .uploading .err-class {

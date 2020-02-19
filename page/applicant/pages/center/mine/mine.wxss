@@ -338,3 +338,7 @@
   overflow: hidden;
   color: #929292;
 }
+
+.un-upload {
+  color: #652791;
+}

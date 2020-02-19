@@ -13,7 +13,7 @@ Page({
     platform: app.globalData.platform,
     navH: app.globalData.navHeight,
     cdnPath: app.globalData.cdnImagePath,
-    attachResume: {
+    resumeAttach: {
       name: '',
       path: '',
       size: 0,
@@ -52,11 +52,11 @@ Page({
   },
   onLoad() {
     this.getMyInfo().then(() => {
-      const attachResume = app.globalData.resumeInfo.resumeAttach
-      if(!attachResume) {
+      const resumeAttach = app.globalData.resumeInfo.resumeAttach
+      if(!resumeAttach) {
         return
       }
-      this.setData({ attachResume })
+      this.setData({ resumeAttach })
     })    
   },
   backEvent() {
@@ -130,26 +130,26 @@ Page({
     }
     let fileMinSize = 1024 * 1024 * 3; //3M
     let fileMaxSize = 1024 * 1024 * 10; //10M
-    let attachResume = this.data.attachResume
-    attachResume = Object.assign(attachResume, file, { uploading: true })
-    that.setData({ attachResume })
+    let resumeAttach = this.data.resumeAttach
+    resumeAttach = Object.assign(resumeAttach, file, { uploading: true })
+    that.setData({ resumeAttach })
     if (file.size < fileMinSize) {
-      attachResume = Object.assign(attachResume, { tips: '文件上传中，请稍等...'})
-      that.setData({ attachResume })
-      console.log('a', attachResume)
+      resumeAttach = Object.assign(resumeAttach, { tips: '文件上传中，请稍等...'})
+      that.setData({ resumeAttach })
+      console.log('a', resumeAttach)
     } else {
-      attachResume = Object.assign(attachResume, { tips: '大文件上传需要较长时间，请稍等...'})
-      that.setData({ attachResume })
-      console.log('b', attachResume)
+      resumeAttach = Object.assign(resumeAttach, { tips: '大文件上传需要较长时间，请稍等...'})
+      that.setData({ resumeAttach })
+      console.log('b', resumeAttach)
     }
     if (!allowFileType.includes(file.type)) {
-      attachResume = Object.assign(attachResume, { errTips: '上传失败，文件格式不支持', tips: ''})
-      that.setData({ attachResume })
-      console.log('c', attachResume)
+      resumeAttach = Object.assign(resumeAttach, { errTips: '上传失败，文件格式不支持', tips: ''})
+      that.setData({ resumeAttach })
+      console.log('c', resumeAttach)
     } else if (file.size > fileMaxSize) {
-      attachResume = Object.assign(attachResume, { errTips: '上传失败，文件不可大于10M', tips: ''})
-      that.setData({ attachResume })
-      console.log('d', attachResume)
+      resumeAttach = Object.assign(resumeAttach, { errTips: '上传失败，文件不可大于10M', tips: ''})
+      that.setData({ resumeAttach })
+      console.log('d', resumeAttach)
     } else {
 
       switch(file.type) {
@@ -168,7 +168,7 @@ Page({
       } else {
         BASEHOST = RECRUITERHOST
       }
-      that.setData({ attachResume })
+      that.setData({ resumeAttach })
       uploadTask = wx.uploadFile({
         url: `${BASEHOST}/attaches`,
         filePath: file.path,
@@ -181,8 +181,8 @@ Page({
         formData,
         success(res) {
           let data = typeof res.data === "string" ? JSON.parse(res.data) : res.data
-          data = Object.assign(attachResume, data.data[0], {uploading: false})
-          that.setData({ attachResume: data }, () => that.saveAttach({attach_resume: attachResume.id, attach_name: attachResume.name}))
+          data = Object.assign(resumeAttach, data.data[0], {uploading: false})
+          that.setData({ resumeAttach: data }, () => that.saveAttach({attach_resume: resumeAttach.id, attach_name: resumeAttach.name}))
         },
         fail(err) {
           if (res.statusCode === 401) {
@@ -205,12 +205,12 @@ Page({
             let data = typeof res.data === "string" ? JSON.parse(res.data) : res.data
             if (data.msg) getApp().wxToast({title: data.msg})
           }
-          that.setData({ attachResume })
+          that.setData({ resumeAttach })
           console.log(err, 'err')
         }
       }).onProgressUpdate((res) => {
-        attachResume = Object.assign(attachResume, { progress: res.progress })
-        that.setData({ attachResume })
+        resumeAttach = Object.assign(resumeAttach, { progress: res.progress })
+        that.setData({ resumeAttach })
         console.log(res.progress, 2)
       })
     }
@@ -232,10 +232,10 @@ Page({
   },
   getMyInfo () {
     return app.getAllInfo().then(() => {
-      let attachResume = app.globalData.resumeInfo.attachResume || {}
-      attachResume = Object.assign(this.data.attachResume, attachResume)
-      this.setData({hasReFresh: false, attachResume})
-      console.log(this.data)
+      let resumeAttach = app.globalData.resumeInfo.resumeAttach || {}
+      resumeAttach = Object.assign(this.data.resumeAttach, resumeAttach)
+      this.setData({hasReFresh: false, resumeAttach})
+      console.log(app.globalData.resumeInfo.resumeAttach)
       wx.stopPullDownRefresh()
     })
   },
@@ -245,15 +245,15 @@ Page({
   stopPageScroll() {return false },
   pickerAction(e) {
     let params = e.currentTarget.dataset
-    let attachResume = this.data.attachResume
+    let resumeAttach = this.data.resumeAttach
     this.setData({actionMenu: !this.data.actionMenu})
     switch(params.action) {
       case 'preview':
         app.previewResume(e)
         break
       case 'reupload':
-        attachResume.vkey = ''
-        this.setData({ attachResume })
+        resumeAttach.vkey = ''
+        this.setData({ resumeAttach })
         break
       case 'delete':
         // this.setData({actionMenu: !this.data.actionMenu})
@@ -266,22 +266,21 @@ Page({
     }
   },
   reupload() {
-    let attachResume = this.data.attachResume
-    attachResume.vkey = ''
-    this.setData({ attachResume })
+    let resumeAttach = this.data.resumeAttach
+    resumeAttach.vkey = ''
+    this.setData({ resumeAttach })
   },
   saveAttach(params) {
     return saveAttachApi(params).then(() => {
       getAttachResumeApi().then(res => {
-        let attachResume = res.data
-        attachResume = Object.assign(this.data.attachResume, attachResume)
-        app.globalData.resumeInfo.attachResume = attachResume
-        that.setData({ attachResume })
-        console.log(res)
+        let resumeAttach = res.data
+        resumeAttach = Object.assign(this.data.resumeAttach, resumeAttach)
+        app.globalData.resumeInfo.resumeAttach = resumeAttach
+        this.setData({ resumeAttach })
       })
     })
   },
   onPullDownRefresh() {
-    this.setData({hasReFresh: true}, () => this.getMyInfo())
+    this.setData({ hasReFresh: true }, () => this.getMyInfo())
   }
 })

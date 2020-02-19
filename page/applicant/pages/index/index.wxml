@@ -1,5 +1,5 @@
 <view class="applicant-job" style="padding-top: 105rpx">
-	<navbar title="职位" background="#652791" color="#fff"></navbar>
+	<navbar title="职位" background="#652791" color="#fff" pageSearch="{{ true }}"></navbar>
 	<view hidden="{{!hasReFresh}}">
     <refreshStatus></refreshStatus>
   </view>

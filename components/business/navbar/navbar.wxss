@@ -101,3 +101,11 @@
   width: 367rpx;
   height: 86rpx;
 }
+
+.searchBtn .icon-sousuo{
+  color: white;
+}
+
+.searchBtn{
+  padding: 0 30rpx;
+}

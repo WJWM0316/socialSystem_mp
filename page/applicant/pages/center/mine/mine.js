@@ -33,6 +33,7 @@ Page({
     let init = () => {
       if (app.globalData.isJobhunter) {
         let myInfo = app.globalData.resumeInfo
+        console.log(myInfo, 'kkkk')
         this.setData({myInfo, resumeAttach: myInfo.resumeAttach || {}})
       }
     }
@@ -137,6 +138,11 @@ Page({
       case 'interested_in_me':
         wx.navigateTo({
           url: `${APPLICANT}jobs/likeMe/likeMe`
+        })
+        break
+      case 'resume':
+        wx.navigateTo({
+          url: `${APPLICANT}center/demoupload/demoupload`
         })
         break
       default:

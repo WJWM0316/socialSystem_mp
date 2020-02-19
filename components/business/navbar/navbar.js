@@ -45,6 +45,10 @@ Component({
     mustBack: {
       type: Boolean,
       value: false
+    },
+    pageSearch: {
+      type: Boolean,
+      value: false
     }
   },
   data: {
@@ -119,6 +123,11 @@ Component({
     },
     showScan() {
       this.setData({showScanBox: true})
+    },
+    pageSearch() {
+      wx.navigateTo({
+        url: `${APPLICANT}search/search`
+      })
     }
   },
   pageLifetimes: {

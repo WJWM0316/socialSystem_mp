@@ -247,3 +247,13 @@ export const getSocialDataTypeApi  = (data, hasLoading) => {
     hasLoading: false
   })
 }
+
+
+export const saveAttachApi = (data, hasLoading) => {
+  return request({
+    method: 'post',
+    url: '/jobhunter/save_attach',
+    data,
+    hasLoading: true
+  })
+}

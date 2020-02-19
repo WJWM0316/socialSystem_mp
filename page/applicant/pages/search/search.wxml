@@ -1,0 +1,74 @@
+<navbar title="搜索职位" background="#FFFFFF" color="#22292C"></navbar>
+
+<view class="search">
+	<view class="search-box" style="top: {{ navH }}px">
+		<view class="search-bar}}">
+			<i class="searchIcon iconfont icon-sousuo1"></i>
+			<input
+				class="search-input"
+				type='text'
+				placeholder="请输入职位名称"
+				focus="{{focus}}"
+				placeholder-class="holderStyle"
+				bindinput="bindInput"
+				bindfocus="bindfocus"
+				bindblur="bindblur"
+				value="{{ keyword }}"
+				confirm-type="search"
+				bindconfirm="bindconfirm"/>
+			<i wx:if="{{ keyword }}" class="resetIcon iconfont icon-shurukuang-shanchu" bindtap="removeWord"></i>
+		</view>
+		<view class="searchBtn" bindtap="search">搜索</view>
+	</view>
+	<view class="match-box-ul {{ thinkList.length ? 'show' : ''}}" style="top: calc({{navH}}px + 90rpx)">
+		<view
+			class="li"
+			bindtap="check"
+			data-name="{{ item.name }}"
+			wx:for="{{ thinkList }}"
+			wx:for-item="item"
+			wx:key="{{ index }}">
+				<rich-text nodes="{{item.html}}"></rich-text>
+				<i class="icon iconfont icon-jiantou"></i>
+		</view>
+	</view>
+	<view class="historyArea" wx:if="{{ historyList.length && !positionList.list.length }}">
+		<view class="title">历史搜索<i class="remove iconfont icon-shanchu" bindtap="removeHistory"></i></view>
+		<text class="record ellipsis" wx:for="{{historyList}}"  wx:key="{{index}}" data-item="{{item}}" data-type="label" bindtap="choseKeyWord">{{item.word}}</text>
+	</view>
+	<view class="list-box">
+		<view class="ul">
+			<view
+				class="li personality {{showBoxShadow ? 'box-shadow' : ''}}" 
+				wx:for="{{ positionList.list }}"
+				data-item="{{item}}"
+				data-route="position"
+				bindtap="routeJump">
+				<!-- 职位名称 -->
+				<view class="name">
+					<view class="title">{{item.positionName}}</view>
+					<view class="salary">{{item.emolumentMin * 1000}}~{{item.emolumentMax * 1000}}<text class="moneyTxt">元/月</text></view>
+				</view>
+				
+				<!-- 标签 -->
+				<view class="labelList">
+					<view class="label" wx:if="{{item.city || item.district}}">{{item.city}}{{item.district}}</view>
+					<view class="label">{{item.workExperienceName}}</view>
+					<view class="label">{{item.educationName}}</view>
+				</view>
+
+				<!-- hr信息 -->
+				<view class="hr">
+					<view class="conLeft">
+						<view class="hrImg">
+							<image mode="aspectFill" src="{{item.recruiterInfo.avatar.smallUrl}}" lazy-load></image>
+						</view>
+						<view class="hrName">{{item.recruiterInfo.name}} <block wx:if="{{item.recruiterInfo.position}}">· {{item.recruiterInfo.position}}</block></view>
+					</view>
+					<image wx:if="{{hasLogo}}" class="conRight logo" mode="aspectFit" src="{{item.companyInfo.logoInfo.smallUrl}}" lazy-load></image>
+				</view>
+			</view>
+		</view>
+    <bottomStatus status="{{ onBottomStatus }}" listData="{{ positionList.list }}" desc="暂无相关职位"></bottomStatus>
+  </view>
+</view>

@@ -1,0 +1,73 @@
+<form bindsubmit="formSubmit" report-submit='{{true}}'> 
+  <view class="wrap my-class" style="height: {{wrapH}}px">
+  	<block wx:for="{{listData}}" wx:key="id" wx:for-item="list" wx:for-index="indexs">
+  		<view class="flow {{flowClass}}_flow{{indexs}}{{index}}" wx:for="{{list}}" wx:key="id" style="left: {{item.left}}px;top: {{item.top}}px">
+        <button
+            form-type="submit" 
+            class="card clear-style"
+            bindtap="routeJump"
+            data-id="{{item.id}}"
+            data-type="{{item.cardType}}"
+            data-firstindex="{{indexs}}"
+            data-secondindex="{{index}}"
+            wx:key="{{item.id}}">
+          <block wx:if="{{!item.cardType}}">
+            <view class="iconfont header {{item.isUrgency === 1 ? 'specail' : ''}} {{item.recruiterInfo.signature ? 'hasSignature' : ''}}">
+              <block wx:if="{{item.isUrgency !== 1}}">
+              	<view class="people">
+              		<image lazy-load class="avatar" src="{{item.recruiterInfo.avatar.smallUrl}}"></image>
+              		<view class="detail">
+              			<view class="name ellipsis">{{item.recruiterInfo.name}}</view>
+              			<view class="company ellipsis">{{item.recruiterInfo.companyShortname}}·{{item.recruiterInfo.position}}</view>
+              		</view>
+              	</view>
+              </block>
+              <block wx:if="{{item.isUrgency === 1}}">
+                <view class="specailBox">
+                  <view class="avatarBox"><image lazy-load class="avatar" src="{{item.recruiterInfo.avatar.smallUrl}}"></image></view>
+                  <view class="name ellipsis">{{item.recruiterInfo.name}}</view>
+                  <view class="company ellipsis">{{item.recruiterInfo.companyShortname}}·{{item.recruiterInfo.position}}</view>
+                </view>
+              </block>
+            	<view class="signature" wx:if="{{item.recruiterInfo.signature}}">{{item.recruiterInfo.signature}}</view>
+            </view>
+            <view class="icon specail" wx:if="{{item.isUrgency === 1}}"></view>
+            <view class="content">
+            	<view class="positionName ellipsis">{{item.positionName}}</view>
+            	<view class="salary">{{item.emolumentMin}}K~{{item.emolumentMax}}K<block wx:if="{{item.annualSalary > 12}}">·{{item.annualSalaryDesc}}</block></view>
+            	<view class="otherInfo">
+            		<text class="label ellipsis">{{item.city}}<block wx:if="{{item.district}}">{{item.district}}</block></text>
+            		<text class="label">{{item.workExperienceName}}</text>
+            		<text class="label">{{item.educationName}}</text>
+            	</view>
+            </view>
+            <view class="footer">
+              <view class="viewNum icon" wx:if="{{item.isRapidly === 1}}"></view>
+            	<view class="viewNum" wx:else><text class="num">{{item.numOfVisitors}}</text><text class="normal"> 人查看过</text></view>
+            	<view class="viewBtn"><i class="icon iconfont icon-yuemian"></i>开约</view>
+            </view>
+          </block>
+          <block wx:else>
+            <view class="cardBlock">
+              <view class="title">
+                <block wx:if="{{item.cardType === 'creatUser'}}">{{item.cardType === 'creatUser' ? '名企高薪等你来撩' : ''}}</block>
+                <block wx:if="{{item.cardType === 'itemEdit'}}">{{item.cardType === 'itemEdit' ? '添加项目经历' : ''}}</block>
+                <block wx:if="{{item.cardType === 'userInfoEdit'}}">{{item.cardType === 'userInfoEdit' ? '完善个人资料' : ''}}</block>
+                <block wx:if="{{item.cardType === 'moreEdit'}}">{{item.cardType === 'moreEdit' ? '添加更多介绍' : ''}}</block>
+              </view>
+              <view class="desc">
+                <block wx:if="{{item.cardType === 'creatUser'}}">{{item.cardType === 'creatUser' ? '花几分钟写一份简历，获得更多优质机会' : ''}}</block>
+                <block wx:if="{{item.cardType === 'itemEdit'}}">{{item.cardType === 'itemEdit' ? 'show出那些年你搞定的项目' : ''}}</block>
+                <block wx:if="{{item.cardType === 'userInfoEdit'}}">{{item.cardType === 'userInfoEdit' ? '那个对的招聘官一定想更了解你' : ''}}</block>
+                <block wx:if="{{item.cardType === 'moreEdit'}}">{{item.cardType === 'moreEdit' ? '写不完的才华，就写在这里吧' : ''}}</block>
+              </view>
+              <image class="picture" lazy-load src="{{cdnImagePath}}{{item.cardType === 'login' ? 'creteUser11.png' : ''}}{{item.cardType === 'creatUser' ? 'creteUser11.png' : ''}}{{item.cardType === 'itemEdit' ? 'img_hpfead_addproject@3x.png' : ''}}{{item.cardType === 'userInfoEdit' ? 'img_hpfead_addprosonalinf@3x.png' : ''}}{{item.cardType === 'moreEdit' ? 'img_hpfead_addmoreinf@3x.png' : ''}}"></image>
+              <view class="cardBtn">{{item.cardType === 'creatUser' ? '立即创建简历' : '立即添加'}}<i class="icon iconfont icon-disejiantou-you"></i></view>
+            </view>
+          </block>
+        </button>
+  		</view>
+  	</block>
+  </view>
+</form>
+

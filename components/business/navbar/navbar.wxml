@@ -11,6 +11,7 @@
 			    	</block>
 			    	<button form-type="submit" class="btn backLast formIdBtn iconfont icon-daohanglan-fanhui" wx:if="{{mustBack || (showBack && showBackBtn)}}"  bindtap="navBack" style="color: {{color}}"></button>
 		    		<button class="formIdBtn"><i class="line" wx:if="{{(mustBack || (showBack && showBackBtn)) && showHome}}"></i></button>
+						<button class="searchBtn formIdBtn" wx:if="{{ pageSearch }}" bindtap="pageSearch"><i class="iconfont icon-sousuo"></i></button>
 		    		<button class="btn backHome formIdBtn iconfont icon-fanhuishouye {{(mustBack || (showBack && showBackBtn)) ? 'btn1' : ''}}"  wx:if="{{showHome}}" bindtap="backHome" style="color: {{color}}">
 		    			<image wx:if="{{!showBackBtn && showHome && homeBubble}}" class="homeBubble" src="{{choseType !== 'RECRUITER' ? cdnImagePath + 'ChomeBubble.png' : cdnImagePath + 'BhomeBubble.png'}}" catchtap="closeTips" data-type="homeBubble"></image>
 		    		</button>

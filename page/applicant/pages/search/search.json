@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "jobList": "../../../../components/business/jobList/jobList",
+  	"waterfallFlow": "../../../../components/business/waterfallFlow/waterfallFlow"
+  }
+}

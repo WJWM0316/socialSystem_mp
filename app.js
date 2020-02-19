@@ -27,6 +27,7 @@ App({
     wx.getSystemInfo({
       success: res => {
         //导航高度
+        this.globalData.platform = res.platform
         this.globalData.navHeight = res.statusBarHeight + 44
         if (res.model.indexOf('iPhone X') !== -1) {
           this.globalData.isIphoneX = true
@@ -85,7 +86,8 @@ App({
     systemInfo: wx.getSystemInfoSync(), // 系统信息
     orgList: [], // 机构列表
     // 面试红点信息
-    redDotInfos: {}
+    redDotInfos: {},
+    platform: ''
   },
   // 登录
   login() {

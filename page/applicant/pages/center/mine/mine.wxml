@@ -42,6 +42,16 @@
     <view class="createBox" wx:if='{{isMicroCard && !isJobhunter}}'>你与offer之间还差一份简历~<view class="btn" bindtap="completeResume">去创建<i class="icon iconfont icon-disejiantou-you"></i></view></view>
     <!-- bottom -->
     <view class="entry-list">
+      <view class="li" bindtap="jump" data-type="resume">
+  			<view>
+          <i class="icon iconfont icon-dianhua"></i>
+          <view class="text">附件简历</view>
+        </view>
+        <view class='arrow-box'>
+          <view class="text2">{{ myInfo.resumeAttach ? '附件已上传' : '上传附件'}}</view>
+          <i class="icon iconfont icon-xiangyou"></i>
+        </view>
+  		</view>
   		<view class="li" bindtap="jump" data-type="interest">
   			<view>
           <i class="icon iconfont icon-wodeguanzhux"></i>

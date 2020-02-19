@@ -340,5 +340,5 @@
 }
 
 .un-upload {
-  color: #652791;
+  color: #652791 !important;
 }

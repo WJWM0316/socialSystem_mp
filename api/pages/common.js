@@ -257,3 +257,11 @@ export const saveAttachApi = (data, hasLoading) => {
     hasLoading: true
   })
 }
+
+export const deleteAttachApi = (data, hasLoading) => {
+  return request({
+    method: 'delete',
+    url: '/jobhunter/del_attach',
+    hasLoading: true
+  })
+}

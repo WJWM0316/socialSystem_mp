@@ -3,9 +3,8 @@ let app = getApp(),
 import {APPLICANTHOST, RECRUITERHOST, COMMON, VERSION} from '../../../../../config.js'
 import {
   getAttachResumeApi,
-  scanQrcodeApi,
-  scanLoginApi,
-  saveAttachApi
+  saveAttachApi,
+  deleteAttachApi
 } from '../../../../../api/pages/common.js'
 
 Page({
@@ -60,16 +59,23 @@ Page({
     })    
   },
   backEvent() {
-    if(uploadTask) {
+    let that = this
+    if (uploadTask) {
+      uploadTask.abort()
       app.wxConfirm({
         title: '提示',
         content: '文件上传中，返回后将取消上传，确定离开当前页面？',
         cancelText: '确定',
         confirmText: '取消',
-        cancelBack() {},
+        cancelBack() {          
+          let resumeAttach = this.data.resumeAttach
+          resumeAttach.vkey = ''
+          uploadTask = null
+          that.setData({ resumeAttach })
+        },
         confirmBack: () => {
-          // wx.navigateBack({delta: 1})
-          uploadTask.abort()
+          uploadTask = null
+          wx.navigateBack({delta: 1})         
         }
       })
     } else {
@@ -112,15 +118,17 @@ Page({
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
       success: (res) => {
-        console.log(res)
         that.upload(res.tempFiles[0])
       }
     })
   },
   upload(file) {
-    let allowFileType = [
-      'image',
-      'file'
+    let allowFileExt = [
+      'pdf',
+      'jpg',
+      'png',
+      'doc',
+      'docx'
     ]
     let BASEHOST = ''
     let that = this
@@ -131,25 +139,23 @@ Page({
     let fileMinSize = 1024 * 1024 * 3; //3M
     let fileMaxSize = 1024 * 1024 * 10; //10M
     let resumeAttach = this.data.resumeAttach
+    let fileFieldArr = file.name.split('.')
+    let ext = fileFieldArr[fileFieldArr.length - 1]
     resumeAttach = Object.assign(resumeAttach, file, { uploading: true })
     that.setData({ resumeAttach })
     if (file.size < fileMinSize) {
-      resumeAttach = Object.assign(resumeAttach, { tips: '文件上传中，请稍等...'})
+      resumeAttach = Object.assign(resumeAttach, { tips: `${this.isImageType(file.name) ? '图片' : '文件'}上传中，请稍等...`})
       that.setData({ resumeAttach })
-      console.log('a', resumeAttach)
     } else {
-      resumeAttach = Object.assign(resumeAttach, { tips: '大文件上传需要较长时间，请稍等...'})
+      resumeAttach = Object.assign(resumeAttach, { tips: `大${this.isImageType(file.name) ? '图片' : '文件'}上传需要较长时间，请稍等...`})
       that.setData({ resumeAttach })
-      console.log('b', resumeAttach)
     }
-    if (!allowFileType.includes(file.type)) {
-      resumeAttach = Object.assign(resumeAttach, { errTips: '上传失败，文件格式不支持', tips: ''})
+    if (!allowFileExt.includes(ext)) {
+      resumeAttach = Object.assign(resumeAttach, { errTips: `上传失败，文件格式不支持`, tips: ''})
       that.setData({ resumeAttach })
-      console.log('c', resumeAttach)
     } else if (file.size > fileMaxSize) {
-      resumeAttach = Object.assign(resumeAttach, { errTips: '上传失败，文件不可大于10M', tips: ''})
+      resumeAttach = Object.assign(resumeAttach, { errTips: `上传失败，${this.isImageType(file.name) ? '图片' : '文件'}不可大于10M`, tips: ''})
       that.setData({ resumeAttach })
-      console.log('d', resumeAttach)
     } else {
 
       switch(file.type) {
@@ -163,12 +169,14 @@ Page({
           break
       }
 
+      this.setData({ resumeAttach })
+
       if (wx.getStorageSync('choseType') === 'APPLICAN') {
         BASEHOST = APPLICANTHOST
       } else {
         BASEHOST = RECRUITERHOST
       }
-      that.setData({ resumeAttach })
+      
       uploadTask = wx.uploadFile({
         url: `${BASEHOST}/attaches`,
         filePath: file.path,
@@ -184,8 +192,8 @@ Page({
           data = Object.assign(resumeAttach, data.data[0], {uploading: false})
           that.setData({ resumeAttach: data }, () => that.saveAttach({attach_resume: resumeAttach.id, attach_name: resumeAttach.name}))
         },
-        fail(err) {
-          if (res.statusCode === 401) {
+        fail(res) {
+          if (res.httpStatus === 401) {
             // 需要用到token， 需要绑定手机号
             if (JSON.parse(res.data).code === 4010) {
               wx.removeStorageSync('token')
@@ -206,25 +214,15 @@ Page({
             if (data.msg) getApp().wxToast({title: data.msg})
           }
           that.setData({ resumeAttach })
-          console.log(err, 'err')
         }
-      }).onProgressUpdate((res) => {
+      })
+      
+      uploadTask.onProgressUpdate((res) => {
+        uploadTask = null
         resumeAttach = Object.assign(resumeAttach, { progress: res.progress })
         that.setData({ resumeAttach })
-        console.log(res.progress, 2)
       })
     }
-  },
-  scanCode() {
-    wx.scanCode({
-      onlyFromCamera: true,
-      success: res => {
-        const uuid = res.result.split('&')[0].slice(5)
-        const params = {uuid, isBusiness: 0}
-        console.log(res, '扫码结果')
-        scanQrcodeApi({uuid}).then(res => scanLoginApi(params))
-      }
-    })
   },
   preview(e) {
     let that = this
@@ -235,14 +233,19 @@ Page({
       let resumeAttach = app.globalData.resumeInfo.resumeAttach || {}
       resumeAttach = Object.assign(this.data.resumeAttach, resumeAttach)
       this.setData({hasReFresh: false, resumeAttach})
-      console.log(app.globalData.resumeInfo.resumeAttach)
       wx.stopPullDownRefresh()
     })
   },
   toggleactionMenu() {
     this.setData({actionMenu: !this.data.actionMenu})
   },
-  stopPageScroll() {return false },
+  stopPageScroll() {
+    return false
+  },
+  isImageType(filename) {
+    let temArr = filename.split('.')
+    return ['jpg', 'png'].includes(temArr[temArr.length - 1])
+  },
   pickerAction(e) {
     let params = e.currentTarget.dataset
     let resumeAttach = this.data.resumeAttach
@@ -256,7 +259,7 @@ Page({
         this.setData({ resumeAttach })
         break
       case 'delete':
-        // this.setData({actionMenu: !this.data.actionMenu})
+        this.deleteAttach()
         break
       case 'cancle':
         // this.setData({actionMenu: !this.data.actionMenu})
@@ -264,6 +267,11 @@ Page({
       default:
         break
     }
+  },
+  deleteAttach() {
+    return deleteAttachApi().then(() => {
+      app.globalData.resumeInfo.resumeAttach = null
+    })
   },
   reupload() {
     let resumeAttach = this.data.resumeAttach
@@ -281,6 +289,15 @@ Page({
     })
   },
   onPullDownRefresh() {
-    this.setData({ hasReFresh: true }, () => this.getMyInfo())
+    this.setData({ hasReFresh: true }, () => {
+      getAttachResumeApi().then(res => {
+        let resumeAttach = res.data
+        if(!resumeAttach.vkey) resumeAttach.vkey = ''
+        resumeAttach = Object.assign(this.data.resumeAttach, resumeAttach)
+        // app.globalData.resumeInfo.resumeAttach = resumeAttach
+        this.setData({ resumeAttach, hasReFresh: false })
+        wx.stopPullDownRefresh()
+      })
+    })
   }
 })

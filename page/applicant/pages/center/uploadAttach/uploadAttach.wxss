@@ -156,7 +156,6 @@
 
 .uploading .upload-tips1 {
   margin-top: 30rpx;
-  height:40rpx;
   font-size:28rpx;
   color:rgba(146,146,146,1);
   line-height:40rpx;

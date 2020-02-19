@@ -24,7 +24,7 @@ Page({
     thinkList: []
   },
   onLoad() {
-    this.setData({historyList: wx.getStorageSync('searchRecord')})
+    this.setData({historyList: wx.getStorageSync('searchPositionRecord')})
   },
   /**
    * @Author   小书包
@@ -83,20 +83,20 @@ Page({
   },
   updateHistory (word) {
     if (!keyword) return
-    let searchRecord = this.data.historyList || [],
+    let searchPositionRecord = this.data.historyList || [],
         isRecordIndex= null
     // 判断该关键字是否已经存在，存在则位置提前，不存在则加到第一个
-    searchRecord.forEach((item, index) => { if (item.word === word) isRecordIndex = index })
+    searchPositionRecord.forEach((item, index) => { if (item.word === word) isRecordIndex = index })
     if (!isRecordIndex && isRecordIndex !== 0) {
-      searchRecord.unshift({word, type: !this.data.tabIndex ? 1 : 2})
+      searchPositionRecord.unshift({word, type: !this.data.tabIndex ? 1 : 2})
     } else {
-      searchRecord.splice(isRecordIndex, 1)
-      searchRecord.unshift({word, type: !this.data.tabIndex ? 1 : 2})
+      searchPositionRecord.splice(isRecordIndex, 1)
+      searchPositionRecord.unshift({word, type: !this.data.tabIndex ? 1 : 2})
     }
-    if (searchRecord.length > 7)  searchRecord.pop(1)
-    if (searchRecord.length) {
-      wx.setStorageSync('searchRecord', searchRecord)
-      this.setData({historyList: searchRecord})
+    if (searchPositionRecord.length > 7)  searchPositionRecord.pop(1)
+    if (searchPositionRecord.length) {
+      wx.setStorageSync('searchPositionRecord', searchPositionRecord)
+      this.setData({historyList: searchPositionRecord})
     }
   },
   choseKeyWord (e) {
@@ -118,7 +118,7 @@ Page({
     this.setData({keyword, keyWordList: [], positionList}, () => this.getPositionList())
   },
   removeHistory () {
-    this.setData({historyList: []}, () => wx.removeStorageSync('searchRecord'))
+    this.setData({historyList: []}, () => wx.removeStorageSync('searchPositionRecord'))
   },
   removeWord () {
     if (!keyword) return

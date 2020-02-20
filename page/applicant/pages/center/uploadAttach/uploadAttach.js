@@ -1,6 +1,6 @@
 let app = getApp(),
     uploadTask = null;
-import {APPLICANTHOST, RECRUITERHOST, COMMON, VERSION} from '../../../../../config.js'
+import {APPLICANTHOST, RECRUITERHOST, COMMON, VERSION, UPLOADATTACHPAT} from '../../../../../config.js'
 import {
   getAttachResumeApi,
   saveAttachApi,
@@ -112,15 +112,16 @@ Page({
     }    
   },
   uploadByPhone() {
+    wx.navigateTo({url: `${UPLOADATTACHPAT}${encodeURIComponent(`&pageType=4`)}`})
     let that = this
-    wx.chooseImage({
-      count: 1,
-      sizeType: ['original', 'compressed'],
-      sourceType: ['album', 'camera'],
-      success: (res) => {
-        that.upload(res.tempFiles[0])
-      }
-    })
+    // wx.chooseImage({
+    //   count: 1,
+    //   sizeType: ['original', 'compressed'],
+    //   sourceType: ['album', 'camera'],
+    //   success: (res) => {
+    //     that.upload(res.tempFiles[0])
+    //   }
+    // })
   },
   upload(file) {
     let allowFileExt = [

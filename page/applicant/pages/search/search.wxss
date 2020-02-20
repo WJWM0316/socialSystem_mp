@@ -306,3 +306,18 @@
   margin-left: 12rpx;
   display: block;
 }
+
+.bg {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background: white;
+  z-index: -1;
+  transition: all ease .4s;
+  opacity: 0
+}
+.opcity {
+  opacity: 1
+}

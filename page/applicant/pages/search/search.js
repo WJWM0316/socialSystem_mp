@@ -21,7 +21,8 @@ Page({
       isRequire: false
     },
     pageCount: 20,
-    thinkList: []
+    thinkList: [],
+    onBottomStatus: 0
   },
   onLoad() {
     this.setData({historyList: wx.getStorageSync('searchPositionRecord')})
@@ -47,10 +48,11 @@ Page({
     positionList.pageNum = 1
     keyword = e.detail.value.trim()
     if (lastWord === keyword) return
-    this.setData({ keyword, positionList}, () => this.debounce(this.getSearchMatchList, null, 300, null))    
+    this.setData({ keyword, positionList}, () => this.debounce(this.getSearchMatchList, null, 300, null))
   },
   check(e) {
-    keyword = e.currentTarget.dataset.name
+    keyword = this.data.keyword
+    if(!keyword) return
     this.setData({ keyword, thinkList: [] }, () => this.getPositionList())
   },
   getSearchMatchList() {
@@ -79,6 +81,7 @@ Page({
       positionList.isRequire = true
       this.updateHistory(this.data.keyword)
       this.setData({positionList, onBottomStatus})
+      console.log(this.data)
     })
   },
   updateHistory (word) {

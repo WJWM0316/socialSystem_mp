@@ -40,7 +40,8 @@
 			<i class="icon iconfont icon-jiantou"></i>
 	</view>
 </view>
-<view class="historyArea" wx:if="{{ historyList.length && !orgList.length }}">
+<view class="bg {{ (historyList.length && !orgList.length) ? 'opcity' : ''}}"></view>
+<view class="historyArea" wx:if="{{ historyList.length && !orgList.length && onbottomStatus !== 2 }}">
 	<view class="title">历史搜索<i class="remove iconfont icon-shanchu" bindtap="removeHistory"></i></view>
 	<text class="record ellipsis" wx:for="{{historyList}}"  wx:key="{{index}}" data-item="{{item}}" data-type="label" bindtap="choseKeyWord">{{item.word}}</text>
 </view>

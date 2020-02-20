@@ -16,17 +16,20 @@
 .un-upload .icon-box {
   width:56rpx;
   height:56rpx;
-  background:rgba(23,184,210,1);
-  border-radius: 50%;
   display: inline-block;
   vertical-align: middle;
   line-height: 56rpx;
   text-align: center;
 }
 
-.un-upload .icon-box .iconfont{
-  color: white;
-  font-size: 28rpx;
+.un-upload .icon-box .icon-weixin-mian{
+  color: #4BB134;
+  font-size: 56rpx;
+}
+
+.un-upload .icon-box .icon-shouji-mian{
+  color: #17B8D2;
+  font-size: 56rpx;
 }
 
 .un-upload .text {

@@ -65,7 +65,7 @@
         "pages/center/attachment/attachment",
         "pages/jobs/like/like",
         "pages/jobs/likeMe/likeMe",
-        "pages/center/demoupload/demoupload",
+        "pages/center/uploadAttach/uploadAttach",
         "pages/search/search"
       ]
     },

@@ -31,7 +31,7 @@ Page({
    */
   onLoad(options) {
     let showBtn = ['recruiter-org'].includes(options.type) && app.globalData.recruiterDetails.isCompanyTopAdmin && wx.getStorageSync('choseType') === 'RECRUITER'
-    this.setData({options, showBtn, historyList: wx.getStorageSync('searchRecord')}, () => {
+    this.setData({options, showBtn, historyList: wx.getStorageSync('searchCompanyRecord')}, () => {
       if( wx.getStorageSync('choseType') === 'RECRUITER') {
         this.getList()
       }
@@ -39,20 +39,20 @@ Page({
   },
   updateHistory (word) {
     if (!keyword) return
-    let searchRecord = this.data.historyList || [],
+    let searchCompanyRecord = this.data.historyList || [],
         isRecordIndex= null
     // 判断该关键字是否已经存在，存在则位置提前，不存在则加到第一个
-    searchRecord.forEach((item, index) => { if (item.word === word) isRecordIndex = index })
+    searchCompanyRecord.forEach((item, index) => { if (item.word === word) isRecordIndex = index })
     if (!isRecordIndex && isRecordIndex !== 0) {
-      searchRecord.unshift({word, type: !this.data.tabIndex ? 1 : 2})
+      searchCompanyRecord.unshift({word, type: !this.data.tabIndex ? 1 : 2})
     } else {
-      searchRecord.splice(isRecordIndex, 1)
-      searchRecord.unshift({word, type: !this.data.tabIndex ? 1 : 2})
+      searchCompanyRecord.splice(isRecordIndex, 1)
+      searchCompanyRecord.unshift({word, type: !this.data.tabIndex ? 1 : 2})
     }
-    if (searchRecord.length > 7)  searchRecord.pop(1)
-    if (searchRecord.length) {
-      wx.setStorageSync('searchRecord', searchRecord)
-      this.setData({historyList: searchRecord})
+    if (searchCompanyRecord.length > 7)  searchCompanyRecord.pop(1)
+    if (searchCompanyRecord.length) {
+      wx.setStorageSync('searchCompanyRecord', searchCompanyRecord)
+      this.setData({historyList: searchCompanyRecord})
     }
   },
   choseKeyWord (e) {
@@ -90,6 +90,14 @@ Page({
     keyword = value
     this.setData({ keyword }, () => this.debounce(this.getSearchMatchCompanyList, null, 300, null))   
   },
+  search () {
+    keyword = this.data.keyword
+    if(!keyword) {
+      return
+    }
+    this.updateHistory(keyword)
+    this.setData({keyword}, () => this.getList())
+  },
   getList () {
     let options = this.data.options
     let orgList = this.data.orgList,
@@ -101,6 +109,7 @@ Page({
       orgList = res.data
       this.setData({orgList, onbottomStatus})
       this.updateHistory(this.data.keyword)
+      console.log(this.data)
     })
   },
   roouteJump (e) {

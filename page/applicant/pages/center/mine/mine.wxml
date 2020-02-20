@@ -48,7 +48,7 @@
           <view class="text">附件简历</view>
         </view>
         <view class='arrow-box'>
-          <view class="text2">{{ myInfo.resumeAttach ? '附件已上传' : '上传附件'}}</view>
+          <view class="text2 {{myInfo.resumeAttach ? 'has-upload' : 'un-upload'}}">{{ myInfo.resumeAttach ? '附件已上传' : '上传附件'}}</view>
           <i class="icon iconfont icon-xiangyou"></i>
         </view>
   		</view>

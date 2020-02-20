@@ -10,6 +10,7 @@ import {
 
 Page({
   data: {
+    option: {},
     platform: app.globalData.platform,
     navH: app.globalData.navHeight,
     cdnPath: app.globalData.cdnImagePath,
@@ -48,9 +49,15 @@ Page({
         action: 'cancle'
       }
     ],
+    mobileUpload: true,
     actionMenu: false
   },
-  onLoad() {
+  onLoad(option) {
+    if (option.mobileUpload) {
+      this.setData({['attachResume.uploading']: true})
+
+      return
+    }
     this.getMyInfo().then(() => {
       const attachResume = app.globalData.resumeInfo.resumeAttach
       if(!attachResume) {
@@ -83,6 +90,7 @@ Page({
         count: 1,
         type: 'all',
         success (res) {
+          console.log(res, 111)
           that.upload(res.tempFiles[0])
         },
         fail(err) {
@@ -106,16 +114,20 @@ Page({
     }    
   },
   uploadByPhone() {
-    let that = this
-    wx.chooseImage({
-      count: 1,
-      sizeType: ['original', 'compressed'],
-      sourceType: ['album', 'camera'],
-      success: (res) => {
-        console.log(res)
-        that.upload(res.tempFiles[0])
-      }
+    wx.navigateTo({
+      
+      url: `${COMMON}webView/webView?p=${encodeURIComponent('http://192.168.8.109:8090/uploadFile/index.html')}`
+      //url: `${COMMON}webView/webView?p=${encodeURIComponent('https://h5.lieduoduo.ziwork.com/art/uploadFile/index.html')}`
     })
+    // wx.chooseImage({
+    //   count: 1,
+    //   sizeType: ['original', 'compressed'],
+    //   sourceType: ['album', 'camera'],
+    //   success: (res) => {
+    //     console.log(res)
+    //     that.upload(res.tempFiles[0])
+    //   }
+    // })
   },
   upload(file) {
     let allowFileType = [
@@ -126,7 +138,7 @@ Page({
     let that = this
     let formData = {
       'img1': file.path,
-      'size': file.size
+      'size': file.size || 0
     }
     let fileMinSize = 1024 * 1024 * 3; //3M
     let fileMaxSize = 1024 * 1024 * 10; //10M
@@ -185,27 +197,27 @@ Page({
           that.setData({ attachResume: data }, () => that.saveAttach({attach_resume: attachResume.id, attach_name: attachResume.name}))
         },
         fail(err) {
-          if (res.statusCode === 401) {
-            // 需要用到token， 需要绑定手机号
-            if (JSON.parse(res.data).code === 4010) {
-              wx.removeStorageSync('token')
-              wx.navigateTo({
-                url: `${COMMON}bindPhone/bindPhone`
-              })
-            }
-            // 需要用到微信token， 需要授权
-            if (JSON.parse(res.data).code === 0) {
-              wx.removeStorageSync('sessionToken')
-              wx.removeStorageSync('token')
-              wx.navigateTo({
-                url: `${COMMON}auth/auth`
-              })
-            }
-          } else {
-            let data = typeof res.data === "string" ? JSON.parse(res.data) : res.data
-            if (data.msg) getApp().wxToast({title: data.msg})
-          }
-          that.setData({ attachResume })
+          // if (err.statusCode === 401) {
+          //   // 需要用到token， 需要绑定手机号
+          //   if (JSON.parse(err.data).code === 4010) {
+          //     wx.removeStorageSync('token')
+          //     wx.navigateTo({
+          //       url: `${COMMON}bindPhone/bindPhone`
+          //     })
+          //   }
+          //   // 需要用到微信token， 需要授权
+          //   if (JSON.parse(err.data).code === 0) {
+          //     wx.removeStorageSync('sessionToken')
+          //     wx.removeStorageSync('token')
+          //     wx.navigateTo({
+          //       url: `${COMMON}auth/auth`
+          //     })
+          //   }
+          // } else {
+          //   let data = typeof err.data === "string" ? JSON.parse(err.data) : err.data
+          //   if (data.msg) getApp().wxToast({title: data.msg})
+          // }
+          // that.setData({ attachResume })
           console.log(err, 'err')
         }
       }).onProgressUpdate((res) => {

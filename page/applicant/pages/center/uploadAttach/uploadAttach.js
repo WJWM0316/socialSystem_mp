@@ -72,8 +72,8 @@ Page({
       app.wxConfirm({
         title: '提示',
         content: '文件上传中，返回后将取消上传，确定离开当前页面？',
-        cancelText: '确定',
-        confirmText: '取消',
+        cancelText: '取消',
+        confirmText: '确定',
         cancelBack() {          
           let resumeAttach = this.data.resumeAttach
           resumeAttach.vkey = ''
@@ -120,11 +120,12 @@ Page({
     }    
   },
   uploadByPhone() {
-    let that = this
-    wx.navigateTo({
-      url: `${COMMON}webView/webView?p=${encodeURIComponent('http://192.168.8.109:8090/uploadFile/index.html')}`
-      //url: `${COMMON}webView/webView?p=${encodeURIComponent('https://h5.lieduoduo.ziwork.com/art/uploadFile/index.html')}`
-    })
+    // let that = this
+    // wx.navigateTo({
+    //   url: UPLOADATTACHPAT
+    //   // url: `${COMMON}webView/webView?p=${encodeURIComponent('http://192.168.8.109:8090/uploadFile/index.html')}`
+    //   //url: `${COMMON}webView/webView?p=${encodeURIComponent('https://h5.lieduoduo.ziwork.com/art/uploadFile/index.html')}`
+    // })
     // wx.chooseImage({
     //   count: 1,
     //   sizeType: ['original', 'compressed'],
@@ -283,9 +284,20 @@ Page({
     }
   },
   deleteAttach() {
-    return deleteAttachApi().then(() => {
-      app.globalData.resumeInfo.resumeAttach = null
-    })
+    app.wxConfirm({
+      title: '删除简历',
+      content: '确定删除该附件简历吗？删除后将无法向招聘官发送附件简历。',
+      cancelText: '再想想',
+      confirmText: '确认删除',
+      cancelBack() {          
+        //
+      },
+      confirmBack: () => {
+        deleteAttachApi().then(() => {
+          app.globalData.resumeInfo.resumeAttach = null
+        })         
+      }
+    })    
   },
   reupload() {
     let resumeAttach = this.data.resumeAttach

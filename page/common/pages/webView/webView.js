@@ -52,7 +52,11 @@ Page({
             imageUrl: imgUrl
           }
         }
-        pageUrl = `${path}&sessionToken=${sessionToken}&token=${token}`
+        if (path.indexOf('?') !== -1) {
+          pageUrl = `${path}&sessionToken=${sessionToken}&token=${token}`
+        } else {
+          pageUrl = `${path}?sessionToken=${sessionToken}&token=${token}`
+        }
         console.log(pageUrl)
       }
       this.setData({pageUrl})
@@ -67,6 +71,16 @@ Page({
   },
   getMessage (e) {
     console.log(e, 'h5返回的信息')
+    if (e.detail.data[0].saveKey) {
+      const fs = wx.getFileSystemManager()
+      fs.access({
+        path: e.detail.data[0].saveVal,
+        complete (res) {
+          console.log(res, 2222222222)
+        }
+      })
+      wx.setStorageSync(e.detail.data[0].saveKey, e.detail.data[0].saveVal)
+    }
   },
   webLoad (e) {
   },

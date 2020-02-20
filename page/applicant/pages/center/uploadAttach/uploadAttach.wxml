@@ -52,7 +52,7 @@
     <view class="tips11">*附件简历上传后，面试官在确认预约面试后可查看</view>
   </view>
 
-  <view class="uploading" wx:if="{{ !resumeAttach.vkey && resumeAttach.uploading }}">
+  <view class="uploading" wx:if="{{ attachResume.uploading }}">
     <view class="img-box">
       <!-- <image class="img" mode="aspectFill" src="{{ resumeAttach.path }}"></image> -->
       <image class="img" mode="aspectFill" src="{{ filter.fileFormat(resumeAttach.url || resumeAttach.path) }}"></image>

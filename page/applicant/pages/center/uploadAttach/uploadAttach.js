@@ -53,11 +53,6 @@ Page({
     actionMenu: false
   },
   onLoad(option) {
-    if (option.mobileUpload) {
-      this.setData({['attachResume.uploading']: true})
-
-      return
-    }
     this.getMyInfo().then(() => {
       const resumeAttach = app.globalData.resumeInfo.resumeAttach
       if(!resumeAttach) {
@@ -217,7 +212,7 @@ Page({
             let data = typeof err.data === "string" ? JSON.parse(err.data) : err.data
             if (data.msg) getApp().wxToast({title: data.msg})
           }
-          that.setData({ attachResume })
+          that.setData({ resumeAttach })
           console.log(err, 'err')
         }
       })

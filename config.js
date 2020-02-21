@@ -19,7 +19,6 @@ if (environment === 0) {
 	PUBAPIHOST = 'https://pub-api.dd.lieduoduo.ziwork.com'
 	NODEHOST = 'https://node.dd.lieduoduo.ziwork.com/frontEnd'  // 'http://localhost:3001/frontEnd' // 
 	WEBVIEW = `https://m.duoduohr.ziwork.com/`
-	WEBVIEW = 'http://192.168.0.117:8090/'
 	RECRUITERHOST2 = 'https://zhaopin-api.dd.lieduoduo.ziwork.com'
 	// NODEHOST = 'http://192.168.5.67:3001/frontEnd'
 } else {
@@ -47,4 +46,3 @@ export const COMPONENTS = '/components/'
 // api
 export const API = '/api/'
 
-export const UPLOADATTACHPAT = `${COMMON}webView/webView?p=${encodeURIComponent(`${WEBVIEW}uploadFile?sourceType=miniGuide`)}`

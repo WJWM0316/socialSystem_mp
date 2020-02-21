@@ -23,7 +23,8 @@ Page({
       errTips: '',
       progress: 0,
       uploading: false,
-      vkey: ''
+      vkey: '',
+      hasRequire: false
     },
     hasReFresh: false,
     actionList: [
@@ -120,21 +121,10 @@ Page({
     }    
   },
   uploadByPhone() {
-    // let that = this
-    // wx.navigateTo({
-    //   url: UPLOADATTACHPAT
-    //   // url: `${COMMON}webView/webView?p=${encodeURIComponent('http://192.168.8.109:8090/uploadFile/index.html')}`
-    //   //url: `${COMMON}webView/webView?p=${encodeURIComponent('https://h5.lieduoduo.ziwork.com/art/uploadFile/index.html')}`
-    // })
-    // wx.chooseImage({
-    //   count: 1,
-    //   sizeType: ['original', 'compressed'],
-    //   sourceType: ['album', 'camera'],
-    //   success: (res) => {
-    //     console.log(res)
-    //     that.upload(res.tempFiles[0])
-    //   }
-    // })
+    let that = this
+    wx.navigateTo({
+      url: `${COMMON}webView/webView?p=${encodeURIComponent('http://192.168.8.109:8090/uploadFile/index.html')}`
+    })
   },
   upload(file) {
     let allowFileExt = [
@@ -207,27 +197,27 @@ Page({
           that.setData({ resumeAttach: data }, () => that.saveAttach({attach_resume: resumeAttach.id, attach_name: resumeAttach.name}))
         },
         fail(err) {
-          // if (err.statusCode === 401) {
-          //   // 需要用到token， 需要绑定手机号
-          //   if (JSON.parse(err.data).code === 4010) {
-          //     wx.removeStorageSync('token')
-          //     wx.navigateTo({
-          //       url: `${COMMON}bindPhone/bindPhone`
-          //     })
-          //   }
-          //   // 需要用到微信token， 需要授权
-          //   if (JSON.parse(err.data).code === 0) {
-          //     wx.removeStorageSync('sessionToken')
-          //     wx.removeStorageSync('token')
-          //     wx.navigateTo({
-          //       url: `${COMMON}auth/auth`
-          //     })
-          //   }
-          // } else {
-          //   let data = typeof err.data === "string" ? JSON.parse(err.data) : err.data
-          //   if (data.msg) getApp().wxToast({title: data.msg})
-          // }
-          // that.setData({ attachResume })
+          if (err.statusCode === 401) {
+            // 需要用到token， 需要绑定手机号
+            if (JSON.parse(err.data).code === 4010) {
+              wx.removeStorageSync('token')
+              wx.navigateTo({
+                url: `${COMMON}bindPhone/bindPhone`
+              })
+            }
+            // 需要用到微信token， 需要授权
+            if (JSON.parse(err.data).code === 0) {
+              wx.removeStorageSync('sessionToken')
+              wx.removeStorageSync('token')
+              wx.navigateTo({
+                url: `${COMMON}auth/auth`
+              })
+            }
+          } else {
+            let data = typeof err.data === "string" ? JSON.parse(err.data) : err.data
+            if (data.msg) getApp().wxToast({title: data.msg})
+          }
+          that.setData({ attachResume })
           console.log(err, 'err')
         }
       })
@@ -246,7 +236,9 @@ Page({
   getMyInfo () {
     return app.getAllInfo().then(() => {
       let resumeAttach = app.globalData.resumeInfo.resumeAttach || {}
+      resumeAttach.hasRequire = true
       resumeAttach = Object.assign(this.data.resumeAttach, resumeAttach)
+
       this.setData({hasReFresh: false, resumeAttach})
       wx.stopPullDownRefresh()
     })

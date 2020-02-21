@@ -118,7 +118,7 @@ Page({
   uploadByPhone() {
     let that = this
     wx.navigateTo({
-      url: `${COMMON}webView/webView?p=${encodeURIComponent('http://192.168.8.109:8090/uploadFile/index.html')}`
+      url: `${COMMON}webView/webView?p=${encodeURIComponent('https://h5.lieduoduo.ziwork.com/art/uploadFile/index.html')}`
     })
   },
   upload(file) {

@@ -72,8 +72,8 @@ Page({
       app.wxConfirm({
         title: '提示',
         content: '文件上传中，返回后将取消上传，确定离开当前页面？',
-        cancelText: '取消',
-        confirmText: '确定',
+        cancelText: '继续上传',
+        confirmText: '确认返回',
         cancelBack() {          
           let resumeAttach = this.data.resumeAttach
           resumeAttach.vkey = ''

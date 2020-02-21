@@ -36,6 +36,7 @@
         </view>
       </view>
     </view>
+    <view class="re-upload" bindtap="reupload"> 重新上传简历 </view>
   </view>
 
   <view class="un-upload" wx:if="{{ !resumeAttach.vkey && !resumeAttach.uploading }}">
@@ -70,14 +71,15 @@
       <view class="icon-err"><i class="icon iconfont icon-xinxi-huang"></i></view>
       <view class="err-class">{{ resumeAttach.errTips }}</view>
     </view>
+    <view class="re-upload" bindtap="reupload"> 重新选择文件</view>
   </view>
 
-  <view
+<!--   <view
     class="re-upload"
     wx:if="{{ (!resumeAttach.vkey && resumeAttach.uploading) || (resumeAttach.vkey && !resumeAttach.uploading) }}"
     bindtap="reupload">
     重新选择文件
-  </view>
+  </view> -->
 
   <view class="action-menu">
     <view class="mask" catchtouchmove="stopPageScroll"  bindtap="toggleShowRules" hidden="{{ !actionMenu }}"></view>

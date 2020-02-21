@@ -10,28 +10,30 @@
   <view hidden="{{!hasReFresh}}">
     <refreshStatus></refreshStatus>
   </view>
-
-  <view class="has-upload" wx:if="{{ resumeAttach.vkey && !resumeAttach.uploading }}">
-    <view class="attachment">
-      <view class="bg" style="top: {{navH}}px"></view>
-      <view class="infos">
-        <image class="img" mode="aspectFill" src="{{ cdnPath }}scan_code_complate.png"></image>
-        <view class="tips has"> 附件简历已上传 </view>
-      </view>
-      <!-- <view>{ {text }}</view> -->
-      <view class="attach-box">
-        <view class="item" bindtap="preview1" data-file="{{ resumeAttach }}">
-          <view class="img-box">
-            <image class="img" mode="aspectFill" src="{{ filter.fileFormat(resumeAttach.url) }}"></image>
-          </view>
-          <view class="content">
-            <view class="filename">{{ resumeAttach.attachName }}</view>
-            <view class="date">{{ resumeAttach.createdAt }}</view>
-          </view>
-          <view class="more-action" bindtap="toggleactionMenu">
-            <view class="circle"></view>
-            <view class="circle"></view>
-            <view class="circle"></view>
+  
+  <view wx:if="{{resumeAttach.hasRequire}}">
+    <view class="has-upload" wx:if="{{ resumeAttach.vkey && !resumeAttach.uploading }}">
+      <view class="attachment">
+        <view class="bg" style="top: {{navH}}px"></view>
+        <view class="infos">
+          <image class="img" mode="aspectFill" src="{{ cdnPath }}scan_code_complate.png"></image>
+          <view class="tips has"> 附件简历已上传 </view>
+        </view>
+        <!-- <view>{ {text }}</view> -->
+        <view class="attach-box">
+          <view class="item" bindtap="preview1" data-file="{{ resumeAttach }}">
+            <view class="img-box">
+              <image class="img" mode="aspectFill" src="{{ filter.fileFormat(resumeAttach.url) }}"></image>
+            </view>
+            <view class="content">
+              <view class="filename">{{ resumeAttach.attachName }}</view>
+              <view class="date">{{ resumeAttach.createdAt }}</view>
+            </view>
+            <view class="more-action" bindtap="toggleactionMenu">
+              <view class="circle"></view>
+              <view class="circle"></view>
+              <view class="circle"></view>
+            </view>
           </view>
         </view>
       </view>
@@ -39,31 +41,37 @@
     <view class="re-upload" bindtap="reupload"> 重新上传简历 </view>
   </view>
 
-  <view class="un-upload" wx:if="{{ !resumeAttach.vkey && !resumeAttach.uploading }}">
-    <view class="h11">选择一种方式上传简历</view>
-    <view class="p11">支持pdf、jpg、png、doc、docx格式附件，文件大小不超过 10M。</view>
-    <view class="upload-item" bindtap="uploadByWechat">
-      <view class="icon-box"><i class="icon iconfont icon-weixin-mian"></i></view>
-      <view class="text">微信导入简历<view class="icon-recommand">推荐</view></view>
+    <view class="un-upload" wx:if="{{ !resumeAttach.vkey && !resumeAttach.uploading }}">
+      <view class="h11">选择一种方式上传简历</view>
+      <view class="p11">支持pdf、jpg、png、doc、docx格式附件，文件大小不超过 10M。</view>
+      <view class="upload-item" bindtap="uploadByWechat">
+        <view class="icon-box"><i class="icon iconfont icon-weixin-mian"></i></view>
+        <view class="text">微信导入简历<view class="icon-recommand">推荐</view></view>
+      </view>
+      <view class="upload-item" bindtap="uploadByPhone">
+        <view class="icon-box"><i class="icon iconfont icon-shouji-mian"></i></view>
+        <view class="text">手机导入简历</view>
+      </view>
+      <view class="tips11">*附件简历上传后，面试官在确认预约面试后可查看</view>
     </view>
-    <view class="upload-item" bindtap="uploadByPhone">
-      <view class="icon-box"><i class="icon iconfont icon-shouji-mian"></i></view>
-      <view class="text">手机导入简历</view>
-    </view>
-    <view class="tips11">*附件简历上传后，面试官在确认预约面试后可查看</view>
-  </view>
 
-  <view class="uploading" wx:if="{{ attachResume.uploading }}">
-    <view class="img-box">
-      <!-- <image class="img" mode="aspectFill" src="{{ resumeAttach.path }}"></image> -->
-      <image class="img" mode="aspectFill" src="{{ filter.fileFormat(resumeAttach.url || resumeAttach.path) }}"></image>
-    </view>
-    <view class="file-name">{{ resumeAttach.name }}</view>
-    <view class="file-size">{{ resumeAttach.size }}kb</view>
-    <view class="progress" wx:if="{{ resumeAttach.progress && resumeAttach.progress < 100}}">
-      <view class="progress-text">已上传{{resumeAttach.progress}}%</view>
-      <view class="progress-bar">
-        <view class="active" style="width:{{ resumeAttach.progress }}%"></view>
+    <view class="uploading" wx:if="{{ resumeAttach.uploading }}">
+      <view class="img-box">
+        <!-- <image class="img" mode="aspectFill" src="{{ resumeAttach.path }}"></image> -->
+        <image class="img" mode="aspectFill" src="{{ filter.fileFormat(resumeAttach.url || resumeAttach.path) }}"></image>
+      </view>
+      <view class="file-name">{{ resumeAttach.name }}</view>
+      <view class="file-size">{{ resumeAttach.size }}kb</view>
+      <view class="progress" wx:if="{{ resumeAttach.progress && resumeAttach.progress < 100}}">
+        <view class="progress-text">已上传{{resumeAttach.progress}}%</view>
+        <view class="progress-bar">
+          <view class="active" style="width:{{ resumeAttach.progress }}%"></view>
+        </view>
+      </view>
+      <view class="upload-tips1" wx:if="{{ resumeAttach.tips && !resumeAttach.errTips && resumeAttach.progress && resumeAttach.progress < 100}}">{{ resumeAttach.tips }}</view>
+      <view class="upload-tips2" wx:if="{{ resumeAttach.errTips }}">
+        <view class="icon-err"><i class="icon iconfont icon-xinxi-huang"></i></view>
+        <view class="err-class">{{ resumeAttach.errTips }}</view>
       </view>
     </view>
     <view class="upload-tips1" wx:if="{{ resumeAttach.tips && !resumeAttach.errTips && resumeAttach.progress && resumeAttach.progress < 100}}">{{ resumeAttach.tips }}</view>
@@ -74,26 +82,21 @@
     <view class="re-upload" bindtap="reupload"> 重新选择文件</view>
   </view>
 
-<!--   <view
-    class="re-upload"
-    wx:if="{{ (!resumeAttach.vkey && resumeAttach.uploading) || (resumeAttach.vkey && !resumeAttach.uploading) }}"
-    bindtap="reupload">
-    重新选择文件
-  </view> -->
 
-  <view class="action-menu">
-    <view class="mask" catchtouchmove="stopPageScroll"  bindtap="toggleShowRules" hidden="{{ !actionMenu }}"></view>
-    <view class="content {{ actionMenu ? 'show' : '' }}">
-      <view class="ul" wx:if="{{ actionMenu }}">
-        <view
-          class="li btn-{{item.action}}"
-          wx:for="{{ actionList }}"
-          data-file="{{ resumeAttach }}"
-          wx:item="item"
-          bindtap="pickerAction"
-          data-action="{{item.action}}"
-          wx:key="{{item.action}}">
-          {{ item.text }}
+    <view class="action-menu">
+      <view class="mask" catchtouchmove="stopPageScroll"  bindtap="toggleShowRules" hidden="{{ !actionMenu }}"></view>
+      <view class="content {{ actionMenu ? 'show' : '' }}">
+        <view class="ul" wx:if="{{ actionMenu }}">
+          <view
+            class="li btn-{{item.action}}"
+            wx:for="{{ actionList }}"
+            data-file="{{ resumeAttach }}"
+            wx:item="item"
+            bindtap="pickerAction"
+            data-action="{{item.action}}"
+            wx:key="{{item.action}}">
+            {{ item.text }}
+          </view>
         </view>
       </view>
     </view>

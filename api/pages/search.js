@@ -29,3 +29,13 @@ export const getSearchMatchCompanyListApi = (data, hasLoading) => {
     hasLoading: hasLoading
   })
 }
+
+// 搜索机构列表
+export const getCompanyListApi = (data, hasLoading) => {
+  return request({
+    method: 'get',
+    url: `/search/es/company`,
+    data,
+    hasLoading: hasLoading
+  })
+}

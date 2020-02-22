@@ -3,7 +3,7 @@
 	<view class="tips">* 不能填写QQ、微信、电话等联系方式，以及特殊符号</view>
 	<view bindsubmit="submit">
 		<view class="input-li">
-			<input placeholder="请输入职位名称" auto-focus bindinput="bindInput" value="{{keyword}}" maxlength="50" placeholder-style="color:#BCBCBC"/>
+			<input placeholder="请输入职位名称" auto-focus bindinput="bindInput" value="{{keyword}}" maxlength="50" placeholder-style="color:#BCBCBC" maxlength="50"/>
 		</view>
 		<view class="name-lists">
 			<view

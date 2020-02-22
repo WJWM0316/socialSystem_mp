@@ -47,11 +47,11 @@ Page({
     let positionList = this.data.positionList
     positionList.pageNum = 1
     keyword = e.detail.value.trim()
-    if (lastWord === keyword) return
+    if (!keyword) return
     this.setData({ keyword, positionList}, () => this.debounce(this.getSearchMatchList, null, 300, null))
   },
   check(e) {
-    keyword = this.data.keyword
+    keyword = e.currentTarget.dataset.name
     if(!keyword) return
     this.setData({ keyword, thinkList: [] }, () => this.getPositionList())
   },

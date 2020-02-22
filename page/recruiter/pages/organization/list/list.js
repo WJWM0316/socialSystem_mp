@@ -1,9 +1,5 @@
 import{getCompanyOrglistApi} from '../../../../../api/pages/company.js'
 import {COMMON, RECRUITER} from '../../../../../config.js'
-import {
-  getSearchMatchCompanyListApi
-} from '../../../../../api/pages/search.js'
-
 const app = getApp()
 let timer = null,
     keyword = null
@@ -20,96 +16,33 @@ Page({
     choseType: wx.getStorageSync('choseType'),
     orgList: [],
     options: {},
-    showBtn: false,
-    onbottomStatus: 0,
-    thinkList: [],
-    keyword: '',
-    historyList: []
+    showBtn: false
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad(options) {
+  onLoad: function (options) {
     let showBtn = ['recruiter-org'].includes(options.type) && app.globalData.recruiterDetails.isCompanyTopAdmin && wx.getStorageSync('choseType') === 'RECRUITER'
-    this.setData({options, showBtn, historyList: wx.getStorageSync('searchCompanyRecord')}, () => {
-      if( wx.getStorageSync('choseType') === 'RECRUITER') {
-        this.getList()
-      }
-    })
-  },
-  updateHistory (word) {
-    if (!keyword) return
-    let searchCompanyRecord = this.data.historyList || [],
-        isRecordIndex= null
-    // 判断该关键字是否已经存在，存在则位置提前，不存在则加到第一个
-    searchCompanyRecord.forEach((item, index) => { if (item.word === word) isRecordIndex = index })
-    if (!isRecordIndex && isRecordIndex !== 0) {
-      searchCompanyRecord.unshift({word, type: !this.data.tabIndex ? 1 : 2})
-    } else {
-      searchCompanyRecord.splice(isRecordIndex, 1)
-      searchCompanyRecord.unshift({word, type: !this.data.tabIndex ? 1 : 2})
-    }
-    if (searchCompanyRecord.length > 7)  searchCompanyRecord.pop(1)
-    if (searchCompanyRecord.length) {
-      wx.setStorageSync('searchCompanyRecord', searchCompanyRecord)
-      this.setData({historyList: searchCompanyRecord})
-    }
-  },
-  choseKeyWord (e) {
-    let word = e.currentTarget.dataset.item.word
-    keyword = word
-    this.updateHistory(keyword)
-    this.setData({keyword, keyWordList: []}, () => this.getList())
-  },
-  check(e) {
-    keyword = e.currentTarget.dataset.name
-    this.setData({ keyword, thinkList: [] }, () => this.getList())
-  },
-  /**
-   * @Author   小书包
-   * @DateTime 2019-01-11
-   * @detail   防抖
-   * @return   {[type]}   [description]
-   */
-  debounce(fn, context, delay, text) {
-    clearTimeout(fn.timeoutId)
-    fn.timeoutId = setTimeout(() => fn.call(context, text), delay)
-  },
-  getSearchMatchCompanyList() {
-    getSearchMatchCompanyListApi({name: this.data.keyword}).then(res => {
-      let thinkList = res.data
-      thinkList.map(field => {
-        field.html = field.name.replace(new RegExp(this.data.keyword,'g'),`<span style="color: #652791;">${this.data.keyword}</span>`)
-        field.html = `<div>${field.html}</div>`
-      })
-      this.setData({ thinkList })
-    })
+    this.setData({options, showBtn}, () => this.getList())
   },
   bindInput (e) {
+    clearTimeout(timer)
     let value = e.detail.value
     keyword = value
-    this.setData({ keyword }, () => this.debounce(this.getSearchMatchCompanyList, null, 300, null))   
-  },
-  search () {
-    keyword = this.data.keyword
-    if(!keyword) {
-      return
-    }
-    this.updateHistory(keyword)
-    this.setData({keyword}, () => this.getList())
+    timer = setTimeout(() => {
+      this.getList()
+      clearTimeout(timer)
+    }, 100)
   },
   getList () {
     let options = this.data.options
     let orgList = this.data.orgList,
-        parmas = {company_id: options.companyId },
-        keyword = this.data.keyword
+        parmas = {company_id: options.companyId }
         if(keyword) parmas.keyword = keyword
     getCompanyOrglistApi(parmas).then(res => {
-      let onbottomStatus = res.meta && res.meta.nextPageUrl ? 0 : 2
+      if (!res.data.length) return
       orgList = res.data
-      this.setData({orgList, onbottomStatus})
-      this.updateHistory(this.data.keyword)
-      console.log(this.data)
+      this.setData({orgList})
     })
   },
   roouteJump (e) {
@@ -154,6 +87,9 @@ Page({
         })
         break
     }
+  },
+  search() {
+    wx.navigateTo({url: `${RECRUITER}organization/search/search`})
   },
   /**
    * 生命周期函数--监听页面卸载

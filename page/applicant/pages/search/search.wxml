@@ -15,6 +15,7 @@
 				bindblur="bindblur"
 				value="{{ keyword }}"
 				confirm-type="search"
+				maxlength="50"
 				bindconfirm="bindconfirm"/>
 			<i wx:if="{{ keyword }}" class="resetIcon iconfont icon-shurukuang-shanchu" bindtap="removeWord"></i>
 		</view>

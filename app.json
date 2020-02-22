@@ -122,7 +122,8 @@
         "pages/createQr/createQr",
         "pages/candidate/candidate",
         "pages/organization/position/position",
-        "pages/organization/setOrg/setOrg"
+        "pages/organization/setOrg/setOrg",
+        "pages/organization/search/search"
       ]
     }
   ],

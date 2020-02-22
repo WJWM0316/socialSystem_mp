@@ -1,56 +1,18 @@
 
-<navbar title="全部机构" background="#FFFFFF" color="#22292C"></navbar>
-<!-- <view class="search" style="top: {{navH}}px">
-	<input
-		class="searchBar iconfont"
-		value="{{keyword}}"
-		bindinput="bindInput"
-		type="text"
-		placeholder="{{placeholder}}"
-		placeholder-style="font-family: iconfont"
-		placeholder-class="holderStyle"/>
-</view> -->
-<view class="search-box" style="top: {{ navH }}px">
-	<view class="search-bar}}">
-		<i class="searchIcon iconfont icon-sousuo1"></i>
-		<input
-			class="search-input"
-			type='text'
-			placeholder="请输入机构名称"
-			placeholder-class="holderStyle"
-			bindinput="bindInput"
-			bindfocus="bindfocus"
-			bindblur="bindblur"
-			value="{{ keyword }}"
-			confirm-type="search"
-			bindconfirm="bindconfirm"/>
-		<i wx:if="{{ keyword }}" class="resetIcon iconfont icon-shurukuang-shanchu" bindtap="removeWord"></i>
-	</view>
-	<view class="searchBtn" bindtap="search">搜索</view>
-</view>
-<view class="match-box-ul {{ thinkList.length ? 'show' : ''}}" style="top: calc({{navH}}px + 90rpx)">
-	<view
-		class="li"
-		bindtap="check"
-		data-name="{{ item.name }}"
-		wx:for="{{ thinkList }}"
-		wx:for-item="item"
-		wx:key="{{ index }}">
-			<rich-text nodes="{{item.html}}"></rich-text>
-			<i class="icon iconfont icon-jiantou"></i>
-	</view>
-</view>
-<view class="bg {{ (historyList.length && !orgList.length) ? 'opcity' : ''}}"></view>
-<view class="historyArea" wx:if="{{ historyList.length && !orgList.length && onbottomStatus !== 2 }}">
-	<view class="title">历史搜索<i class="remove iconfont icon-shanchu" bindtap="removeHistory"></i></view>
-	<text class="record ellipsis" wx:for="{{historyList}}"  wx:key="{{index}}" data-item="{{item}}" data-type="label" bindtap="choseKeyWord">{{item.word}}</text>
+<navbar title="全部机构"></navbar>
+<view class="search" style="top: {{navH}}px">
+	<view class="inner" bindtap="search">
+		<i class="iconfont icon-sousuo1"></i>
+		<text>请输入机构名称</text>
+	</view>		
+	<!-- <input class="searchBar iconfont" value="{{keyword}}" bindinput="bindInput" type="text" placeholder="{{placeholder}}" placeholder-style="font-family: iconfont" placeholder-class="holderStyle"/> -->
 </view>
 <view class="organizationList">
 	<view class="list">
 		<button
 			class="list-item clear-style"
 			open-type="{{options.type === 'shareCompany' ? 'share' : ''}}"
-			wx:for="{{ orgList }}"
+			wx:for="{{orgList}}"
 			wx:key="{{index}}"
 			data-type="{{options.type === 'path-mechanism' ? 'path-mechanism' : 'preview'}}"
 			bindtap="{{options.type === 'shareCompany' ? '' : 'roouteJump'}}"
@@ -62,7 +24,6 @@
 			</view>
 		</button>
 	</view>
-	<bottomStatus status="{{ onbottomStatus }}" listData="{{ orgList }}" desc="暂无相关机构~" marginTop="{{120}}"></bottomStatus>
 </view>
 <view class="addBtn" wx:if="{{showBtn}}">
 	<view class="btn" data-type="add" bindtap="roouteJump">添加机构</view>

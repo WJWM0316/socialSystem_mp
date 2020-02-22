@@ -261,10 +261,14 @@
 
 .has-upload .more-action {
   position: relative;
-  width: 30rpx;
-  line-height: 6rpx;
+  line-height: 182rpx;
   text-align: right;
-  padding: 20rpx 0 20rpx 20rpx;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 100%;
+  box-sizing: border-box;
 }
 
 .has-upload .more-action .circle{
@@ -347,7 +351,7 @@
   background:rgba(255,255,255,1);
   border-bottom: 1px solid #E8E9EB;
   border-top: 1px solid #E8E9EB;
-  padding: 40rpx 0;
+  padding: 40rpx 50rpx 40rpx 0;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
@@ -379,7 +383,9 @@
 
 .has-upload .attach-box {
   margin: 0 40rpx;
-  padding-bottom: 273rpx;
+  /* padding-bottom: 273rpx; */
+  overflow: hidden;
+  position: relative;
 }
 
 .has-upload .filename {

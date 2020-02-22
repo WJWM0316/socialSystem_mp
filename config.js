@@ -46,3 +46,5 @@ export const COMPONENTS = '/components/'
 // api
 export const API = '/api/'
 
+export const UPLOADATTACHPATH = `${COMMON}webView/webView?p=${encodeURIComponent(`${WEBVIEW}art/uploadFile/index.html?sourceType=miniGuide`)}`
+

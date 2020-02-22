@@ -12,7 +12,6 @@
     <refreshStatus></refreshStatus>
   </view>
   
-  <view wx:if="{{resumeAttach.hasRequire}}">
     <view class="has-upload" wx:if="{{ resumeAttach.vkey && !resumeAttach.uploading }}">
       <view class="attachment">
         <view class="bg" style="top: {{navH}}px"></view>
@@ -22,7 +21,7 @@
         </view>
         <!-- <view>{ {text }}</view> -->
         <view class="attach-box">
-          <view class="item" bindtap="preview1" data-file="{{ resumeAttach }}">
+          <view class="item" bindtap="preview1" data-file="{{ resumeAttach }}" bindtap="preview">
             <view class="img-box">
               <image class="img" mode="aspectFill" src="{{ filter.fileFormat(resumeAttach.url) }}"></image>
             </view>
@@ -30,24 +29,23 @@
               <view class="filename">{{ resumeAttach.attachName }}</view>
               <view class="date">{{ resumeAttach.createdAt }}</view>
             </view>
-            <view class="more-action" bindtap="toggleactionMenu">
-              <view class="circle"></view>
-              <view class="circle"></view>
-              <view class="circle"></view>
-            </view>
+          </view>
+          <view class="more-action" bindtap="toggleactionMenu">
+            <view class="circle"></view>
+            <view class="circle"></view>
+            <view class="circle"></view>
           </view>
         </view>
       </view>
+      <view class="re-upload" bindtap="reupload"> 重新上传简历 </view>
     </view>
-    <view class="re-upload" bindtap="reupload"> 重新上传简历 </view>
-  </view>
 
     <view class="un-upload" wx:if="{{ !resumeAttach.vkey && !resumeAttach.uploading }}">
       <view class="h11">选择一种方式上传简历</view>
       <view class="p11">支持pdf、jpg、png、doc、docx格式附件，文件大小不超过 10M。</view>
       <view class="upload-item" bindtap="uploadByWechat">
         <view class="icon-box"><i class="icon iconfont icon-weixin-mian"></i></view>
-        <view class="text">微信导入简历<view class="icon-recommand">推荐</view></view>
+        <view class="text">微信导入简历<view class="icon-recommand" wx:if="{{ platform == 'ios'}}">推荐</view></view>
       </view>
       <view class="upload-item" bindtap="uploadByPhone">
         <view class="icon-box"><i class="icon iconfont icon-shouji-mian"></i></view>

@@ -1,6 +1,6 @@
 let app = getApp(),
     uploadTask = null;
-import {APPLICANTHOST, RECRUITERHOST, COMMON, VERSION, UPLOADATTACHPAT} from '../../../../../config.js'
+import {APPLICANTHOST, RECRUITERHOST, COMMON, VERSION, UPLOADATTACHPATH} from '../../../../../config.js'
 import {
   getAttachResumeApi,
   saveAttachApi,
@@ -118,7 +118,7 @@ Page({
   uploadByPhone() {
     let that = this
     wx.navigateTo({
-      url: `${COMMON}webView/webView?p=${encodeURIComponent('https://h5.lieduoduo.ziwork.com/art/uploadFile/index.html')}`
+      url: UPLOADATTACHPATH
     })
   },
   upload(file) {

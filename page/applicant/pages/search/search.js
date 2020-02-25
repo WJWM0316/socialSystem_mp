@@ -11,6 +11,7 @@ let keyword = '',
     lock = false
 Page({
   data: {
+    tabIndex: 0,
     navH: app.globalData.navHeight,
     keyword: '',
     historyList: [],
@@ -22,10 +23,17 @@ Page({
     },
     pageCount: 20,
     thinkList: [],
-    onBottomStatus: 0
+    onBottomStatus: 0,
+    hasFocus: false
   },
   onLoad() {
     this.setData({historyList: wx.getStorageSync('searchPositionRecord')})
+  },
+  bindblur () {
+    this.setData({hasFocus: false})
+  },
+  bindfocus () {
+    this.setData({hasFocus: true})
   },
   /**
    * @Author   小书包
@@ -37,18 +45,12 @@ Page({
     clearTimeout(fn.timeoutId)
     fn.timeoutId = setTimeout(() => fn.call(context, text), delay)
   },
-  bindblur () {
-    this.setData({hasFocus: false})
-  },
-  bindfocus () {
-    this.setData({hasFocus: true})
-  },
   bindInput (e) {
     let positionList = this.data.positionList
     positionList.pageNum = 1
     keyword = e.detail.value.trim()
     if (!keyword) return
-    this.setData({ keyword, positionList}, () => this.debounce(this.getSearchMatchList, null, 300, null))
+    this.setData({ keyword, positionList}, () => this.debounce(this.getSearchMatchList, null, 100, null))
   },
   check(e) {
     keyword = e.currentTarget.dataset.name
@@ -56,6 +58,7 @@ Page({
     this.setData({ keyword, thinkList: [] }, () => this.getPositionList())
   },
   getSearchMatchList() {
+    if (!this.data.hasFocus) return
     getSearchMatchListApi({name: this.data.keyword}).then(res => {
       let thinkList = res.data
       thinkList.map(field => {
@@ -80,9 +83,11 @@ Page({
       positionList.pageNum = positionList.pageNum + 1
       positionList.isRequire = true
       this.updateHistory(this.data.keyword)
-      this.setData({positionList, onBottomStatus})
-      console.log(this.data)
+      this.setData({positionList, onBottomStatus, thinkList: []})
     })
+  },
+  bindconfirm() {
+    this.search()
   },
   updateHistory (word) {
     if (!keyword) return
@@ -108,17 +113,18 @@ Page({
     keyword = word
     positionList.pageNum = 1
     this.updateHistory(keyword)
-    this.setData({keyword, keyWordList: [], positionList}, () => this.getPositionList())
+    this.setData({keyword, positionList}, () => this.getPositionList())
   },
   search () {
     let positionList = this.data.positionList
     keyword = this.data.keyword
     positionList.pageNum = 1
+    positionList.list = []
     if(!keyword) {
       return
     }
     this.updateHistory(keyword)
-    this.setData({keyword, keyWordList: [], positionList}, () => this.getPositionList())
+    this.setData({keyword, positionList, thinkList: [], onBottomStatus: 0}, () => this.getPositionList())
   },
   removeHistory () {
     this.setData({historyList: []}, () => wx.removeStorageSync('searchPositionRecord'))

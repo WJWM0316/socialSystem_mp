@@ -20,6 +20,8 @@
   vertical-align: middle;
   line-height: 56rpx;
   text-align: center;
+  position: relative;
+  top: -2rpx;
 }
 
 .un-upload .icon-box .icon-weixin-mian{
@@ -34,7 +36,6 @@
 
 .un-upload .text {
   display: inline-block;
-  vertical-align: middle;
   margin-left: 16rpx;
   color: #320E3B;
 }
@@ -60,7 +61,7 @@
   color:rgba(146,146,146,1);
   line-height:24rpx;
   text-align: center;
-  bottom: 80rpx;
+  bottom: 114rpx;
   left: 0;
   right: 0;
   position: fixed;
@@ -112,6 +113,8 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   margin-top: 30rpx;
+  margin-left: 40rpx;
+  margin-right: 40rpx;
 }
 
 .uploading .file-size {
@@ -202,7 +205,7 @@
   line-height: 98rpx;
   text-align: center;
   position: fixed;
-  bottom: 160rpx;
+  bottom: 170rpx;
 }
 
 .has-upload .ul {
@@ -272,8 +275,8 @@
 }
 
 .has-upload .more-action .circle{
-  width:6rpx;
-  height:6rpx;
+  width:8rpx;
+  height:8rpx;
   background:rgba(204,215,221,1);
   border-radius: 50%;
   /* left: 10rpx; */
@@ -361,7 +364,6 @@
 .has-upload .img-box {
   width:100rpx;
   height:100rpx;
-  background:rgba(250,57,57,1);
   border-radius:10rpx;
   overflow: hidden;
   margin-right: 20rpx;
@@ -465,11 +467,25 @@
 .action-menu .ul .li{
   height:100rpx;
   line-height: 100rpx;
-  border-bottom: 1rpx solid #E8E9EB;
+  /* border-bottom: 1rpx solid #E8E9EB; */
   text-align: center;
   background: white;
   font-size:32rpx;
   color:rgba(40,40,40,1);
+  position: relative;
+}
+
+.action-menu .ul .btn-preview::after,
+.action-menu .ul .btn-reupload::after{
+  height:1rpx;
+  background: #dcdcdc;
+  content: '';
+  display: block;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  transform: scaleY(.5)
 }
 
 .action-menu .ul .btn-delete {

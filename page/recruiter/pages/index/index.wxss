@@ -293,7 +293,7 @@
 .todos_bar_notopen .icon-xiangyou {
   color:#929292;
   position: relative;
-  top: 2rpx;
+  top: 4rpx;
 }
 
 .todo_ul{

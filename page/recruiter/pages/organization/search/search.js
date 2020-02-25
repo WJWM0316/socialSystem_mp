@@ -13,7 +13,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    placeholder: '\ue635 请输入机构名称',
+    tabIndex: 0,
     navH: app.globalData.navHeight,
     cdnImagePath: app.globalData.cdnImagePath,
     isTopAdmin: app.globalData.isTopAdmin,
@@ -24,6 +24,8 @@ Page({
     thinkList: [],
     keyword: '',
     historyList: [],
+    canSearch: true,
+    hasFocus: false,
     orgListData: {
       list: [],
       pageNum: 1,
@@ -31,6 +33,12 @@ Page({
       isLastPage: false,
       isRequire: false
     }
+  },
+  bindblur () {
+    this.setData({hasFocus: false})
+  },
+  bindfocus () {
+    this.setData({hasFocus: true})
   },
   /**
    * 生命周期函数--监听页面加载
@@ -55,6 +63,9 @@ Page({
       wx.setStorageSync('searchCompanyRecord', searchCompanyRecord)
       this.setData({historyList: searchCompanyRecord})
     }
+  },
+  bindconfirm() {
+    this.search()
   },
   choseKeyWord (e) {
     let orgListData = this.data.orgListData
@@ -84,6 +95,7 @@ Page({
     fn.timeoutId = setTimeout(() => fn.call(context, text), delay)
   },
   getSearchMatchCompanyList() {
+    if (!this.data.hasFocus) return
     getSearchMatchCompanyListApi({name: this.data.keyword}).then(res => {
       let thinkList = res.data
       thinkList.map(field => {
@@ -95,10 +107,8 @@ Page({
   },
   bindInput (e) {
     keyword = e.detail.value
-    if(!keyword) {
-      return
-    }
-    this.setData({ keyword }, () => this.debounce(this.getSearchMatchCompanyList, null, 300, null))   
+    if(!keyword) return
+    this.setData({ keyword, canSearch: false }, () => this.debounce(this.getSearchMatchCompanyList, null, 100, null))   
   },
   search () {
     let orgListData = this.data.orgListData
@@ -108,7 +118,7 @@ Page({
     }
     orgListData.pageNum = 1
     this.updateHistory(keyword)
-    this.setData({keyword, orgListData}, () => this.getList())
+    this.setData({keyword, orgListData,thinkList: []}, () => this.getList())
   },
   removeHistory () {
     this.setData({historyList: []}, () => wx.removeStorageSync('searchCompanyRecord'))
@@ -126,9 +136,8 @@ Page({
       orgListData.isRequire = true
       orgListData.isLastPage = !res.meta || !res.meta.nextPageUrl ? true : false
       orgListData.list = res.data
-      this.setData({onbottomStatus, orgListData})
+      this.setData({onbottomStatus, orgListData, thinkList: []})
       this.updateHistory(this.data.keyword)
-      console.log(this.data)
     })
   },
   roouteJump (e) {

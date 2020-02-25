@@ -34,7 +34,7 @@
 		</view>
 	</view>
 	<view class="historyArea" wx:if="{{ historyList.length && !positionList.list.length && onBottomStatus !== 2 }}">
-		<view class="title">历史搜索<i class="remove iconfont icon-shanchu" bindtap="removeHistory"></i></view>
+		<view class="title"><text>历史搜索</text><i class="remove iconfont icon-shanchu" bindtap="removeHistory"></i></view>
 		<text class="record ellipsis" wx:for="{{historyList}}"  wx:key="{{index}}" data-item="{{item}}" data-type="label" bindtap="choseKeyWord">{{item.word}}</text>
 	</view>
 	<view class="bg {{ historyList.length && !positionList.list.length ? 'opcity' : ''}}"></view>
@@ -71,6 +71,6 @@
 				</view>
 			</view>
 		</view>
-    <bottomStatus status="{{ onBottomStatus }}" listData="{{ positionList.list }}" desc="暂无相关职位"></bottomStatus>
+    <bottomStatus status="{{ onBottomStatus }}" listData="{{ positionList.list }}" desc="暂无相关职位" marginTop="{{212}}"></bottomStatus>
   </view>
 </view>

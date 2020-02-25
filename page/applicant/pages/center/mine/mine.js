@@ -33,9 +33,9 @@ Page({
     let init = () => {
       if (app.globalData.isJobhunter) {
         let myInfo = app.globalData.resumeInfo
-        console.log(myInfo, 'kkkk')
         this.setData({myInfo, resumeAttach: myInfo.resumeAttach || {}})
       }
+      console.log(app.globalData, this.data, 'kkkk')
     }
     if (app.getRoleInit) {
       this.getMyInfo()
@@ -141,9 +141,31 @@ Page({
         })
         break
       case 'resume':
-        wx.navigateTo({
-          url: `${APPLICANT}center/uploadAttach/uploadAttach`
-        })
+        if(this.data.isMicroCard) {
+          app.wxConfirm({
+            title: '完善简历',
+            content: '前往完善在线简历后，即可上传附件简历',
+            cancelText: '取消',
+            confirmText: '立即前往',
+            cancelBack() {},
+            confirmBack: () => {
+              let path = app.getCurrentPagePath()
+              app.getRoleInfo().then(res => {
+                let url = ''
+                if(!res.data.hasCard) {
+                  url = `${APPLICANT}createUser/createUser?directChat=${encodeURIComponent(path)}&from=2&micro=true`
+                } else {
+                  url = `${APPLICANT}createUser/createUser?directChat=${encodeURIComponent(path)}&from=2`
+                }
+                wx.navigateTo({url})
+              })
+            }
+          })
+        } else {
+          wx.navigateTo({
+            url: `${APPLICANT}center/uploadAttach/uploadAttach`
+          })  
+        }        
         break
       default:
         break

@@ -46,6 +46,9 @@
   font-weight: 700;
   color: rgba(40, 40, 40, 1);
   line-height: 56rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .mine .floating-box .degree-name {

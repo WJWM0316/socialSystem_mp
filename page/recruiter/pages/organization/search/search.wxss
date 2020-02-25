@@ -203,13 +203,16 @@
   padding-top: 108rpx;
 }
 
-.historyArea .title, .hotArea .title {
+.historyArea .title {
 	margin-bottom: 24rpx;
   font-size:28rpx;
-	font-weight:700;
 	color:#929292;
 	line-height:36rpx;
   position: relative;
+}
+
+.historyArea .title text{
+	font-weight:700;
 }
 
 .title .remove {
@@ -223,7 +226,7 @@
 .record {
 	padding: 0 30rpx;
 	height: 58rpx;
-	line-height: 58rpx;
+	line-height: 52rpx;
 	font-size:26rpx;
 	color:#929292;
 	margin-right: 20rpx;

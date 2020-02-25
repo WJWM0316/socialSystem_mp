@@ -1,4 +1,4 @@
-<view>
+<view wx:if="{{ loaded }}">
   <wxs src="../../../../../utils/filters.wxs" module="filter" />
   <navbar
     title="附件简历"
@@ -54,13 +54,13 @@
       <view class="tips11">*附件简历上传后，面试官在确认预约面试后可查看</view>
     </view>
 
-    <view class="uploading" wx:if="{{ resumeAttach.uploading }}">
+    <view class="uploading" wx:if="{{ !resumeAttach.vkey && resumeAttach.uploading }}">
       <view class="img-box">
         <image class="img" mode="aspectFill" src="{{ filter.fileFormat(resumeAttach.url || resumeAttach.path) }}"></image>
       </view>
       <view class="file-name">{{ resumeAttach.name }}</view>
-      <view class="file-size">{{ resumeAttach.size }}kb</view>
-      <view class="progress" wx:if="{{ resumeAttach.progress && resumeAttach.progress < 100}}">
+      <view class="file-size">{{ resumeAttach.fileSize }}</view>
+      <view class="progress" wx:if="{{ resumeAttach.progress}}">
         <view class="progress-text">已上传{{resumeAttach.progress}}%</view>
         <view class="progress-bar">
           <view class="active" style="width:{{ resumeAttach.progress }}%"></view>
@@ -71,7 +71,7 @@
         <view class="icon-err"><i class="icon iconfont icon-xinxi-huang"></i></view>
         <view class="err-class">{{ resumeAttach.errTips }}</view>
       </view>
-      <view class="re-upload" bindtap="reupload"> 重新选择文件</view>
+      <view class="re-upload" bindtap="uploadByWechat" wx:if="{{ resumeAttach.errTips }}"> 重新选择文件</view>
     </view>
 
     <view class="action-menu">

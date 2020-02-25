@@ -349,8 +349,10 @@
 }
 
 .icon-xiangyou {
-  float: right;
   color: #BACED8;
+  line-height: 1;
+  position: relative;
+  top: 5rpx;
 }
 
 

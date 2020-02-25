@@ -42,7 +42,7 @@
 </view>
 <view class="bg {{ (historyList.length && !orgListData.list.length) ? 'opcity' : ''}}"></view>
 <view class="historyArea" wx:if="{{ historyList.length && !orgListData.list.length && onbottomStatus !== 2 }}">
-	<view class="title">历史搜索<i class="remove iconfont icon-shanchu" bindtap="removeHistory"></i></view>
+	<view class="title"><text>历史搜索</text><i class="remove iconfont icon-shanchu" bindtap="removeHistory"></i></view>
 	<text class="record ellipsis" wx:for="{{historyList}}"  wx:key="{{index}}" data-item="{{item}}" data-type="label" bindtap="choseKeyWord">{{item.word}}</text>
 </view>
 <view class="organizationList">
@@ -62,7 +62,7 @@
 			</view>
 		</button>
 	</view>
-	<bottomStatus status="{{ onbottomStatus }}" listData="{{ orgListData.list }}" desc="暂无相关机构~" marginTop="{{120}}"></bottomStatus>
+	<bottomStatus status="{{ onbottomStatus }}" listData="{{ orgListData.list }}" desc="暂无相关机构~" marginTop="{{212}}"></bottomStatus>
 </view>
 
 <!-- <shareBtn posterType="production" id="shareBtn" shareBtn="{{false}}"></shareBtn> -->

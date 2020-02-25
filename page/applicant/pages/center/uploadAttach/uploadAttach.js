@@ -50,17 +50,29 @@ Page({
       }
     ],
     mobileUpload: true,
-    actionMenu: false
+    actionMenu: false,
+    loaded: false
   },
-  onLoad(option) {
+  onLoad() {
     this.getMyInfo().then(() => {
-      const resumeAttach = app.globalData.resumeInfo.resumeAttach
+      let resumeAttach = app.globalData.resumeInfo.resumeAttach
       if(!resumeAttach) {
+        this.setData({ resumeAttach: this.data.resumeAttach, loaded: true })
         return
       }
-      this.setData({ resumeAttach })
+      this.setData({ resumeAttach, loaded: true })
     })    
   },
+  // onShow() {
+  //   this.getMyInfo().then(() => {
+  //     let resumeAttach = app.globalData.resumeInfo.resumeAttach
+  //     if(!resumeAttach) {
+  //       this.setData({ resumeAttach: this.data.resumeAttach, loaded: true })
+  //       return
+  //     }
+  //     this.setData({ resumeAttach, loaded: true })
+  //   })    
+  // },
   backEvent() {
     let that = this
     if (uploadTask) {
@@ -92,8 +104,9 @@ Page({
         count: 1,
         type: 'all',
         success (res) {
-          console.log(res, 111)
-          that.upload(res.tempFiles[0])
+          let resumeAttach = that.data.resumeAttach
+          resumeAttach = Object.assign(resumeAttach, { errTips: '', tips: ''})
+          that.setData({ resumeAttach }, () => that.upload(res.tempFiles[0]))          
         },
         fail(err) {
           console.log('wx.chooseImage发神经了', err)
@@ -106,8 +119,7 @@ Page({
       app.wxConfirm({
         title: '微信导入简历',
         content: `请提前将附件简历发送到【文件传输助手】或微信好友，然后在选择好友列表中选中对应聊天窗口后，勾选对应附件进行导入；`,
-        showCancel: false,
-        confirmText: '前往导入',
+        confirmText: '确定',
         confirmBack() {
           wx.setStorageSync('uploadByWechat', 'uploadByWechat')
           callBack()
@@ -140,7 +152,8 @@ Page({
     let resumeAttach = this.data.resumeAttach
     let fileFieldArr = file.name.split('.')
     let ext = fileFieldArr[fileFieldArr.length - 1]
-    resumeAttach = Object.assign(resumeAttach, file, { uploading: true })
+    let fileSize = (file.size / 1000 / 1024 ).toFixed(2) + 'M'
+    resumeAttach = Object.assign(resumeAttach, file, { uploading: true, fileSize })
     that.setData({ resumeAttach })
     if (file.size < fileMinSize) {
       resumeAttach = Object.assign(resumeAttach, { tips: `${this.isImageType(file.name) ? '图片' : '文件'}上传中，请稍等...`})
@@ -188,8 +201,10 @@ Page({
         formData,
         success(res) {
           let data = typeof res.data === "string" ? JSON.parse(res.data) : res.data
-          data = Object.assign(resumeAttach, data.data[0], {uploading: false})
-          that.setData({ resumeAttach: data }, () => that.saveAttach({attach_resume: resumeAttach.id, attach_name: resumeAttach.name}))
+          data = Object.assign(resumeAttach, data.data[0], {uploading: false, errTips: '', tips: '附件保存中...，请稍等', progress: 0})
+          that.setData({ resumeAttach: data }, () => {
+            that.saveAttach({attach_resume: resumeAttach.id, attach_name: resumeAttach.name})
+          })
         },
         fail(err) {
           if (err.statusCode === 401) {
@@ -232,10 +247,11 @@ Page({
     return app.getAllInfo().then(() => {
       let resumeAttach = app.globalData.resumeInfo.resumeAttach || {}
       resumeAttach.hasRequire = true
+      resumeAttach.uploading = false
       resumeAttach = Object.assign(this.data.resumeAttach, resumeAttach)
-
       this.setData({hasReFresh: false, resumeAttach})
       wx.stopPullDownRefresh()
+      console.log(this.data)
     })
   },
   toggleactionMenu() {
@@ -271,6 +287,7 @@ Page({
     }
   },
   deleteAttach() {
+    let that = this
     app.wxConfirm({
       title: '删除简历',
       content: '确定删除该附件简历吗？删除后将无法向招聘官发送附件简历。',
@@ -282,6 +299,7 @@ Page({
       confirmBack: () => {
         deleteAttachApi().then(() => {
           app.globalData.resumeInfo.resumeAttach = null
+          that.reupload()
         })         
       }
     })    
@@ -292,6 +310,9 @@ Page({
     this.setData({ resumeAttach })
   },
   saveAttach(params) {
+    // let resumeAttach = this.data.resumeAttach
+    // resumeAttach = Object.assign(resumeAttach, { tips: `${this.isImageType(file.name) ? '图片' : '文件'}上传中，请稍等...`})
+    // this.setData({ resumeAttach })
     return saveAttachApi(params).then(() => {
       getAttachResumeApi().then(res => {
         let resumeAttach = res.data
@@ -303,14 +324,15 @@ Page({
   },
   onPullDownRefresh() {
     this.setData({ hasReFresh: true }, () => {
-      getAttachResumeApi().then(res => {
-        let resumeAttach = res.data
-        if(!resumeAttach.vkey) resumeAttach.vkey = ''
-        resumeAttach = Object.assign(this.data.resumeAttach, resumeAttach)
-        // app.globalData.resumeInfo.resumeAttach = resumeAttach
-        this.setData({ resumeAttach, hasReFresh: false })
-        wx.stopPullDownRefresh()
-      })
+      this.getMyInfo()
+      // getAttachResumeApi().then(res => {
+      //   let resumeAttach = res.data
+      //   if(!resumeAttach.vkey) resumeAttach.vkey = ''
+      //   resumeAttach = Object.assign(this.data.resumeAttach, resumeAttach)
+      //   // app.globalData.resumeInfo.resumeAttach = resumeAttach
+      //   this.setData({ resumeAttach, hasReFresh: false })
+      //   wx.stopPullDownRefresh()
+      // })
     })
   }
 })

@@ -32,7 +32,8 @@ Page({
       count: 10,
       isLastPage: false,
       isRequire: false
-    }
+    },
+    focus: false
   },
   bindblur () {
     this.setData({hasFocus: false})
@@ -44,10 +45,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    this.setData({options, historyList: wx.getStorageSync('searchCompanyRecord')})
+    this.setData({focus: true,options, historyList: wx.getStorageSync('searchCompanyRecord')})
   },
   updateHistory (word) {
-    if (!keyword) return
+    if (!this.data.keyword) return
     let searchCompanyRecord = this.data.historyList || [],
         isRecordIndex= null
     // 判断该关键字是否已经存在，存在则位置提前，不存在则加到第一个
@@ -82,6 +83,12 @@ Page({
     this.setData({ keyword, thinkList: [], orgListData }, () => this.getList())
   },
   removeWord () {
+    let orgListData = this.data.orgListData
+    orgListData.pageNum = 1
+    orgListData.list = []
+    if (!keyword) return
+    keyword = ''
+    this.setData({keyword, focus: true, orgListData, historyList: wx.getStorageSync('searchCompanyRecord'), onbottomStatus: 0})
     this.setData({keyword: '', focus: true})
   },
   /**
@@ -107,8 +114,14 @@ Page({
   },
   bindInput (e) {
     keyword = e.detail.value
-    if(!keyword) return
-    this.setData({ keyword, canSearch: false }, () => this.debounce(this.getSearchMatchCompanyList, null, 100, null))   
+    this.setData({ keyword, canSearch: false }, () => {
+      if(!keyword) {
+        this.setData({ thinkList: [], onbottomStatus: [], historyList: wx.getStorageSync('searchCompanyRecord')})
+      } else {
+        this.debounce(this.getSearchMatchCompanyList, null, 100, null)
+      }
+      console.log(this.data)
+    })   
   },
   search () {
     let orgListData = this.data.orgListData
@@ -118,7 +131,7 @@ Page({
     }
     orgListData.pageNum = 1
     this.updateHistory(keyword)
-    this.setData({keyword, orgListData,thinkList: []}, () => this.getList())
+    this.setData({keyword, orgListData, thinkList: []}, () => this.getList())
   },
   removeHistory () {
     this.setData({historyList: []}, () => wx.removeStorageSync('searchCompanyRecord'))
@@ -137,7 +150,6 @@ Page({
       orgListData.isLastPage = !res.meta || !res.meta.nextPageUrl ? true : false
       orgListData.list = res.data
       this.setData({onbottomStatus, orgListData, thinkList: []})
-      this.updateHistory(this.data.keyword)
     })
   },
   roouteJump (e) {

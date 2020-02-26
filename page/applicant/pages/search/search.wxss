@@ -85,7 +85,7 @@
 .record {
 	padding: 0 30rpx;
 	height: 58rpx;
-	line-height: 52rpx;
+	line-height: 56rpx;
 	font-size:26rpx;
 	color:#929292;
 	margin-right: 20rpx;

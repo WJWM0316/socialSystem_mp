@@ -23,6 +23,7 @@
 			bindblur="bindblur"
 			value="{{ keyword }}"
 			confirm-type="search"
+			focus="{{focus}}"
 			bindconfirm="bindconfirm"/>
 		<i wx:if="{{ keyword }}" class="resetIcon iconfont icon-shurukuang-shanchu" bindtap="removeWord"></i>
 	</view>
@@ -41,7 +42,7 @@
 	</view>
 </view>
 <view class="bg {{ (historyList.length && !orgListData.list.length) ? 'opcity' : ''}}"></view>
-<view class="historyArea" wx:if="{{ historyList.length && !orgListData.list.length && onbottomStatus !== 2 }}">
+<view class="historyArea" wx:if="{{ historyList.length && !orgListData.list.length && onbottomStatus != 2}}">
 	<view class="title"><text>历史搜索</text><i class="remove iconfont icon-shanchu" bindtap="removeHistory"></i></view>
 	<text class="record ellipsis" wx:for="{{historyList}}"  wx:key="{{index}}" data-item="{{item}}" data-type="label" bindtap="choseKeyWord">{{item.word}}</text>
 </view>

@@ -81,7 +81,7 @@
   transform: translateY(-50%);
   color: #BCBCBC;
   line-height: 1;
-  font-size: 30rpx;
+  font-size: 34rpx;
 }
 
 .un-upload .h11{

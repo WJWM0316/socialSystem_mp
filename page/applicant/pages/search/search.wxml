@@ -16,6 +16,7 @@
 				value="{{ keyword }}"
 				confirm-type="search"
 				maxlength="50"
+				focus="{{focus}}"
 				bindconfirm="bindconfirm"/>
 			<i wx:if="{{ keyword }}" class="resetIcon iconfont icon-shurukuang-shanchu" bindtap="removeWord"></i>
 		</view>
@@ -33,7 +34,7 @@
 				<i class="icon iconfont icon-jiantou"></i>
 		</view>
 	</view>
-	<view class="historyArea" wx:if="{{ historyList.length && !positionList.list.length && onBottomStatus !== 2 }}">
+	<view class="historyArea" wx:if="{{ historyList.length && !positionList.list.length && onBottomStatus != 2}}">
 		<view class="title"><text>历史搜索</text><i class="remove iconfont icon-shanchu" bindtap="removeHistory"></i></view>
 		<text class="record ellipsis" wx:for="{{historyList}}"  wx:key="{{index}}" data-item="{{item}}" data-type="label" bindtap="choseKeyWord">{{item.word}}</text>
 	</view>

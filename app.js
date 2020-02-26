@@ -26,7 +26,7 @@ App({
     this.globalData.startRoute = e
     wx.getSystemInfo({
       success: res => {
-        console.log(res, 'kkk')
+        // console.log(res, 'kkk')
         //导航高度
         this.globalData.platform = res.platform
         this.globalData.navHeight = res.statusBarHeight + 44

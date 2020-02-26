@@ -24,10 +24,11 @@ Page({
     pageCount: 20,
     thinkList: [],
     onBottomStatus: 0,
-    hasFocus: false
+    hasFocus: false,
+    focus: false,
   },
   onLoad() {
-    this.setData({historyList: wx.getStorageSync('searchPositionRecord')})
+    this.setData({focus: true,historyList: wx.getStorageSync('searchPositionRecord')})
   },
   bindblur () {
     this.setData({hasFocus: false})
@@ -49,13 +50,21 @@ Page({
     let positionList = this.data.positionList
     positionList.pageNum = 1
     keyword = e.detail.value.trim()
-    if (!keyword) return
-    this.setData({ keyword, positionList}, () => this.debounce(this.getSearchMatchList, null, 100, null))
+    this.setData({ keyword, positionList}, () => {
+      if(!keyword) {
+        this.setData({ thinkList: [], onBottomStatus: [], historyList: wx.getStorageSync('searchPositionRecord')})
+      } else {
+        this.debounce(this.getSearchMatchList, null, 100, null)
+      }
+    })
   },
   check(e) {
+    let positionList = this.data.positionList
     keyword = e.currentTarget.dataset.name
     if(!keyword) return
-    this.setData({ keyword, thinkList: [] }, () => this.getPositionList())
+    positionList.pageNum = 1
+    positionList.list = []
+    this.setData({ keyword, thinkList: [], positionList}, () => this.getPositionList())
   },
   getSearchMatchList() {
     if (!this.data.hasFocus) return
@@ -90,7 +99,7 @@ Page({
     this.search()
   },
   updateHistory (word) {
-    if (!keyword) return
+    if (!this.data.keyword) return
     let searchPositionRecord = this.data.historyList || [],
         isRecordIndex= null
     // 判断该关键字是否已经存在，存在则位置提前，不存在则加到第一个
@@ -130,10 +139,13 @@ Page({
     this.setData({historyList: []}, () => wx.removeStorageSync('searchPositionRecord'))
   },
   removeWord () {
+    let positionList = this.data.positionList
+    positionList.pageNum = 1
+    positionList.list = []
     if (!keyword) return
     lastWord = keyword
     keyword = ''
-    this.setData({keyword, focus: true})
+    this.setData({keyword, focus: true, positionList, historyList: wx.getStorageSync('searchPositionRecord'), onBottomStatus: 0})
   },
   routeJump (e) {
     let route = e.currentTarget.dataset.route,

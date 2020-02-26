@@ -149,7 +149,7 @@ Page({
             confirmText: '立即前往',
             cancelBack() {},
             confirmBack: () => {
-              let path = app.getCurrentPagePath()
+              let path = `${APPLICANT}center/mine/mine?a=11`
               app.getRoleInfo().then(res => {
                 let url = ''
                 if(!res.data.hasCard) {

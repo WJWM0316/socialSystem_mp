@@ -7,10 +7,11 @@
   background:rgba(255,255,255,1);
   box-shadow:0rpx 6rpx 20rpx 0rpx rgba(50,14,59,0.07);
   border-radius:16rpx;
-  line-height: 114rpx;
+  line-height: 110rpx;
   margin-bottom: 28rpx;
   box-sizing: border-box;
   padding: 0 32rpx;
+  position: relative;
 }
 
 .un-upload .icon-box {
@@ -21,7 +22,7 @@
   line-height: 56rpx;
   text-align: center;
   position: relative;
-  top: -2rpx;
+  top: -5rpx;
 }
 
 .un-upload .icon-box .icon-weixin-mian{
@@ -37,7 +38,8 @@
 .un-upload .text {
   display: inline-block;
   margin-left: 16rpx;
-  color: #320E3B;
+  color: #282828;
+  font-size: 28rpx;
 }
 
 .un-upload .icon-recommand {
@@ -65,6 +67,21 @@
   left: 0;
   right: 0;
   position: fixed;
+}
+
+.un-upload .icon-yanzhengma {
+  font-size: 26rpx;
+  margin-right: 11rpx;
+}
+
+.un-upload .icon-xiangyou {
+  position: absolute;
+  top: 50%;
+  right: 24rpx;
+  transform: translateY(-50%);
+  color: #BCBCBC;
+  line-height: 1;
+  font-size: 30rpx;
 }
 
 .un-upload .h11{
@@ -105,16 +122,17 @@
 }
 
 .uploading .file-name {
-  height:40rpx;
   font-size:30rpx;
   color:rgba(40,40,40,1);
   line-height:40rpx;
-  overflow: hidden;
+  /* overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: nowrap; */
   margin-top: 30rpx;
   margin-left: 40rpx;
   margin-right: 40rpx;
+  text-align: center;
+  word-break: break-all;
 }
 
 .uploading .file-size {

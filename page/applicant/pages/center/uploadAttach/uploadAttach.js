@@ -75,22 +75,24 @@ Page({
   // },
   backEvent() {
     let that = this
+
     if (uploadTask) {
       uploadTask.abort()
       app.wxConfirm({
         title: '提示',
         content: '文件上传中，返回后将取消上传，确定离开当前页面？',
-        cancelText: '继续上传',
-        confirmText: '确认返回',
+        cancelText: '确认返回',
+        confirmText: '继续上传',
         cancelBack() {          
+          uploadTask = null
+          wx.navigateBack({delta: 1})        
+        },
+        confirmBack: () => {
           let resumeAttach = this.data.resumeAttach
           resumeAttach.vkey = ''
           uploadTask = null
-          that.setData({ resumeAttach })
-        },
-        confirmBack: () => {
-          uploadTask = null
-          wx.navigateBack({delta: 1})         
+          resumeAttach.uploading = false
+          that.setData({ resumeAttach }) 
         }
       })
     } else {
@@ -201,7 +203,8 @@ Page({
         formData,
         success(res) {
           let data = typeof res.data === "string" ? JSON.parse(res.data) : res.data
-          data = Object.assign(resumeAttach, data.data[0], {uploading: false, errTips: '', tips: '附件保存中...，请稍等', progress: 0})
+          data = Object.assign(resumeAttach, data.data[0], {uploading: false})
+          console.log(that.data)
           that.setData({ resumeAttach: data }, () => {
             that.saveAttach({attach_resume: resumeAttach.id, attach_name: resumeAttach.name})
           })
@@ -231,10 +234,11 @@ Page({
           console.log(err, 'err')
         }
       })
-      
       uploadTask.onProgressUpdate((res) => {
-        uploadTask = null
         resumeAttach = Object.assign(resumeAttach, { progress: res.progress })
+        if(res.progress === 100) {
+          resumeAttach = Object.assign(resumeAttach, { progress: res.progress, errTips: '', tips: '附件保存中...，请稍等' })
+        }
         that.setData({ resumeAttach })
       })
     }
@@ -291,16 +295,23 @@ Page({
     app.wxConfirm({
       title: '删除简历',
       content: '确定删除该附件简历吗？删除后将无法向招聘官发送附件简历。',
-      cancelText: '再想想',
-      confirmText: '确认删除',
+      cancelText: '确认删除',
+      confirmText: '再想想',
+      confirmColor: '#652791',
+      cancelColor: '#BCBCBC',
       cancelBack() {          
-        //
+        deleteAttachApi().then(() => {
+          app.wxToast({
+            title: '删除成功',
+            callback() {
+              app.globalData.resumeInfo.resumeAttach = null
+              that.reupload()
+            }
+          })
+        }) 
       },
       confirmBack: () => {
-        deleteAttachApi().then(() => {
-          app.globalData.resumeInfo.resumeAttach = null
-          that.reupload()
-        })         
+        
       }
     })    
   },

@@ -58,7 +58,7 @@
 			<image class="logo" src="{{item.logoInfo.smallUrl}}"></image>
 			<view class="content">
 				<view class="name ellipsis">{{item.companyName}}</view>
-				<view class="address ellipsis">{{item.address[0].address}}</view>
+				<view class="address ellipsis">{{item.addressInfo.address}}</view>
 			</view>
 		</button>
 	</view>

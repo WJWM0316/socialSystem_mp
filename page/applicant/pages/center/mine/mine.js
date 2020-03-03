@@ -35,7 +35,6 @@ Page({
         let myInfo = app.globalData.resumeInfo
         this.setData({myInfo, resumeAttach: myInfo.resumeAttach || {}})
       }
-      console.log(app.globalData, this.data, 'kkkk')
     }
     if (app.getRoleInit) {
       this.getMyInfo()

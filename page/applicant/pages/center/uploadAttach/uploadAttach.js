@@ -329,7 +329,9 @@ Page({
         let resumeAttach = res.data
         resumeAttach = Object.assign(this.data.resumeAttach, resumeAttach)
         app.globalData.resumeInfo.resumeAttach = resumeAttach
-        this.setData({ resumeAttach })
+        this.setData({ resumeAttach }, () => {
+          uploadTask = null
+        })
       })
     })
   },

@@ -90,8 +90,8 @@ Page({
     info.picList.map((item, index) => {
       idList.push(item.id)
     })
-    if (!realNameReg.test(info.userName)) {
-      title = '姓名需为2-20个中文字符'
+    if (!info.userName.trim()) {
+      title = '姓名需为1-50个字符'
     }
     if (!positionReg.test(info.position)) {
       title = '担任职务需为2-20个字'

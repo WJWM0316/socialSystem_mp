@@ -20,7 +20,7 @@
   <view class="item">
     <view class="txt">姓名</view>
     <view class="edit">
-      <input type="text" value="{{userName}}" data-type="name" bindblur="getInputValue" placeholder="请输入姓名" placeholder-style="color: #B2B6C2" disabled />
+      <input type="text" value="{{userName}}" data-type="name" bindblur="getInputValue" placeholder="请输入姓名" placeholder-style="color: #B2B6C2" />
     </view>
   </view>
   <view class="item">

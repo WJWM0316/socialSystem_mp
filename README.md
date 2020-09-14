@@ -124,8 +124,3 @@ bindresultevent ： 获取上传结果
    
 + 自定义方法 bindresultEvent  获取上传结果  
 
-``` html
-<unloadFile bindresultEvent="getResult" unloadType="img" url="https://attach.lieduoduo.ziwork.com/img/2018/1218/11/5c18707cc2424.jpg%21330xauto?OSSAccessKeyId=LTAI8J03ETJEHV51&Expires=1545105834&Signature=8mpXIv8Ok7rcCd%2BT5NCm1280Tb0%3D">
-  <view>上传文件</view>
-</unloadFile> 
-```
